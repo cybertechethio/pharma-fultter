@@ -1,0 +1,4 @@
+  Generating the build script.
+  Reading the asset graph.
+^CTerminate batch job (Y/N)? Terminate batch job (Y/N)? 
+^C

@@ -1,0 +1,5615 @@
+{
+  "@@locale": "en",
+  
+  "appTitle": "Cyber Tech",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  
+  "appTitleWithPos": "Cyber Tech POS",
+  "@appTitleWithPos": {
+    "description": "The full application title with POS"
+  },
+  
+  "welcome": "Welcome",
+  "@welcome": {
+    "description": "Welcome message"
+  },
+  
+  "home": "Home",
+  "@home": {
+    "description": "Home navigation label"
+  },
+  
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings navigation label"
+  },
+  
+  "language": "Language",
+  "@language": {
+    "description": "Language settings label"
+  },
+  
+  "theme": "Theme",
+  "@theme": {
+    "description": "Theme settings label"
+  },
+  
+  "lightMode": "Light Mode",
+  "@lightMode": {
+    "description": "Light theme option"
+  },
+  
+  "darkMode": "Dark Mode",
+  "@darkMode": {
+    "description": "Dark theme option"
+  },
+  
+  "brandColor": "Brand Color",
+  "@brandColor": {
+    "description": "Brand color customization label"
+  },
+  
+  "save": "Save",
+  "@save": {
+    "description": "Save button label"
+  },
+  
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Cancel button label"
+  },
+  
+  "ok": "OK",
+  "@ok": {
+    "description": "OK button label"
+  },
+  
+  "error": "Error",
+  "@error": {
+    "description": "Generic error message"
+  },
+  
+  "success": "Success",
+  "@success": {
+    "description": "Generic success message"
+  },
+  
+  "loading": "Loading...",
+  "@loading": {
+    "description": "Loading indicator text"
+  },
+  
+  "retry": "Retry",
+  "@retry": {
+    "description": "Retry button label"
+  },
+  
+  "close": "Close",
+  "@close": {
+    "description": "Close button label"
+  },
+  
+  "greetingMessage": "Hello, {userName}!",
+  "@greetingMessage": {
+    "description": "Greeting message with user name",
+    "placeholders": {
+      "userName": {
+        "type": "String",
+        "example": "John"
+      }
+    }
+  },
+  
+  "itemCount": "{count, plural, =0{No items} =1{1 item} other{{count} items}}",
+  "@itemCount": {
+    "description": "Display item count with pluralization",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  
+  "logout": "Logout",
+  "@logout": {
+    "description": "Logout button label"
+  },
+  
+  "login": "Login",
+  "@login": {
+    "description": "Login button label"
+  },
+  
+  "email": "Email",
+  "@email": {
+    "description": "Email field label"
+  },
+  
+  "password": "Password",
+  "@password": {
+    "description": "Password field label"
+  },
+  
+  "forgotPassword": "Forgot Password?",
+  "@forgotPassword": {
+    "description": "Forgot password link text"
+  },
+  
+  "noAccount": "Don't have an account?",
+  "@noAccount": {
+    "description": "No account prompt"
+  },
+  
+  "signUp": "Sign Up",
+  "@signUp": {
+    "description": "Sign up button label"
+  },
+  
+  "createAccount": "Create Account",
+  "@createAccount": {
+    "description": "Create account button label"
+  },
+  
+  "joinUsToday": "Join Us Today",
+  "@joinUsToday": {
+    "description": "Registration screen title"
+  },
+  
+  "createAccountToGetStarted": "Create your account to get started",
+  "@createAccountToGetStarted": {
+    "description": "Registration screen subtitle"
+  },
+  
+  "firstName": "First Name",
+  "@firstName": {
+    "description": "First name field label"
+  },
+  
+  "lastName": "Last Name",
+  "@lastName": {
+    "description": "Last name field label"
+  },
+  
+  "companyName": "Company Name",
+  "@companyName": {
+    "description": "Company name field label"
+  },
+  
+  "phoneNumber": "Phone Number",
+  "@phoneNumber": {
+    "description": "Phone number field label"
+  },
+  
+  "phoneNumberHint": "+251012001708",
+  "@phoneNumberHint": {
+    "description": "Phone number field hint"
+  },
+  
+  "confirmPassword": "Confirm Password",
+  "@confirmPassword": {
+    "description": "Confirm password field label"
+  },
+  
+  "confirmPasswordHint": "Confirm your password",
+  "@confirmPasswordHint": {
+    "description": "Confirm password field hint"
+  },
+  
+  "acceptTerms": "I agree to the Terms and Conditions",
+  "@acceptTerms": {
+    "description": "Terms and conditions checkbox label"
+  },
+  
+  "termsDescription": "By checking this box, you agree to our terms of service and privacy policy.",
+  "@termsDescription": {
+    "description": "Terms and conditions description"
+  },
+  
+  "passwordStrength": "Password Strength",
+  "@passwordStrength": {
+    "description": "Password strength indicator label"
+  },
+  
+  "registrationSuccessful": "Registration Successful",
+  "@registrationSuccessful": {
+    "description": "Registration success dialog title"
+  },
+  
+  "welcomeUser": "Welcome, {name}!",
+  "@welcomeUser": {
+    "description": "Welcome message with user name",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "verifyAccount": "Please verify your account:",
+  "@verifyAccount": {
+    "description": "Account verification prompt"
+  },
+  
+  "checkEmailForVerification": "• Check your email for verification link",
+  "@checkEmailForVerification": {
+    "description": "Email verification instruction"
+  },
+  
+  "checkPhoneForVerification": "• Check your phone for verification code",
+  "@checkPhoneForVerification": {
+    "description": "Phone verification instruction"
+  },
+  
+  "canLoginNow": "You can now log in with your credentials.",
+  "@canLoginNow": {
+    "description": "Login instruction after registration"
+  },
+  
+  "alreadyHaveAccount": "Already have an account?",
+  "@alreadyHaveAccount": {
+    "description": "Login link prompt"
+  },
+  
+  "signIn": "Sign In",
+  "@signIn": {
+    "description": "Sign in link text"
+  },
+  
+  "changeLanguage": "Change Language",
+  "@changeLanguage": {
+    "description": "Change language option"
+  },
+  
+  "welcomeBack": "Welcome Back!",
+  "@welcomeBack": {
+    "description": "Welcome back message on login screen"
+  },
+  
+  "loginToContinue": "Login to continue",
+  "@loginToContinue": {
+    "description": "Login prompt subtitle"
+  },
+  
+  "emailHint": "Enter your email",
+  "@emailHint": {
+    "description": "Email field hint text"
+  },
+  
+  "passwordHint": "Enter your password",
+  "@passwordHint": {
+    "description": "Password field hint text"
+  },
+  
+  "rememberMe": "Remember me",
+  "@rememberMe": {
+    "description": "Remember me checkbox label"
+  },
+  
+  "loginButton": "Login",
+  "@loginButton": {
+    "description": "Login button text"
+  },
+  
+  "loggingIn": "Logging in...",
+  "@loggingIn": {
+    "description": "Login in progress message"
+  },
+  
+  "emailRequired": "Email is required",
+  "@emailRequired": {
+    "description": "Email validation message"
+  },
+  
+  "invalidEmail": "Please enter a valid email",
+  "@invalidEmail": {
+    "description": "Invalid email format message"
+  },
+  
+  "passwordRequired": "Password is required",
+  "@passwordRequired": {
+    "description": "Password validation message"
+  },
+  
+  "passwordMinLength": "Password must be at least 6 characters",
+  "@passwordMinLength": {
+    "description": "Password minimum length message"
+  },
+  
+  "loginSuccess": "Login successful!",
+  "@loginSuccess": {
+    "description": "Login success message"
+  },
+  
+  "loginFailed": "Login failed",
+  "@loginFailed": {
+    "description": "Login failure message"
+  },
+  
+  "invalidCredentials": "Invalid email or password",
+  "@invalidCredentials": {
+    "description": "Invalid credentials error message"
+  },
+  
+  "orLoginWith": "Or login with",
+  "@orLoginWith": {
+    "description": "Social login separator text"
+  },
+  
+  "googleLogin": "Google",
+  "@googleLogin": {
+    "description": "Google login button label"
+  },
+  
+  "facebookLogin": "Facebook",
+  "@facebookLogin": {
+    "description": "Facebook login button label"
+  },
+  
+  "appleLogin": "Apple",
+  "@appleLogin": {
+    "description": "Apple login button label"
+  },
+  
+  "socialLoginComingSoon": "Social login coming soon",
+  "@socialLoginComingSoon": {
+    "description": "Social login feature not available message"
+  },
+  
+  "languageToggle": "Toggle Language",
+  "@languageToggle": {
+    "description": "Language toggle button tooltip"
+  },
+  
+  "continueAsGuest": "Continue as Guest",
+  "@continueAsGuest": {
+    "description": "Guest login option"
+  },
+  
+  "calendar": "Calendar",
+  "@calendar": {
+    "description": "Calendar label"
+  },
+  
+  "selectDate": "Select Date",
+  "@selectDate": {
+    "description": "Select date button/title"
+  },
+  
+  "gregorianCalendar": "Gregorian Calendar",
+  "@gregorianCalendar": {
+    "description": "Gregorian calendar type label"
+  },
+  
+  "ethiopianCalendar": "Ethiopian Calendar",
+  "@ethiopianCalendar": {
+    "description": "Ethiopian calendar type label"
+  },
+  
+  "calendarType": "Calendar Type",
+  "@calendarType": {
+    "description": "Calendar type selector label"
+  },
+  
+  "today": "Today",
+  "@today": {
+    "description": "Today button label"
+  },
+  
+  "selectedDate": "Selected Date",
+  "@selectedDate": {
+    "description": "Selected date label"
+  },
+  
+  "ethiopianMonthMeskerem": "Meskerem",
+  "@ethiopianMonthMeskerem": {
+    "description": "Ethiopian month 1"
+  },
+  
+  "ethiopianMonthTikimt": "Tikimt",
+  "@ethiopianMonthTikimt": {
+    "description": "Ethiopian month 2"
+  },
+  
+  "ethiopianMonthHidar": "Hidar",
+  "@ethiopianMonthHidar": {
+    "description": "Ethiopian month 3"
+  },
+  
+  "ethiopianMonthTahsas": "Tahsas",
+  "@ethiopianMonthTahsas": {
+    "description": "Ethiopian month 4"
+  },
+  
+  "ethiopianMonthTir": "Tir",
+  "@ethiopianMonthTir": {
+    "description": "Ethiopian month 5"
+  },
+  
+  "ethiopianMonthYekatit": "Yekatit",
+  "@ethiopianMonthYekatit": {
+    "description": "Ethiopian month 6"
+  },
+  
+  "ethiopianMonthMegabit": "Megabit",
+  "@ethiopianMonthMegabit": {
+    "description": "Ethiopian month 7"
+  },
+  
+  "ethiopianMonthMiazia": "Miazia",
+  "@ethiopianMonthMiazia": {
+    "description": "Ethiopian month 8"
+  },
+  
+  "ethiopianMonthGenbot": "Genbot",
+  "@ethiopianMonthGenbot": {
+    "description": "Ethiopian month 9"
+  },
+  
+  "ethiopianMonthSene": "Sene",
+  "@ethiopianMonthSene": {
+    "description": "Ethiopian month 10"
+  },
+  
+  "ethiopianMonthHamle": "Hamle",
+  "@ethiopianMonthHamle": {
+    "description": "Ethiopian month 11"
+  },
+  
+  "ethiopianMonthNehasse": "Nehasse",
+  "@ethiopianMonthNehasse": {
+    "description": "Ethiopian month 12"
+  },
+  
+  "ethiopianMonthPagumen": "Pagumen",
+  "@ethiopianMonthPagumen": {
+    "description": "Ethiopian month 13"
+  },
+  
+  "dateRange": "Date Range",
+  "@dateRange": {
+    "description": "Date range label"
+  },
+  
+  "selectDateRange": "Select Date Range",
+  "@selectDateRange": {
+    "description": "Select date range button/title"
+  },
+  
+  "startDate": "Start Date",
+  "@startDate": {
+    "description": "Start date label"
+  },
+  
+  "endDate": "End Date",
+  "@endDate": {
+    "description": "End date label"
+  },
+  
+  "selectingStart": "Selecting Start Date",
+  "@selectingStart": {
+    "description": "Hint when selecting start date"
+  },
+  
+  "selectingEnd": "Selecting End Date",
+  "@selectingEnd": {
+    "description": "Hint when selecting end date"
+  },
+  
+  "duration": "Duration",
+  "@duration": {
+    "description": "Duration label"
+  },
+  
+  "days": "{count, plural, =0{0 days} =1{1 day} other{{count} days}}",
+  "@days": {
+    "description": "Days count with pluralization",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  
+  "clearSelection": "Clear Selection",
+  "@clearSelection": {
+    "description": "Clear selection button"
+  },
+  
+  "selectRange": "Select Range",
+  "@selectRange": {
+    "description": "Select range action"
+  },
+
+  "defaultDate": "Default Date",
+  "@defaultDate": {
+    "description": "Default date setting label"
+  },
+
+  "defaultStartDate": "Default Start Date",
+  "@defaultStartDate": {
+    "description": "Default start date for filtering"
+  },
+
+  "setDefaultDate": "Set Default Date",
+  "@setDefaultDate": {
+    "description": "Button to set default date"
+  },
+
+  "defaultDateDescription": "This date will be used for dashboard and data filtering",
+  "@defaultDateDescription": {
+    "description": "Description of default date functionality"
+  },
+
+  "noDefaultDate": "No default date set",
+  "@noDefaultDate": {
+    "description": "Message when no default date is set"
+  },
+
+  "themeSettings": "Theme Settings",
+  "@themeSettings": {
+    "description": "Theme settings section title"
+  },
+
+  "languageSettings": "Language Settings",
+  "@languageSettings": {
+    "description": "Language settings section title"
+  },
+
+  "dateSettings": "Date Settings",
+  "@dateSettings": {
+    "description": "Date settings section title"
+  },
+
+  "appearance": "Appearance",
+  "@appearance": {
+    "description": "Appearance settings label"
+  },
+
+  "general": "General",
+  "@general": {
+    "description": "General settings label"
+  },
+
+  "calendarDisplayType": "Calendar Display",
+  "@calendarDisplayType": {
+    "description": "Calendar display type setting label"
+  },
+
+  "calendarDisplayDescription": "Choose how dates are displayed throughout the app",
+  "@calendarDisplayDescription": {
+    "description": "Description of calendar display setting"
+  },
+
+  "autoDetect": "Auto (Based on Language)",
+  "@autoDetect": {
+    "description": "Auto-detect calendar type based on language"
+  },
+
+  "displayInGregorian": "Always Gregorian",
+  "@displayInGregorian": {
+    "description": "Always display dates in Gregorian calendar"
+  },
+
+  "displayInEthiopian": "Always Ethiopian",
+  "@displayInEthiopian": {
+    "description": "Always display dates in Ethiopian calendar"
+  },
+
+  "getStarted": "Get Started",
+  "@getStarted": {
+    "description": "Get started button text"
+  },
+
+  "addItem": "Add Item",
+  "@addItem": {
+    "description": "Add item button text"
+  },
+
+  "browseItems": "Browse Items",
+  "@browseItems": {
+    "description": "Browse items button text"
+  },
+
+  "startShopping": "Start Shopping",
+  "@startShopping": {
+    "description": "Start shopping button text"
+  },
+
+  "clearSearch": "Clear Search",
+  "@clearSearch": {
+    "description": "Clear search button text"
+  },
+
+  "completeProfile": "Complete Profile",
+  "@completeProfile": {
+    "description": "Complete profile button text"
+  },
+
+  "networkError": "Network connection failed. Please check your internet connection and try again.",
+  "@networkError": {
+    "description": "Network error message"
+  },
+
+  "serverError": "Server error occurred. Please try again later.",
+  "@serverError": {
+    "description": "Server error message"
+  },
+
+  "notFound": "Not Found",
+  "@notFound": {
+    "description": "Not found error title"
+  },
+
+  "notFoundMessage": "The requested content was not found.",
+  "@notFoundMessage": {
+    "description": "Not found error message"
+  },
+
+  "permissionError": "Permission denied. Please grant the required permissions to continue.",
+  "@permissionError": {
+    "description": "Permission error message"
+  },
+
+  "noItemsFound": "No items found. Start by adding your first item.",
+  "@noItemsFound": {
+    "description": "Empty list message"
+  },
+
+  "noResultsFound": "No results found. Try adjusting your search terms.",
+  "@noResultsFound": {
+    "description": "Empty search results message"
+  },
+
+  "noFavoritesYet": "No favorites yet. Start by adding items you love.",
+  "@noFavoritesYet": {
+    "description": "Empty favorites message"
+  },
+
+  "noNotificationsYet": "No notifications yet. We'll notify you when something important happens.",
+  "@noNotificationsYet": {
+    "description": "Empty notifications message"
+  },
+
+  "cartEmpty": "Your cart is empty. Add some items to get started.",
+  "@cartEmpty": {
+    "description": "Empty cart message"
+  },
+
+  "profileIncomplete": "Complete your profile to get the most out of the app.",
+  "@profileIncomplete": {
+    "description": "Incomplete profile message"
+  },
+
+  "loadingData": "Loading data...",
+  "@loadingData": {
+    "description": "Loading data message"
+  },
+
+  "pleaseWait": "Please wait...",
+  "@pleaseWait": {
+    "description": "Please wait message"
+  },
+
+  "required": "Required",
+  "@required": {
+    "description": "Required field indicator"
+  },
+
+  "invalidEmail": "Please enter a valid email",
+  "@invalidEmail": {
+    "description": "Invalid email validation message"
+  },
+
+  "passwordMinLength": "Password must be at least 6 characters",
+  "@passwordMinLength": {
+    "description": "Password minimum length validation message"
+  },
+
+  "fieldRequired": "This field is required",
+  "@fieldRequired": {
+    "description": "Generic required field validation message"
+  },
+
+  "enterEmail": "Enter your email",
+  "@enterEmail": {
+    "description": "Email field hint"
+  },
+
+  "enterPassword": "Enter your password",
+  "@enterPassword": {
+    "description": "Password field hint"
+  },
+
+  "searchHint": "Search...",
+  "@searchHint": {
+    "description": "Search field hint"
+  },
+  
+  "searchByItemName": "Search by item name...",
+  "@searchByItemName": {
+    "description": "Search by item name hint text"
+  },
+
+  "selectOption": "Select an option",
+  "@selectOption": {
+    "description": "Dropdown hint text"
+  },
+
+  "search": "Search",
+  "@search": {
+    "description": "Search button and label"
+  },
+
+  "menu": "Menu",
+  "@menu": {
+    "description": "Menu button label"
+  },
+
+  "back": "Back",
+  "@back": {
+    "description": "Back button label"
+  },
+
+  "close": "Close",
+  "@close": {
+    "description": "Close button label"
+  },
+
+  "done": "Done",
+  "@done": {
+    "description": "Done button label"
+  },
+
+  "edit": "Edit",
+  "@edit": {
+    "description": "Edit button label"
+  },
+
+  "delete": "Delete",
+  "@delete": {
+    "description": "Delete button label"
+  },
+
+  "share": "Share",
+  "@share": {
+    "description": "Share button label"
+  },
+
+  "copy": "Copy",
+  "@copy": {
+    "description": "Copy button label"
+  },
+
+  "paste": "Paste",
+  "@paste": {
+    "description": "Paste button label"
+  },
+
+  "cut": "Cut",
+  "@cut": {
+    "description": "Cut button label"
+  },
+
+  "selectAll": "Select All",
+  "@selectAll": {
+    "description": "Select all button label"
+  },
+
+  "more": "More",
+  "@more": {
+    "description": "More options label"
+  },
+
+  "less": "Less",
+  "@less": {
+    "description": "Less options label"
+  },
+
+  "showMore": "Show More",
+  "@showMore": {
+    "description": "Show more content label"
+  },
+
+  "showLess": "Show Less",
+  "@showLess": {
+    "description": "Show less content label"
+  },
+
+  "expand": "Expand",
+  "@expand": {
+    "description": "Expand content label"
+  },
+
+  "collapse": "Collapse",
+  "@collapse": {
+    "description": "Collapse content label"
+  },
+
+  "refresh": "Refresh",
+  "@refresh": {
+    "description": "Refresh content label"
+  },
+
+  "filter": "Filter",
+  "@filter": {
+    "description": "Filter content label"
+  },
+
+  "sort": "Sort",
+  "@sort": {
+    "description": "Sort content label"
+  },
+
+  "view": "View",
+  "@view": {
+    "description": "View content label"
+  },
+
+  "details": "Details",
+  "@details": {
+    "description": "Details label"
+  },
+
+  "summary": "Summary",
+  "@summary": {
+    "description": "Summary label"
+  },
+
+  "preview": "Preview",
+  "@preview": {
+    "description": "Preview label"
+  },
+
+  "fullScreen": "Full Screen",
+  "@fullScreen": {
+    "description": "Full screen mode label"
+  },
+
+  "exitFullScreen": "Exit Full Screen",
+  "@exitFullScreen": {
+    "description": "Exit full screen mode label"
+  },
+
+  "welcomeToApp": "Welcome to Cyber Tech",
+  "@welcomeToApp": {
+    "description": "Welcome message for home screen"
+  },
+
+  "appName": "SecureAuth",
+  "@appName": {
+    "description": "Application name"
+  },
+
+  "signInToContinue": "Sign in to your account to continue",
+  "@signInToContinue": {
+    "description": "Sign in continuation message"
+  },
+
+  "emailAddress": "Email Address",
+  "@emailAddress": {
+    "description": "Email address field label"
+  },
+
+  "enterYourEmail": "Enter your email",
+  "@enterYourEmail": {
+    "description": "Email field hint text"
+  },
+
+  "enterYourPassword": "Enter your password",
+  "@enterYourPassword": {
+    "description": "Password field hint text"
+  },
+
+  "pleaseEnterPassword": "Please enter your password",
+  "@pleaseEnterPassword": {
+    "description": "Password required validation message"
+  },
+
+  "signingIn": "Signing In...",
+  "@signingIn": {
+    "description": "Signing in progress message"
+  },
+
+  "or": "OR",
+  "@or": {
+    "description": "OR separator text"
+  },
+
+  "continueWithGoogle": "Continue with Google",
+  "@continueWithGoogle": {
+    "description": "Google sign in button text"
+  },
+
+  "dontHaveAccount": "Don't have an account?",
+  "@dontHaveAccount": {
+    "description": "No account prompt text"
+  },
+
+  "fullName": "Full Name",
+  "@fullName": {
+    "description": "Full name field label"
+  },
+
+  "byCreatingAccount": "By creating an account, you agree to our",
+  "@byCreatingAccount": {
+    "description": "Terms agreement text"
+  },
+
+  "termsOfUse": "Terms of Use",
+  "@termsOfUse": {
+    "description": "Terms of use link text"
+  },
+
+  "and": "and",
+  "@and": {
+    "description": "Conjunction word"
+  },
+
+  "privacyPolicy": "Privacy Policy",
+  "@privacyPolicy": {
+    "description": "Privacy policy link text"
+  },
+
+  "goToHome": "Go to Home",
+  "@goToHome": {
+    "description": "Quick navigation button to home screen"
+  },
+
+  "loginAccount": "Login to Your Account",
+  "@loginAccount": {
+    "description": "Login screen title"
+  },
+
+  "enterPhone": "Enter Phone Number",
+  "@enterPhone": {
+    "description": "Phone number field label"
+  },
+
+  "enterValidPhone": "Please enter a valid phone number",
+  "@enterValidPhone": {
+    "description": "Phone number validation message"
+  },
+
+  "enterPassword": "Enter Password",
+  "@enterPassword": {
+    "description": "Password field label"
+  },
+
+  "enterValidPassword": "Please enter a valid password",
+  "@enterValidPassword": {
+    "description": "Password validation message"
+  },
+
+  "loginWithGoogle": "Login with Google",
+  "@loginWithGoogle": {
+    "description": "Google login button text"
+  },
+
+  "firstName": "First Name",
+  "@firstName": {
+    "description": "First name field label"
+  },
+
+  "lastName": "Last Name",
+  "@lastName": {
+    "description": "Last name field label"
+  },
+
+  "phoneNumber": "Phone Number",
+  "@phoneNumber": {
+    "description": "Phone number field label"
+  },
+
+  "enterValidPhone": "Please enter a valid phone number",
+  "@enterValidPhone": {
+    "description": "Phone number validation message"
+  },
+
+  "verifyAccountTitle": "Verify Your Account",
+  "@verifyAccountTitle": {
+    "description": "Verify account screen title"
+  },
+
+  "verifyAccountSubtitle": "Enter the verification code sent to your {identifier}",
+  "@verifyAccountSubtitle": {
+    "description": "Verify account screen subtitle with identifier",
+    "placeholders": {
+      "identifier": {
+        "type": "String",
+        "example": "email@example.com"
+      }
+    }
+  },
+
+  "validateOtpTitle": "Validate OTP",
+  "@validateOtpTitle": {
+    "description": "OTP validation screen title"
+  },
+
+  "validateOtpSubtitle": "Enter the verification code sent to {identifier}",
+  "@validateOtpSubtitle": {
+    "description": "OTP validation screen subtitle with identifier",
+    "placeholders": {
+      "identifier": {
+        "type": "String",
+        "example": "0987654321"
+      }
+    }
+  },
+
+  "enterVerificationCode": "Enter Verification Code",
+  "@enterVerificationCode": {
+    "description": "OTP input field label"
+  },
+
+  "verificationCodeHint": "Enter the 6-digit code",
+  "@verificationCodeHint": {
+    "description": "OTP input field hint"
+  },
+
+  "verifyOtp": "Verify OTP",
+  "@verifyOtp": {
+    "description": "Verify OTP button text"
+  },
+
+  "resendOtp": "Resend OTP",
+  "@resendOtp": {
+    "description": "Resend OTP button text"
+  },
+
+  "resendOtpIn": "Resend OTP in {seconds}s",
+  "@resendOtpIn": {
+    "description": "Resend OTP countdown timer",
+    "placeholders": {
+      "seconds": {
+        "type": "int",
+        "example": "30"
+      }
+    }
+  },
+
+  "otpRequired": "Verification code is required",
+  "@otpRequired": {
+    "description": "OTP required validation message"
+  },
+
+  "otpInvalid": "Invalid verification code",
+  "@otpInvalid": {
+    "description": "Invalid OTP error message"
+  },
+
+  "otpExpired": "Verification code has expired",
+  "@otpExpired": {
+    "description": "Expired OTP error message"
+  },
+
+  "verifyingAccount": "Verifying account...",
+  "@verifyingAccount": {
+    "description": "Account verification in progress message"
+  },
+
+  "resendingOtp": "Resending OTP...",
+  "@resendingOtp": {
+    "description": "OTP resend in progress message"
+  },
+
+  "accountVerifiedSuccess": "Account verified successfully!",
+  "@accountVerifiedSuccess": {
+    "description": "Account verification success message"
+  },
+
+  "otpResentSuccess": "OTP resent successfully!",
+  "@otpResentSuccess": {
+    "description": "OTP resend success message"
+  },
+
+  "verificationFailed": "Verification failed",
+  "@verificationFailed": {
+    "description": "Verification failure message"
+  },
+
+  "didntReceiveCode": "Didn't receive the code?",
+  "@didntReceiveCode": {
+    "description": "Didn't receive code prompt"
+  },
+
+  "checkSpamFolder": "Check your spam folder or try resending",
+  "@checkSpamFolder": {
+    "description": "Check spam folder instruction"
+  },
+
+  "forgotPassword": "Forgot Password",
+  "@forgotPassword": {
+    "description": "Forgot password screen title"
+  },
+
+  "forgotPasswordSubtitle": "Enter your phone number to receive a password reset code",
+  "@forgotPasswordSubtitle": {
+    "description": "Forgot password screen subtitle"
+  },
+
+  "sendResetCode": "Send Reset Code",
+  "@sendResetCode": {
+    "description": "Send password reset code button text"
+  },
+
+  "sendingResetCode": "Sending reset code...",
+  "@sendingResetCode": {
+    "description": "Sending password reset code in progress message"
+  },
+
+  "resetCodeSent": "Password reset code sent successfully!",
+  "@resetCodeSent": {
+    "description": "Password reset code sent success message"
+  },
+
+  "enterPhoneForReset": "Enter your phone number",
+  "@enterPhoneForReset": {
+    "description": "Phone number field hint for password reset"
+  },
+
+  "editPhone": "Edit Phone",
+  "@editPhone": {
+    "description": "Edit phone button text"
+  },
+
+  "resetPassword": "Reset Password",
+  "@resetPassword": {
+    "description": "Reset password screen title"
+  },
+
+  "resetPasswordSubtitle": "Enter your new password",
+  "@resetPasswordSubtitle": {
+    "description": "Reset password screen subtitle"
+  },
+
+  "newPassword": "New Password",
+  "@newPassword": {
+    "description": "New password field label"
+  },
+
+  "confirmNewPassword": "Confirm New Password",
+  "@confirmNewPassword": {
+    "description": "Confirm new password field label"
+  },
+
+  "resetPasswordButton": "Reset Password",
+  "@resetPasswordButton": {
+    "description": "Reset password button text"
+  },
+
+  "resettingPassword": "Resetting password...",
+  "@resettingPassword": {
+    "description": "Resetting password in progress message"
+  },
+
+  "passwordResetSuccess": "Password reset successfully!",
+  "@passwordResetSuccess": {
+    "description": "Password reset success message"
+  },
+
+  "passwordsDoNotMatch": "Passwords do not match",
+  "@passwordsDoNotMatch": {
+    "description": "Password mismatch validation message"
+  },
+
+  "companies": "Companies",
+  "@companies": {
+    "description": "Companies screen title"
+  },
+  "customers": "Customers",
+  "@customers": {
+    "description": "Customers menu label"
+  },
+  "suppliers": "Suppliers",
+  "@suppliers": {
+    "description": "Suppliers menu label"
+  },
+  "supplier": "Supplier",
+  "@supplier": {
+    "description": "Supplier type label"
+  },
+  "customer": "Customer",
+  "@customer": {
+    "description": "Customer type label"
+  },
+  "editCustomer": "Edit Customer",
+  "@editCustomer": {
+    "description": "Edit customer dialog title"
+  },
+  "editSupplier": "Edit Supplier",
+  "@editSupplier": {
+    "description": "Edit supplier dialog title"
+  },
+  "type": "Type",
+  "@type": {
+    "description": "Type field label"
+  },
+  "name": "Name",
+  "@name": {
+    "description": "Name field label"
+  },
+
+  "description": "Description",
+  "@description": {
+    "description": "Description field label"
+  },
+  "accountCode": "Account Code",
+  "@accountCode": {
+    "description": "Account code field label"
+  },
+  "tinNumber": "TIN Number",
+  "@tinNumber": {
+    "description": "TIN number field label"
+  },
+  "customerDetails": "Customer Details",
+  "@customerDetails": {
+    "description": "Customer details screen title"
+  },
+  "supplierDetails": "Supplier Details",
+  "@supplierDetails": {
+    "description": "Supplier details screen title"
+  },
+  "businessInformation": "Business Information",
+  "@businessInformation": {
+    "description": "Business information section title"
+  },
+  "accountDetails": "Account Details",
+  "@accountDetails": {
+    "description": "Account details section title"
+  },
+  "balance": "Balance",
+  "@balance": {
+    "description": "Balance field label"
+  },
+  "categories": "Categories",
+  "@categories": {
+    "description": "Categories menu label"
+  },
+  "subCategories": "Sub-Categories",
+  "@subCategories": {
+    "description": "Sub-Categories menu label"
+  },
+  "units": "Units",
+  "@units": {
+    "description": "Units menu label"
+  },
+  "brands": "Brands",
+  "@brands": {
+    "description": "Brands menu label"
+  },
+  "models": "Models",
+  "@models": {
+    "description": "Models menu label"
+  },
+  "items": "Items",
+  "@items": {
+    "description": "Items menu label"
+  },
+  "item": "Item",
+  "@item": {
+    "description": "Item type label"
+  },
+  "roles": "Roles",
+  "@roles": {
+    "description": "Roles menu label"
+  },
+  "users": "Users",
+  "@users": {
+    "description": "Users menu label"
+  },
+  "user": "User",
+  "@user": {
+    "description": "User type label"
+  },
+  "@users": {
+    "description": "Users menu label"
+  },
+  "banks": "Banks",
+  "@banks": {
+    "description": "Banks menu label"
+  },
+  "employees": "Employees",
+  "@employees": {
+    "description": "Employees menu label"
+  },
+  "reports": "Reports",
+  "@reports": {
+    "description": "Reports menu label"
+  },
+  "help": "Help",
+  "@help": {
+    "description": "Help menu label"
+  },
+
+  "noCompanies": "No Companies",
+  "@noCompanies": {
+    "description": "Empty companies list title"
+  },
+
+  "noCompaniesMessage": "You haven't created any companies yet.\nTap the + button to create your first company.",
+  "@noCompaniesMessage": {
+    "description": "Empty companies list message"
+  },
+
+  "createCompany": "Create Company",
+  "@createCompany": {
+    "description": "Create company button and dialog title"
+  },
+
+  "editCompany": "Edit Company",
+  "@editCompany": {
+    "description": "Edit company dialog title"
+  },
+
+  "companyName": "Company Name",
+  "@companyName": {
+    "description": "Company name field label"
+  },
+
+  "active": "Active",
+  "@active": {
+    "description": "Active status label"
+  },
+
+  "inactive": "Inactive",
+  "@inactive": {
+    "description": "Inactive status label"
+  },
+
+  "viewBranches": "View Branches",
+  "@viewBranches": {
+    "description": "View branches button tooltip"
+  },
+
+  "editCompanyTooltip": "Edit Company",
+  "@editCompanyTooltip": {
+    "description": "Edit company button tooltip"
+  },
+
+  "deleteCompanyTooltip": "Delete Company",
+  "@deleteCompanyTooltip": {
+    "description": "Delete company button tooltip"
+  },
+
+  "update": "Update",
+  "@update": {
+    "description": "Update button label"
+  },
+
+  "create": "Create",
+  "@create": {
+    "description": "Create button label"
+  },
+
+  "branches": "Branches",
+  "@branches": {
+    "description": "Branches screen title"
+  },
+
+  "noBranches": "No Branches",
+  "@noBranches": {
+    "description": "Empty branches list title"
+  },
+
+  "noBranchesMessage": "This company doesn't have any branches yet.\nTap the + button to create the first branch.",
+  "@noBranchesMessage": {
+    "description": "Empty branches list message"
+  },
+
+  "createBranch": "Create Branch",
+  "@createBranch": {
+    "description": "Create branch button and dialog title"
+  },
+
+  "editBranch": "Edit Branch",
+  "@editBranch": {
+    "description": "Edit branch dialog title"
+  },
+
+  "branchName": "Branch Name",
+  "@branchName": {
+    "description": "Branch name field label"
+  },
+
+  "editBranchTooltip": "Edit Branch",
+  "@editBranchTooltip": {
+    "description": "Edit branch button tooltip"
+  },
+
+  "deleteBranchTooltip": "Delete Branch",
+  "@deleteBranchTooltip": {
+    "description": "Delete branch button tooltip"
+  },
+
+  "management": "Management",
+  "@management": {
+    "description": "Management menu label for company and branch management"
+  },
+
+  "addNew": "Add New",
+  "@addNew": {
+    "description": "Add new item button tooltip"
+  },
+
+  "noRoles": "No roles",
+  "@noRoles": {
+    "description": "Empty roles list title"
+  },
+
+  "noRolesMessage": "You don't have any roles yet.",
+  "@noRolesMessage": {
+    "description": "Empty roles list message"
+  },
+
+  "createRole": "Create Role",
+  "@createRole": {
+    "description": "Create role button and screen title"
+  },
+
+  "editRole": "Edit Role",
+  "@editRole": {
+    "description": "Edit role screen title"
+  },
+
+  "roleDetails": "Role Details",
+  "@roleDetails": {
+    "description": "Role details screen title"
+  },
+
+  "activeStatus": "Active Status",
+  "@activeStatus": {
+    "description": "Active status toggle label"
+  },
+
+  "enableOrDisableRole": "Enable or disable this role",
+  "@enableOrDisableRole": {
+    "description": "Active status toggle subtitle"
+  },
+
+  "permissions": "Permissions",
+  "@permissions": {
+    "description": "Permissions section title"
+  },
+
+  "selectedPermissions": "Selected: {count} permissions",
+  "@selectedPermissions": {
+    "description": "Selected permissions count",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+
+  "selectAtLeastOnePermission": "Please select at least one permission",
+  "@selectAtLeastOnePermission": {
+    "description": "Permission selection validation message"
+  },
+
+  "errorLoadingPermissions": "Error loading permissions: {error}",
+  "@errorLoadingPermissions": {
+    "description": "Error message when loading permissions fails",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Network error"
+      }
+    }
+  },
+
+  "noPermissionsAvailable": "No permissions available",
+  "@noPermissionsAvailable": {
+    "description": "Message when no permissions are available"
+  },
+
+  "updateRole": "Update Role",
+  "@updateRole": {
+    "description": "Update role button text"
+  },
+
+  "creating": "Creating...",
+  "@creating": {
+    "description": "Creating in progress message"
+  },
+
+  "updating": "Updating...",
+  "@updating": {
+    "description": "Updating in progress message"
+  },
+
+  "nameRequired": "Name is required",
+  "@nameRequired": {
+    "description": "Name field validation message"
+  },
+
+  "descriptionRequired": "Description is required",
+  "@descriptionRequired": {
+    "description": "Description field validation message"
+  },
+
+  "noPermissionsAssigned": "No permissions assigned",
+  "@noPermissionsAssigned": {
+    "description": "Message when role has no permissions"
+  },
+
+  "deleteRole": "Delete Role",
+  "@deleteRole": {
+    "description": "Delete role dialog title"
+  },
+
+  "confirmDeleteRole": "Are you sure you want to delete {roleName}? This action cannot be undone.",
+  "@confirmDeleteRole": {
+    "description": "Delete role confirmation message",
+    "placeholders": {
+      "roleName": {
+        "type": "String",
+        "example": "Admin"
+      }
+    }
+  },
+
+  "noUsers": "No Users",
+  "@noUsers": {
+    "description": "Empty users list title"
+  },
+
+  "noUsersMessage": "You haven't created any users yet.\nTap the + button to create your first user.",
+  "@noUsersMessage": {
+    "description": "Empty users list message"
+  },
+
+  "createUser": "Create User",
+  "@createUser": {
+    "description": "Create user button and screen title"
+  },
+
+  "editUser": "Edit User",
+  "@editUser": {
+    "description": "Edit user screen title"
+  },
+
+  "updateUser": "Update User",
+  "@updateUser": {
+    "description": "Update user button text"
+  },
+
+  "userDetails": "User Details",
+  "@userDetails": {
+    "description": "User details screen title"
+  },
+
+  "deleteUser": "Delete User",
+  "@deleteUser": {
+    "description": "Delete user dialog title"
+  },
+
+  "confirmDeleteUser": "Are you sure you want to delete {userName}? This action cannot be undone.",
+  "@confirmDeleteUser": {
+    "description": "Delete user confirmation message",
+    "placeholders": {
+      "userName": {
+        "type": "String",
+        "example": "John Doe"
+      }
+    }
+  },
+
+  "errorLoadingUser": "Error loading user: {error}",
+  "@errorLoadingUser": {
+    "description": "Error message when loading user fails",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Network error"
+      }
+    }
+  },
+
+  "enableOrDisableUser": "Enable or disable this user",
+  "@enableOrDisableUser": {
+    "description": "Active status toggle subtitle for user"
+  },
+
+  "contactInformation": "Contact Information",
+  "@contactInformation": {
+    "description": "Contact information section title"
+  },
+
+  "firstName": "First Name",
+  "@firstName": {
+    "description": "First name field label"
+  },
+
+  "lastName": "Last Name",
+  "@lastName": {
+    "description": "Last name field label"
+  },
+
+  "phone": "Phone",
+  "@phone": {
+    "description": "Phone field label"
+  },
+
+  "createdAt": "Created At",
+  "@createdAt": {
+    "description": "Created at field label"
+  },
+  "updatedAt": "Updated At",
+  "@updatedAt": {
+    "description": "Updated at field label"
+  },
+
+  "goBack": "Go Back",
+  "@goBack": {
+    "description": "Go back button text"
+  },
+
+  "totalPermissions": "Total Permissions: {count}",
+  "@totalPermissions": {
+    "description": "Total permissions count label",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "10"
+      }
+    }
+  },
+
+  "profile": "Profile",
+  "@profile": {
+    "description": "Profile screen title"
+  },
+
+  "noUserFound": "No User Found",
+  "@noUserFound": {
+    "description": "Empty user profile title"
+  },
+
+  "unableToLoadProfile": "Unable to load user profile. Please try again.",
+  "@unableToLoadProfile": {
+    "description": "Error loading user profile message"
+  },
+
+  "accountInformation": "Account Information",
+  "@accountInformation": {
+    "description": "Account information section title"
+  },
+
+  "settingsAndActions": "Settings & Actions",
+  "@settingsAndActions": {
+    "description": "Settings and actions section title"
+  },
+
+  "dangerZone": "Danger Zone",
+  "@dangerZone": {
+    "description": "Danger zone section title"
+  },
+
+  "confirmLogout": "Are you sure you want to logout?",
+  "@confirmLogout": {
+    "description": "Logout confirmation message"
+  },
+
+  "deleteAccount": "Delete Account",
+  "@deleteAccount": {
+    "description": "Delete account dialog title"
+  },
+
+  "deleteAccountWarning": "This action cannot be undone. Please enter your password to confirm.",
+  "@deleteAccountWarning": {
+    "description": "Delete account warning message"
+  },
+
+  "chooseFromGallery": "Choose from Gallery",
+  "@chooseFromGallery": {
+    "description": "Choose image from gallery option"
+  },
+
+  "takePhoto": "Take Photo",
+  "@takePhoto": {
+    "description": "Take photo option"
+  },
+
+  "errorPickingImage": "Error picking image: {error}",
+  "@errorPickingImage": {
+    "description": "Error message when picking image fails",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Permission denied"
+      }
+    }
+  },
+
+  "createBrand": "Create Brand",
+  "@createBrand": {
+    "description": "Create brand dialog title"
+  },
+  "brand": "Brand",
+  "@brand": {
+    "description": "Brand type label"
+  },
+  "editBrand": "Edit Brand",
+  "@editBrand": {
+    "description": "Edit brand dialog title"
+  },
+
+  "noBrands": "No brands",
+  "@noBrands": {
+    "description": "Empty brands list title"
+  },
+
+  "noBrandsMessage": "You don't have any brands yet.",
+  "@noBrandsMessage": {
+    "description": "Empty brands list message"
+  },
+
+  "createUnit": "Create Unit",
+  "@createUnit": {
+    "description": "Create unit dialog title"
+  },
+  "unit": "Unit",
+  "@unit": {
+    "description": "Unit type label"
+  },
+  "editUnit": "Edit Unit",
+  "@editUnit": {
+    "description": "Edit unit dialog title"
+  },
+
+  "noUnits": "No units",
+  "@noUnits": {
+    "description": "Empty units list title"
+  },
+
+  "noUnitsMessage": "You don't have any units yet.",
+  "@noUnitsMessage": {
+    "description": "Empty units list message"
+  },
+
+  "createBank": "Create Bank",
+  "@createBank": {
+    "description": "Create bank dialog title"
+  },
+  "bank": "Bank",
+  "@bank": {
+    "description": "Bank type label"
+  },
+  "editBank": "Edit Bank",
+  "@editBank": {
+    "description": "Edit bank dialog title"
+  },
+
+  "noBanks": "No banks",
+  "@noBanks": {
+    "description": "Empty banks list title"
+  },
+
+  "noBanksMessage": "You don't have any banks yet.",
+  "@noBanksMessage": {
+    "description": "Empty banks list message"
+  },
+
+  "bankName": "Bank Name",
+  "@bankName": {
+    "description": "Bank name field label"
+  },
+
+  "bankNameRequired": "Bank name is required",
+  "@bankNameRequired": {
+    "description": "Bank name validation error"
+  },
+
+  "createCategory": "Create Category",
+  "@createCategory": {
+    "description": "Create category dialog title"
+  },
+
+  "noCategories": "No categories",
+  "@noCategories": {
+    "description": "Empty categories list title"
+  },
+
+  "noCategoriesMessage": "You don't have any categories yet.",
+  "@noCategoriesMessage": {
+    "description": "Empty categories list message"
+  },
+
+  "createSubCategory": "Create Sub-Category",
+  "@createSubCategory": {
+    "description": "Create sub-category dialog title"
+  },
+  "subCategory": "Sub-Category",
+  "@subCategory": {
+    "description": "Sub-category type label"
+  },
+  "editSubCategory": "Edit Sub-Category",
+  "@editSubCategory": {
+    "description": "Edit sub-category dialog title"
+  },
+
+  "noSubCategories": "No sub-categories",
+  "@noSubCategories": {
+    "description": "Empty sub-categories list title"
+  },
+
+  "noSubCategoriesMessage": "You don't have any sub-categories yet.",
+  "@noSubCategoriesMessage": {
+    "description": "Empty sub-categories list message"
+  },
+
+  "createModel": "Create Model",
+  "@createModel": {
+    "description": "Create model dialog title"
+  },
+  "model": "Model",
+  "@model": {
+    "description": "Model type label"
+  },
+  "editModel": "Edit Model",
+  "@editModel": {
+    "description": "Edit model dialog title"
+  },
+
+  "noModels": "No models",
+  "@noModels": {
+    "description": "Empty models list title"
+  },
+
+  "noModelsMessage": "You don't have any models yet.",
+  "@noModelsMessage": {
+    "description": "Empty models list message"
+  },
+
+  "noCategoriesAvailable": "No categories available. Please create a category first.",
+  "@noCategoriesAvailable": {
+    "description": "Message when no categories are available for sub-category"
+  },
+
+  "errorLoadingCategories": "Error loading categories: {error}",
+  "@errorLoadingCategories": {
+    "description": "Error message when loading categories fails",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Network error"
+      }
+    }
+  },
+
+  "category": "Category",
+  "@category": {
+    "description": "Category field label"
+  },
+  "editCategory": "Edit Category",
+  "@editCategory": {
+    "description": "Edit category dialog title"
+  },
+
+  "categoryRequired": "Category is required",
+  "@categoryRequired": {
+    "description": "Category field validation message"
+  },
+
+  "expenseCategories": "Expense Categories",
+  "@expenseCategories": {
+    "description": "Expense categories navigation label"
+  },
+
+  "createExpenseCategory": "Create Expense Category",
+  "@createExpenseCategory": {
+    "description": "Create expense category dialog title"
+  },
+
+  "expenses": "Expenses",
+  "@expenses": {
+    "description": "Expenses navigation label"
+  },
+
+  "createExpense": "Create Expense",
+  "@createExpense": {
+    "description": "Create expense dialog title"
+  },
+
+  "editExpense": "Edit Expense",
+  "@editExpense": {
+    "description": "Edit expense dialog title"
+  },
+
+  "expense": "Expense",
+  "@expense": {
+    "description": "Expense singular form"
+  },
+
+  "expenseRequired": "Expense name is required",
+  "@expenseRequired": {
+    "description": "Expense name validation message"
+  },
+
+  "expenseNameExists": "Expense name already exists",
+  "@expenseNameExists": {
+    "description": "Expense name uniqueness validation message"
+  },
+
+  "noExpenses": "No Expenses",
+  "@noExpenses": {
+    "description": "No expenses title"
+  },
+
+  "noExpensesMessage": "You haven't created any expenses yet. Tap the + button to create your first expense.",
+  "@noExpensesMessage": {
+    "description": "No expenses message"
+  },
+
+  "reference": "Reference",
+  "@reference": {
+    "description": "Reference field label"
+  },
+
+  "expenseDate": "Expense Date",
+  "@expenseDate": {
+    "description": "Expense date field label"
+  },
+
+  "expenseAmount": "Amount",
+  "@expenseAmount": {
+    "description": "Expense amount field label"
+  },
+
+  "errorLoadingRole": "Error loading role: {error}",
+  "@errorLoadingRole": {
+    "description": "Error message when loading role fails",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Network error"
+      }
+    }
+  },
+
+  "selectAll": "Select All",
+  "@selectAll": {
+    "description": "Select all button label"
+  },
+
+  "deselectAll": "Deselect All",
+  "@deselectAll": {
+    "description": "Deselect all button label"
+  },
+
+  "selectedCount": "{selected} / {total} selected",
+  "@selectedCount": {
+    "description": "Selected count display",
+    "placeholders": {
+      "selected": {
+        "type": "int",
+        "example": "5"
+      },
+      "total": {
+        "type": "int",
+        "example": "10"
+      }
+    }
+  },
+
+  "fullName": "Full Name",
+  "@fullName": {
+    "description": "Full name field label"
+  },
+
+  "accountStatus": "Account Status",
+  "@accountStatus": {
+    "description": "Account status label"
+  },
+
+  "memberSince": "Member Since",
+  "@memberSince": {
+    "description": "Member since label"
+  },
+
+  "editProfile": "Edit Profile",
+  "@editProfile": {
+    "description": "Edit profile button label"
+  },
+
+  "changePassword": "Change Password",
+  "@changePassword": {
+    "description": "Change password button label"
+  },
+
+  "verified": "Verified",
+  "@verified": {
+    "description": "Verified account status"
+  },
+
+  "notVerified": "Not Verified",
+  "@notVerified": {
+    "description": "Not verified account status"
+  },
+
+  "batches": "Batches",
+  "@batches": {
+    "description": "Batches menu label"
+  },
+  "batch": "Batch",
+  "@batch": {
+    "description": "Batch type label"
+  },
+  "createBatch": "Create Batch",
+  "@createBatch": {
+    "description": "Create batch dialog title"
+  },
+  "noBatches": "No batches",
+  "@noBatches": {
+    "description": "Empty batches list title"
+  },
+  "noBatchesMessage": "You don't have any batches yet.",
+  "@noBatchesMessage": {
+    "description": "Empty batches list message"
+  },
+
+  "batchName": "Batch Name",
+  "@batchName": {
+    "description": "Batch name field label"
+  },
+
+  "batchNameRequired": "Batch name is required",
+  "@batchNameRequired": {
+    "description": "Batch name field validation message"
+  },
+
+  "stocks": "Stocks",
+  "@stocks": {
+    "description": "Stocks menu label"
+  },
+  "stock": "Stock",
+  "@stock": {
+    "description": "Stock type label"
+  },
+  "noStocks": "No stocks",
+  "@noStocks": {
+    "description": "Empty stocks list title"
+  },
+  "noStocksMessage": "You don't have any stocks yet.",
+  "@noStocksMessage": {
+    "description": "Empty stocks list message"
+  },
+  "updateStock": "Update Stock",
+  "@updateStock": {
+    "description": "Update stock dialog title"
+  },
+  "lowStockThreshold": "Low Stock Threshold",
+  "@lowStockThreshold": {
+    "description": "Low stock threshold field label"
+  },
+  "location": "Location",
+  "@location": {
+    "description": "Location field label"
+  },
+  "status": "Status",
+  "@status": {
+    "description": "Status field label"
+  },
+
+  "transactions": "Transactions",
+  "@transactions": {
+    "description": "Transactions menu label"
+  },
+  "transaction": "Transaction",
+  "@transaction": {
+    "description": "Transaction type label"
+  },
+  "noTransactions": "No transactions",
+  "@noTransactions": {
+    "description": "Empty transactions list title"
+  },
+  "noTransactionsMessage": "You don't have any transactions yet.",
+  "@noTransactionsMessage": {
+    "description": "Empty transactions list message"
+  },
+
+  "transfers": "Transfers",
+  "@transfers": {
+    "description": "Transfers menu label"
+  },
+  "transfer": "Transfer",
+  "@transfer": {
+    "description": "Transfer type label"
+  },
+  "noTransfers": "No transfers",
+  "@noTransfers": {
+    "description": "Empty transfers list title"
+  },
+  "noTransfersMessage": "You don't have any transfers yet.",
+  "@noTransfersMessage": {
+    "description": "Empty transfers list message"
+  },
+  "createTransfer": "Create Transfer",
+  "@createTransfer": {
+    "description": "Create transfer button and screen title"
+  },
+  "destinationBranch": "Destination Branch",
+  "@destinationBranch": {
+    "description": "Destination branch field label"
+  },
+  "sourceBranch": "Source Branch",
+  "@sourceBranch": {
+    "description": "Source branch field label"
+  },
+  "lastUpdated": "Last Updated",
+  "@lastUpdated": {
+    "description": "Last updated field label"
+  },
+  "notAvailable": "N/A",
+  "@notAvailable": {
+    "description": "Not available placeholder text"
+  },
+  "unknown": "Unknown",
+  "@unknown": {
+    "description": "Unknown value placeholder"
+  },
+  "transferOut": "Transfer Out",
+  "@transferOut": {
+    "description": "Transfer out type label"
+  },
+  "transferIn": "Transfer In",
+  "@transferIn": {
+    "description": "Transfer in type label"
+  },
+  "transferCreatedSuccessfully": "Transfer created successfully",
+  "@transferCreatedSuccessfully": {
+    "description": "Transfer creation success message"
+  },
+
+  "reverseTransaction": "Reverse Transaction",
+  "@reverseTransaction": {
+    "description": "Reverse transaction button and dialog title"
+  },
+
+  "reverseTransactionMessage": "Are you sure you want to reverse this transaction? This will create a reversal entry.",
+  "@reverseTransactionMessage": {
+    "description": "Reverse transaction confirmation message"
+  },
+
+  "reversalNote": "Reversal Note",
+  "@reversalNote": {
+    "description": "Reversal note field label"
+  },
+
+  "reversalNoteHint": "Enter a note for this reversal (optional)",
+  "@reversalNoteHint": {
+    "description": "Reversal note field hint"
+  },
+
+  "reverse": "Reverse",
+  "@reverse": {
+    "description": "Reverse button label"
+  },
+
+  "purchaseReverse": "Purchase Reverse",
+  "@purchaseReverse": {
+    "description": "Purchase reverse transaction type label"
+  },
+
+  "saleReverse": "Sale Reverse",
+  "@saleReverse": {
+    "description": "Sale reverse transaction type label"
+  },
+
+  "salesOrder": "Sales Order",
+  "@salesOrder": {
+    "description": "Sales order transaction type label"
+  },
+
+  "salesOrders": "Sales Orders",
+  "@salesOrders": {
+    "description": "Sales orders menu label"
+  },
+
+  "noSalesOrders": "No Sales Orders",
+  "@noSalesOrders": {
+    "description": "Empty sales orders list title"
+  },
+
+  "noSalesOrdersMessage": "You don't have any sales orders yet.",
+  "@noSalesOrdersMessage": {
+    "description": "Empty sales orders list message"
+  },
+
+  "createSalesOrder": "Create Sales Order",
+  "@createSalesOrder": {
+    "description": "Create sales order button and screen title"
+  },
+
+  "salesOrderDetails": "Sales Order Details",
+  "@salesOrderDetails": {
+    "description": "Sales order details screen title"
+  },
+
+  "fulfillmentBranch": "Fulfillment Branch",
+  "@fulfillmentBranch": {
+    "description": "Fulfillment branch field label"
+  },
+
+  "saleBranch": "Sale Branch",
+  "@saleBranch": {
+    "description": "Sale branch field label"
+  },
+
+  "selectFulfillmentBranch": "Select Fulfillment Branch",
+  "@selectFulfillmentBranch": {
+    "description": "Fulfillment branch selector hint"
+  },
+
+  "orderNumber": "Order Number",
+  "@orderNumber": {
+    "description": "Order number field label"
+  },
+
+  "pending": "Pending",
+  "@pending": {
+    "description": "Pending status label"
+  },
+
+  "approved": "Approved",
+  "@approved": {
+    "description": "Approved status label"
+  },
+
+  "fulfilled": "Fulfilled",
+  "@fulfilled": {
+    "description": "Fulfilled status label"
+  },
+
+  "cancelled": "Cancelled",
+  "@cancelled": {
+    "description": "Cancelled status label"
+  },
+
+  "approve": "Approve",
+  "@approve": {
+    "description": "Approve action button label"
+  },
+
+  "fulfill": "Fulfill",
+  "@fulfill": {
+    "description": "Fulfill action button label"
+  },
+
+  "cancelOrder": "Cancel Order",
+  "@cancelOrder": {
+    "description": "Cancel order action button label"
+  },
+
+  "approveOrder": "Approve Order",
+  "@approveOrder": {
+    "description": "Approve order dialog title"
+  },
+
+  "fulfillOrder": "Fulfill Order",
+  "@fulfillOrder": {
+    "description": "Fulfill order dialog title"
+  },
+
+  "confirmApproveOrder": "Are you sure you want to approve this sales order?",
+  "@confirmApproveOrder": {
+    "description": "Approve order confirmation message"
+  },
+
+  "confirmFulfillOrder": "Are you sure you want to fulfill this sales order? This will create a transaction and deduct inventory.",
+  "@confirmFulfillOrder": {
+    "description": "Fulfill order confirmation message"
+  },
+
+  "confirmCancelOrder": "Are you sure you want to cancel this sales order?",
+  "@confirmCancelOrder": {
+    "description": "Cancel order confirmation message"
+  },
+
+  "orderApprovedSuccessfully": "Sales order approved successfully",
+  "@orderApprovedSuccessfully": {
+    "description": "Order approval success message"
+  },
+
+  "orderFulfilledSuccessfully": "Sales order fulfilled successfully",
+  "@orderFulfilledSuccessfully": {
+    "description": "Order fulfillment success message"
+  },
+
+  "orderCancelledSuccessfully": "Sales order cancelled successfully",
+  "@orderCancelledSuccessfully": {
+    "description": "Order cancellation success message"
+  },
+
+  "salesOrderCreatedSuccessfully": "Sales order created successfully",
+  "@salesOrderCreatedSuccessfully": {
+    "description": "Sales order creation success message"
+  },
+
+  "subtotal": "Subtotal",
+  "@subtotal": {
+    "description": "Subtotal label"
+  },
+
+  "totalTax": "Total Tax",
+  "@totalTax": {
+    "description": "Total tax label"
+  },
+
+  "totalAmount": "Total Amount",
+  "@totalAmount": {
+    "description": "Total amount label"
+  },
+
+  "paidAmount": "Paid Amount",
+  "@paidAmount": {
+    "description": "Paid amount label"
+  },
+
+  "remainingAmount": "Remaining Amount",
+  "@remainingAmount": {
+    "description": "Remaining amount label"
+  },
+
+  "attachments": "Attachments",
+  "@attachments": {
+    "description": "Attachments section label"
+  },
+
+  "deliveryProof": "Delivery Proof",
+  "@deliveryProof": {
+    "description": "Delivery proof attachment label"
+  },
+
+  "walkIn": "Walk-in",
+  "@walkIn": {
+    "description": "Walk-in customer label"
+  },
+
+  "cancelOrderConfirmation": "Are you sure you want to cancel this order? This action cannot be undone.",
+  "@cancelOrderConfirmation": {
+    "description": "Cancel order confirmation message"
+  },
+
+  "tax": "Tax",
+  "@tax": {
+    "description": "Tax label"
+  },
+
+  "total": "Total",
+  "@total": {
+    "description": "Total label"
+  },
+
+  "approvedAt": "Approved At",
+  "@approvedAt": {
+    "description": "Approved at date label"
+  },
+
+  "approvedBy": "Approved By",
+  "@approvedBy": {
+    "description": "Approved by user label"
+  },
+
+  "createdBy": "Created By",
+  "@createdBy": {
+    "description": "Created by user label"
+  },
+
+  "updatedBy": "Updated By",
+  "@updatedBy": {
+    "description": "Updated by user label"
+  },
+
+  "add": "Add",
+  "@add": {
+    "description": "Add button label"
+  },
+
+  "accept": "Accept",
+  "@accept": {
+    "description": "Accept button label"
+  },
+
+  "reject": "Reject",
+  "@reject": {
+    "description": "Reject button label"
+  },
+
+  "payment": "Payment",
+  "@payment": {
+    "description": "Payment label"
+  },
+
+  "paymentDetails": "Payment Details",
+  "@paymentDetails": {
+    "description": "Payment details section title"
+  },
+
+  "notes": "Notes",
+  "@notes": {
+    "description": "Notes field label"
+  },
+
+  "yes": "Yes",
+  "@yes": {
+    "description": "Yes confirmation button"
+  },
+
+  "no": "No",
+  "@no": {
+    "description": "No confirmation button"
+  },
+
+  "currentBranch": "Current Branch",
+  "@currentBranch": {
+    "description": "Current branch label in drawer"
+  },
+
+  "selectBranch": "Select Branch",
+  "@selectBranch": {
+    "description": "Select branch prompt in drawer"
+  },
+
+  "switchBranch": "Switch Branch",
+  "@switchBranch": {
+    "description": "Switch branch action label"
+  },
+
+  "core": "Core",
+  "@core": {
+    "description": "Core section label in navigation"
+  },
+
+  "inventory": "Inventory",
+  "@inventory": {
+    "description": "Inventory section label in navigation"
+  },
+
+  "operations": "Operations",
+  "@operations": {
+    "description": "Operations section label in navigation"
+  },
+
+  "administration": "Administration",
+  "@administration": {
+    "description": "Administration section label in navigation"
+  },
+
+  "paid": "Paid",
+  "@paid": {
+    "description": "Paid label"
+  },
+
+  "remaining": "Remaining",
+  "@remaining": {
+    "description": "Remaining label"
+  },
+
+  "optional": "(Optional)",
+  "@optional": {
+    "description": "Optional field indicator"
+  },
+
+  "paymentMethods": "Payment Methods",
+  "@paymentMethods": {
+    "description": "Payment methods section label"
+  },
+
+  "add": "Add",
+  "@add": {
+    "description": "Add button label"
+  },
+
+  "noPaymentMethodsAdded": "No payment methods added",
+  "@noPaymentMethodsAdded": {
+    "description": "Empty payment methods message"
+  },
+
+  "attachment": "Attachment",
+  "@attachment": {
+    "description": "Attachment label"
+  },
+
+  "addAttachment": "Add Attachment",
+  "@addAttachment": {
+    "description": "Add attachment button label"
+  },
+
+  "change": "Change",
+  "@change": {
+    "description": "Change button label"
+  },
+
+  "remove": "Remove",
+  "@remove": {
+    "description": "Remove button label"
+  },
+
+  "fulfillOrderConfirmation": "This will create a transaction and deduct inventory from the fulfillment branch.",
+  "@fulfillOrderConfirmation": {
+    "description": "Fulfill order information message"
+  },
+
+  "noDescription": "No description",
+  "@noDescription": {
+    "description": "Placeholder text when no description is available"
+  },
+
+  "addBalance": "Add Balance",
+  "@addBalance": {
+    "description": "Add balance button label"
+  },
+
+  "refund": "Refund",
+  "@refund": {
+    "description": "Refund button label"
+  },
+
+  "transactionId": "Transaction ID",
+  "@transactionId": {
+    "description": "Transaction ID field label"
+  },
+
+  "transactionIdRequired": "Transaction ID is required",
+  "@transactionIdRequired": {
+    "description": "Transaction ID required validation message"
+  },
+
+  "invalidTransactionId": "Invalid transaction ID",
+  "@invalidTransactionId": {
+    "description": "Invalid transaction ID validation message"
+  },
+
+  "addBalanceSuccess": "Balance added successfully",
+  "@addBalanceSuccess": {
+    "description": "Add balance success message"
+  },
+
+  "refundSuccess": "Refund processed successfully",
+  "@refundSuccess": {
+    "description": "Refund success message"
+  },
+
+  "addPaymentMethod": "Add Payment Method",
+  "@addPaymentMethod": {
+    "description": "Add payment method button label"
+  },
+
+  "addAtLeastOnePaymentMethod": "Please add at least one payment method",
+  "@addAtLeastOnePaymentMethod": {
+    "description": "Validation message for payment methods"
+  },
+
+  "receipt": "Receipt",
+  "@receipt": {
+    "description": "Receipt label"
+  },
+
+  "optional": "optional",
+  "@optional": {
+    "description": "Optional field indicator"
+  },
+
+  "totalSales": "Total Sales",
+  "@totalSales": {
+    "description": "Total sales label"
+  },
+
+  "totalSalesReturn": "Total Sales Return",
+  "@totalSalesReturn": {
+    "description": "Total sales return label"
+  },
+
+  "totalPurchase": "Total Purchase",
+  "@totalPurchase": {
+    "description": "Total purchase label"
+  },
+
+  "totalPurchaseReturn": "Total Purchase Return",
+  "@totalPurchaseReturn": {
+    "description": "Total purchase return label"
+  },
+
+  "viewAll": "View All",
+  "@viewAll": {
+    "description": "View all button label"
+  },
+
+  "profit": "Profit",
+  "@profit": {
+    "description": "Profit label"
+  },
+
+  "invoiceDue": "Invoice Due",
+  "@invoiceDue": {
+    "description": "Invoice due label"
+  },
+
+  "totalExpenses": "Total Expenses",
+  "@totalExpenses": {
+    "description": "Total expenses label"
+  },
+
+  "totalPaymentReturns": "Total Payment Returns",
+  "@totalPaymentReturns": {
+    "description": "Total payment returns label"
+  },
+
+  "salesAndPurchase": "Sales & Purchase",
+  "@salesAndPurchase": {
+    "description": "Sales and purchase chart title"
+  },
+
+  "sales": "Sales",
+  "@sales": {
+    "description": "Sales label"
+  },
+
+  "purchase": "Purchase",
+  "@purchase": {
+    "description": "Purchase label"
+  },
+
+  "noData": "No data available",
+  "@noData": {
+    "description": "No data message"
+  },
+
+  "overallInformation": "Overall Information",
+  "@overallInformation": {
+    "description": "Overall information section title"
+  },
+
+  "orders": "Orders",
+  "@orders": {
+    "description": "Orders label"
+  },
+
+  "customersOverview": "Customers Overview",
+  "@customersOverview": {
+    "description": "Customers overview chart title"
+  },
+
+  "firstTime": "First Time",
+  "@firstTime": {
+    "description": "First time customer label"
+  },
+
+  "returning": "Return",
+  "@returning": {
+    "description": "Returning customer label"
+  },
+
+  "salesStatistics": "Sales Statistics",
+  "@salesStatistics": {
+    "description": "Sales statistics chart title"
+  },
+
+  "revenue": "Revenue",
+  "@revenue": {
+    "description": "Revenue label"
+  },
+
+  "topSellingProducts": "Top Selling Products",
+  "@topSellingProducts": {
+    "description": "Top selling products card title"
+  },
+
+  "lowStockProducts": "Low Stock Products",
+  "@lowStockProducts": {
+    "description": "Low stock products card title"
+  },
+
+  "inStock": "In Stock",
+  "@inStock": {
+    "description": "In stock label"
+  },
+
+  "topCustomers": "Top Customers",
+  "@topCustomers": {
+    "description": "Top customers card title"
+  },
+
+  "salesReport": "Sales Report",
+  "@salesReport": {
+    "description": "Sales report label in drawer"
+  },
+
+  "annualReport": "Annual Report",
+  "@annualReport": {
+    "description": "Annual report label in drawer"
+  },
+
+  "bestSellerReport": "Best Seller Report",
+  "@bestSellerReport": {
+    "description": "Best seller report label in drawer"
+  },
+
+  "customerReport": "Customer Report",
+  "@customerReport": {
+    "description": "Customer report label in drawer"
+  },
+
+  "expenseReport": "Expense Report",
+  "@expenseReport": {
+    "description": "Expense report label in drawer"
+  },
+
+  "profitLossReport": "Profit & Loss Report",
+  "@profitLossReport": {
+    "description": "Profit and loss report label in drawer"
+  },
+
+  "purchaseReport": "Purchase Report",
+  "@purchaseReport": {
+    "description": "Purchase report label in drawer"
+  },
+
+  "switchedToBranch": "Switched to {branchName}",
+  "@switchedToBranch": {
+    "description": "Branch switch success message",
+    "placeholders": {
+      "branchName": {
+        "type": "String",
+        "example": "Main Branch"
+      }
+    }
+  },
+
+  "failedToSwitchBranch": "Failed to switch branch",
+  "@failedToSwitchBranch": {
+    "description": "Branch switch failure message"
+  },
+
+  "yourTransactions": "Your Transactions",
+  "@yourTransactions": {
+    "description": "Transactions list header title"
+  },
+
+  "allCustomers": "All Customers",
+  "@allCustomers": {
+    "description": "All customers filter option"
+  },
+
+  "yourProduct": "Your Product",
+  "@yourProduct": {
+    "description": "Alert banner product label"
+  },
+
+  "isRunningLowAlreadyBelow": "is running Low, already below",
+  "@isRunningLowAlreadyBelow": {
+    "description": "Alert banner low stock message"
+  },
+
+  "pcs": "Pcs.",
+  "@pcs": {
+    "description": "Pieces abbreviation"
+  },
+
+  "addStock": "Add Stock",
+  "@addStock": {
+    "description": "Add stock button label"
+  },
+
+  "noAnnualItems": "No annual items",
+  "@noAnnualItems": {
+    "description": "Empty annual report items message"
+  },
+
+  "totalCost": "Total Cost",
+  "@totalCost": {
+    "description": "Total cost label"
+  },
+
+  "vat": "VAT",
+  "@vat": {
+    "description": "VAT label"
+  },
+
+  "grossProfit": "Gross Profit",
+  "@grossProfit": {
+    "description": "Gross profit label"
+  },
+
+  "netProfit": "Net Profit",
+  "@netProfit": {
+    "description": "Net profit label"
+  },
+
+  "noProfitLossItems": "No profit-loss items",
+  "@noProfitLossItems": {
+    "description": "Empty profit-loss report items message"
+  },
+
+  "salesAndProfitTrend": "Sales and Profit Trend",
+  "@salesAndProfitTrend": {
+    "description": "Sales and profit trend chart title"
+  },
+
+  "last10Days": "Last 10 Days",
+  "@last10Days": {
+    "description": "Last 10 days label"
+  },
+
+  "noBestSellers": "No best sellers",
+  "@noBestSellers": {
+    "description": "Empty best seller report message"
+  },
+
+  "totalExpenses": "Total Expenses",
+  "@totalExpenses": {
+    "description": "Total expenses label"
+  },
+
+  "averageExpense": "Average Expense",
+  "@averageExpense": {
+    "description": "Average expense label"
+  },
+
+  "largestExpense": "Largest Expense",
+  "@largestExpense": {
+    "description": "Largest expense label"
+  },
+
+  "totalToPayCustomers": "Total to Pay Customers",
+  "@totalToPayCustomers": {
+    "description": "Total to pay customers label"
+  },
+
+  "totalCustomersOweUs": "Total Customers Owe Us",
+  "@totalCustomersOweUs": {
+    "description": "Total customers owe us label"
+  },
+
+  "netBalance": "Net Balance",
+  "@netBalance": {
+    "description": "Net balance label"
+  },
+
+  "noCustomers": "No customers",
+  "@noCustomers": {
+    "description": "Empty customers message"
+  },
+
+  "totalPaid": "Total Paid",
+  "@totalPaid": {
+    "description": "Total paid label"
+  },
+
+  "totalUnpaid": "Total Unpaid",
+  "@totalUnpaid": {
+    "description": "Total unpaid label"
+  },
+
+  "overdue": "Overdue",
+  "@overdue": {
+    "description": "Overdue label"
+  },
+
+  "noPurchaseItems": "No purchase items",
+  "@noPurchaseItems": {
+    "description": "Empty purchase report items message"
+  },
+
+  "noSalesItems": "No sales items",
+  "@noSalesItems": {
+    "description": "Empty sales report items message"
+  },
+
+  "noPaymentData": "No payment data",
+  "@noPaymentData": {
+    "description": "No payment data message"
+  },
+
+  "paymentMethods": "Payment Methods",
+  "@paymentMethods": {
+    "description": "Payment methods label"
+  },
+
+  "addPayment": "Add Payment",
+  "@addPayment": {
+    "description": "Add payment button label"
+  },
+
+  "noPaymentMethods": "No payment methods",
+  "@noPaymentMethods": {
+    "description": "No payment methods message"
+  },
+
+  "notes": "Notes",
+  "@notes": {
+    "description": "Notes label"
+  },
+
+  "receipt": "Receipt",
+  "@receipt": {
+    "description": "Receipt label"
+  },
+
+  "assignRolesToBranches": "Assign Roles to Branches",
+  "@assignRolesToBranches": {
+    "description": "Assign roles to branches label"
+  },
+
+  "chooseFromGallery": "Choose from Gallery",
+  "@chooseFromGallery": {
+    "description": "Choose from gallery option"
+  },
+
+  "takePhoto": "Take Photo",
+  "@takePhoto": {
+    "description": "Take photo option"
+  },
+
+  "autoPrint": "Auto Print",
+  "@autoPrint": {
+    "description": "Auto print setting label"
+  },
+
+  "automaticallyPrintReceipts": "Automatically print receipts after transactions",
+  "@automaticallyPrintReceipts": {
+    "description": "Auto print setting description"
+  },
+
+  "defaultStartDate": "Default Start Date",
+  "@defaultStartDate": {
+    "description": "Default start date setting label"
+  },
+
+  "uploadLogo": "Upload Logo",
+  "@uploadLogo": {
+    "description": "Upload logo button label"
+  },
+
+  "noCompanyFound": "No company found",
+  "@noCompanyFound": {
+    "description": "No company found message"
+  },
+
+  "qty": "Qty",
+  "@qty": {
+    "description": "Quantity abbreviation"
+  },
+
+  "ref": "Ref",
+  "@ref": {
+    "description": "Reference abbreviation"
+  },
+
+  "noAnnualItemsFound": "No annual items found for the selected date.",
+  "@noAnnualItemsFound": {
+    "description": "Empty annual items message"
+  },
+
+  "noExpensesFound": "No expenses found for the selected date range.",
+  "@noExpensesFound": {
+    "description": "Empty expenses message"
+  },
+
+  "noProfitLossItemsFound": "No profit-loss items found for the selected date range.",
+  "@noProfitLossItemsFound": {
+    "description": "Empty profit-loss items message"
+  },
+
+  "noBestSellersFound": "No best sellers found for the selected date range.",
+  "@noBestSellersFound": {
+    "description": "Empty best sellers message"
+  },
+
+  "noCustomerDataFound": "No customer data found.",
+  "@noCustomerDataFound": {
+    "description": "Empty customer data message"
+  },
+
+  "noSalesItemsFound": "No sales items found for the selected date range.",
+  "@noSalesItemsFound": {
+    "description": "Empty sales items message"
+  },
+
+  "noPurchaseItemsFound": "No purchase items found for the selected date range.",
+  "@noPurchaseItemsFound": {
+    "description": "Empty purchase items message"
+  },
+
+  "salesAndProfitTrendLast10Days": "Sales and Profit Trend (Last 10 Days)",
+  "@salesAndProfitTrendLast10Days": {
+    "description": "Sales and profit trend chart title with last 10 days"
+  },
+
+  "payment": "Payment",
+  "@payment": {
+    "description": "Payment label"
+  },
+
+  "paymentId": "Payment ID",
+  "@paymentId": {
+    "description": "Payment ID label"
+  },
+
+  "paidAmount": "Paid Amount",
+  "@paidAmount": {
+    "description": "Paid amount label"
+  },
+
+  "remaining": "Remaining",
+  "@remaining": {
+    "description": "Remaining label"
+  },
+
+  "addPaymentMethod": "Add Payment Method",
+  "@addPaymentMethod": {
+    "description": "Add payment method dialog title"
+  },
+
+  "companyInformation": "Company Information",
+  "@companyInformation": {
+    "description": "Company information section title"
+  },
+
+  "enabled": "Enabled",
+  "@enabled": {
+    "description": "Enabled status"
+  },
+
+  "disabled": "Disabled",
+  "@disabled": {
+    "description": "Disabled status"
+  },
+
+  "retry": "Retry",
+  "@retry": {
+    "description": "Retry button label"
+  },
+
+  "stockInformation": "Stock Information",
+  "@stockInformation": {
+    "description": "Stock information section title"
+  },
+
+  "metadata": "Metadata",
+  "@metadata": {
+    "description": "Metadata section title"
+  },
+
+  "itemDetails": "Item Details",
+  "@itemDetails": {
+    "description": "Item details section title"
+  },
+
+  "updateQuantity": "Update Quantity",
+  "@updateQuantity": {
+    "description": "Update quantity dialog title"
+  },
+
+  "update": "Update",
+  "@update": {
+    "description": "Update button label"
+  },
+
+  "addItems": "Add Items",
+  "@addItems": {
+    "description": "Add items button label"
+  },
+
+  "editProfile": "Edit Profile",
+  "@editProfile": {
+    "description": "Edit profile dialog title"
+  },
+
+  "items": "Items",
+  "@items": {
+    "description": "Items section title"
+  },
+
+  "noItems": "No items",
+  "@noItems": {
+    "description": "No items message"
+  },
+
+  "summary": "Summary",
+  "@summary": {
+    "description": "Summary section title"
+  },
+
+  "overview": "Overview",
+  "@overview": {
+    "description": "Overview section title"
+  },
+
+  "fulfillSalesOrder": "Fulfill Sales Order",
+  "@fulfillSalesOrder": {
+    "description": "Fulfill sales order dialog title"
+  },
+
+  "editPaymentMethod": "Edit Payment Method",
+  "@editPaymentMethod": {
+    "description": "Edit payment method dialog title"
+  },
+
+  "deletePaymentMethod": "Delete Payment Method",
+  "@deletePaymentMethod": {
+    "description": "Delete payment method dialog title"
+  },
+
+  "updatePaymentMethod": "Update Payment Method",
+  "@updatePaymentMethod": {
+    "description": "Update payment method button label"
+  },
+
+  "confirmDeletePaymentMethod": "Are you sure you want to delete this payment method? This action cannot be undone.",
+  "@confirmDeletePaymentMethod": {
+    "description": "Delete payment method confirmation message"
+  },
+
+  "updateCompany": "Update Company",
+  "@updateCompany": {
+    "description": "Update company screen title"
+  },
+
+  "basicInformation": "Basic Information",
+  "@basicInformation": {
+    "description": "Basic information section title"
+  },
+
+  "contactInformation": "Contact Information",
+  "@contactInformation": {
+    "description": "Contact information section title"
+  },
+
+  "locationInformation": "Location Information",
+  "@locationInformation": {
+    "description": "Location information section title"
+  },
+
+  "businessInformation": "Business Information",
+  "@businessInformation": {
+    "description": "Business information section title"
+  },
+
+  "appSettings": "App Settings",
+  "@appSettings": {
+    "description": "App settings section title"
+  },
+
+  "transactionDetails": "Transaction Details",
+  "@transactionDetails": {
+    "description": "Transaction details screen title"
+  },
+
+  "personalInformation": "Personal Information",
+  "@personalInformation": {
+    "description": "Personal information section title"
+  },
+
+  "accountDetails": "Account Details",
+  "@accountDetails": {
+    "description": "Account details section title"
+  },
+
+  "noMovements": "No Movements",
+  "@noMovements": {
+    "description": "No movements title"
+  },
+
+  "noStockMovementsRecorded": "No stock movements recorded yet",
+  "@noStockMovementsRecorded": {
+    "description": "No stock movements message"
+  },
+
+  "stockDetails": "Stock Details",
+  "@stockDetails": {
+    "description": "Stock details screen title"
+  },
+
+  "noTransactionsYet": "No transactions yet.",
+  "@noTransactionsYet": {
+    "description": "No transactions message"
+  },
+
+  "acceptTransfer": "Accept Transfer",
+  "@acceptTransfer": {
+    "description": "Accept transfer dialog title"
+  },
+
+  "confirmAcceptTransfer": "Are you sure you want to accept this transfer?",
+  "@confirmAcceptTransfer": {
+    "description": "Accept transfer confirmation message"
+  },
+
+  "rejectTransfer": "Reject Transfer",
+  "@rejectTransfer": {
+    "description": "Reject transfer dialog title"
+  },
+
+  "confirmRejectTransfer": "Are you sure you want to reject this transfer?",
+  "@confirmRejectTransfer": {
+    "description": "Reject transfer confirmation message"
+  },
+
+  "transferDetails": "Transfer Details",
+  "@transferDetails": {
+    "description": "Transfer details screen title"
+  },
+
+  "noItemsInCart": "No items in cart",
+  "@noItemsInCart": {
+    "description": "No items in cart title"
+  },
+
+  "tapItemsIconToAdd": "Tap the Items icon above to add items to your cart",
+  "@tapItemsIconToAdd": {
+    "description": "Empty cart instruction message"
+  },
+
+  "itemsInCart": "Items in Cart",
+  "@itemsInCart": {
+    "description": "Items in cart section title"
+  },
+
+  "newTransfer": "New Transfer",
+  "@newTransfer": {
+    "description": "New transfer screen title"
+  },
+
+  "transfers": "Transfers",
+  "@transfers": {
+    "description": "Transfers screen title"
+  },
+
+  "noTransfersFound": "No transfers found",
+  "@noTransfersFound": {
+    "description": "No transfers found message"
+  },
+
+  "youDontHaveAnyItemsYet": "You don't have any items yet.",
+  "@youDontHaveAnyItemsYet": {
+    "description": "Empty items message"
+  },
+
+  "cancelSalesOrder": "Cancel Sales Order",
+  "@cancelSalesOrder": {
+    "description": "Cancel sales order dialog title"
+  },
+
+  "confirmCancelSalesOrder": "Are you sure you want to cancel this sales order?",
+  "@confirmCancelSalesOrder": {
+    "description": "Cancel sales order confirmation message"
+  },
+
+  "newSalesOrder": "New Sales Order",
+  "@newSalesOrder": {
+    "description": "New sales order screen title"
+  },
+
+  "attachment": "Attachment",
+  "@attachment": {
+    "description": "Attachment label"
+  },
+
+  "salesOrderDetails": "Sales Order Details",
+  "@salesOrderDetails": {
+    "description": "Sales order details screen title"
+  },
+
+  "newTransaction": "New Transaction",
+  "@newTransaction": {
+    "description": "New transaction screen title"
+  },
+
+  "reverseTransaction": "Reverse Transaction",
+  "@reverseTransaction": {
+    "description": "Reverse transaction dialog title"
+  },
+
+  "reverse": "Reverse",
+  "@reverse": {
+    "description": "Reverse button label"
+  },
+
+  "category": "Category",
+  "@category": {
+    "description": "Category label"
+  },
+
+  "additionalInformation": "Additional Information",
+  "@additionalInformation": {
+    "description": "Additional information section title"
+  },
+
+  "attachments": "Attachments",
+  "@attachments": {
+    "description": "Attachments section title"
+  },
+
+  "recordPaymentWithApproval": "Record payment with approval",
+  "@recordPaymentWithApproval": {
+    "description": "Add payment with approval subtitle"
+  },
+
+  "id": "ID",
+  "@id": {
+    "description": "ID label"
+  },
+
+  "bank": "Bank",
+  "@bank": {
+    "description": "Bank label"
+  },
+
+  "reference": "Reference",
+  "@reference": {
+    "description": "Reference label"
+  },
+
+  "none": "None",
+  "@none": {
+    "description": "None option"
+  },
+
+  "bakery": "Bakery",
+  "@bakery": {
+    "description": "Bakery business type"
+  },
+
+  "pharmacy": "Pharmacy",
+  "@pharmacy": {
+    "description": "Pharmacy business type"
+  },
+
+  "supermarket": "Supermarket",
+  "@supermarket": {
+    "description": "Supermarket business type"
+  },
+
+  "retail": "Retail",
+  "@retail": {
+    "description": "Retail business type"
+  },
+
+  "cafe": "Cafe",
+  "@cafe": {
+    "description": "Cafe business type"
+  },
+
+  "allCategories": "All Categories",
+  "@allCategories": {
+    "description": "All categories filter option"
+  },
+
+  "allSuppliers": "All Suppliers",
+  "@allSuppliers": {
+    "description": "All suppliers filter option"
+  },
+
+  "allStatus": "All Status",
+  "@allStatus": {
+    "description": "All status filter option"
+  },
+
+  "completed": "Completed",
+  "@completed": {
+    "description": "Completed status"
+  },
+
+  "reversed": "Reversed",
+  "@reversed": {
+    "description": "Reversed status"
+  },
+
+  "status": "Status",
+  "@status": {
+    "description": "Status label"
+  },
+
+  "supplier": "Supplier",
+  "@supplier": {
+    "description": "Supplier label"
+  },
+
+  "paymentMethod": "Payment Method",
+  "@paymentMethod": {
+    "description": "Payment method label"
+  },
+
+  "bankRequired": "Bank *",
+  "@bankRequired": {
+    "description": "Bank required field label"
+  },
+
+  "admin": "Admin",
+  "@admin": {
+    "description": "Admin user type"
+  },
+
+  "manager": "Manager",
+  "@manager": {
+    "description": "Manager user type"
+  },
+
+  "cashier": "Cashier",
+  "@cashier": {
+    "description": "Cashier user type"
+  },
+
+  "storekeeper": "Storekeeper",
+  "@storekeeper": {
+    "description": "Storekeeper user type"
+  },
+
+  "supervisor": "Supervisor",
+  "@supervisor": {
+    "description": "Supervisor user type"
+  },
+
+  "standard": "Standard",
+  "@standard": {
+    "description": "Standard user type"
+  },
+
+  "userType": "User Type",
+  "@userType": {
+    "description": "User type label"
+  },
+
+  "userId": "User ID",
+  "@userId": {
+    "description": "User ID label"
+  },
+
+  "phone1": "Phone 1",
+  "@phone1": {
+    "description": "Phone 1 label"
+  },
+
+  "phone2": "Phone 2",
+  "@phone2": {
+    "description": "Phone 2 label"
+  },
+
+  "city": "City",
+  "@city": {
+    "description": "City label"
+  },
+
+  "wereda": "Wereda",
+  "@wereda": {
+    "description": "Wereda label"
+  },
+
+  "tinNumber": "TIN Number",
+  "@tinNumber": {
+    "description": "TIN number label"
+  },
+
+  "lowStockThreshold": "Low Stock Threshold",
+  "@lowStockThreshold": {
+    "description": "Low stock threshold label"
+  },
+
+  "location": "Location",
+  "@location": {
+    "description": "Location label"
+  },
+
+  "createdAt": "Created At",
+  "@createdAt": {
+    "description": "Created at label"
+  },
+
+  "updatedAt": "Updated At",
+  "@updatedAt": {
+    "description": "Updated at label"
+  },
+
+  "subCategory": "Sub Category",
+  "@subCategory": {
+    "description": "Sub category label"
+  },
+
+  "youDontHaveAnySuppliersYet": "You don't have any suppliers yet.",
+  "@youDontHaveAnySuppliersYet": {
+    "description": "Empty suppliers message"
+  },
+
+  "youDontHaveAnyExpenseCategoriesYet": "You don't have any expense categories yet.",
+  "@youDontHaveAnyExpenseCategoriesYet": {
+    "description": "Empty expense categories message"
+  },
+
+  "youDontHaveAnyItemsYet": "You don't have any items yet.",
+  "@youDontHaveAnyItemsYet": {
+    "description": "Empty items message"
+  },
+
+  "youDontHaveAnyCategoriesYet": "You don't have any categories yet.",
+  "@youDontHaveAnyCategoriesYet": {
+    "description": "Empty categories message"
+  },
+
+  "youDontHaveAnyCustomersYet": "You don't have any customers yet.",
+  "@youDontHaveAnyCustomersYet": {
+    "description": "Empty customers message"
+  },
+
+  "errorPickingImages": "Error picking images: {error}",
+  "@errorPickingImages": {
+    "description": "Error picking images message",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Permission denied"
+      }
+    }
+  },
+
+  "confirmDeleteItem": "Are you sure you want to delete {itemName}? This action cannot be undone.",
+  "@confirmDeleteItem": {
+    "description": "Delete item confirmation message",
+    "placeholders": {
+      "itemName": {
+        "type": "String",
+        "example": "Item Name"
+      }
+    }
+  },
+
+  "fulfillmentDate": "Fulfillment Date",
+  "@fulfillmentDate": {
+    "description": "Fulfillment date label"
+  },
+
+  "notSet": "Not set",
+  "@notSet": {
+    "description": "Not set value"
+  },
+
+  "party": "Party",
+  "@party": {
+    "description": "Party label (generic customer/supplier)"
+  },
+
+  "qty": "Qty",
+  "@qty": {
+    "description": "Quantity abbreviation"
+  },
+
+  "unitPrice": "Unit Price",
+  "@unitPrice": {
+    "description": "Unit price label"
+  },
+
+  "costPrice": "Cost Price",
+  "@costPrice": {
+    "description": "Cost price label"
+  },
+
+  "taxRate": "Tax Rate",
+  "@taxRate": {
+    "description": "Tax rate label"
+  },
+
+  "taxableAmt": "Taxable Amt",
+  "@taxableAmt": {
+    "description": "Taxable amount label"
+  },
+
+  "taxAmt": "Tax Amt",
+  "@taxAmt": {
+    "description": "Tax amount label"
+  },
+
+  "itemCode": "Code",
+  "@itemCode": {
+    "description": "Item code label"
+  },
+
+  "itemCodeLabel": "Code: {code}",
+  "@itemCodeLabel": {
+    "description": "Item code label with value",
+    "placeholders": {
+      "code": {
+        "type": "String",
+        "example": "ITEM001"
+      }
+    }
+  },
+
+  "noAttachments": "No attachments",
+  "@noAttachments": {
+    "description": "No attachments message"
+  },
+
+  "attachmentNumber": "Attachment {number}",
+  "@attachmentNumber": {
+    "description": "Attachment number label",
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "example": "1"
+      }
+    }
+  },
+
+  "transactionLabel": "Transaction: {number}",
+  "@transactionLabel": {
+    "description": "Transaction label with number",
+    "placeholders": {
+      "number": {
+        "type": "String",
+        "example": "TXN001"
+      }
+    }
+  },
+
+  "stockMovements": "Stock Movements",
+  "@stockMovements": {
+    "description": "Stock movements section title"
+  },
+
+  "color": "Color",
+  "@color": {
+    "description": "Color label"
+  },
+
+  "size": "Size",
+  "@size": {
+    "description": "Size label"
+  },
+
+  "material": "Material",
+  "@material": {
+    "description": "Material label"
+  },
+
+  "weight": "Weight",
+  "@weight": {
+    "description": "Weight label"
+  },
+
+  "unknownItem": "Unknown Item",
+  "@unknownItem": {
+    "description": "Unknown item placeholder"
+  },
+
+  "quantityLabel": "Qty: {quantity}",
+  "@quantityLabel": {
+    "description": "Quantity label with value",
+    "placeholders": {
+      "quantity": {
+        "type": "String",
+        "example": "10"
+      }
+    }
+  },
+
+  "itemNumber": "Item #{id}",
+  "@itemNumber": {
+    "description": "Item number label",
+    "placeholders": {
+      "id": {
+        "type": "String",
+        "example": "123"
+      }
+    }
+  },
+
+  "inboundLabel": "Inbound: +{quantity}",
+  "@inboundLabel": {
+    "description": "Inbound quantity label",
+    "placeholders": {
+      "quantity": {
+        "type": "String",
+        "example": "10"
+      }
+    }
+  },
+
+  "outboundLabel": "Outbound: -{quantity}",
+  "@outboundLabel": {
+    "description": "Outbound quantity label",
+    "placeholders": {
+      "quantity": {
+        "type": "String",
+        "example": "5"
+      }
+    }
+  },
+
+  "fromLabel": "From: {source}",
+  "@fromLabel": {
+    "description": "From source label",
+    "placeholders": {
+      "source": {
+        "type": "String",
+        "example": "Branch A"
+      }
+    }
+  },
+
+  "toLabel": "To: {destination}",
+  "@toLabel": {
+    "description": "To destination label",
+    "placeholders": {
+      "destination": {
+        "type": "String",
+        "example": "Branch B"
+      }
+    }
+  },
+
+  "movementCount": "{count, plural, =1{1 movement} other{{count} movements}}",
+  "@movementCount": {
+    "description": "Movement count with pluralization",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+
+  "moreMovements": "+ {count} more movements",
+  "@moreMovements": {
+    "description": "More movements label",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+
+  "notesLabel": "Notes: {notes}",
+  "@notesLabel": {
+    "description": "Notes label with value",
+    "placeholders": {
+      "notes": {
+        "type": "String",
+        "example": "Payment notes"
+      }
+    }
+  },
+
+  "methods": "Methods",
+  "@methods": {
+    "description": "Methods label"
+  },
+
+  "selectTransactionType": "Select Transaction Type",
+  "@selectTransactionType": {
+    "description": "Select transaction type dialog title"
+  },
+
+  "addAttachments": "Add Attachments",
+  "@addAttachments": {
+    "description": "Add attachments button label"
+  },
+
+  "clearAll": "Clear All",
+  "@clearAll": {
+    "description": "Clear all button label"
+  },
+
+  "applyFilters": "Apply Filters",
+  "@applyFilters": {
+    "description": "Apply filters button label"
+  },
+
+  "nameAsc": "Name (A-Z)",
+  "@nameAsc": {
+    "description": "Sort by name ascending"
+  },
+
+  "nameDesc": "Name (Z-A)",
+  "@nameDesc": {
+    "description": "Sort by name descending"
+  },
+
+  "createdDesc": "Created Date (Newest)",
+  "@createdDesc": {
+    "description": "Sort by created date descending"
+  },
+
+  "createdAsc": "Created Date (Oldest)",
+  "@createdAsc": {
+    "description": "Sort by created date ascending"
+  },
+
+  "unitPriceAsc": "Unit Price (Low to High)",
+  "@unitPriceAsc": {
+    "description": "Sort by unit price ascending"
+  },
+
+  "unitPriceDesc": "Unit Price (High to Low)",
+  "@unitPriceDesc": {
+    "description": "Sort by unit price descending"
+  },
+
+  "costPriceAsc": "Cost Price (Low to High)",
+  "@costPriceAsc": {
+    "description": "Sort by cost price ascending"
+  },
+
+  "costPriceDesc": "Cost Price (High to Low)",
+  "@costPriceDesc": {
+    "description": "Sort by cost price descending"
+  },
+
+  "allCategories": "All Categories",
+  "@allCategories": {
+    "description": "All categories filter option"
+  },
+
+  "allSubCategories": "All Sub Categories",
+  "@allSubCategories": {
+    "description": "All sub categories filter option"
+  },
+
+  "allBrands": "All Brands",
+  "@allBrands": {
+    "description": "All brands filter option"
+  },
+
+  "allUnits": "All Units",
+  "@allUnits": {
+    "description": "All units filter option"
+  },
+
+  "allModels": "All Models",
+  "@allModels": {
+    "description": "All models filter option"
+  },
+
+  "isTaxable": "Is Taxable",
+  "@isTaxable": {
+    "description": "Is taxable label"
+  },
+
+  "isActive": "Is Active",
+  "@isActive": {
+    "description": "Is active label"
+  },
+
+  "taxable": "Taxable",
+  "@taxable": {
+    "description": "Taxable status"
+  },
+
+  "nonTaxable": "Non-taxable",
+  "@nonTaxable": {
+    "description": "Non-taxable status"
+  },
+
+  "errorPickingImages": "Error picking images: {error}",
+  "@errorPickingImages": {
+    "description": "Error picking images message",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Permission denied"
+      }
+    }
+  },
+
+  "pleaseEnterValidAmount": "Please enter a valid amount",
+  "@pleaseEnterValidAmount": {
+    "description": "Valid amount validation message"
+  },
+
+  "pleaseAddAtLeastOnePaymentMethod": "Please add at least one payment method",
+  "@pleaseAddAtLeastOnePaymentMethod": {
+    "description": "Payment method required validation"
+  },
+
+  "pleaseSelectBankForBankTransfer": "Please select a bank for bank transfer payment method",
+  "@pleaseSelectBankForBankTransfer": {
+    "description": "Bank selection required for bank transfer"
+  },
+
+  "referenceNumberRequired": "Reference number is required for {method}",
+  "@referenceNumberRequired": {
+    "description": "Reference number required message",
+    "placeholders": {
+      "method": {
+        "type": "String",
+        "example": "Bank Transfer"
+      }
+    }
+  },
+
+  "paymentMethodsTotalMustEqual": "Payment methods total ({total}) must equal expense amount ({amount})",
+  "@paymentMethodsTotalMustEqual": {
+    "description": "Payment methods total validation",
+    "placeholders": {
+      "total": {
+        "type": "String",
+        "example": "100.00"
+      },
+      "amount": {
+        "type": "String",
+        "example": "100.00"
+      }
+    }
+  },
+
+  "failedToLoadBanks": "Failed to load banks",
+  "@failedToLoadBanks": {
+    "description": "Failed to load banks error message"
+  },
+
+  "selectBank": "Select Bank",
+  "@selectBank": {
+    "description": "Select bank dialog title"
+  },
+
+  "errorLoadingItems": "Error loading items: {error}",
+  "@errorLoadingItems": {
+    "description": "Error loading items message",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Network error"
+      }
+    }
+  },
+
+  "expenseDataNotFound": "Expense data not found",
+  "@expenseDataNotFound": {
+    "description": "Expense data not found message"
+  },
+
+  "showExpensesFromAllCategories": "Show expenses from all categories",
+  "@showExpensesFromAllCategories": {
+    "description": "Show expenses from all categories subtitle"
+  },
+
+  "noBranchesAvailable": "No branches available",
+  "@noBranchesAvailable": {
+    "description": "No branches available message"
+  },
+
+  "errorLoadingRoles": "Error loading roles",
+  "@errorLoadingRoles": {
+    "description": "Error loading roles message"
+  },
+
+  "myCompany": "My Company",
+  "@myCompany": {
+    "description": "My company label"
+  },
+
+  "viewAndManageCompanyDetails": "View and manage company details",
+  "@viewAndManageCompanyDetails": {
+    "description": "View and manage company details subtitle"
+  },
+
+  "refLabel": "Ref: {ref}",
+  "@refLabel": {
+    "description": "Reference label with value",
+    "placeholders": {
+      "ref": {
+        "type": "String",
+        "example": "REF001"
+      }
+    }
+  },
+
+  "approveSalesOrder": "Approve Sales Order",
+  "@approveSalesOrder": {
+    "description": "Approve sales order dialog title"
+  },
+
+  "notesOptional": "Notes (optional)",
+  "@notesOptional": {
+    "description": "Notes field label with optional indicator"
+  },
+
+  "paymentNotesOptional": "Payment notes (optional)",
+  "@paymentNotesOptional": {
+    "description": "Payment notes field label with optional indicator"
+  },
+
+  "orderTotal": "Order Total",
+  "@orderTotal": {
+    "description": "Order total label"
+  },
+
+  "advancedFilters": "Advanced Filters",
+  "@advancedFilters": {
+    "description": "Advanced filters title"
+  },
+
+  "productInformation": "Product Information",
+  "@productInformation": {
+    "description": "Product information section title"
+  },
+
+  "priceRanges": "Price Ranges",
+  "@priceRanges": {
+    "description": "Price ranges section title"
+  },
+
+  "taxStatus": "Tax Status",
+  "@taxStatus": {
+    "description": "Tax status label"
+  },
+
+  "min": "Min",
+  "@min": {
+    "description": "Minimum label"
+  },
+
+  "max": "Max",
+  "@max": {
+    "description": "Maximum label"
+  },
+
+  "expenseName": "Expense Name",
+  "@expenseName": {
+    "description": "Expense name field label"
+  },
+
+  "expenseNameRequired": "Expense name is required",
+  "@expenseNameRequired": {
+    "description": "Expense name required validation"
+  },
+
+  "amountRequired": "Amount is required",
+  "@amountRequired": {
+    "description": "Amount required validation"
+  },
+
+  "selectCategory": "Select category (optional)",
+  "@selectCategory": {
+    "description": "Select category placeholder"
+  },
+
+  "categorySelected": "Category selected",
+  "@categorySelected": {
+    "description": "Category selected message"
+  },
+
+  "thisWillCreateTransactionAndUpdateInventory": "This will create a transaction and update inventory.",
+  "@thisWillCreateTransactionAndUpdateInventory": {
+    "description": "Fulfill sales order warning message"
+  },
+
+  "attachment": "Attachment",
+  "@attachment": {
+    "description": "Attachment label"
+  },
+
+  "addAttachmentOptional": "Add attachment (optional)",
+  "@addAttachmentOptional": {
+    "description": "Add attachment placeholder"
+  },
+
+  "firstNameRequired": "First name is required",
+  "@firstNameRequired": {
+    "description": "First name required validation"
+  },
+
+  "lastNameRequired": "Last name is required",
+  "@lastNameRequired": {
+    "description": "Last name required validation"
+  },
+
+  "enterValidEmail": "Enter a valid email",
+  "@enterValidEmail": {
+    "description": "Valid email validation message"
+  },
+
+  "selectAll": "Select All",
+  "@selectAll": {
+    "description": "Select all button label"
+  },
+
+  "assignRolesToUser": "Assign Roles to User",
+  "@assignRolesToUser": {
+    "description": "Assign roles to user dialog title"
+  },
+
+  "pleaseSelectAtLeastOneBranch": "Please select at least one branch",
+  "@pleaseSelectAtLeastOneBranch": {
+    "description": "Select at least one branch validation"
+  },
+
+  "pleaseSelectBank": "Please select a bank",
+  "@pleaseSelectBank": {
+    "description": "Please select bank validation"
+  },
+
+  "selectBankRequired": "Select Bank *",
+  "@selectBankRequired": {
+    "description": "Select bank required label"
+  },
+
+  "pleaseSelectFulfillmentBranch": "Please select a fulfillment branch",
+  "@pleaseSelectFulfillmentBranch": {
+    "description": "Please select fulfillment branch validation"
+  },
+
+  "pleaseSelectBankForBankTransfer": "Please select a bank for bank transfer",
+  "@pleaseSelectBankForBankTransfer": {
+    "description": "Please select bank for bank transfer validation"
+  },
+
+  "changing": "Changing...",
+  "@changing": {
+    "description": "Changing password loading text"
+  },
+
+  "filterBestSellerReport": "Filter Best Seller Report",
+  "@filterBestSellerReport": {
+    "description": "Filter best seller report title"
+  },
+
+  "paymentMethodsCount": "Payment Methods ({count})",
+  "@paymentMethodsCount": {
+    "description": "Payment methods with count",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "compact"
+      }
+    }
+  },
+
+  "removePaymentMethod": "Remove payment method",
+  "@removePaymentMethod": {
+    "description": "Remove payment method tooltip"
+  },
+
+  "selectBankPlaceholder": "Select bank",
+  "@selectBankPlaceholder": {
+    "description": "Select bank placeholder"
+  },
+
+  "sortLabel": "Sort:",
+  "@sortLabel": {
+    "description": "Sort section label with colon"
+  },
+
+  "nameAZ": "Name (A-Z)",
+  "@nameAZ": {
+    "description": "Sort by name ascending"
+  },
+
+  "nameZA": "Name (Z-A)",
+  "@nameZA": {
+    "description": "Sort by name descending"
+  },
+
+  "createdDateNewest": "Created Date (Newest)",
+  "@createdDateNewest": {
+    "description": "Sort by created date newest"
+  },
+
+  "createdDateOldest": "Created Date (Oldest)",
+  "@createdDateOldest": {
+    "description": "Sort by created date oldest"
+  },
+
+  "attributes": "Attributes",
+  "@attributes": {
+    "description": "Attributes section title"
+  },
+
+  "referenceNumberLabel": "Reference Number",
+  "@referenceNumberLabel": {
+    "description": "Reference number field label"
+  },
+
+  "searchByNamePhoneOrAccountCode": "Search by name, phone, or account code...",
+  "@searchByNamePhoneOrAccountCode": {
+    "description": "Search bar hint text for suppliers/customers"
+  },
+
+  "noSuppliersMessage": "You don't have any suppliers yet.",
+  "@noSuppliersMessage": {
+    "description": "Empty suppliers list message"
+  },
+
+  "selectFulfillmentDate": "Select Fulfillment Date",
+  "@selectFulfillmentDate": {
+    "description": "Select fulfillment date dialog help text"
+  },
+
+  "searchExpenseCategories": "Search expense categories...",
+  "@searchExpenseCategories": {
+    "description": "Search expense categories hint text"
+  },
+
+  "failedToLoadExpenseCategories": "Failed to load expense categories",
+  "@failedToLoadExpenseCategories": {
+    "description": "Failed to load expense categories error message"
+  },
+
+  "noExpenseCategoriesMatchSearch": "No expense categories match your search",
+  "@noExpenseCategoriesMatchSearch": {
+    "description": "No expense categories match search message"
+  },
+
+  "userLabel": "User: {userName}",
+  "@userLabel": {
+    "description": "User label with name",
+    "placeholders": {
+      "userName": {
+        "type": "String",
+        "example": "John Doe"
+      }
+    }
+  },
+
+  "selectBranchesAndAssignRoles": "Select branches and assign roles",
+  "@selectBranchesAndAssignRoles": {
+    "description": "Select branches and assign roles header text"
+  },
+
+  "searchCategories": "Search categories...",
+  "@searchCategories": {
+    "description": "Search categories hint text"
+  },
+
+  "noCategoriesFound": "No categories found",
+  "@noCategoriesFound": {
+    "description": "No categories found message"
+  },
+
+  "noCategoriesMatchSearch": "No categories match your search",
+  "@noCategoriesMatchSearch": {
+    "description": "No categories match search message"
+  },
+
+  "selectCategoryFirst": "Select category first",
+  "@selectCategoryFirst": {
+    "description": "Select category first message"
+  },
+
+  "noSubCategoriesAvailable": "No sub-categories available",
+  "@noSubCategoriesAvailable": {
+    "description": "No sub-categories available message"
+  },
+
+  "noBrandsAvailable": "No brands available",
+  "@noBrandsAvailable": {
+    "description": "No brands available message"
+  },
+
+  "noUnitsAvailable": "No units available",
+  "@noUnitsAvailable": {
+    "description": "No units available message"
+  },
+
+  "noModelsAvailable": "No models available",
+  "@noModelsAvailable": {
+    "description": "No models available message"
+  },
+
+  "searchByBatchName": "Search by batch name...",
+  "@searchByBatchName": {
+    "description": "Search batches hint text"
+  },
+
+  "batchNumberLabel": "Batch #: {batchNumber}",
+  "@batchNumberLabel": {
+    "description": "Batch number label with number",
+    "placeholders": {
+      "batchNumber": {
+        "type": "String",
+        "example": "B001"
+      }
+    }
+  },
+
+  "itemNameLabel": "Item: {itemName}",
+  "@itemNameLabel": {
+    "description": "Item name label",
+    "placeholders": {
+      "itemName": {
+        "type": "String",
+        "example": "Product Name"
+      }
+    }
+  },
+
+  "noAdditionalDetailsAvailable": "No additional details available",
+  "@noAdditionalDetailsAvailable": {
+    "description": "No additional details available message"
+  },
+
+  "filterSalesReport": "Filter Sales Report",
+  "@filterSalesReport": {
+    "description": "Filter sales report dialog title"
+  },
+
+  "filterPurchaseReport": "Filter Purchase Report",
+  "@filterPurchaseReport": {
+    "description": "Filter purchase report dialog title"
+  },
+
+  "filterExpenseReport": "Filter Expense Report",
+  "@filterExpenseReport": {
+    "description": "Filter expense report dialog title"
+  },
+
+  "placeOrder": "Place Order",
+  "@placeOrder": {
+    "description": "Place order button text"
+  },
+
+  "noBanksAvailable": "No banks available",
+  "@noBanksAvailable": {
+    "description": "No banks available message"
+  },
+
+  "receiptAttached": "Receipt attached",
+  "@receiptAttached": {
+    "description": "Receipt attached label"
+  },
+
+  "addReceipt": "Add Receipt",
+  "@addReceipt": {
+    "description": "Add receipt button label"
+  },
+
+  "tapToUpload": "Tap to upload",
+  "@tapToUpload": {
+    "description": "Tap to upload hint text"
+  },
+
+  "pleaseSelectItem": "Please select an item",
+  "@pleaseSelectItem": {
+    "description": "Please select item validation message"
+  },
+
+  "selectItem": "Select an item",
+  "@selectItem": {
+    "description": "Select item placeholder"
+  },
+
+  "configuration": "Configuration",
+  "@configuration": {
+    "description": "Configuration section title"
+  },
+
+  "appSettings": "App Settings",
+  "@appSettings": {
+    "description": "App settings section title"
+  },
+
+  "receipt": "Receipt",
+  "@receipt": {
+    "description": "Receipt label"
+  },
+
+  "updateCompany": "Update Company",
+  "@updateCompany": {
+    "description": "Update company screen title"
+  },
+
+  "basicInformation": "Basic Information",
+  "@basicInformation": {
+    "description": "Basic information section title"
+  },
+
+  "contactInformation": "Contact Information",
+  "@contactInformation": {
+    "description": "Contact information section title"
+  },
+
+  "locationInformation": "Location Information",
+  "@locationInformation": {
+    "description": "Location information section title"
+  },
+
+  "businessInformation": "Business Information",
+  "@businessInformation": {
+    "description": "Business information section title"
+  },
+
+  "noItems": "No items",
+  "@noItems": {
+    "description": "No items empty state"
+  },
+
+  "noSuppliers": "No suppliers",
+  "@noSuppliers": {
+    "description": "No suppliers empty state"
+  },
+
+  "noCustomers": "No customers",
+  "@noCustomers": {
+    "description": "No customers empty state"
+  },
+
+  "noCategories": "No categories",
+  "@noCategories": {
+    "description": "No categories empty state"
+  },
+
+  "noSubCategories": "No sub-categories",
+  "@noSubCategories": {
+    "description": "No sub-categories empty state"
+  },
+
+  "noExpenseCategories": "No expense categories",
+  "@noExpenseCategories": {
+    "description": "No expense categories empty state"
+  },
+
+  "noTransactions": "No transactions",
+  "@noTransactions": {
+    "description": "No transactions empty state"
+  },
+
+  "createSupplier": "Create Supplier",
+  "@createSupplier": {
+    "description": "Create supplier screen title"
+  },
+
+  "createCustomer": "Create Customer",
+  "@createCustomer": {
+    "description": "Create customer screen title"
+  },
+
+  "createCategory": "Create Category",
+  "@createCategory": {
+    "description": "Create category screen title"
+  },
+
+  "createSubCategory": "Create Sub-Category",
+  "@createSubCategory": {
+    "description": "Create sub-category screen title"
+  },
+
+  "createItem": "Create Item",
+  "@createItem": {
+    "description": "Create item screen title"
+  },
+
+  "updateItem": "Update Item",
+  "@updateItem": {
+    "description": "Update item screen title"
+  },
+
+  "itemDetails": "Item Details",
+  "@itemDetails": {
+    "description": "Item details screen title"
+  },
+
+  "deleteItem": "Delete Item",
+  "@deleteItem": {
+    "description": "Delete item dialog title"
+  },
+
+  "selectItems": "Select Items",
+  "@selectItems": {
+    "description": "Select items screen title"
+  },
+
+  "expenseDetails": "Expense Details",
+  "@expenseDetails": {
+    "description": "Expense details screen title"
+  },
+
+  "batchDetails": "Batch Details",
+  "@batchDetails": {
+    "description": "Batch details screen title"
+  },
+
+  "personalInformation": "Personal Information",
+  "@personalInformation": {
+    "description": "Personal information section title"
+  },
+
+  "accountDetails": "Account Details",
+  "@accountDetails": {
+    "description": "Account details section title"
+  },
+
+  "identification": "Identification",
+  "@identification": {
+    "description": "Identification section title"
+  },
+
+  "productDetails": "Product Details",
+  "@productDetails": {
+    "description": "Product details section title"
+  },
+
+  "relationships": "Relationships",
+  "@relationships": {
+    "description": "Relationships section title"
+  },
+
+  "pricing": "Pricing",
+  "@pricing": {
+    "description": "Pricing section title"
+  },
+
+  "taxAndStatus": "Tax & Status",
+  "@taxAndStatus": {
+    "description": "Tax and status section title"
+  },
+
+  "datesOptional": "Dates (Optional)",
+  "@datesOptional": {
+    "description": "Dates optional section title"
+  },
+
+  "category": "Category",
+  "@category": {
+    "description": "Category section title"
+  },
+
+  "additionalInformation": "Additional Information",
+  "@additionalInformation": {
+    "description": "Additional information section title"
+  },
+
+  "attachments": "Attachments",
+  "@attachments": {
+    "description": "Attachments section title"
+  },
+
+  "paymentMethods": "Payment Methods",
+  "@paymentMethods": {
+    "description": "Payment methods section title"
+  },
+
+  "addPaymentMethod": "Add Payment Method",
+  "@addPaymentMethod": {
+    "description": "Add payment method button label"
+  },
+
+  "addAttachments": "Add Attachments",
+  "@addAttachments": {
+    "description": "Add attachments button label"
+  },
+
+  "addStock": "Add Stock",
+  "@addStock": {
+    "description": "Add stock button label"
+  },
+
+  "clearAll": "Clear All",
+  "@clearAll": {
+    "description": "Clear all button label"
+  },
+
+  "applyFilters": "Apply Filters",
+  "@applyFilters": {
+    "description": "Apply filters button label"
+  },
+
+  "assignRolesToBranches": "Assign Roles to Branches",
+  "@assignRolesToBranches": {
+    "description": "Assign roles to branches label"
+  },
+
+  "actions": "Actions",
+  "@actions": {
+    "description": "Actions section title"
+  },
+
+  "editExpenseCategory": "Edit Expense Category",
+  "@editExpenseCategory": {
+    "description": "Edit expense category dialog title"
+  },
+
+  "companyName": "Company Name",
+  "@companyName": {
+    "description": "Company name label"
+  },
+
+  "tradeName": "Trade Name",
+  "@tradeName": {
+    "description": "Trade name label"
+  },
+
+  "phone1": "Phone 1",
+  "@phone1": {
+    "description": "Phone 1 label"
+  },
+
+  "phone2": "Phone 2",
+  "@phone2": {
+    "description": "Phone 2 label"
+  },
+
+  "city": "City",
+  "@city": {
+    "description": "City label"
+  },
+
+  "wereda": "Wereda",
+  "@wereda": {
+    "description": "Wereda label"
+  },
+
+  "tinNumber": "TIN Number",
+  "@tinNumber": {
+    "description": "TIN number label"
+  },
+
+  "expenseDate": "Expense Date",
+  "@expenseDate": {
+    "description": "Expense date label"
+  },
+
+  "attachmentIndex": "Attachment {index}",
+  "@attachmentIndex": {
+    "description": "Attachment label with index",
+    "placeholders": {
+      "index": {
+        "type": "int",
+        "example": "1"
+      }
+    }
+  },
+
+  "errorPickingImages": "Error picking images: {error}",
+  "@errorPickingImages": {
+    "description": "Error picking images message",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Permission denied"
+      }
+    }
+  },
+
+  "selectCustomerOptional": "Select Customer (optional)",
+  "@selectCustomerOptional": {
+    "description": "Select customer dropdown hint (optional)"
+  },
+
+  "selectPaymentMethod": "Select payment method",
+  "@selectPaymentMethod": {
+    "description": "Select payment method dropdown hint"
+  },
+
+  "attachReceiptOptional": "Attach receipt (optional)",
+  "@attachReceiptOptional": {
+    "description": "Attach receipt placeholder (optional)"
+  },
+
+  "pleaseEnterValidAmount": "Please enter a valid amount",
+  "@pleaseEnterValidAmount": {
+    "description": "Invalid amount error message"
+  },
+
+  "pleaseAddAtLeastOnePaymentMethod": "Please add at least one payment method",
+  "@pleaseAddAtLeastOnePaymentMethod": {
+    "description": "No payment method error message"
+  },
+
+  "pleaseSelectBankForBankTransfer": "Please select a bank for bank transfer payment method",
+  "@pleaseSelectBankForBankTransfer": {
+    "description": "Bank selection required error message"
+  },
+
+  "referenceNumberRequired": "Reference number is required for {method}",
+  "@referenceNumberRequired": {
+    "description": "Reference number required error message",
+    "placeholders": {
+      "method": {
+        "type": "String",
+        "example": "Bank Transfer"
+      }
+    }
+  },
+
+  "paymentMethodsTotalMustEqual": "Payment methods total ({total}) must equal expense amount ({amount})",
+  "@paymentMethodsTotalMustEqual": {
+    "description": "Payment methods total mismatch error message",
+    "placeholders": {
+      "total": {
+        "type": "String",
+        "example": "1000.00"
+      },
+      "amount": {
+        "type": "String",
+        "example": "1000.00"
+      }
+    }
+  },
+
+  "noPaymentMethodsAdded": "No payment methods added",
+  "@noPaymentMethodsAdded": {
+    "description": "No payment methods added message"
+  },
+
+  "expenseAmount": "Amount",
+  "@expenseAmount": {
+    "description": "Expense amount label"
+  },
+
+  "amountRequired": "Amount is required",
+  "@amountRequired": {
+    "description": "Amount required error message"
+  },
+
+  "createExpense": "Create Expense",
+  "@createExpense": {
+    "description": "Create expense button label"
+  },
+
+  "failedToLoadBanksWithError": "Failed to load banks: {error}",
+  "@failedToLoadBanksWithError": {
+    "description": "Failed to load banks error message with error details",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Network error"
+      }
+    }
+  },
+
+  "pleaseSelectBank": "Please select a bank",
+  "@pleaseSelectBank": {
+    "description": "Please select bank error message"
+  },
+
+  "errorLoadingItems": "Error loading items: {error}",
+  "@errorLoadingItems": {
+    "description": "Error loading items message",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Network error"
+      }
+    }
+  },
+
+  "selectItem": "Select an item",
+  "@selectItem": {
+    "description": "Select item placeholder"
+  },
+
+  "destinationBranch": "Destination Branch",
+  "@destinationBranch": {
+    "description": "Destination branch label"
+  },
+
+  "searchByNameCodeSku": "Search by name, code, SKU...",
+  "@searchByNameCodeSku": {
+    "description": "Search items placeholder"
+  },
+
+  "addAttachmentOptional": "Add attachment (optional)",
+  "@addAttachmentOptional": {
+    "description": "Add attachment placeholder (optional)"
+  },
+
+  "selectBusinessType": "Select Business Type",
+  "@selectBusinessType": {
+    "description": "Select business type placeholder"
+  },
+
+  "selectCalendarType": "Select Calendar Type",
+  "@selectCalendarType": {
+    "description": "Select calendar type placeholder"
+  },
+
+  "none": "None",
+  "@none": {
+    "description": "None option label"
+  },
+
+  "bakery": "Bakery",
+  "@bakery": {
+    "description": "Bakery business type"
+  },
+
+  "pharmacy": "Pharmacy",
+  "@pharmacy": {
+    "description": "Pharmacy business type"
+  },
+
+  "supermarket": "Supermarket",
+  "@supermarket": {
+    "description": "Supermarket business type"
+  },
+
+  "retail": "Retail",
+  "@retail": {
+    "description": "Retail business type"
+  },
+
+  "cafe": "Cafe",
+  "@cafe": {
+    "description": "Cafe business type"
+  },
+
+  "nameAsc": "Name (A-Z)",
+  "@nameAsc": {
+    "description": "Name ascending sort option"
+  },
+
+  "nameDesc": "Name (Z-A)",
+  "@nameDesc": {
+    "description": "Name descending sort option"
+  },
+
+  "createdDateNewest": "Created Date (Newest)",
+  "@createdDateNewest": {
+    "description": "Created date newest sort option"
+  },
+
+  "createdDateOldest": "Created Date (Oldest)",
+  "@createdDateOldest": {
+    "description": "Created date oldest sort option"
+  },
+
+  "unitPriceLowToHigh": "Unit Price (Low to High)",
+  "@unitPriceLowToHigh": {
+    "description": "Unit price low to high sort option"
+  },
+
+  "unitPriceHighToLow": "Unit Price (High to Low)",
+  "@unitPriceHighToLow": {
+    "description": "Unit price high to low sort option"
+  },
+
+  "costPriceLowToHigh": "Cost Price (Low to High)",
+  "@costPriceLowToHigh": {
+    "description": "Cost price low to high sort option"
+  },
+
+  "costPriceHighToLow": "Cost Price (High to Low)",
+  "@costPriceHighToLow": {
+    "description": "Cost price high to low sort option"
+  },
+
+  "selectCategory": "Select Category",
+  "@selectCategory": {
+    "description": "Select category placeholder"
+  },
+
+  "selectSubCategory": "Select Sub-Category",
+  "@selectSubCategory": {
+    "description": "Select sub-category placeholder"
+  },
+
+  "selectBrand": "Select Brand",
+  "@selectBrand": {
+    "description": "Select brand placeholder"
+  },
+
+  "selectUnit": "Select Unit",
+  "@selectUnit": {
+    "description": "Select unit placeholder"
+  },
+
+  "selectModel": "Select Model",
+  "@selectModel": {
+    "description": "Select model placeholder"
+  },
+
+  "active": "Active",
+  "@active": {
+    "description": "Active status label"
+  },
+
+  "inactive": "Inactive",
+  "@inactive": {
+    "description": "Inactive status label"
+  },
+
+  "taxable": "Taxable",
+  "@taxable": {
+    "description": "Taxable label"
+  },
+
+  "nonTaxable": "Non-taxable",
+  "@nonTaxable": {
+    "description": "Non-taxable label"
+  },
+
+  "isTaxable": "Is Taxable",
+  "@isTaxable": {
+    "description": "Is taxable label"
+  },
+
+  "isActive": "Is Active",
+  "@isActive": {
+    "description": "Is active label"
+  },
+
+  "enterLimit": "Enter limit (e.g., 1000)",
+  "@enterLimit": {
+    "description": "Enter limit placeholder"
+  },
+
+  "selectStatus": "Select Status",
+  "@selectStatus": {
+    "description": "Select status placeholder"
+  },
+
+  "searchByName": "Search by name...",
+  "@searchByName": {
+    "description": "Search by name placeholder"
+  },
+
+  "searchByNamePhoneOrAccountCode": "Search by name, phone, or account code...",
+  "@searchByNamePhoneOrAccountCode": {
+    "description": "Search by name, phone, or account code placeholder"
+  },
+
+  "searchExpenseCategories": "Search expense categories...",
+  "@searchExpenseCategories": {
+    "description": "Search expense categories placeholder"
+  },
+
+  "showExpensesFromAllCategories": "Show expenses from all categories",
+  "@showExpensesFromAllCategories": {
+    "description": "Show expenses from all categories subtitle"
+  },
+
+  "clearSelection": "Clear Selection",
+  "@clearSelection": {
+    "description": "Clear selection button label"
+  },
+
+  "date": "Date",
+  "@date": {
+    "description": "Date label"
+  },
+
+  "created": "Created",
+  "@created": {
+    "description": "Created label"
+  },
+
+  "updated": "Updated",
+  "@updated": {
+    "description": "Updated label"
+  },
+
+  "needStock": "Need Stock",
+  "@needStock": {
+    "description": "Need stock label"
+  },
+
+  "availableQuantity": "Available Quantity",
+  "@availableQuantity": {
+    "description": "Available quantity label"
+  },
+
+  "material": "Material",
+  "@material": {
+    "description": "Material label"
+  },
+
+  "weight": "Weight",
+  "@weight": {
+    "description": "Weight label"
+  },
+
+  "batchName": "Batch Name",
+  "@batchName": {
+    "description": "Batch name label"
+  },
+
+  "batchNumber": "Batch Number",
+  "@batchNumber": {
+    "description": "Batch number label"
+  },
+
+  "itemId": "Item ID",
+  "@itemId": {
+    "description": "Item ID label"
+  },
+
+  "itemName": "Item Name",
+  "@itemName": {
+    "description": "Item name label"
+  },
+
+  "supplierBatchNumber": "Supplier Batch Number",
+  "@supplierBatchNumber": {
+    "description": "Supplier batch number label"
+  },
+
+  "expenseDataNotFound": "Expense data not found",
+  "@expenseDataNotFound": {
+    "description": "Expense data not found error message"
+  },
+
+  "sku": "SKU",
+  "@sku": {
+    "description": "SKU label"
+  },
+
+  "barcode": "Barcode",
+  "@barcode": {
+    "description": "Barcode label"
+  },
+
+  "expirationDate": "Expiration Date",
+  "@expirationDate": {
+    "description": "Expiration date label"
+  },
+
+  "manufacturingDate": "Manufacturing Date",
+  "@manufacturingDate": {
+    "description": "Manufacturing date label"
+  },
+
+  "selectCategory": "Select Category",
+  "@selectCategory": {
+    "description": "Select category hint"
+  },
+
+  "selectSubCategory": "Select Sub-Category",
+  "@selectSubCategory": {
+    "description": "Select sub-category hint"
+  },
+
+  "selectBrand": "Select Brand",
+  "@selectBrand": {
+    "description": "Select brand hint"
+  },
+
+  "selectUnit": "Select Unit",
+  "@selectUnit": {
+    "description": "Select unit hint"
+  },
+
+  "selectModel": "Select Model",
+  "@selectModel": {
+    "description": "Select model hint"
+  },
+
+  "selectItem": "Select an item",
+  "@selectItem": {
+    "description": "Select item hint"
+  },
+
+  "selectSupplier": "Select Supplier",
+  "@selectSupplier": {
+    "description": "Select supplier hint"
+  },
+
+  "selectStatus": "Select Status",
+  "@selectStatus": {
+    "description": "Select status hint"
+  },
+
+  "selectUserType": "Select User Type",
+  "@selectUserType": {
+    "description": "Select user type hint"
+  },
+
+  "selectBusinessType": "Select Business Type",
+  "@selectBusinessType": {
+    "description": "Select business type hint"
+  },
+
+  "selectCalendarType": "Select Calendar Type",
+  "@selectCalendarType": {
+    "description": "Select calendar type hint"
+  },
+
+  "searchByName": "Search by name...",
+  "@searchByName": {
+    "description": "Search by name hint"
+  },
+
+  "searchByNameCodeSku": "Search by name, code, SKU...",
+  "@searchByNameCodeSku": {
+    "description": "Search by name, code, SKU hint"
+  },
+
+  "limit": "Limit",
+  "@limit": {
+    "description": "Limit label"
+  },
+
+  "enterLimit": "Enter limit (e.g., 1000)",
+  "@enterLimit": {
+    "description": "Enter limit hint"
+  },
+
+  "currentPassword": "Current Password",
+  "@currentPassword": {
+    "description": "Current password field label"
+  },
+
+  "currentPasswordRequired": "Current password is required",
+  "@currentPasswordRequired": {
+    "description": "Current password required validation"
+  },
+
+  "enterValidPassword": "Enter a valid password",
+  "@enterValidPassword": {
+    "description": "Valid password validation message"
+  },
+
+  "passwordsDoNotMatch": "Passwords do not match",
+  "@passwordsDoNotMatch": {
+    "description": "Password mismatch validation message"
+  },
+
+  "referenceNumber": "Reference Number",
+  "@referenceNumber": {
+    "description": "Reference number field label"
+  },
+
+  "editPaymentMethod": "Edit Payment Method",
+  "@editPaymentMethod": {
+    "description": "Edit payment method dialog title"
+  },
+
+  "updatePaymentMethod": "Update Payment Method",
+  "@updatePaymentMethod": {
+    "description": "Update payment method button label"
+  },
+
+  "attachReceiptOptional": "Attach receipt (optional)",
+  "@attachReceiptOptional": {
+    "description": "Attach receipt placeholder"
+  },
+
+  "searchByNamePhoneOrAccountCode": "Search by name, phone, or account code...",
+  "@searchByNamePhoneOrAccountCode": {
+    "description": "Search by name, phone, or account code hint"
+  },
+
+  "noSuppliersMessage": "You don't have any suppliers yet.",
+  "@noSuppliersMessage": {
+    "description": "No suppliers empty state message"
+  },
+
+  "noCustomersMessage": "You don't have any customers yet.",
+  "@noCustomersMessage": {
+    "description": "No customers empty state message"
+  },
+
+  "noCategoriesMessage": "You don't have any categories yet.",
+  "@noCategoriesMessage": {
+    "description": "No categories empty state message"
+  },
+
+  "noSubCategoriesMessage": "You don't have any sub-categories yet.",
+  "@noSubCategoriesMessage": {
+    "description": "No sub-categories empty state message"
+  },
+
+  "noItemsMessage": "You don't have any items yet.",
+  "@noItemsMessage": {
+    "description": "No items empty state message"
+  },
+
+  "noSubCategoriesInCategoryMessage": "This category doesn't have any sub-categories yet.",
+  "@noSubCategoriesInCategoryMessage": {
+    "description": "Empty sub-categories list message for a specific category"
+  },
+
+  "noExpenseCategoriesMessage": "You don't have any expense categories yet.",
+  "@noExpenseCategoriesMessage": {
+    "description": "No expense categories empty state message"
+  },
+
+  "noTransactionsYet": "No transactions yet.",
+  "@noTransactionsYet": {
+    "description": "No transactions empty state message"
+  },
+
+  "roleAssignmentsByBranch": "Role Assignments by Branch",
+  "@roleAssignmentsByBranch": {
+    "description": "Role assignments section title"
+  },
+
+  "errorLoadingRoleAssignments": "Error loading role assignments: {error}",
+  "@errorLoadingRoleAssignments": {
+    "description": "Error message when loading role assignments fails",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Network error"
+      }
+    }
+  },
+
+  "noRoleAssignmentsFound": "No role assignments found",
+  "@noRoleAssignmentsFound": {
+    "description": "Empty role assignments message"
+  },
+
+  "noRoleAssignmentsMessage": "This user doesn't have any role assignments in any branch yet.",
+  "@noRoleAssignmentsMessage": {
+    "description": "Empty role assignments detailed message"
+  },
+
+  "noRolesAvailable": "No roles available",
+  "@noRolesAvailable": {
+    "description": "No roles available message"
+  },
+
+  "thisCategoryHasNoSubCategories": "This category doesn't have any sub-categories yet.",
+  "@thisCategoryHasNoSubCategories": {
+    "description": "Category has no sub-categories message"
+  },
+
+  "filterBestSellerReport": "Filter Best Seller Report",
+  "@filterBestSellerReport": {
+    "description": "Filter best seller report bottom sheet title"
+  },
+
+  "searchCategories": "Search categories...",
+  "@searchCategories": {
+    "description": "Search categories hint"
+  },
+
+  "amount": "Amount",
+  "@amount": {
+    "description": "Amount field label"
+  },
+
+  "allCustomers": "All Customers",
+  "@allCustomers": {
+    "description": "All customers option label"
+  },
+
+  "searchCustomers": "Search customers...",
+  "@searchCustomers": {
+    "description": "Search customers hint"
+  },
+
+  "quantity": "Quantity",
+  "@quantity": {
+    "description": "Quantity field label"
+  },
+
+  "payments": "Payments",
+  "@payments": {
+    "description": "Payments section title"
+  },
+
+  "noPaymentsRecorded": "No payments recorded",
+  "@noPaymentsRecorded": {
+    "description": "Empty payments list message"
+  },
+
+  "confirmReverseTransaction": "Are you sure you want to reverse this transaction?",
+  "@confirmReverseTransaction": {
+    "description": "Confirm reverse transaction dialog message"
+  },
+
+  "thisActionCannotBeUndone": "This action cannot be undone.",
+  "@thisActionCannotBeUndone": {
+    "description": "Warning message for irreversible actions"
+  },
+
+  "nA": "N/A",
+  "@nA": {
+    "description": "Not available label"
+  },
+
+  "expenseCategory": "expense category",
+  "@expenseCategory": {
+    "description": "Expense category type label"
+  },
+
+  "pleaseEnterComplete6DigitCode": "Please enter a complete 6-digit code",
+  "@pleaseEnterComplete6DigitCode": {
+    "description": "OTP validation error message"
+  },
+
+  "noResetTokenFound": "No reset token found",
+  "@noResetTokenFound": {
+    "description": "Reset token not found error message"
+  },
+
+  "loginSuccessful": "Login successful! Welcome back.",
+  "@loginSuccessful": {
+    "description": "Login success message"
+  },
+
+  "creatingAccount": "Creating account...",
+  "@creatingAccount": {
+    "description": "Registration loading message"
+  },
+
+  "accountCreatedSuccessfully": "Account created successfully! Please verify your account.",
+  "@accountCreatedSuccessfully": {
+    "description": "Registration success message"
+  },
+
+  "accountVerifiedSuccessfully": "Account verified successfully! You can now access all features.",
+  "@accountVerifiedSuccessfully": {
+    "description": "Account verification success message"
+  },
+
+  "otpValidatedSuccessfully": "OTP validated successfully!",
+  "@otpValidatedSuccessfully": {
+    "description": "OTP validation success message"
+  },
+
+  "passwordResetLinkSent": "Password reset link sent to your phone number.",
+  "@passwordResetLinkSent": {
+    "description": "Password reset link sent message"
+  },
+
+  "passwordResetLinkSentGeneric": "If an account exists with this phone number, a reset link has been sent.",
+  "@passwordResetLinkSentGeneric": {
+    "description": "Generic password reset link sent message"
+  },
+
+  "passwordResetSuccessfully": "Password reset successfully! You can now login with your new password.",
+  "@passwordResetSuccessfully": {
+    "description": "Password reset success message"
+  },
+
+  "passwordChangedSuccessfully": "Password changed successfully!",
+  "@passwordChangedSuccessfully": {
+    "description": "Password change success message"
+  },
+
+  "profileUpdatedSuccessfully": "Profile updated successfully!",
+  "@profileUpdatedSuccessfully": {
+    "description": "Profile update success message"
+  },
+
+  "accountDeletedSuccessfully": "Account deleted successfully. We're sorry to see you go.",
+  "@accountDeletedSuccessfully": {
+    "description": "Account deletion success message"
+  },
+
+  "otpResentSuccessfully": "OTP resent successfully! Please check your phone.",
+  "@otpResentSuccessfully": {
+    "description": "OTP resend success message"
+  },
+
+  "otpResentGeneric": "If an account exists with this phone number, an OTP has been resent.",
+  "@otpResentGeneric": {
+    "description": "Generic OTP resend message"
+  },
+
+  "loggedOutSuccessfully": "Logged out successfully!",
+  "@loggedOutSuccessfully": {
+    "description": "Logout success message"
+  },
+
+  "authenticationRefreshed": "Authentication refreshed!",
+  "@authenticationRefreshed": {
+    "description": "Authentication refresh success message"
+  },
+
+  "noAuthenticatedUserFound": "No authenticated user found.",
+  "@noAuthenticatedUserFound": {
+    "description": "No authenticated user message"
+  },
+
+  "bankCreatedSuccessfully": "Bank created successfully",
+  "@bankCreatedSuccessfully": {
+    "description": "Bank creation success message"
+  },
+
+  "bankUpdatedSuccessfully": "Bank updated successfully",
+  "@bankUpdatedSuccessfully": {
+    "description": "Bank update success message"
+  },
+
+  "bankDeletedSuccessfully": "Bank deleted successfully",
+  "@bankDeletedSuccessfully": {
+    "description": "Bank deletion success message"
+  },
+
+  "failedToSyncCompanySwitch": "Failed to sync company switch with server. Your selection is saved locally.",
+  "@failedToSyncCompanySwitch": {
+    "description": "Company switch sync failure message"
+  },
+
+  "failedToSyncBranchSwitch": "Failed to sync branch switch with server. Your selection is saved locally.",
+  "@failedToSyncBranchSwitch": {
+    "description": "Branch switch sync failure message"
+  },
+
+  "brandCreatedSuccessfully": "Brand created successfully",
+  "@brandCreatedSuccessfully": {
+    "description": "Brand created success message"
+  },
+
+  "brandUpdatedSuccessfully": "Brand updated successfully",
+  "@brandUpdatedSuccessfully": {
+    "description": "Brand updated success message"
+  },
+
+  "brandDeletedSuccessfully": "Brand deleted successfully",
+  "@brandDeletedSuccessfully": {
+    "description": "Brand deleted success message"
+  },
+
+  "categoryCreatedSuccessfully": "Category created successfully",
+  "@categoryCreatedSuccessfully": {
+    "description": "Category created success message"
+  },
+
+  "categoryUpdatedSuccessfully": "Category updated successfully",
+  "@categoryUpdatedSuccessfully": {
+    "description": "Category updated success message"
+  },
+
+  "categoryDeletedSuccessfully": "Category deleted successfully",
+  "@categoryDeletedSuccessfully": {
+    "description": "Category deleted success message"
+  },
+
+  "companyUpdatedSuccessfully": "Company updated successfully",
+  "@companyUpdatedSuccessfully": {
+    "description": "Company updated success message"
+  },
+
+  "stockUpdatedSuccessfully": "Stock updated successfully",
+  "@stockUpdatedSuccessfully": {
+    "description": "Stock updated success message"
+  },
+
+  "companyLogo": "Company Logo",
+  "@companyLogo": {
+    "description": "Company logo label"
+  },
+
+  "oneDay": "1D",
+  "@oneDay": {
+    "description": "One day period label"
+  },
+
+  "twoDays": "2D",
+  "@twoDays": {
+    "description": "Two days period label"
+  },
+
+  "sevenDays": "7D",
+  "@sevenDays": {
+    "description": "Seven days period label"
+  },
+
+  "tenDays": "10D",
+  "@tenDays": {
+    "description": "Ten days period label"
+  },
+
+  "thirtyDays": "30D",
+  "@thirtyDays": {
+    "description": "Thirty days period label"
+  },
+
+  "attachmentsCount": "Attachments ({count})",
+  "@attachmentsCount": {
+    "description": "Attachments count label",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+
+  "expenseCategoryCreatedSuccessfully": "Expense category created successfully",
+  "@expenseCategoryCreatedSuccessfully": {
+    "description": "Expense category created success message"
+  },
+
+  "expenseCategoryUpdatedSuccessfully": "Expense category updated successfully",
+  "@expenseCategoryUpdatedSuccessfully": {
+    "description": "Expense category updated success message"
+  },
+
+  "expenseCategoryDeletedSuccessfully": "Expense category deleted successfully",
+  "@expenseCategoryDeletedSuccessfully": {
+    "description": "Expense category deleted success message"
+  },
+
+  "itemCreatedSuccessfully": "Item created successfully",
+  "@itemCreatedSuccessfully": {
+    "description": "Item created success message"
+  },
+
+  "itemUpdatedSuccessfully": "Item updated successfully",
+  "@itemUpdatedSuccessfully": {
+    "description": "Item updated success message"
+  },
+
+  "itemDeletedSuccessfully": "Item deleted successfully",
+  "@itemDeletedSuccessfully": {
+    "description": "Item deleted success message"
+  },
+
+  "codeRequired": "Code is required",
+  "@codeRequired": {
+    "description": "Code field validation message"
+  },
+
+  "costPriceRequired": "Cost price is required",
+  "@costPriceRequired": {
+    "description": "Cost price required validation message"
+  },
+
+  "costPriceMustBeGreaterThanZero": "Cost price must be greater than 0",
+  "@costPriceMustBeGreaterThanZero": {
+    "description": "Cost price must be greater than zero validation message"
+  },
+
+  "unitPriceRequired": "Unit price is required",
+  "@unitPriceRequired": {
+    "description": "Unit price required validation message"
+  },
+
+  "unitPriceMustBeGreaterThanZero": "Unit price must be greater than 0",
+  "@unitPriceMustBeGreaterThanZero": {
+    "description": "Unit price must be greater than zero validation message"
+  },
+
+  "unitPriceMustBeGreaterThanOrEqualToCostPrice": "Unit price must be greater than or equal to cost price",
+  "@unitPriceMustBeGreaterThanOrEqualToCostPrice": {
+    "description": "Unit price must be greater than or equal to cost price validation message"
+  },
+
+  "taxRateRequired": "Tax rate is required",
+  "@taxRateRequired": {
+    "description": "Tax rate required validation message"
+  },
+
+  "taxRateMustBeBetween0And100": "Tax rate must be between 0 and 100",
+  "@taxRateMustBeBetween0And100": {
+    "description": "Tax rate must be between 0 and 100 validation message"
+  },
+
+  "filterItems": "Filter items",
+  "@filterItems": {
+    "description": "Filter items tooltip"
+  },
+
+  "close": "Close",
+  "@close": {
+    "description": "Close button tooltip"
+  },
+
+  "modelCreatedSuccessfully": "Model created successfully",
+  "@modelCreatedSuccessfully": {
+    "description": "Model created success message"
+  },
+
+  "modelUpdatedSuccessfully": "Model updated successfully",
+  "@modelUpdatedSuccessfully": {
+    "description": "Model updated success message"
+  },
+
+  "modelDeletedSuccessfully": "Model deleted successfully",
+  "@modelDeletedSuccessfully": {
+    "description": "Model deleted success message"
+  },
+
+  "paymentMethodCreatedSuccessfully": "Payment method created successfully",
+  "@paymentMethodCreatedSuccessfully": {
+    "description": "Payment method created success message"
+  },
+
+  "paymentMethodUpdatedSuccessfully": "Payment method updated successfully",
+  "@paymentMethodUpdatedSuccessfully": {
+    "description": "Payment method updated success message"
+  },
+
+  "paymentMethodDeletedSuccessfully": "Payment method deleted successfully",
+  "@paymentMethodDeletedSuccessfully": {
+    "description": "Payment method deleted success message"
+  },
+
+  "profilePictureUploadedSuccessfully": "Profile picture uploaded successfully",
+  "@profilePictureUploadedSuccessfully": {
+    "description": "Profile picture uploaded success message"
+  }
+}
+

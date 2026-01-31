@@ -1,0 +1,23 @@
+targets:
+  $default:
+    builders:
+      freezed:
+        options:
+          # Generate union types for better pattern matching
+          union_key: type
+          # Generate copyWith methods
+          copyWith: true
+          # Generate toString methods
+          toString: true
+          # Generate equality and hashCode
+          equal: true
+          # Generate JSON serialization
+          json: true
+      json_serializable:
+        options:
+          # Generate explicit toJson methods
+          explicit_to_json: true
+          # Include null values in JSON
+          include_if_null: false
+          # Use checked for better error handling
+          checked: true

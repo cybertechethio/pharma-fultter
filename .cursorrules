@@ -1,0 +1,1029 @@
+# Flutter Project Rules
+
+## 🚨 Core Architecture Patterns
+**CRITICAL**: These patterns MUST be followed for ALL code generation.
+
+### MANDATORY PATTERNS:
+1. **ALWAYS use Either<Failure, Success>** - For all repository and use case returns
+2. **ALWAYS use RequestWrapper** - For all API request formatting
+3. **ALWAYS follow Clean Architecture** - UI → UseCase → Repository → DataSource → ApiService
+4. **ALWAYS use Riverpod providers** - For dependency injection and state management
+5. **ALWAYS implement proper disposal** - For controllers and resources
+6. **ALWAYS use proper validation** - In request models before API calls
+
+## 📁 File Organization
+
+### Documentation
+- **ALL .md files MUST be placed in `docs/` directory**
+- Use UPPERCASE_UNDERSCORES.md format
+- Include implementation status in filename when applicable
+
+### Code Structure
+- Follow Clean Architecture principles
+- Use feature-based organization under `lib/features/`
+- Maintain separation between data, domain, and presentation layers
+- Use Freezed for immutable data classes
+- Follow repository pattern for data access
+- Use use cases for business logic
+
+## 🎨 UI/UX Standards
+
+### Theme System
+- Always use `Theme.of(context)` for accessing theme
+- Support both light and dark modes
+- Follow Material Design 3 guidelines
+
+### Component Usage
+- **PRIORITY**: Check existing components before creating new ones
+- Use established component patterns from `lib/shared/components/`
+- Include proper accessibility support
+- Use AppLocalizations for text
+
+### Global Snackbars
+- **MANDATORY**: Use `SnackbarService` for user feedback (success/error/warning/info). Do NOT show context-bound snackbars from widget-local contexts.
+- Router MUST be constructed with `navigatorKey: SnackbarService.rootNavigatorKey` (see `routes/app_router.dart`).
+- Snack widgets live under `lib/shared/snacks/` and are Flushbar-based: `success_snack_bar.dart`, `error_snack_bar.dart`, `warning_snack_bar.dart`, `info_snack_bar.dart`.
+- Defaults: 2s duration, no actions/labels, replace current snackbar (no queue).
+- Call through Riverpod: `final snackbar = ref.read(snackbarServiceProvider);` then `snackbar.showSuccess(...)`, `snackbar.showError(Failure)`, `snackbar.showWarning(...)`, `snackbar.showInfo(...)`.
+- For top-level/root screens (e.g., Home), disable back button if needed (e.g., `showBackButton: false`) since Flushbar introduces a transient route and can make `Navigator.canPop` true.
+
+### State Management
+- **MANDATORY**: Use Riverpod with AsyncValue pattern - NO custom state classes
+- **MANDATORY**: Use AsyncNotifier with AsyncValue<List<Entity>> for all list features
+- **MANDATORY**: Use AsyncValue.guard() for all operations (create, update, delete)
+- **MANDATORY**: Use OPTIMISTIC UPDATES - Update state directly after operations (NOT auto-reload)
+- **MANDATORY**: Use UI Events pattern - Emit events (Created, Updated, Deleted, Failure) for user feedback
+- **MANDATORY**: Use ref.listen for UI events → show snackbars via SnackbarService
+- **MANDATORY**: Use dataAsync.when() with data, loading, error states in UI
+- **MANDATORY**: Use ConsumerWidget for list screens (NOT ConsumerStatefulWidget)
+- **MANDATORY**: Use separate loading providers for create/update/delete operations
+- **MANDATORY**: Use DeleteConfirmationHelper for all delete operations
+- **MANDATORY**: Use mounted check before Navigator.pop() in dialogs
+
+## 🔧 Development Rules
+
+### Async Dependencies Pattern
+**CRITICAL**: Use Dependency Injection at App Level for async dependencies (SharedPreferences, databases, file systems)
+
+```dart
+// ✅ CORRECT - Only async dependency with keepAlive
+@Riverpod(keepAlive: true)
+Future<SharedPreferences> sharedPreferences(Ref ref) async {
+  return await SharedPreferences.getInstance();
+}
+
+// ✅ CORRECT - All dependent providers synchronous
+@riverpod
+AuthLocalDataSource authLocalDataSource(Ref ref) {
+  return AuthLocalDataSourceImpl(
+    ref.watch(sharedPreferencesProvider).value!, // Safe because keepAlive
+  );
+}
+
+// ✅ REQUIRED - Initialize at app startup
+class MyApp extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.read(sharedPreferencesProvider.future).then((_) {
+      print('✅ SharedPreferences initialized');
+    });
+    return MaterialApp(/* ... */);
+  }
+}
+```
+
+**❌ DON'T**: Make entire provider chain async - only the async dependency itself
+**❌ DON'T**: Access async dependencies without keepAlive + app startup initialization
+
+### Code Quality
+- Follow Dart/Flutter best practices
+- Use proper error handling and validation
+- Write testable code with dependency injection
+- Use proper naming conventions (camelCase for variables, PascalCase for classes)
+- Implement proper null safety
+- Use const constructors where possible
+
+### Internationalization
+- Always use `AppLocalizations.of(context)` for text
+- Provide fallback text for all user-facing strings
+- Add new strings to `lib/l10n/app_en.arb` and `lib/l10n/app_am.arb`
+
+### File Structure
+- Place new features in `lib/features/[feature_name]/`
+- Use established folder structure (data/, domain/, presentation/)
+- Keep shared utilities in `lib/shared/`
+- Keep core utilities in `lib/core/`
+
+## 🚫 Prohibited Actions
+
+### File Placement
+- ❌ Never create .md files in root directory
+- ❌ Never place documentation outside `docs/` folder
+- ❌ Never create duplicate components without checking existing ones
+
+### Code Patterns
+- ❌ Don't use hardcoded colors (use theme system)
+- ❌ Don't create components without theme support
+- ❌ Don't skip internationalization
+- ❌ Don't ignore error handling
+- ❌ Don't use mutable state classes (use Freezed)
+- ❌ Don't skip proper disposal of controllers
+- ❌ Don't ignore accessibility requirements
+- ❌ Don't use direct API calls in UI components
+- ❌ Don't skip Either<Failure, Success> pattern in repositories and use cases
+- ❌ Don't forget RequestWrapper for API requests
+- ❌ Don't skip model-to-entity conversion with extension methods
+- ❌ Don't ignore proper validation in request models
+- ❌ Don't skip proper error mapping from ApiException to Failure types
+- ❌ Don't use direct API calls in UI components (use UseCase instead)
+- ❌ Don't skip proper disposal of controllers and resources
+- ❌ Don't ignore loading, error, and success states in UI
+- ❌ Don't skip proper form validation before API calls
+- ❌ Don't use Navigator 1.0 (use GoRouter instead)
+- ❌ Don't use goNamed() or pushNamed() (use context.go() instead)
+- ❌ Don't hardcode route strings (use RouteName constants)
+- ❌ Don't skip go_router import when using navigation
+- ❌ Don't create custom state classes (use AsyncValue instead)
+- ❌ Don't skip AsyncValue.guard() for operations
+- ❌ Don't use auto-reload after operations (use optimistic updates instead)
+- ❌ Don't skip user feedback (success/error snackbars)
+- ❌ Don't use dataAsync.whenOrNull() (use dataAsync.when() instead)
+- ❌ Don't skip mounted check before Navigator.pop()
+- ❌ Don't create custom delete dialogs (use DeleteConfirmationHelper)
+
+## ✅ Required Actions
+
+### Before Writing Code
+- [ ] Check existing components in `lib/shared/components/`
+- [ ] Verify theme system usage for dark/light mode support
+- [ ] Plan state management with Riverpod providers
+- [ ] Consider internationalization requirements
+- [ ] Follow Clean Architecture layer separation
+- [ ] Plan proper error handling and validation
+- [ ] Consider accessibility requirements
+- [ ] Plan proper dependency injection
+- [ ] Use Freezed for immutable data classes
+- [ ] Plan complete data flow (UI → UseCase → Repository → DataSource → ApiService)
+- [ ] Plan Either<Failure, Success> pattern for error handling
+- [ ] Plan RequestWrapper integration for API requests
+- [ ] Plan model-to-entity conversion with extension methods
+- [ ] Plan proper validation in request models
+- [ ] Plan proper error mapping from ApiException to Failure types
+- [ ] Plan navigation requirements with GoRouter and RouteName constants
+- [ ] Plan route structure in lib/routes/ directory
+
+### When Creating Components
+- [ ] Use existing theme colors and typography
+- [ ] Support both light and dark modes
+- [ ] Add accessibility support
+- [ ] Use AppLocalizations for text
+- [ ] Follow Material Design 3 guidelines
+- [ ] Follow component creation pattern with proper structure
+- [ ] Use enums for component variants (primary, secondary, outlined, text)
+- [ ] Use enums for component sizes (small, medium, large)
+- [ ] Include convenience constructors with extension methods
+- [ ] Add localized constructors for common use cases
+- [ ] Use proper parameter validation with assertions
+- [ ] Implement proper disposal of controllers and focus nodes
+
+### When Creating Features
+- [ ] Create complete Clean Architecture structure (data/, domain/, presentation/)
+- [ ] Create domain entities with Freezed and proper business logic
+- [ ] Create data models with Freezed and JSON serialization
+- [ ] Create request models with validation methods
+- [ ] Create response models with model-to-entity conversion
+- [ ] Create repository interface in domain layer
+- [ ] Create repository implementation in data layer with Either pattern
+- [ ] Create use cases in domain layer with proper business logic
+- [ ] Create data sources in data layer with ApiService integration
+- [ ] Create Riverpod providers for dependency injection
+- [ ] Create screens with proper form handling and error states
+- [ ] Implement proper error handling with Failure types
+- [ ] Use RequestWrapper for all API requests
+- [ ] Implement proper validation in request models
+- [ ] Create proper mappers between models and entities
+- [ ] Follow complete data flow pattern
+- [ ] Test all layers with proper unit tests
+- [ ] **MANDATORY**: Use AsyncNotifier with AsyncValue<List<Entity>> for state management
+- [ ] **MANDATORY**: Use AsyncValue.guard() for all operations
+- [ ] **MANDATORY**: Use optimistic updates (update state directly, NOT reload)
+- [ ] **MANDATORY**: Create UI events provider for user feedback
+- [ ] **MANDATORY**: Create separate loading providers for create/update/delete
+- [ ] **MANDATORY**: Use ref.listen for user feedback
+- [ ] **MANDATORY**: Use dataAsync.when() with data, loading, error states
+- [ ] **MANDATORY**: Use ConsumerWidget for list screens
+- [ ] **MANDATORY**: Use DeleteConfirmationHelper for delete operations
+
+### When Creating Screens
+- [ ] Use CustomAppBar for consistent navigation
+- [ ] Implement responsive layout
+- [ ] Use existing loading and error widgets
+- [ ] Follow the established screen structure pattern
+- [ ] Include proper internationalization
+- [ ] Use ConsumerWidget for Riverpod integration
+- [ ] Implement proper error handling with try-catch
+- [ ] Use _buildBody, _buildContent pattern for organization
+- [ ] Handle loading, error, and success states properly
+- [ ] Use proper navigation patterns with route guards
+- [ ] **ALWAYS use GoRouter for navigation** - NO Navigator 1.0 or custom navigation
+- [ ] **ALWAYS use context.go() for navigation** - NO goNamed() or pushNamed()
+- [ ] **ALWAYS import go_router** - Add `import 'package:go_router/go_router.dart';`
+- [ ] **ALWAYS use RouteName constants** - NO hardcoded route strings
+- [ ] Implement proper form validation and submission
+- [ ] Use proper state management with Riverpod providers
+- [ ] Include proper accessibility support
+- [ ] **Use UseCase pattern** for business logic (never direct API calls)
+- [ ] **Handle Either<Failure, Success> results** with proper fold() method
+- [ ] **Implement proper loading states** with setState or Riverpod
+- [ ] **Handle form validation** before calling UseCase
+- [ ] **Implement proper error display** for user feedback
+- [ ] **Use proper disposal** of controllers and resources
+- [ ] **Follow complete data flow** (UI → UseCase → Repository → DataSource → ApiService)
+
+## 🔧 Code Patterns
+
+### Complete Data Flow Pattern
+```dart
+/// 1. UI Layer - Screen with form handling
+class LoginScreen extends ConsumerStatefulWidget {
+  Future<void> _handleLogin() async {
+    final useCase = ref.read(loginUseCaseProvider);
+    final result = await useCase.call(identifier: email, password: password);
+    
+    result.fold(
+      (failure) => _showError(failure.message),
+      (success) => _navigateToHome(success.user),
+    );
+  }
+}
+
+/// 2. Domain Layer - Use Case
+class LoginUseCase {
+  Future<Either<Failure, ({User user, AuthToken tokens})>> call({
+    required String identifier,
+    required String password,
+  }) async {
+    return await _repository.loginUser(identifier: identifier, password: password);
+  }
+}
+
+/// 3. Domain Layer - Repository Interface
+abstract class AuthRepository {
+  Future<Either<Failure, ({User user, AuthToken tokens})>> loginUser({
+    required String identifier,
+    required String password,
+  });
+}
+
+/// 4. Data Layer - Repository Implementation
+class AuthRepositoryImpl implements AuthRepository {
+  Future<Either<Failure, ({User user, AuthToken tokens})>> loginUser({
+    required String identifier,
+    required String password,
+  }) async {
+    try {
+      final request = LoginRequestModel(identifier: identifier, password: password);
+      final response = await _dataSource.loginUser(request);
+      final user = response.toUser();
+      final tokens = response.toAuthToken();
+      return Right((user: user, tokens: tokens));
+    } on ApiException catch (e) {
+      return Left(Failure.serverError(e.message));
+    } catch (e) {
+      return Left(Failure.unexpectedError('Login failed: ${e.toString()}'));
+    }
+  }
+}
+
+/// 5. Data Layer - Data Source
+class AuthApiService implements AuthDataSource {
+  Future<LoginResponseModel> loginUser(LoginRequestModel request) async {
+    final response = await ApiService.post(
+      ApiEndpoints.login,
+      data: request.toApiJson(), // Automatically wrapped with RequestWrapper
+    );
+    return LoginResponseModel.fromJson(response.data);
+  }
+}
+
+/// 6. Network Layer - API Service with RequestWrapper
+class ApiService {
+  static Future<Response<T>> post<T>(String endpoint, {dynamic data}) async {
+    dynamic wrappedData = data;
+    if (data is Map<String, dynamic>) {
+      wrappedData = RequestWrapper.wrap(data); // Auto-wrap requests
+    }
+    return await _dio.post<T>(endpoint, data: wrappedData);
+  }
+}
+```
+
+### Navigation Pattern (GoRouter)
+```dart
+// ✅ CORRECT: Use GoRouter context extensions appropriately
+// - context.go(...)     → Replace current location (top-level switches, auth redirects)
+// - context.push(...)   → Drill-in pages where back should return to previous screen
+// - context.pop()       → Return to previous screen/dialog
+import 'package:go_router/go_router.dart';
+import '../../routes/route_name.dart';
+
+class MyScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        children: [
+          ElevatedButton(
+            onPressed: () => context.go(RouteName.home),
+            child: Text('Go Home'),
+          ),
+          ElevatedButton(
+            onPressed: () => context.push(RouteName.settings),
+            child: Text('Open Settings'),
+          ),
+          ElevatedButton(
+            onPressed: () => context.pop(),
+            child: Text('Back'),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ❌ WRONG
+// Navigator 1.0 (pushNamed/push) for app navigation → deprecated in this project
+// goNamed()/pushNamed() → Not used; we standardize on path constants via RouteName
+```
+
+### Form Handling Pattern with Clean Architecture
+```dart
+class FormScreen extends ConsumerStatefulWidget {
+  @override
+  ConsumerState<FormScreen> createState() => _FormScreenState();
+}
+
+class _FormScreenState extends ConsumerState<FormScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  
+  bool _isLoading = false;
+  String? _errorMessage;
+  
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+  
+  Future<void> _handleSubmit() async {
+    if (_formKey.currentState?.validate() != true) return;
+    
+    setState(() {
+      _isLoading = true;
+      _errorMessage = null;
+    });
+    
+    try {
+      final useCase = ref.read(loginUseCaseProvider);
+      final result = await useCase.call(
+        identifier: _emailController.text,
+        password: _passwordController.text,
+      );
+      
+      result.fold(
+        (failure) => setState(() => _errorMessage = failure.message),
+        (success) => _handleSuccess(success),
+      );
+    } on ApiException catch (e) {
+      setState(() => _errorMessage = e.message);
+    } catch (e) {
+      setState(() => _errorMessage = 'An unexpected error occurred');
+    } finally {
+      if (mounted) {
+        setState(() => _isLoading = false);
+      }
+    }
+  }
+  
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          if (_errorMessage != null) ...[
+            CustomErrorWidget(message: _errorMessage!),
+            const SizedBox(height: 16),
+          ],
+          CustomTextField(
+            controller: _emailController,
+            label: l10n.email,
+            type: CustomTextFieldType.email,
+            validator: (value) => _validateEmail(value),
+          ),
+          const SizedBox(height: 16),
+          CustomTextField(
+            controller: _passwordController,
+            label: l10n.password,
+            type: CustomTextFieldType.password,
+            validator: (value) => _validatePassword(value),
+          ),
+          const SizedBox(height: 24),
+          CustomButton(
+            text: l10n.submit,
+            onPressed: _isLoading ? null : _handleSubmit,
+            loading: _isLoading,
+          ),
+        ],
+      ),
+    );
+  }
+}
+```
+
+## 🧪 Testing Standards
+
+### Test Structure
+- **Unit Tests**: `test/unit/` - Test business logic, providers, and services
+- **Widget Tests**: `test/widget/` - Test UI components and screens
+- **Integration Tests**: `test/integration/` - Test complete user flows
+- **Mocks**: `test/mocks/` - Mock implementations for testing
+
+### Testing Requirements
+- [ ] Write unit tests for all business logic
+- [ ] Test all state management providers
+- [ ] Test all UI components with different states
+- [ ] Test error handling and edge cases
+- [ ] Test accessibility compliance
+- [ ] Test both light and dark themes
+- [ ] Test internationalization
+- [ ] Achieve minimum 80% code coverage
+- [ ] Test complete data flow (UI → UseCase → Repository → DataSource → ApiService)
+- [ ] Test Either<Failure, Success> pattern with proper fold() handling
+- [ ] Test RequestWrapper integration and request formatting
+- [ ] Test model-to-entity conversion with extension methods
+- [ ] Test proper validation in request models
+- [ ] Test error mapping from ApiException to Failure types
+- [ ] Test proper error handling in all layers
+- [ ] Test proper disposal of controllers and resources
+- [ ] Test loading, error, and success states in UI components
+- [ ] Test form validation and submission flows
+- [ ] Test proper dependency injection with Riverpod providers
+
+## 📚 Reference Documents
+
+### Essential Reading
+- `docs/CODE_GENERATION_GUIDE.md` - Complete code generation standards
+- `docs/ARCHITECTURE.md` - Project architecture overview
+- `docs/STATE_MANAGEMENT.md` - Riverpod patterns and usage
+- `docs/STATE_MANAGEMENT_GUIDELINES.md` - **MANDATORY** AsyncValue pattern guidelines
+
+### Implementation Guides
+- `docs/FREEZED_IMPLEMENTATION_GUIDE.md` - Code generation setup
+- `docs/LOCALIZATION_SETUP_COMPLETE.md` - Internationalization
+- `docs/CALENDAR_IMPLEMENTATION_COMPLETE.md` - Calendar system
+
+### Feature Documentation
+- `docs/LOGIN_SCREEN_IMPLEMENTATION.md` - Authentication system
+- `docs/DATE_CONVERSION_FIX.md` - Date handling fixes
+
+### Testing & Quality
+- `test/unit/` - Unit test examples and patterns
+- `test/widget/` - Widget test examples
+- `test/integration/` - Integration test examples
+- `test/mocks/` - Mock implementations for testing
+
+---
+
+## 🏗️ Clean Architecture Summary
+
+### Complete Data Flow Pattern
+```
+UI Screen → UseCase → Repository → DataSource → ApiService → Backend
+    ↓         ↓         ↓          ↓           ↓
+  Form     Business   Data      Network    Request
+Handling   Logic    Access    Layer      Wrapping
+```
+
+### Key Patterns to Follow
+1. **Either<Failure, Success>** - For all repository and use case returns
+2. **RequestWrapper** - For all API request formatting
+3. **Model-to-Entity Conversion** - With extension methods (toUser(), toEntity())
+4. **Proper Validation** - In request models before API calls
+5. **Error Mapping** - From ApiException to Failure types
+6. **Complete Data Flow** - Never skip layers or use direct API calls in UI
+7. **Proper State Management** - With Riverpod providers and proper disposal
+8. **Form Handling** - With validation, loading states, and error display
+9. **GoRouter Navigation** - Use context.go() with RouteName constants
+10. **Route Structure** - Centralized in lib/routes/ directory
+
+### File Structure for Features
+```
+lib/features/[feature_name]/
+├── data/
+│   ├── datasources/
+│   │   └── [feature]_api_service.dart
+│   ├── models/
+│   │   ├── [feature]_request_model.dart
+│   │   └── [feature]_response_model.dart
+│   └── repositories/
+│       └── [feature]_repository_impl.dart
+├── domain/
+│   ├── entities/
+│   │   └── [feature]_entity.dart
+│   ├── repositories/
+│   │   └── [feature]_repository.dart
+│   └── usecases/
+│       └── [feature]_usecase.dart
+└── presentation/
+    ├── providers/
+    │   └── [feature]_providers.dart
+    └── screens/
+        └── [feature]_screen.dart
+```
+
+### Routing Structure
+```
+lib/routes/
+├── app_router.dart     # GoRouter configuration
+└── route_name.dart     # Route name constants
+```
+
+### Navigation Usage Examples
+```dart
+// ✅ CORRECT Navigation Patterns
+import 'package:go_router/go_router.dart';
+import '../../routes/route_name.dart';
+
+// Navigate to different screens
+context.go(RouteName.home);        // Go to home
+context.go(RouteName.settings);    // Go to settings
+context.go(RouteName.login);       // Go to login
+
+// ❌ WRONG Navigation Patterns
+context.goNamed('home');           // ❌ goNamed() doesn't exist
+context.pushNamed('settings');     // ❌ pushNamed() doesn't exist
+Navigator.pushNamed(context, '/'); // ❌ Navigator 1.0 deprecated
+```
+
+---
+
+## 🎯 ACTUAL IMPLEMENTATION PATTERNS (Based on Codebase Analysis)
+
+### Complete Feature Structure Pattern
+
+**MANDATORY**: Every feature MUST follow this exact structure:
+
+```
+lib/features/[feature_name]/
+├── data/
+│   ├── datasources/
+│   │   ├── [feature]_api_service.dart          # API service (calls ApiService)
+│   │   ├── [feature]_remote_data_source.dart   # Interface
+│   │   └── [feature]_remote_data_source_impl.dart  # Implementation (maps ApiResponse → Either)
+│   ├── models/
+│   │   └── [feature]_model.dart                # Freezed model with JSON serialization
+│   ├── mappers/
+│   │   └── [feature]_mapper.dart               # Extension method: Model.toDomain()
+│   └── repositories/
+│       └── [feature]_repository_impl.dart       # Implements domain repository
+├── domain/
+│   ├── entities/
+│   │   └── [feature]_entity.dart               # Freezed entity (business object)
+│   ├── repositories/
+│   │   └── [feature]_repository.dart           # Interface (returns Either<Failure, Entity>)
+│   └── usecases/
+│       ├── get_[feature]s_usecase.dart         # Get all
+│       ├── create_[feature]_usecase.dart        # Create
+│       ├── update_[feature]_usecase.dart        # Update
+│       └── delete_[feature]_usecase.dart       # Delete
+└── presentation/
+    ├── providers/
+    │   ├── [feature]_providers.dart            # DI providers (ApiService → DataSource → Repository → UseCase)
+    │   ├── [feature]_notifier.dart             # AsyncNotifier with AsyncValue<List<Entity>>
+    │   ├── [feature]_events.dart               # UI events (Created, Updated, Deleted, Failure)
+    │   └── [feature]_loading_providers.dart     # Loading state providers (create/update/delete)
+    ├── screens/
+    │   └── [feature]_list_screen.dart          # ConsumerWidget with ref.listen for events
+    └── widgets/
+        ├── [feature]_card.dart                 # Display widget with edit/delete actions
+        └── [feature]_form_dialog.dart           # Create/edit form dialog
+```
+
+### Notifier Pattern (ACTUAL Implementation)
+
+```dart
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+import '../../domain/entities/[feature].dart';
+import '[feature]_providers.dart';
+import '[feature]_events.dart';
+import '[feature]_loading_providers.dart';
+
+part '[feature]_notifier.g.dart';
+
+@riverpod
+class [Feature]Notifier extends _$[Feature]Notifier {
+  @override
+  Future<List<[Feature]Entity>> build() async {
+    return await _load();
+  }
+
+  Future<void> load() async {
+    state = const AsyncValue.loading();
+    state = await AsyncValue.guard(() => _load());
+  }
+
+  Future<void> create({
+    required String name,
+    required String description,
+  }) async {
+    // 1. Start loading
+    final createLoading = ref.read([feature]CreateLoadingProvider.notifier);
+    createLoading.setLoading(true);
+
+    // 2. Call use case
+    final useCase = ref.read(create[Feature]UseCaseProvider);
+    final result = await useCase.call(
+      name: name,
+      description: description,
+    );
+
+    // 3. Handle result with optimistic update
+    result.fold(
+      (failure) {
+        // Emit failure event
+        ref.read([feature]UiEventsProvider.notifier).emit([Feature]Failure(failure));
+      },
+      (created) {
+        // OPTIMISTIC UPDATE: Update state directly (NOT reload)
+        final current = state.value ?? const <[Feature]Entity>[];
+        state = AsyncValue.data([created, ...current]);
+        
+        // Emit success event
+        ref.read([feature]UiEventsProvider.notifier).emit(
+          [Feature]Created(created, '[Feature] created successfully'),
+        );
+      },
+    );
+
+    // 4. Stop loading
+    createLoading.setLoading(false);
+  }
+
+  Future<void> update[Feature]({
+    required String id,
+    required String name,
+    required String description,
+  }) async {
+    // Similar pattern with optimistic update
+    final updating = ref.read([feature]UpdateLoadingProvider.notifier);
+    updating.start(id);
+    
+    final useCase = ref.read(update[Feature]UseCaseProvider);
+    final result = await useCase.call(
+      id: id,
+      name: name,
+      description: description,
+    );
+
+    result.fold(
+      (failure) {
+        ref.read([feature]UiEventsProvider.notifier).emit([Feature]Failure(failure));
+      },
+      (updated) {
+        // OPTIMISTIC UPDATE: Update item in list
+        final list = List<[Feature]Entity>.from(state.value ?? const <[Feature]Entity>[]);
+        final idx = list.indexWhere((e) => e.id == id);
+        if (idx != -1) list[idx] = updated;
+        state = AsyncValue.data(list);
+        
+        ref.read([feature]UiEventsProvider.notifier).emit(
+          [Feature]Updated(updated, '[Feature] updated successfully'),
+        );
+      },
+    );
+
+    updating.stop(id);
+  }
+
+  Future<void> delete({
+    required String id,
+  }) async {
+    final deleting = ref.read([feature]DeleteLoadingProvider.notifier);
+    deleting.start(id);
+
+    final useCase = ref.read(delete[Feature]UseCaseProvider);
+    final result = await useCase.call(id: id);
+
+    result.fold(
+      (failure) {
+        ref.read([feature]UiEventsProvider.notifier).emit([Feature]Failure(failure));
+      },
+      (deletedEntity) {
+        // OPTIMISTIC UPDATE: Remove item from list
+        final list = List<[Feature]Entity>.from(state.value ?? const <[Feature]Entity>[]);
+        list.removeWhere((e) => e.id == id);
+        state = AsyncValue.data(list);
+        
+        ref.read([feature]UiEventsProvider.notifier).emit(
+          [Feature]Deleted(id, '[Feature] deleted successfully'),
+        );
+      },
+    );
+
+    deleting.stop(id);
+  }
+
+  Future<List<[Feature]Entity>> _load() async {
+    final useCase = ref.read(get[Feature]sUseCaseProvider);
+    final result = await useCase.call();
+    return result.fold(
+      (failure) {
+        throw failure;
+      },
+      (items) => items,
+    );
+  }
+}
+```
+
+### UI Events Pattern
+
+```dart
+// [feature]_events.dart
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+import '../../domain/entities/[feature].dart';
+import '../../../../core/errors/failure.dart';
+
+part '[feature]_events.g.dart';
+
+sealed class [Feature]UiEvent {}
+
+class [Feature]Created extends [Feature]UiEvent {
+  final [Feature]Entity entity;
+  final String message;
+  [Feature]Created(this.entity, this.message);
+}
+
+class [Feature]Updated extends [Feature]UiEvent {
+  final [Feature]Entity entity;
+  final String message;
+  [Feature]Updated(this.entity, this.message);
+}
+
+class [Feature]Deleted extends [Feature]UiEvent {
+  final String id;
+  final String message;
+  [Feature]Deleted(this.id, this.message);
+}
+
+class [Feature]Failure extends [Feature]UiEvent {
+  final Failure failure;
+  [Feature]Failure(this.failure);
+}
+
+@riverpod
+class [Feature]UiEvents extends _$[Feature]UiEvents {
+  @override
+  [Feature]UiEvent? build() {
+    return null;
+  }
+
+  void emit([Feature]UiEvent event) {
+    state = event;
+  }
+
+  void clear() {
+    state = null;
+  }
+}
+```
+
+### Loading Providers Pattern
+
+```dart
+// [feature]_loading_providers.dart
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+part '[feature]_loading_providers.g.dart';
+
+@riverpod
+class [Feature]CreateLoading extends _$[Feature]CreateLoading {
+  @override
+  bool build() => false;
+
+  void setLoading(bool value) {
+    state = value;
+  }
+}
+
+@riverpod
+class [Feature]UpdateLoading extends _$[Feature]UpdateLoading {
+  @override
+  Set<String> build() => {};
+
+  void start(String id) {
+    state = {...state, id};
+  }
+
+  void stop(String id) {
+    state = state.where((e) => e != id).toSet();
+  }
+}
+
+@riverpod
+class [Feature]DeleteLoading extends _$[Feature]DeleteLoading {
+  @override
+  Set<String> build() => {};
+
+  void start(String id) {
+    state = {...state, id};
+  }
+
+  void stop(String id) {
+    state = state.where((e) => e != id).toSet();
+  }
+}
+```
+
+### List Screen Pattern
+
+```dart
+// [feature]_list_screen.dart
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../l10n/app_localizations.dart';
+import '../../../../core/errors/failure.dart';
+import '../../../../core/services/snackbar_service.dart';
+import '../../../../shared/components/common/error_widget.dart' as app_err;
+import '../../../../shared/components/common/empty_widget.dart';
+import '../providers/[feature]_notifier.dart';
+import '../providers/[feature]_events.dart';
+import '../widgets/[feature]_card.dart';
+import '../widgets/[feature]_form_dialog.dart';
+
+class [Feature]ListScreen extends ConsumerWidget {
+  const [Feature]ListScreen({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    
+    // Listen to UI events for user feedback
+    ref.listen<[Feature]UiEvent?>(
+      [feature]UiEventsProvider,
+      (prev, next) {
+        if (next == null) return;
+        final snackbar = ref.read(snackbarServiceProvider);
+        if (next is [Feature]Failure) {
+          snackbar.showError(next.failure);
+        } else if (next is [Feature]Created) {
+          snackbar.showSuccess(next.message);
+        } else if (next is [Feature]Updated) {
+          snackbar.showSuccess(next.message);
+        } else if (next is [Feature]Deleted) {
+          snackbar.showSuccess(next.message);
+        }
+        ref.read([feature]UiEventsProvider.notifier).clear();
+      },
+    );
+    
+    final asyncList = ref.watch([feature]Provider);
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(l10n.[features]),
+      ),
+      body: asyncList.when(
+        loading: () => const Center(child: CircularProgressIndicator()),
+        data: (items) {
+          if (items.isEmpty) {
+            return Center(
+              child: EmptyWidget(
+                icon: Icons.[feature_icon],
+                title: l10n.no[Features],
+                message: l10n.no[Features]Message,
+              ),
+            );
+          }
+          return RefreshIndicator(
+            onRefresh: () => ref.read([feature]Provider.notifier).load(),
+            child: ListView.builder(
+              padding: const EdgeInsets.all(16),
+              itemCount: items.length,
+              itemBuilder: (context, index) => Padding(
+                padding: const EdgeInsets.only(bottom: 12),
+                child: [Feature]Card(item: items[index]),
+              ),
+            ),
+          );
+        },
+        error: (error, stackTrace) => Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              app_err.ErrorsWidget(
+                failure: error is Failure ? error : Failure.unexpectedError(error.toString()),
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () => ref.read([feature]Provider.notifier).load(),
+                child: Text(l10n.retry),
+              ),
+            ],
+          ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => _openCreateDialog(context),
+        child: const Icon(Icons.add),
+      ),
+    );
+  }
+
+  void _openCreateDialog(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    showDialog(
+      context: context,
+      builder: (context) => [Feature]FormDialog(
+        title: l10n.create[Feature],
+        buttonText: l10n.create,
+      ),
+    );
+  }
+}
+```
+
+### Data Source Pattern (Error Mapping)
+
+```dart
+// [feature]_remote_data_source_impl.dart
+import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
+import '../../../../core/errors/exceptions.dart';
+import '../../../../core/errors/failure.dart';
+import '../../../../core/services/logging_service.dart';
+import '../../../../shared/models/api_response.dart';
+import '../models/[feature]_model.dart';
+import '[feature]_api_service.dart';
+import '[feature]_remote_data_source.dart';
+
+class [Feature]RemoteDataSourceImpl implements [Feature]RemoteDataSource {
+  final [Feature]ApiService _api;
+
+  [Feature]RemoteDataSourceImpl(this._api);
+
+  @override
+  Future<Either<Failure, List<[Feature]Model>>> get[Features]() async {
+    LoggingService.auth('Starting get [features] process');
+    try {
+      final ApiResponse<List<[Feature]Model>> response = await _api.getAll();
+      return response.when(
+        success: (success, message, data, meta) {
+          LoggingService.auth('Get [features] successful', {
+            'count': data.length,
+            'message': message,
+          });
+          return Right(data);
+        },
+        error: (success, error, meta) {
+          LoggingService.auth('Get [features] failed - server error', {
+            'error': error.message,
+            'code': error.statusCode,
+          });
+          return Left(Failure.serverError(error.message));
+        },
+      );
+    } on DioException catch (e) {
+      final exception = NetworkExceptions.getDioException(e);
+      return Left(Failure.networkError(NetworkExceptions.getErrorMessage(exception)));
+    } on TypeError catch (e) {
+      LoggingService.error('Get [features] data parsing error', e, StackTrace.current);
+      return Left(Failure.unexpectedError('Data parsing error: ${e.toString()}'));
+    } on FormatException catch (e) {
+      LoggingService.error('Get [features] response format error', e, StackTrace.current);
+      return Left(Failure.unexpectedError('Invalid response format: ${e.toString()}'));
+    } catch (e) {
+      LoggingService.error('Get [features] unexpected error', e, StackTrace.current);
+      return Left(Failure.unexpectedError('Get [features] failed: ${e.toString()}'));
+    }
+  }
+  
+  // Similar pattern for create, update, delete...
+}
+```
+
+### Key Differences from Documentation
+
+1. **Optimistic Updates**: State is updated directly after operations, NOT reloaded from server
+2. **Event-Driven UI**: UI events (Created, Updated, Deleted, Failure) are emitted and listened to
+3. **Separate Loading Providers**: Create/Update/Delete have separate loading state providers
+4. **ConsumerWidget**: List screens use ConsumerWidget, NOT ConsumerStatefulWidget
+5. **No Auto-Reload**: Operations update state optimistically, manual refresh via RefreshIndicator
+
+**Remember**: Always prioritize existing components and patterns before creating new ones. The goal is to maintain consistency, reusability, and maintainability across the entire project. Follow testing standards to ensure production-ready quality. **NEVER skip the Clean Architecture data flow pattern** - it ensures proper separation of concerns, testability, and maintainability.

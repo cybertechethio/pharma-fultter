@@ -1,0 +1,86 @@
+RETRY STRATEGY UPDATE:
+
+✅ REMOVED general RetryInterceptor - no longer needed
+✅ KEPT AuthInterceptor retry logic - handles 401 + token refresh perfectly
+✅ SIMPLIFIED retry behavior - only retry on 401 errors after token refresh
+✅ REMOVED retry configuration - no longer needed
+
+Current retry behavior:
+- 401 error → Refresh token → Retry once → Success or fail
+- All other errors → Show error immediately → No retries
+
+This is the correct, professional approach for production apps.
+
+
+
+
+
+
+{
+  "success": true,
+  "message": "Expense fetched successfully",
+  "data": {
+    "id": 123,
+    "companyId": 456,
+    "branchId": 789,
+    "categoryId": 101,
+    "expenseDate": "2024-01-15T10:30:00.000Z",
+    "name": "Office Supplies Purchase",
+    "amount": 150.50,
+    "notes": "Purchased pens, paper, and printer ink",
+    "attachments": [
+      "https://cdn.example.com/uploads/file1.jpg",
+      "https://cdn.example.com/uploads/file2.pdf"
+    ],
+    "status": "active",
+    "createdAt": "2024-01-15T10:30:00.000Z",
+    "updatedAt": "2024-01-15T10:35:00.000Z",
+    "createdBy": 123,
+    "updatedBy": 123,
+    
+    // Relations
+    "category": {
+      "id": 101,
+      "companyId": 456,
+      "name": "Office Supplies",
+      "description": "Stationery and office materials",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2024-01-01T00:00:00.000Z",
+      "createdBy": 123,
+      "updatedBy": null
+    },
+    
+    "branches": {
+      "id": 789,
+      "companyId": 456,
+      "name": "Main Branch",
+      "location": "Downtown",
+      "isActive": true,
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": null,
+      "createdBy": 123,
+      "updatedBy": null
+    },
+    
+    "expensePayments": [
+      {
+        "id": 201,
+        "expenseId": 123,
+        "amount": 150.50,
+        "createdAt": "2024-01-15T10:30:00.000Z",
+        
+        "paymentMethods": [
+          {
+            "id": 301,
+            "method": "cash",
+            "amount": 150.50,
+            "referenceNumber": null,
+            "createdAt": "2024-01-15T10:30:00.000Z",
+            
+            "banks": null  // Only populated for bank_transfer method
+          }
+        ]
+      }
+    ]
+  }
+}

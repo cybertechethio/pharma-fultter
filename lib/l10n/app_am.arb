@@ -1,0 +1,3451 @@
+{
+  "@@locale": "am",
+  
+  "appTitle": "ሳይበር ቴክ",
+  "appTitleWithPos": "ሳይበር ቴክ POS",
+  "welcome": "እንኳን ደህና መጡ",
+  "home": "መነሻ",
+  "settings": "ቅንብሮች",
+  "language": "ቋንቋ",
+  "theme": "ገጽታ",
+  "lightMode": "ብርሃን ገጽታ",
+  "darkMode": "ጨለማ ገጽታ",
+  "brandColor": "የምርት ቀለም",
+  "save": "አስቀምጥ",
+  "cancel": "ሰርዝ",
+  "ok": "እሺ",
+  "error": "ስህተት",
+  "success": "ተሳክቷል",
+  "loading": "በመጫን ላይ...",
+  "retry": "እንደገና ሞክር",
+  "close": "ዝጋ",
+  "greetingMessage": "ሰላም፣ {userName}!",
+  "itemCount": "{count, plural, =0{ምንም ነገር የለም} =1{1 ነገር} other{{count} ነገሮች}}",
+  "logout": "ውጣ",
+  "login": "ግባ",
+  "email": "ኢሜይል",
+  "password": "የይለፍ ቃል",
+  "forgotPassword": "የይለፍ ቃልዎን ረሱ?",
+  "noAccount": "መለያ የለዎትም?",
+  "signUp": "ይመዝገቡ",
+  "createAccount": "መለያ ይፍጠሩ",
+  "joinUsToday": "ዛሬ ይቀላቀሉን",
+  "createAccountToGetStarted": "ለመጀመር መለያዎን ይፍጠሩ",
+  "firstName": "የመጀመሪያ ስም",
+  "lastName": "የአባት ስም",
+  "companyName": "የኩባንያ ስም",
+  "phoneNumber": "የስልክ ቁጥር",
+  "phoneNumberHint": "+251012001708",
+  "confirmPassword": "የይለፍ ቃል ያረጋግጡ",
+  "confirmPasswordHint": "የይለፍ ቃልዎን ያረጋግጡ",
+  "acceptTerms": "የአገልግሎት ውሎችን እቀበላለሁ",
+  "termsDescription": "ይህን ሳጥን በመመርጥ የአገልግሎት ውሎችን እና የግላዊነት ፖሊሲያችንን እቀበላለሁ።",
+  "passwordStrength": "የይለፍ ቃል ጥንካሬ",
+  "registrationSuccessful": "መዝገብ በተሳካ ሁኔታ",
+  "welcomeUser": "እንኳን ደህና መጡ፣ {name}!",
+  "verifyAccount": "እባክዎ መለያዎን ያረጋግጡ:",
+  "checkEmailForVerification": "• ለማረጋገጫ ኢሜይልዎን ይፈልጉ",
+  "checkPhoneForVerification": "• ለማረጋገጫ ስልክዎን ይፈልጉ",
+  "canLoginNow": "አሁን በምልክቶችዎ መግባት ይችላሉ።",
+  "alreadyHaveAccount": "አስቀድመው መለያ አላችሁ?",
+  "signIn": "ግባ",
+  "changeLanguage": "ቋንቋ ቀይር",
+  "welcomeBack": "እንኳን ደህና መጡ!",
+  "loginToContinue": "ለመቀጠል ይግቡ",
+  "emailHint": "ኢሜይልዎን ያስገቡ",
+  "passwordHint": "የይለፍ ቃልዎን ያስገቡ",
+  "rememberMe": "አስታውሰኝ",
+  "loginButton": "ግባ",
+  "loggingIn": "በመግባት ላይ...",
+  "emailRequired": "ኢሜይል ያስፈልጋል",
+  "invalidEmail": "እባክዎ ትክክለኛ ኢሜይል ያስገቡ",
+  "passwordRequired": "የይለፍ ቃል ያስፈልጋል",
+  "passwordMinLength": "የይለፍ ቃል ቢያንስ 6 ቁምፊዎች መሆን አለበት",
+  "loginSuccess": "በተሳካ ሁኔታ ገብተዋል!",
+  "loginFailed": "መግባት አልተሳካም",
+  "invalidCredentials": "የተሳሳተ ኢሜይል ወይም የይለፍ ቃል",
+  "orLoginWith": "ወይም በሚከተለው ይግቡ",
+  "googleLogin": "ጉግል",
+  "facebookLogin": "ፌስቡክ",
+  "appleLogin": "አፕል",
+  "socialLoginComingSoon": "ማህበራዊ መግባት በቅርቡ ይመጣል",
+  "languageToggle": "ቋንቋ ቀይር",
+  "continueAsGuest": "እንደ እንግዳ ቀጥል",
+  "calendar": "የቀን መቁጠሪያ",
+  "selectDate": "ቀን ይምረጡ",
+  "gregorianCalendar": "ግሪጎሪያን የቀን መቁጠሪያ",
+  "ethiopianCalendar": "የኢትዮጵያ የቀን መቁጠሪያ",
+  "calendarType": "የቀን መቁጠሪያ አይነት",
+  "today": "ዛሬ",
+  "selectedDate": "የተመረጠ ቀን",
+  "ethiopianMonthMeskerem": "መስከረም",
+  "ethiopianMonthTikimt": "ጥቅምት",
+  "ethiopianMonthHidar": "ህዳር",
+  "ethiopianMonthTahsas": "ታህሳስ",
+  "ethiopianMonthTir": "ጥር",
+  "ethiopianMonthYekatit": "የካቲት",
+  "ethiopianMonthMegabit": "መጋቢት",
+  "ethiopianMonthMiazia": "ሚያዝያ",
+  "ethiopianMonthGenbot": "ግንቦት",
+  "ethiopianMonthSene": "ሰኔ",
+  "ethiopianMonthHamle": "ሐምሌ",
+  "ethiopianMonthNehasse": "ነሐሴ",
+  "ethiopianMonthPagumen": "ጳጉሜን",
+  "dateRange": "የቀን ክልል",
+  "selectDateRange": "የቀን ክልል ይምረጡ",
+  "startDate": "የመጀመሪያ ቀን",
+  "endDate": "የመጨረሻ ቀን",
+  "selectingStart": "የመጀመሪያ ቀን በመምረጥ ላይ",
+  "selectingEnd": "የመጨረሻ ቀን በመምረጥ ላይ",
+  "duration": "ቆይታ",
+  "days": "{count, plural, =0{0 ቀናት} =1{1 ቀን} other{{count} ቀናት}}",
+  "clearSelection": "ምርጫ አጥፋ",
+  "selectRange": "ክልል ምረጥ",
+  "defaultDate": "ነባሪ ቀን",
+  "defaultStartDate": "ነባሪ የመጀመሪያ ቀን",
+  "setDefaultDate": "ነባሪ ቀን ያስቀምጡ",
+  "defaultDateDescription": "ይህ ቀን ለዳሽቦርድ እና ለመረጃ ማጣሪያ ይውላል",
+  "noDefaultDate": "ምንም ነባሪ ቀን አልተቀመጠም",
+  "themeSettings": "የገጽታ ቅንብሮች",
+  "languageSettings": "የቋንቋ ቅንብሮች",
+  "dateSettings": "የቀን ቅንብሮች",
+  "appearance": "ገጽታ",
+  "general": "አጠቃላይ",
+  "calendarDisplayType": "የቀን መቁጠሪያ ማሳያ",
+  "calendarDisplayDescription": "በመተግበሪያው ውስጥ ቀኖች እንዴት እንደሚታዩ ይምረጡ",
+  "autoDetect": "ራስ-ሰር (በቋንቋ ላይ የተመሰረተ)",
+  "displayInGregorian": "ሁልጊዜ ግሪጎሪያን",
+  "displayInEthiopian": "ሁልጊዜ ኢትዮጵያን",
+  "getStarted": "ጀምር",
+  "addItem": "ንጥል ጨምር",
+  "browseItems": "ንጥሎች ያስሱ",
+  "startShopping": "ግዢ ጀምር",
+  "clearSearch": "ፍለጋ አጽዳ",
+  "completeProfile": "መገለጫ ሙሉ",
+  "networkError": "የኔትዎርክ ግንኙነት አልተሳካም። እባክዎ የኢንተርኔት ግንኙነትዎን ያረጋግጡ እና እንደገና ይሞክሩ።",
+  "serverError": "የሰርቨር ስህተት ተከስቷል። እባክዎ ቆይተው እንደገና ይሞክሩ።",
+  "notFound": "አልተገኘም",
+  "notFoundMessage": "የተጠየቀው ይዘት አልተገኘም።",
+  "permissionError": "ፈቃድ ተከልክሏል። ለመቀጠል አስፈላጊውን ፈቃድ እባክዎ ይስጡ።",
+  "noItemsFound": "ምንም ንጥል አልተገኘም። የመጀመሪያውን ንጥልዎን በመጨመር ይጀምሩ።",
+  "noResultsFound": "ምንም ውጤት አልተገኘም። የፍለጋ ቃላትዎን እባክዎ ያስተካክሉ።",
+  "noFavoritesYet": "እስካሁን ምንም ተወዳጅ አልተጨመረም። የሚወዷቸውን ንጥሎች በመጨመር ይጀምሩ።",
+  "noNotificationsYet": "እስካሁን ምንም ማሳወቂያ የለም። አስፈላጊ ነገር በሚከሰት ጊዜ እናሳውቅዎታለን።",
+  "cartEmpty": "የግዢ ቅርጫትዎ ባዶ ነው። ለመጀመር አንዳንድ ንጥሎች ይጨምሩ።",
+  "profileIncomplete": "የመገለጫዎን ሙሉ ለማድረግ አፕሊኬሽኑን በተሻለ ሁኔታ ለመጠቀም።",
+  "loadingData": "ውሂብ በመጫን ላይ...",
+  "pleaseWait": "እባክዎ ይጠብቁ...",
+  "required": "ያስፈልጋል",
+  "invalidEmail": "እባክዎ ትክክለኛ ኢሜይል ያስገቡ",
+  "passwordMinLength": "የይለፍ ቃል ቢያንስ 6 ቁምፊዎች መሆን አለበት",
+  "fieldRequired": "ይህ መስክ ያስፈልጋል",
+  "enterEmail": "ኢሜይልዎን ያስገቡ",
+  "enterPassword": "የይለፍ ቃልዎን ያስገቡ",
+  "searchHint": "ፍለጋ...",
+  "searchByItemName": "በንጥል ስም ፍለጋ...",
+  "selectOption": "አማራጭ ይምረጡ",
+  "search": "ፍለጋ",
+  "menu": "ምናሌ",
+  "back": "ተመለስ",
+  "close": "ዝጋ",
+  "done": "ተጠናቋል",
+  "edit": "አርትዖ",
+  "delete": "ሰርዝ",
+  "share": "አጋራ",
+  "copy": "ቅዳ",
+  "paste": "ጣቅም",
+  "cut": "ቈርጥ",
+  "selectAll": "ሁሉንም ምረጥ",
+  "more": "ተጨማሪ",
+  "less": "ተጨማሪ",
+  "showMore": "ተጨማሪ አሳይ",
+  "showLess": "ተጨማሪ አሳይ",
+  "expand": "ዘርጋ",
+  "collapse": "ጠቅ",
+  "refresh": "አደስ",
+  "filter": "አጣራ",
+  "sort": "ደርድር",
+  "view": "እይታ",
+  "details": "ዝርዝሮች",
+  "summary": "ማጠቃለያ",
+  "preview": "ቅድመ እይታ",
+  "fullScreen": "ሙሉ ማያ",
+  "exitFullScreen": "ሙሉ ማያ ውጣ",
+  "@exitFullScreen": {
+    "description": "ሙሉ ማያ ሁነታ መለያ"
+  },
+
+  "welcomeToApp": "ወደ ሳይበር ቴክ እንኳን ደህና መጡ",
+  "@welcomeToApp": {
+    "description": "ዋና ማያ ለምሳሌ የሚልቅ መልዕክት"
+  },
+
+  "appName": "ደህንነት ያለው ማረጋገጫ",
+  "@appName": {
+    "description": "የመተግበሪያ ስም"
+  },
+
+  "signInToContinue": "ለመቀጠል ወደ መለያዎ ይግቡ",
+  "@signInToContinue": {
+    "description": "የመግባት ቀጣይ መልዕክት"
+  },
+
+  "emailAddress": "የኢሜል አድራሻ",
+  "@emailAddress": {
+    "description": "የኢሜል አድራሻ መስክ መለያ"
+  },
+
+  "enterYourEmail": "ኢሜልዎን ያስገቡ",
+  "@enterYourEmail": {
+    "description": "የኢሜል መስክ ተመላሽ ጽሑፍ"
+  },
+
+  "enterYourPassword": "የይለፍ ቃልዎን ያስገቡ",
+  "@enterYourPassword": {
+    "description": "የይለፍ ቃል መስክ ተመላሽ ጽሑፍ"
+  },
+
+  "pleaseEnterPassword": "እባክዎ የይለፍ ቃልዎን ያስገቡ",
+  "@pleaseEnterPassword": {
+    "description": "የይለፍ ቃል ያስፈልጋል የማረጋገጫ መልዕክት"
+  },
+
+  "signingIn": "በመግባት ላይ...",
+  "@signingIn": {
+    "description": "የመግባት እያለ መልዕክት"
+  },
+
+  "or": "ወይም",
+  "@or": {
+    "description": "ወይም አስተካካይ ጽሑፍ"
+  },
+
+  "continueWithGoogle": "በ Google ይቀጥሉ",
+  "@continueWithGoogle": {
+    "description": "Google የመግባት ቁልፍ ጽሑፍ"
+  },
+
+  "dontHaveAccount": "መለያ የለዎትም?",
+  "@dontHaveAccount": {
+    "description": "መለያ የለም ተነሳሽነት ጽሑፍ"
+  },
+
+  "fullName": "ሙሉ ስም",
+  "@fullName": {
+    "description": "ሙሉ ስም መስክ መለያ"
+  },
+
+  "byCreatingAccount": "መለያ በመፍጠር እኛን በማመንታት ተስማምተዋል",
+  "@byCreatingAccount": {
+    "description": "የስምምነት ጽሑፍ"
+  },
+
+  "termsOfUse": "የአጠቃቀም ውሎች",
+  "@termsOfUse": {
+    "description": "የአጠቃቀም ውሎች አገናኝ ጽሑፍ"
+  },
+
+  "and": "እና",
+  "@and": {
+    "description": "የመገናኛ ቃል"
+  },
+
+  "privacyPolicy": "የግላዊነት ፖሊሲ",
+  "@privacyPolicy": {
+    "description": "የግላዊነት ፖሊሲ አገናኝ ጽሑፍ"
+  },
+
+  "goToHome": "ወደ መነሻ ይሂዱ",
+  "@goToHome": {
+    "description": "ወደ መነሻ ማያ ቀጣይ የመምራት ቁልፍ"
+  },
+
+  "loginAccount": "ወደ መለያዎ ይግቡ",
+  "@loginAccount": {
+    "description": "የመግባት ማያ ርዕስ"
+  },
+
+  "enterPhone": "የስልክ ቁጥር ያስገቡ",
+  "@enterPhone": {
+    "description": "የስልክ ቁጥር መስክ መለያ"
+  },
+
+  "enterValidPhone": "እባክዎ ትክክለኛ የስልክ ቁጥር ያስገቡ",
+  "@enterValidPhone": {
+    "description": "የስልክ ቁጥር የማረጋገጫ መልዕክት"
+  },
+
+  "enterPassword": "የይለፍ ቃል ያስገቡ",
+  "@enterPassword": {
+    "description": "የይለፍ ቃል መስክ መለያ"
+  },
+
+  "enterValidPassword": "እባክዎ ትክክለኛ የይለፍ ቃል ያስገቡ",
+  "@enterValidPassword": {
+    "description": "የይለፍ ቃል የማረጋገጫ መልዕክት"
+  },
+
+  "loginWithGoogle": "በ Google ይግቡ",
+  "@loginWithGoogle": {
+    "description": "Google የመግባት ቁልፍ ጽሑፍ"
+  },
+
+  "firstName": "የመጀመሪያ ስም",
+  "@firstName": {
+    "description": "የመጀመሪያ ስም መስክ መለያ"
+  },
+
+  "lastName": "የአባት ስም",
+  "@lastName": {
+    "description": "የአባት ስም መስክ መለያ"
+  },
+
+  "phoneNumber": "የስልክ ቁጥር",
+  "@phoneNumber": {
+    "description": "የስልክ ቁጥር መስክ መለያ"
+  },
+
+  "enterValidPhone": "እባክዎ ትክክለኛ የስልክ ቁጥር ያስገቡ",
+  "@enterValidPhone": {
+    "description": "የስልክ ቁጥር የማረጋገጫ መልዕክት"
+  },
+
+  "companies": "ኩባንያዎች",
+  "@companies": {
+    "description": "ኩባንያዎች ማያ ርዕስ"
+  },
+  "customers": "ደንበኞች",
+  "@customers": {
+    "description": "ደንበኞች ምናሌ መለያ"
+  },
+  "suppliers": "አቅራቢዎች",
+  "@suppliers": {
+    "description": "አቅራቢዎች ምናሌ መለያ"
+  },
+  "supplier": "አቅራቢ",
+  "@supplier": {
+    "description": "አቅራቢ ዓይነት መለያ"
+  },
+  "customer": "ደንበኛ",
+  "@customer": {
+    "description": "ደንበኛ ዓይነት መለያ"
+  },
+  "editCustomer": "ደንበኛ አርትዖ",
+  "@editCustomer": {
+    "description": "ደንበኛ አርትዖ ዳይሎግ ርዕስ"
+  },
+  "editSupplier": "አቅራቢ አርትዖ",
+  "@editSupplier": {
+    "description": "አቅራቢ አርትዖ ዳይሎግ ርዕስ"
+  },
+  "type": "ዓይነት",
+  "@type": {
+    "description": "ዓይነት መስክ መለያ"
+  },
+  "name": "ስም",
+  "@name": {
+    "description": "ስም መስክ መለያ"
+  },
+  "description": "መግለጫ",
+  "@description": {
+    "description": "መግለጫ መስክ መለያ"
+  },
+  "accountCode": "የመለያ ኮድ",
+  "@accountCode": {
+    "description": "የመለያ ኮድ መስክ መለያ"
+  },
+  "tinNumber": "የTIN ቁጥር",
+  "@tinNumber": {
+    "description": "የTIN ቁጥር መስክ መለያ"
+  },
+  "customerDetails": "የደንበኛ ዝርዝሮች",
+  "@customerDetails": {
+    "description": "የደንበኛ ዝርዝሮች ስክሪን ርዕስ"
+  },
+  "supplierDetails": "የአቅራቢ ዝርዝሮች",
+  "@supplierDetails": {
+    "description": "የአቅራቢ ዝርዝሮች ስክሪን ርዕስ"
+  },
+  "businessInformation": "የንግድ መረጃ",
+  "@businessInformation": {
+    "description": "የንግድ መረጃ ክፍል ርዕስ"
+  },
+  "accountDetails": "የመለያ ዝርዝሮች",
+  "@accountDetails": {
+    "description": "የመለያ ዝርዝሮች ክፍል ርዕስ"
+  },
+  "balance": "ቀሪ ሂሳብ",
+  "@balance": {
+    "description": "ቀሪ ሂሳብ መስክ መለያ"
+  },
+  "categories": "ምድቦች",
+  "@categories": {
+    "description": "ምድቦች ምናሌ መለያ"
+  },
+  "expenseCategories": "የወጪ ምድቦች",
+  "@expenseCategories": {
+    "description": "የወጪ ምድቦች ምናሌ መለያ"
+  },
+  "createExpenseCategory": "የወጪ ምድብ ፍጠር",
+  "@createExpenseCategory": {
+    "description": "የወጪ ምድብ መፍጠሪያ መስኮት ርእስ"
+  },
+
+  "expenses": "ወጪዎች",
+  "@expenses": {
+    "description": "ወጪዎች ምናሌ መለያ"
+  },
+
+  "createExpense": "ወጪ ፍጠር",
+  "@createExpense": {
+    "description": "ወጪ መፍጠሪያ መስኮት ርእስ"
+  },
+
+  "editExpense": "ወጪ አርትዕ",
+  "@editExpense": {
+    "description": "ወጪ ማረሚያ መስኮት ርእስ"
+  },
+
+  "expense": "ወጪ",
+  "@expense": {
+    "description": "ወጪ ነጠላ ቅፅበት"
+  },
+
+  "expenseRequired": "የወጪ ስም አስፈላጊ ነው",
+  "@expenseRequired": {
+    "description": "የወጪ ስም ማረጋገጫ መልክ"
+  },
+
+  "expenseNameExists": "የወጪ ስም አስቀድሞ አለ",
+  "@expenseNameExists": {
+    "description": "የወጪ ስም ልዩነት ማረጋገጫ መልክ"
+  },
+
+  "noExpenses": "ወጪ የለም",
+  "@noExpenses": {
+    "description": "ያልሆኑ ወጪዎች ርእስ"
+  },
+
+  "noExpensesMessage": "እስካሁን ምንም ወጪ አልፈጠሩም። የመጀመሪያ ወጪን ለመፍጠር + ቁልፍን ያድርጉ።",
+  "@noExpensesMessage": {
+    "description": "ያልሆኑ ወጪዎች መልክ"
+  },
+
+  "reference": "ማጣቀሻ",
+  "@reference": {
+    "description": "ማጣቀሻ መስክ መለያ"
+  },
+
+  "expenseDate": "የወጪ ቀን",
+  "@expenseDate": {
+    "description": "የወጪ ቀን መስክ መለያ"
+  },
+
+  "expenseAmount": "መጠን",
+  "@expenseAmount": {
+    "description": "የወጪ መጠን መስክ መለያ"
+  },
+
+  "subCategories": "ንዑስ ምድቦች",
+  "@subCategories": {
+    "description": "ንዑስ ምድቦች ምናሌ መለያ"
+  },
+  "units": "አሃዶች",
+  "@units": {
+    "description": "አሃዶች ምናሌ መለያ"
+  },
+  "brands": "የምርት ስም",
+  "@brands": {
+    "description": "የምርት ስም ምናሌ መለያ"
+  },
+  "models": "ሞዴሎች",
+  "@models": {
+    "description": "ሞዴሎች ምናሌ መለያ"
+  },
+  "items": "ንጥሎች",
+  "@items": {
+    "description": "ንጥሎች ምናሌ መለያ"
+  },
+  "item": "ንጥል",
+  "@item": {
+    "description": "ንጥል ዓይነት መለያ"
+  },
+  "@items": {
+    "description": "ንጥሎች ምናሌ መለያ"
+  },
+  "roles": "ሚናዎች",
+  "@roles": {
+    "description": "ሚናዎች ምናሌ መለያ"
+  },
+  "banks": "ባንኮች",
+  "@banks": {
+    "description": "ባንኮች ምናሌ መለያ"
+  },
+  "employees": "ሠራተኞች",
+  "@employees": {
+    "description": "ሠራተኞች ምናሌ መለያ"
+  },
+  "users": "ተጠቃሚዎች",
+  "@users": {
+    "description": "ተጠቃሚዎች ምናሌ መለያ"
+  },
+  "user": "ተጠቃሚ",
+  "@user": {
+    "description": "ተጠቃሚ ዓይነት መለያ"
+  },
+  "@employees": {
+    "description": "ሠራተኞች ምናሌ መለያ"
+  },
+  "reports": "ሪፖርቶች",
+  "@reports": {
+    "description": "ሪፖርቶች ምናሌ መለያ"
+  },
+  "help": "እርዳታ",
+  "@help": {
+    "description": "እርዳታ ምናሌ መለያ"
+  },
+
+  "noCompanies": "ምንም ኩባንያ የለም",
+  "@noCompanies": {
+    "description": "ባዶ ኩባንያዎች ዝርዝር ርዕስ"
+  },
+
+  "noCompaniesMessage": "እስካሁን ምንም ኩባንያ አልፈጠርክም።\nየመጀመሪያውን ኩባንያዎን ለመፍጠር + ቁልፉን ይንኩ።",
+  "@noCompaniesMessage": {
+    "description": "ባዶ ኩባንያዎች ዝርዝር መልዕክት"
+  },
+
+  "createCompany": "ኩባንያ ፍጠር",
+  "@createCompany": {
+    "description": "ኩባንያ የመፍጠር ቁልፍ እና የመወያያ ርዕስ"
+  },
+
+  "editCompany": "ኩባንያ አርትዖ",
+  "@editCompany": {
+    "description": "ኩባንያ የማስተካከያ የመወያያ ርዕስ"
+  },
+
+  "companyName": "የኩባንያ ስም",
+  "@companyName": {
+    "description": "የኩባንያ ስም መስክ መለያ"
+  },
+
+  "active": "ንቁ",
+  "@active": {
+    "description": "ንቁ ሁኔታ መለያ"
+  },
+
+  "inactive": "ንቁ ያልሆነ",
+  "@inactive": {
+    "description": "ንቁ ያልሆነ ሁኔታ መለያ"
+  },
+
+  "viewBranches": "ቅርንጫፎች ይመልከቱ",
+  "@viewBranches": {
+    "description": "ቅርንጫፎች የመመልከት ቁልፍ መሳሪያ ጽሑፍ"
+  },
+
+  "editCompanyTooltip": "ኩባንያ አርትዖ",
+  "@editCompanyTooltip": {
+    "description": "ኩባንያ የማስተካከያ ቁልፍ መሳሪያ ጽሑፍ"
+  },
+
+  "deleteCompanyTooltip": "ኩባንያ ሰርዝ",
+  "@deleteCompanyTooltip": {
+    "description": "ኩባንያ የመሰረዝ ቁልፍ መሳሪያ ጽሑፍ"
+  },
+
+  "update": "አዘምን",
+  "@update": {
+    "description": "የማዘመን ቁልፍ መለያ"
+  },
+
+  "create": "ፍጠር",
+  "@create": {
+    "description": "የመፍጠር ቁልፍ መለያ"
+  },
+
+  "branches": "ቅርንጫፎች",
+  "@branches": {
+    "description": "ቅርንጫፎች ማያ ርዕስ"
+  },
+
+  "noBranches": "ምንም ቅርንጫፍ የለም",
+  "@noBranches": {
+    "description": "ባዶ ቅርንጫፎች ዝርዝር ርዕስ"
+  },
+
+  "noBranchesMessage": "ይህ ኩባንያ እስካሁን ምንም ቅርንጫፍ የለውም።\nየመጀመሪያውን ቅርንጫፍ ለመፍጠር + ቁልፉን ይንኩ።",
+  "@noBranchesMessage": {
+    "description": "ባዶ ቅርንጫፎች ዝርዝር መልዕክት"
+  },
+
+  "createBranch": "ቅርንጫፍ ፍጠር",
+  "@createBranch": {
+    "description": "ቅርንጫፍ የመፍጠር ቁልፍ እና የመወያያ ርዕስ"
+  },
+
+  "editBranch": "ቅርንጫፍ አርትዖ",
+  "@editBranch": {
+    "description": "ቅርንጫፍ የማስተካከያ የመወያያ ርዕስ"
+  },
+
+  "branchName": "የቅርንጫፍ ስም",
+  "@branchName": {
+    "description": "የቅርንጫፍ ስም መስክ መለያ"
+  },
+
+  "editBranchTooltip": "ቅርንጫፍ አርትዖ",
+  "@editBranchTooltip": {
+    "description": "ቅርንጫፍ የማስተካከያ ቁልፍ መሳሪያ ጽሑፍ"
+  },
+
+  "deleteBranchTooltip": "ቅርንጫፍ ሰርዝ",
+  "@deleteBranchTooltip": {
+    "description": "ቅርንጫፍ የመሰረዝ ቁልፍ መሳሪያ ጽሑፍ"
+  },
+
+  "management": "አስተዳደር",
+  "@management": {
+    "description": "ኩባንያ እና ቅርንጫፍ አስተዳደር የምናሌ መለያ"
+  },
+
+  "addNew": "አዲስ ጨምር",
+  "@addNew": {
+    "description": "አዲስ ንጥል የመጨመር ቁልፍ መሳሪያ ጽሑፍ"
+  },
+
+  "noRoles": "ምንም ሚና የለም",
+  "@noRoles": {
+    "description": "ባዶ ሚናዎች ዝርዝር ርዕስ"
+  },
+
+  "noRolesMessage": "እስካሁን ምንም ሚና የሎትም።",
+  "@noRolesMessage": {
+    "description": "ባዶ ሚናዎች ዝርዝር መልዕክት"
+  },
+
+  "createRole": "ሚና ፍጠር",
+  "@createRole": {
+    "description": "ሚና የመፍጠር ቁልፍ እና ማያ ርዕስ"
+  },
+
+  "editRole": "ሚና አርትዖ",
+  "@editRole": {
+    "description": "ሚና የማስተካከያ ማያ ርዕስ"
+  },
+
+  "roleDetails": "የሚና ዝርዝሮች",
+  "@roleDetails": {
+    "description": "የሚና ዝርዝሮች ማያ ርዕስ"
+  },
+
+  "activeStatus": "ንቁ ሁኔታ",
+  "@activeStatus": {
+    "description": "ንቁ ሁኔታ መቀያየሪያ መለያ"
+  },
+
+  "enableOrDisableRole": "ይህን ሚና ያብሩ ወይም ያጥፉ",
+  "@enableOrDisableRole": {
+    "description": "ንቁ ሁኔታ መቀያየሪያ ንዑስ ርዕስ"
+  },
+
+  "permissions": "ፈቃዶች",
+  "@permissions": {
+    "description": "ፈቃዶች ክፍል ርዕስ"
+  },
+
+  "selectedPermissions": "የተመረጠ: {count} ፈቃዶች",
+  "@selectedPermissions": {
+    "description": "የተመረጡ ፈቃዶች ብዛት",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+
+  "selectAtLeastOnePermission": "እባክዎ ቢያንስ አንድ ፈቃድ ይምረጡ",
+  "@selectAtLeastOnePermission": {
+    "description": "ፈቃድ ምርጫ የማረጋገጫ መልዕክት"
+  },
+
+  "errorLoadingPermissions": "ፈቃዶችን በመጫን ላይ ስህተት: {error}",
+  "@errorLoadingPermissions": {
+    "description": "ፈቃዶችን በመጫን ላይ ስህተት ሲከሰት የስህተት መልዕክት",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "የኔትዎርክ ስህተት"
+      }
+    }
+  },
+
+  "noPermissionsAvailable": "ምንም ፈቃድ አይገኝም",
+  "@noPermissionsAvailable": {
+    "description": "ምንም ፈቃድ ሲገኝ መልዕክት"
+  },
+
+  "updateRole": "ሚና አዘምን",
+  "@updateRole": {
+    "description": "ሚና የማዘመን ቁልፍ ጽሑፍ"
+  },
+
+  "creating": "በመፍጠር ላይ...",
+  "@creating": {
+    "description": "በመፍጠር ላይ መልዕክት"
+  },
+
+  "updating": "በማዘመን ላይ...",
+  "@updating": {
+    "description": "በማዘመን ላይ መልዕክት"
+  },
+
+  "nameRequired": "ስም ያስፈልጋል",
+  "@nameRequired": {
+    "description": "ስም መስክ የማረጋገጫ መልዕክት"
+  },
+
+  "descriptionRequired": "መግለጫ ያስፈልጋል",
+  "@descriptionRequired": {
+    "description": "መግለጫ መስክ የማረጋገጫ መልዕክት"
+  },
+
+  "noPermissionsAssigned": "ምንም ፈቃድ አልተመደበም",
+  "@noPermissionsAssigned": {
+    "description": "ሚና ምንም ፈቃድ ሲኖረው መልዕክት"
+  },
+
+  "deleteRole": "ሚና ሰርዝ",
+  "@deleteRole": {
+    "description": "ሚና የመሰረዝ የመወያያ ርዕስ"
+  },
+
+  "confirmDeleteRole": "እርግጠኛ ነዎት {roleName}ን መሰረዝ ይፈልጋሉ? ይህ ተግባር ሊመለስ አይችልም።",
+  "@confirmDeleteRole": {
+    "description": "ሚና የመሰረዝ ማረጋገጫ መልዕክት",
+    "placeholders": {
+      "roleName": {
+        "type": "String",
+        "example": "አስተዳዳሪ"
+      }
+    }
+  },
+
+  "goBack": "ተመለስ",
+  "@goBack": {
+    "description": "ተመለስ ቁልፍ ጽሑፍ"
+  },
+
+  "totalPermissions": "ጠቅላላ ፈቃዶች: {count}",
+  "@totalPermissions": {
+    "description": "ጠቅላላ ፈቃዶች ብዛት መለያ",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "10"
+      }
+    }
+  },
+
+  "profile": "መገለጫ",
+  "@profile": {
+    "description": "መገለጫ ማያ ርዕስ"
+  },
+
+  "noUserFound": "ምንም ተጠቃሚ አልተገኘም",
+  "@noUserFound": {
+    "description": "ባዶ ተጠቃሚ መገለጫ ርዕስ"
+  },
+
+  "unableToLoadProfile": "የተጠቃሚ መገለጫ መጫን አልተሳካም። እባክዎ እንደገና ይሞክሩ።",
+  "@unableToLoadProfile": {
+    "description": "ተጠቃሚ መገለጫ በመጫን ላይ ስህተት መልዕክት"
+  },
+
+  "accountInformation": "የመለያ መረጃ",
+  "@accountInformation": {
+    "description": "የመለያ መረጃ ክፍል ርዕስ"
+  },
+
+  "settingsAndActions": "ቅንብሮች እና ተግባሮች",
+  "@settingsAndActions": {
+    "description": "ቅንብሮች እና ተግባሮች ክፍል ርዕስ"
+  },
+
+  "dangerZone": "አደጋ ዞን",
+  "@dangerZone": {
+    "description": "አደጋ ዞን ክፍል ርዕስ"
+  },
+
+  "confirmLogout": "እርግጠኛ ነዎት መውጣት ይፈልጋሉ?",
+  "@confirmLogout": {
+    "description": "የመውጣት ማረጋገጫ መልዕክት"
+  },
+
+  "deleteAccount": "መለያ ሰርዝ",
+  "@deleteAccount": {
+    "description": "መለያ የመሰረዝ የመወያያ ርዕስ"
+  },
+
+  "deleteAccountWarning": "ይህ ተግባር ሊመለስ አይችልም። ለማረጋገጥ እባክዎ የይለፍ ቃልዎን ያስገቡ።",
+  "@deleteAccountWarning": {
+    "description": "መለያ የመሰረዝ ማስጠንቀቂያ መልዕክት"
+  },
+
+  "chooseFromGallery": "ከጋለሪ ይምረጡ",
+  "@chooseFromGallery": {
+    "description": "ከጋለሪ ምስል ምርጫ አማራጭ"
+  },
+
+  "takePhoto": "ፎቶ ይቅረጹ",
+  "@takePhoto": {
+    "description": "ፎቶ የመቅረጽ አማራጭ"
+  },
+
+  "errorPickingImage": "ምስል በመምረጥ ላይ ስህተት: {error}",
+  "@errorPickingImage": {
+    "description": "ምስል በመምረጥ ላይ ስህተት ሲከሰት የስህተት መልዕክት",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "ፈቃድ ተከልክሏል"
+      }
+    }
+  },
+
+  "createBrand": "የምርት ስም ፍጠር",
+  "@createBrand": {
+    "description": "የምርት ስም የመፍጠር የመወያያ ርዕስ"
+  },
+  "brand": "የምርት ስም",
+  "@brand": {
+    "description": "የምርት ስም ዓይነት መለያ"
+  },
+  "editBrand": "የምርት ስም አርትዖ",
+  "@editBrand": {
+    "description": "የምርት ስም አርትዖ ዳይሎግ ርዕስ"
+  },
+
+  "noBrands": "ምንም የምርት ስም የለም",
+  "@noBrands": {
+    "description": "ባዶ የምርት ስሞች ዝርዝር ርዕስ"
+  },
+
+  "noBrandsMessage": "እስካሁን ምንም የምርት ስም የሎትም።",
+  "@noBrandsMessage": {
+    "description": "ባዶ የምርት ስሞች ዝርዝር መልዕክት"
+  },
+
+  "createUnit": "አሃድ ፍጠር",
+  "@createUnit": {
+    "description": "አሃድ የመፍጠር የመወያያ ርዕስ"
+  },
+  "unit": "አሃድ",
+  "@unit": {
+    "description": "አሃድ ዓይነት መለያ"
+  },
+  "editUnit": "አሃድ አርትዖ",
+  "@editUnit": {
+    "description": "አሃድ አርትዖ ዳይሎግ ርዕስ"
+  },
+
+  "createBank": "ባንክ ፍጠር",
+  "@createBank": {
+    "description": "ባንክ ፍጠር የዳይሎግ ርዕስ"
+  },
+  "bank": "ባንክ",
+  "@bank": {
+    "description": "ባንክ ዓይነት መለያ"
+  },
+  "editBank": "ባንክ አርትዖ",
+  "@editBank": {
+    "description": "ባንክ አርትዖ ዳይሎግ ርዕስ"
+  },
+
+  "noBanks": "ባንኮች የሉም",
+  "@noBanks": {
+    "description": "ባዶ ባንኮች ዝርዝር ርዕስ"
+  },
+
+  "noBanksMessage": "እስካሁን ምንም ባንኮች የሎትም።",
+  "@noBanksMessage": {
+    "description": "ባዶ ባንኮች ዝርዝር መልዕክት"
+  },
+
+  "bankName": "የባንክ ስም",
+  "@bankName": {
+    "description": "የባንክ ስም መስክ መለያ"
+  },
+
+  "bankNameRequired": "የባንክ ስም ያስፈልጋል",
+  "@bankNameRequired": {
+    "description": "የባንክ ስም የማረጋገጫ ስህተት"
+  },
+
+  "noUnits": "ምንም አሃድ የለም",
+  "@noUnits": {
+    "description": "ባዶ አሃዶች ዝርዝር ርዕስ"
+  },
+
+  "noUnitsMessage": "እስካሁን ምንም አሃድ የሎትም።",
+  "@noUnitsMessage": {
+    "description": "ባዶ አሃዶች ዝርዝር መልዕክት"
+  },
+
+  "createCategory": "ምድብ ፍጠር",
+  "@createCategory": {
+    "description": "ምድብ የመፍጠር የመወያያ ርዕስ"
+  },
+
+  "noCategories": "ምንም ምድብ የለም",
+  "@noCategories": {
+    "description": "ባዶ ምድቦች ዝርዝር ርዕስ"
+  },
+
+  "noCategoriesMessage": "እስካሁን ምንም ምድብ የሎትም።",
+  "@noCategoriesMessage": {
+    "description": "ባዶ ምድቦች ዝርዝር መልዕክት"
+  },
+
+  "createSubCategory": "ንዑስ ምድብ ፍጠር",
+  "@createSubCategory": {
+    "description": "ንዑስ ምድብ የመፍጠር የመወያያ ርዕስ"
+  },
+  "subCategory": "ንዑስ ምድብ",
+  "@subCategory": {
+    "description": "ንዑስ ምድብ ዓይነት መለያ"
+  },
+  "editSubCategory": "ንዑስ ምድብ አርትዖ",
+  "@editSubCategory": {
+    "description": "ንዑስ ምድብ አርትዖ ዳይሎግ ርዕስ"
+  },
+
+  "noSubCategories": "ምንም ንዑስ ምድብ የለም",
+  "@noSubCategories": {
+    "description": "ባዶ ንዑስ ምድቦች ዝርዝር ርዕስ"
+  },
+
+  "noSubCategoriesMessage": "እስካሁን ምንም ንዑስ ምድብ የሎትም።",
+  "@noSubCategoriesMessage": {
+    "description": "ባዶ ንዑስ ምድቦች ዝርዝር መልዕክት"
+  },
+
+  "createModel": "ሞዴል ፍጠር",
+  "@createModel": {
+    "description": "ሞዴል የመፍጠር የመወያያ ርዕስ"
+  },
+  "model": "ሞዴል",
+  "@model": {
+    "description": "ሞዴል ዓይነት መለያ"
+  },
+  "editModel": "ሞዴል አርትዖ",
+  "@editModel": {
+    "description": "ሞዴል አርትዖ ዳይሎግ ርዕስ"
+  },
+
+  "noModels": "ምንም ሞዴል የለም",
+  "@noModels": {
+    "description": "ባዶ ሞዴሎች ዝርዝር ርዕስ"
+  },
+
+  "noModelsMessage": "እስካሁን ምንም ሞዴል የሎትም።",
+  "@noModelsMessage": {
+    "description": "ባዶ ሞዴሎች ዝርዝር መልዕክት"
+  },
+
+  "noCategoriesAvailable": "ምንም ምድብ አይገኝም። እባክዎ በመጀመሪያ ምድብ ይፍጠሩ።",
+  "@noCategoriesAvailable": {
+    "description": "ለንዑስ ምድብ ምንም ምድብ ሲገኝ መልዕክት"
+  },
+
+  "errorLoadingCategories": "ምድቦችን በመጫን ላይ ስህተት: {error}",
+  "@errorLoadingCategories": {
+    "description": "ምድቦችን በመጫን ላይ ስህተት ሲከሰት የስህተት መልዕክት",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "የኔትዎርክ ስህተት"
+      }
+    }
+  },
+
+  "category": "ምድብ",
+  "@category": {
+    "description": "ምድብ መስክ መለያ"
+  },
+  "editCategory": "ምድብ አርትዖ",
+  "@editCategory": {
+    "description": "ምድብ አርትዖ ዳይሎግ ርዕስ"
+  },
+  "@category": {
+    "description": "ምድብ መስክ መለያ"
+  },
+
+  "categoryRequired": "ምድብ ያስፈልጋል",
+  "@categoryRequired": {
+    "description": "ምድብ መስክ የማረጋገጫ መልዕክት"
+  },
+
+  "errorLoadingRole": "ሚናን በመጫን ላይ ስህተት: {error}",
+  "@errorLoadingRole": {
+    "description": "ሚናን በመጫን ላይ ስህተት ሲከሰት የስህተት መልዕክት",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "የኔትዎርክ ስህተት"
+      }
+    }
+  },
+
+  "selectAll": "ሁሉንም ምረጥ",
+  "@selectAll": {
+    "description": "ሁሉንም ምረጥ ቁልፍ መለያ"
+  },
+
+  "deselectAll": "ሁሉንም ምርጫ አጥፋ",
+  "@deselectAll": {
+    "description": "ሁሉንም ምርጫ አጥፋ ቁልፍ መለያ"
+  },
+
+  "selectedCount": "{selected} / {total} የተመረጠ",
+  "@selectedCount": {
+    "description": "የተመረጡ ብዛት ማሳያ",
+    "placeholders": {
+      "selected": {
+        "type": "int",
+        "example": "5"
+      },
+      "total": {
+        "type": "int",
+        "example": "10"
+      }
+    }
+  },
+
+  "fullName": "ሙሉ ስም",
+  "@fullName": {
+    "description": "ሙሉ ስም መስክ መለያ"
+  },
+
+  "accountStatus": "የመለያ ሁኔታ",
+  "@accountStatus": {
+    "description": "የመለያ ሁኔታ መለያ"
+  },
+
+  "memberSince": "አባል ከ",
+  "@memberSince": {
+    "description": "አባል ከ መለያ"
+  },
+
+  "editProfile": "መገለጫ አርትዖ",
+  "@editProfile": {
+    "description": "መገለጫ አርትዖ ቁልፍ መለያ"
+  },
+
+  "changePassword": "የይለፍ ቃል ቀይር",
+  "@changePassword": {
+    "description": "የይለፍ ቃል ቀይር ቁልፍ መለያ"
+  },
+
+  "verified": "የተረጋገጠ",
+  "@verified": {
+    "description": "የተረጋገጠ መለያ ሁኔታ"
+  },
+
+  "notVerified": "አልተረጋገጠም",
+  "@notVerified": {
+    "description": "አልተረጋገጠም የመለያ ሁኔታ"
+  },
+
+  "batches": "ቦታዎች",
+  "@batches": {
+    "description": "ቦታዎች ምናሌ መለያ"
+  },
+  "batch": "ቦታ",
+  "@batch": {
+    "description": "ቦታ ዓይነት መለያ"
+  },
+  "createBatch": "ቦታ ፍጠር",
+  "@createBatch": {
+    "description": "ቦታ ማፍጠር ዲያሎግ ርዕስ"
+  },
+  "noBatches": "ምንም ቦታዎች የሉም",
+  "@noBatches": {
+    "description": "ባዶ ቦታዎች ዝርዝር ርዕስ"
+  },
+  "noBatchesMessage": "እስካሁን ምንም ቦታዎች የሎትም።",
+  "@noBatchesMessage": {
+    "description": "ባዶ ቦታዎች ዝርዝር መልዕክት"
+  },
+
+  "batchName": "የቦታ ስም",
+  "@batchName": {
+    "description": "የቦታ ስም መስክ መለያ"
+  },
+
+  "batchNameRequired": "የቦታ ስም ያስፈልጋል",
+  "@batchNameRequired": {
+    "description": "የቦታ ስም መስክ የማረጋገጫ መልዕክት"
+  },
+
+  "stocks": "ክምችቶች",
+  "@stocks": {
+    "description": "ክምችቶች ምናሌ መለያ"
+  },
+  "stock": "ክምችት",
+  "@stock": {
+    "description": "ክምችት ዓይነት መለያ"
+  },
+  "noStocks": "ምንም ክምችቶች የሉም",
+  "@noStocks": {
+    "description": "ባዶ ክምችቶች ዝርዝር ርዕስ"
+  },
+  "noStocksMessage": "እስካሁን ምንም ክምችቶች የሎትም።",
+  "@noStocksMessage": {
+    "description": "ባዶ ክምችቶች ዝርዝር መልዕክት"
+  },
+  "updateStock": "ክምችት አዘምን",
+  "@updateStock": {
+    "description": "ክምችት አዘምን ንግግር ርዕስ"
+  },
+  "lowStockThreshold": "ዝቅተኛ ክምችት ገደብ",
+  "@lowStockThreshold": {
+    "description": "ዝቅተኛ ክምችት ገደብ መስክ መለያ"
+  },
+  "location": "ቦታ",
+  "@location": {
+    "description": "ቦታ መስክ መለያ"
+  },
+  "status": "ሁኔታ",
+  "@status": {
+    "description": "ሁኔታ መስክ መለያ"
+  },
+
+  "transactions": "ግብይቶች",
+  "@transactions": {
+    "description": "ግብይቶች ምናሌ መለያ"
+  },
+  "transaction": "ግብይት",
+  "@transaction": {
+    "description": "ግብይት ዓይነት መለያ"
+  },
+  "noTransactions": "ምንም ግብይቶች የሉም",
+  "@noTransactions": {
+    "description": "ባዶ ግብይቶች ዝርዝር ርዕስ"
+  },
+  "noTransactionsMessage": "እስካሁን ምንም ግብይቶች የሎትም።",
+  "@noTransactionsMessage": {
+    "description": "ባዶ ግብይቶች ዝርዝር መልዕክት"
+  },
+
+  "transfers": "ዝውውሮች",
+  "@transfers": {
+    "description": "ዝውውሮች ምናሌ መለያ"
+  },
+  "transfer": "ዝውውር",
+  "@transfer": {
+    "description": "ዝውውር ዓይነት መለያ"
+  },
+  "noTransfers": "ምንም ዝውውሮች የሉም",
+  "@noTransfers": {
+    "description": "ባዶ ዝውውሮች ዝርዝር ርዕስ"
+  },
+  "noTransfersMessage": "እስካሁን ምንም ዝውውሮች የሎትም።",
+  "@noTransfersMessage": {
+    "description": "ባዶ ዝውውሮች ዝርዝር መልዕክት"
+  },
+  "createTransfer": "ዝውውር ፍጠር",
+  "@createTransfer": {
+    "description": "ዝውውር ማፍጠር ቁልፍ እና ገጽ ርዕስ"
+  },
+  "destinationBranch": "መድረሻ ቅርንጫፍ",
+  "@destinationBranch": {
+    "description": "መድረሻ ቅርንጫፍ መስክ መለያ"
+  },
+  "sourceBranch": "ምንጭ ቅርንጫፍ",
+  "@sourceBranch": {
+    "description": "ምንጭ ቅርንጫፍ መስክ መለያ"
+  },
+  "lastUpdated": "የመጨረሻ ዝመና",
+  "@lastUpdated": {
+    "description": "የመጨረሻ ዝመና መስክ መለያ"
+  },
+  "notAvailable": "የለም",
+  "@notAvailable": {
+    "description": "የለም ምትክ ጽሑፍ"
+  },
+  "unknown": "ያልታወቀ",
+  "@unknown": {
+    "description": "ያልታወቀ እሴት ምትክ"
+  },
+  "transferOut": "ዝውውር ወጪ",
+  "@transferOut": {
+    "description": "ዝውውር ወጪ ዓይነት መለያ"
+  },
+  "transferIn": "ዝውውር ገቢ",
+  "@transferIn": {
+    "description": "ዝውውር ገቢ ዓይነት መለያ"
+  },
+  "transferCreatedSuccessfully": "ዝውውር በተሳካ ሁኔታ ተፈጥሯል",
+  "@transferCreatedSuccessfully": {
+    "description": "ዝውውር መፍጠር የተሳካ መልዕክት"
+  },
+
+  "reverseTransaction": "ግብይት መልስ",
+  "@reverseTransaction": {
+    "description": "ግብይት መልስ ቁልፍ እና ዳይሎግ ርዕስ"
+  },
+
+  "reverseTransactionMessage": "እርግጠኛ ነዎት ይህን ግብይት መመለስ ይፈልጋሉ? ይህ የመመለሻ ማስገቢያ ይፈጥራል።",
+  "@reverseTransactionMessage": {
+    "description": "ግብይት መመለስ ማረጋገጫ መልዕክት"
+  },
+
+  "reversalNote": "የመመለሻ ማስታወሻ",
+  "@reversalNote": {
+    "description": "የመመለሻ ማስታወሻ መስክ መለያ"
+  },
+
+  "reversalNoteHint": "ለዚህ መመለሻ ማስታወሻ ያስገቡ (አማራጭ)",
+  "@reversalNoteHint": {
+    "description": "የመመለሻ ማስታወሻ መስክ ተመላሽ ጽሑፍ"
+  },
+
+  "reverse": "መልስ",
+  "@reverse": {
+    "description": "መልስ ቁልፍ መለያ"
+  },
+
+  "purchaseReverse": "ግዥ መመለስ",
+  "@purchaseReverse": {
+    "description": "ግዥ መመለስ ግብይት ዓይነት መለያ"
+  },
+
+  "saleReverse": "ሽያጭ መመለስ",
+  "@saleReverse": {
+    "description": "ሽያጭ መመለስ ግብይት ዓይነት መለያ"
+  },
+
+  "salesOrder": "የሽያጭ ትዕዛዝ",
+  "@salesOrder": {
+    "description": "የሽያጭ ትዕዛዝ ግብይት ዓይነት መለያ"
+  },
+
+  "salesOrders": "የሽያጭ ትዕዛዞች",
+  "@salesOrders": {
+    "description": "የሽያጭ ትዕዛዞች ምናሌ መለያ"
+  },
+
+  "noSalesOrders": "ምንም የሽያጭ ትዕዛዝ የለም",
+  "@noSalesOrders": {
+    "description": "ባዶ የሽያጭ ትዕዛዞች ዝርዝር ርዕስ"
+  },
+
+  "noSalesOrdersMessage": "እስካሁን ምንም የሽያጭ ትዕዛዝ የሎትም።",
+  "@noSalesOrdersMessage": {
+    "description": "ባዶ የሽያጭ ትዕዛዞች ዝርዝር መልዕክት"
+  },
+
+  "createSalesOrder": "የሽያጭ ትዕዛዝ ፍጠር",
+  "@createSalesOrder": {
+    "description": "የሽያጭ ትዕዛዝ ማፍጠር ቁልፍ እና ገጽ ርዕስ"
+  },
+
+  "salesOrderDetails": "የሽያጭ ትዕዛዝ ዝርዝሮች",
+  "@salesOrderDetails": {
+    "description": "የሽያጭ ትዕዛዝ ዝርዝሮች ገጽ ርዕስ"
+  },
+
+  "fulfillmentBranch": "የመፈጸሚያ ቅርንጫፍ",
+  "@fulfillmentBranch": {
+    "description": "የመፈጸሚያ ቅርንጫፍ መስክ መለያ"
+  },
+
+  "saleBranch": "የሽያጭ ቅርንጫፍ",
+  "@saleBranch": {
+    "description": "የሽያጭ ቅርንጫፍ መስክ መለያ"
+  },
+
+  "selectFulfillmentBranch": "የመፈጸሚያ ቅርንጫፍ ይምረጡ",
+  "@selectFulfillmentBranch": {
+    "description": "የመፈጸሚያ ቅርንጫፍ መራጭ ጠቃሚ ጽሑፍ"
+  },
+
+  "orderNumber": "የትዕዛዝ ቁጥር",
+  "@orderNumber": {
+    "description": "የትዕዛዝ ቁጥር መስክ መለያ"
+  },
+
+  "orderTotal": "የትዕዛዝ ጠቅላላ",
+  "@orderTotal": {
+    "description": "የትዕዛዝ ጠቅላላ መለያ"
+  },
+
+  "noPaymentsRecorded": "መክፈያዎች አልተመዘገቡም",
+  "@noPaymentsRecorded": {
+    "description": "መክፈያዎች አልተመዘገቡም መልዕክት"
+  },
+
+  "pending": "በመጠባበቅ ላይ",
+  "@pending": {
+    "description": "በመጠባበቅ ላይ ሁኔታ መለያ"
+  },
+
+  "approved": "ፀድቋል",
+  "@approved": {
+    "description": "ፀድቋል ሁኔታ መለያ"
+  },
+
+  "fulfilled": "ተሟልቷል",
+  "@fulfilled": {
+    "description": "ተሟልቷል ሁኔታ መለያ"
+  },
+
+  "cancelled": "ተሰርዟል",
+  "@cancelled": {
+    "description": "ተሰርዟል ሁኔታ መለያ"
+  },
+
+  "approve": "አፅድቅ",
+  "@approve": {
+    "description": "አፅድቅ ተግባር ቁልፍ መለያ"
+  },
+
+  "fulfill": "ፈጽም",
+  "@fulfill": {
+    "description": "ፈጽም ተግባር ቁልፍ መለያ"
+  },
+
+  "cancelOrder": "ትዕዛዝ ሰርዝ",
+  "@cancelOrder": {
+    "description": "ትዕዛዝ ሰርዝ ተግባር ቁልፍ መለያ"
+  },
+
+  "approveOrder": "ትዕዛዝ አፅድቅ",
+  "@approveOrder": {
+    "description": "ትዕዛዝ አፅድቅ ዳይሎግ ርዕስ"
+  },
+
+  "fulfillOrder": "ትዕዛዝ ፈጽም",
+  "@fulfillOrder": {
+    "description": "ትዕዛዝ ፈጽም ዳይሎግ ርዕስ"
+  },
+
+  "confirmApproveOrder": "እርግጠኛ ነዎት ይህን የሽያጭ ትዕዛዝ ማፅደቅ ይፈልጋሉ?",
+  "@confirmApproveOrder": {
+    "description": "ትዕዛዝ ማፅደቅ ማረጋገጫ መልዕክት"
+  },
+
+  "confirmFulfillOrder": "እርግጠኛ ነዎት ይህን የሽያጭ ትዕዛዝ መፈጸም ይፈልጋሉ? ይህ ግብይት ይፈጥራል እና ክምችት ይቀንሳል።",
+  "@confirmFulfillOrder": {
+    "description": "ትዕዛዝ መፈጸም ማረጋገጫ መልዕክት"
+  },
+
+  "confirmCancelOrder": "እርግጠኛ ነዎት ይህን የሽያጭ ትዕዛዝ መሰረዝ ይፈልጋሉ?",
+  "@confirmCancelOrder": {
+    "description": "ትዕዛዝ መሰረዝ ማረጋገጫ መልዕክት"
+  },
+
+  "approvedAt": "የፀደቀበት ቀን",
+  "@approvedAt": {
+    "description": "የፀደቀበት ቀን መለያ"
+  },
+
+  "approvedBy": "ያፀደቀ",
+  "@approvedBy": {
+    "description": "ያፀደቀ ተጠቃሚ መለያ"
+  },
+
+  "createdBy": "የፈጠረ",
+  "@createdBy": {
+    "description": "የፈጠረ ተጠቃሚ መለያ"
+  },
+
+  "payment": "ክፍያ",
+  "@payment": {
+    "description": "ክፍያ መለያ"
+  },
+
+  "paymentDetails": "የክፍያ ዝርዝር",
+  "@paymentDetails": {
+    "description": "የክፍያ ዝርዝር ክፍል ርዕስ"
+  },
+
+  "orderApprovedSuccessfully": "የሽያጭ ትዕዛዝ በተሳካ ሁኔታ ፀድቋል",
+  "@orderApprovedSuccessfully": {
+    "description": "ትዕዛዝ ማፅደቅ የተሳካ መልዕክት"
+  },
+
+  "orderFulfilledSuccessfully": "የሽያጭ ትዕዛዝ በተሳካ ሁኔታ ተሟልቷል",
+  "@orderFulfilledSuccessfully": {
+    "description": "ትዕዛዝ መፈጸም የተሳካ መልዕክት"
+  },
+
+  "orderCancelledSuccessfully": "የሽያጭ ትዕዛዝ በተሳካ ሁኔታ ተሰርዟል",
+  "@orderCancelledSuccessfully": {
+    "description": "ትዕዛዝ መሰረዝ የተሳካ መልዕክት"
+  },
+
+  "salesOrderCreatedSuccessfully": "የሽያጭ ትዕዛዝ በተሳካ ሁኔታ ተፈጥሯል",
+  "@salesOrderCreatedSuccessfully": {
+    "description": "የሽያጭ ትዕዛዝ መፍጠር የተሳካ መልዕክት"
+  },
+
+  "subtotal": "ንዑስ ድምር",
+  "@subtotal": {
+    "description": "ንዑስ ድምር መለያ"
+  },
+
+  "totalTax": "ጠቅላላ ግብር",
+  "@totalTax": {
+    "description": "ጠቅላላ ግብር መለያ"
+  },
+
+  "totalAmount": "ጠቅላላ ድምር",
+  "@totalAmount": {
+    "description": "ጠቅላላ ድምር መለያ"
+  },
+
+  "paidAmount": "የተከፈለ ድምር",
+  "@paidAmount": {
+    "description": "የተከፈለ ድምር መለያ"
+  },
+
+  "remainingAmount": "የቀረ ድምር",
+  "@remainingAmount": {
+    "description": "የቀረ ድምር መለያ"
+  },
+
+  "attachments": "አባሪዎች",
+  "@attachments": {
+    "description": "አባሪዎች ክፍል መለያ"
+  },
+
+  "deliveryProof": "የመላኪያ ማረጋገጫ",
+  "@deliveryProof": {
+    "description": "የመላኪያ ማረጋገጫ አባሪ መለያ"
+  },
+
+  "walkIn": "በቀጥታ የመጣ",
+  "@walkIn": {
+    "description": "በቀጥታ የመጣ ደንበኛ መለያ"
+  },
+
+  "currentBranch": "ወቅታዊ ቅርንጫፍ",
+  "@currentBranch": {
+    "description": "በመሳቢያ ውስጥ ወቅታዊ ቅርንጫፍ መለያ"
+  },
+
+  "selectBranch": "ቅርንጫፍ ይምረጡ",
+  "@selectBranch": {
+    "description": "በመሳቢያ ውስጥ ቅርንጫፍ ይምረጡ ጥያቄ"
+  },
+
+  "switchBranch": "ቅርንጫፍ ይቀይሩ",
+  "@switchBranch": {
+    "description": "ቅርንጫፍ መቀየር እርምጃ መለያ"
+  },
+
+  "core": "መሰረታዊ",
+  "@core": {
+    "description": "በአሰሳ ውስጥ መሰረታዊ ክፍል መለያ"
+  },
+
+  "inventory": "ክምችት",
+  "@inventory": {
+    "description": "በአሰሳ ውስጥ ክምችት ክፍል መለያ"
+  },
+
+  "operations": "ስራዎች",
+  "@operations": {
+    "description": "በአሰሳ ውስጥ ስራዎች ክፍል መለያ"
+  },
+
+  "administration": "አስተዳደር",
+  "@administration": {
+    "description": "በአሰሳ ውስጥ አስተዳደር ክፍል መለያ"
+  },
+
+  "paid": "የተከፈለ",
+  "@paid": {
+    "description": "የተከፈለ መለያ"
+  },
+
+  "remaining": "የቀረ",
+  "@remaining": {
+    "description": "የቀረ መለያ"
+  },
+
+  "optional": "(አማራጭ)",
+  "@optional": {
+    "description": "አማራጭ መስክ አመላካች"
+  },
+
+  "paymentMethods": "የክፍያ ዘዴዎች",
+  "@paymentMethods": {
+    "description": "የክፍያ ዘዴዎች ክፍል መለያ"
+  },
+
+  "add": "ጨምር",
+  "@add": {
+    "description": "ጨምር ቁልፍ መለያ"
+  },
+
+  "noPaymentMethodsAdded": "ምንም የክፍያ ዘዴ አልተጨመረም",
+  "@noPaymentMethodsAdded": {
+    "description": "ባዶ የክፍያ ዘዴዎች መልዕክት"
+  },
+
+  "attachment": "አባሪ",
+  "@attachment": {
+    "description": "አባሪ መለያ"
+  },
+
+  "addAttachment": "አባሪ ጨምር",
+  "@addAttachment": {
+    "description": "አባሪ ጨምር ቁልፍ መለያ"
+  },
+
+  "change": "ቀይር",
+  "@change": {
+    "description": "ቀይር ቁልፍ መለያ"
+  },
+
+  "remove": "አስወግድ",
+  "@remove": {
+    "description": "አስወግድ ቁልፍ መለያ"
+  },
+
+  "fulfillOrderConfirmation": "ይህ ግብይት ይፈጥራል እና ከመፈጸሚያ ቅርንጫፍ ክምችት ይቀንሳል።",
+  "@fulfillOrderConfirmation": {
+    "description": "ትዕዛዝ መፈጸም መረጃ መልዕክት"
+  },
+
+  "noDescription": "መግለጫ የለም",
+  "@noDescription": {
+    "description": "መግለጫ ከሌለ የሚታይ ጽሑፍ"
+  },
+
+  "addBalance": "ቀሪ ሂሳብ ጨምር",
+  "@addBalance": {
+    "description": "ቀሪ ሂሳብ ጨምር ቁልፍ መለያ"
+  },
+
+  "refund": "ተመላሽ",
+  "@refund": {
+    "description": "ተመላሽ ቁልፍ መለያ"
+  },
+
+  "transactionId": "የግብይት መታወቂያ",
+  "@transactionId": {
+    "description": "የግብይት መታወቂያ መስክ መለያ"
+  },
+
+  "transactionIdRequired": "የግብይት መታወቂያ ያስፈልጋል",
+  "@transactionIdRequired": {
+    "description": "የግብይት መታወቂያ ያስፈልጋል ማረጋገጫ መልዕክት"
+  },
+
+  "invalidTransactionId": "ልክ ያልሆነ የግብይት መታወቂያ",
+  "@invalidTransactionId": {
+    "description": "ልክ ያልሆነ የግብይት መታወቂያ ማረጋገጫ መልዕክት"
+  },
+
+  "addBalanceSuccess": "ቀሪ ሂሳብ በተሳካ ሁኔታ ተጨምሯል",
+  "@addBalanceSuccess": {
+    "description": "ቀሪ ሂሳብ ጨምር ስኬት መልዕክት"
+  },
+
+  "refundSuccess": "ተመላሽ በተሳካ ሁኔታ ተከናውኗል",
+  "@refundSuccess": {
+    "description": "ተመላሽ ስኬት መልዕክት"
+  },
+
+  "addPaymentMethod": "የክፍያ ዘዴ ጨምር",
+  "@addPaymentMethod": {
+    "description": "የክፍያ ዘዴ ጨምር ቁልፍ መለያ"
+  },
+
+  "addAtLeastOnePaymentMethod": "እባክዎ ቢያንስ አንድ የክፍያ ዘዴ ያክሉ",
+  "@addAtLeastOnePaymentMethod": {
+    "description": "የክፍያ ዘዴዎች ማረጋገጫ መልዕክት"
+  },
+
+  "receipt": "ደረሰኝ",
+  "@receipt": {
+    "description": "ደረሰኝ መለያ"
+  },
+
+  "optional": "አማራጭ",
+  "@optional": {
+    "description": "አማራጭ መስክ አመልካች"
+  },
+
+  "totalSales": "ጠቅላላ ሽያጭ",
+  "@totalSales": {
+    "description": "ጠቅላላ ሽያጭ መለያ"
+  },
+
+  "totalSalesReturn": "ጠቅላላ የሽያጭ ተመላሽ",
+  "@totalSalesReturn": {
+    "description": "ጠቅላላ የሽያጭ ተመላሽ መለያ"
+  },
+
+  "totalPurchase": "ጠቅላላ ግዢ",
+  "@totalPurchase": {
+    "description": "ጠቅላላ ግዢ መለያ"
+  },
+
+  "totalPurchaseReturn": "ጠቅላላ የግዢ ተመላሽ",
+  "@totalPurchaseReturn": {
+    "description": "ጠቅላላ የግዢ ተመላሽ መለያ"
+  },
+
+  "viewAll": "ሁሉንም ይመልከቱ",
+  "@viewAll": {
+    "description": "ሁሉንም ይመልከቱ ቁልፍ መለያ"
+  },
+
+  "profit": "ትርፍ",
+  "@profit": {
+    "description": "ትርፍ መለያ"
+  },
+
+  "invoiceDue": "ያልተከፈለ ደረሰኝ",
+  "@invoiceDue": {
+    "description": "ያልተከፈለ ደረሰኝ መለያ"
+  },
+
+  "totalExpenses": "ጠቅላላ ወጪዎች",
+  "@totalExpenses": {
+    "description": "ጠቅላላ ወጪዎች መለያ"
+  },
+
+  "totalPaymentReturns": "ጠቅላላ የክፍያ ተመላሾች",
+  "@totalPaymentReturns": {
+    "description": "ጠቅላላ የክፍያ ተመላሾች መለያ"
+  },
+
+  "salesAndPurchase": "ሽያጭ እና ግዢ",
+  "@salesAndPurchase": {
+    "description": "የሽያጭ እና ግዢ ሰንጠረዥ ርዕስ"
+  },
+
+  "sales": "ሽያጭ",
+  "@sales": {
+    "description": "ሽያጭ መለያ"
+  },
+
+  "purchase": "ግዢ",
+  "@purchase": {
+    "description": "ግዢ መለያ"
+  },
+
+  "noData": "ምንም ውሂብ የለም",
+  "@noData": {
+    "description": "ምንም ውሂብ መልእክት"
+  },
+
+  "overallInformation": "አጠቃላይ መረጃ",
+  "@overallInformation": {
+    "description": "አጠቃላይ መረጃ ክፍል ርዕስ"
+  },
+
+  "orders": "ትዕዛዞች",
+  "@orders": {
+    "description": "ትዕዛዞች መለያ"
+  },
+
+  "customersOverview": "የደንበኞች አጠቃላይ እይታ",
+  "@customersOverview": {
+    "description": "የደንበኞች አጠቃላይ እይታ ሰንጠረዥ ርዕስ"
+  },
+
+  "firstTime": "አዲስ",
+  "@firstTime": {
+    "description": "አዲስ ደንበኛ መለያ"
+  },
+
+  "returning": "ተመላሽ",
+  "@returning": {
+    "description": "ተመላሽ ደንበኛ መለያ"
+  },
+
+  "salesStatistics": "የሽያጭ ስታቲስቲክስ",
+  "@salesStatistics": {
+    "description": "የሽያጭ ስታቲስቲክስ ሰንጠረዥ ርዕስ"
+  },
+
+  "revenue": "ገቢ",
+  "@revenue": {
+    "description": "ገቢ መለያ"
+  },
+
+  "topSellingProducts": "ከፍተኛ የሚሸጡ ምርቶች",
+  "@topSellingProducts": {
+    "description": "ከፍተኛ የሚሸጡ ምርቶች ካርድ ርዕስ"
+  },
+
+  "lowStockProducts": "ዝቅተኛ ክምችት ምርቶች",
+  "@lowStockProducts": {
+    "description": "ዝቅተኛ ክምችት ምርቶች ካርድ ርዕስ"
+  },
+
+  "inStock": "በክምችት",
+  "@inStock": {
+    "description": "በክምችት መለያ"
+  },
+
+  "topCustomers": "ከፍተኛ ደንበኞች",
+  "@topCustomers": {
+    "description": "ከፍተኛ ደንበኞች ካርድ ርዕስ"
+  },
+
+  "salesReport": "የሽያጭ ሪፖርት",
+  "@salesReport": {
+    "description": "የሽያጭ ሪፖርት መለያ በመሳሪያ ሳጥን"
+  },
+
+  "annualReport": "ዓመታዊ ሪፖርት",
+  "@annualReport": {
+    "description": "ዓመታዊ ሪፖርት መለያ በመሳሪያ ሳጥን"
+  },
+
+  "bestSellerReport": "ከፍተኛ ሽያጭ ሪፖርት",
+  "@bestSellerReport": {
+    "description": "ከፍተኛ ሽያጭ ሪፖርት መለያ በመሳሪያ ሳጥን"
+  },
+
+  "customerReport": "የደንበኛ ሪፖርት",
+  "@customerReport": {
+    "description": "የደንበኛ ሪፖርት መለያ በመሳሪያ ሳጥን"
+  },
+
+  "expenseReport": "የወጪ ሪፖርት",
+  "@expenseReport": {
+    "description": "የወጪ ሪፖርት መለያ በመሳሪያ ሳጥን"
+  },
+
+  "profitLossReport": "የትርፍ እና ኪሳራ ሪፖርት",
+  "@profitLossReport": {
+    "description": "የትርፍ እና ኪሳራ ሪፖርት መለያ በመሳሪያ ሳጥን"
+  },
+
+  "purchaseReport": "የግዢ ሪፖርት",
+  "@purchaseReport": {
+    "description": "የግዢ ሪፖርት መለያ በመሳሪያ ሳጥን"
+  },
+
+  "switchedToBranch": "ወደ {branchName} ተቀይሯል",
+  "@switchedToBranch": {
+    "description": "ቅርንጫፍ መቀየር ስኬት መልዕክት",
+    "placeholders": {
+      "branchName": {
+        "type": "String",
+        "example": "ዋና ቅርንጫፍ"
+      }
+    }
+  },
+
+  "failedToSwitchBranch": "ቅርንጫፍ መቀየር አልተሳካም",
+  "@failedToSwitchBranch": {
+    "description": "ቅርንጫፍ መቀየር ውድቀት መልዕክት"
+  },
+
+  "yourTransactions": "የእርስዎ ግብይቶች",
+  "@yourTransactions": {
+    "description": "የግብይቶች ዝርዝር ራስ ርዕስ"
+  },
+
+  "allCustomers": "ሁሉም ደንበኞች",
+  "@allCustomers": {
+    "description": "ሁሉም ደንበኞች ማጣሪያ አማራጭ"
+  },
+
+  "yourProduct": "የእርስዎ ምርት",
+  "@yourProduct": {
+    "description": "ማስጠንቀቂያ ሰንደቅ ምርት መለያ"
+  },
+
+  "isRunningLowAlreadyBelow": "ዝቅተኛ እየሆነ ነው፣ አስቀድሞ ከ",
+  "@isRunningLowAlreadyBelow": {
+    "description": "ማስጠንቀቂያ ሰንደቅ ዝቅተኛ ክምችት መልዕክት"
+  },
+
+  "pcs": "ቁርጥራጮች",
+  "@pcs": {
+    "description": "ቁርጥራጮች ምህጻረ ቃል"
+  },
+
+  "addStock": "ክምችት ጨምር",
+  "@addStock": {
+    "description": "ክምችት ጨምር ቁልፍ መለያ"
+  },
+
+  "noAnnualItems": "ዓመታዊ ንጥሎች የሉም",
+  "@noAnnualItems": {
+    "description": "ባዶ ዓመታዊ ሪፖርት ንጥሎች መልዕክት"
+  },
+
+  "totalCost": "ጠቅላላ ወጪ",
+  "@totalCost": {
+    "description": "ጠቅላላ ወጪ መለያ"
+  },
+
+  "vat": "VAT",
+  "@vat": {
+    "description": "VAT መለያ"
+  },
+
+  "grossProfit": "ጠቅላላ ትርፍ",
+  "@grossProfit": {
+    "description": "ጠቅላላ ትርፍ መለያ"
+  },
+
+  "netProfit": "ንጹህ ትርፍ",
+  "@netProfit": {
+    "description": "ንጹህ ትርፍ መለያ"
+  },
+
+  "noProfitLossItems": "የትርፍ-ኪሳራ ንጥሎች የሉም",
+  "@noProfitLossItems": {
+    "description": "ባዶ የትርፍ-ኪሳራ ሪፖርት ንጥሎች መልዕክት"
+  },
+
+  "salesAndProfitTrend": "የሽያጭ እና ትርፍ አዝማሚያ",
+  "@salesAndProfitTrend": {
+    "description": "የሽያጭ እና ትርፍ አዝማሚያ ገበታ ርዕስ"
+  },
+
+  "last10Days": "የመጨረሻዎቹ 10 ቀናት",
+  "@last10Days": {
+    "description": "የመጨረሻዎቹ 10 ቀናት መለያ"
+  },
+
+  "noBestSellers": "ከፍተኛ ሽያጭ የለም",
+  "@noBestSellers": {
+    "description": "ባዶ ከፍተኛ ሽያጭ ሪፖርት መልዕክት"
+  },
+
+  "totalExpenses": "ጠቅላላ ወጪዎች",
+  "@totalExpenses": {
+    "description": "ጠቅላላ ወጪዎች መለያ"
+  },
+
+  "averageExpense": "አማካይ ወጪ",
+  "@averageExpense": {
+    "description": "አማካይ ወጪ መለያ"
+  },
+
+  "largestExpense": "ትልቁ ወጪ",
+  "@largestExpense": {
+    "description": "ትልቁ ወጪ መለያ"
+  },
+
+  "totalToPayCustomers": "ጠቅላላ ለመክፈል ደንበኞች",
+  "@totalToPayCustomers": {
+    "description": "ጠቅላላ ለመክፈል ደንበኞች መለያ"
+  },
+
+  "totalCustomersOweUs": "ጠቅላላ ደንበኞች ያሳለፉን",
+  "@totalCustomersOweUs": {
+    "description": "ጠቅላላ ደንበኞች ያሳለፉን መለያ"
+  },
+
+  "netBalance": "ንጹህ ቀሪ ሂሳብ",
+  "@netBalance": {
+    "description": "ንጹህ ቀሪ ሂሳብ መለያ"
+  },
+
+  "noCustomers": "ደንበኞች የሉም",
+  "@noCustomers": {
+    "description": "ባዶ ደንበኞች መልዕክት"
+  },
+
+  "totalPaid": "ጠቅላላ የተከፈለ",
+  "@totalPaid": {
+    "description": "ጠቅላላ የተከፈለ መለያ"
+  },
+
+  "totalUnpaid": "ጠቅላላ ያልተከፈለ",
+  "@totalUnpaid": {
+    "description": "ጠቅላላ ያልተከፈለ መለያ"
+  },
+
+  "overdue": "የተዘገየ",
+  "@overdue": {
+    "description": "የተዘገየ መለያ"
+  },
+
+  "noPurchaseItems": "የግዢ ንጥሎች የሉም",
+  "@noPurchaseItems": {
+    "description": "ባዶ የግዢ ሪፖርት ንጥሎች መልዕክት"
+  },
+
+  "noSalesItems": "የሽያጭ ንጥሎች የሉም",
+  "@noSalesItems": {
+    "description": "ባዶ የሽያጭ ሪፖርት ንጥሎች መልዕክት"
+  },
+
+  "noPaymentData": "የመክፈያ ውሂብ የለም",
+  "@noPaymentData": {
+    "description": "የመክፈያ ውሂብ የለም መልዕክት"
+  },
+
+  "paymentMethods": "የመክፈያ ዘዴዎች",
+  "@paymentMethods": {
+    "description": "የመክፈያ ዘዴዎች መለያ"
+  },
+
+  "addPayment": "መክፈያ ጨምር",
+  "@addPayment": {
+    "description": "መክፈያ ጨምር ቁልፍ መለያ"
+  },
+
+  "noPaymentMethods": "የመክፈያ ዘዴዎች የሉም",
+  "@noPaymentMethods": {
+    "description": "የመክፈያ ዘዴዎች የሉም መልዕክት"
+  },
+
+  "notes": "ማስታወሻዎች",
+  "@notes": {
+    "description": "ማስታወሻዎች መለያ"
+  },
+
+  "receipt": "ደረሰኝ",
+  "@receipt": {
+    "description": "ደረሰኝ መለያ"
+  },
+
+  "assignRolesToBranches": "ሚናዎችን ለቅርንጫፎች መድረስ",
+  "@assignRolesToBranches": {
+    "description": "ሚናዎችን ለቅርንጫፎች መድረስ መለያ"
+  },
+
+  "chooseFromGallery": "ከፎቶ ማግኛ ይምረጡ",
+  "@chooseFromGallery": {
+    "description": "ከፎቶ ማግኛ ይምረጡ አማራጭ"
+  },
+
+  "takePhoto": "ፎቶ ይቅረጹ",
+  "@takePhoto": {
+    "description": "ፎቶ ይቅረጹ አማራጭ"
+  },
+
+  "autoPrint": "ራስ-ሰር ማተም",
+  "@autoPrint": {
+    "description": "ራስ-ሰር ማተም ቅንብር መለያ"
+  },
+
+  "automaticallyPrintReceipts": "ከግብይቶች በኋላ ደረሰኞችን በራስ-ሰር ያትሙ",
+  "@automaticallyPrintReceipts": {
+    "description": "ራስ-ሰር ማተም ቅንብር መግለጫ"
+  },
+
+  "defaultStartDate": "ነባሪ የመጀመሪያ ቀን",
+  "@defaultStartDate": {
+    "description": "ነባሪ የመጀመሪያ ቀን ቅንብር መለያ"
+  },
+
+  "defaultCalendarType": "ነባሪ የቀን መቁጠሪያ አይነት",
+  "@defaultCalendarType": {
+    "description": "ነባሪ የቀን መቁጠሪያ አይነት ቅንብር መለያ"
+  },
+
+  "businessType": "የንግድ አይነት",
+  "@businessType": {
+    "description": "የንግድ አይነት ቅንብር መለያ"
+  },
+
+  "uploadLogo": "ሎጎ ይጭኑ",
+  "@uploadLogo": {
+    "description": "ሎጎ ይጭኑ ቁልፍ መለያ"
+  },
+
+  "noCompanyFound": "ኩባንያ አልተገኘም",
+  "@noCompanyFound": {
+    "description": "ኩባንያ አልተገኘም መልዕክት"
+  },
+
+  "qty": "ብዛት",
+  "@qty": {
+    "description": "ብዛት ምህጻረ ቃል"
+  },
+
+  "ref": "ማጣቀሻ",
+  "@ref": {
+    "description": "ማጣቀሻ ምህጻረ ቃል"
+  },
+
+  "noAnnualItemsFound": "ለተመረጠው ቀን ዓመታዊ ንጥሎች አልተገኙም።",
+  "@noAnnualItemsFound": {
+    "description": "ባዶ ዓመታዊ ንጥሎች መልዕክት"
+  },
+
+  "noExpensesFound": "ለተመረጠው የቀን ክልል ወጪዎች አልተገኙም።",
+  "@noExpensesFound": {
+    "description": "ባዶ ወጪዎች መልዕክት"
+  },
+
+  "noProfitLossItemsFound": "ለተመረጠው የቀን ክልል የትርፍ-ኪሳራ ንጥሎች አልተገኙም።",
+  "@noProfitLossItemsFound": {
+    "description": "ባዶ የትርፍ-ኪሳራ ንጥሎች መልዕክት"
+  },
+
+  "noBestSellersFound": "ለተመረጠው የቀን ክልል ከፍተኛ ሽያጭ አልተገኙም።",
+  "@noBestSellersFound": {
+    "description": "ባዶ ከፍተኛ ሽያጭ መልዕክት"
+  },
+
+  "noCustomerDataFound": "የደንበኛ ውሂብ አልተገኘም።",
+  "@noCustomerDataFound": {
+    "description": "ባዶ የደንበኛ ውሂብ መልዕክት"
+  },
+
+  "noSalesItemsFound": "ለተመረጠው የቀን ክልል የሽያጭ ንጥሎች አልተገኙም።",
+  "@noSalesItemsFound": {
+    "description": "ባዶ የሽያጭ ንጥሎች መልዕክት"
+  },
+
+  "noPurchaseItemsFound": "ለተመረጠው የቀን ክልል የግዢ ንጥሎች አልተገኙም።",
+  "@noPurchaseItemsFound": {
+    "description": "ባዶ የግዢ ንጥሎች መልዕክት"
+  },
+
+  "salesAndProfitTrendLast10Days": "የሽያጭ እና ትርፍ አዝማሚያ (የመጨረሻዎቹ 10 ቀናት)",
+  "@salesAndProfitTrendLast10Days": {
+    "description": "የሽያጭ እና ትርፍ አዝማሚያ ገበታ ርዕስ ከመጨረሻዎቹ 10 ቀናት"
+  },
+
+  "payment": "መክፈያ",
+  "@payment": {
+    "description": "መክፈያ መለያ"
+  },
+
+  "paymentId": "የመክፈያ መታወቂያ",
+  "@paymentId": {
+    "description": "የመክፈያ መታወቂያ መለያ"
+  },
+
+  "paidAmount": "የተከፈለ መጠን",
+  "@paidAmount": {
+    "description": "የተከፈለ መጠን መለያ"
+  },
+
+  "remaining": "ቀሪ",
+  "@remaining": {
+    "description": "ቀሪ መለያ"
+  },
+
+  "addPaymentMethod": "የመክፈያ ዘዴ ጨምር",
+  "@addPaymentMethod": {
+    "description": "የመክፈያ ዘዴ ጨምር ዲያሎግ ርዕስ"
+  },
+
+  "companyInformation": "የኩባንያ መረጃ",
+  "@companyInformation": {
+    "description": "የኩባንያ መረጃ ክፍል ርዕስ"
+  },
+
+  "enabled": "አንቃለሁ",
+  "@enabled": {
+    "description": "አንቃለሁ ሁኔታ"
+  },
+
+  "disabled": "አግድያለሁ",
+  "@disabled": {
+    "description": "አግድያለሁ ሁኔታ"
+  },
+
+  "retry": "እንደገና ሞክር",
+  "@retry": {
+    "description": "እንደገና ሞክር ቁልፍ መለያ"
+  },
+
+  "stockInformation": "የክምችት መረጃ",
+  "@stockInformation": {
+    "description": "የክምችት መረጃ ክፍል ርዕስ"
+  },
+
+  "metadata": "የመረጃ መረጃ",
+  "@metadata": {
+    "description": "የመረጃ መረጃ ክፍል ርዕስ"
+  },
+
+  "itemDetails": "የንጥል ዝርዝሮች",
+  "@itemDetails": {
+    "description": "የንጥል ዝርዝሮች ክፍል ርዕስ"
+  },
+
+  "updateQuantity": "ብዛት ያዘምኑ",
+  "@updateQuantity": {
+    "description": "ብዛት ያዘምኑ ዲያሎግ ርዕስ"
+  },
+
+  "update": "ያዘምኑ",
+  "@update": {
+    "description": "ያዘምኑ ቁልፍ መለያ"
+  },
+
+  "addItems": "ንጥሎች ጨምር",
+  "@addItems": {
+    "description": "ንጥሎች ጨምር ቁልፍ መለያ"
+  },
+
+  "editProfile": "መገለጫ ያርትዑ",
+  "@editProfile": {
+    "description": "መገለጫ ያርትዑ ዲያሎግ ርዕስ"
+  },
+
+  "items": "ንጥሎች",
+  "@items": {
+    "description": "ንጥሎች ክፍል ርዕስ"
+  },
+
+  "noItems": "ንጥሎች የሉም",
+  "@noItems": {
+    "description": "ንጥሎች የሉም መልዕክት"
+  },
+
+  "summary": "ማጠቃለያ",
+  "@summary": {
+    "description": "ማጠቃለያ ክፍል ርዕስ"
+  },
+
+  "overview": "አጠቃላይ እይታ",
+  "@overview": {
+    "description": "አጠቃላይ እይታ ክፍል ርዕስ"
+  },
+
+  "fulfillSalesOrder": "የሽያጭ ትዕዛዝ ሙሉ ማድረግ",
+  "@fulfillSalesOrder": {
+    "description": "የሽያጭ ትዕዛዝ ሙሉ ማድረግ ዲያሎግ ርዕስ"
+  },
+
+  "editPaymentMethod": "የመክፈያ ዘዴ ያርትዑ",
+  "@editPaymentMethod": {
+    "description": "የመክፈያ ዘዴ ያርትዑ ዲያሎግ ርዕስ"
+  },
+
+  "deletePaymentMethod": "የመክፈያ ዘዴ ሰርዝ",
+  "@deletePaymentMethod": {
+    "description": "የመክፈያ ዘዴ ሰርዝ ዲያሎግ ርዕስ"
+  },
+
+  "confirmDeletePaymentMethod": "ይህንን የመክፈያ ዘዴ መሰረዝ እንደፈለጉ እርግጠኛ ነዎት? ይህ ተግባር ሊመለስ አይችልም።",
+  "@confirmDeletePaymentMethod": {
+    "description": "የመክፈያ ዘዴ ማረጋገጫ መልዕክት ሰርዝ"
+  },
+
+  "updateCompany": "ኩባንያ ያዘምኑ",
+  "@updateCompany": {
+    "description": "ኩባንያ ያዘምኑ ስክሪን ርዕስ"
+  },
+
+  "basicInformation": "መሰረታዊ መረጃ",
+  "@basicInformation": {
+    "description": "መሰረታዊ መረጃ ክፍል ርዕስ"
+  },
+
+  "contactInformation": "የጥሪ መረጃ",
+  "@contactInformation": {
+    "description": "የጥሪ መረጃ ክፍል ርዕስ"
+  },
+
+  "locationInformation": "የአካባቢ መረጃ",
+  "@locationInformation": {
+    "description": "የአካባቢ መረጃ ክፍል ርዕስ"
+  },
+
+  "businessInformation": "የንግድ መረጃ",
+  "@businessInformation": {
+    "description": "የንግድ መረጃ ክፍል ርዕስ"
+  },
+
+  "appSettings": "የመተግበሪያ ቅንብሮች",
+  "@appSettings": {
+    "description": "የመተግበሪያ ቅንብሮች ክፍል ርዕስ"
+  },
+
+  "transactionDetails": "የግብይት ዝርዝሮች",
+  "@transactionDetails": {
+    "description": "የግብይት ዝርዝሮች ስክሪን ርዕስ"
+  },
+
+  "personalInformation": "የግላዊ መረጃ",
+  "@personalInformation": {
+    "description": "የግላዊ መረጃ ክፍል ርዕስ"
+  },
+
+  "accountDetails": "የመለያ ዝርዝሮች",
+  "@accountDetails": {
+    "description": "የመለያ ዝርዝሮች ክፍል ርዕስ"
+  },
+
+  "noMovements": "እንቅስቃሴዎች የሉም",
+  "@noMovements": {
+    "description": "እንቅስቃሴዎች የሉም ርዕስ"
+  },
+
+  "noStockMovementsRecorded": "እስካሁን የክምችት እንቅስቃሴዎች አልተመዘገቡም",
+  "@noStockMovementsRecorded": {
+    "description": "የክምችት እንቅስቃሴዎች የሉም መልዕክት"
+  },
+
+  "stockDetails": "የክምችት ዝርዝሮች",
+  "@stockDetails": {
+    "description": "የክምችት ዝርዝሮች ስክሪን ርዕስ"
+  },
+
+  "noTransactionsYet": "እስካሁን ግብይቶች የሉም።",
+  "@noTransactionsYet": {
+    "description": "ግብይቶች የሉም መልዕክት"
+  },
+
+  "acceptTransfer": "ማስተላለፍ ተቀበል",
+  "@acceptTransfer": {
+    "description": "ማስተላለፍ ተቀበል ዲያሎግ ርዕስ"
+  },
+
+  "confirmAcceptTransfer": "ይህንን ማስተላለፍ መቀበል እንደፈለጉ እርግጠኛ ነዎት?",
+  "@confirmAcceptTransfer": {
+    "description": "ማስተላለፍ ማረጋገጫ መልዕክት ተቀበል"
+  },
+
+  "rejectTransfer": "ማስተላለፍ ውድቅ አድርግ",
+  "@rejectTransfer": {
+    "description": "ማስተላለፍ ውድቅ አድርግ ዲያሎግ ርዕስ"
+  },
+
+  "confirmRejectTransfer": "ይህንን ማስተላለፍ ማሰረዝ እንደፈለጉ እርግጠኛ ነዎት?",
+  "@confirmRejectTransfer": {
+    "description": "ማስተላለፍ ማረጋገጫ መልዕክት ውድቅ አድርግ"
+  },
+
+  "accept": "ተቀበል",
+  "@accept": {
+    "description": "ተቀበል ቁልፍ መለያ"
+  },
+
+  "reject": "ውድቅ አድርግ",
+  "@reject": {
+    "description": "ውድቅ አድርግ ቁልፍ መለያ"
+  },
+
+  "transferDetails": "የማስተላለፍ ዝርዝሮች",
+  "@transferDetails": {
+    "description": "የማስተላለፍ ዝርዝሮች ስክሪን ርዕስ"
+  },
+
+  "noItemsInCart": "በጋሪ ውስጥ ንጥሎች የሉም",
+  "@noItemsInCart": {
+    "description": "በጋሪ ውስጥ ንጥሎች የሉም ርዕስ"
+  },
+
+  "tapItemsIconToAdd": "ንጥሎችን ወደ ጋሪዎ ለመጨመር ከላይ ያለውን የንጥሎች አዶ ይንኩ",
+  "@tapItemsIconToAdd": {
+    "description": "ባዶ ጋሪ መመሪያ መልዕክት"
+  },
+
+  "itemsInCart": "በጋሪ ውስጥ ንጥሎች",
+  "@itemsInCart": {
+    "description": "በጋሪ ውስጥ ንጥሎች ክፍል ርዕስ"
+  },
+
+  "newTransfer": "አዲስ ማስተላለፍ",
+  "@newTransfer": {
+    "description": "አዲስ ማስተላለፍ ስክሪን ርዕስ"
+  },
+
+  "transfers": "ማስተላለፎች",
+  "@transfers": {
+    "description": "ማስተላለፎች ስክሪን ርዕስ"
+  },
+
+  "noTransfersFound": "ማስተላለፎች አልተገኙም",
+  "@noTransfersFound": {
+    "description": "ማስተላለፎች አልተገኙም መልዕክት"
+  },
+
+  "youDontHaveAnyItemsYet": "እስካሁን ምንም ንጥሎች የሎትም።",
+  "@youDontHaveAnyItemsYet": {
+    "description": "ባዶ ንጥሎች መልዕክት"
+  },
+
+  "cancelSalesOrder": "የሽያጭ ትዕዛዝ ይቅር",
+  "@cancelSalesOrder": {
+    "description": "የሽያጭ ትዕዛዝ ይቅር ዲያሎግ ርዕስ"
+  },
+
+  "confirmCancelSalesOrder": "ይህንን የሽያጭ ትዕዛዝ ማስረዝ እንደፈለጉ እርግጠኛ ነዎት?",
+  "@confirmCancelSalesOrder": {
+    "description": "የሽያጭ ትዕዛዝ ማረጋገጫ መልዕክት ይቅር"
+  },
+
+  "newSalesOrder": "አዲስ የሽያጭ ትዕዛዝ",
+  "@newSalesOrder": {
+    "description": "አዲስ የሽያጭ ትዕዛዝ ስክሪን ርዕስ"
+  },
+
+  "attachment": "መያዣ",
+  "@attachment": {
+    "description": "መያዣ መለያ"
+  },
+
+  "salesOrderDetails": "የሽያጭ ትዕዛዝ ዝርዝሮች",
+  "@salesOrderDetails": {
+    "description": "የሽያጭ ትዕዛዝ ዝርዝሮች ስክሪን ርዕስ"
+  },
+
+  "newTransaction": "አዲስ ግብይት",
+  "@newTransaction": {
+    "description": "አዲስ ግብይት ስክሪን ርዕስ"
+  },
+
+  "reverseTransaction": "ግብይት ይቀይሩ",
+  "@reverseTransaction": {
+    "description": "ግብይት ይቀይሩ ዲያሎግ ርዕስ"
+  },
+
+  "reverse": "ይቀይሩ",
+  "@reverse": {
+    "description": "ይቀይሩ ቁልፍ መለያ"
+  },
+
+  "category": "ምድብ",
+  "@category": {
+    "description": "ምድብ መለያ"
+  },
+
+  "additionalInformation": "ተጨማሪ መረጃ",
+  "@additionalInformation": {
+    "description": "ተጨማሪ መረጃ ክፍል ርዕስ"
+  },
+
+  "attachments": "መያዣዎች",
+  "@attachments": {
+    "description": "መያዣዎች ክፍል ርዕስ"
+  },
+
+  "recordPaymentWithApproval": "ከማረጋገጫ ጋር መክፈያ ይመዝግቡ",
+  "@recordPaymentWithApproval": {
+    "description": "ከማረጋገጫ ጋር መክፈያ ጨምር ንዑስ ርዕስ"
+  },
+
+  "id": "መታወቂያ",
+  "@id": {
+    "description": "መታወቂያ መለያ"
+  },
+
+  "bank": "ባንክ",
+  "@bank": {
+    "description": "ባንክ መለያ"
+  },
+
+  "reference": "ማጣቀሻ",
+  "@reference": {
+    "description": "ማጣቀሻ መለያ"
+  },
+
+  "none": "ምንም",
+  "@none": {
+    "description": "ምንም አማራጭ"
+  },
+
+  "bakery": "ዳቦ ማፍላት",
+  "@bakery": {
+    "description": "ዳቦ ማፍላት የንግድ አይነት"
+  },
+
+  "pharmacy": "ፋርማሲ",
+  "@pharmacy": {
+    "description": "ፋርማሲ የንግድ አይነት"
+  },
+
+  "supermarket": "ሱፐርማርኬት",
+  "@supermarket": {
+    "description": "ሱፐርማርኬት የንግድ አይነት"
+  },
+
+  "retail": "ገበያ",
+  "@retail": {
+    "description": "ገበያ የንግድ አይነት"
+  },
+
+  "cafe": "ካፌ",
+  "@cafe": {
+    "description": "ካፌ የንግድ አይነት"
+  },
+
+  "allCategories": "ሁሉም ምድቦች",
+  "@allCategories": {
+    "description": "ሁሉም ምድቦች ማጣሪያ አማራጭ"
+  },
+
+  "allSuppliers": "ሁሉም አቅራቢዎች",
+  "@allSuppliers": {
+    "description": "ሁሉም አቅራቢዎች ማጣሪያ አማራጭ"
+  },
+
+  "allStatus": "ሁሉም ሁኔታ",
+  "@allStatus": {
+    "description": "ሁሉም ሁኔታ ማጣሪያ አማራጭ"
+  },
+
+  "completed": "ተጠናቋል",
+  "@completed": {
+    "description": "ተጠናቋል ሁኔታ"
+  },
+
+  "reversed": "ተመለሰ",
+  "@reversed": {
+    "description": "ተመለሰ ሁኔታ"
+  },
+
+  "status": "ሁኔታ",
+  "@status": {
+    "description": "ሁኔታ መለያ"
+  },
+
+  "supplier": "አቅራቢ",
+  "@supplier": {
+    "description": "አቅራቢ መለያ"
+  },
+
+  "paymentMethod": "የመክፈያ ዘዴ",
+  "@paymentMethod": {
+    "description": "የመክፈያ ዘዴ መለያ"
+  },
+
+  "bankRequired": "ባንክ *",
+  "@bankRequired": {
+    "description": "ባንክ ያስፈልጋል መስክ መለያ"
+  },
+
+  "admin": "አስተዳዳሪ",
+  "@admin": {
+    "description": "አስተዳዳሪ የተጠቃሚ አይነት"
+  },
+
+  "manager": "አስተዳዳሪ",
+  "@manager": {
+    "description": "አስተዳዳሪ የተጠቃሚ አይነት"
+  },
+
+  "cashier": "ገንዘብ ተቀባይ",
+  "@cashier": {
+    "description": "ገንዘብ ተቀባይ የተጠቃሚ አይነት"
+  },
+
+  "storekeeper": "መጋዘን ጠባቂ",
+  "@storekeeper": {
+    "description": "መጋዘን ጠባቂ የተጠቃሚ አይነት"
+  },
+
+  "supervisor": "አቀናባሪ",
+  "@supervisor": {
+    "description": "አቀናባሪ የተጠቃሚ አይነት"
+  },
+
+  "standard": "መደበኛ",
+  "@standard": {
+    "description": "መደበኛ የተጠቃሚ አይነት"
+  },
+
+  "userType": "የተጠቃሚ አይነት",
+  "@userType": {
+    "description": "የተጠቃሚ አይነት መለያ"
+  },
+
+  "userId": "የተጠቃሚ መታወቂያ",
+  "@userId": {
+    "description": "የተጠቃሚ መታወቂያ መለያ"
+  },
+
+  "phone1": "ስልክ 1",
+  "@phone1": {
+    "description": "ስልክ 1 መለያ"
+  },
+
+  "phone2": "ስልክ 2",
+  "@phone2": {
+    "description": "ስልክ 2 መለያ"
+  },
+
+  "city": "ከተማ",
+  "@city": {
+    "description": "ከተማ መለያ"
+  },
+
+  "wereda": "ወረዳ",
+  "@wereda": {
+    "description": "ወረዳ መለያ"
+  },
+
+  "tinNumber": "የTIN ቁጥር",
+  "@tinNumber": {
+    "description": "የTIN ቁጥር መለያ"
+  },
+
+  "lowStockThreshold": "ዝቅተኛ ክምችት ደረጃ",
+  "@lowStockThreshold": {
+    "description": "ዝቅተኛ ክምችት ደረጃ መለያ"
+  },
+
+  "location": "አካባቢ",
+  "@location": {
+    "description": "አካባቢ መለያ"
+  },
+
+  "createdAt": "በተፈጠረበት",
+  "@createdAt": {
+    "description": "በተፈጠረበት መለያ"
+  },
+
+  "updatedAt": "በተዘመነበት",
+  "@updatedAt": {
+    "description": "በተዘመነበት መለያ"
+  },
+
+  "subCategory": "ንዑስ ምድብ",
+  "@subCategory": {
+    "description": "ንዑስ ምድብ መለያ"
+  },
+
+  "youDontHaveAnySuppliersYet": "እስካሁን ምንም አቅራቢዎች የሎትም።",
+  "@youDontHaveAnySuppliersYet": {
+    "description": "ባዶ አቅራቢዎች መልዕክት"
+  },
+
+  "youDontHaveAnyExpenseCategoriesYet": "እስካሁን ምንም የወጪ ምድቦች የሎትም።",
+  "@youDontHaveAnyExpenseCategoriesYet": {
+    "description": "ባዶ የወጪ ምድቦች መልዕክት"
+  },
+
+  "youDontHaveAnyItemsYet": "እስካሁን ምንም ንጥሎች የሎትም።",
+  "@youDontHaveAnyItemsYet": {
+    "description": "ባዶ ንጥሎች መልዕክት"
+  },
+
+  "youDontHaveAnyCategoriesYet": "እስካሁን ምንም ምድቦች የሎትም።",
+  "@youDontHaveAnyCategoriesYet": {
+    "description": "ባዶ ምድቦች መልዕክት"
+  },
+
+  "youDontHaveAnyCustomersYet": "እስካሁን ምንም ደንበኞች የሎትም።",
+  "@youDontHaveAnyCustomersYet": {
+    "description": "ባዶ ደንበኞች መልዕክት"
+  },
+
+  "errorPickingImages": "ምስሎችን ማምረጥ ስህተት: {error}",
+  "@errorPickingImages": {
+    "description": "ምስሎችን ማምረጥ ስህተት መልዕክት",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "ፍቃድ ተከልክሏል"
+      }
+    }
+  },
+
+  "confirmDeleteItem": "እርግጠኛ ነዎት {itemName}ን መሰረዝ ይፈልጋሉ? ይህ ተግባር ሊመለስ አይችልም።",
+  "@confirmDeleteItem": {
+    "description": "ንጥል ማረጋገጫ መልዕክት ሰርዝ",
+    "placeholders": {
+      "itemName": {
+        "type": "String",
+        "example": "የንጥል ስም"
+      }
+    }
+  },
+
+  "fulfillmentDate": "የማሟላት ቀን",
+  "@fulfillmentDate": {
+    "description": "የማሟላት ቀን መለያ"
+  },
+
+  "notSet": "አልተቀመጠም",
+  "@notSet": {
+    "description": "አልተቀመጠም እሴት"
+  },
+
+  "party": "አጋር",
+  "@party": {
+    "description": "አጋር መለያ (አጠቃላይ ደንበኛ/አቅራቢ)"
+  },
+
+  "qty": "ብዛት",
+  "@qty": {
+    "description": "ብዛት አህጽሮት"
+  },
+
+  "unitPrice": "የአሃድ ዋጋ",
+  "@unitPrice": {
+    "description": "የአሃድ ዋጋ መለያ"
+  },
+
+  "costPrice": "የወጪ ዋጋ",
+  "@costPrice": {
+    "description": "የወጪ ዋጋ መለያ"
+  },
+
+  "taxRate": "የግብር መጠን",
+  "@taxRate": {
+    "description": "የግብር መጠን መለያ"
+  },
+
+  "taxableAmt": "የግብር የሚገባ መጠን",
+  "@taxableAmt": {
+    "description": "የግብር የሚገባ መጠን መለያ"
+  },
+
+  "taxAmt": "የግብር መጠን",
+  "@taxAmt": {
+    "description": "የግብር መጠን መለያ"
+  },
+
+  "noAttachments": "መያዣዎች የሉም",
+  "@noAttachments": {
+    "description": "መያዣዎች የሉም መልዕክት"
+  },
+
+  "confirmReverseTransaction": "ይህንን ግብይት ማስተላለፍ እንደፈለጉ እርግጠኛ ነዎት?",
+  "@confirmReverseTransaction": {
+    "description": "ግብይት ማረጋገጫ መልዕክት ይቀይሩ"
+  },
+
+  "thisActionCannotBeUndone": "ይህ ተግባር ሊመለስ አይችልም።",
+  "@thisActionCannotBeUndone": {
+    "description": "ለማይመለስ ተግባራት ማስጠንቀቂያ መልዕክት"
+  },
+
+  "itemCode": "ኮድ",
+  "itemCodeLabel": "ኮድ: {code}",
+  "transactionLabel": "ግብይት: {number}",
+  "stockMovements": "የክምችት እንቅስቃሴዎች",
+  "color": "ቀለም",
+  "size": "መጠን",
+  "material": "ቁሳቁስ",
+  "weight": "ክብደት",
+  "unknownItem": "ያልታወቀ ንጥል",
+  "quantityLabel": "ብዛት: {quantity}",
+  "itemNumber": "ንጥል #{id}",
+  "inboundLabel": "ገቢ: +{quantity}",
+  "outboundLabel": "ወጪ: -{quantity}",
+  "fromLabel": "ከ: {source}",
+  "toLabel": "ወደ: {destination}",
+  "movementCount": "{count, plural, =1{1 እንቅስቃሴ} other{{count} እንቅስቃሴዎች}}",
+  "moreMovements": "+ {count} ተጨማሪ እንቅስቃሴዎች",
+  "attachmentNumber": "መያዣ {number}",
+  "notesLabel": "ማስታወሻዎች: {notes}",
+  "methods": "ዘዴዎች",
+  "selectTransactionType": "የግብይት አይነት ይምረጡ",
+  "addAttachments": "መያዣዎች ጨምር",
+  "clearAll": "ሁሉንም አጽዳ",
+  "applyFilters": "መጣሪያዎችን ይተግብሩ",
+  "nameAsc": "ስም (አ-ዘ)",
+  "nameDesc": "ስም (ዘ-አ)",
+  "createdDesc": "የተፈጠረ ቀን (አዲስ)",
+  "createdAsc": "የተፈጠረ ቀን (አሮጌ)",
+  "unitPriceAsc": "የአሃድ ዋጋ (ከዝቅ ወደ ከፍ)",
+  "unitPriceDesc": "የአሃድ ዋጋ (ከከፍ ወደ ዝቅ)",
+  "costPriceAsc": "የወጪ ዋጋ (ከዝቅ ወደ ከፍ)",
+  "costPriceDesc": "የወጪ ዋጋ (ከከፍ ወደ ዝቅ)",
+  "allCategories": "ሁሉም ምድቦች",
+  "allSubCategories": "ሁሉም ንዑስ ምድቦች",
+  "allBrands": "ሁሉም የምርት ስሞች",
+  "allUnits": "ሁሉም አሃዶች",
+  "allModels": "ሁሉም ሞዴሎች",
+  "isTaxable": "የግብር የሚገባ ነው",
+  "isActive": "ንቁ ነው",
+  "taxable": "የግብር የሚገባ",
+  "nonTaxable": "የግብር የማይገባ",
+  "errorPickingImages": "ምስሎችን ማምረጥ ስህተት: {error}",
+  "pleaseEnterValidAmount": "እባክዎ ትክክለኛ መጠን ያስገቡ",
+  "pleaseAddAtLeastOnePaymentMethod": "እባክዎ ቢያንስ አንድ የክፍያ ዘዴ ያክሉ",
+  "pleaseSelectBankForBankTransfer": "እባክዎ ለባንክ ማስተላለፍ የክፍያ ዘዴ ባንክ ይምረጡ",
+  "referenceNumberRequired": "ለ {method} ማጣቀሻ ቁጥር ያስፈልጋል",
+  "paymentMethodsTotalMustEqual": "የክፍያ ዘዴዎች ጠቅላላ ({total}) ከወጪ መጠን ({amount}) ጋር እኩል መሆን አለበት",
+  "failedToLoadBanks": "ባንኮችን ማስጫን አልተሳካም",
+  "selectBank": "ባንክ ይምረጡ",
+  "errorLoadingItems": "ንጥሎችን ማስጫን ስህተት: {error}",
+  "expenseDataNotFound": "የወጪ ውሂብ አልተገኘም",
+  "showExpensesFromAllCategories": "ከሁሉም ምድቦች ወጪዎችን አሳይ",
+  "noBranchesAvailable": "ምንም ቅርንጫፍ አይገኝም",
+  "errorLoadingRoles": "ሚናዎችን ማስጫን ስህተት",
+  "myCompany": "የእኔ ኩባንያ",
+  "viewAndManageCompanyDetails": "የኩባንያ ዝርዝሮችን ይመልከቱ እና ያቀናብሩ",
+  "refLabel": "ማጣቀሻ: {ref}",
+  "approveSalesOrder": "የሽያጭ ትዕዛዝ ይፈቀድ",
+  "notesOptional": "ማስታወሻዎች (አማራጭ)",
+  "paymentNotesOptional": "የክፍያ ማስታወሻዎች (አማራጭ)",
+  "orderTotal": "የትዕዛዝ ጠቅላላ",
+  "advancedFilters": "የላቀ ማጣሪያዎች",
+  "productInformation": "የምርት መረጃ",
+  "priceRanges": "የዋጋ ክልሎች",
+  "taxStatus": "የግብር ሁኔታ",
+  "min": "ዝቅተኛ",
+  "max": "ከፍተኛ",
+  "expenseName": "የወጪ ስም",
+  "expenseNameRequired": "የወጪ ስም ያስፈልጋል",
+  "amountRequired": "መጠን ያስፈልጋል",
+  "selectCategory": "ምድብ ይምረጡ (አማራጭ)",
+  "categorySelected": "ምድብ ተመርጧል",
+  "thisWillCreateTransactionAndUpdateInventory": "ይህ ግብይት ይፈጥራል እና አክሲዮን ያዘምናል።",
+  "attachment": "ተያያዥ",
+  "addAttachmentOptional": "ተያያዥ ያክሉ (አማራጭ)",
+  "firstNameRequired": "የመጀመሪያ ስም ያስፈልጋል",
+  "lastNameRequired": "የአባት ስም ያስፈልጋል",
+  "enterValidEmail": "ትክክለኛ ኢሜይል ያስገቡ",
+  "selectAll": "ሁሉንም ይምረጡ",
+  "assignRolesToUser": "ለተጠቃሚ ሚናዎች ይመድቡ",
+  "pleaseSelectAtLeastOneBranch": "እባክዎ ቢያንስ አንድ ቅርንጫፍ ይምረጡ",
+  "pleaseSelectBank": "እባክዎ ባንክ ይምረጡ",
+  "selectBankRequired": "ባንክ ይምረጡ *",
+  "pleaseSelectFulfillmentBranch": "እባክዎ የመሙላት ቅርንጫፍ ይምረጡ",
+  "pleaseSelectBankForBankTransfer": "እባክዎ ለባንክ ማስተላለፍ ባንክ ይምረጡ",
+  "paymentMethodsCount": "የክፍያ ዘዴዎች ({count})",
+  "removePaymentMethod": "የክፍያ ዘዴ አስወግድ",
+  "selectBankPlaceholder": "ባንክ ይምረጡ",
+  "sortLabel": "ማዘዣ:",
+  "nameAZ": "ስም (አ-ዘ)",
+  "nameZA": "ስም (ዘ-አ)",
+  "createdDateNewest": "የተፈጠረ ቀን (አዲስ)",
+  "createdDateOldest": "የተፈጠረ ቀን (ዕድሜ ያለው)",
+  "attributes": "ባህሪያት",
+  "referenceNumberLabel": "የማጣቀሻ ቁጥር",
+  "searchExpenseCategories": "የወጪ ምድቦችን ይፈልጉ...",
+  "failedToLoadExpenseCategories": "የወጪ ምድቦችን ማስጫን አልተሳካም",
+  "noExpenseCategoriesMatchSearch": "ምንም የወጪ ምድቦች ከፍለጋዎ ጋር አይዛመዱም",
+  "userLabel": "ተጠቃሚ: {userName}",
+  "selectBranchesAndAssignRoles": "ቅርንጫፎችን ይምረጡ እና ሚናዎችን ይመድቡ",
+  "searchCategories": "ምድቦችን ይፈልጉ...",
+  "noCategoriesFound": "ምንም ምድብ አልተገኘም",
+  "noCategoriesMatchSearch": "ምንም ምድቦች ከፍለጋዎ ጋር አይዛመዱም",
+  "selectCategoryFirst": "በመጀመሪያ ምድብ ይምረጡ",
+  "noSubCategoriesAvailable": "ምንም ንዑስ ምድቦች አይገኙም",
+  "noBrandsAvailable": "ምንም የምርት ስም አይገኙም",
+  "noUnitsAvailable": "ምንም አሃዶች አይገኙም",
+  "noModelsAvailable": "ምንም ሞዴሎች አይገኙም",
+  "searchByBatchName": "በቦታ ስም ይፈልጉ...",
+  "batchNumberLabel": "ቦታ #: {batchNumber}",
+  "itemNameLabel": "ንጥል: {itemName}",
+  "noAdditionalDetailsAvailable": "ምንም ተጨማሪ ዝርዝሮች አይገኙም",
+  "filterSalesReport": "የሽያጭ ሪፖርት ይፈልጉ",
+  "filterPurchaseReport": "የግዢ ሪፖርት ይፈልጉ",
+  "filterExpenseReport": "የወጪ ሪፖርት ይፈልጉ",
+  "placeOrder": "ትዕዛዝ ይስጡ",
+  "noBanksAvailable": "ምንም ባንኮች አይገኙም",
+  "receiptAttached": "ደረሰኝ ተያይዟል",
+  "addReceipt": "ደረሰኝ ጨምር",
+  "tapToUpload": "ለመጫን ይንኩ",
+  "configuration": "ቅንብር",
+  "appSettings": "የመተግበሪያ ቅንብሮች",
+  "receipt": "ደረሰኝ",
+  "updateCompany": "ኩባንያ አዘምን",
+  "basicInformation": "መሰረታዊ መረጃ",
+  "contactInformation": "የግንኙነት መረጃ",
+  "locationInformation": "የአካባቢ መረጃ",
+  "businessInformation": "የንግድ መረጃ",
+  "noItems": "ምንም ንጥሎች የሉም",
+  "noSuppliers": "ምንም አቅራቢዎች የሉም",
+  "noCustomers": "ምንም ደንበኞች የሉም",
+  "noCategories": "ምንም ምድቦች የሉም",
+  "noSubCategories": "ምንም ንዑስ ምድቦች የሉም",
+  "noExpenseCategories": "ምንም የወጪ ምድቦች የሉም",
+  "noTransactions": "ምንም ግብይቶች የሉም",
+  "createSupplier": "አቅራቢ ፍጠር",
+  "createCustomer": "ደንበኛ ፍጠር",
+  "createCategory": "ምድብ ፍጠር",
+  "createSubCategory": "ንዑስ ምድብ ፍጠር",
+  "createItem": "ንጥል ፍጠር",
+  "updateItem": "ንጥል አዘምን",
+  "itemDetails": "የንጥል ዝርዝሮች",
+  "deleteItem": "ንጥል ሰርዝ",
+  "selectItems": "ንጥሎች ይምረጡ",
+  "expenseDetails": "የወጪ ዝርዝሮች",
+  "batchDetails": "የጥምር ዝርዝሮች",
+  "personalInformation": "የግላዊ መረጃ",
+  "accountDetails": "የመለያ ዝርዝሮች",
+  "identification": "ማንነት",
+  "productDetails": "የምርት ዝርዝሮች",
+  "relationships": "ዝምድናዎች",
+  "pricing": "የዋጋ አሰጣጥ",
+  "taxAndStatus": "ግብር እና ሁኔታ",
+  "datesOptional": "ቀኖች (አማራጭ)",
+  "category": "ምድብ",
+  "additionalInformation": "ተጨማሪ መረጃ",
+  "attachments": "ተጣባባይዎች",
+  "paymentMethods": "የክፍያ ዘዴዎች",
+  "addPaymentMethod": "የክፍያ ዘዴ ጨምር",
+  "addAttachments": "ተጣባባይዎች ጨምር",
+  "addStock": "ክምችት ጨምር",
+  "clearAll": "ሁሉንም አጽዳ",
+  "applyFilters": "መርጃዎችን ተግብር",
+  "assignRolesToBranches": "ሚናዎችን ለቅርንጫፎች መድብ",
+  "actions": "ድርጊቶች",
+  "editExpenseCategory": "የወጪ ምድብ አርም",
+  "companyName": "የኩባንያ ስም",
+  "tradeName": "የንግድ ስም",
+  "phone1": "ስልክ 1",
+  "phone2": "ስልክ 2",
+  "city": "ከተማ",
+  "wereda": "ወረዳ",
+  "tinNumber": "የTIN ቁጥር",
+  "expenseDate": "የወጪ ቀን",
+  "attachmentIndex": "ተጣባባይ {index}",
+  "errorPickingImages": "ምስሎችን ማምረጥ ስህተት: {error}",
+
+  "paid": "የተከፈለ",
+  "@paid": {
+    "description": "የተከፈለ መለያ"
+  },
+
+  "methods": "ዘዴዎች",
+  "@methods": {
+    "description": "ዘዴዎች መለያ"
+  },
+
+  "selectCustomerOptional": "ደንበኛ ይምረጡ (አማራጭ)",
+  "@selectCustomerOptional": {
+    "description": "ደንበኛ ዝርዝር ማስተካከያ (አማራጭ)"
+  },
+
+  "selectPaymentMethod": "የክፍያ ዘዴ ይምረጡ",
+  "@selectPaymentMethod": {
+    "description": "የክፍያ ዘዴ ዝርዝር ማስተካከያ"
+  },
+
+  "attachReceiptOptional": "ደረሰኝ ያያይዙ (አማራጭ)",
+  "@attachReceiptOptional": {
+    "description": "ደረሰኝ ማያያዣ ምሳሌ (አማራጭ)"
+  },
+
+  "sku": "SKU",
+  "barcode": "ባርኮድ",
+  "expirationDate": "የመጨረሻ ቀን",
+  "manufacturingDate": "የምርት ቀን",
+  "selectCategory": "ምድብ ይምረጡ",
+  "selectSubCategory": "ንዑስ ምድብ ይምረጡ",
+
+  "pleaseEnterValidAmount": "እባክዎ ትክክለኛ መጠን ያስገቡ",
+  "@pleaseEnterValidAmount": {
+    "description": "የማይሰራ መጠን ስህተት መልዕክት"
+  },
+
+  "pleaseAddAtLeastOnePaymentMethod": "እባክዎ ቢያንስ አንድ የክፍያ ዘዴ ያክሉ",
+  "@pleaseAddAtLeastOnePaymentMethod": {
+    "description": "የክፍያ ዘዴ የለም ስህተት መልዕክት"
+  },
+
+  "pleaseSelectBankForBankTransfer": "እባክዎ ለባንክ ማስተላለፍ የክፍያ ዘዴ ባንክ ይምረጡ",
+  "@pleaseSelectBankForBankTransfer": {
+    "description": "ባንክ ምርጫ የሚፈለግ ስህተት መልዕክት"
+  },
+
+  "referenceNumberRequired": "ለ {method} የማጣቀሻ ቁጥር ያስፈልጋል",
+  "@referenceNumberRequired": {
+    "description": "የማጣቀሻ ቁጥር የሚፈለግ ስህተት መልዕክት",
+    "placeholders": {
+      "method": {
+        "type": "String",
+        "example": "የባንክ ማስተላለፍ"
+      }
+    }
+  },
+
+  "paymentMethodsTotalMustEqual": "የክፍያ ዘዴዎች ጠቅላላ ({total}) ከወጪ መጠን ({amount}) ጋር እኩል መሆን አለበት",
+  "@paymentMethodsTotalMustEqual": {
+    "description": "የክፍያ ዘዴዎች ጠቅላላ አለመመጣጠን ስህተት መልዕክት",
+    "placeholders": {
+      "total": {
+        "type": "String",
+        "example": "1000.00"
+      },
+      "amount": {
+        "type": "String",
+        "example": "1000.00"
+      }
+    }
+  },
+
+  "noPaymentMethodsAdded": "የክፍያ ዘዴዎች አልተጨመሩም",
+  "@noPaymentMethodsAdded": {
+    "description": "የክፍያ ዘዴዎች አልተጨመሩም መልዕክት"
+  },
+
+  "expenseAmount": "መጠን",
+  "@expenseAmount": {
+    "description": "የወጪ መጠን መለያ"
+  },
+
+  "amountRequired": "መጠን ያስፈልጋል",
+  "@amountRequired": {
+    "description": "መጠን የሚፈለግ ስህተት መልዕክት"
+  },
+
+  "createExpense": "ወጪ ይፍጠሩ",
+  "@createExpense": {
+    "description": "ወጪ ለመፍጠር ቁልፍ መለያ"
+  },
+
+  "failedToLoadBanksWithError": "ባንኮችን ማምጣት አልተሳካም: {error}",
+  "@failedToLoadBanksWithError": {
+    "description": "ባንኮችን ማምጣት አልተሳካም ስህተት መልዕክት",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "የአውታረ መረብ ስህተት"
+      }
+    }
+  },
+
+  "pleaseSelectBank": "እባክዎ ባንክ ይምረጡ",
+  "@pleaseSelectBank": {
+    "description": "እባክዎ ባንክ ይምረጡ ስህተት መልዕክት"
+  },
+
+  "errorLoadingItems": "ንጥሎችን ማምጣት ስህተት: {error}",
+  "@errorLoadingItems": {
+    "description": "ንጥሎችን ማምጣት ስህተት መልዕክት",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "የአውታረ መረብ ስህተት"
+      }
+    }
+  },
+
+  "selectItem": "ንጥል ይምረጡ",
+  "@selectItem": {
+    "description": "ንጥል ምሳሌ ይምረጡ"
+  },
+
+  "destinationBranch": "የመድረሻ ቅርንጫፍ",
+  "@destinationBranch": {
+    "description": "የመድረሻ ቅርንጫፍ መለያ"
+  },
+
+  "searchByNameCodeSku": "በስም፣ ኮድ፣ SKU... ይፈልጉ",
+  "@searchByNameCodeSku": {
+    "description": "ንጥሎችን ይፈልጉ ምሳሌ"
+  },
+
+  "addAttachmentOptional": "መያዣ ያክሉ (አማራጭ)",
+  "@addAttachmentOptional": {
+    "description": "መያዣ ያክሉ ምሳሌ (አማራጭ)"
+  },
+
+  "selectBusinessType": "የንግድ አይነት ይምረጡ",
+  "@selectBusinessType": {
+    "description": "የንግድ አይነት ምሳሌ ይምረጡ"
+  },
+
+  "selectCalendarType": "የቀን መቁጠሪያ አይነት ይምረጡ",
+  "@selectCalendarType": {
+    "description": "የቀን መቁጠሪያ አይነት ምሳሌ ይምረጡ"
+  },
+
+  "none": "ምንም",
+  "@none": {
+    "description": "ምንም አማራጭ መለያ"
+  },
+
+  "bakery": "ዳቦ ቤት",
+  "@bakery": {
+    "description": "ዳቦ ቤት የንግድ አይነት"
+  },
+
+  "pharmacy": "ፋርማሲ",
+  "@pharmacy": {
+    "description": "ፋርማሲ የንግድ አይነት"
+  },
+
+  "supermarket": "ሱፐርማርኬት",
+  "@supermarket": {
+    "description": "ሱፐርማርኬት የንግድ አይነት"
+  },
+
+  "retail": "ገበያ",
+  "@retail": {
+    "description": "ገበያ የንግድ አይነት"
+  },
+
+  "cafe": "ካፌ",
+  "@cafe": {
+    "description": "ካፌ የንግድ አይነት"
+  },
+
+  "nameAsc": "ስም (A-Z)",
+  "@nameAsc": {
+    "description": "ስም እየጨመረ የማዘጋጀት አማራጭ"
+  },
+
+  "nameDesc": "ስም (Z-A)",
+  "@nameDesc": {
+    "description": "ስም እየቀነሰ የማዘጋጀት አማራጭ"
+  },
+
+  "createdDateNewest": "የተፈጠረ ቀን (አዲስ)",
+  "@createdDateNewest": {
+    "description": "የተፈጠረ ቀን አዲስ የማዘጋጀት አማራጭ"
+  },
+
+  "createdDateOldest": "የተፈጠረ ቀን (ዕድሜ ያለው)",
+  "@createdDateOldest": {
+    "description": "የተፈጠረ ቀን ዕድሜ ያለው የማዘጋጀት አማራጭ"
+  },
+
+  "unitPriceLowToHigh": "የአሃድ ዋጋ (ከዝቅ ወደ ከፍ)",
+  "@unitPriceLowToHigh": {
+    "description": "የአሃድ ዋጋ ከዝቅ ወደ ከፍ የማዘጋጀት አማራጭ"
+  },
+
+  "unitPriceHighToLow": "የአሃድ ዋጋ (ከከፍ ወደ ዝቅ)",
+  "@unitPriceHighToLow": {
+    "description": "የአሃድ ዋጋ ከከፍ ወደ ዝቅ የማዘጋጀት አማራጭ"
+  },
+
+  "costPriceLowToHigh": "የወጪ ዋጋ (ከዝቅ ወደ ከፍ)",
+  "@costPriceLowToHigh": {
+    "description": "የወጪ ዋጋ ከዝቅ ወደ ከፍ የማዘጋጀት አማራጭ"
+  },
+
+  "costPriceHighToLow": "የወጪ ዋጋ (ከከፍ ወደ ዝቅ)",
+  "@costPriceHighToLow": {
+    "description": "የወጪ ዋጋ ከከፍ ወደ ዝቅ የማዘጋጀት አማራጭ"
+  },
+
+  "selectCategory": "ምድብ ይምረጡ",
+  "@selectCategory": {
+    "description": "ምድብ ምሳሌ ይምረጡ"
+  },
+
+  "selectSubCategory": "ንዑስ ምድብ ይምረጡ",
+  "@selectSubCategory": {
+    "description": "ንዑስ ምድብ ምሳሌ ይምረጡ"
+  },
+
+  "selectBrand": "የምርት ስም ይምረጡ",
+  "@selectBrand": {
+    "description": "የምርት ስም ምሳሌ ይምረጡ"
+  },
+
+  "selectUnit": "አሃድ ይምረጡ",
+  "@selectUnit": {
+    "description": "አሃድ ምሳሌ ይምረጡ"
+  },
+
+  "selectModel": "ሞዴል ይምረጡ",
+  "@selectModel": {
+    "description": "ሞዴል ምሳሌ ይምረጡ"
+  },
+
+  "active": "ንቁ",
+  "@active": {
+    "description": "ንቁ ሁኔታ መለያ"
+  },
+
+  "inactive": "አልተሰራም",
+  "@inactive": {
+    "description": "አልተሰራም ሁኔታ መለያ"
+  },
+
+  "taxable": "የግብር የሚገባ",
+  "@taxable": {
+    "description": "የግብር የሚገባ መለያ"
+  },
+
+  "nonTaxable": "የግብር የማይገባ",
+  "@nonTaxable": {
+    "description": "የግብር የማይገባ መለያ"
+  },
+
+  "isTaxable": "የግብር የሚገባ ነው",
+  "@isTaxable": {
+    "description": "የግብር የሚገባ ነው መለያ"
+  },
+
+  "isActive": "ንቁ ነው",
+  "@isActive": {
+    "description": "ንቁ ነው መለያ"
+  },
+
+  "enterLimit": "ገደብ ያስገቡ (ለምሳሌ፣ 1000)",
+  "@enterLimit": {
+    "description": "ገደብ ያስገቡ ምሳሌ"
+  },
+
+  "selectStatus": "ሁኔታ ይምረጡ",
+  "@selectStatus": {
+    "description": "ሁኔታ ምሳሌ ይምረጡ"
+  },
+
+  "searchByName": "በስም ይፈልጉ...",
+  "@searchByName": {
+    "description": "በስም ይፈልጉ ምሳሌ"
+  },
+
+  "searchByNamePhoneOrAccountCode": "በስም፣ ስልክ ወይም የመለያ ኮድ ይፈልጉ...",
+  "@searchByNamePhoneOrAccountCode": {
+    "description": "በስም፣ ስልክ ወይም የመለያ ኮድ ይፈልጉ ምሳሌ"
+  },
+
+  "searchExpenseCategories": "የወጪ ምድቦችን ይፈልጉ...",
+  "@searchExpenseCategories": {
+    "description": "የወጪ ምድቦችን ይፈልጉ ምሳሌ"
+  },
+
+  "showExpensesFromAllCategories": "ከሁሉም ምድቦች ወጪዎችን አሳይ",
+  "@showExpensesFromAllCategories": {
+    "description": "ከሁሉም ምድቦች ወጪዎችን አሳይ ንዑስ ርዕስ"
+  },
+
+  "clearSelection": "ምርጫ አጽዳ",
+  "@clearSelection": {
+    "description": "ምርጫ አጽዳ ቁልፍ መለያ"
+  },
+
+  "date": "ቀን",
+  "@date": {
+    "description": "ቀን መለያ"
+  },
+
+  "created": "የተፈጠረ",
+  "@created": {
+    "description": "የተፈጠረ መለያ"
+  },
+
+  "updated": "የተዘመነ",
+  "@updated": {
+    "description": "የተዘመነ መለያ"
+  },
+
+  "needStock": "ክምችት ያስፈልጋል",
+  "@needStock": {
+    "description": "ክምችት ያስፈልጋል መለያ"
+  },
+
+  "availableQuantity": "የሚገኝ ብዛት",
+  "@availableQuantity": {
+    "description": "የሚገኝ ብዛት መለያ"
+  },
+
+  "material": "ቁሳቁስ",
+  "@material": {
+    "description": "ቁሳቁስ መለያ"
+  },
+
+  "weight": "ክብደት",
+  "@weight": {
+    "description": "ክብደት መለያ"
+  },
+
+  "batchName": "የጥምር ስም",
+  "@batchName": {
+    "description": "የጥምር ስም መለያ"
+  },
+
+  "batchNumber": "የጥምር ቁጥር",
+  "@batchNumber": {
+    "description": "የጥምር ቁጥር መለያ"
+  },
+
+  "itemId": "የንጥል ID",
+  "@itemId": {
+    "description": "የንጥል ID መለያ"
+  },
+
+  "itemName": "የንጥል ስም",
+  "@itemName": {
+    "description": "የንጥል ስም መለያ"
+  },
+
+  "supplierBatchNumber": "የአቅራቢ ጥምር ቁጥር",
+  "@supplierBatchNumber": {
+    "description": "የአቅራቢ ጥምር ቁጥር መለያ"
+  },
+
+  "expenseDataNotFound": "የወጪ ውሂብ አልተገኘም",
+  "@expenseDataNotFound": {
+    "description": "የወጪ ውሂብ አልተገኘም ስህተት መልዕክት"
+  },
+  "selectBrand": "የምርት ስም ይምረጡ",
+  "selectUnit": "አሃድ ይምረጡ",
+  "selectModel": "ሞዴል ይምረጡ",
+  "selectItem": "ንጥል ይምረጡ",
+  "selectSupplier": "አቅራቢ ይምረጡ",
+  "selectStatus": "ሁኔታ ይምረጡ",
+  "selectUserType": "የተጠቃሚ አይነት ይምረጡ",
+  "selectBusinessType": "የንግድ አይነት ይምረጡ",
+  "selectCalendarType": "የቀን መቁጠሪያ አይነት ይምረጡ",
+  "searchByName": "በስም ፍለጋ...",
+  "searchByNameCodeSku": "በስም፣ ኮድ፣ SKU ፍለጋ...",
+  "limit": "ገደብ",
+  "enterLimit": "ገደብ ያስገቡ (ለምሳሌ: 1000)",
+  "selectCustomer": "ደንበኛ ይምረጡ",
+  "changing": "በመቀየር ላይ...",
+  "filterBestSellerReport": "የበለጠ የሚሸጡ ሪፖርት ማጣሪያ",
+  "searchCategories": "ምድቦችን ይፈልጉ...",
+  "amount": "መጠን",
+
+  "quantity": "ብዛት",
+  "@quantity": {
+    "description": "Quantity field label"
+  },
+
+  "payments": "ክፍያዎች",
+  "@payments": {
+    "description": "Payments section title"
+  },
+
+  "noPaymentsRecorded": "ክፍያ አልተመዘገበም",
+  "@noPaymentsRecorded": {
+    "description": "Empty payments list message"
+  },
+
+  "confirmReverseTransaction": "ይህን ግብይት ለመመለስ እርግጠኛ ነዎት?",
+  "@confirmReverseTransaction": {
+    "description": "Confirm reverse transaction dialog message"
+  },
+
+  "thisActionCannotBeUndone": "ይህ ተግባር ሊመለስ አይችልም።",
+  "@thisActionCannotBeUndone": {
+    "description": "Warning message for irreversible actions"
+  },
+
+  "pleaseEnterComplete6DigitCode": "እባክዎ ሙሉ 6-አሃዝ ኮድ ያስገቡ",
+  "noResetTokenFound": "የመታወስ ቶከን አልተገኘም",
+  "loginSuccessful": "መግቢያ በተሳካ ሁኔታ! እንኳን ደህና መጡ።",
+  "creatingAccount": "መለያ በመፍጠር ላይ...",
+  "accountCreatedSuccessfully": "መለያ በተሳካ ሁኔታ ተፈጥሯል! እባክዎ መለያዎን ያረጋግጡ።",
+  "accountVerifiedSuccessfully": "መለያ በተሳካ ሁኔታ ተረጋግጧል! አሁን ሁሉንም ባህሪያት መጠቀም ይችላሉ።",
+  "otpValidatedSuccessfully": "OTP በተሳካ ሁኔታ ተረጋግጧል!",
+  "passwordResetLinkSent": "የመታወስ አገናኝ ወደ ስልክ ቁጥርዎ ተልኳል።",
+  "passwordResetLinkSentGeneric": "ከዚህ ስልክ ቁጥር ጋር መለያ ካለ, የመታወስ አገናኝ ተልኳል።",
+  "passwordResetSuccessfully": "የይለፍ ቃል በተሳካ ሁኔታ ተታወሰ! አሁን በአዲሱ የይለፍ ቃልዎ መግባት ይችላሉ።",
+  "passwordChangedSuccessfully": "የይለፍ ቃል በተሳካ ሁኔታ ተቀይሯል!",
+  "profileUpdatedSuccessfully": "መገለጫ በተሳካ ሁኔታ ተሻሽሏል!",
+  "accountDeletedSuccessfully": "መለያ በተሳካ ሁኔታ ተሰርቷል። መልካም ጉዞ እንድንለው እናዝናለን።",
+  "otpResentSuccessfully": "OTP በተሳካ ሁኔታ ተድግሏል! እባክዎ ስልክዎን ይመልከቱ።",
+  "otpResentGeneric": "ከዚህ ስልክ ቁጥር ጋር መለያ ካለ, OTP ተድግሏል።",
+  "loggedOutSuccessfully": "በተሳካ ሁኔታ ወጥተዋል!",
+  "authenticationRefreshed": "ማረጋገጫ ተደስቷል!",
+  "noAuthenticatedUserFound": "ምንም የተጠቃሚ ማረጋገጫ አልተገኘም።",
+  "bankCreatedSuccessfully": "ባንክ በተሳካ ሁኔታ ተፈጥሯል",
+  "bankUpdatedSuccessfully": "ባንክ በተሳካ ሁኔታ ተሻሽሏል",
+  "bankDeletedSuccessfully": "ባንክ በተሳካ ሁኔታ ተሰርቷል",
+  "failedToSyncCompanySwitch": "ኩባንያ ለውጥን ከሰርቨር ጋር ማመሳሰል አልተሳካም። ምርጫዎ በአካባቢ ተቀምጧል።",
+  "failedToSyncBranchSwitch": "ቅርንጫፍ ለውጥን ከሰርቨር ጋር ማመሳሰል አልተሳካም። ምርጫዎ በአካባቢ ተቀምጧል።",
+
+  "oneDay": "1D",
+  "@oneDay": {
+    "description": "አንድ ቀን ወቅት መለያ"
+  },
+
+  "twoDays": "2D",
+  "@twoDays": {
+    "description": "ሁለት ቀናት ወቅት መለያ"
+  },
+
+  "sevenDays": "7D",
+  "@sevenDays": {
+    "description": "ሰባት ቀናት ወቅት መለያ"
+  },
+
+  "tenDays": "10D",
+  "@tenDays": {
+    "description": "አስር ቀናት ወቅት መለያ"
+  },
+
+  "thirtyDays": "30D",
+  "@thirtyDays": {
+    "description": "ሠላሳ ቀናት ወቅት መለያ"
+  },
+
+  "attachmentsCount": "መያዣዎች ({count})",
+  "@attachmentsCount": {
+    "description": "መያዣዎች ብዛት መለያ",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+
+  "noItemsMessage": "እስካሁን ምንም ንጥሎች የሉዎትም።",
+  "@noItemsMessage": {
+    "description": "ባዶ ንጥሎች ዝርዝር መልዕክት"
+  },
+
+  "noSubCategoriesInCategoryMessage": "ይህ ምድብ እስካሁን ምንም ንዑስ ምድቦች የሉትም።",
+  "@noSubCategoriesInCategoryMessage": {
+    "description": "ለተወሰነ ምድብ ባዶ ንዑስ ምድቦች ዝርዝር መልዕክት"
+  },
+
+  "roleAssignmentsByBranch": "በቅርንጫፍ የሚመደቡ ሚናዎች",
+  "@roleAssignmentsByBranch": {
+    "description": "የሚና መድቦች ክፍል ርዕስ"
+  },
+
+  "errorLoadingRoleAssignments": "የሚና መድቦችን ለመጫን ስህተት: {error}",
+  "@errorLoadingRoleAssignments": {
+    "description": "የሚና መድቦችን ለመጫን ስህተት መልዕክት",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "የአውታረ መረብ ስህተት"
+      }
+    }
+  },
+
+  "noRoleAssignmentsFound": "ምንም የሚና መድቦች አልተገኙም",
+  "@noRoleAssignmentsFound": {
+    "description": "ባዶ የሚና መድቦች መልዕክት"
+  },
+
+  "noRoleAssignmentsMessage": "ይህ ተጠቃሚ እስካሁን በማንኛውም ቅርንጫፍ ምንም የሚና መድቦች የለውም።",
+  "@noRoleAssignmentsMessage": {
+    "description": "ባዶ የሚና መድቦች ዝርዝር መልዕክት"
+  },
+
+  "noRolesAvailable": "ምንም ሚናዎች አይገኙም",
+  "@noRolesAvailable": {
+    "description": "ምንም ሚናዎች አይገኙም መልዕክት"
+  },
+
+  "expenseCategoryCreatedSuccessfully": "ወጪ ምድብ በተሳካ ሁኔታ ተፈጥሯል",
+  "@expenseCategoryCreatedSuccessfully": {
+    "description": "ወጪ ምድብ የተፈጠረ ስኬት መልዕክት"
+  },
+
+  "expenseCategoryUpdatedSuccessfully": "ወጪ ምድብ በተሳካ ሁኔታ ተዘመነ",
+  "@expenseCategoryUpdatedSuccessfully": {
+    "description": "ወጪ ምድብ የተዘመነ ስኬት መልዕክት"
+  },
+
+  "expenseCategoryDeletedSuccessfully": "ወጪ ምድብ በተሳካ ሁኔታ ተሰርዟል",
+  "@expenseCategoryDeletedSuccessfully": {
+    "description": "ወጪ ምድብ የተሰረዘ ስኬት መልዕክት"
+  },
+
+  "itemCreatedSuccessfully": "ንጥል በተሳካ ሁኔታ ተፈጥሯል",
+  "@itemCreatedSuccessfully": {
+    "description": "ንጥል የተፈጠረ ስኬት መልዕክት"
+  },
+
+  "itemUpdatedSuccessfully": "ንጥል በተሳካ ሁኔታ ተዘመነ",
+  "@itemUpdatedSuccessfully": {
+    "description": "ንጥል የተዘመነ ስኬት መልዕክት"
+  },
+
+  "itemDeletedSuccessfully": "ንጥል በተሳካ ሁኔታ ተሰርዟል",
+  "@itemDeletedSuccessfully": {
+    "description": "ንጥል የተሰረዘ ስኬት መልዕክት"
+  },
+
+  "codeRequired": "ኮድ ያስፈልጋል",
+  "@codeRequired": {
+    "description": "ኮድ መስክ የማረጋገጫ መልዕክት"
+  },
+
+  "costPriceRequired": "የዋጋ ዋጋ ያስፈልጋል",
+  "@costPriceRequired": {
+    "description": "የዋጋ ዋጋ ያስፈልጋል የማረጋገጫ መልዕክት"
+  },
+
+  "costPriceMustBeGreaterThanZero": "የዋጋ ዋጋ ከ 0 በላይ መሆን አለበት",
+  "@costPriceMustBeGreaterThanZero": {
+    "description": "የዋጋ ዋጋ ከ 0 በላይ መሆን አለበት የማረጋገጫ መልዕክት"
+  },
+
+  "unitPriceRequired": "የአሃድ ዋጋ ያስፈልጋል",
+  "@unitPriceRequired": {
+    "description": "የአሃድ ዋጋ ያስፈልጋል የማረጋገጫ መልዕክት"
+  },
+
+  "unitPriceMustBeGreaterThanZero": "የአሃድ ዋጋ ከ 0 በላይ መሆን አለበት",
+  "@unitPriceMustBeGreaterThanZero": {
+    "description": "የአሃድ ዋጋ ከ 0 በላይ መሆን አለበት የማረጋገጫ መልዕክት"
+  },
+
+  "unitPriceMustBeGreaterThanOrEqualToCostPrice": "የአሃድ ዋጋ ከዋጋ ዋጋ ወይም እኩል መሆን አለበት",
+  "@unitPriceMustBeGreaterThanOrEqualToCostPrice": {
+    "description": "የአሃድ ዋጋ ከዋጋ ዋጋ ወይም እኩል መሆን አለበት የማረጋገጫ መልዕክት"
+  },
+
+  "taxRateRequired": "የግብር መጠን ያስፈልጋል",
+  "@taxRateRequired": {
+    "description": "የግብር መጠን ያስፈልጋል የማረጋገጫ መልዕክት"
+  },
+
+  "taxRateMustBeBetween0And100": "የግብር መጠን በ 0 እና 100 መካከል መሆን አለበት",
+  "@taxRateMustBeBetween0And100": {
+    "description": "የግብር መጠን በ 0 እና 100 መካከል መሆን አለበት የማረጋገጫ መልዕክት"
+  },
+
+  "filterItems": "ንጥሎችን ማጣሪያ",
+  "@filterItems": {
+    "description": "ንጥሎችን ማጣሪያ መሳሪያ ማስተናገድ"
+  },
+
+  "close": "ዝጋ",
+  "@close": {
+    "description": "ዝጋ ቁልፍ መሳሪያ ማስተናገድ"
+  },
+
+  "brandCreatedSuccessfully": "የምርት ስም በተሳካ ሁኔታ ተፈጥሯል",
+  "@brandCreatedSuccessfully": {
+    "description": "Brand created success message"
+  },
+
+  "brandUpdatedSuccessfully": "የምርት ስም በተሳካ ሁኔታ ተዘምኗል",
+  "@brandUpdatedSuccessfully": {
+    "description": "Brand updated success message"
+  },
+
+  "brandDeletedSuccessfully": "የምርት ስም በተሳካ ሁኔታ ተሰርዟል",
+  "@brandDeletedSuccessfully": {
+    "description": "Brand deleted success message"
+  },
+
+  "categoryCreatedSuccessfully": "ምድብ በተሳካ ሁኔታ ተፈጥሯል",
+  "@categoryCreatedSuccessfully": {
+    "description": "Category created success message"
+  },
+
+  "categoryUpdatedSuccessfully": "ምድብ በተሳካ ሁኔታ ተዘምኗል",
+  "@categoryUpdatedSuccessfully": {
+    "description": "Category updated success message"
+  },
+
+  "categoryDeletedSuccessfully": "ምድብ በተሳካ ሁኔታ ተሰርዟል",
+  "@categoryDeletedSuccessfully": {
+    "description": "Category deleted success message"
+  },
+
+  "companyUpdatedSuccessfully": "ኩባንያ በተሳካ ሁኔታ ተዘምኗል",
+  "@companyUpdatedSuccessfully": {
+    "description": "Company updated success message"
+  },
+
+  "stockUpdatedSuccessfully": "ክምችት በተሳካ ሁኔታ ተዘምኗል",
+  "@stockUpdatedSuccessfully": {
+    "description": "Stock updated success message"
+  },
+
+  "companyLogo": "የኩባንያ ሎጎ",
+  "@companyLogo": {
+    "description": "Company logo label"
+  },
+  "modelCreatedSuccessfully": "ሞዴል በተሳካ ሁኔታ ተፈጥሯል",
+  "modelUpdatedSuccessfully": "ሞዴል በተሳካ ሁኔታ ተሻሽሏል",
+  "modelDeletedSuccessfully": "ሞዴል በተሳካ ሁኔታ ተሰርቷል",
+  "paymentMethodCreatedSuccessfully": "የክፍያ ዘዴ በተሳካ ሁኔታ ተፈጥሯል",
+  "paymentMethodUpdatedSuccessfully": "የክፍያ ዘዴ በተሳካ ሁኔታ ተሻሽሏል",
+  "paymentMethodDeletedSuccessfully": "የክፍያ ዘዴ በተሳካ ሁኔታ ተሰርቷል",
+  "profilePictureUploadedSuccessfully": "የመገለጫ ስዕል በተሳካ ሁኔታ ተጭኗል"
+}

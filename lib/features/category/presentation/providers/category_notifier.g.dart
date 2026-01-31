@@ -1,0 +1,55 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'category_notifier.dart';
+
+// **************************************************************************
+// RiverpodGenerator
+// **************************************************************************
+
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
+@ProviderFor(CategoryNotifier)
+const categoryProvider = CategoryNotifierProvider._();
+
+final class CategoryNotifierProvider
+    extends $AsyncNotifierProvider<CategoryNotifier, List<Category>> {
+  const CategoryNotifierProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'categoryProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$categoryNotifierHash();
+
+  @$internal
+  @override
+  CategoryNotifier create() => CategoryNotifier();
+}
+
+String _$categoryNotifierHash() => r'9e01d633678b55c26b9ca455c59941c2287f52a3';
+
+abstract class _$CategoryNotifier extends $AsyncNotifier<List<Category>> {
+  FutureOr<List<Category>> build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build();
+    final ref = this.ref as $Ref<AsyncValue<List<Category>>, List<Category>>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AsyncValue<List<Category>>, List<Category>>,
+              AsyncValue<List<Category>>,
+              Object?,
+              Object?
+            >;
+    element.handleValue(ref, created);
+  }
+}
