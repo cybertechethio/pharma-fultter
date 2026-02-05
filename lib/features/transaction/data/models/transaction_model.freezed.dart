@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$TransactionModel {
 
-@JsonKey(toJson: _transactionTypeToJson) TransactionType get transactionType; int? get supplierId; int? get customerId; int? get branchId; String? get notes; List<TransactionItemModel> get items; List<TransactionPaymentModel>? get paymentMethods; List<String>? get attachments;
+ int get id; String get transactionType; String get transactionNumber; String get status; int? get supplierId; int? get customerId; String? get supplierName; String? get customerName;@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) double get subtotal;@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) double get totalTax;@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) double get totalAmount; String? get notes; List<String> get attachments; DateTime get createdAt; DateTime get updatedAt; int? get createdBy; int? get updatedBy; String? get creatorName; String? get updatorName; List<TransItemModel> get items; PaymentModel? get payment;
 /// Create a copy of TransactionModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $TransactionModelCopyWith<TransactionModel> get copyWith => _$TransactionModelCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TransactionModel&&(identical(other.transactionType, transactionType) || other.transactionType == transactionType)&&(identical(other.supplierId, supplierId) || other.supplierId == supplierId)&&(identical(other.customerId, customerId) || other.customerId == customerId)&&(identical(other.branchId, branchId) || other.branchId == branchId)&&(identical(other.notes, notes) || other.notes == notes)&&const DeepCollectionEquality().equals(other.items, items)&&const DeepCollectionEquality().equals(other.paymentMethods, paymentMethods)&&const DeepCollectionEquality().equals(other.attachments, attachments));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TransactionModel&&(identical(other.id, id) || other.id == id)&&(identical(other.transactionType, transactionType) || other.transactionType == transactionType)&&(identical(other.transactionNumber, transactionNumber) || other.transactionNumber == transactionNumber)&&(identical(other.status, status) || other.status == status)&&(identical(other.supplierId, supplierId) || other.supplierId == supplierId)&&(identical(other.customerId, customerId) || other.customerId == customerId)&&(identical(other.supplierName, supplierName) || other.supplierName == supplierName)&&(identical(other.customerName, customerName) || other.customerName == customerName)&&(identical(other.subtotal, subtotal) || other.subtotal == subtotal)&&(identical(other.totalTax, totalTax) || other.totalTax == totalTax)&&(identical(other.totalAmount, totalAmount) || other.totalAmount == totalAmount)&&(identical(other.notes, notes) || other.notes == notes)&&const DeepCollectionEquality().equals(other.attachments, attachments)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.createdBy, createdBy) || other.createdBy == createdBy)&&(identical(other.updatedBy, updatedBy) || other.updatedBy == updatedBy)&&(identical(other.creatorName, creatorName) || other.creatorName == creatorName)&&(identical(other.updatorName, updatorName) || other.updatorName == updatorName)&&const DeepCollectionEquality().equals(other.items, items)&&(identical(other.payment, payment) || other.payment == payment));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,transactionType,supplierId,customerId,branchId,notes,const DeepCollectionEquality().hash(items),const DeepCollectionEquality().hash(paymentMethods),const DeepCollectionEquality().hash(attachments));
+int get hashCode => Object.hashAll([runtimeType,id,transactionType,transactionNumber,status,supplierId,customerId,supplierName,customerName,subtotal,totalTax,totalAmount,notes,const DeepCollectionEquality().hash(attachments),createdAt,updatedAt,createdBy,updatedBy,creatorName,updatorName,const DeepCollectionEquality().hash(items),payment]);
 
 @override
 String toString() {
-  return 'TransactionModel(transactionType: $transactionType, supplierId: $supplierId, customerId: $customerId, branchId: $branchId, notes: $notes, items: $items, paymentMethods: $paymentMethods, attachments: $attachments)';
+  return 'TransactionModel(id: $id, transactionType: $transactionType, transactionNumber: $transactionNumber, status: $status, supplierId: $supplierId, customerId: $customerId, supplierName: $supplierName, customerName: $customerName, subtotal: $subtotal, totalTax: $totalTax, totalAmount: $totalAmount, notes: $notes, attachments: $attachments, createdAt: $createdAt, updatedAt: $updatedAt, createdBy: $createdBy, updatedBy: $updatedBy, creatorName: $creatorName, updatorName: $updatorName, items: $items, payment: $payment)';
 }
 
 
@@ -48,11 +48,11 @@ abstract mixin class $TransactionModelCopyWith<$Res>  {
   factory $TransactionModelCopyWith(TransactionModel value, $Res Function(TransactionModel) _then) = _$TransactionModelCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(toJson: _transactionTypeToJson) TransactionType transactionType, int? supplierId, int? customerId, int? branchId, String? notes, List<TransactionItemModel> items, List<TransactionPaymentModel>? paymentMethods, List<String>? attachments
+ int id, String transactionType, String transactionNumber, String status, int? supplierId, int? customerId, String? supplierName, String? customerName,@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) double subtotal,@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) double totalTax,@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) double totalAmount, String? notes, List<String> attachments, DateTime createdAt, DateTime updatedAt, int? createdBy, int? updatedBy, String? creatorName, String? updatorName, List<TransItemModel> items, PaymentModel? payment
 });
 
 
-
+$PaymentModelCopyWith<$Res>? get payment;
 
 }
 /// @nodoc
@@ -65,20 +65,45 @@ class _$TransactionModelCopyWithImpl<$Res>
 
 /// Create a copy of TransactionModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? transactionType = null,Object? supplierId = freezed,Object? customerId = freezed,Object? branchId = freezed,Object? notes = freezed,Object? items = null,Object? paymentMethods = freezed,Object? attachments = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? transactionType = null,Object? transactionNumber = null,Object? status = null,Object? supplierId = freezed,Object? customerId = freezed,Object? supplierName = freezed,Object? customerName = freezed,Object? subtotal = null,Object? totalTax = null,Object? totalAmount = null,Object? notes = freezed,Object? attachments = null,Object? createdAt = null,Object? updatedAt = null,Object? createdBy = freezed,Object? updatedBy = freezed,Object? creatorName = freezed,Object? updatorName = freezed,Object? items = null,Object? payment = freezed,}) {
   return _then(_self.copyWith(
-transactionType: null == transactionType ? _self.transactionType : transactionType // ignore: cast_nullable_to_non_nullable
-as TransactionType,supplierId: freezed == supplierId ? _self.supplierId : supplierId // ignore: cast_nullable_to_non_nullable
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int,transactionType: null == transactionType ? _self.transactionType : transactionType // ignore: cast_nullable_to_non_nullable
+as String,transactionNumber: null == transactionNumber ? _self.transactionNumber : transactionNumber // ignore: cast_nullable_to_non_nullable
+as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as String,supplierId: freezed == supplierId ? _self.supplierId : supplierId // ignore: cast_nullable_to_non_nullable
 as int?,customerId: freezed == customerId ? _self.customerId : customerId // ignore: cast_nullable_to_non_nullable
-as int?,branchId: freezed == branchId ? _self.branchId : branchId // ignore: cast_nullable_to_non_nullable
-as int?,notes: freezed == notes ? _self.notes : notes // ignore: cast_nullable_to_non_nullable
+as int?,supplierName: freezed == supplierName ? _self.supplierName : supplierName // ignore: cast_nullable_to_non_nullable
+as String?,customerName: freezed == customerName ? _self.customerName : customerName // ignore: cast_nullable_to_non_nullable
+as String?,subtotal: null == subtotal ? _self.subtotal : subtotal // ignore: cast_nullable_to_non_nullable
+as double,totalTax: null == totalTax ? _self.totalTax : totalTax // ignore: cast_nullable_to_non_nullable
+as double,totalAmount: null == totalAmount ? _self.totalAmount : totalAmount // ignore: cast_nullable_to_non_nullable
+as double,notes: freezed == notes ? _self.notes : notes // ignore: cast_nullable_to_non_nullable
+as String?,attachments: null == attachments ? _self.attachments : attachments // ignore: cast_nullable_to_non_nullable
+as List<String>,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as DateTime,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
+as DateTime,createdBy: freezed == createdBy ? _self.createdBy : createdBy // ignore: cast_nullable_to_non_nullable
+as int?,updatedBy: freezed == updatedBy ? _self.updatedBy : updatedBy // ignore: cast_nullable_to_non_nullable
+as int?,creatorName: freezed == creatorName ? _self.creatorName : creatorName // ignore: cast_nullable_to_non_nullable
+as String?,updatorName: freezed == updatorName ? _self.updatorName : updatorName // ignore: cast_nullable_to_non_nullable
 as String?,items: null == items ? _self.items : items // ignore: cast_nullable_to_non_nullable
-as List<TransactionItemModel>,paymentMethods: freezed == paymentMethods ? _self.paymentMethods : paymentMethods // ignore: cast_nullable_to_non_nullable
-as List<TransactionPaymentModel>?,attachments: freezed == attachments ? _self.attachments : attachments // ignore: cast_nullable_to_non_nullable
-as List<String>?,
+as List<TransItemModel>,payment: freezed == payment ? _self.payment : payment // ignore: cast_nullable_to_non_nullable
+as PaymentModel?,
   ));
 }
+/// Create a copy of TransactionModel
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$PaymentModelCopyWith<$Res>? get payment {
+    if (_self.payment == null) {
+    return null;
+  }
 
+  return $PaymentModelCopyWith<$Res>(_self.payment!, (value) {
+    return _then(_self.copyWith(payment: value));
+  });
+}
 }
 
 
@@ -157,10 +182,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(toJson: _transactionTypeToJson)  TransactionType transactionType,  int? supplierId,  int? customerId,  int? branchId,  String? notes,  List<TransactionItemModel> items,  List<TransactionPaymentModel>? paymentMethods,  List<String>? attachments)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String transactionType,  String transactionNumber,  String status,  int? supplierId,  int? customerId,  String? supplierName,  String? customerName, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)  double subtotal, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)  double totalTax, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)  double totalAmount,  String? notes,  List<String> attachments,  DateTime createdAt,  DateTime updatedAt,  int? createdBy,  int? updatedBy,  String? creatorName,  String? updatorName,  List<TransItemModel> items,  PaymentModel? payment)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _TransactionModel() when $default != null:
-return $default(_that.transactionType,_that.supplierId,_that.customerId,_that.branchId,_that.notes,_that.items,_that.paymentMethods,_that.attachments);case _:
+return $default(_that.id,_that.transactionType,_that.transactionNumber,_that.status,_that.supplierId,_that.customerId,_that.supplierName,_that.customerName,_that.subtotal,_that.totalTax,_that.totalAmount,_that.notes,_that.attachments,_that.createdAt,_that.updatedAt,_that.createdBy,_that.updatedBy,_that.creatorName,_that.updatorName,_that.items,_that.payment);case _:
   return orElse();
 
 }
@@ -178,10 +203,10 @@ return $default(_that.transactionType,_that.supplierId,_that.customerId,_that.br
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(toJson: _transactionTypeToJson)  TransactionType transactionType,  int? supplierId,  int? customerId,  int? branchId,  String? notes,  List<TransactionItemModel> items,  List<TransactionPaymentModel>? paymentMethods,  List<String>? attachments)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String transactionType,  String transactionNumber,  String status,  int? supplierId,  int? customerId,  String? supplierName,  String? customerName, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)  double subtotal, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)  double totalTax, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)  double totalAmount,  String? notes,  List<String> attachments,  DateTime createdAt,  DateTime updatedAt,  int? createdBy,  int? updatedBy,  String? creatorName,  String? updatorName,  List<TransItemModel> items,  PaymentModel? payment)  $default,) {final _that = this;
 switch (_that) {
 case _TransactionModel():
-return $default(_that.transactionType,_that.supplierId,_that.customerId,_that.branchId,_that.notes,_that.items,_that.paymentMethods,_that.attachments);}
+return $default(_that.id,_that.transactionType,_that.transactionNumber,_that.status,_that.supplierId,_that.customerId,_that.supplierName,_that.customerName,_that.subtotal,_that.totalTax,_that.totalAmount,_that.notes,_that.attachments,_that.createdAt,_that.updatedAt,_that.createdBy,_that.updatedBy,_that.creatorName,_that.updatorName,_that.items,_that.payment);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -195,10 +220,10 @@ return $default(_that.transactionType,_that.supplierId,_that.customerId,_that.br
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(toJson: _transactionTypeToJson)  TransactionType transactionType,  int? supplierId,  int? customerId,  int? branchId,  String? notes,  List<TransactionItemModel> items,  List<TransactionPaymentModel>? paymentMethods,  List<String>? attachments)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String transactionType,  String transactionNumber,  String status,  int? supplierId,  int? customerId,  String? supplierName,  String? customerName, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)  double subtotal, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)  double totalTax, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)  double totalAmount,  String? notes,  List<String> attachments,  DateTime createdAt,  DateTime updatedAt,  int? createdBy,  int? updatedBy,  String? creatorName,  String? updatorName,  List<TransItemModel> items,  PaymentModel? payment)?  $default,) {final _that = this;
 switch (_that) {
 case _TransactionModel() when $default != null:
-return $default(_that.transactionType,_that.supplierId,_that.customerId,_that.branchId,_that.notes,_that.items,_that.paymentMethods,_that.attachments);case _:
+return $default(_that.id,_that.transactionType,_that.transactionNumber,_that.status,_that.supplierId,_that.customerId,_that.supplierName,_that.customerName,_that.subtotal,_that.totalTax,_that.totalAmount,_that.notes,_that.attachments,_that.createdAt,_that.updatedAt,_that.createdBy,_that.updatedBy,_that.creatorName,_that.updatorName,_that.items,_that.payment);case _:
   return null;
 
 }
@@ -210,39 +235,42 @@ return $default(_that.transactionType,_that.supplierId,_that.customerId,_that.br
 @JsonSerializable()
 
 class _TransactionModel implements TransactionModel {
-  const _TransactionModel({@JsonKey(toJson: _transactionTypeToJson) required this.transactionType, this.supplierId, this.customerId, this.branchId, this.notes, required final  List<TransactionItemModel> items, final  List<TransactionPaymentModel>? paymentMethods, final  List<String>? attachments}): _items = items,_paymentMethods = paymentMethods,_attachments = attachments;
+  const _TransactionModel({required this.id, required this.transactionType, required this.transactionNumber, required this.status, this.supplierId, this.customerId, this.supplierName, this.customerName, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) required this.subtotal, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) required this.totalTax, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) required this.totalAmount, this.notes, final  List<String> attachments = const [], required this.createdAt, required this.updatedAt, this.createdBy, this.updatedBy, this.creatorName, this.updatorName, final  List<TransItemModel> items = const [], this.payment}): _attachments = attachments,_items = items;
   factory _TransactionModel.fromJson(Map<String, dynamic> json) => _$TransactionModelFromJson(json);
 
-@override@JsonKey(toJson: _transactionTypeToJson) final  TransactionType transactionType;
+@override final  int id;
+@override final  String transactionType;
+@override final  String transactionNumber;
+@override final  String status;
 @override final  int? supplierId;
 @override final  int? customerId;
-@override final  int? branchId;
+@override final  String? supplierName;
+@override final  String? customerName;
+@override@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) final  double subtotal;
+@override@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) final  double totalTax;
+@override@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) final  double totalAmount;
 @override final  String? notes;
- final  List<TransactionItemModel> _items;
-@override List<TransactionItemModel> get items {
+ final  List<String> _attachments;
+@override@JsonKey() List<String> get attachments {
+  if (_attachments is EqualUnmodifiableListView) return _attachments;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_attachments);
+}
+
+@override final  DateTime createdAt;
+@override final  DateTime updatedAt;
+@override final  int? createdBy;
+@override final  int? updatedBy;
+@override final  String? creatorName;
+@override final  String? updatorName;
+ final  List<TransItemModel> _items;
+@override@JsonKey() List<TransItemModel> get items {
   if (_items is EqualUnmodifiableListView) return _items;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_items);
 }
 
- final  List<TransactionPaymentModel>? _paymentMethods;
-@override List<TransactionPaymentModel>? get paymentMethods {
-  final value = _paymentMethods;
-  if (value == null) return null;
-  if (_paymentMethods is EqualUnmodifiableListView) return _paymentMethods;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(value);
-}
-
- final  List<String>? _attachments;
-@override List<String>? get attachments {
-  final value = _attachments;
-  if (value == null) return null;
-  if (_attachments is EqualUnmodifiableListView) return _attachments;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(value);
-}
-
+@override final  PaymentModel? payment;
 
 /// Create a copy of TransactionModel
 /// with the given fields replaced by the non-null parameter values.
@@ -257,16 +285,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TransactionModel&&(identical(other.transactionType, transactionType) || other.transactionType == transactionType)&&(identical(other.supplierId, supplierId) || other.supplierId == supplierId)&&(identical(other.customerId, customerId) || other.customerId == customerId)&&(identical(other.branchId, branchId) || other.branchId == branchId)&&(identical(other.notes, notes) || other.notes == notes)&&const DeepCollectionEquality().equals(other._items, _items)&&const DeepCollectionEquality().equals(other._paymentMethods, _paymentMethods)&&const DeepCollectionEquality().equals(other._attachments, _attachments));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TransactionModel&&(identical(other.id, id) || other.id == id)&&(identical(other.transactionType, transactionType) || other.transactionType == transactionType)&&(identical(other.transactionNumber, transactionNumber) || other.transactionNumber == transactionNumber)&&(identical(other.status, status) || other.status == status)&&(identical(other.supplierId, supplierId) || other.supplierId == supplierId)&&(identical(other.customerId, customerId) || other.customerId == customerId)&&(identical(other.supplierName, supplierName) || other.supplierName == supplierName)&&(identical(other.customerName, customerName) || other.customerName == customerName)&&(identical(other.subtotal, subtotal) || other.subtotal == subtotal)&&(identical(other.totalTax, totalTax) || other.totalTax == totalTax)&&(identical(other.totalAmount, totalAmount) || other.totalAmount == totalAmount)&&(identical(other.notes, notes) || other.notes == notes)&&const DeepCollectionEquality().equals(other._attachments, _attachments)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.createdBy, createdBy) || other.createdBy == createdBy)&&(identical(other.updatedBy, updatedBy) || other.updatedBy == updatedBy)&&(identical(other.creatorName, creatorName) || other.creatorName == creatorName)&&(identical(other.updatorName, updatorName) || other.updatorName == updatorName)&&const DeepCollectionEquality().equals(other._items, _items)&&(identical(other.payment, payment) || other.payment == payment));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,transactionType,supplierId,customerId,branchId,notes,const DeepCollectionEquality().hash(_items),const DeepCollectionEquality().hash(_paymentMethods),const DeepCollectionEquality().hash(_attachments));
+int get hashCode => Object.hashAll([runtimeType,id,transactionType,transactionNumber,status,supplierId,customerId,supplierName,customerName,subtotal,totalTax,totalAmount,notes,const DeepCollectionEquality().hash(_attachments),createdAt,updatedAt,createdBy,updatedBy,creatorName,updatorName,const DeepCollectionEquality().hash(_items),payment]);
 
 @override
 String toString() {
-  return 'TransactionModel(transactionType: $transactionType, supplierId: $supplierId, customerId: $customerId, branchId: $branchId, notes: $notes, items: $items, paymentMethods: $paymentMethods, attachments: $attachments)';
+  return 'TransactionModel(id: $id, transactionType: $transactionType, transactionNumber: $transactionNumber, status: $status, supplierId: $supplierId, customerId: $customerId, supplierName: $supplierName, customerName: $customerName, subtotal: $subtotal, totalTax: $totalTax, totalAmount: $totalAmount, notes: $notes, attachments: $attachments, createdAt: $createdAt, updatedAt: $updatedAt, createdBy: $createdBy, updatedBy: $updatedBy, creatorName: $creatorName, updatorName: $updatorName, items: $items, payment: $payment)';
 }
 
 
@@ -277,11 +305,11 @@ abstract mixin class _$TransactionModelCopyWith<$Res> implements $TransactionMod
   factory _$TransactionModelCopyWith(_TransactionModel value, $Res Function(_TransactionModel) _then) = __$TransactionModelCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(toJson: _transactionTypeToJson) TransactionType transactionType, int? supplierId, int? customerId, int? branchId, String? notes, List<TransactionItemModel> items, List<TransactionPaymentModel>? paymentMethods, List<String>? attachments
+ int id, String transactionType, String transactionNumber, String status, int? supplierId, int? customerId, String? supplierName, String? customerName,@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) double subtotal,@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) double totalTax,@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) double totalAmount, String? notes, List<String> attachments, DateTime createdAt, DateTime updatedAt, int? createdBy, int? updatedBy, String? creatorName, String? updatorName, List<TransItemModel> items, PaymentModel? payment
 });
 
 
-
+@override $PaymentModelCopyWith<$Res>? get payment;
 
 }
 /// @nodoc
@@ -294,21 +322,46 @@ class __$TransactionModelCopyWithImpl<$Res>
 
 /// Create a copy of TransactionModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? transactionType = null,Object? supplierId = freezed,Object? customerId = freezed,Object? branchId = freezed,Object? notes = freezed,Object? items = null,Object? paymentMethods = freezed,Object? attachments = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? transactionType = null,Object? transactionNumber = null,Object? status = null,Object? supplierId = freezed,Object? customerId = freezed,Object? supplierName = freezed,Object? customerName = freezed,Object? subtotal = null,Object? totalTax = null,Object? totalAmount = null,Object? notes = freezed,Object? attachments = null,Object? createdAt = null,Object? updatedAt = null,Object? createdBy = freezed,Object? updatedBy = freezed,Object? creatorName = freezed,Object? updatorName = freezed,Object? items = null,Object? payment = freezed,}) {
   return _then(_TransactionModel(
-transactionType: null == transactionType ? _self.transactionType : transactionType // ignore: cast_nullable_to_non_nullable
-as TransactionType,supplierId: freezed == supplierId ? _self.supplierId : supplierId // ignore: cast_nullable_to_non_nullable
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int,transactionType: null == transactionType ? _self.transactionType : transactionType // ignore: cast_nullable_to_non_nullable
+as String,transactionNumber: null == transactionNumber ? _self.transactionNumber : transactionNumber // ignore: cast_nullable_to_non_nullable
+as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as String,supplierId: freezed == supplierId ? _self.supplierId : supplierId // ignore: cast_nullable_to_non_nullable
 as int?,customerId: freezed == customerId ? _self.customerId : customerId // ignore: cast_nullable_to_non_nullable
-as int?,branchId: freezed == branchId ? _self.branchId : branchId // ignore: cast_nullable_to_non_nullable
-as int?,notes: freezed == notes ? _self.notes : notes // ignore: cast_nullable_to_non_nullable
+as int?,supplierName: freezed == supplierName ? _self.supplierName : supplierName // ignore: cast_nullable_to_non_nullable
+as String?,customerName: freezed == customerName ? _self.customerName : customerName // ignore: cast_nullable_to_non_nullable
+as String?,subtotal: null == subtotal ? _self.subtotal : subtotal // ignore: cast_nullable_to_non_nullable
+as double,totalTax: null == totalTax ? _self.totalTax : totalTax // ignore: cast_nullable_to_non_nullable
+as double,totalAmount: null == totalAmount ? _self.totalAmount : totalAmount // ignore: cast_nullable_to_non_nullable
+as double,notes: freezed == notes ? _self.notes : notes // ignore: cast_nullable_to_non_nullable
+as String?,attachments: null == attachments ? _self._attachments : attachments // ignore: cast_nullable_to_non_nullable
+as List<String>,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as DateTime,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
+as DateTime,createdBy: freezed == createdBy ? _self.createdBy : createdBy // ignore: cast_nullable_to_non_nullable
+as int?,updatedBy: freezed == updatedBy ? _self.updatedBy : updatedBy // ignore: cast_nullable_to_non_nullable
+as int?,creatorName: freezed == creatorName ? _self.creatorName : creatorName // ignore: cast_nullable_to_non_nullable
+as String?,updatorName: freezed == updatorName ? _self.updatorName : updatorName // ignore: cast_nullable_to_non_nullable
 as String?,items: null == items ? _self._items : items // ignore: cast_nullable_to_non_nullable
-as List<TransactionItemModel>,paymentMethods: freezed == paymentMethods ? _self._paymentMethods : paymentMethods // ignore: cast_nullable_to_non_nullable
-as List<TransactionPaymentModel>?,attachments: freezed == attachments ? _self._attachments : attachments // ignore: cast_nullable_to_non_nullable
-as List<String>?,
+as List<TransItemModel>,payment: freezed == payment ? _self.payment : payment // ignore: cast_nullable_to_non_nullable
+as PaymentModel?,
   ));
 }
 
+/// Create a copy of TransactionModel
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$PaymentModelCopyWith<$Res>? get payment {
+    if (_self.payment == null) {
+    return null;
+  }
 
+  return $PaymentModelCopyWith<$Res>(_self.payment!, (value) {
+    return _then(_self.copyWith(payment: value));
+  });
+}
 }
 
 // dart format on

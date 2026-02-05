@@ -90,20 +90,20 @@ class _ExpenseListScreenState extends ConsumerState<ExpenseListScreen> {
       appBar: CustomAppBar(
         title: l10n.expenses,
         bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: const Size.fromHeight(AppSizes.searchBarHeight),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            padding: const EdgeInsets.symmetric(horizontal: AppSizes.sm),
             child: Row(
               children: [
                 Expanded(
                   child: search.AppSearchBar(
-                    hintText: 'Search by name...',
+                    hintText: l10n.searchByName,
                     onSearch: (query) => ref.read(expenseProvider.notifier).search(search: query),
                     onClear: () => ref.read(expenseProvider.notifier).refresh(),
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(AppSizes.sm),
                   ),
                 ),
-                const SizedBox(width: 8.0),
+                const SizedBox(width: AppSizes.sm),
                 IconButton(
                   icon: const Icon(Icons.filter_list),
                   onPressed: () => _showCategoryFilterDialog(context),
@@ -166,7 +166,7 @@ class _ExpenseListScreenState extends ConsumerState<ExpenseListScreen> {
               app_err.ErrorsWidget(
                 failure: error is Failure ? error : Failure.unexpectedError(error.toString()),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSizes.lg),
               ElevatedButton(
                 onPressed: () => ref.read(expenseProvider.notifier).refresh(),
                 child: Text(l10n.retry),

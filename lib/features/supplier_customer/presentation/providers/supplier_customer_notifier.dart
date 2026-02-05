@@ -1,4 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import '../../data/models/supplier_customer_payment_request.dart';
 import '../../domain/entities/supplier_customer.dart';
 import 'supplier_customer_providers.dart';
 import 'supplier_customer_events.dart';
@@ -157,6 +158,74 @@ class SupplierCustomerNotifier extends _$SupplierCustomerNotifier {
   String _successMsg(SupplierCustomerType type, String verb) {
     final who = type == SupplierCustomerType.customer ? 'Customer' : 'Supplier';
     return '$who $verb successfully';
+  }
+
+  Future<void> addBalance({
+    required SupplierCustomerType type,
+    required String id,
+    required SupplierCustomerPaymentRequest request,
+    Map<String, String> paymentAttachmentFilePaths = const {},
+  }) async {
+    final loading = ref.read(addBalanceLoadingProvider.notifier);
+    loading.setLoading(true);
+
+    final useCase = ref.read(addBalanceUseCaseProvider);
+    final result = await useCase.call(
+      request: request,
+      paymentAttachmentFilePaths: paymentAttachmentFilePaths,
+    );
+
+    result.fold(
+      (failure) {
+        ref.read(supplierCustomerUiEventsProvider(type).notifier)
+          .emit(SupplierCustomerFailure(failure));
+      },
+      (_) {
+        ref.read(supplierCustomerUiEventsProvider(type).notifier).emit(
+          AddBalanceSuccess(
+            customerId: type == SupplierCustomerType.customer ? id : null,
+            supplierId: type == SupplierCustomerType.supplier ? id : null,
+            message: 'Balance added successfully',
+          ),
+        );
+      },
+    );
+
+    loading.setLoading(false);
+  }
+
+  Future<void> refund({
+    required SupplierCustomerType type,
+    required String id,
+    required SupplierCustomerPaymentRequest request,
+    Map<String, String> paymentAttachmentFilePaths = const {},
+  }) async {
+    final loading = ref.read(refundLoadingProvider.notifier);
+    loading.setLoading(true);
+
+    final useCase = ref.read(refundUseCaseProvider);
+    final result = await useCase.call(
+      request: request,
+      paymentAttachmentFilePaths: paymentAttachmentFilePaths,
+    );
+
+    result.fold(
+      (failure) {
+        ref.read(supplierCustomerUiEventsProvider(type).notifier)
+          .emit(SupplierCustomerFailure(failure));
+      },
+      (_) {
+        ref.read(supplierCustomerUiEventsProvider(type).notifier).emit(
+          RefundSuccess(
+            customerId: type == SupplierCustomerType.customer ? id : null,
+            supplierId: type == SupplierCustomerType.supplier ? id : null,
+            message: 'Refund processed successfully',
+          ),
+        );
+      },
+    );
+
+    loading.setLoading(false);
   }
 }
 

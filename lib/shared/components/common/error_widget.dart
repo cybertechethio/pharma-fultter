@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../../app/theme/app_sizes.dart';
+import '../../../app/theme/text_styles.dart';
 import '../../../core/errors/failure.dart';
 
 /// Simple error widget component for displaying error states
@@ -35,10 +37,10 @@ class ErrorsWidget extends StatelessWidget {
         children: [
           Text(
             _getErrorMessage(),
-            style: Theme.of(context).textTheme.bodyLarge,
+            style: context.body(),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: AppSizes.lg),
           if (onRetry != null)
             ElevatedButton(
               onPressed: onRetry,

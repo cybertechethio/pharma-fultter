@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cyber_pos/l10n/app_localizations.dart';
+import '../../../app/theme/app_sizes.dart';
 import '../../../app/theme/brand_colors.dart';
 
 /// Loading widget component with multiple variants
@@ -69,7 +70,7 @@ class LoadingWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           indicator,
-          const SizedBox(height: 16),
+          const SizedBox(height: AppSizes.lg),
           Text(
             message!,
             style: theme.textTheme.bodyMedium?.copyWith(
@@ -138,11 +139,11 @@ class LoadingWidget extends StatelessWidget {
             borderRadius: borderRadius ?? BorderRadius.circular(size / 2),
           ),
           if (showMessage && message != null) ...[
-            const SizedBox(height: 16),
+            const SizedBox(height: AppSizes.lg),
             _ShimmerItem(
               width: 120,
-              height: 16,
-              borderRadius: borderRadius ?? BorderRadius.circular(8),
+              height: AppSizes.lg,
+              borderRadius: borderRadius ?? BorderRadius.circular(AppSizes.radiusSm),
             ),
           ],
         ],
@@ -230,10 +231,10 @@ class _ShimmerLoadingState extends State<_ShimmerLoading>
             return LinearGradient(
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
-              colors: const [
-                Color(0xFFEBEBF4),
-                Color(0xFFF4F4F4),
-                Color(0xFFEBEBF4),
+              colors: [
+                BrandColors.surfaceVariant,
+                BrandColors.surfaceContainerHighest,
+                BrandColors.surfaceVariant,
               ],
               stops: [
                 _animation.value - 0.3,

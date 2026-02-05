@@ -127,7 +127,7 @@ class _SubCategoryFormDialogState extends ConsumerState<SubCategoryFormDialog> {
                       });
                     },
                     label: l10n.category,
-                    hintText: 'Select a category',
+                    hintText: l10n.selectCategory,
                     required: true,
                   );
                 },

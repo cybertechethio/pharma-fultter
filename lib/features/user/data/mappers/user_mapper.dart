@@ -10,6 +10,7 @@ extension UserMapper on UserModel {
       email: email,
       phone: phone,
       isActive: isActive,
+      userType: userType,
       createdAt: createdAt,
     );
   }

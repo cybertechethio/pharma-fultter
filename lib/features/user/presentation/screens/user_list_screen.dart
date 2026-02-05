@@ -89,7 +89,7 @@ class _UserListScreenState extends ConsumerState<UserListScreen> {
                     ? error
                     : Failure.unexpectedError(error.toString()),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSizes.lg),
               CustomButton(
                 text: l10n.retry,
                 onPressed: () => ref.read(userProvider.notifier).load(),

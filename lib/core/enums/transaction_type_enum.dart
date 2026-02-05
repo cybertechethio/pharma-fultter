@@ -4,12 +4,17 @@ import '../../app/theme/brand_colors.dart';
 enum TransactionType {
   purchase,
   sale,
+  using,
   adjustment,
-  purchaseReverse,
-  saleReverse,
+  waste,
+  damage,
+  producing,
+  reverse,
 }
 
 extension TransactionTypeExtension on TransactionType {
+
+  
   /// Get TransactionType from string value
   static TransactionType fromString(String value) {
     switch (value.toLowerCase()) {
@@ -17,32 +22,24 @@ extension TransactionTypeExtension on TransactionType {
         return TransactionType.purchase;
       case 'sale':
         return TransactionType.sale;
+      case 'using':
+        return TransactionType.using;
       case 'adjustment':
         return TransactionType.adjustment;
-      case 'purchase_reverse':
-        return TransactionType.purchaseReverse;
-      case 'sale_reverse':
-        return TransactionType.saleReverse;
+      case 'waste':
+        return TransactionType.waste;
+      case 'damage':
+        return TransactionType.damage;
+      case 'producing':
+        return TransactionType.producing;
+      case 'reverse':
+        return TransactionType.reverse;
       default:
-        return TransactionType.purchase; // Default fallback
+        return TransactionType.sale; // Default fallback
     }
   }
 
-  /// Convert TransactionType to string value for API
-  String toApiString() {
-    switch (this) {
-      case TransactionType.purchase:
-        return 'purchase';
-      case TransactionType.sale:
-        return 'sale';
-      case TransactionType.adjustment:
-        return 'adjustment';
-      case TransactionType.purchaseReverse:
-        return 'purchase_reverse';
-      case TransactionType.saleReverse:
-        return 'sale_reverse';
-    }
-  }
+ 
 
   /// Check if transaction type requires customer/supplier
   bool requiresCustomerOrSupplier() {
@@ -60,15 +57,11 @@ extension TransactionTypeExtension on TransactionType {
     return this == TransactionType.purchase || this == TransactionType.sale;
   }
 
-  /// Check if transaction type allows batch creation
-  bool allowsBatchCreation() {
-    return this == TransactionType.purchase;
-  }
 
   /// Check if this transaction type is a reversal type
   bool isReversalType() {
-    return this == TransactionType.purchaseReverse ||
-        this == TransactionType.saleReverse;
+    return this == TransactionType.purchase ||
+        this == TransactionType.sale;
   }
 
   /// Check if this transaction type can be reversed
@@ -76,17 +69,6 @@ extension TransactionTypeExtension on TransactionType {
     return this == TransactionType.purchase || this == TransactionType.sale;
   }
 
-  /// Get the reversal type for this transaction type
-  TransactionType? getReversalType() {
-    switch (this) {
-      case TransactionType.purchase:
-        return TransactionType.purchaseReverse;
-      case TransactionType.sale:
-        return TransactionType.saleReverse;
-      default:
-        return null;
-    }
-  }
 
   /// Get display label for transaction type
   String getDisplayLabel() {
@@ -95,12 +77,18 @@ extension TransactionTypeExtension on TransactionType {
         return 'Purchase';
       case TransactionType.sale:
         return 'Sale';
+      case TransactionType.using:
+        return 'Using';
       case TransactionType.adjustment:
         return 'Adjustment';
-      case TransactionType.purchaseReverse:
-        return 'Purchase Reverse';
-      case TransactionType.saleReverse:
-        return 'Sale Reverse';
+      case TransactionType.waste:
+        return 'Waste';
+      case TransactionType.damage:
+        return 'Damage';
+      case TransactionType.producing:
+        return 'Producing';
+      case TransactionType.reverse:
+        return 'Reverse';
     }
   }
 
@@ -112,12 +100,40 @@ extension TransactionTypeExtension on TransactionType {
         return BrandColors.info;
       case TransactionType.sale:
         return BrandColors.success;
+      case TransactionType.using:
+        return BrandColors.transfer;
       case TransactionType.adjustment:
         return BrandColors.textMuted;
-      case TransactionType.purchaseReverse:
+      case TransactionType.waste:
         return BrandColors.error;
-      case TransactionType.saleReverse:
+      case TransactionType.damage:
         return BrandColors.error;
+      case TransactionType.producing:
+        return BrandColors.returnColor;
+      case TransactionType.reverse:
+        return BrandColors.warning;
+    }
+  }
+
+  /// Get icon for transaction type
+  IconData getIcon() {
+    switch (this) {
+      case TransactionType.purchase:
+        return Icons.shopping_cart_rounded;
+      case TransactionType.sale:
+        return Icons.point_of_sale_rounded;
+      case TransactionType.using:
+        return Icons.outbox_rounded;
+      case TransactionType.adjustment:
+        return Icons.tune_rounded;
+      case TransactionType.waste:
+        return Icons.delete_rounded;
+      case TransactionType.damage:
+        return Icons.error_outline_rounded;
+      case TransactionType.producing:
+        return Icons.factory_rounded;
+      case TransactionType.reverse:
+        return Icons.undo_rounded;
     }
   }
 }

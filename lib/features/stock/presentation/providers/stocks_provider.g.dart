@@ -33,7 +33,7 @@ final class StockNotifierProvider
   StockNotifier create() => StockNotifier();
 }
 
-String _$stockNotifierHash() => r'b20f4bfbdecbf257691291023e642e243a22ab63';
+String _$stockNotifierHash() => r'a3d2ba68c73d510e21433fce8bd4042d31cf2981';
 
 abstract class _$StockNotifier extends $AsyncNotifier<List<Stock>> {
   FutureOr<List<Stock>> build();

@@ -56,10 +56,12 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     required String email,
     required String phone,
     bool isActive = true,
+    required String userType,
   }) async {
     LoggingService.auth('Starting create user process', {
       'firstName': firstName,
       'email': email,
+      'userType': userType,
     });
     try {
       final response = await _api.create(
@@ -68,6 +70,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
         email: email,
         phone: phone,
         isActive: isActive,
+        userType: userType,
       );
       return response.when(
         success: (success, message, data, meta, pagination) {
@@ -108,9 +111,11 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     required String email,
     required String phone,
     bool isActive = true,
+    required String userType,
   }) async {
     LoggingService.auth('Starting update user process', {
       'id': id,
+      'userType': userType,
     });
     try {
       final response = await _api.update(
@@ -120,6 +125,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
         email: email,
         phone: phone,
         isActive: isActive,
+        userType: userType,
       );
       return response.when(
         success: (success, message, data, meta, pagination) {

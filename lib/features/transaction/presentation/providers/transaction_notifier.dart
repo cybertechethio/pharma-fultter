@@ -2,7 +2,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../../core/enums/transaction_type_enum.dart';
 import '../../../../shared/models/pagination_model.dart';
 import '../../domain/entities/transaction.dart';
-import '../../domain/entities/transaction_data.dart';
+import '../../data/models/create_trans_request.dart';
 import 'transaction_providers.dart';
 import 'transaction_events.dart';
 import 'transaction_loading_providers.dart';
@@ -20,11 +20,16 @@ class TransactionNotifier extends _$TransactionNotifier {
   // Current pagination info
   PaginationModel? _currentPagination;
   bool _isLoadingMore = false;
+  TransactionType? _selectedType;
 
   /// Load initial page (page 1)
   Future<List<Transaction>> _loadInitial() async {
     final useCase = ref.read(getTransactionsUseCaseProvider);
-    final result = await useCase.call(page: 1, limit: 25);
+    final result = await useCase.call(
+      page: 1,
+      limit: 25,
+      transactionType: _selectedType,
+    );
 
     return result.fold(
       (failure) {
@@ -39,6 +44,14 @@ class TransactionNotifier extends _$TransactionNotifier {
 
   /// Refresh: Reload from page 1
   Future<void> refresh() async {
+    state = const AsyncValue.loading();
+    state = await AsyncValue.guard(() => _loadInitial());
+  }
+
+  /// Apply transaction type filter (matches pattern from report notifiers)
+  Future<void> applyFilter(TransactionType? type) async {
+    _selectedType = type;
+    _currentPagination = null; // Reset pagination when filtering
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() => _loadInitial());
   }
@@ -60,7 +73,11 @@ class TransactionNotifier extends _$TransactionNotifier {
       }
 
       final useCase = ref.read(getTransactionsUseCaseProvider);
-      final result = await useCase.call(page: nextPage, limit: 25);
+      final result = await useCase.call(
+        page: nextPage,
+        limit: 25,
+        transactionType: _selectedType,
+      );
 
       result.fold(
         (failure) {
@@ -92,8 +109,9 @@ class TransactionNotifier extends _$TransactionNotifier {
   /// Check if currently loading more
   bool get isLoadingMore => _isLoadingMore;
 
+
   Future<void> createTransaction({
-    required TransactionData data,
+    required CreateTransRequest data,
     required List<String> receiptFilePaths,
     required Map<String, String> paymentAttachmentFilePaths,
   }) async {
@@ -103,8 +121,6 @@ class TransactionNotifier extends _$TransactionNotifier {
      createLoading.setLoading(true);
 
     final useCase = ref.read(createTransactionUseCaseProvider);
-
-   
 
     // Call use case
     final result = await useCase.call(

@@ -5,12 +5,12 @@ extension ItemMapper on ItemModel {
   Item toDomain() {
     return Item(
       id: id,
-      companyId: companyId,
       name: name,
+      code: code ?? 'N/A',
+      companyId: companyId,
       description: description,
       imageUrl: imageUrl,
       sku: sku,
-      code: code,
       barcode: barcode,
       color: color,
       size: size,
@@ -19,11 +19,20 @@ extension ItemMapper on ItemModel {
       isTaxable: isTaxable,
       taxRate: taxRate,
       isActive: isActive,
+      costPrice: costPrice,
+      unitPrice: unitPrice,
+      expirationDate: expirationDate,
+      manufacturingDate: manufacturingDate,
       categoryId: categoryId,
       subCategoryId: subCategoryId,
       brandId: brandId,
       unitId: unitId,
       modelId: modelId,
+      categories: categories,
+      subCategories: subCategories,
+      brands: brands,
+      units: units,
+      models: models,
       categoryName: categoryName,
       subCategoryName: subCategoryName,
       brandName: brandName,
@@ -33,6 +42,7 @@ extension ItemMapper on ItemModel {
       updatedAt: updatedAt,
       createdBy: createdBy,
       updatedBy: updatedBy,
+      createdByName: createdByName,
     );
   }
 }

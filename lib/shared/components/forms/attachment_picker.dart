@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../app/theme/app_sizes.dart';
+import '../../../app/theme/brand_colors.dart';
 import '../common/image_picker_bottom_sheet.dart';
 
 /// Modern attachment picker for receipts and files
@@ -51,12 +52,12 @@ class AttachmentPicker extends StatelessWidget {
               children: [
                 // Icon
                 Container(
-                  padding: const EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(AppSizes.sm),
                   decoration: BoxDecoration(
                     color: hasFile 
                         ? colorScheme.primary.withOpacity(0.1)
                         : colorScheme.surfaceContainerHighest,
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(AppSizes.radiusSm),
                   ),
                   child: Icon(
                     hasFile ? Icons.check_circle_rounded : Icons.add_photo_alternate_outlined,
@@ -64,7 +65,7 @@ class AttachmentPicker extends StatelessWidget {
                     size: 20,
                   ),
                 ),
-                const SizedBox(width: 12),
+                const SizedBox(width: AppSizes.md),
                 // Text
                 Expanded(
                   child: Column(
@@ -92,7 +93,7 @@ class AttachmentPicker extends StatelessWidget {
                   IconButton(
                     icon: Icon(
                       Icons.close_rounded, 
-                      size: 18, 
+                      size: AppSizes.iconSizeSm, 
                       color: colorScheme.onSurfaceVariant,
                     ),
                     padding: EdgeInsets.zero,
@@ -113,27 +114,27 @@ class AttachmentPicker extends StatelessWidget {
         ),
         // Preview
         if (hasFile && showPreview) ...[
-          const SizedBox(height: 10),
+          const SizedBox(height: AppSizes.sm2),
           GestureDetector(
             onTap: () => _showFullPreview(context),
             child: Container(
               height: 72,
               width: 72,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(AppSizes.radiusMd),
                 border: Border.all(
                   color: colorScheme.outline.withOpacity(0.2),
                 ),
                 boxShadow: [
                   BoxShadow(
                     color: colorScheme.shadow.withOpacity(0.05),
-                    blurRadius: 8,
-                    offset: const Offset(0, 2),
+                    blurRadius: AppSizes.sm,
+                    offset: const Offset(0, AppSizes.xxs),
                   ),
                 ],
               ),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(9),
+                borderRadius: BorderRadius.circular(AppSizes.radiusSm),
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
@@ -163,7 +164,7 @@ class AttachmentPicker extends StatelessWidget {
                             child: Icon(
                               Icons.zoom_in_rounded,
                               color: Colors.white.withOpacity(0.9),
-                              size: 16,
+                              size: AppSizes.iconSizeSm,
                             ),
                           ),
                         ),
@@ -207,7 +208,7 @@ class AttachmentPicker extends StatelessWidget {
           children: [
             // Image
             ClipRRect(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(AppSizes.radius),
               child: Image.file(
                 File(filePath!),
                 fit: BoxFit.contain,
@@ -215,20 +216,20 @@ class AttachmentPicker extends StatelessWidget {
             ),
             // Close button
             Positioned(
-              top: 8,
-              right: 8,
+              top: AppSizes.sm,
+              right: AppSizes.sm,
               child: IconButton(
                 onPressed: () => Navigator.of(context).pop(),
                 icon: Container(
-                  padding: const EdgeInsets.all(6),
+                  padding: const EdgeInsets.all(AppSizes.xs2),
                   decoration: BoxDecoration(
                     color: Colors.black.withOpacity(0.5),
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(
+                  child: Icon(
                     Icons.close_rounded,
-                    color: Colors.white,
-                    size: 20,
+                    color: BrandColors.textLight,
+                    size: AppSizes.iconSize,
                   ),
                 ),
               ),

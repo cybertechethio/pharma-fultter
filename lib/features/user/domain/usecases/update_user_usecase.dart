@@ -15,6 +15,7 @@ class UpdateUserUseCase {
     required String email,
     required String phone,
     bool isActive = true,
+    required String userType,
   }) async {
     // Validation: First name must not be empty
     if (firstName.trim().isEmpty) {
@@ -43,6 +44,7 @@ class UpdateUserUseCase {
       email: email.trim(),
       phone: phone.trim(),
       isActive: isActive,
+      userType: userType,
     );
   }
 }

@@ -23,6 +23,16 @@ class BatchFailure extends BatchUiEvent {
   BatchFailure(this.failure);
 }
 
+class BatchOperationSuccess extends BatchUiEvent {
+  final String message;
+  BatchOperationSuccess(this.message);
+}
+
+class BatchOperationFailure extends BatchUiEvent {
+  final Failure failure;
+  BatchOperationFailure(this.failure);
+}
+
 @riverpod
 class BatchUiEvents extends _$BatchUiEvents {
   @override

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../app/theme/app_sizes.dart';
 import '../../../app/theme/brand_colors.dart';
 
 class InitialAvatar extends StatelessWidget {
@@ -25,7 +26,7 @@ class InitialAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     final bg = backgroundColor ?? BrandColors.primary.withValues(alpha: 0.5);
     final fg = textColor ?? BrandColors.textLight;
-    final fontSize = (size * 0.35).clamp(12.0, 20.0);
+    final fontSize = (size * 0.35).clamp(AppSizes.fontSizeLabel, AppSizes.fontSizeTitle);
 
     return CircleAvatar(
       radius: size / 3,

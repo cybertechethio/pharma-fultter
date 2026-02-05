@@ -51,7 +51,7 @@ class CustomerListScreen extends ConsumerWidget {
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(60),
             child: search.AppSearchBar(
-              hintText: 'Search by name, phone, or account code...',
+              hintText: l10n.searchByNamePhoneOrAccountCode,
               onSearch: (query) => ref.read(supplierCustomerProvider(type).notifier).search(type, query),
               onClear: () => ref.read(supplierCustomerProvider(type).notifier).load(type),
             ),
@@ -64,8 +64,8 @@ class CustomerListScreen extends ConsumerWidget {
             return Center(
               child: EmptyWidget(
                 icon: Icons.group_outlined,
-                title: 'No customers',
-                message: "You don't have any customers yet.",
+                title: l10n.noCustomers,
+                message: l10n.noCustomersMessage,
               ),
             );
           }
@@ -115,8 +115,8 @@ class CustomerListScreen extends ConsumerWidget {
       context: context,
       builder: (context) => SupplierCustomerFormDialog(
         type: type,
-        title: 'Create Customer',
-        buttonText: 'Create',
+        title: l10n.createCustomer,
+        buttonText: l10n.create,
       ),
     );
   }

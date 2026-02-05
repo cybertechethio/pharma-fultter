@@ -49,7 +49,6 @@ class BranchCard extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final deleting = ref.watch(branchDeleteLoadingProvider).contains(branch.id);
     final updating = ref.watch(branchUpdateLoadingProvider).contains(branch.id);
-    final theme = Theme.of(context);
     
     return Padding(
       padding: const EdgeInsets.symmetric(
@@ -61,7 +60,7 @@ class BranchCard extends ConsumerWidget {
         children: [
           // Branch Name
           cardTitle(title: branch.name),
-          const SizedBox(height: 4),
+          const SizedBox(height: AppSizes.xs),
           // Status and Actions Row
           Row(
             children: [

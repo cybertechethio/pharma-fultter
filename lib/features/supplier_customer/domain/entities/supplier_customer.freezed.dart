@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SupplierCustomer {
 
- String get id; String get name; String get phone; String get accountCode; String get tinNumber; SupplierCustomerType get type; bool get isActive; DateTime get createdAt; DateTime? get updatedAt;
+ String get id; String get name; String get phone; String get accountCode; String get tinNumber; SupplierCustomerType get type; String get balance; bool get isActive; DateTime get createdAt; DateTime? get updatedAt;
 /// Create a copy of SupplierCustomer
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $SupplierCustomerCopyWith<SupplierCustomer> get copyWith => _$SupplierCustomerCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SupplierCustomer&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.accountCode, accountCode) || other.accountCode == accountCode)&&(identical(other.tinNumber, tinNumber) || other.tinNumber == tinNumber)&&(identical(other.type, type) || other.type == type)&&(identical(other.isActive, isActive) || other.isActive == isActive)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SupplierCustomer&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.accountCode, accountCode) || other.accountCode == accountCode)&&(identical(other.tinNumber, tinNumber) || other.tinNumber == tinNumber)&&(identical(other.type, type) || other.type == type)&&(identical(other.balance, balance) || other.balance == balance)&&(identical(other.isActive, isActive) || other.isActive == isActive)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,name,phone,accountCode,tinNumber,type,isActive,createdAt,updatedAt);
+int get hashCode => Object.hash(runtimeType,id,name,phone,accountCode,tinNumber,type,balance,isActive,createdAt,updatedAt);
 
 @override
 String toString() {
-  return 'SupplierCustomer(id: $id, name: $name, phone: $phone, accountCode: $accountCode, tinNumber: $tinNumber, type: $type, isActive: $isActive, createdAt: $createdAt, updatedAt: $updatedAt)';
+  return 'SupplierCustomer(id: $id, name: $name, phone: $phone, accountCode: $accountCode, tinNumber: $tinNumber, type: $type, balance: $balance, isActive: $isActive, createdAt: $createdAt, updatedAt: $updatedAt)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $SupplierCustomerCopyWith<$Res>  {
   factory $SupplierCustomerCopyWith(SupplierCustomer value, $Res Function(SupplierCustomer) _then) = _$SupplierCustomerCopyWithImpl;
 @useResult
 $Res call({
- String id, String name, String phone, String accountCode, String tinNumber, SupplierCustomerType type, bool isActive, DateTime createdAt, DateTime? updatedAt
+ String id, String name, String phone, String accountCode, String tinNumber, SupplierCustomerType type, String balance, bool isActive, DateTime createdAt, DateTime? updatedAt
 });
 
 
@@ -62,7 +62,7 @@ class _$SupplierCustomerCopyWithImpl<$Res>
 
 /// Create a copy of SupplierCustomer
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? phone = null,Object? accountCode = null,Object? tinNumber = null,Object? type = null,Object? isActive = null,Object? createdAt = null,Object? updatedAt = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? phone = null,Object? accountCode = null,Object? tinNumber = null,Object? type = null,Object? balance = null,Object? isActive = null,Object? createdAt = null,Object? updatedAt = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -70,7 +70,8 @@ as String,phone: null == phone ? _self.phone : phone // ignore: cast_nullable_to
 as String,accountCode: null == accountCode ? _self.accountCode : accountCode // ignore: cast_nullable_to_non_nullable
 as String,tinNumber: null == tinNumber ? _self.tinNumber : tinNumber // ignore: cast_nullable_to_non_nullable
 as String,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
-as SupplierCustomerType,isActive: null == isActive ? _self.isActive : isActive // ignore: cast_nullable_to_non_nullable
+as SupplierCustomerType,balance: null == balance ? _self.balance : balance // ignore: cast_nullable_to_non_nullable
+as String,isActive: null == isActive ? _self.isActive : isActive // ignore: cast_nullable_to_non_nullable
 as bool,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,
@@ -155,10 +156,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  String phone,  String accountCode,  String tinNumber,  SupplierCustomerType type,  bool isActive,  DateTime createdAt,  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  String phone,  String accountCode,  String tinNumber,  SupplierCustomerType type,  String balance,  bool isActive,  DateTime createdAt,  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SupplierCustomer() when $default != null:
-return $default(_that.id,_that.name,_that.phone,_that.accountCode,_that.tinNumber,_that.type,_that.isActive,_that.createdAt,_that.updatedAt);case _:
+return $default(_that.id,_that.name,_that.phone,_that.accountCode,_that.tinNumber,_that.type,_that.balance,_that.isActive,_that.createdAt,_that.updatedAt);case _:
   return orElse();
 
 }
@@ -176,10 +177,10 @@ return $default(_that.id,_that.name,_that.phone,_that.accountCode,_that.tinNumbe
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  String phone,  String accountCode,  String tinNumber,  SupplierCustomerType type,  bool isActive,  DateTime createdAt,  DateTime? updatedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  String phone,  String accountCode,  String tinNumber,  SupplierCustomerType type,  String balance,  bool isActive,  DateTime createdAt,  DateTime? updatedAt)  $default,) {final _that = this;
 switch (_that) {
 case _SupplierCustomer():
-return $default(_that.id,_that.name,_that.phone,_that.accountCode,_that.tinNumber,_that.type,_that.isActive,_that.createdAt,_that.updatedAt);}
+return $default(_that.id,_that.name,_that.phone,_that.accountCode,_that.tinNumber,_that.type,_that.balance,_that.isActive,_that.createdAt,_that.updatedAt);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -193,10 +194,10 @@ return $default(_that.id,_that.name,_that.phone,_that.accountCode,_that.tinNumbe
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  String phone,  String accountCode,  String tinNumber,  SupplierCustomerType type,  bool isActive,  DateTime createdAt,  DateTime? updatedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  String phone,  String accountCode,  String tinNumber,  SupplierCustomerType type,  String balance,  bool isActive,  DateTime createdAt,  DateTime? updatedAt)?  $default,) {final _that = this;
 switch (_that) {
 case _SupplierCustomer() when $default != null:
-return $default(_that.id,_that.name,_that.phone,_that.accountCode,_that.tinNumber,_that.type,_that.isActive,_that.createdAt,_that.updatedAt);case _:
+return $default(_that.id,_that.name,_that.phone,_that.accountCode,_that.tinNumber,_that.type,_that.balance,_that.isActive,_that.createdAt,_that.updatedAt);case _:
   return null;
 
 }
@@ -208,7 +209,7 @@ return $default(_that.id,_that.name,_that.phone,_that.accountCode,_that.tinNumbe
 
 
 class _SupplierCustomer implements SupplierCustomer {
-  const _SupplierCustomer({required this.id, required this.name, required this.phone, required this.accountCode, required this.tinNumber, required this.type, required this.isActive, required this.createdAt, this.updatedAt});
+  const _SupplierCustomer({required this.id, required this.name, required this.phone, required this.accountCode, required this.tinNumber, required this.type, required this.balance, required this.isActive, required this.createdAt, this.updatedAt});
   
 
 @override final  String id;
@@ -217,6 +218,7 @@ class _SupplierCustomer implements SupplierCustomer {
 @override final  String accountCode;
 @override final  String tinNumber;
 @override final  SupplierCustomerType type;
+@override final  String balance;
 @override final  bool isActive;
 @override final  DateTime createdAt;
 @override final  DateTime? updatedAt;
@@ -231,16 +233,16 @@ _$SupplierCustomerCopyWith<_SupplierCustomer> get copyWith => __$SupplierCustome
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SupplierCustomer&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.accountCode, accountCode) || other.accountCode == accountCode)&&(identical(other.tinNumber, tinNumber) || other.tinNumber == tinNumber)&&(identical(other.type, type) || other.type == type)&&(identical(other.isActive, isActive) || other.isActive == isActive)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SupplierCustomer&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.accountCode, accountCode) || other.accountCode == accountCode)&&(identical(other.tinNumber, tinNumber) || other.tinNumber == tinNumber)&&(identical(other.type, type) || other.type == type)&&(identical(other.balance, balance) || other.balance == balance)&&(identical(other.isActive, isActive) || other.isActive == isActive)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,name,phone,accountCode,tinNumber,type,isActive,createdAt,updatedAt);
+int get hashCode => Object.hash(runtimeType,id,name,phone,accountCode,tinNumber,type,balance,isActive,createdAt,updatedAt);
 
 @override
 String toString() {
-  return 'SupplierCustomer(id: $id, name: $name, phone: $phone, accountCode: $accountCode, tinNumber: $tinNumber, type: $type, isActive: $isActive, createdAt: $createdAt, updatedAt: $updatedAt)';
+  return 'SupplierCustomer(id: $id, name: $name, phone: $phone, accountCode: $accountCode, tinNumber: $tinNumber, type: $type, balance: $balance, isActive: $isActive, createdAt: $createdAt, updatedAt: $updatedAt)';
 }
 
 
@@ -251,7 +253,7 @@ abstract mixin class _$SupplierCustomerCopyWith<$Res> implements $SupplierCustom
   factory _$SupplierCustomerCopyWith(_SupplierCustomer value, $Res Function(_SupplierCustomer) _then) = __$SupplierCustomerCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String name, String phone, String accountCode, String tinNumber, SupplierCustomerType type, bool isActive, DateTime createdAt, DateTime? updatedAt
+ String id, String name, String phone, String accountCode, String tinNumber, SupplierCustomerType type, String balance, bool isActive, DateTime createdAt, DateTime? updatedAt
 });
 
 
@@ -268,7 +270,7 @@ class __$SupplierCustomerCopyWithImpl<$Res>
 
 /// Create a copy of SupplierCustomer
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? phone = null,Object? accountCode = null,Object? tinNumber = null,Object? type = null,Object? isActive = null,Object? createdAt = null,Object? updatedAt = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? phone = null,Object? accountCode = null,Object? tinNumber = null,Object? type = null,Object? balance = null,Object? isActive = null,Object? createdAt = null,Object? updatedAt = freezed,}) {
   return _then(_SupplierCustomer(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -276,7 +278,8 @@ as String,phone: null == phone ? _self.phone : phone // ignore: cast_nullable_to
 as String,accountCode: null == accountCode ? _self.accountCode : accountCode // ignore: cast_nullable_to_non_nullable
 as String,tinNumber: null == tinNumber ? _self.tinNumber : tinNumber // ignore: cast_nullable_to_non_nullable
 as String,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
-as SupplierCustomerType,isActive: null == isActive ? _self.isActive : isActive // ignore: cast_nullable_to_non_nullable
+as SupplierCustomerType,balance: null == balance ? _self.balance : balance // ignore: cast_nullable_to_non_nullable
+as String,isActive: null == isActive ? _self.isActive : isActive // ignore: cast_nullable_to_non_nullable
 as bool,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,

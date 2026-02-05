@@ -9,12 +9,16 @@ import '../../domain/usecases/get_supplier_customers_usecase.dart';
 import '../../domain/usecases/create_supplier_customer_usecase.dart';
 import '../../domain/usecases/update_supplier_customer_usecase.dart';
 import '../../domain/usecases/delete_supplier_customer_usecase.dart';
+import '../../domain/usecases/get_supplier_customer_transactions_usecase.dart';
+import '../../domain/usecases/add_balance_usecase.dart';
+import '../../domain/usecases/refund_usecase.dart';
+import '../../domain/usecases/get_supplier_customer_by_id_usecase.dart';
 
 part 'supplier_customer_providers.g.dart';
 
 @riverpod
 SupplierCustomerApiService supplierCustomerApiService(Ref ref) {
-  return const SupplierCustomerApiService();
+  return  SupplierCustomerApiService.create();
 }
 
 @riverpod
@@ -59,4 +63,31 @@ DeleteSupplierCustomerUseCase deleteSupplierCustomerUseCase(Ref ref) {
   );
 }
 
+@riverpod
+GetSupplierCustomerTransactionsUseCase getSupplierCustomerTransactionsUseCase(Ref ref) {
+  return GetSupplierCustomerTransactionsUseCase(
+    ref.watch(supplierCustomerRepositoryProvider),
+  );
+}
+
+@riverpod
+AddBalanceUseCase addBalanceUseCase(Ref ref) {
+  return AddBalanceUseCase(
+    ref.watch(supplierCustomerRepositoryProvider),
+  );
+}
+
+@riverpod
+RefundUseCase refundUseCase(Ref ref) {
+  return RefundUseCase(
+    ref.watch(supplierCustomerRepositoryProvider),
+  );
+}
+
+@riverpod
+GetSupplierCustomerByIdUseCase getSupplierCustomerByIdUseCase(Ref ref) {
+  return GetSupplierCustomerByIdUseCase(
+    ref.watch(supplierCustomerRepositoryProvider),
+  );
+}
 

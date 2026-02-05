@@ -21,7 +21,7 @@ final class ExpenseCategoryNotifierProvider
         argument: null,
         retry: null,
         name: r'expenseCategoryProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -35,7 +35,7 @@ final class ExpenseCategoryNotifierProvider
 }
 
 String _$expenseCategoryNotifierHash() =>
-    r'b4d0d838b269c9756d22a8562c154d73c42b4983';
+    r'6cd89e0ff3e9f9bb3aa7eeeb03d46902906e1134';
 
 abstract class _$ExpenseCategoryNotifier
     extends $AsyncNotifier<List<ExpenseCategory>> {

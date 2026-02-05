@@ -2606,42 +2606,6 @@ abstract class AppLocalizations {
   /// **'Sale Reverse'**
   String get saleReverse;
 
-  /// Sales order transaction type label
-  ///
-  /// In en, this message translates to:
-  /// **'Sales Order'**
-  String get salesOrder;
-
-  /// Sales orders menu label
-  ///
-  /// In en, this message translates to:
-  /// **'Sales Orders'**
-  String get salesOrders;
-
-  /// Empty sales orders list title
-  ///
-  /// In en, this message translates to:
-  /// **'No Sales Orders'**
-  String get noSalesOrders;
-
-  /// Empty sales orders list message
-  ///
-  /// In en, this message translates to:
-  /// **'You don\'t have any sales orders yet.'**
-  String get noSalesOrdersMessage;
-
-  /// Create sales order button and screen title
-  ///
-  /// In en, this message translates to:
-  /// **'Create Sales Order'**
-  String get createSalesOrder;
-
-  /// Sales order details screen title
-  ///
-  /// In en, this message translates to:
-  /// **'Sales Order Details'**
-  String get salesOrderDetails;
-
   /// Fulfillment branch field label
   ///
   /// In en, this message translates to:
@@ -2719,48 +2683,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Fulfill Order'**
   String get fulfillOrder;
-
-  /// Approve order confirmation message
-  ///
-  /// In en, this message translates to:
-  /// **'Are you sure you want to approve this sales order?'**
-  String get confirmApproveOrder;
-
-  /// Fulfill order confirmation message
-  ///
-  /// In en, this message translates to:
-  /// **'Are you sure you want to fulfill this sales order? This will create a transaction and deduct inventory.'**
-  String get confirmFulfillOrder;
-
-  /// Cancel order confirmation message
-  ///
-  /// In en, this message translates to:
-  /// **'Are you sure you want to cancel this sales order?'**
-  String get confirmCancelOrder;
-
-  /// Order approval success message
-  ///
-  /// In en, this message translates to:
-  /// **'Sales order approved successfully'**
-  String get orderApprovedSuccessfully;
-
-  /// Order fulfillment success message
-  ///
-  /// In en, this message translates to:
-  /// **'Sales order fulfilled successfully'**
-  String get orderFulfilledSuccessfully;
-
-  /// Order cancellation success message
-  ///
-  /// In en, this message translates to:
-  /// **'Sales order cancelled successfully'**
-  String get orderCancelledSuccessfully;
-
-  /// Sales order creation success message
-  ///
-  /// In en, this message translates to:
-  /// **'Sales order created successfully'**
-  String get salesOrderCreatedSuccessfully;
 
   /// Subtotal label
   ///
@@ -2917,6 +2839,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Switch Branch'**
   String get switchBranch;
+
+  /// Main section label in drawer
+  ///
+  /// In en, this message translates to:
+  /// **'Main'**
+  String get main;
+
+  /// People section label in drawer
+  ///
+  /// In en, this message translates to:
+  /// **'People'**
+  String get people;
+
+  /// Products menu label
+  ///
+  /// In en, this message translates to:
+  /// **'Products'**
+  String get products;
+
+  /// Point of Sale menu label
+  ///
+  /// In en, this message translates to:
+  /// **'Point of Sale'**
+  String get pointOfSale;
+
+  /// Stock transfer menu label
+  ///
+  /// In en, this message translates to:
+  /// **'Stock Transfer'**
+  String get stockTransfer;
+
+  /// Billers menu label
+  ///
+  /// In en, this message translates to:
+  /// **'Billers'**
+  String get billers;
+
+  /// Daily sales report menu label
+  ///
+  /// In en, this message translates to:
+  /// **'Daily Sales Report'**
+  String get dailySalesReport;
 
   /// Core section label in navigation
   ///
@@ -3458,6 +3422,18 @@ abstract class AppLocalizations {
   /// **'Automatically print receipts after transactions'**
   String get automaticallyPrintReceipts;
 
+  /// Default calendar type setting label
+  ///
+  /// In en, this message translates to:
+  /// **'Default Calendar Type'**
+  String get defaultCalendarType;
+
+  /// Business type setting label
+  ///
+  /// In en, this message translates to:
+  /// **'Business Type'**
+  String get businessType;
+
   /// Upload logo button label
   ///
   /// In en, this message translates to:
@@ -3596,12 +3572,6 @@ abstract class AppLocalizations {
   /// **'Overview'**
   String get overview;
 
-  /// Fulfill sales order dialog title
-  ///
-  /// In en, this message translates to:
-  /// **'Fulfill Sales Order'**
-  String get fulfillSalesOrder;
-
   /// Edit payment method dialog title
   ///
   /// In en, this message translates to:
@@ -3680,6 +3650,54 @@ abstract class AppLocalizations {
   /// **'Stock Details'**
   String get stockDetails;
 
+  /// Stock movement details screen title
+  ///
+  /// In en, this message translates to:
+  /// **'Stock Movement Details'**
+  String get stockMovementDetails;
+
+  /// Movement information section title
+  ///
+  /// In en, this message translates to:
+  /// **'Movement Information'**
+  String get movementInformation;
+
+  /// Previous stock label
+  ///
+  /// In en, this message translates to:
+  /// **'Previous Stock'**
+  String get previousStock;
+
+  /// New stock label
+  ///
+  /// In en, this message translates to:
+  /// **'New Stock'**
+  String get newStock;
+
+  /// Inbound movement label
+  ///
+  /// In en, this message translates to:
+  /// **'Inbound'**
+  String get inbound;
+
+  /// Outbound movement label
+  ///
+  /// In en, this message translates to:
+  /// **'Outbound'**
+  String get outbound;
+
+  /// Transfer ID label
+  ///
+  /// In en, this message translates to:
+  /// **'Transfer ID'**
+  String get transferId;
+
+  /// Reversed movement ID label
+  ///
+  /// In en, this message translates to:
+  /// **'Reversed Movement ID'**
+  String get reversedMovement;
+
   /// No transactions empty state message
   ///
   /// In en, this message translates to:
@@ -3752,29 +3770,17 @@ abstract class AppLocalizations {
   /// **'You don\'t have any items yet.'**
   String get youDontHaveAnyItemsYet;
 
-  /// Cancel sales order dialog title
-  ///
-  /// In en, this message translates to:
-  /// **'Cancel Sales Order'**
-  String get cancelSalesOrder;
-
-  /// Cancel sales order confirmation message
-  ///
-  /// In en, this message translates to:
-  /// **'Are you sure you want to cancel this sales order?'**
-  String get confirmCancelSalesOrder;
-
-  /// New sales order screen title
-  ///
-  /// In en, this message translates to:
-  /// **'New Sales Order'**
-  String get newSalesOrder;
-
   /// New transaction screen title
   ///
   /// In en, this message translates to:
   /// **'New Transaction'**
   String get newTransaction;
+
+  /// Cart menu item label
+  ///
+  /// In en, this message translates to:
+  /// **'Cart'**
+  String get cart;
 
   /// Additional information section title
   ///
@@ -4363,12 +4369,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Ref: {ref}'**
   String refLabel(String ref);
-
-  /// Approve sales order dialog title
-  ///
-  /// In en, this message translates to:
-  /// **'Approve Sales Order'**
-  String get approveSalesOrder;
 
   /// Notes field label with optional indicator
   ///

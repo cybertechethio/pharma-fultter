@@ -106,12 +106,11 @@ class _RegistrationScreenState extends ConsumerState<RegistrationScreen> {
     
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: BrandColors.transparent,
         elevation: 0,
         actions: [
-          // Language Toggle Button
           const LanguageToggleButton(),
-          const SizedBox(width: 8),
+          const SizedBox(width: AppSizes.sm),
         ],
       ),
       body: Center(
@@ -251,44 +250,44 @@ class _RegistrationScreenState extends ConsumerState<RegistrationScreen> {
                     isLoading: authState is AuthLoading,
                     loadingText: authState is AuthLoading ? authState.message : null,
                   ),
-                  const SizedBox(height: AppSizes.lg),
+                   const SizedBox(height: AppSizes.xxxxl),
                   
                   // OR separator
-                  Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: Divider(
-                          thickness: 1, 
-                          color: BrandColors.divider,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: AppSizes.sm),
-                        child: Text(
-                          l10n.or,
-                          style: context.bodySecondary(bold: true),
-                        ),
-                      ),
-                      Expanded(
-                        child: Divider(
-                          thickness: 1, 
-                          color: BrandColors.divider,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: AppSizes.lg),
+                  // Row(
+                  //   children: <Widget>[
+                  //     Expanded(
+                  //       child: Divider(
+                  //         thickness: 1, 
+                  //         color: BrandColors.divider,
+                  //       ),
+                  //     ),
+                  //     Padding(
+                  //       padding: const EdgeInsets.symmetric(horizontal: AppSizes.sm),
+                  //       child: Text(
+                  //         l10n.or,
+                  //         style: context.bodySecondary(bold: true),
+                  //       ),
+                  //     ),
+                  //     Expanded(
+                  //       child: Divider(
+                  //         thickness: 1, 
+                  //         color: BrandColors.divider,
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                  // const SizedBox(height: AppSizes.lg),
                   
-                  // Google Sign Up Button
-                  CustomButton(
-                    text: l10n.continueWithGoogle,
-                    onPressed: authState is AuthLoading ? null : () {
-                      // TODO: Implement Google signup logic later
-                    },
-                    isSocial: true,
-                    color: BrandColors.background,
-                  ),
-                  const SizedBox(height: AppSizes.xl),
+                  // // Google Sign Up Button
+                  // CustomButton(
+                  //   text: l10n.continueWithGoogle,
+                  //   onPressed: authState is AuthLoading ? null : () {
+                  //     // TODO: Implement Google signup logic later
+                  //   },
+                  //   isSocial: true,
+                  //   color: BrandColors.background,
+                  // ),
+                  // const SizedBox(height: AppSizes.xl),
                   
                   // Terms and Privacy Policy
                   Center(
@@ -326,11 +325,11 @@ class _RegistrationScreenState extends ConsumerState<RegistrationScreen> {
                     child: RichText(
                       text: TextSpan(
                         text: '${l10n.alreadyHaveAccount} ',
-                        style: context.bodySecondary(),
+                        style: context.bodySecondary().copyWith(fontSize: AppSizes.fontSizeBodySmall),
                         children: [
                           TextSpan(
                             text: l10n.signIn,
-                            style: context.bodyPrimary(bold: true),
+                            style: context.bodyPrimary(bold: true).copyWith(fontSize: AppSizes.fontSizeBodySmall),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
                                 context.pop();

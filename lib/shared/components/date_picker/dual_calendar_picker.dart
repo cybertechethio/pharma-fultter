@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:abushakir/abushakir.dart';
 import 'package:cyber_pos/l10n/app_localizations.dart';
+import '../../../app/theme/app_sizes.dart';
 import '../../utils/calendar_converter.dart';
 import '../../models/calendar_type.dart';
 import 'ethiopian_date_picker.dart';
@@ -211,18 +212,18 @@ class _DualCalendarPickerSheetState extends State<DualCalendarPickerSheet> {
         children: [
           // Drag handle
           Container(
-            margin: const EdgeInsets.symmetric(vertical: 8),
-            width: 40,
-            height: 4,
+            margin: const EdgeInsets.symmetric(vertical: AppSizes.sm),
+            width: AppSizes.xxxxl,
+            height: AppSizes.xs,
             decoration: BoxDecoration(
               color: theme.colorScheme.onSurfaceVariant.withOpacity(0.4),
-              borderRadius: BorderRadius.circular(2),
+              borderRadius: BorderRadius.circular(AppSizes.radiusXxs),
             ),
           ),
 
           // Title
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: AppSizes.lg, vertical: AppSizes.sm),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -272,7 +273,7 @@ class _DualCalendarPickerSheetState extends State<DualCalendarPickerSheet> {
                 },
                 child: Text(
                   l10n.ok,
-                  style: const TextStyle(fontSize: 16),
+                  style: TextStyle(fontSize: AppSizes.fontSizeBody),
                 ),
               ),
             ),

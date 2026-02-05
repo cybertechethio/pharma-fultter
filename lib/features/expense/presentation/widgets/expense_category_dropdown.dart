@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../app/theme/brand_colors.dart';
 import '../../../../app/theme/app_sizes.dart';
+import '../../../../app/theme/text_styles.dart';
 import '../../../expense_category/domain/entities/expense_category.dart';
 import '../../../expense_category/presentation/providers/expense_category_notifier.dart';
 
@@ -56,8 +57,6 @@ class _ExpenseCategorySelectionDialogState extends ConsumerState<ExpenseCategory
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final categoriesAsync = ref.watch(expenseCategoryProvider);
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
 
     // Initialize filtered list
     if (_filteredCategories.isEmpty && categoriesAsync.hasValue) {
@@ -70,7 +69,7 @@ class _ExpenseCategorySelectionDialogState extends ConsumerState<ExpenseCategory
 
     return Dialog(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(AppSizes.radiusLg),
       ),
       child: Container(
         constraints: const BoxConstraints(maxWidth: 400, maxHeight: 600),
@@ -79,15 +78,13 @@ class _ExpenseCategorySelectionDialogState extends ConsumerState<ExpenseCategory
           children: [
             // Header
             Padding(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(AppSizes.lg),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     l10n.expenseCategories,
-                    style: theme.textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: context.subtitle(bold: true),
                   ),
                   IconButton(
                     icon: const Icon(Icons.close),
@@ -100,21 +97,21 @@ class _ExpenseCategorySelectionDialogState extends ConsumerState<ExpenseCategory
 
             // Search bar
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: AppSizes.lg),
               child: TextField(
                 controller: _searchController,
                 decoration: InputDecoration(
-                  hintText: 'Search expense categories...',
+                  hintText: l10n.searchExpenseCategories,
                   prefixIcon: const Icon(Icons.search),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(AppSizes.radius),
                   ),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: AppSizes.lg, vertical: AppSizes.md),
                 ),
               ),
             ),
 
-            const SizedBox(height: 8),
+            const SizedBox(height: AppSizes.sm),
 
             // Categories list
             Expanded(
@@ -127,21 +124,19 @@ class _ExpenseCategorySelectionDialogState extends ConsumerState<ExpenseCategory
                 ),
                 error: (error, stackTrace) => Center(
                   child: Padding(
-                    padding: const EdgeInsets.all(32),
+                    padding: const EdgeInsets.all(AppSizes.xxxl),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Icon(
                           Icons.error_outline,
-                          size: 64,
+                          size: AppSizes.xxxxl + AppSizes.lg,
                           color: BrandColors.error,
                         ),
-                        const SizedBox(height: 16),
+                        const SizedBox(height: AppSizes.lg),
                         Text(
-                          'Failed to load expense categories',
-                          style: theme.textTheme.bodyLarge?.copyWith(
-                            color: BrandColors.error,
-                          ),
+                          l10n.failedToLoadExpenseCategories,
+                          style: context.body(color: BrandColors.error),
                           textAlign: TextAlign.center,
                         ),
                       ],
@@ -151,21 +146,19 @@ class _ExpenseCategorySelectionDialogState extends ConsumerState<ExpenseCategory
                 data: (categories) => _filteredCategories.isEmpty && _searchController.text.isNotEmpty
                     ? Center(
                         child: Padding(
-                          padding: const EdgeInsets.all(32),
+                          padding: const EdgeInsets.all(AppSizes.xxxl),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Icon(
                                 Icons.search_off,
-                                size: 64,
-                                color: colorScheme.onSurface.withOpacity(0.3),
+                                size: AppSizes.xxxxl + AppSizes.lg,
+                                color: BrandColors.textPrimary.withOpacity(0.3),
                               ),
-                              const SizedBox(height: 16),
+                              const SizedBox(height: AppSizes.lg),
                               Text(
-                                'No expense categories match your search',
-                                style: theme.textTheme.bodyLarge?.copyWith(
-                                  color: colorScheme.onSurface.withOpacity(0.6),
-                                ),
+                                l10n.noExpenseCategoriesMatchSearch,
+                                style: context.body(color: BrandColors.textPrimary.withOpacity(0.6)),
                                 textAlign: TextAlign.center,
                               ),
                             ],
@@ -179,8 +172,8 @@ class _ExpenseCategorySelectionDialogState extends ConsumerState<ExpenseCategory
                           if (index == 0) {
                             // "All Categories" option
                             return ListTile(
-                              title: const Text('All Categories'),
-                              subtitle: const Text('Show expenses from all categories'),
+                              title: Text(l10n.allCategories),
+                              subtitle: Text(l10n.showExpensesFromAllCategories),
                               onTap: () => Navigator.of(context).pop(null),
                             );
                           }
@@ -192,12 +185,12 @@ class _ExpenseCategorySelectionDialogState extends ConsumerState<ExpenseCategory
                             title: Text(category.name),
                             subtitle: Text(category.description),
                             selected: isSelected,
-                            selectedTileColor: colorScheme.primaryContainer.withOpacity(0.3),
+                            selectedTileColor: BrandColors.primaryBackgroundLight.withOpacity(0.3),
                             onTap: () => Navigator.of(context).pop(category.id),
                             trailing: isSelected
                                 ? Icon(
                                     Icons.check_circle,
-                                    color: colorScheme.primary,
+                                    color: BrandColors.primary,
                                   )
                                 : null,
                           );
@@ -209,11 +202,11 @@ class _ExpenseCategorySelectionDialogState extends ConsumerState<ExpenseCategory
             // Clear selection button
             if (widget.selectedCategoryId != null)
               Padding(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.all(AppSizes.lg),
                 child: OutlinedButton.icon(
                   onPressed: () => Navigator.of(context).pop(null),
                   icon: const Icon(Icons.clear),
-                  label: const Text('Clear Selection'),
+                  label: Text(l10n.clearSelection),
                   style: OutlinedButton.styleFrom(
                     minimumSize: const Size(double.infinity, 48),
                   ),

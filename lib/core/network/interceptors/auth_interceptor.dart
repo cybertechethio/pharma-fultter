@@ -101,6 +101,14 @@ class AuthInterceptor extends Interceptor {
     try {
       // Handle 401 Unauthorized errors
       if (err.response?.statusCode == 401) {
+        // Skip token refresh for auth endpoints (login, register, etc.)
+        // A 401 on these endpoints means invalid credentials, not expired token
+        if (_isAuthEndpoint(err.requestOptions.path)) {
+          LoggingService.auth('Received 401 on auth endpoint, skipping token refresh: ${err.requestOptions.path}');
+          handler.next(err);
+          return;
+        }
+        
         LoggingService.auth('Received 401 error, attempting token refresh');
         
         if (_authLocalDataSource == null) {

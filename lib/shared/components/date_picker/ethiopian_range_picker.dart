@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:abushakir/abushakir.dart';
+import '../../../app/theme/app_sizes.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../utils/calendar_converter.dart';
 
@@ -270,13 +271,13 @@ class _EthiopianRangePickerState extends State<EthiopianRangePicker> {
     } else if (isSelected) {
       decoration = BoxDecoration(
         color: theme.colorScheme.primary,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(AppSizes.radiusSm),
       );
       textColor = theme.colorScheme.onPrimary;
     } else if (isInRange) {
       decoration = BoxDecoration(
         color: theme.colorScheme.primary.withOpacity(0.15),
-        borderRadius: BorderRadius.circular(4),
+        borderRadius: BorderRadius.circular(AppSizes.radiusXs),
       );
       textColor = theme.colorScheme.primary;
     } else if (isToday) {
@@ -285,14 +286,14 @@ class _EthiopianRangePickerState extends State<EthiopianRangePicker> {
           color: theme.colorScheme.primary,
           width: 2,
         ),
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(AppSizes.radiusSm),
       );
       textColor = theme.colorScheme.primary;
     }
 
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(8),
+      borderRadius: BorderRadius.circular(AppSizes.radiusSm),
       child: Container(
         decoration: decoration,
         alignment: Alignment.center,

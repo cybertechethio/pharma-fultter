@@ -20,7 +20,7 @@ final class ModelNotifierProvider
         argument: null,
         retry: null,
         name: r'modelProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -33,7 +33,7 @@ final class ModelNotifierProvider
   ModelNotifier create() => ModelNotifier();
 }
 
-String _$modelNotifierHash() => r'1c5348a31e660287bcbb58e13588f7783abc56bb';
+String _$modelNotifierHash() => r'6128775e364cb0acf2ec4d5af6a3915075858a5b';
 
 abstract class _$ModelNotifier extends $AsyncNotifier<List<ModelEntity>> {
   FutureOr<List<ModelEntity>> build();

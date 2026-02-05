@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import '../../../../app/theme/app_sizes.dart';
+import '../../../../shared/utils/url_utils.dart';
 
 /// A stunning drawer header with gradient background, company branding,
 /// and active branch indicator.
 class DrawerHeader extends StatelessWidget {
   final String? companyName;
+  final String? logoUrl;
   final bool isLoading;
 
   const DrawerHeader({
     super.key,
     this.companyName,
+    this.logoUrl,
     this.isLoading = false,
   });
 
@@ -18,8 +23,10 @@ class DrawerHeader extends StatelessWidget {
     final colorScheme = theme.colorScheme;
     final isDark = theme.brightness == Brightness.dark;
 
+    final fullLogoUrl = UrlUtils.getFullImageUrl(logoUrl);
+
     return Container(
-      padding: const EdgeInsets.fromLTRB(20, 24, 20, 20),
+      padding: const EdgeInsets.fromLTRB(AppSizes.xl, AppSizes.xxl, AppSizes.xl, AppSizes.xl),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
@@ -34,44 +41,22 @@ class DrawerHeader extends StatelessWidget {
                   colorScheme.surface,
                 ],
         ),
+        image: fullLogoUrl != null
+            ? DecorationImage(
+                image: CachedNetworkImageProvider(fullLogoUrl),
+                fit: BoxFit.cover,
+                opacity: 1.0,
+              )
+            : null,
       ),
       child: SafeArea(
         bottom: false,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                // Company Logo/Avatar
-                _CompanyAvatar(
-                  companyName: companyName,
-                  isLoading: isLoading,
-                ),
-                const SizedBox(width: 14),
-                // Company Info
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      if (isLoading)
-                        _ShimmerBox(width: 120, height: 20)
-                      else
-                        Text(
-                          companyName ?? 'Unknown Company',
-                          style: theme.textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.w700,
-                            letterSpacing: -0.3,
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ],
+        child: Center(
+          child: _CompanyAvatar(
+            companyName: companyName,
+            logoUrl: logoUrl,
+            isLoading: isLoading,
+          ),
         ),
       ),
     );
@@ -80,10 +65,12 @@ class DrawerHeader extends StatelessWidget {
 
 class _CompanyAvatar extends StatelessWidget {
   final String? companyName;
+  final String? logoUrl;
   final bool isLoading;
 
   const _CompanyAvatar({
     this.companyName,
+    this.logoUrl,
     this.isLoading = false,
   });
 
@@ -92,19 +79,23 @@ class _CompanyAvatar extends StatelessWidget {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
+    final fullLogoUrl = UrlUtils.getFullImageUrl(logoUrl);
+
     return Container(
       width: 56,
       height: 56,
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            colorScheme.primary,
-            colorScheme.primary.withOpacity(0.7),
-          ],
-        ),
-        borderRadius: BorderRadius.circular(16),
+        gradient: fullLogoUrl == null
+            ? LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  colorScheme.primary,
+                  colorScheme.primary.withOpacity(0.7),
+                ],
+              )
+            : null,
+        borderRadius: BorderRadius.circular(AppSizes.radiusLg),
         boxShadow: [
           BoxShadow(
             color: colorScheme.primary.withOpacity(0.3),
@@ -112,30 +103,38 @@ class _CompanyAvatar extends StatelessWidget {
             offset: const Offset(0, 4),
           ),
         ],
+        image: fullLogoUrl != null
+            ? DecorationImage(
+                image: CachedNetworkImageProvider(fullLogoUrl),
+                fit: BoxFit.cover,
+              )
+            : null,
       ),
       child: Center(
         child: isLoading
             ? SizedBox(
-                width: 24,
-                height: 24,
+width: AppSizes.iconSizeLg,
+                  height: AppSizes.iconSizeLg,
                 child: CircularProgressIndicator(
-                  strokeWidth: 2,
+                  strokeWidth: AppSizes.loaderStrokeWidth,
                   color: colorScheme.onPrimary,
                 ),
               )
-            : (companyName != null && companyName!.isNotEmpty)
-                ? Text(
-                    companyName![0].toUpperCase(),
-                    style: theme.textTheme.headlineSmall?.copyWith(
-                      color: colorScheme.onPrimary,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )
-                : Icon(
-                    Icons.business_rounded,
-                    color: colorScheme.onPrimary,
-                    size: 28,
-                  ),
+            : (fullLogoUrl == null)
+                ? (companyName != null && companyName!.isNotEmpty)
+                    ? Text(
+                        companyName![0].toUpperCase(),
+                        style: theme.textTheme.headlineSmall?.copyWith(
+                          color: colorScheme.onPrimary,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    : Icon(
+                        Icons.business_rounded,
+                        color: colorScheme.onPrimary,
+                        size: 28,
+                      )
+                : const SizedBox.shrink(),
       ),
     );
   }
@@ -185,7 +184,7 @@ class _ShimmerBoxState extends State<_ShimmerBox>
           width: widget.width,
           height: widget.height,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(6),
+            borderRadius: BorderRadius.circular(AppSizes.radiusDialog),
             gradient: LinearGradient(
               begin: Alignment(_animation.value - 1, 0),
               end: Alignment(_animation.value + 1, 0),

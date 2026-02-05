@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cyber_pos/l10n/app_localizations.dart';
+import '../../../app/theme/app_sizes.dart';
 
 /// Gregorian calendar date picker
 class GregorianDatePicker extends StatefulWidget {
@@ -211,7 +212,7 @@ class _GregorianDatePickerState extends State<GregorianDatePicker> {
 
               return InkWell(
                 onTap: () => _selectDate(day),
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(AppSizes.radiusSm),
                 child: Container(
                   decoration: BoxDecoration(
                     color: isSelected
@@ -219,7 +220,7 @@ class _GregorianDatePickerState extends State<GregorianDatePicker> {
                         : isToday
                             ? theme.colorScheme.primaryContainer
                             : null,
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(AppSizes.radiusSm),
                     border: isToday && !isSelected
                         ? Border.all(
                             color: theme.colorScheme.primary,

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../app/theme/app_sizes.dart';
 import '../../../../core/errors/failure.dart';
 import '../../../../core/services/snackbar_service.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/components/common/app_bar.dart';
 import '../../../../shared/components/common/error_widget.dart' as app_err;
 import '../../domain/entities/expense_detail.dart';
@@ -22,6 +24,7 @@ class ExpenseDetailScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
     final asyncDetail = ref.watch(expenseDetailProvider(expenseId));
 
     // Listen to UI events for user feedback
@@ -47,7 +50,7 @@ class ExpenseDetailScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Expense Details',
+        title: l10n.expenseDetails,
       ),
       body: asyncDetail.when(
         loading: () => const Center(child: CircularProgressIndicator()),
@@ -59,10 +62,10 @@ class ExpenseDetailScreen extends ConsumerWidget {
               app_err.ErrorsWidget(
                 failure: error is Failure ? error : Failure.unexpectedError(error.toString()),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSizes.lg),
               ElevatedButton(
                 onPressed: () => ref.invalidate(expenseDetailProvider(expenseId)),
-                child: const Text('Retry'),
+                child: Text(l10n.retry),
               ),
             ],
           ),
@@ -81,6 +84,7 @@ class ExpenseDetailScreen extends ConsumerWidget {
   }
 
   Widget _buildContent(BuildContext context, ExpenseDetail detail, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
     return RefreshIndicator(
       onRefresh: () async {
         ref.invalidate(expenseDetailProvider(expenseId));
@@ -97,15 +101,15 @@ class ExpenseDetailScreen extends ConsumerWidget {
             ExpenseAttachmentsWidget(attachments: detail.attachments),
             // Add Payment Method Button
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: AppSizes.lg, vertical: AppSizes.sm),
               child: SizedBox(
                 width: double.infinity,
                 child: ElevatedButton.icon(
                   onPressed: () => _showCreatePaymentMethodDialog(context),
                   icon: const Icon(Icons.add),
-                  label: const Text('Add Payment Method'),
+                  label: Text(l10n.addPaymentMethod),
                   style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    padding: const EdgeInsets.symmetric(vertical: AppSizes.md),
                   ),
                 ),
               ),
@@ -115,7 +119,7 @@ class ExpenseDetailScreen extends ConsumerWidget {
               expensePayments: detail.expensePayments,
               expenseId: detail.id,
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: AppSizes.lg),
           ],
         ),
       ),

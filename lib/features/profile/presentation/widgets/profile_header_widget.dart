@@ -166,7 +166,7 @@ class ProfileHeaderWidget extends ConsumerWidget {
                 ),
               ),
               if (user.isAccountVerified) ...[
-                const SizedBox(width: 8),
+                const SizedBox(width: AppSizes.sm),
                 Icon(
                   Icons.verified,
                   color: colorScheme.primary,
@@ -186,7 +186,7 @@ class ProfileHeaderWidget extends ConsumerWidget {
                   size: 16,
                   color: colorScheme.onSurfaceVariant,
                 ),
-                const SizedBox(width: 4),
+                const SizedBox(width: AppSizes.xs),
                 Text(
                   user.email!,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
@@ -195,7 +195,7 @@ class ProfileHeaderWidget extends ConsumerWidget {
                 ),
               ],
             ),
-          const SizedBox(height: 4),
+          const SizedBox(height: AppSizes.xs),
           // Phone
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -205,7 +205,7 @@ class ProfileHeaderWidget extends ConsumerWidget {
                 size: 16,
                 color: colorScheme.onSurfaceVariant,
               ),
-              const SizedBox(width: 4),
+              const SizedBox(width: AppSizes.xs),
               Text(
                 user.phone,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(

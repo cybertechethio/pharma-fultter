@@ -5,7 +5,6 @@ import '../../../../shared/components/common/card_title.dart';
 import '../../../../shared/components/common/delete_confirmation_dialog.dart';
 import '../../../../shared/components/ui/action_buttons.dart';
 import '../../../../app/theme/app_sizes.dart';
-import '../../../../app/theme/text_styles.dart';
 import '../../domain/entities/bank.dart';
 import '../providers/bank_notifier.dart';
 import '../providers/bank_loading_providers.dart';

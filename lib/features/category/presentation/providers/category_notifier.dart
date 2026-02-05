@@ -122,7 +122,7 @@ class CategoryNotifier extends _$CategoryNotifier {
         final current = state.value ?? const <Category>[];
         state = AsyncValue.data([created, ...current]);
         ref.read(categoryUiEventsProvider.notifier).emit(
-          CategoryCreated(created, 'Category created successfully'),
+          CategoryCreated(created, ''),
         );
       },
     );
@@ -154,7 +154,7 @@ class CategoryNotifier extends _$CategoryNotifier {
         if (idx != -1) list[idx] = updated;
         state = AsyncValue.data(list);
         ref.read(categoryUiEventsProvider.notifier).emit(
-          CategoryUpdated(updated, 'Category updated successfully'),
+          CategoryUpdated(updated, ''),
         );
       },
     );
@@ -180,7 +180,7 @@ class CategoryNotifier extends _$CategoryNotifier {
         list.removeWhere((e) => e.id == id);
         state = AsyncValue.data(list);
         ref.read(categoryUiEventsProvider.notifier).emit(
-          CategoryDeleted(id, 'Category deleted successfully'),
+          CategoryDeleted(id, ''),
         );
       },
     );

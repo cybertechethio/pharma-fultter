@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../app/theme/app_sizes.dart';
+import '../../../../app/theme/brand_colors.dart';
+import '../../../../app/theme/text_styles.dart';
 import '../../../../core/state/locale_provider.dart';
 import '../../../../l10n/app_localizations.dart';
 
@@ -16,16 +18,16 @@ class LanguageTile extends ConsumerWidget {
       margin: const EdgeInsets.symmetric(horizontal: AppSizes.lg),
       elevation: 1,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(AppSizes.radiusSm),
       ),
       child: ListTile(
         leading: Icon(
           Icons.language,
-          color: Theme.of(context).colorScheme.primary,
+          color: BrandColors.primary,
         ),
         title: Text(l10n.language),
         subtitle: Text(localeState.currentLanguageName),
-        trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+        trailing: Icon(Icons.arrow_forward_ios, size: AppSizes.iconSizeSm),
         onTap: () {
           _showLanguageSelector(context, ref);
         },
@@ -46,7 +48,6 @@ class LanguageTile extends ConsumerWidget {
           builder: (context, ref, child) {
             final localeState = ref.watch(localeProvider);
             final l10n = AppLocalizations.of(bottomSheetContext);
-            final theme = Theme.of(bottomSheetContext);
 
             return Container(
               padding: const EdgeInsets.all(AppSizes.xl),
@@ -56,7 +57,7 @@ class LanguageTile extends ConsumerWidget {
                 children: [
                   Text(
                     l10n.changeLanguage,
-                    style: theme.textTheme.headlineSmall,
+                    style: context.header(color: BrandColors.textPrimary),
                   ),
                   const SizedBox(height: AppSizes.xl),
                   ...LocaleNotifier.availableLanguages.entries.map((entry) {
@@ -65,17 +66,17 @@ class LanguageTile extends ConsumerWidget {
                     return ListTile(
                       leading: Icon(
                         Icons.language,
-                        color: isSelected ? theme.colorScheme.primary : null,
+                        color: isSelected ? BrandColors.primary : null,
                       ),
                       title: Text(
                         entry.value,
-                        style: TextStyle(
-                          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                          color: isSelected ? theme.colorScheme.primary : null,
+                        style: context.body(
+                          color: isSelected ? BrandColors.primary : null,
+                          bold: isSelected,
                         ),
                       ),
                       trailing: isSelected
-                          ? Icon(Icons.check, color: theme.colorScheme.primary)
+                          ? Icon(Icons.check, color: BrandColors.primary)
                           : null,
                       onTap: () async {
                         await ref.read(localeProvider.notifier).setLocaleByCode(entry.key);

@@ -3,7 +3,7 @@ import '../../../../core/errors/failure.dart';
 import '../entities/transfer.dart';
 import '../repositories/transfer_repository.dart';
 
-class GetTransferDetailUseCase {
+class GetTransferDetailUseCase { 
   final TransferRepository repository;
 
   GetTransferDetailUseCase(this.repository);
@@ -12,16 +12,4 @@ class GetTransferDetailUseCase {
     return await repository.getTransferDetail(id);
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
 

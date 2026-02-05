@@ -176,6 +176,18 @@ class ApiEndpoints {
   /// Delete supplier/customer
   static String deleteSupplierCustomer(String id) => '$supplierCustomers/$id';
 
+  /// Get supplier/customer by ID
+  static String getSupplierCustomerById(String id) => '$supplierCustomers/$id';
+
+  /// Add balance payment (customers only)
+  static const String addBalance = '$supplierCustomers/add-balance';
+
+  /// Refund payment (for reversed transactions)
+  static const String refundPayment = '$supplierCustomers/refund';
+
+  /// Get supplier/customer transactions
+  static String getSupplierCustomerTransactions(String id) => '$supplierCustomers/$id/transactions';
+
   // ==================== CATEGORY ENDPOINTS ====================
   /// Category base path
   static const String categories = '/categories';
@@ -320,23 +332,70 @@ class ApiEndpoints {
   static const String createItem = items;
 
   /// Update item
-  static String updateItem(String id) => '$items/$id';
+  static String updateItem(int id) => '$items/$id';
 
   /// Delete item
-  static String deleteItem(String id) => '$items/$id';
+  static String deleteItem(int id) => '$items/$id';
+
+  /// Get batches for an item (no pagination)
+  static String getBatchesByItem(int itemId) => '$items/$itemId/batches';
 
   // ==================== BATCH ENDPOINTS ====================
   /// Batch base path
   static const String batches = '/batches';
 
-  /// Get all batches
+  /// Get all batches (with pagination)
   static const String getBatches = batches;
 
   /// Create batch
   static const String createBatch = batches;
 
-  /// Update batch
+  /// Update batch by ID
   static String updateBatch(String id) => '$batches/$id';
+
+  /// Batch operations base path (transfer, consolidation, split)
+  static const String batchOperation = '/batch';
+
+  /// Batch transfer — POST
+  static const String batchTransfer = '$batchOperation/transfer';
+
+  /// Batch consolidation — POST
+  static const String batchConsolidation = '$batchOperation/consolidation';
+
+  /// Batch split — POST
+  static const String batchSplit = '$batchOperation/split';
+
+  // ==================== DASHBOARD ENDPOINTS ====================
+  /// Dashboard endpoint
+  static const String dashboard = '/dashboard';
+
+  /// Get dashboard data
+  static const String getDashboard = dashboard;
+
+  // ==================== REPORT ENDPOINTS ====================
+  /// Reports base path
+  static const String reports = '/reports';
+
+  /// Get sales report
+  static const String getSalesReport = '$reports/sales';
+
+  /// Get purchase report
+  static const String getPurchaseReport = '$reports/purchase';
+
+  /// Get customer report
+  static const String getCustomerReport = '$reports/customer';
+
+  /// Get expense report
+  static const String getExpenseReport = '$reports/expense';
+
+  /// Get best seller report
+  static const String getBestSellerReport = '$reports/best-seller';
+
+  /// Get annual report
+  static const String getAnnualReport = '$reports/annual';
+
+  /// Get profit-loss report
+  static const String getProfitLossReport = '$reports/profit-loss';
 
   // ==================== STOCK ENDPOINTS ====================
   /// Stock base path
@@ -344,6 +403,12 @@ class ApiEndpoints {
 
   /// Get all stocks
   static const String getStocks = branchStocks;
+
+  /// Update stock
+  static String updateStock(int id) => '$branchStocks/$id';
+
+  /// Stock movements endpoint
+  static const String stockMovements = '/stock-movements';
 
   // ==================== TRANSACTION ENDPOINTS ====================
   /// Transaction base path
@@ -358,6 +423,21 @@ class ApiEndpoints {
   /// Create transaction
   static const String createTransaction = transactions;
 
+  // ==================== PAYMENT METHODS ENDPOINTS ====================
+  /// Payment methods base path
+  static const String payments = '/payments';
+
+  /// Create payment method(s) for a payment
+  static String createPaymentMethod(int paymentId) => '$payments/$paymentId/methods';
+
+  /// Update payment method for a payment
+  static String updatePaymentMethod(int paymentId, int methodId) =>
+      '$payments/$paymentId/methods/$methodId';
+
+  /// Delete payment method for a payment
+  static String deletePaymentMethod(int paymentId, int methodId) =>
+      '$payments/$paymentId/methods/$methodId';
+
   // ==================== TRANSFER ENDPOINTS ====================
   /// Transfer base path
   static const String transfers = '/transfers';
@@ -370,6 +450,9 @@ class ApiEndpoints {
 
   /// Create transfer
   static const String createTransfer = transfers;
+
+  /// Update transfer status
+  static String updateTransferStatus(int id) => '$transfers/$id/status';
 
   // ==================== BANK ENDPOINTS ====================
   /// Bank base path

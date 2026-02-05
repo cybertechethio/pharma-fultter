@@ -6,9 +6,8 @@ import '../../../../core/errors/failure.dart';
 import '../../../../core/services/logging_service.dart';
 import '../../../../shared/models/api_response.dart';
 import '../../../../shared/models/paginated_response.dart';
+import '../models/create_trans_request.dart';
 import '../models/transaction_model.dart';
-import '../models/transaction_response_model.dart';
-import '../models/transaction_detail_response_model.dart';
 import 'transaction_api_service.dart';
 import 'transaction_remote_data_source.dart';
 
@@ -18,18 +17,21 @@ class TransactionRemoteDataSourceImpl implements TransactionRemoteDataSource {
   TransactionRemoteDataSourceImpl(this._api);
 
   @override
-  Future<Either<Failure, PaginatedResponse<TransactionResponseModel>>> getTransactions({
+  Future<Either<Failure, PaginatedResponse<TransactionModel>>> getTransactions({
     int page = 1,
     int limit = 25,
+    TransactionType? transactionType,
   }) async {
     LoggingService.auth('Starting get transactions process', {
       'page': page,
       'limit': limit,
+      'transactionType': transactionType?.name,
     });
     try {
-      final ApiResponse<List<TransactionResponseModel>> response = await _api.getAll(
+      final ApiResponse<List<TransactionModel>> response = await _api.getAll(
         page: page,
         limit: limit,
+        transactionType: transactionType,
       );
       return response.when(
         success: (success, message, data, meta, pagination) {
@@ -76,10 +78,10 @@ class TransactionRemoteDataSourceImpl implements TransactionRemoteDataSource {
   }
 
   @override
-  Future<Either<Failure, TransactionDetailResponseModel>> getTransactionDetail(int id) async {
+  Future<Either<Failure, TransactionModel>> getTransactionDetail(int id) async {
     LoggingService.auth('Starting get transaction detail process', {'id': id});
     try {
-      final ApiResponse<TransactionDetailResponseModel> response = await _api.getById(id);
+      final ApiResponse<TransactionModel> response = await _api.getById(id);
       return response.when(
         success: (success, message, data, meta, pagination) {
           LoggingService.auth('Get transaction detail successful', {
@@ -112,20 +114,15 @@ class TransactionRemoteDataSourceImpl implements TransactionRemoteDataSource {
   }
 
   @override
-  Future<Either<Failure, TransactionResponseModel>> createTransaction({
-    required TransactionModel request,
+  Future<Either<Failure, TransactionModel>> createTransaction({
+    required CreateTransRequest request,
     required List<String> receiptFilePaths,
     required Map<String, String> paymentAttachmentFilePaths,
   }) async {
-    LoggingService.auth('Starting create transaction process', {
-      'transactionType': request.transactionType.toApiString(),
-      'itemsCount': request.items.length,
-      'receiptsCount': receiptFilePaths.length,
-      'paymentMethodsCount': request.paymentMethods?.length ?? 0,
-    });
+    
 
     try {
-      final ApiResponse<TransactionResponseModel> response = await _api.create(
+      final ApiResponse<TransactionModel> response = await _api.create(
         request: request,
         receiptFilePaths: receiptFilePaths,
         paymentAttachmentFilePaths: paymentAttachmentFilePaths,
@@ -163,19 +160,19 @@ class TransactionRemoteDataSourceImpl implements TransactionRemoteDataSource {
   }
 
   @override
-  Future<Either<Failure, TransactionResponseModel>> reverseTransaction({
+  Future<Either<Failure, TransactionModel>> reverseTransaction({
     required TransactionType transactionType,
     required int reversesTransactionId,
     String? notes,
   }) async {
     LoggingService.auth('Starting reverse transaction process', {
-      'transactionType': transactionType.toApiString(),
+      'transactionType': transactionType.name,
       'reversesTransactionId': reversesTransactionId,
       'hasNotes': notes?.isNotEmpty ?? false,
     });
 
     try {
-      final ApiResponse<TransactionResponseModel> response = await _api.reverseTransaction(
+      final ApiResponse<TransactionModel> response = await _api.reverseTransaction(
         transactionType: transactionType,
         reversesTransactionId: reversesTransactionId,
         notes: notes,

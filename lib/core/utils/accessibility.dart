@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../app/theme/brand_colors.dart';
 
 /// Accessibility utilities following WCAG 2.1 guidelines
 class AccessibilityUtils {
@@ -33,11 +34,11 @@ class AccessibilityUtils {
     return (lighter + 0.05) / (darker + 0.05);
   }
   
-  /// Get accessible text color (black or white) for a given background
+  /// Get accessible text color (dark or light) for a given background
   static Color getAccessibleTextColor(Color backgroundColor) {
     return backgroundColor.computeLuminance() > 0.5 
-        ? Colors.black 
-        : Colors.white;
+        ? BrandColors.textPrimary 
+        : BrandColors.textLight;
   }
   
   /// Generate accessible color variant based on brightness

@@ -48,7 +48,6 @@ class CyberTech extends ConsumerWidget {
     final router = ref.watch(goRouterProvider);
     
     return MaterialApp.router(
-      
       // Localization configuration
       localizationsDelegates: const [
         AppLocalizations.delegate,

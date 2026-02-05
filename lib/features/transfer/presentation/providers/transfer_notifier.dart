@@ -1,7 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../../shared/models/pagination_model.dart';
 import '../../domain/entities/transfer.dart';
-import '../../domain/entities/transfer_data.dart';
+import '../../data/models/create_transfer_request.dart';
 import 'transfer_providers.dart';
 import 'transfer_events.dart';
 import 'transfer_loading_providers.dart';
@@ -91,18 +91,22 @@ class TransferNotifier extends _$TransferNotifier {
   /// Check if currently loading more
   bool get isLoadingMore => _isLoadingMore;
 
+
   Future<void> createTransfer({
-    required TransferData data,
+    required CreateTransferRequest data,
   }) async {
     // Read providers before async operation to avoid disposed ref issues
     final createLoading = ref.read(transferCreateLoadingProvider.notifier);
-    // Start loading
-    createLoading.setLoading(true);
+     // Start loading
+     createLoading.setLoading(true);
 
     final useCase = ref.read(createTransferUseCaseProvider);
 
     // Call use case
-    final result = await useCase.call(data: data);
+    final result = await useCase.call(
+      data: data,
+    );
+
 
     // Handle result
     result.fold(
@@ -118,19 +122,50 @@ class TransferNotifier extends _$TransferNotifier {
       },
     );
 
-    createLoading.setLoading(false);
+      createLoading.setLoading(false);
+    
+  }
+
+  /// Update transfer status (accept or reject)
+  Future<void> updateTransferStatus({
+    required int id,
+    required String status, // "completed" or "rejected"
+  }) async {
+    final statusLoading = ref.read(transferStatusUpdateLoadingProvider.notifier);
+    statusLoading.start(id);
+
+    final useCase = ref.read(updateTransferStatusUseCaseProvider);
+
+    final result = await useCase.call(
+      id: id,
+      status: status,
+    );
+
+    result.fold(
+      (failure) {
+        ref.read(transferUiEventsProvider.notifier).emit(TransferFailure(failure));
+      },
+      (updated) {
+        // Optimistic update: Update transfer in list
+        final current = state.value ?? const <Transfer>[];
+        final updatedList = current.map((transfer) {
+          if (transfer.id == id) {
+            return transfer.copyWith(status: status);
+          }
+          return transfer;
+        }).toList();
+        state = AsyncValue.data(updatedList);
+        
+        final message = status == 'completed' 
+            ? 'Transfer accepted successfully'
+            : 'Transfer rejected successfully';
+        ref.read(transferUiEventsProvider.notifier).emit(
+          TransferStatusUpdated(id, status, message),
+        );
+      },
+    );
+
+    statusLoading.stop(id);
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
 

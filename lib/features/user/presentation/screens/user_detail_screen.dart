@@ -6,7 +6,9 @@ import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/components/common/app_bar.dart';
 import '../../../../shared/components/common/delete_confirmation_dialog.dart';
 import '../../../../routes/route_name.dart';
+import '../../../../app/theme/app_sizes.dart';
 import '../../../../app/theme/brand_colors.dart';
+import '../../../../core/enums/user_type_enum.dart';
 import '../../domain/entities/user.dart';
 import '../providers/user_notifier.dart';
 import '../providers/user_loading_providers.dart';
@@ -66,13 +68,13 @@ class UserDetailScreen extends ConsumerWidget {
                 size: 64,
                 color: colorScheme.error,
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSizes.lg),
               Text(
                 l10n.errorLoadingUser(error.toString()),
                 style: theme.textTheme.bodyLarge,
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSizes.lg),
               ElevatedButton(
                 onPressed: () => context.pop(),
                 child: Text(l10n.goBack),
@@ -110,7 +112,7 @@ class UserDetailScreen extends ConsumerWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(width: 16),
+                        const SizedBox(width: AppSizes.lg),
                         // Name and ID
                         Expanded(
                           child: Column(
@@ -122,7 +124,7 @@ class UserDetailScreen extends ConsumerWidget {
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              const SizedBox(height: 4),
+                              const SizedBox(height: AppSizes.xs),
                               Text(
                                 'ID: ${user.id}',
                                 style: theme.textTheme.bodySmall?.copyWith(
@@ -139,7 +141,7 @@ class UserDetailScreen extends ConsumerWidget {
                             color: user.isActive
                                 ? BrandColors.successWithOpacity(0.1)
                                 : BrandColors.textMuted.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(16),
+                            borderRadius: BorderRadius.circular(AppSizes.radiusLg),
                             border: Border.all(
                               color: user.isActive ? BrandColors.success : BrandColors.textMuted,
                               width: 1,
@@ -153,12 +155,12 @@ class UserDetailScreen extends ConsumerWidget {
                                 size: 14,
                                 color: user.isActive ? BrandColors.success : BrandColors.textMuted,
                               ),
-                              const SizedBox(width: 4),
+                              const SizedBox(width: AppSizes.xs),
                               Text(
                                 user.isActive ? l10n.active : l10n.inactive,
                                 style: TextStyle(
                                   color: user.isActive ? BrandColors.success : BrandColors.textMuted,
-                                  fontSize: 12,
+                                  fontSize: AppSizes.fontSizeLabel,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
@@ -170,11 +172,11 @@ class UserDetailScreen extends ConsumerWidget {
                   ),
                 ),
 
-                const SizedBox(height: 16),
+                const SizedBox(height: AppSizes.lg),
 
                 // Personal Information Card
                 _InfoCard(
-                  title: 'Personal Information',
+                  title: l10n.personalInformation,
                   icon: Icons.person_outline,
                   children: [
                     _InfoRow(
@@ -182,7 +184,7 @@ class UserDetailScreen extends ConsumerWidget {
                       label: l10n.firstName,
                       value: user.firstName,
                     ),
-                    const Divider(height: 24),
+                    Divider(height: AppSizes.xxl),
                     _InfoRow(
                       icon: Icons.badge_outlined,
                       label: l10n.lastName,
@@ -191,7 +193,7 @@ class UserDetailScreen extends ConsumerWidget {
                   ],
                 ),
 
-                const SizedBox(height: 16),
+                const SizedBox(height: AppSizes.lg),
 
                 // Contact Information Card
                 _InfoCard(
@@ -203,7 +205,7 @@ class UserDetailScreen extends ConsumerWidget {
                       label: l10n.email,
                       value: user.email,
                     ),
-                    const Divider(height: 24),
+                    Divider(height: AppSizes.xxl),
                     _InfoRow(
                       icon: Icons.phone_outlined,
                       label: l10n.phone,
@@ -212,25 +214,27 @@ class UserDetailScreen extends ConsumerWidget {
                   ],
                 ),
 
-                const SizedBox(height: 16),
+                const SizedBox(height: AppSizes.lg),
 
                 // Account Details Card
                 _InfoCard(
-                  title: 'Account Details',
+                  title: l10n.accountDetails,
                   icon: Icons.info_outline,
                   children: [
                     _InfoRow(
                       icon: Icons.fingerprint_outlined,
-                      label: 'User ID',
+                      label: l10n.userId,
                       value: user.id.toString(),
                     ),
-                    const Divider(height: 24),
+                    Divider(height: AppSizes.xxl),
+                    _UserTypeRow(userType: user.userType, l10n: l10n),
+                    Divider(height: AppSizes.xxl),
                     _InfoRow(
                       icon: Icons.toggle_on_outlined,
-                      label: 'Status',
+                      label: l10n.status,
                       value: user.isActive ? l10n.active : l10n.inactive,
                     ),
-                    const Divider(height: 24),
+                    Divider(height: AppSizes.xxl),
                     _InfoRow(
                       icon: Icons.calendar_today_outlined,
                       label: l10n.createdAt,
@@ -239,12 +243,12 @@ class UserDetailScreen extends ConsumerWidget {
                   ],
                 ),
 
-                const SizedBox(height: 16),
+                const SizedBox(height: AppSizes.lg),
 
                 // Role Assignments Section
                 _RoleAssignmentsSection(userId: userId, userName: '${user.firstName} ${user.lastName}'),
 
-                const SizedBox(height: 24),
+                const SizedBox(height: AppSizes.xxl),
 
                 // Action Buttons
                 Row(
@@ -269,7 +273,7 @@ class UserDetailScreen extends ConsumerWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(width: 12),
+                    const SizedBox(width: AppSizes.md),
                     Expanded(
                       child: OutlinedButton.icon(
                         onPressed: deleting
@@ -346,7 +350,7 @@ class _InfoCard extends StatelessWidget {
     return Card(
       elevation: 1,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(AppSizes.radiusSm),
       ),
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -356,7 +360,7 @@ class _InfoCard extends StatelessWidget {
             Row(
               children: [
                 Icon(icon, size: 20, color: colorScheme.primary),
-                const SizedBox(width: 8),
+                const SizedBox(width: AppSizes.sm),
                 Text(
                   title,
                   style: theme.textTheme.titleMedium?.copyWith(
@@ -365,7 +369,7 @@ class _InfoCard extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: AppSizes.lg),
             ...children,
           ],
         ),
@@ -400,7 +404,7 @@ class _InfoRow extends StatelessWidget {
             size: 20,
             color: colorScheme.onSurfaceVariant,
           ),
-          const SizedBox(width: 12),
+          const SizedBox(width: AppSizes.md),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -409,14 +413,81 @@ class _InfoRow extends StatelessWidget {
                   label,
                   style: theme.textTheme.bodySmall?.copyWith(
                     color: colorScheme.onSurfaceVariant,
-                    fontSize: 12,
+                    fontSize: AppSizes.fontSizeLabel,
                   ),
                 ),
-                const SizedBox(height: 4),
+                const SizedBox(height: AppSizes.xs),
                 Text(
                   value,
                   style: theme.textTheme.bodyMedium?.copyWith(
                     fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _UserTypeRow extends StatelessWidget {
+  final UserType userType;
+  final AppLocalizations l10n;
+
+  const _UserTypeRow({required this.userType, required this.l10n});
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
+    String getLocalizedLabel() {
+      switch (userType) {
+        case UserType.admin:
+          return l10n.admin;
+        case UserType.manager:
+          return l10n.manager;
+        case UserType.cashier:
+          return l10n.cashier;
+        case UserType.storekeeper:
+          return l10n.storekeeper;
+        case UserType.supervisor:
+          return l10n.supervisor;
+        case UserType.standard:
+          return l10n.standard;
+      }
+    }
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(
+            userType.getIcon(),
+            size: 20,
+            color: userType.getColor(),
+          ),
+          const SizedBox(width: AppSizes.md),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  l10n.userType,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: colorScheme.onSurfaceVariant,
+                    fontSize: AppSizes.fontSizeLabel,
+                  ),
+                ),
+                const SizedBox(height: AppSizes.xs),
+                Text(
+                  getLocalizedLabel(),
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    fontWeight: FontWeight.w500,
+                    color: userType.getColor(),
                   ),
                 ),
               ],
@@ -481,16 +552,16 @@ class _RoleAssignmentsSectionState extends ConsumerState<_RoleAssignmentsSection
             Row(
               children: [
                 Icon(Icons.badge_outlined, color: colorScheme.primary),
-                const SizedBox(width: 8),
+                const SizedBox(width: AppSizes.sm),
                 Text(
-                  'Role Assignments by Branch',
+                  l10n.roleAssignmentsByBranch,
                   style: theme.textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: AppSizes.lg),
             assignmentsAsync.when(
               loading: () => const Center(
                 child: Padding(
@@ -503,12 +574,12 @@ class _RoleAssignmentsSectionState extends ConsumerState<_RoleAssignmentsSection
                 child: Column(
                   children: [
                     Text(
-                      'Error loading role assignments: ${error.toString()}',
+                      l10n.errorLoadingRoleAssignments(error.toString()),
                       style: theme.textTheme.bodyMedium?.copyWith(
                         color: colorScheme.error,
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: AppSizes.sm),
                     TextButton(
                       onPressed: () => ref.read(userRoleProvider(widget.userId).notifier).load(),
                       child: Text(l10n.retry),
@@ -521,7 +592,7 @@ class _RoleAssignmentsSectionState extends ConsumerState<_RoleAssignmentsSection
                   return Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 24),
+                        padding: const EdgeInsets.symmetric(vertical: AppSizes.xxl),
                         child: Column(
                           children: [
                             Icon(
@@ -529,16 +600,16 @@ class _RoleAssignmentsSectionState extends ConsumerState<_RoleAssignmentsSection
                               size: 48,
                               color: colorScheme.onSurfaceVariant,
                             ),
-                            const SizedBox(height: 16),
+                            const SizedBox(height: AppSizes.lg),
                             Text(
-                              'No role assignments found',
+                              l10n.noRoleAssignmentsFound,
                               style: theme.textTheme.bodyLarge?.copyWith(
                                 color: colorScheme.onSurfaceVariant,
                               ),
                             ),
-                            const SizedBox(height: 8),
+                            const SizedBox(height: AppSizes.sm),
                             Text(
-                              'This user doesn\'t have any role assignments in any branch yet.',
+                              l10n.noRoleAssignmentsMessage,
                               style: theme.textTheme.bodyMedium?.copyWith(
                                 color: colorScheme.onSurfaceVariant,
                               ),
@@ -547,13 +618,13 @@ class _RoleAssignmentsSectionState extends ConsumerState<_RoleAssignmentsSection
                           ],
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: AppSizes.lg),
                       SizedBox(
                         width: double.infinity,
                         child: OutlinedButton.icon(
                           onPressed: _showAssignRolesDialog,
                           icon: const Icon(Icons.add),
-                          label: Text('Assign Roles to Branches'),
+                          label: Text(AppLocalizations.of(context).assignRolesToBranches),
                         ),
                       ),
                     ],
@@ -570,13 +641,13 @@ class _RoleAssignmentsSectionState extends ConsumerState<_RoleAssignmentsSection
                         onToggle: () => _toggleBranch(assignment.branchId),
                       );
                     }).toList(),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: AppSizes.lg),
                     SizedBox(
                       width: double.infinity,
                       child: OutlinedButton.icon(
                         onPressed: _showAssignRolesDialog,
                         icon: const Icon(Icons.add),
-                        label: Text('Assign Roles to Branches'),
+                        label: Text(l10n.assignRolesToBranches),
                       ),
                     ),
                   ],

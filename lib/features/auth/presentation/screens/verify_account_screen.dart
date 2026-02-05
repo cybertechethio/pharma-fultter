@@ -98,11 +98,11 @@ class _VerifyAccountScreenState extends ConsumerState<VerifyAccountScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: BrandColors.transparent,
         elevation: 0,
         actions: [
           const LanguageToggleButton(),
-          const SizedBox(width: 8),
+          const SizedBox(width: AppSizes.sm),
         ],
       ),
       body: Center(
@@ -153,7 +153,7 @@ class _VerifyAccountScreenState extends ConsumerState<VerifyAccountScreen> {
                         onPressed: authState is AuthLoading ? null : _resendOtp,
                         child: Text(
                           l10n.resendOtp,
-                          style: context.bodyPrimary(),
+                          style: context.bodyPrimary().copyWith(fontSize: AppSizes.fontSizeBodySmall),
                         ),
                       ),
                       TextButton(
@@ -162,7 +162,7 @@ class _VerifyAccountScreenState extends ConsumerState<VerifyAccountScreen> {
                         },
                         child: Text(
                           l10n.back,
-                          style: context.bodyPrimary(),
+                          style: context.bodyPrimary().copyWith(fontSize: AppSizes.fontSizeBodySmall),
                         ),
                       ),
                     ],
@@ -181,7 +181,7 @@ class _VerifyAccountScreenState extends ConsumerState<VerifyAccountScreen> {
                       children: [
                         Text(
                           l10n.didntReceiveCode,
-                          style: context.bodySecondary(bold: true),
+                          style: context.bodySecondary(bold: true).copyWith(fontSize: AppSizes.fontSizeBodySmall),
                         ),
                         const SizedBox(height: AppSizes.sm),
                         Text(

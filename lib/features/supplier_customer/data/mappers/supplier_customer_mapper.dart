@@ -10,6 +10,7 @@ extension SupplierCustomerMapper on SupplierCustomerModel {
       accountCode: accountCode,
       tinNumber: tinNumber,
       type: _mapTypeToDomain(type),
+      balance: balance,
       isActive: isActive,
       createdAt: createdAt,
       updatedAt: updatedAt,

@@ -4,8 +4,9 @@ import '../../../../core/errors/exceptions.dart';
 import '../../../../core/errors/failure.dart';
 import '../../../../core/services/logging_service.dart';
 import '../../../../shared/models/api_response.dart';
+import '../../../../shared/models/paginated_response.dart';
+import '../models/create_transfer_request.dart';
 import '../models/transfer_model.dart';
-import '../models/transfer_response_model.dart';
 import 'transfer_api_service.dart';
 import 'transfer_remote_data_source.dart';
 
@@ -15,23 +16,39 @@ class TransferRemoteDataSourceImpl implements TransferRemoteDataSource {
   TransferRemoteDataSourceImpl(this._api);
 
   @override
-  Future<Either<Failure, List<TransferResponseModel>>> getTransfers({
+  Future<Either<Failure, PaginatedResponse<TransferModel>>> getTransfers({
     int page = 1,
     int limit = 25,
   }) async {
-    LoggingService.auth('Starting get transfers process');
+    LoggingService.auth('Starting get transfers process', {
+      'page': page,
+      'limit': limit,
+    });
     try {
-      final ApiResponse<List<TransferResponseModel>> response = await _api.getAll(
+      final ApiResponse<List<TransferModel>> response = await _api.getAll(
         page: page,
         limit: limit,
       );
       return response.when(
         success: (success, message, data, meta, pagination) {
+          // For paginated endpoints, pagination should exist
+          if (pagination == null) {
+            LoggingService.warning('Get transfers: pagination data missing - endpoint may not support pagination');
+            return Left(Failure.unexpectedError('Pagination data is required for this endpoint'));
+          }
+
           LoggingService.auth('Get transfers successful', {
             'count': data.length,
+            'currentPage': pagination.currentPage,
+            'totalPages': pagination.totalPages,
+            'hasNextPage': pagination.hasNextPage,
             'message': message,
           });
-          return Right(data);
+
+          return Right(PaginatedResponse(
+            data: data,
+            pagination: pagination,
+          ));
         },
         error: (success, error, meta) {
           LoggingService.auth('Get transfers failed - server error', {
@@ -57,15 +74,15 @@ class TransferRemoteDataSourceImpl implements TransferRemoteDataSource {
   }
 
   @override
-  Future<Either<Failure, TransferResponseModel>> getTransferDetail(int id) async {
+  Future<Either<Failure, TransferModel>> getTransferDetail(int id) async {
     LoggingService.auth('Starting get transfer detail process', {'id': id});
     try {
-      final ApiResponse<TransferResponseModel> response = await _api.getById(id);
+      final ApiResponse<TransferModel> response = await _api.getById(id);
       return response.when(
         success: (success, message, data, meta, pagination) {
           LoggingService.auth('Get transfer detail successful', {
             'id': data.id,
-            'transferNumber': data.transferNumber,
+            'message': message,
           });
           return Right(data);
         },
@@ -80,6 +97,12 @@ class TransferRemoteDataSourceImpl implements TransferRemoteDataSource {
     } on DioException catch (e) {
       final exception = NetworkExceptions.getDioException(e);
       return Left(Failure.networkError(NetworkExceptions.getErrorMessage(exception)));
+    } on TypeError catch (e) {
+      LoggingService.error('Get transfer detail data parsing error', e, StackTrace.current);
+      return Left(Failure.unexpectedError('Data parsing error: ${e.toString()}'));
+    } on FormatException catch (e) {
+      LoggingService.error('Get transfer detail response format error', e, StackTrace.current);
+      return Left(Failure.unexpectedError('Invalid response format: ${e.toString()}'));
     } catch (e) {
       LoggingService.error('Get transfer detail unexpected error', e, StackTrace.current);
       return Left(Failure.unexpectedError('Get transfer detail failed: ${e.toString()}'));
@@ -87,19 +110,24 @@ class TransferRemoteDataSourceImpl implements TransferRemoteDataSource {
   }
 
   @override
-  Future<Either<Failure, TransferResponseModel>> createTransfer({
-    required TransferModel request,
+  Future<Either<Failure, TransferModel>> createTransfer({
+    required CreateTransferRequest request,
   }) async {
-    LoggingService.auth('Starting create transfer process');
+    LoggingService.auth('Starting create transfer process', {
+      'transferType': request.transferType.name,
+      'itemsCount': request.items.length,
+    });
+
     try {
-      final ApiResponse<TransferResponseModel> response = await _api.create(
+      final ApiResponse<TransferModel> response = await _api.create(
         request: request,
       );
+
       return response.when(
         success: (success, message, data, meta, pagination) {
           LoggingService.auth('Create transfer successful', {
             'id': data.id,
-            'transferNumber': data.transferNumber,
+            'message': message,
           });
           return Right(data);
         },
@@ -111,25 +139,67 @@ class TransferRemoteDataSourceImpl implements TransferRemoteDataSource {
           return Left(Failure.serverError(error.message));
         },
       );
-    } on DioException catch (e) {
+     } on DioException catch (e) {
       final exception = NetworkExceptions.getDioException(e);
       return Left(Failure.networkError(NetworkExceptions.getErrorMessage(exception)));
+    } on TypeError catch (e) {
+      LoggingService.error('Create transfer data parsing error', e, StackTrace.current);
+      return Left(Failure.unexpectedError('Data parsing error: ${e.toString()}'));
+    } on FormatException catch (e) {
+      LoggingService.error('Create transfer response format error', e, StackTrace.current);
+      return Left(Failure.unexpectedError('Invalid response format: ${e.toString()}'));
     } catch (e) {
       LoggingService.error('Create transfer unexpected error', e, StackTrace.current);
       return Left(Failure.unexpectedError('Create transfer failed: ${e.toString()}'));
     }
   }
+
+  @override
+  Future<Either<Failure, TransferModel>> updateStatus({
+    required int id,
+    required String status,
+  }) async {
+    LoggingService.auth('Starting update transfer status process', {
+      'id': id,
+      'status': status,
+    });
+
+    try {
+      final ApiResponse<TransferModel> response = await _api.updateStatus(
+        id: id,
+        status: status,
+      );
+
+      return response.when(
+        success: (success, message, data, meta, pagination) {
+          LoggingService.auth('Update transfer status successful', {
+            'id': data.id,
+            'status': data.status,
+            'message': message,
+          });
+          return Right(data);
+        },
+        error: (success, error, meta) {
+          LoggingService.auth('Update transfer status failed - server error', {
+            'error': error.message,
+            'code': error.statusCode,
+          });
+          return Left(Failure.serverError(error.message));
+        },
+      );
+    } on DioException catch (e) {
+      final exception = NetworkExceptions.getDioException(e);
+      return Left(Failure.networkError(NetworkExceptions.getErrorMessage(exception)));
+    } on TypeError catch (e) {
+      LoggingService.error('Update transfer status data parsing error', e, StackTrace.current);
+      return Left(Failure.unexpectedError('Data parsing error: ${e.toString()}'));
+    } on FormatException catch (e) {
+      LoggingService.error('Update transfer status response format error', e, StackTrace.current);
+      return Left(Failure.unexpectedError('Invalid response format: ${e.toString()}'));
+    } catch (e) {
+      LoggingService.error('Update transfer status unexpected error', e, StackTrace.current);
+      return Left(Failure.unexpectedError('Update transfer status failed: ${e.toString()}'));
+    }
+  }
 }
-
-
-
-
-
-
-
-
-
-
-
-
 

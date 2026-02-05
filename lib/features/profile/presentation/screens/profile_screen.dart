@@ -8,7 +8,9 @@ import '../../../../shared/components/common/app_bar.dart';
 import '../../../../shared/components/forms/custom_text_field.dart';
 import '../../../../shared/components/common/error_widget.dart' as app_err;
 import '../../../../shared/components/common/empty_widget.dart';
+import '../../../../app/theme/app_sizes.dart';
 import '../../../../app/theme/brand_colors.dart';
+import '../../../../app/theme/text_styles.dart';
 import '../../../../routes/route_name.dart';
 import '../../../../shared/components/common/delete_confirmation_dialog.dart';
 import '../../../auth/domain/entities/user.dart'; 
@@ -103,7 +105,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     ? error
                     : Failure.unexpectedError(error.toString()),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSizes.lg),
               ElevatedButton(
                 onPressed: () {
                   ref.read(profileProvider.notifier).loadUser();
@@ -137,7 +139,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               icon: Icons.info_outline,
             ),
             AccountInfoCard(user: user),
-            const SizedBox(height: 24),
+            const SizedBox(height: AppSizes.xxl),
 
             // Settings & Actions Section
             SectionHeaderWidget(
@@ -148,19 +150,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               onEditProfile: () => _showEditProfileDialog(context, user),
               onChangePassword: () => _showChangePasswordDialog(context),
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: AppSizes.xxl),
 
-            // Danger Zone Section
-            SectionHeaderWidget(
-              title: l10n.dangerZone,
-              icon: Icons.warning_outlined,
-              color: BrandColors.error,
-            ),
             DangerZoneCard(
               onLogout: () => _showLogoutDialog(context, l10n),
               onDeleteAccount: () => _showDeleteAccountDialog(context, l10n),
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: AppSizes.xxl),
           ],
         ),
       ),
@@ -207,16 +203,16 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       builder: (context) => AlertDialog(
         title: Text(
           l10n.deleteAccount,
-          style: TextStyle(color: BrandColors.error),
+          style: context.title(color: BrandColors.error),
         ),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               l10n.deleteAccountWarning,
-              style: TextStyle(color: BrandColors.error),
+              style: context.body(color: BrandColors.error),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: AppSizes.lg),
             CustomTextField(
               labelText: l10n.password,
               controller: passwordController,
@@ -245,7 +241,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: BrandColors.error,
-              foregroundColor: Colors.white
+              foregroundColor: BrandColors.textLight,
             ),
             child: Text(l10n.deleteAccount),
           ),

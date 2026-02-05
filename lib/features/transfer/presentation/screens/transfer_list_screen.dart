@@ -1,3 +1,4 @@
+import 'package:cyber_pos/shared/components/forms/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -92,7 +93,7 @@ class _TransferListScreenState extends ConsumerState<TransferListScreen> {
               child: EmptyWidget(
                 icon: Icons.swap_horiz,
                 title: l10n.noTransfers,
-                message: l10n.noTransfersMessage,
+                message: l10n.noTransfersFound,
               ),
             );
           }
@@ -147,9 +148,9 @@ class _TransferListScreenState extends ConsumerState<TransferListScreen> {
                     : Failure.unexpectedError(error.toString()),
               ),
               const SizedBox(height: AppSizes.lg),
-              ElevatedButton(
+              CustomButton(
                 onPressed: () => ref.read(transferProvider.notifier).refresh(),
-                child: Text(l10n.retry),
+                text: l10n.retry,
               ),
             ],
           ),

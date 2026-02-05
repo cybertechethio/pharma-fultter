@@ -24,6 +24,7 @@ class UserNotifier extends _$UserNotifier {
     required String email,
     required String phone,
     bool isActive = true,
+    required String userType,
   }) async {
     final createLoading = ref.read(userCreateLoadingProvider.notifier);
     createLoading.setLoading(true);
@@ -35,6 +36,7 @@ class UserNotifier extends _$UserNotifier {
       email: email,
       phone: phone,
       isActive: isActive,
+      userType: userType,
     );
 
     result.fold(
@@ -60,6 +62,7 @@ class UserNotifier extends _$UserNotifier {
     required String email,
     required String phone,
     bool isActive = true,
+    required String userType,
   }) async {
     final updating = ref.read(userUpdateLoadingProvider.notifier);
     updating.start(id);
@@ -71,6 +74,7 @@ class UserNotifier extends _$UserNotifier {
       email: email,
       phone: phone,
       isActive: isActive,
+      userType: userType,
     );
 
     result.fold(

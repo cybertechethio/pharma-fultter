@@ -73,11 +73,11 @@ class _ItemListScreenState extends ConsumerState<ItemListScreen> {
         if (next is ItemFailure) {
           snackbar.showError(next.failure);
         } else if (next is ItemCreated) {
-          snackbar.showSuccess(next.message);
+          snackbar.showSuccess(l10n.itemCreatedSuccessfully);
         } else if (next is ItemUpdated) {
-          snackbar.showSuccess(next.message);
+          snackbar.showSuccess(l10n.itemUpdatedSuccessfully);
         } else if (next is ItemDeleted) {
-          snackbar.showSuccess(next.message);
+          snackbar.showSuccess(l10n.itemDeletedSuccessfully);
         }
         ref.read(itemUiEventsProvider.notifier).clear();
       },
@@ -89,26 +89,26 @@ class _ItemListScreenState extends ConsumerState<ItemListScreen> {
 
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Items',
+        title: l10n.items,
         bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: const Size.fromHeight(AppSizes.searchBarHeight),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            padding: const EdgeInsets.symmetric(horizontal: AppSizes.sm),
             child: Row(
               children: [
                 Expanded(
                   child: search.AppSearchBar(
-                    hintText: 'Search by name, code, SKU...',
+                    hintText: l10n.searchByNameCodeSku,
                     onSearch: (query) => ref.read(itemProvider.notifier).search(query),
                     onClear: () => ref.read(itemProvider.notifier).refresh(),
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(AppSizes.sm),
                   ),
                 ),
-                const SizedBox(width: 8.0),
+                const SizedBox(width: AppSizes.sm),
                 IconButton(
                   icon: const Icon(Icons.filter_list),
                   onPressed: () => _showCategoryFilterDialog(context),
-                  tooltip: 'Filter items',
+                  tooltip: l10n.filterItems,
                 ),
               ],
             ),
@@ -122,8 +122,8 @@ class _ItemListScreenState extends ConsumerState<ItemListScreen> {
             return Center(
               child: EmptyWidget(
                 icon: Icons.inventory_2_outlined,
-                title: 'No items',
-                message: "You don't have any items yet.",
+                title: l10n.noItems,
+                message: l10n.noItemsMessage,
               ),
             );
           }
@@ -168,7 +168,7 @@ class _ItemListScreenState extends ConsumerState<ItemListScreen> {
                     ? error
                     : Failure.unexpectedError(error.toString()),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSizes.lg),
               ElevatedButton(
                 onPressed: () => ref.read(itemProvider.notifier).refresh(),
                 child: Text(l10n.retry),

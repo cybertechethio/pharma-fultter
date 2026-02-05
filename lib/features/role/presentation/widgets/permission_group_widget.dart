@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../../../app/theme/app_sizes.dart';
+import '../../../../app/theme/text_styles.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../domain/entities/permission.dart';
 
@@ -43,7 +45,7 @@ class _PermissionGroupWidgetState extends State<PermissionGroupWidget> {
         .length;
 
     return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      margin: const EdgeInsets.symmetric(horizontal: AppSizes.lg, vertical: AppSizes.sm),
       child: Column(
         children: [
           ListTile(
@@ -52,9 +54,7 @@ class _PermissionGroupWidgetState extends State<PermissionGroupWidget> {
             ),
             title: Text(
               widget.categoryName.toUpperCase(),
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+              style: context.title(bold: true),
             ),
             subtitle: Text(l10n.selectedCount(selectedCount, widget.permissions.length)),
             trailing: !widget.isReadOnly && widget.onSelectAll != null

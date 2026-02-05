@@ -55,9 +55,10 @@ class CustomOtpInput extends StatelessWidget {
       defaultPinTheme: PinTheme(
         width: pinWidth,
         height: pinHeight,
-        textStyle: textTheme.headlineSmall?.copyWith(
+        textStyle: textTheme.titleLarge?.copyWith(
           color: colorScheme.onSurface,
           fontWeight: FontWeight.bold,
+          fontSize: AppSizes.fontSizeTitle,
         ),
         decoration: BoxDecoration(
           border: Border.all(
@@ -71,9 +72,10 @@ class CustomOtpInput extends StatelessWidget {
       focusedPinTheme: PinTheme(
         width: pinWidth,
         height: pinHeight,
-        textStyle: textTheme.headlineSmall?.copyWith(
+        textStyle: textTheme.titleLarge?.copyWith(
           color: colorScheme.onSurface,
           fontWeight: FontWeight.bold,
+          fontSize: AppSizes.fontSizeTitle,
         ),
         decoration: BoxDecoration(
           border: Border.all(
@@ -87,9 +89,10 @@ class CustomOtpInput extends StatelessWidget {
       errorPinTheme: PinTheme(
         width: pinWidth,
         height: pinHeight,
-        textStyle: textTheme.headlineSmall?.copyWith(
+        textStyle: textTheme.titleLarge?.copyWith(
           color: colorScheme.onSurface,
           fontWeight: FontWeight.bold,
+          fontSize: AppSizes.fontSizeTitle,
         ),
         decoration: BoxDecoration(
           border: Border.all(

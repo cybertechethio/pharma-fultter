@@ -1,4 +1,3 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../domain/entities/transfer.dart';
 import 'transfer_providers.dart';
@@ -6,15 +5,16 @@ import 'transfer_providers.dart';
 part 'transfer_detail_notifier.g.dart';
 
 @riverpod
-Future<Transfer?> transferDetail(Ref ref, int transferId) async {
-  final useCase = ref.watch(getTransferDetailUseCaseProvider);
-  final result = await useCase.call(transferId);
+Future<Transfer> transferDetail(Ref ref, int id) async {
+  final useCase = ref.read(getTransferDetailUseCaseProvider);
+  final result = await useCase.call(id);
 
   return result.fold(
     (failure) {
+      // Emit error through state
       throw failure;
     },
-    (transfer) => transfer,
+    (detail) => detail,
   );
 }
 

@@ -15,6 +15,11 @@ _UserModel _$UserModelFromJson(Map<String, dynamic> json) =>
         email: $checkedConvert('email', (v) => v as String),
         phone: $checkedConvert('phone', (v) => v as String),
         isActive: $checkedConvert('isActive', (v) => v as bool? ?? true),
+        userType: $checkedConvert(
+          'userType',
+          (v) =>
+              v == null ? UserType.standard : _userTypeFromJson(v as String?),
+        ),
         createdAt: $checkedConvert(
           'createdAt',
           (v) => DateTime.parse(v as String),
@@ -31,5 +36,6 @@ Map<String, dynamic> _$UserModelToJson(_UserModel instance) =>
       'email': instance.email,
       'phone': instance.phone,
       'isActive': instance.isActive,
+      'userType': _userTypeToJson(instance.userType),
       'createdAt': instance.createdAt.toIso8601String(),
     };

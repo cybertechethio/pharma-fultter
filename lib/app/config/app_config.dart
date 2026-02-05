@@ -72,6 +72,33 @@ class AppConfig {
   /// Maximum number of cached items
   static const int maxCachedItems = 1000;
 
+  // ==================== AUDIO CONFIGURATION ====================
+  
+  /// Default audio quality
+  static const String defaultAudioQuality = 'high';
+  
+  /// Maximum audio file size in bytes
+  static const int maxAudioFileSize = 50 * 1024 * 1024; // 50 MB
+  
+  /// Supported audio formats
+  static const List<String> supportedAudioFormats = [
+    'mp3',
+    'wav',
+    'aac',
+    'm4a',
+    'flac',
+  ];
+
+  // ==================== CALENDAR CONFIGURATION ====================
+  
+  /// Default calendar type
+  static const String defaultCalendarType = 'gregorian';
+  
+  /// Supported calendar types
+  static const List<String> supportedCalendarTypes = [
+    'gregorian',
+    'ethiopian',
+  ];
 
   // ==================== SECURITY CONFIGURATION ====================
   

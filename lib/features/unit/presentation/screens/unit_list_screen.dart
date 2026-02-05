@@ -46,7 +46,7 @@ class UnitListScreen extends ConsumerWidget {
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(60),
           child: search.AppSearchBar(
-            hintText: 'Search by name...',
+            hintText: l10n.searchByName,
             onSearch: (query) => ref.read(unitProvider.notifier).search(query),
             onClear: () => ref.read(unitProvider.notifier).load(),
           ),
@@ -86,7 +86,7 @@ class UnitListScreen extends ConsumerWidget {
               app_err.ErrorsWidget(
                 failure: error is Failure ? error : Failure.unexpectedError(error.toString()),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSizes.lg),
               ElevatedButton(
                 onPressed: () => ref.read(unitProvider.notifier).load(),
                 child: Text(l10n.retry),

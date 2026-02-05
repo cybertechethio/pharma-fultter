@@ -5,7 +5,7 @@ part 'item.freezed.dart';
 @freezed
 sealed class Item with _$Item {
   const factory Item({
-    required String id,
+    required int id,
     required String name,
     required String code,
     
@@ -15,13 +15,21 @@ sealed class Item with _$Item {
     String? imageUrl,
     String? sku,
     String? barcode,
-    String? color,
+    @Default('N/A') String? color,
     String? size,
     String? material,
-    @Default(0.0) double weight,
-    @Default(false) bool isTaxable,
+    @Default(0.0) double? weight,
+    required bool isTaxable,
     @Default(0) int taxRate,
-    @Default(true) bool isActive,
+    required bool isActive,
+
+    // Pricing fields (mandatory)
+    required double costPrice,
+    required double unitPrice,
+    
+    // Date fields
+    DateTime? expirationDate,
+    DateTime? manufacturingDate,
     
     // Optional Foreign Keys
     int? categoryId,
@@ -30,17 +38,26 @@ sealed class Item with _$Item {
     int? unitId,
     int? modelId,
     
-    // Optional Display Names (from API response)
+    // Display Names from API response (plural form)
+    String? categories,
+    String? subCategories,
+    String? brands,
+    String? units,
+    String? models,
+    
+    // Legacy display names (kept for backward compatibility)
     String? categoryName,
     String? subCategoryName,
     String? brandName,
     String? unitName,
     String? modelName,
     
-    DateTime? createdAt,
-    DateTime? updatedAt,
+    // Timestamps (mandatory)
+    required DateTime createdAt,
+    required DateTime updatedAt,
     int? createdBy,
     int? updatedBy,
+    String? createdByName,
   }) = _Item;
 }
 

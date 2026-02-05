@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:abushakir/abushakir.dart';
 import 'package:cyber_pos/l10n/app_localizations.dart';
+import '../../../app/theme/app_sizes.dart';
 import '../../utils/calendar_converter.dart';
 
 /// Ethiopian calendar date picker
@@ -157,7 +158,7 @@ class _EthiopianDatePickerState extends State<EthiopianDatePicker> {
 
               return InkWell(
                 onTap: () => _selectDate(day),
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(AppSizes.radiusSm),
                 child: Container(
                   decoration: BoxDecoration(
                     color: isSelected
@@ -165,7 +166,7 @@ class _EthiopianDatePickerState extends State<EthiopianDatePicker> {
                         : isToday
                             ? theme.colorScheme.primaryContainer
                             : null,
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(AppSizes.radiusSm),
                     border: isToday && !isSelected
                         ? Border.all(
                             color: theme.colorScheme.primary,

@@ -87,7 +87,7 @@ class StandardFormDialog extends ConsumerWidget {
 
     return Dialog(
       elevation: 0,
-      backgroundColor: Colors.transparent,
+      backgroundColor: BrandColors.transparent,
       insetPadding: const EdgeInsets.symmetric(
         horizontal: AppSizes.lg,
         vertical: AppSizes.xl,

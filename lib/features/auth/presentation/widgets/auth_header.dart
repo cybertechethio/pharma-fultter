@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../app/theme/app_sizes.dart';
 import '../../../../app/theme/brand_colors.dart';
+import '../../../../app/theme/text_styles.dart';
 
 class AuthHeader extends StatelessWidget {
   final String? imagePath;
@@ -16,23 +17,19 @@ class AuthHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-    final textTheme = theme.textTheme;
-
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         if (imagePath != null) ...[
           Container(
-            width: 80,
-            height: 80,
+            width: AppSizes.xxxxl,
+            height: AppSizes.xxxxl,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(AppSizes.radiusLg),
               boxShadow: [
                 BoxShadow(
                   color: BrandColors.primary.withOpacity(0.3),
-                  blurRadius: 12,
+                  blurRadius: AppSizes.md,
                   offset: const Offset(0, 6),
                 ),
               ],
@@ -40,25 +37,19 @@ class AuthHeader extends StatelessWidget {
             child: Image.asset(
               imagePath!,
               fit: BoxFit.contain,
-              
             ),
           ),
           const SizedBox(height: AppSizes.xl),
         ],
         Text(
           title,
-          style: textTheme.headlineSmall?.copyWith(
-            color: colorScheme.onSurface,
-            fontWeight: FontWeight.bold,
-          ),
+          style: context.header(color: BrandColors.textPrimary),
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: AppSizes.sm),
         Text(
           subtitle,
-          style: textTheme.bodyMedium?.copyWith(
-            color: colorScheme.onSurfaceVariant,
-          ),
+          style: context.bodySecondary(),
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: AppSizes.xl),

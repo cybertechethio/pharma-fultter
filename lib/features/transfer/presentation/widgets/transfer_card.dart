@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import '../../../../app/theme/app_sizes.dart';
+import '../../../../app/theme/brand_colors.dart';
 import '../../../../app/theme/text_styles.dart';
-import '../../../../core/enums/transfer_type_enum.dart';
-import '../../../../l10n/app_localizations.dart';
-import '../../domain/entities/transfer.dart';
 import '../../../../shared/components/common/card_title.dart';
-import '../../../../shared/components/common/vertical_bar.dart';
+import '../../../../shared/utils/formatters.dart';
+import '../../../../core/enums/transfer_type_enum.dart';
+import '../../../../core/enums/transfer_status_enum.dart';
+import '../../domain/entities/transfer.dart';
 
 class TransferCard extends StatelessWidget {
   final Transfer transfer;
@@ -19,80 +20,119 @@ class TransferCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-    final transferType = transfer.transferType.toTransferType();
-    final typeColor = transferType.getColor();
+    final status = TransferStatusExtension.fromString(transfer.status);
+    final statusColor = status.getColor();
 
     return ClipRRect(
       borderRadius: BorderRadius.circular(AppSizes.radiusSm),
       child: Material(
-        color: Colors.transparent,
+        color: BrandColors.transparent,
         child: InkWell(
           onTap: onTap,
           child: IntrinsicHeight(
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                // Leading vertical bar based on type
-                VerticalBar(color: typeColor),
                 const SizedBox(width: AppSizes.sm),
-                // Transfer info
+                // Left content
                 Expanded(
                   child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: AppSizes.md),
-              child: Row(
-                children: [
-                  // Transfer info
-                  Expanded(
+                    padding: const EdgeInsets.symmetric(vertical: AppSizes.md),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Transfer number and type badge
+                        // Transfer number
+                        cardTitle(title: transfer.transferNumber),
+                        const SizedBox(height: AppSizes.xs),
+                        // Type badge
                         Row(
                           children: [
-                            Expanded(
-                              child: cardTitle(title: transfer.transferNumber),
-                            ),
-                            const SizedBox(width: AppSizes.sm),
-                            _buildTypeBadge(context),
-                          ],
-                        ),
-                        const SizedBox(height: AppSizes.xs),
-                        // Branch info
-                        Text(
-                          _getBranchInfo(context),
-                          style: theme.textTheme.bodySmall?.copyWith(
-                            color: colorScheme.onSurfaceVariant,
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        const SizedBox(height: AppSizes.xs),
-                        // Status and date
-                        Row(
-                          children: [
-                            _buildStatusBadge(context),
-                            const Spacer(),
-                            Text(
-                              _formatDate(transfer.createdAt),
-                              style: theme.textTheme.bodySmall?.copyWith(
-                                color: colorScheme.onSurfaceVariant,
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: AppSizes.xs,
+                                vertical: 2,
+                              ),
+                              decoration: BoxDecoration(
+                                color: transfer.transferType.getColor().withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(AppSizes.radiusXs),
+                              ),
+                              child: Text(
+                                transfer.transferType.getDisplayLabel(),
+                                style: context.small(
+                                  color: transfer.transferType.getColor(),
+                                  bold: true,
+                                ),
                               ),
                             ),
                           ],
                         ),
+                        // Branches info
+                        if (transfer.sourceBranch != null || transfer.destinationBranch != null) ...[
+                          const SizedBox(height: AppSizes.xs),
+                          Text(
+                            '${transfer.sourceBranch ?? "N/A"} → ${transfer.destinationBranch ?? "N/A"}',
+                            style: context.small(),
+                          ),
+                        ],
+                        // Creator name if exists
+                        if (transfer.creatorName != null) ...[
+                          const SizedBox(height: AppSizes.xs),
+                          Text(
+                            'by ${transfer.creatorName!}',
+                            style: context.small(),
+                          ),
+                        ],
                       ],
                     ),
                   ),
-                  const SizedBox(width: AppSizes.sm),
-                  Icon(
-                    Icons.chevron_right,
-                    color: colorScheme.onSurfaceVariant,
+                ),
+                // Right content
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: AppSizes.md),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      // Status badge
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Container(
+                            width: 6,
+                            height: 6,
+                            decoration: BoxDecoration(
+                              color: statusColor,
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                          const SizedBox(width: AppSizes.xs),
+                          Text(
+                            status.getDisplayLabel(),
+                            style: context.label(
+                              color: statusColor,
+                              bold: false,
+                            ),
+                          ),
+                        ],
+                      ),
+                      // Items count
+                      Text(
+                        '${transfer.transferItems.length} items',
+                        style: context.small(),
+                      ),
+                      // Date
+                      Text(
+                        Formatters.formatDateTime(transfer.createdAt),
+                        style: context.small(),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-                  ),
+                ),
+                const SizedBox(width: AppSizes.sm),
+                Icon(
+                  Icons.chevron_right,
+                  color: BrandColors.textSecondary,
                 ),
               ],
             ),
@@ -101,73 +141,5 @@ class TransferCard extends StatelessWidget {
       ),
     );
   }
-
-  Widget _buildTypeBadge(BuildContext context) {
-    final theme = Theme.of(context);
-    final transferType = transfer.transferType.toTransferType();
-    final typeColor = transferType.getColor();
-    final typeLabel = transferType.getDisplayLabel();
-    
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: AppSizes.sm, vertical: AppSizes.xxs),
-      decoration: BoxDecoration(
-        color: typeColor.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(AppSizes.radiusXs),
-      ),
-      child: Text(
-        typeLabel,
-        style: theme.textTheme.labelSmall?.copyWith(
-          color: typeColor,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-    );
-  }
-
-  Widget _buildStatusBadge(BuildContext context) {
-    final color = transfer.status.getTransferStatusColor();
-    final statusText = transfer.status.isNotEmpty
-        ? transfer.status[0].toUpperCase() + transfer.status.substring(1).toLowerCase()
-        : transfer.status;
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          width: 6,
-          height: 6,
-          decoration: BoxDecoration(
-            color: color,
-            shape: BoxShape.circle,
-          ),
-        ),
-        const SizedBox(width: AppSizes.xs),
-        Text(
-          statusText,
-          style: context.label(
-            color: color,
-            bold: false,
-          ),
-        ),
-      ],
-    );
-  }
-
-  String _getBranchInfo(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-    final source = transfer.sourceBranchName ?? l10n.unknown;
-    final destination = transfer.destinationBranchName ?? l10n.unknown;
-    return '$source → $destination';
-  }
-
-  String _formatDate(DateTime date) {
-    return '${date.day}/${date.month}/${date.year}';
-  }
 }
-
-
-
-
-
-
-
 

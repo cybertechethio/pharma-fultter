@@ -9,6 +9,8 @@ enum TransferType {
 }
 
 extension TransferTypeExtension on TransferType {
+
+  
   /// Get TransferType from string value
   static TransferType fromString(String value) {
     switch (value.toLowerCase()) {
@@ -25,19 +27,7 @@ extension TransferTypeExtension on TransferType {
     }
   }
 
-  /// Convert TransferType to string value for API
-  String toApiString() {
-    switch (this) {
-      case TransferType.transferOut:
-        return 'transfer_out';
-      case TransferType.transferIn:
-        return 'transfer_in';
-      case TransferType.transferInReturn:
-        return 'transfer_in_return';
-      case TransferType.transferOutReturn:
-        return 'transfer_out_return';
-    }
-  }
+ 
 
   /// Get display label for transfer type
   String getDisplayLabel() {
@@ -67,30 +57,18 @@ extension TransferTypeExtension on TransferType {
         return BrandColors.error;
     }
   }
-}
 
-/// Extension for String to convert to TransferType
-extension StringToTransferTypeExtension on String {
-  /// Get TransferType from string value
-  TransferType toTransferType() {
-    return TransferTypeExtension.fromString(this);
-  }
-}
-
-/// Extension for transfer status string helpers
-extension TransferStatusHelper on String {
-  /// Get color for transfer status badge
-  /// Returns Material color for UI display
-  Color getTransferStatusColor() {
-    switch (toLowerCase()) {
-      case 'completed':
-        return BrandColors.success;
-      case 'pending':
-        return BrandColors.warning;
-      case 'cancelled':
-        return BrandColors.error;
-      default:
-        return BrandColors.textMuted;
+  /// Get icon for transfer type
+  IconData getIcon() {
+    switch (this) {
+      case TransferType.transferOut:
+        return Icons.outbox_rounded;
+      case TransferType.transferIn:
+        return Icons.inbox_rounded;
+      case TransferType.transferInReturn:
+        return Icons.keyboard_return_rounded;
+      case TransferType.transferOutReturn:
+        return Icons.undo_rounded;
     }
   }
 }

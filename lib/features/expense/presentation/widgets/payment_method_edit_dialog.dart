@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../app/theme/app_sizes.dart';
 import '../../../../app/theme/brand_colors.dart';
+import '../../../../app/theme/text_styles.dart';
 import '../../../../core/enums/payment_method_type_enum.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/components/forms/custom_text_field.dart';
@@ -57,11 +58,10 @@ class _PaymentMethodEditDialogState extends ConsumerState<PaymentMethodEditDialo
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final theme = Theme.of(context);
 
     return Dialog(
       elevation: 0,
-      backgroundColor: Colors.transparent,
+      backgroundColor: BrandColors.transparent,
       insetPadding: const EdgeInsets.symmetric(
         horizontal: AppSizes.lg,
         vertical: AppSizes.xl,
@@ -75,7 +75,7 @@ class _PaymentMethodEditDialogState extends ConsumerState<PaymentMethodEditDialo
             BoxShadow(
               color: BrandColors.shadow,
               blurRadius: 20,
-              offset: const Offset(0, 8),
+              offset: const Offset(0, AppSizes.sm),
             ),
           ],
         ),
@@ -103,11 +103,8 @@ class _PaymentMethodEditDialogState extends ConsumerState<PaymentMethodEditDialo
                 children: [
                   Expanded(
                     child: Text(
-                      'Edit Payment Method',
-                      style: theme.textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: BrandColors.textPrimary,
-                      ),
+                      l10n.editPaymentMethod,
+                      style: context.subtitle(bold: true),
                     ),
                   ),
                   IconButton(
@@ -145,10 +142,10 @@ class _PaymentMethodEditDialogState extends ConsumerState<PaymentMethodEditDialo
                       children: [
                         // Payment Method Type
                         Text(
-                          'Payment Method',
-                          style: theme.textTheme.labelLarge,
+                          l10n.paymentMethod,
+                          style: context.label(),
                         ),
-                        const SizedBox(height: 8),
+                        const SizedBox(height: AppSizes.sm),
                         Wrap(
                           spacing: 8,
                           runSpacing: 8,
@@ -171,47 +168,47 @@ class _PaymentMethodEditDialogState extends ConsumerState<PaymentMethodEditDialo
                             );
                           }).toList(),
                         ),
-                        const SizedBox(height: 24),
+                        const SizedBox(height: AppSizes.xxl),
                         // Amount
                         CustomTextField(
                           controller: _amountController,
-                          labelText: 'Amount *',
+                          labelText: '${l10n.expenseAmount} *',
                           inputType: const TextInputType.numberWithOptions(decimal: true),
                           validator: (value) {
                             if (value == null || value.trim().isEmpty) {
-                              return 'Amount is required';
+                              return l10n.amountRequired;
                             }
                             final amount = double.tryParse(value.trim());
                             if (amount == null || amount <= 0) {
-                              return 'Please enter a valid amount';
+                              return l10n.pleaseEnterValidAmount;
                             }
                             return null;
                           },
                         ),
-                        const SizedBox(height: 16),
+                        const SizedBox(height: AppSizes.lg),
                         // Reference Number (if required)
                         _selectedMethod.requiresReferenceNumber()
                           ? CustomTextField(
                               controller: _referenceNumberController,
-                              labelText: 'Reference Number',
+                              labelText: l10n.referenceNumber,
                               validator: (value) {
                                 if (_selectedMethod.requiresReferenceNumber() &&
                                     (value == null || value.trim().isEmpty)) {
-                                  return 'Reference number is required';
+                                  return l10n.referenceNumberRequired(_selectedMethod.getDisplayLabel());
                                 }
                                 return null;
                               },
                             )
                           : const SizedBox.shrink(),
                         _selectedMethod.requiresReferenceNumber()
-                          ? const SizedBox(height: 16)
+                          ? const SizedBox(height: AppSizes.lg)
                           : const SizedBox.shrink(),
                         // Bank Selector (only for bank transfer)
                         _selectedMethod == PaymentMethodType.bankTransfer
                           ? _buildBankSelector(context)
                           : const SizedBox.shrink(),
                         _selectedMethod == PaymentMethodType.bankTransfer
-                          ? const SizedBox(height: 16)
+                          ? const SizedBox(height: AppSizes.lg)
                           : const SizedBox.shrink(),
                       ],
                     ),
@@ -235,7 +232,7 @@ class _PaymentMethodEditDialogState extends ConsumerState<PaymentMethodEditDialo
                 ),
               ),
               child: CustomButton(
-                text: 'Update Payment Method',
+                text: l10n.updatePaymentMethod,
                 onPressed: _handleSubmit,
               ),
             ),
@@ -246,12 +243,12 @@ class _PaymentMethodEditDialogState extends ConsumerState<PaymentMethodEditDialo
   }
 
   Widget _buildBankSelector(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final banksAsync = ref.watch(bankProvider);
-    final theme = Theme.of(context);
 
     return banksAsync.when(
       loading: () => const CircularProgressIndicator(),
-      error: (error, stack) => Text('Failed to load banks: $error'),
+      error: (error, stack) => Text('${l10n.failedToLoadBanks}: $error'),
       data: (banks) {
         final selectedBank = banks.cast<BankEntity?>().firstWhere(
           (bank) => bank?.id == _selectedBankId,
@@ -271,23 +268,21 @@ class _PaymentMethodEditDialogState extends ConsumerState<PaymentMethodEditDialo
             }
           },
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: AppSizes.md, vertical: AppSizes.lg),
             decoration: BoxDecoration(
-              border: Border.all(color: theme.colorScheme.outline),
-              borderRadius: BorderRadius.circular(4),
+              border: Border.all(color: BrandColors.outline),
+              borderRadius: BorderRadius.circular(AppSizes.radiusXs),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  selectedBank?.name ?? 'Select Bank *',
-                  style: theme.textTheme.bodyLarge?.copyWith(
-                    color: selectedBank != null
-                        ? theme.colorScheme.onSurface
-                        : theme.colorScheme.onSurfaceVariant,
-                  ),
+                  selectedBank?.name ?? l10n.selectBankRequired,
+                  style: selectedBank != null
+                      ? context.body()
+                      : context.bodySecondary(),
                 ),
-                Icon(Icons.arrow_drop_down, color: theme.colorScheme.onSurfaceVariant),
+                Icon(Icons.arrow_drop_down, color: BrandColors.textSecondary),
               ],
             ),
           ),
@@ -297,22 +292,20 @@ class _PaymentMethodEditDialogState extends ConsumerState<PaymentMethodEditDialo
   }
 
   Widget _buildBankSelectionDialog(BuildContext context, List<BankEntity> banks) {
-    final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context);
 
     return Dialog(
       child: Container(
         constraints: const BoxConstraints(maxWidth: 400, maxHeight: 400),
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(AppSizes.lg),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'Select Bank',
-              style: theme.textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+              l10n.selectBank,
+              style: context.subtitle(bold: true),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: AppSizes.lg),
             Flexible(
               child: ListView.builder(
                 shrinkWrap: true,
@@ -328,16 +321,16 @@ class _PaymentMethodEditDialogState extends ConsumerState<PaymentMethodEditDialo
                       Navigator.of(context).pop(bank.id);
                     },
                     trailing: isSelected
-                        ? Icon(Icons.check, color: theme.colorScheme.primary)
+                        ? Icon(Icons.check, color: BrandColors.primary)
                         : null,
                   );
                 },
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: AppSizes.lg),
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: const Text('Cancel'),
+              child: Text(l10n.cancel),
             ),
           ],
         ),
@@ -346,12 +339,13 @@ class _PaymentMethodEditDialogState extends ConsumerState<PaymentMethodEditDialo
   }
 
   void _handleSubmit() {
+    final l10n = AppLocalizations.of(context);
     if (!_formKey.currentState!.validate()) return;
 
     // Validate bank selection for bank transfer
     if (_selectedMethod == PaymentMethodType.bankTransfer && _selectedBankId == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please select a bank')),
+        SnackBar(content: Text(l10n.pleaseSelectBank)),
       );
       return;
     }

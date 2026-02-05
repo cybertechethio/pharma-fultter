@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../app/theme/brand_colors.dart';
 import '../../../../l10n/app_localizations.dart';
-import '../../../../shared/components/common/active_status.dart';
 import '../../../../shared/components/common/card_title.dart';
 import '../../../../shared/components/common/delete_confirmation_dialog.dart';
 import '../../../../shared/components/ui/action_buttons.dart';
 import '../../../../app/theme/app_sizes.dart';
 import '../../../../app/theme/text_styles.dart';
 import '../../../../shared/components/common/initial_avatar.dart';
+import '../../../../routes/route_name.dart';
 import '../../domain/entities/supplier_customer.dart';
 import '../providers/supplier_customer_notifier.dart';
 import '../providers/supplier_customer_loading_providers.dart';
@@ -26,7 +27,7 @@ class SupplierCustomerCard extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
 
     return InkWell(
-      onTap: () => _openEdit(context),
+      onTap: () => context.push(RouteName.supplierCustomerDetailPath(item.id)),
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: AppSizes.lg,
@@ -86,6 +87,8 @@ class SupplierCustomerCard extends ConsumerWidget {
     );
   }
 
+
+
   Future<void> _confirmDelete(BuildContext context, WidgetRef ref, AppLocalizations l10n) async {
     final confirmed = await DeleteConfirmationHelper.showItemDeleteConfirmation(
       context: context,
@@ -100,6 +103,3 @@ class SupplierCustomerCard extends ConsumerWidget {
     );
   }
 }
- 
- 
-

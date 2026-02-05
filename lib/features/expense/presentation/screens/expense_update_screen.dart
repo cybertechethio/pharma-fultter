@@ -4,6 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../l10n/app_localizations.dart';
+import '../../../../app/theme/app_sizes.dart';
+import '../../../../app/theme/brand_colors.dart';
+import '../../../../app/theme/text_styles.dart';
 import '../../../../shared/components/common/app_bar.dart';
 import '../../../../shared/components/forms/custom_text_field.dart';
 import '../../../../shared/components/forms/custom_button.dart';
@@ -90,8 +93,9 @@ class _ExpenseUpdateScreenState extends ConsumerState<ExpenseUpdateScreen> {
       }
     } catch (e) {
       if (mounted) {
+        final l10n = AppLocalizations.of(context);
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error picking images: $e')),
+          SnackBar(content: Text(l10n.errorPickingImages(e.toString()))),
         );
       }
     }
@@ -114,10 +118,10 @@ class _ExpenseUpdateScreenState extends ConsumerState<ExpenseUpdateScreen> {
               fit: BoxFit.contain,
             ),
             Positioned(
-              top: 8,
-              right: 8,
+              top: AppSizes.sm,
+              right: AppSizes.sm,
               child: IconButton(
-                icon: const Icon(Icons.close, color: Colors.white),
+                icon: Icon(Icons.close, color: BrandColors.textLight),
                 onPressed: () => Navigator.of(context).pop(),
               ),
             ),
@@ -130,18 +134,20 @@ class _ExpenseUpdateScreenState extends ConsumerState<ExpenseUpdateScreen> {
   Future<void> _handleSubmit() async {
     if (!_formKey.currentState!.validate()) return;
 
+    final l10n = AppLocalizations.of(context);
+
     if (widget.expense == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Expense data not found')),
-      );
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(l10n.expenseDataNotFound)),
+        );
       return;
     }
 
     final amount = double.tryParse(_amountController.text.trim());
     if (amount == null || amount <= 0) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please enter a valid amount')),
-      );
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(l10n.pleaseEnterValidAmount)),
+        );
       return;
     }
 
@@ -181,77 +187,77 @@ class _ExpenseUpdateScreenState extends ConsumerState<ExpenseUpdateScreen> {
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(AppSizes.lg),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               // Basic Information Section
               _buildSection(
                 context,
-                title: 'Basic Information',
+                title: l10n.basicInformation,
                 children: [
                   CustomTextField(
-                    labelText: 'Expense Name *',
+                    labelText: '${l10n.expenseName} *',
                     controller: _nameController,
                     prefixIcon: Icons.description_outlined,
                     validator: (value) {
                       if (value == null || value.trim().isEmpty) {
-                        return 'Expense name is required';
+                        return l10n.expenseNameRequired;
                       }
                       return null;
                     },
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: AppSizes.lg),
                   CustomTextField(
-                    labelText: 'Amount *',
+                    labelText: '${l10n.amount} *',
                     controller: _amountController,
                     prefixIcon: Icons.attach_money,
                     inputType: TextInputType.number,
                     validator: (value) {
                       if (value == null || value.trim().isEmpty) {
-                        return 'Amount is required';
+                        return l10n.amountRequired;
                       }
                       final amount = double.tryParse(value.trim());
                       if (amount == null || amount <= 0) {
-                        return 'Please enter a valid amount';
+                        return l10n.pleaseEnterValidAmount;
                       }
                       return null;
                     },
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: AppSizes.lg),
                   // Date Picker
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Expense Date *',
-                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          color: Theme.of(context).colorScheme.onSurface,
+                        '${l10n.expenseDate} *',
+                        style: context.label(
+                          color: BrandColors.textPrimary,
                         ),
                       ),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: AppSizes.sm),
                       InkWell(
                         onTap: _selectDate,
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(AppSizes.radius),
                         child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                          padding: const EdgeInsets.symmetric(horizontal: AppSizes.lg, vertical: AppSizes.lg),
                           decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.surface,
-                            borderRadius: BorderRadius.circular(12),
+                            color: BrandColors.surface,
+                            borderRadius: BorderRadius.circular(AppSizes.radius),
                             border: Border.all(
-                              color: Theme.of(context).colorScheme.outline.withOpacity(0.5),
+                              color: BrandColors.outline.withOpacity(0.5),
                             ),
                           ),
                           child: Row(
                             children: [
                               Icon(
                                 Icons.calendar_today,
-                                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                                color: BrandColors.textPrimary.withOpacity(0.6),
                               ),
-                              const SizedBox(width: 12),
+                              const SizedBox(width: AppSizes.md),
                               Text(
                                 '${_selectedDate.day}/${_selectedDate.month}/${_selectedDate.year}',
-                                style: Theme.of(context).textTheme.bodyLarge,
+                                style: context.body(),
                               ),
                             ],
                           ),
@@ -262,12 +268,12 @@ class _ExpenseUpdateScreenState extends ConsumerState<ExpenseUpdateScreen> {
                 ],
               ),
 
-              const SizedBox(height: 24),
+              const SizedBox(height: AppSizes.xxl),
 
               // Category Section
               _buildSection(
                 context,
-                title: 'Category',
+                title: l10n.category,
                 children: [
                   InkWell(
                     onTap: () async {
@@ -284,36 +290,36 @@ class _ExpenseUpdateScreenState extends ConsumerState<ExpenseUpdateScreen> {
                       }
                     },
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                      padding: const EdgeInsets.symmetric(horizontal: AppSizes.lg, vertical: AppSizes.lg),
                       decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.surface,
-                        borderRadius: BorderRadius.circular(12),
+                        color: BrandColors.surface,
+                        borderRadius: BorderRadius.circular(AppSizes.radius),
                         border: Border.all(
-                          color: Theme.of(context).colorScheme.outline.withOpacity(0.5),
+                          color: BrandColors.outline.withOpacity(0.5),
                         ),
                       ),
                       child: Row(
                         children: [
                           Icon(
                             Icons.category,
-                            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                            color: BrandColors.textPrimary.withOpacity(0.6),
                           ),
-                          const SizedBox(width: 12),
+                          const SizedBox(width: AppSizes.md),
                           Expanded(
                             child: Text(
                               _selectedCategoryId != null
-                                  ? 'Category selected' // In real app, show category name
-                                  : 'Select category (optional)',
-                              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                  ? l10n.categorySelected
+                                  : l10n.selectCategory,
+                              style: context.body(
                                 color: _selectedCategoryId != null
-                                    ? Theme.of(context).colorScheme.onSurface
-                                    : Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                                    ? BrandColors.textPrimary
+                                    : BrandColors.textPrimary.withOpacity(0.6),
                               ),
                             ),
                           ),
                           Icon(
                             Icons.arrow_drop_down,
-                            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                            color: BrandColors.textPrimary.withOpacity(0.6),
                           ),
                         ],
                       ),
@@ -322,43 +328,43 @@ class _ExpenseUpdateScreenState extends ConsumerState<ExpenseUpdateScreen> {
                 ],
               ),
 
-              const SizedBox(height: 24),
+              const SizedBox(height: AppSizes.xxl),
 
               // Additional Information Section
               _buildSection(
                 context,
-                title: 'Additional Information',
+                title: l10n.additionalInformation,
                 children: [
                   TextFormField(
                     controller: _notesController,
                     decoration: InputDecoration(
-                      labelText: 'Notes',
+                      labelText: l10n.notes,
                       prefixIcon: const Icon(Icons.notes),
                       filled: true,
-                      fillColor: Theme.of(context).colorScheme.surfaceContainerHighest,
+                      fillColor: BrandColors.surfaceContainerHighest,
                     ),
                     maxLines: 3,
                   ),
                 ],
               ),
 
-              const SizedBox(height: 24),
+              const SizedBox(height: AppSizes.xxl),
 
               // Attachments Section
               _buildSection(
                 context,
-                title: 'Attachments',
+                title: l10n.attachments,
                 children: [
                   OutlinedButton.icon(
                     onPressed: _pickImages,
                     icon: const Icon(Icons.add_photo_alternate),
-                    label: const Text('Add Attachments'),
+                    label: Text(l10n.addAttachments),
                   ),
                   if (_attachmentFilePaths.isNotEmpty) ...[
-                    const SizedBox(height: 16),
+                    const SizedBox(height: AppSizes.lg),
                     Wrap(
-                      spacing: 8,
-                      runSpacing: 8,
+                      spacing: AppSizes.sm,
+                      runSpacing: AppSizes.sm,
                       children: List.generate(
                         _attachmentFilePaths.length,
                         (index) => Stack(
@@ -369,11 +375,11 @@ class _ExpenseUpdateScreenState extends ConsumerState<ExpenseUpdateScreen> {
                                 width: 100,
                                 height: 100,
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  border: Border.all(color: Theme.of(context).colorScheme.outline),
+                                  borderRadius: BorderRadius.circular(AppSizes.radiusSm),
+                                  border: Border.all(color: BrandColors.outline),
                                 ),
                                 child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8),
+                                  borderRadius: BorderRadius.circular(AppSizes.radiusSm),
                                   child: Image.file(
                                     File(_attachmentFilePaths[index]),
                                     fit: BoxFit.cover,
@@ -382,15 +388,15 @@ class _ExpenseUpdateScreenState extends ConsumerState<ExpenseUpdateScreen> {
                               ),
                             ),
                             Positioned(
-                              top: 4,
-                              right: 4,
+                              top: AppSizes.xs,
+                              right: AppSizes.xs,
                               child: CircleAvatar(
-                                radius: 12,
-                                backgroundColor: Theme.of(context).colorScheme.error,
+                                radius: AppSizes.md,
+                                backgroundColor: BrandColors.error,
                                 child: IconButton(
                                   padding: EdgeInsets.zero,
-                                  iconSize: 16,
-                                  icon: const Icon(Icons.close, color: Colors.white),
+                                  iconSize: AppSizes.lg,
+                                  icon: Icon(Icons.close, color: BrandColors.textLight),
                                   onPressed: () => _removeImage(index),
                                 ),
                               ),
@@ -403,7 +409,7 @@ class _ExpenseUpdateScreenState extends ConsumerState<ExpenseUpdateScreen> {
                 ],
               ),
 
-              const SizedBox(height: 32),
+              const SizedBox(height: AppSizes.xxl),
 
               // Update Button
               CustomButton(
@@ -412,7 +418,7 @@ class _ExpenseUpdateScreenState extends ConsumerState<ExpenseUpdateScreen> {
                 isLoading: updating,
               ),
 
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSizes.lg),
             ],
           ),
         ),
@@ -427,18 +433,15 @@ class _ExpenseUpdateScreenState extends ConsumerState<ExpenseUpdateScreen> {
     return Card(
       margin: EdgeInsets.zero,
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(AppSizes.lg),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               title,
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: Theme.of(context).colorScheme.primary,
-              ),
+              style: context.subtitle(color: BrandColors.primary, bold: true),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: AppSizes.lg),
             ...children,
           ],
         ),

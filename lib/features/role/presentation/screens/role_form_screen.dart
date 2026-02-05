@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../../../app/theme/app_sizes.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../core/services/snackbar_service.dart';
 import '../../../../shared/components/common/app_bar.dart';
@@ -204,13 +205,13 @@ class _RoleFormScreenState extends ConsumerState<RoleFormScreen> {
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(AppSizes.lg),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Name Field
               CustomTextField(
-                labelText: 'Name *',
+                labelText: '${l10n.name} *',
                 controller: _nameController,
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
@@ -219,15 +220,15 @@ class _RoleFormScreenState extends ConsumerState<RoleFormScreen> {
                   return null;
                 },
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSizes.lg),
 
               // Description Field
               CustomTextField(
-                labelText: 'Description',
+                labelText: l10n.description,
                 controller: _descriptionController,
                 inputType: TextInputType.multiline,
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSizes.lg),
 
               // Active Status Toggle
               Card(
@@ -242,7 +243,7 @@ class _RoleFormScreenState extends ConsumerState<RoleFormScreen> {
                   },
                 ),
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: AppSizes.xxl),
 
               // Permissions Section
               Text(
@@ -251,23 +252,23 @@ class _RoleFormScreenState extends ConsumerState<RoleFormScreen> {
                       fontWeight: FontWeight.bold,
                     ),
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: AppSizes.sm),
               Text(
                 l10n.selectedPermissions(_selectedPermissionIds.length),
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSizes.lg),
 
               // Permission Groups
               permissionsAsync.when(
                 loading: () => const Center(
                   child: Padding(
-                    padding: EdgeInsets.all(16.0),
+                    padding: EdgeInsets.all(AppSizes.lg),
                     child: CircularProgressIndicator(),
                   ),
                 ),
                 error: (error, stack) => Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(AppSizes.lg),
                   child: Text(l10n.errorLoadingPermissions(error.toString())),
                 ),
                 data: (grouped) {
@@ -277,7 +278,7 @@ class _RoleFormScreenState extends ConsumerState<RoleFormScreen> {
 
                   if (_groupedPermissions.isEmpty) {
                     return Padding(
-                      padding: const EdgeInsets.all(16.0),
+                      padding: const EdgeInsets.all(AppSizes.lg),
                       child: Text(l10n.noPermissionsAvailable),
                     );
                   }
@@ -297,7 +298,7 @@ class _RoleFormScreenState extends ConsumerState<RoleFormScreen> {
                 },
               ),
 
-              const SizedBox(height: 24),
+              const SizedBox(height: AppSizes.xxl),
 
               // Submit Button
               CustomButton(
@@ -306,7 +307,7 @@ class _RoleFormScreenState extends ConsumerState<RoleFormScreen> {
                 loadingText: _isEditing ? l10n.updating : l10n.creating,
                 onPressed: _handleSubmit,
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSizes.lg),
             ],
           ),
         ),

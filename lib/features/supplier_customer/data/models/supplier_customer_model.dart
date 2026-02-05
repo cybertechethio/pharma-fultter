@@ -16,6 +16,7 @@ sealed class SupplierCustomerModel with _$SupplierCustomerModel {
     @Default('N/A') String tinNumber,
     /// API returns uppercase strings: CUSTOMER | SUPPLIER
     required String type,
+    @Default('0.0') String balance,
     @Default(true) bool isActive,
     required DateTime createdAt,
     DateTime? updatedAt,

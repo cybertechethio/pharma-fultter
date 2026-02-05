@@ -14,12 +14,8 @@ const transferDetailProvider = TransferDetailFamily._();
 
 final class TransferDetailProvider
     extends
-        $FunctionalProvider<
-          AsyncValue<Transfer?>,
-          Transfer?,
-          FutureOr<Transfer?>
-        >
-    with $FutureModifier<Transfer?>, $FutureProvider<Transfer?> {
+        $FunctionalProvider<AsyncValue<Transfer>, Transfer, FutureOr<Transfer>>
+    with $FutureModifier<Transfer>, $FutureProvider<Transfer> {
   const TransferDetailProvider._({
     required TransferDetailFamily super.from,
     required int super.argument,
@@ -43,11 +39,11 @@ final class TransferDetailProvider
 
   @$internal
   @override
-  $FutureProviderElement<Transfer?> $createElement($ProviderPointer pointer) =>
+  $FutureProviderElement<Transfer> $createElement($ProviderPointer pointer) =>
       $FutureProviderElement(pointer);
 
   @override
-  FutureOr<Transfer?> create(Ref ref) {
+  FutureOr<Transfer> create(Ref ref) {
     final argument = this.argument as int;
     return transferDetail(ref, argument);
   }
@@ -63,10 +59,10 @@ final class TransferDetailProvider
   }
 }
 
-String _$transferDetailHash() => r'3899b18dd4be6bd235afafe98e77be2ca715c64d';
+String _$transferDetailHash() => r'38edc624428e4006af4ff72bf9bb9164aee69690';
 
 final class TransferDetailFamily extends $Family
-    with $FunctionalFamilyOverride<FutureOr<Transfer?>, int> {
+    with $FunctionalFamilyOverride<FutureOr<Transfer>, int> {
   const TransferDetailFamily._()
     : super(
         retry: null,
@@ -76,8 +72,8 @@ final class TransferDetailFamily extends $Family
         isAutoDispose: true,
       );
 
-  TransferDetailProvider call(int transferId) =>
-      TransferDetailProvider._(argument: transferId, from: this);
+  TransferDetailProvider call(int id) =>
+      TransferDetailProvider._(argument: id, from: this);
 
   @override
   String toString() => r'transferDetailProvider';

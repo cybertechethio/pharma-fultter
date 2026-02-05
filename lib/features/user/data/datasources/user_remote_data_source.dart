@@ -10,6 +10,7 @@ abstract class UserRemoteDataSource {
     required String email,
     required String phone,
     bool isActive = true,
+    required String userType,
   });
   Future<Either<Failure, UserModel>> updateUser({
     required int id,
@@ -18,6 +19,7 @@ abstract class UserRemoteDataSource {
     required String email,
     required String phone,
     bool isActive = true,
+    required String userType,
   });
   Future<Either<Failure, UserModel>> deleteUser({required int id});
 }

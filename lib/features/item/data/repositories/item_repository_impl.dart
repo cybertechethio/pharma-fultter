@@ -5,6 +5,7 @@ import '../../domain/entities/item.dart';
 import '../../domain/repositories/item_repository.dart';
 import '../datasources/item_remote_data_source.dart';
 import '../mappers/item_mapper.dart';
+import '../models/item_request_model.dart';
 
 class ItemRepositoryImpl implements ItemRepository {
   final ItemRemoteDataSource _remoteDataSource;
@@ -43,46 +44,8 @@ class ItemRepositoryImpl implements ItemRepository {
   }
 
   @override
-  Future<Either<Failure, Item>> createItem({
-    required String name,
-    required String description,
-    required String sku,
-    required String code,
-    required String barcode,
-    required String color,
-    required String size,
-    required String material,
-    required double weight,
-    required bool isTaxable,
-    required int taxRate,
-    required bool isActive,
-    String? imageUrl,
-    int? categoryId,
-    int? subCategoryId,
-    int? brandId,
-    int? unitId,
-    int? modelId,
-  }) async {
-    final response = await _remoteDataSource.createItem(
-      name: name,
-      description: description,
-      sku: sku,
-      code: code,
-      barcode: barcode,
-      color: color,
-      size: size,
-      material: material,
-      weight: weight,
-      isTaxable: isTaxable,
-      taxRate: taxRate,
-      isActive: isActive,
-      imageUrl: imageUrl,
-      categoryId: categoryId,
-      subCategoryId: subCategoryId,
-      brandId: brandId,
-      unitId: unitId,
-      modelId: modelId,
-    );
+  Future<Either<Failure, Item>> createItem(ItemRequestModel request) async {
+    final response = await _remoteDataSource.createItem(request);
 
     return response.fold(
       (failure) => Left(failure),
@@ -92,46 +55,12 @@ class ItemRepositoryImpl implements ItemRepository {
 
   @override
   Future<Either<Failure, Item>> updateItem({
-    required String id,
-    required String name,
-    required String description,
-    required String sku,
-    required String code,
-    required String barcode,
-    required String color,
-    required String size,
-    required String material,
-    required double weight,
-    required bool isTaxable,
-    required int taxRate,
-    required bool isActive,
-    String? imageUrl,
-    int? categoryId,
-    int? subCategoryId,
-    int? brandId,
-    int? unitId,
-    int? modelId,
+    required int id,
+    required ItemRequestModel request,
   }) async {
     final response = await _remoteDataSource.updateItem(
       id: id,
-      name: name,
-      description: description,
-      sku: sku,
-      code: code,
-      barcode: barcode,
-      color: color,
-      size: size,
-      material: material,
-      weight: weight,
-      isTaxable: isTaxable,
-      taxRate: taxRate,
-      isActive: isActive,
-      imageUrl: imageUrl,
-      categoryId: categoryId,
-      subCategoryId: subCategoryId,
-      brandId: brandId,
-      unitId: unitId,
-      modelId: modelId,
+      request: request,
     );
 
     return response.fold(
@@ -142,7 +71,7 @@ class ItemRepositoryImpl implements ItemRepository {
 
   @override
   Future<Either<Failure, Item>> deleteItem({
-    required String id,
+    required int id,
   }) async {
     final response = await _remoteDataSource.deleteItem(id: id);
     return response.fold(

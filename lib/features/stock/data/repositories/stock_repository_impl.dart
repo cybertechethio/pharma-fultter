@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import '../../../../core/errors/failure.dart';
+import '../../../../core/enums/stock_status_enum.dart';
 import '../../../../shared/models/paginated_response.dart';
 import '../../domain/entities/stock.dart';
 import '../../domain/repositories/stock_repository.dart';
@@ -37,6 +38,26 @@ class StockRepositoryImpl implements StockRepository {
           pagination: paginatedModels.pagination,
         ));
       },
+    );
+  }
+
+  @override
+  Future<Either<Failure, Stock>> updateStock({
+    required int id,
+    String? lowStockThreshold,
+    String? location,
+    StockStatus? lowStockStatus,
+  }) async {
+    final result = await _remoteDataSource.updateStock(
+      id: id,
+      lowStockThreshold: lowStockThreshold,
+      location: location,
+      lowStockStatus: lowStockStatus,
+    );
+    
+    return result.fold(
+      (failure) => Left(failure),
+      (model) => Right(model.toDomain()),
     );
   }
 }

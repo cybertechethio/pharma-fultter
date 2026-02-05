@@ -15,6 +15,7 @@ extension CompanyMapper on CompanyModel {
       wereda: wereda,
       autoPrint: autoPrint,
       defaultStartDate: defaultStartDate,
+      businessType: businessType,
       createdAt: createdAt,
       updatedAt: updatedAt,
     );

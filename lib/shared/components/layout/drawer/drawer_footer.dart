@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
+import '../../../../app/theme/app_sizes.dart';
+import '../../../../app/theme/brand_colors.dart';
 import '../../../../l10n/app_localizations.dart';
 import 'drawer_nav_item.dart';
 
-/// A drawer footer with settings and help.
+/// A drawer footer with branch switcher, profile, and settings.
 class DrawerFooter extends StatelessWidget {
+  final Widget? branchSwitcher;
   final VoidCallback onSettingsTap;
-  final VoidCallback onHelpTap;
+  final VoidCallback? onProfileTap;
   final String? appVersion;
 
   const DrawerFooter({
     super.key,
+    this.branchSwitcher,
     required this.onSettingsTap,
-    required this.onHelpTap,
+    this.onProfileTap,
     this.appVersion,
   });
 
@@ -25,7 +29,7 @@ class DrawerFooter extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border(
           top: BorderSide(
-            color: colorScheme.outlineVariant.withOpacity(0.3),
+            color: BrandColors.primary,
             width: 1,
           ),
         ),
@@ -35,16 +39,17 @@ class DrawerFooter extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const SizedBox(height: 8),
-            // Quick Actions
+            const SizedBox(height: AppSizes.sm),
+            if (branchSwitcher != null) branchSwitcher!,
+            if (onProfileTap != null)
+              DrawerNavItem(
+                icon: Icons.person_outline_outlined,
+                label: l10n.profile,
+                onTap: onProfileTap!,
+                iconColor: colorScheme.secondary,
+              ),
             DrawerNavItem(
-              icon: Icons.help_outline_rounded,
-              label: l10n.help,
-              onTap: onHelpTap,
-              iconColor: colorScheme.secondary,
-            ),
-            DrawerNavItem(
-              icon: Icons.settings_rounded,
+              icon: Icons.settings_outlined,
               label: l10n.settings,
               onTap: onSettingsTap,
               iconColor: colorScheme.secondary,
@@ -52,7 +57,7 @@ class DrawerFooter extends StatelessWidget {
             // Version Info
             if (appVersion != null)
               Padding(
-                padding: const EdgeInsets.only(top: 8, bottom: 12),
+                padding: const EdgeInsets.only(top: AppSizes.sm, bottom: AppSizes.md),
                 child: Text(
                   'v$appVersion',
                   style: theme.textTheme.labelSmall?.copyWith(
@@ -62,7 +67,7 @@ class DrawerFooter extends StatelessWidget {
                 ),
               )
             else
-              const SizedBox(height: 8),
+              const SizedBox(height: AppSizes.sm),
           ],
         ),
       ),

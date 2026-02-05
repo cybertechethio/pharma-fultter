@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../shared/utils/formatters.dart';
+import '../../../../app/theme/app_sizes.dart';
+import '../../../../app/theme/brand_colors.dart';
+import '../../../../app/theme/text_styles.dart';
 import '../../../../core/enums/payment_method_type_enum.dart';
 import '../../domain/entities/expense_detail.dart';
 import '../providers/expense_payment_methods_notifier.dart';
@@ -21,8 +24,6 @@ class ExpensePaymentMethodCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
     final updating = ref.watch(expensePaymentMethodUpdateLoadingProvider).contains(paymentMethod.id);
     final deleting = ref.watch(expensePaymentMethodDeleteLoadingProvider).contains(paymentMethod.id);
 
@@ -32,13 +33,13 @@ class ExpensePaymentMethodCard extends ConsumerWidget {
     );
 
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(12),
+      margin: const EdgeInsets.only(bottom: AppSizes.md),
+      padding: const EdgeInsets.all(AppSizes.md),
       decoration: BoxDecoration(
-        color: colorScheme.surfaceVariant.withOpacity(0.3),
-        borderRadius: BorderRadius.circular(8),
+        color: BrandColors.surfaceVariant.withOpacity(0.3),
+        borderRadius: BorderRadius.circular(AppSizes.radiusSm),
         border: Border.all(
-          color: colorScheme.outline.withOpacity(0.2),
+          color: BrandColors.outline.withOpacity(0.2),
         ),
       ),
       child: Column(
@@ -52,16 +53,14 @@ class ExpensePaymentMethodCard extends ConsumerWidget {
                   children: [
                     Icon(
                       _getPaymentMethodIcon(method),
-                      size: 20,
-                      color: colorScheme.primary,
+                      size: AppSizes.iconSize,
+                      color: BrandColors.primary,
                     ),
-                    const SizedBox(width: 8),
+                    const SizedBox(width: AppSizes.sm),
                     Flexible(
                       child: Text(
                         method.getDisplayLabel().toUpperCase(),
-                        style: theme.textTheme.bodyMedium?.copyWith(
-                          fontWeight: FontWeight.w600,
-                        ),
+                        style: context.body(bold: true),
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
@@ -70,33 +69,30 @@ class ExpensePaymentMethodCard extends ConsumerWidget {
               ),
               Text(
                 Formatters.formatAmount(double.tryParse(paymentMethod.amount) ?? 0.0),
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: colorScheme.primary,
-                ),
+                style: context.bodyPrimary(bold: true),
               ),
               if (updating || deleting) ...[
-                const SizedBox(width: 8),
+                const SizedBox(width: AppSizes.sm),
                 SizedBox(
-                  width: 16,
-                  height: 16,
+                  width: AppSizes.lg,
+                  height: AppSizes.lg,
                   child: CircularProgressIndicator(
-                    strokeWidth: 2,
-                    color: colorScheme.primary,
+                    strokeWidth: AppSizes.xxs,
+                    color: BrandColors.primary,
                   ),
                 ),
               ] else ...[
-                const SizedBox(width: 8),
+                const SizedBox(width: AppSizes.sm),
                 IconButton(
-                  icon: Icon(Icons.edit, size: 18, color: colorScheme.primary),
+                  icon: Icon(Icons.edit, size: AppSizes.md2, color: BrandColors.primary),
                   onPressed: () => _handleEdit(context, ref),
                   tooltip: 'Edit payment method',
                   padding: EdgeInsets.zero,
                   constraints: const BoxConstraints(),
                 ),
-                const SizedBox(width: 4),
+                const SizedBox(width: AppSizes.xs),
                 IconButton(
-                  icon: Icon(Icons.delete, size: 18, color: colorScheme.error),
+                  icon: Icon(Icons.delete, size: AppSizes.md2, color: BrandColors.error),
                   onPressed: canDelete ? () => _handleDelete(context, ref) : null,
                   tooltip: 'Delete payment method',
                   padding: EdgeInsets.zero,
@@ -106,12 +102,10 @@ class ExpensePaymentMethodCard extends ConsumerWidget {
             ],
           ),
           if (paymentMethod.referenceNumber != null) ...[
-            const SizedBox(height: 8),
+            const SizedBox(height: AppSizes.sm),
             Text(
               'Reference: ${paymentMethod.referenceNumber}',
-              style: theme.textTheme.bodySmall?.copyWith(
-                color: colorScheme.onSurfaceVariant,
-              ),
+              style: context.smallSecondary(),
             ),
           ],
         ],
@@ -131,8 +125,7 @@ class ExpensePaymentMethodCard extends ConsumerWidget {
         return Icons.account_balance;
       case PaymentMethodType.check:
         return Icons.receipt;
-      case PaymentMethodType.other:
-        return Icons.more_horiz;
+      
     }
   }
 

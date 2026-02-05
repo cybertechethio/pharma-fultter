@@ -6,6 +6,7 @@ import '../../../../core/services/logging_service.dart';
 import '../../../../shared/models/api_response.dart';
 import '../../../../shared/models/paginated_response.dart';
 import '../models/item_model.dart';
+import '../models/item_request_model.dart';
 import 'item_api_service.dart';
 import 'item_remote_data_source.dart';
 
@@ -79,51 +80,13 @@ class ItemRemoteDataSourceImpl implements ItemRemoteDataSource {
   }
 
   @override
-  Future<Either<Failure, ItemModel>> createItem({
-    required String name,
-    required String description,
-    required String sku,
-    required String code,
-    required String barcode,
-    required String color,
-    required String size,
-    required String material,
-    required double weight,
-    required bool isTaxable,
-    required int taxRate,
-    required bool isActive,
-    String? imageUrl,
-    int? categoryId,
-    int? subCategoryId,
-    int? brandId,
-    int? unitId,
-    int? modelId,
-  }) async {
+  Future<Either<Failure, ItemModel>> createItem(ItemRequestModel request) async {
     LoggingService.info('Starting create item process', {
-      'name': name,
-      'sku': sku,
+      'name': request.name,
+      'code': request.code,
     });
     try {
-      final response = await _api.create(
-        name: name,
-        description: description,
-        sku: sku,
-        code: code,
-        barcode: barcode,
-        color: color,
-        size: size,
-        material: material,
-        weight: weight,
-        isTaxable: isTaxable,
-        taxRate: taxRate,
-        isActive: isActive,
-        imageUrl: imageUrl,
-        categoryId: categoryId,
-        subCategoryId: subCategoryId,
-        brandId: brandId,
-        unitId: unitId,
-        modelId: modelId,
-      );
+      final response = await _api.create(request);
       return response.when(
         success: (success, message, data, meta, pagination) {
           LoggingService.info('Create item successful', {
@@ -157,25 +120,8 @@ class ItemRemoteDataSourceImpl implements ItemRemoteDataSource {
 
   @override
   Future<Either<Failure, ItemModel>> updateItem({
-    required String id,
-    required String name,
-    required String description,
-    required String sku,
-    required String code,
-    required String barcode,
-    required String color,
-    required String size,
-    required String material,
-    required double weight,
-    required bool isTaxable,
-    required int taxRate,
-    required bool isActive,
-    String? imageUrl,
-    int? categoryId,
-    int? subCategoryId,
-    int? brandId,
-    int? unitId,
-    int? modelId,
+    required int id,
+    required ItemRequestModel request,
   }) async {
     LoggingService.info('Starting update item process', {
       'id': id,
@@ -183,24 +129,7 @@ class ItemRemoteDataSourceImpl implements ItemRemoteDataSource {
     try {
       final response = await _api.update(
         id: id,
-        name: name,
-        description: description,
-        sku: sku,
-        code: code,
-        barcode: barcode,
-        color: color,
-        size: size,
-        material: material,
-        weight: weight,
-        isTaxable: isTaxable,
-        taxRate: taxRate,
-        isActive: isActive,
-        imageUrl: imageUrl,
-        categoryId: categoryId,
-        subCategoryId: subCategoryId,
-        brandId: brandId,
-        unitId: unitId,
-        modelId: modelId,
+        request: request,
       );
       return response.when(
         success: (success, message, data, meta, pagination) {
@@ -235,7 +164,7 @@ class ItemRemoteDataSourceImpl implements ItemRemoteDataSource {
 
   @override
   Future<Either<Failure, ItemModel>> deleteItem({
-    required String id,
+    required int id,
   }) async {
     LoggingService.info('Starting delete item process', {
       'id': id,

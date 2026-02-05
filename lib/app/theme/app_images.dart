@@ -9,4 +9,5 @@ class AppImages {
   // Onboarding images
 
   // Splash screen images
+  static const String cyberLogo = 'assets/logo/cyber_logo.png';
 }

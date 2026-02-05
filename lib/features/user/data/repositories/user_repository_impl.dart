@@ -30,6 +30,7 @@ class UserRepositoryImpl implements UserRepository {
     required String email,
     required String phone,
     bool isActive = true,
+    required String userType,
   }) async {
     final response = await _remote.createUser(
       firstName: firstName,
@@ -37,6 +38,7 @@ class UserRepositoryImpl implements UserRepository {
       email: email,
       phone: phone,
       isActive: isActive,
+      userType: userType,
     );
 
     return response.fold(
@@ -53,6 +55,7 @@ class UserRepositoryImpl implements UserRepository {
     required String email,
     required String phone,
     bool isActive = true,
+    required String userType,
   }) async {
     final response = await _remote.updateUser(
       id: id,
@@ -61,6 +64,7 @@ class UserRepositoryImpl implements UserRepository {
       email: email,
       phone: phone,
       isActive: isActive,
+      userType: userType,
     );
 
     return response.fold(

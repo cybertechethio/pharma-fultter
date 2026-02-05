@@ -60,9 +60,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           state.whenOrNull(
             authenticated: (message, user, tokens) {
               // Show success message and navigate to home screen
-              snackbar.showSuccess(
-                message,
-              );
+              // snackbar.showSuccess(
+              //   message,
+              // );
               print('message: $message');
               context.go(RouteName.home);
             },
@@ -81,11 +81,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: BrandColors.transparent,
         elevation: 0,
         actions: [
           const LanguageToggleButton(),
-          const SizedBox(width: 8),
+          const SizedBox(width: AppSizes.sm),
         ],
       ),
       body: Center(
@@ -146,7 +146,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       },
                       child: Text(
                         l10n.forgotPassword,
-                        style: context.bodyPrimary(),
+                        style: context.bodyPrimary().copyWith(fontSize: AppSizes.fontSizeBodySmall),
                       ),
                     ),
                   ),
@@ -157,49 +157,49 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     isLoading: authState is AuthLoading,
                     loadingText: authState is AuthLoading ? authState.message : null,
                   ),
-                  const SizedBox(height: AppSizes.lg),
-                  Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: Divider(
-                          thickness: 1, 
-                          color: BrandColors.divider,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: Text(
-                          l10n.or,
-                          style: context.bodySecondary(bold: true),
-                        ),
-                      ),
-                      Expanded(
-                        child: Divider(
-                          thickness: 1, 
-                          color: BrandColors.divider,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: AppSizes.lg),
-                  CustomButton(
-                    text: l10n.loginWithGoogle,
-                    onPressed: authState is AuthLoading ? null : () {
-                      // TODO: Implement Google login logic later
-                    },
-                    isSocial: true,
-                    color: BrandColors.background,
-                  ),
+                  const SizedBox(height: AppSizes.xxxxl),
+                  // Row(
+                  //   children: <Widget>[
+                  //     Expanded(
+                  //       child: Divider(
+                  //         thickness: 1, 
+                  //         color: BrandColors.divider,
+                  //       ),
+                  //     ),
+                  //     Padding(
+                  //       padding: const EdgeInsets.symmetric(horizontal: 10),
+                  //       child: Text(
+                  //         l10n.or,
+                  //         style: context.bodySecondary(bold: true),
+                  //       ),
+                  //     ),
+                  //     Expanded(
+                  //       child: Divider(
+                  //         thickness: 1, 
+                  //         color: BrandColors.divider,
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                  // const SizedBox(height: AppSizes.lg),
+                  // CustomButton(
+                  //   text: l10n.loginWithGoogle,
+                  //   onPressed: authState is AuthLoading ? null : () {
+                  //     // TODO: Implement Google login logic later
+                  //   },
+                  //   isSocial: true,
+                  //   color: BrandColors.background,
+                  // ),
                   const SizedBox(height: AppSizes.xxl),
                   Center(
                     child: RichText(
                       text: TextSpan(
                         text: "${l10n.dontHaveAccount} ",
-                        style: context.bodySecondary(),
+                        style: context.bodySecondary().copyWith(fontSize: AppSizes.fontSizeBodySmall),
                         children: [
                           TextSpan(
                             text: l10n.signUp,
-                            style: context.bodyPrimary(bold: true),
+                            style: context.bodyPrimary(bold: true).copyWith(fontSize: AppSizes.fontSizeBodySmall),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
                                 context.push(RouteName.register);

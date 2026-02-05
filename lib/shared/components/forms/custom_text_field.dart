@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../app/theme/app_sizes.dart';
+import '../../../app/theme/brand_colors.dart';
 
 /// Simple custom text field with theme-based styling
 class CustomTextField extends StatelessWidget {
@@ -26,7 +27,7 @@ class CustomTextField extends StatelessWidget {
     this.inputType,
     this.maxLines,
     this.filled = false,
-    this.subtle = false,
+    this.subtle = true,
   });
 
   @override
@@ -37,32 +38,38 @@ class CustomTextField extends StatelessWidget {
     // When obscureText is true, maxLines must be 1
     final effectiveMaxLines = obscureText ? 1 : (maxLines ?? 1);
     
-    // Subtle mode: muted colors and smaller font
-    final labelColor = subtle 
-        ? colorScheme.onSurfaceVariant.withOpacity(0.7)
+    // Match dropdown label: bodySmall, inputPlaceholder, normal weight
+    final labelColor = subtle
+        ? BrandColors.inputPlaceholder
         : colorScheme.primary;
-    
-    final iconColor = subtle 
-        ? colorScheme.onSurfaceVariant.withOpacity(0.7)
+    final iconColor = subtle
+        ? BrandColors.inputPlaceholder
         : colorScheme.primary;
-    
-    // Use smaller text style for subtle mode
+
     final labelStyle = subtle
         ? theme.textTheme.bodySmall?.copyWith(
-            color: labelColor,
+            color: BrandColors.inputPlaceholder,
             fontWeight: FontWeight.normal,
           )
-        : theme.textTheme.bodyLarge?.copyWith(
+        : theme.textTheme.bodyMedium?.copyWith(
             color: labelColor,
             fontWeight: FontWeight.w500,
+            fontSize: AppSizes.fontSizeBody,
           );
+    final floatingLabelStyle = theme.textTheme.bodySmall?.copyWith(
+      color: labelColor,
+      fontWeight: FontWeight.w700,
+      fontSize: AppSizes.fontSizeBodySmall,
+    );
     
     final inputStyle = subtle
         ? theme.textTheme.bodyMedium?.copyWith(
             color: colorScheme.onSurface,
+            fontSize: AppSizes.fontSizeBody,
           )
-        : theme.textTheme.bodyLarge?.copyWith(
+        : theme.textTheme.bodyMedium?.copyWith(
             color: colorScheme.onSurface,
+            fontSize: AppSizes.fontSizeBody,
           );
     
     return SizedBox(
@@ -77,7 +84,7 @@ class CustomTextField extends StatelessWidget {
           prefixIcon: prefixIcon != null
               ? Icon(
                   prefixIcon, 
-                  size: subtle ? 18 : AppSizes.iconSize,
+                  size: subtle ? AppSizes.iconSizeSm : AppSizes.iconSize,
                   color: iconColor,
                 )
               : null,
@@ -85,11 +92,10 @@ class CustomTextField extends StatelessWidget {
           filled: filled,
           fillColor: filled ? colorScheme.surfaceContainerHighest : null,
           labelStyle: labelStyle,
+          floatingLabelStyle: floatingLabelStyle,
           // Make the field more compact when subtle
           isDense: subtle,
-          contentPadding: subtle 
-              ? const EdgeInsets.symmetric(horizontal: 12, vertical: 12)
-              : null,
+          contentPadding: const EdgeInsets.symmetric(horizontal: AppSizes.md, vertical: AppSizes.contentPaddingInput),
         ),
         style: inputStyle,
       ),

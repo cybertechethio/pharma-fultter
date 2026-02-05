@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../app/theme/app_sizes.dart';
+import '../../../../app/theme/brand_colors.dart';
 import '../../../../features/branch/domain/entities/branch.dart';
 import '../../../../features/auth/presentation/providers/auth_providers.dart';
 
@@ -24,6 +26,7 @@ class DrawerBranchSwitcher extends ConsumerStatefulWidget {
 class _DrawerBranchSwitcherState extends ConsumerState<DrawerBranchSwitcher>
     with SingleTickerProviderStateMixin {
   bool _isExpanded = false;
+  bool _isHovered = false;
   late AnimationController _rotationController;
   late Animation<double> _rotationAnimation;
 
@@ -62,191 +65,122 @@ class _DrawerBranchSwitcherState extends ConsumerState<DrawerBranchSwitcher>
     final colorScheme = theme.colorScheme;
     final branchesAsync = ref.watch(localBranchesProviderProvider);
 
+    final isActive = _isExpanded || _isHovered;
+
     return Padding(
-      padding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOutCubic,
-        decoration: BoxDecoration(
-          color: _isExpanded
-              ? colorScheme.surfaceContainerHighest.withOpacity(0.5)
-              : colorScheme.surfaceContainerHighest.withOpacity(0.3),
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(
+      padding: const EdgeInsets.symmetric(horizontal: AppSizes.md, vertical: AppSizes.xxs),
+      child: MouseRegion(
+        onEnter: (_) => setState(() => _isHovered = true),
+        onExit: (_) => setState(() => _isHovered = false),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          curve: Curves.easeOutCubic,
+          decoration: BoxDecoration(
             color: _isExpanded
-                ? colorScheme.primary.withOpacity(0.3)
-                : colorScheme.outlineVariant.withOpacity(0.3),
-            width: 1,
+                ? colorScheme.surfaceContainerHighest.withOpacity(0.4)
+                : _isHovered
+                    ? colorScheme.surfaceContainerHighest.withOpacity(0.4)
+                    : BrandColors.transparent,
+            borderRadius: BorderRadius.circular(AppSizes.radius),
           ),
-        ),
-        child: Column(
-          children: [
-            // Header (always visible)
-            Material(
-              color: Colors.transparent,
-              child: InkWell(
-                onTap: _toggleExpand,
-                borderRadius: BorderRadius.circular(16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Material(
+                color: BrandColors.transparent,
+                child: InkWell(
+                  onTap: _toggleExpand,
+                  borderRadius: BorderRadius.circular(AppSizes.radius),
                 child: Padding(
-                  padding: const EdgeInsets.all(14),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSizes.md2,
+                    vertical: AppSizes.sm,
+                  ),
                   child: Row(
                     children: [
-                      // Branch Icon
-                      Container(
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                              colorScheme.tertiary,
-                              colorScheme.tertiary.withOpacity(0.7),
-                            ],
-                          ),
-                          borderRadius: BorderRadius.circular(12),
-                          boxShadow: [
-                            BoxShadow(
-                              color: colorScheme.tertiary.withOpacity(0.25),
-                              blurRadius: 8,
-                              offset: const Offset(0, 2),
-                            ),
-                          ],
-                        ),
-                        child: Icon(
-                          Icons.storefront_rounded,
-                          size: 20,
-                          color: colorScheme.onTertiary,
+                      // Icon - brand color, 50% opacity when inactive (match other drawer items)
+                      Icon(
+                        Icons.storefront_outlined,
+                        size: AppSizes.iconSizeLg - 2,
+                        color: BrandColors.primary.withValues(
+                          alpha: isActive ? 1.0 : 0.5,
                         ),
                       ),
-                      const SizedBox(width: 14),
-                      // Branch Info
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Current Branch',
-                              style: theme.textTheme.labelSmall?.copyWith(
-                                color: colorScheme.onSurfaceVariant,
-                                fontWeight: FontWeight.w500,
-                              ),
+                      const SizedBox(width: AppSizes.md2),
+                        // Selected branch name only
+                        Expanded(
+                          child: Text(
+                            widget.activeBranchName ?? 'Select Branch',
+                            style: theme.textTheme.bodyMedium?.copyWith(
+                              fontWeight:
+                                  isActive ? FontWeight.w600 : FontWeight.w500,
+                              color: isActive
+                                  ? colorScheme.onSurface
+                                  : colorScheme.onSurfaceVariant,
+                              letterSpacing: 0.1,
                             ),
-                            const SizedBox(height: 2),
-                            Text(
-                              widget.activeBranchName ?? 'Select Branch',
-                              style: theme.textTheme.titleSmall?.copyWith(
-                                fontWeight: FontWeight.w600,
-                                color: colorScheme.onSurface,
-                              ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ],
-                        ),
-                      ),
-                      // Expand Icon
-                      RotationTransition(
-                        turns: _rotationAnimation,
-                        child: Container(
-                          padding: const EdgeInsets.all(6),
-                          decoration: BoxDecoration(
-                            color: colorScheme.surfaceContainerHighest,
-                            shape: BoxShape.circle,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
+                        ),
+                        // Expand Icon
+                        RotationTransition(
+                          turns: _rotationAnimation,
                           child: Icon(
-                            Icons.keyboard_arrow_down_rounded,
+                            Icons.keyboard_arrow_down_outlined,
                             size: 20,
                             color: colorScheme.onSurfaceVariant,
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            // Expandable Branch List
-            AnimatedCrossFade(
-              firstChild: const SizedBox.shrink(),
-              secondChild: _buildBranchList(branchesAsync),
-              crossFadeState: _isExpanded
-                  ? CrossFadeState.showSecond
-                  : CrossFadeState.showFirst,
-              duration: const Duration(milliseconds: 300),
-              sizeCurve: Curves.easeInOutCubic,
-            ),
-          ],
+              // Expandable Branch List
+              AnimatedCrossFade(
+                firstChild: const SizedBox.shrink(),
+                secondChild: _buildBranchList(branchesAsync),
+                crossFadeState: _isExpanded
+                    ? CrossFadeState.showSecond
+                    : CrossFadeState.showFirst,
+                duration: const Duration(milliseconds: 300),
+                sizeCurve: Curves.easeInOutCubic,
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
   Widget _buildBranchList(AsyncValue<List<Branch>?> branchesAsync) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-
     return branchesAsync.when(
       loading: () => Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(AppSizes.lg),
         child: Center(
           child: SizedBox(
-            width: 24,
-            height: 24,
-            child: CircularProgressIndicator(
-              strokeWidth: 2,
-              color: colorScheme.primary,
-            ),
+            width: AppSizes.iconSize,
+            height: AppSizes.iconSize,
+            child: const CircularProgressIndicator(strokeWidth: AppSizes.loaderStrokeWidth),
           ),
         ),
       ),
-      error: (error, stack) => Padding(
-        padding: const EdgeInsets.all(16),
-        child: Text(
-          'Failed to load branches',
-          style: theme.textTheme.bodySmall?.copyWith(
-            color: colorScheme.error,
-          ),
-        ),
-      ),
+      error: (error, stack) => const SizedBox.shrink(),
       data: (branches) {
-        if (branches == null || branches.isEmpty) {
-          return Padding(
-            padding: const EdgeInsets.all(16),
-            child: Text(
-              'No branches available',
-              style: theme.textTheme.bodySmall?.copyWith(
-                color: colorScheme.onSurfaceVariant,
-              ),
-            ),
-          );
-        }
+        if (branches == null || branches.isEmpty) return const SizedBox.shrink();
 
-        // Filter out active branch
-        final availableBranches = branches
-            .where((b) => b.id != widget.activeBranchId)
-            .toList();
+        final availableBranches =
+            branches.where((b) => b.id != widget.activeBranchId).toList();
 
-        if (availableBranches.isEmpty) {
-          return Padding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-            child: Text(
-              'No other branches available',
-              style: theme.textTheme.bodySmall?.copyWith(
-                color: colorScheme.onSurfaceVariant,
-              ),
-            ),
-          );
-        }
+        if (availableBranches.isEmpty) return const SizedBox.shrink();
 
         return Column(
           children: [
-            Divider(
-              height: 1,
-              indent: 16,
-              endIndent: 16,
-              color: colorScheme.outlineVariant.withOpacity(0.5),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AppSizes.md2),
+              child: Divider(height: AppSizes.xxs, thickness: 0.5),
             ),
-            const SizedBox(height: 8),
             ...availableBranches.map((branch) => _BranchItem(
                   branch: branch,
                   onTap: () {
@@ -254,7 +188,7 @@ class _DrawerBranchSwitcherState extends ConsumerState<DrawerBranchSwitcher>
                     widget.onBranchSelected(branch);
                   },
                 )),
-            const SizedBox(height: 8),
+            const SizedBox(height: AppSizes.xs),
           ],
         );
       },
@@ -262,7 +196,7 @@ class _DrawerBranchSwitcherState extends ConsumerState<DrawerBranchSwitcher>
   }
 }
 
-class _BranchItem extends StatefulWidget {
+class _BranchItem extends StatelessWidget {
   final Branch branch;
   final VoidCallback onTap;
 
@@ -272,85 +206,60 @@ class _BranchItem extends StatefulWidget {
   });
 
   @override
-  State<_BranchItem> createState() => _BranchItemState();
-}
-
-class _BranchItemState extends State<_BranchItem> {
-  bool _isHovered = false;
-
-  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
-    return MouseRegion(
-      onEnter: (_) => setState(() => _isHovered = true),
-      onExit: (_) => setState(() => _isHovered = false),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 150),
-          decoration: BoxDecoration(
-            color: _isHovered
-                ? colorScheme.primaryContainer.withOpacity(0.4)
-                : Colors.transparent,
-            borderRadius: BorderRadius.circular(10),
+    return Material(
+      color: BrandColors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(AppSizes.radiusMd),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppSizes.md2,
+            vertical: AppSizes.sm2,
           ),
-          child: Material(
-            color: Colors.transparent,
-            child: InkWell(
-              onTap: widget.onTap,
-              borderRadius: BorderRadius.circular(10),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 10,
+          child: Row(
+            children: [
+              // Branch Icon Container
+              Container(
+                width: 36,
+                height: 36,
+                decoration: BoxDecoration(
+                  color: colorScheme.secondaryContainer,
+                  borderRadius: BorderRadius.circular(AppSizes.radiusMd),
                 ),
-                child: Row(
-                  children: [
-                    // Branch Avatar
-                    Container(
-                      width: 36,
-                      height: 36,
-                      decoration: BoxDecoration(
-                        color: colorScheme.secondaryContainer,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Center(
-                        child: Text(
-                          widget.branch.name.isNotEmpty
-                              ? widget.branch.name[0].toUpperCase()
-                              : '?',
-                          style: theme.textTheme.titleSmall?.copyWith(
-                            color: colorScheme.onSecondaryContainer,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ),
+                child: Center(
+                  child: Text(
+                    branch.name.isNotEmpty ? branch.name[0].toUpperCase() : '?',
+                    style: theme.textTheme.titleSmall?.copyWith(
+                      color: colorScheme.onSecondaryContainer,
+                      fontWeight: FontWeight.w700,
                     ),
-                    const SizedBox(width: 12),
-                    // Branch Name
-                    Expanded(
-                      child: Text(
-                        widget.branch.name,
-                        style: theme.textTheme.bodyMedium?.copyWith(
-                          fontWeight: FontWeight.w500,
-                          color: colorScheme.onSurface,
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    // Arrow
-                    Icon(
-                      Icons.arrow_forward_ios_rounded,
-                      size: 14,
-                      color: colorScheme.onSurfaceVariant.withOpacity(0.5),
-                    ),
-                  ],
+                  ),
                 ),
               ),
-            ),
+              const SizedBox(width: AppSizes.md),
+              // Branch Name
+              Expanded(
+                child: Text(
+                  branch.name,
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    fontWeight: FontWeight.w500,
+                    color: colorScheme.onSurface,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              // Arrow
+              Icon(
+                Icons.arrow_forward_ios_outlined,
+                size: AppSizes.md2,
+                color: colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
+              ),
+            ],
           ),
         ),
       ),

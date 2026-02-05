@@ -6,7 +6,7 @@ import 'brand_loading_providers.dart';
 
 part 'brand_notifier.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class BrandNotifier extends _$BrandNotifier {
   @override
   Future<List<BrandEntity>> build() async {
@@ -50,7 +50,7 @@ class BrandNotifier extends _$BrandNotifier {
         final current = state.value ?? const <BrandEntity>[];
         state = AsyncValue.data([created, ...current]);
         ref.read(brandUiEventsProvider.notifier).emit(
-          BrandCreated(created, 'Brand created successfully'),
+          BrandCreated(created, ''),
         );
       },
     );
@@ -82,7 +82,7 @@ class BrandNotifier extends _$BrandNotifier {
         if (idx != -1) list[idx] = updated;
         state = AsyncValue.data(list);
         ref.read(brandUiEventsProvider.notifier).emit(
-          BrandUpdated(updated, 'Brand updated successfully'),
+          BrandUpdated(updated, ''),
         );
       },
     );
@@ -108,7 +108,7 @@ class BrandNotifier extends _$BrandNotifier {
         list.removeWhere((e) => e.id == id);
         state = AsyncValue.data(list);
         ref.read(brandUiEventsProvider.notifier).emit(
-          BrandDeleted(id, 'Brand deleted successfully'),
+          BrandDeleted(id, ''),
         );
       },
     );

@@ -5,8 +5,9 @@ import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/components/common/card_title.dart';
 import '../../../../shared/components/common/delete_confirmation_dialog.dart';
 import '../../../../shared/components/ui/action_buttons.dart';
-import '../../../../app/theme/brand_colors.dart';
 import '../../../../app/theme/app_sizes.dart';
+import '../../../../app/theme/brand_colors.dart';
+import '../../../../app/theme/text_styles.dart';
 import '../../../../routes/route_name.dart';
 import '../../domain/entities/role.dart';
 import '../providers/role_notifier.dart';
@@ -41,7 +42,6 @@ class RoleCard extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final deleting = ref.watch(roleDeleteLoadingProvider).contains(item.id);
     final updating = ref.watch(roleUpdateLoadingProvider).contains(item.id);
-    final theme = Theme.of(context);
     final permissionCount = item.permissions.length;
 
     return InkWell(
@@ -76,10 +76,9 @@ class RoleCard extends ConsumerWidget {
                     const SizedBox(width: AppSizes.xs),
                     Text(
                       '$permissionCount',
-                      style: theme.textTheme.labelSmall?.copyWith(
+                      style: context.small(
                         color: BrandColors.primary,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 12,
+                        bold: true,
                       ),
                     ),
                   ],

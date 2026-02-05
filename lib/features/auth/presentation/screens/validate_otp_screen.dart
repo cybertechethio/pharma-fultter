@@ -107,11 +107,11 @@ class _ValidateOtpScreenState extends ConsumerState<ValidateOtpScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: BrandColors.transparent,
         elevation: 0,
         actions: [
           const LanguageToggleButton(),
-          const SizedBox(width: 8),
+          const SizedBox(width: AppSizes.sm),
         ],
       ),
       body: Center(
@@ -162,7 +162,7 @@ class _ValidateOtpScreenState extends ConsumerState<ValidateOtpScreen> {
                         onPressed: authState is AuthLoading ? null : _resendOtp,
                         child: Text(
                           l10n.resendOtp,
-                          style: context.bodyPrimary(),
+                          style: context.bodyPrimary().copyWith(fontSize: AppSizes.fontSizeBodySmall),
                         ),
                       ),
                       TextButton(
@@ -171,7 +171,7 @@ class _ValidateOtpScreenState extends ConsumerState<ValidateOtpScreen> {
                         },
                         child: Text(
                           l10n.editPhone,
-                          style: context.bodyPrimary(),
+                          style: context.bodyPrimary().copyWith(fontSize: AppSizes.fontSizeBodySmall),
                         ),
                       ),
                     ],
@@ -190,7 +190,7 @@ class _ValidateOtpScreenState extends ConsumerState<ValidateOtpScreen> {
                       children: [
                         Text(
                           l10n.didntReceiveCode,
-                          style: context.bodySecondary(bold: true),
+                          style: context.bodySecondary(bold: true).copyWith(fontSize: AppSizes.fontSizeBodySmall),
                         ),
                         const SizedBox(height: AppSizes.sm),
                         Text(

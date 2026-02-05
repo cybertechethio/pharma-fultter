@@ -10,6 +10,7 @@ import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/components/common/app_bar.dart';
 import '../../../../shared/components/forms/custom_text_field.dart';
 import '../../../../shared/components/forms/date_picker_field.dart';
+import '../../../../shared/components/forms/dropdown.dart';
 import '../../../../shared/components/forms/custom_button.dart';
 import '../../../../core/services/snackbar_service.dart';
 import '../../../../core/errors/failure.dart';
@@ -46,11 +47,13 @@ class _CompanyUpdateScreenState extends ConsumerState<CompanyUpdateScreen> {
   late final TextEditingController _cityController;
   late final TextEditingController _weredaController;
   late final TextEditingController _defaultStartDateController;
+  late final TextEditingController _businessTypeController;
   
   // State variables
   String? _logoFilePath;
   String? _logoUrl;
   late bool _autoPrint;
+  String? _businessType;
 
   @override
   void initState() {
@@ -67,8 +70,10 @@ class _CompanyUpdateScreenState extends ConsumerState<CompanyUpdateScreen> {
           ? widget.company.defaultStartDate!.toIso8601String().split('T')[0]
           : '',
     );
+    _businessTypeController = TextEditingController(text: widget.company.businessType ?? '');
     _logoUrl = widget.company.logoUrl;
     _autoPrint = widget.company.autoPrint;
+    _businessType = widget.company.businessType;
   }
 
   @override
@@ -81,6 +86,7 @@ class _CompanyUpdateScreenState extends ConsumerState<CompanyUpdateScreen> {
     _cityController.dispose();
     _weredaController.dispose();
     _defaultStartDateController.dispose();
+    _businessTypeController.dispose();
     super.dispose();
   }
 
@@ -165,6 +171,7 @@ class _CompanyUpdateScreenState extends ConsumerState<CompanyUpdateScreen> {
       logoUrl: _logoUrl, // Will be updated after upload if _logoFilePath is set
       autoPrint: _autoPrint,
       defaultStartDate: defaultStartDate,
+      businessType: _businessType,
     );
 
     await ref.read(companyProvider.notifier).updateCompany(
@@ -288,6 +295,25 @@ class _CompanyUpdateScreenState extends ConsumerState<CompanyUpdateScreen> {
                     controller: _tinNumberController,
                     prefixIcon: Icons.badge,
                   ),
+                  const SizedBox(height: AppSizes.md),
+                  CustomDropdown<String?>(
+                    value: _businessType,
+                    items: [
+                      DropdownItem<String?>(value: null, label: l10n.none),
+                      DropdownItem<String?>(value: 'BAKERY', label: l10n.bakery),
+                      DropdownItem<String?>(value: 'PHARMACY', label: l10n.pharmacy),
+                      DropdownItem<String?>(value: 'SUPERMARKET', label: l10n.supermarket),
+                      DropdownItem<String?>(value: 'RETAIL', label: l10n.retail),
+                      DropdownItem<String?>(value: 'CAFE', label: l10n.cafe),
+                    ],
+                    onChanged: (value) {
+                      setState(() {
+                        _businessType = value;
+                      });
+                    },
+                    label: l10n.businessType,
+                    hintText: l10n.selectBusinessType,
+                  ),
                 ],
               ),
 
@@ -346,10 +372,10 @@ class _CompanyUpdateScreenState extends ConsumerState<CompanyUpdateScreen> {
       elevation: 1,
       color: BrandColors.background,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(AppSizes.radiusSm),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.all(AppSizes.md),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -359,7 +385,7 @@ class _CompanyUpdateScreenState extends ConsumerState<CompanyUpdateScreen> {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: AppSizes.md),
             ...children,
           ],
         ),
@@ -381,7 +407,7 @@ class _CompanyUpdateScreenState extends ConsumerState<CompanyUpdateScreen> {
             color: colorScheme.onSurfaceVariant,
           ),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: AppSizes.sm),
         Row(
           children: [
             // Logo Preview
@@ -390,11 +416,11 @@ class _CompanyUpdateScreenState extends ConsumerState<CompanyUpdateScreen> {
                 width: 80,
                 height: 80,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(AppSizes.radiusSm),
                   border: Border.all(color: colorScheme.outline),
                 ),
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(AppSizes.radiusSm),
                       child: _logoFilePath != null
                           ? Image.file(
                               File(_logoFilePath!),
@@ -411,7 +437,7 @@ class _CompanyUpdateScreenState extends ConsumerState<CompanyUpdateScreen> {
                 height: 80,
                 decoration: BoxDecoration(
                   color: colorScheme.surfaceVariant,
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(AppSizes.radiusSm),
                   border: Border.all(color: colorScheme.outline),
                 ),
                 child: Icon(
@@ -419,19 +445,19 @@ class _CompanyUpdateScreenState extends ConsumerState<CompanyUpdateScreen> {
                   color: colorScheme.onSurfaceVariant,
                 ),
               ),
-            const SizedBox(width: 12),
+            const SizedBox(width: AppSizes.md),
             Expanded(
               child: OutlinedButton.icon(
                 onPressed: _pickLogo,
                 icon: const Icon(Icons.upload),
                 label: Text(l10n.uploadLogo),
                 style: OutlinedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  padding: const EdgeInsets.symmetric(vertical: AppSizes.md),
                 ),
               ),
             ),
             if (_logoFilePath != null || _logoUrl != null) ...[
-              const SizedBox(width: 8),
+              const SizedBox(width: AppSizes.sm),
               IconButton(
                 onPressed: () {
                   setState(() {

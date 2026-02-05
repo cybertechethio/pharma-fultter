@@ -4,24 +4,26 @@ import '../../../../l10n/app_localizations.dart';
 import '../../../../core/services/snackbar_service.dart';
 import '../../../../shared/components/dialogs/standard_form_dialog.dart';
 import '../../../../shared/components/forms/custom_text_field.dart';
-import '../../../../shared/components/forms/dropdown.dart';
-import '../../../../app/theme/app_sizes.dart';
+import '../../../../shared/components/forms/date_picker_field.dart';
 import '../../domain/entities/batch.dart';
+import '../../domain/entities/batch_input.dart';
 import '../providers/batch_notifier.dart';
 import '../providers/batch_loading_providers.dart';
 import '../providers/batch_events.dart';
-import '../../../item/presentation/providers/item_notifier.dart';
 
 class BatchFormDialog extends ConsumerStatefulWidget {
   final String title;
   final String buttonText;
   final BatchEntity? initial;
+  /// Required when creating a batch (e.g. from BatchListScreen).
+  final int? itemId;
 
   const BatchFormDialog({
     super.key,
     required this.title,
     required this.buttonText,
     this.initial,
+    this.itemId,
   });
 
   @override
@@ -31,19 +33,60 @@ class BatchFormDialog extends ConsumerStatefulWidget {
 class _BatchFormDialogState extends ConsumerState<BatchFormDialog> {
   final _formKey = GlobalKey<FormState>();
   late final TextEditingController _batchName;
-  int? _selectedItemId;
+  late final TextEditingController _costPrice;
+  late final TextEditingController _unitPrice;
+  late final TextEditingController _expirationDate;
+  late final TextEditingController _manufacturingDate;
+  late final TextEditingController _supplierBatchNumber;
+  late final TextEditingController _notes;
+
+  static String _dateToIsoDate(DateTime? d) =>
+      d != null ? d.toIso8601String().split('T').first : '';
 
   @override
   void initState() {
     super.initState();
-    _batchName = TextEditingController(text: widget.initial?.batchName ?? '');
-    _selectedItemId = widget.initial?.itemId;
+    final initial = widget.initial;
+    _batchName = TextEditingController(text: initial?.batchName ?? '');
+    _costPrice = TextEditingController(
+      text: initial?.costPrice != null ? initial!.costPrice!.toString() : '',
+    );
+    _unitPrice = TextEditingController(
+      text: initial?.unitPrice != null ? initial!.unitPrice!.toString() : '',
+    );
+    _expirationDate = TextEditingController(
+      text: _dateToIsoDate(initial?.expirationDate),
+    );
+    _manufacturingDate = TextEditingController(
+      text: _dateToIsoDate(initial?.manufacturingDate),
+    );
+    _supplierBatchNumber = TextEditingController(
+      text: initial?.supplierBatchNumber ?? '',
+    );
+    _notes = TextEditingController(text: initial?.notes ?? '');
   }
 
   @override
   void dispose() {
     _batchName.dispose();
+    _costPrice.dispose();
+    _unitPrice.dispose();
+    _expirationDate.dispose();
+    _manufacturingDate.dispose();
+    _supplierBatchNumber.dispose();
+    _notes.dispose();
     super.dispose();
+  }
+
+  double? _parseDouble(String s) {
+    final t = s.trim();
+    if (t.isEmpty) return null;
+    return double.tryParse(t);
+  }
+
+  String? _opt(String s) {
+    final t = s.trim();
+    return t.isEmpty ? null : t;
   }
 
   @override
@@ -55,9 +98,6 @@ class _BatchFormDialogState extends ConsumerState<BatchFormDialog> {
     final isEditing = widget.initial != null;
     final isUpdating = isEditing && updatingSet.contains(widget.initial!.id);
 
-    // Get items for dropdown
-    final itemsAsync = ref.watch(itemProvider);
-
     return StandardFormDialog(
       title: widget.title,
       buttonText: widget.buttonText,
@@ -65,74 +105,115 @@ class _BatchFormDialogState extends ConsumerState<BatchFormDialog> {
       isLoading: creating || isUpdating,
       loadingText: isEditing ? l10n.updating : l10n.creating,
       onSubmit: () async {
-        if (!isEditing && _selectedItemId == null) {
-          snackbar.showWarning('Please select an item');
+        if (!_formKey.currentState!.validate()) return;
+        if (!isEditing && widget.itemId == null) {
+          snackbar.showWarning('Item is required to create a batch');
+          return;
+        }
+        final cost = _parseDouble(_costPrice.text);
+        final unit = _parseDouble(_unitPrice.text);
+        if (cost == null || cost < 0) {
+          snackbar.showWarning(l10n.costPriceRequired);
+          return;
+        }
+        if (unit == null || unit < 0) {
+          snackbar.showWarning(l10n.unitPriceRequired);
+          return;
+        }
+        if (unit < cost) {
+          snackbar.showWarning(l10n.unitPriceMustBeGreaterThanOrEqualToCostPrice);
           return;
         }
         if (!mounted) return;
+        final notifierItemId =
+            isEditing ? widget.initial!.itemId : widget.itemId!;
+        final notifier = ref.read(batchProvider(notifierItemId).notifier);
+        final input = BatchInput(
+          itemId: isEditing ? null : widget.itemId,
+          batchName: _batchName.text.trim(),
+          costPrice: cost,
+          unitPrice: unit,
+          expirationDate: _opt(_expirationDate.text),
+          manufacturingDate: _opt(_manufacturingDate.text),
+          supplierBatchNumber: _opt(_supplierBatchNumber.text),
+          notes: _opt(_notes.text),
+        );
         if (isEditing) {
-          await ref.read(batchProvider.notifier).updateBatch(
-                id: widget.initial!.id,
-                batchName: _batchName.text.trim(),
-              );
+          await notifier.updateBatch(widget.initial!.id, input);
         } else {
-          await ref.read(batchProvider.notifier).create(
-                itemId: _selectedItemId!,
-                batchName: _batchName.text.trim(),
-              );
+          await notifier.create(input);
         }
       },
       formFieldsBuilder: (context, l10n) {
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Item Dropdown (only show when creating, not when editing)
-            if (!isEditing) ...[
-              itemsAsync.when(
-                loading: () => const CircularProgressIndicator(),
-                data: (items) {
-                  // Convert item String id to int for comparison
-                  final itemList = items
-                      .map((item) {
-                        final itemIdInt = int.tryParse(item.id);
-                        if (itemIdInt == null) return null;
-                        return DropdownItem<int>(
-                          value: itemIdInt,
-                          label: '${item.name} (${item.code})',
-                        );
-                      })
-                      .whereType<DropdownItem<int>>()
-                      .toList();
-
-                  return CustomDropdown<int>(
-                    value: _selectedItemId,
-                    items: itemList,
-                    onChanged: (value) {
-                      setState(() {
-                        _selectedItemId = value;
-                      });
-                    },
-                    label: l10n.item,
-                    hintText: 'Select an item',
-                    required: true,
-                  );
+        return SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              CustomTextField(
+                labelText: l10n.batchName,
+                controller: _batchName,
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return l10n.batchNameRequired;
+                  }
+                  return null;
                 },
-                error: (error, stack) => Text('Error loading items: $error'),
               ),
-              const SizedBox(height: AppSizes.md),
+              const SizedBox(height: 12),
+              CustomTextField(
+                labelText: l10n.costPrice,
+                controller: _costPrice,
+                inputType: TextInputType.number,
+                validator: (value) {
+                  final n = _parseDouble(value ?? '');
+                  if (n == null) return l10n.costPriceRequired;
+                  if (n < 0) return l10n.costPriceMustBeGreaterThanZero;
+                  return null;
+                },
+              ),
+              const SizedBox(height: 12),
+              CustomTextField(
+                labelText: l10n.unitPrice,
+                controller: _unitPrice,
+                inputType: TextInputType.number,
+                validator: (value) {
+                  final n = _parseDouble(value ?? '');
+                  if (n == null) return l10n.unitPriceRequired;
+                  if (n < 0) return l10n.unitPriceMustBeGreaterThanZero;
+                  final costVal = _parseDouble(_costPrice.text);
+                  if (costVal != null && n < costVal) {
+                    return l10n.unitPriceMustBeGreaterThanOrEqualToCostPrice;
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 12),
+              CustomTextField(
+                labelText: l10n.supplierBatchNumber,
+                controller: _supplierBatchNumber,
+                validator: (value) => null,
+              ),
+              const SizedBox(height: 12),
+              CustomTextField(
+                labelText: l10n.notes,
+                controller: _notes,
+                prefixIcon: Icons.notes_outlined,
+                maxLines: 3,
+              ),
+              const SizedBox(height: 12),
+              DatePickerField(
+                labelText: l10n.expirationDate,
+                controller: _expirationDate,
+                prefixIcon: Icons.calendar_today_outlined,
+              ),
+              const SizedBox(height: 12),
+              DatePickerField(
+                labelText: l10n.manufacturingDate,
+                controller: _manufacturingDate,
+                prefixIcon: Icons.date_range_outlined,
+              ),
             ],
-            // Batch Name Field
-            CustomTextField(
-              labelText: l10n.batchName,
-              controller: _batchName,
-              validator: (value) {
-                if (value == null || value.trim().isEmpty) {
-                  return l10n.batchNameRequired;
-                }
-                return null;
-              },
-            ),
-          ],
+          ),
         );
       },
       eventProvider: batchUiEventsProvider,

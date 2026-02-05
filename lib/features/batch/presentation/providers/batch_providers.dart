@@ -4,8 +4,11 @@ import '../../data/datasources/batch_remote_data_source.dart';
 import '../../data/datasources/batch_remote_data_source_impl.dart';
 import '../../data/repositories/batch_repository_impl.dart';
 import '../../domain/repositories/batch_repository.dart';
-import '../../domain/usecases/get_batches_usecase.dart';
+import '../../domain/usecases/consolidate_batch_usecase.dart';
 import '../../domain/usecases/create_batch_usecase.dart';
+import '../../domain/usecases/get_batches_by_item_usecase.dart';
+import '../../domain/usecases/split_batch_usecase.dart';
+import '../../domain/usecases/transfer_batch_usecase.dart';
 import '../../domain/usecases/update_batch_usecase.dart';
 
 part 'batch_providers.g.dart';
@@ -30,8 +33,8 @@ BatchRepository batchRepository(Ref ref) {
 }
 
 @riverpod
-GetBatchesUseCase getBatchesUseCase(Ref ref) {
-  return GetBatchesUseCase(
+GetBatchesByItemUseCase getBatchesByItemUseCase(Ref ref) {
+  return GetBatchesByItemUseCase(
     ref.watch(batchRepositoryProvider),
   );
 }
@@ -48,5 +51,20 @@ UpdateBatchUseCase updateBatchUseCase(Ref ref) {
   return UpdateBatchUseCase(
     ref.watch(batchRepositoryProvider),
   );
+}
+
+@riverpod
+TransferBatchUseCase transferBatchUseCase(Ref ref) {
+  return TransferBatchUseCase(ref.watch(batchRepositoryProvider));
+}
+
+@riverpod
+ConsolidateBatchUseCase consolidateBatchUseCase(Ref ref) {
+  return ConsolidateBatchUseCase(ref.watch(batchRepositoryProvider));
+}
+
+@riverpod
+SplitBatchUseCase splitBatchUseCase(Ref ref) {
+  return SplitBatchUseCase(ref.watch(batchRepositoryProvider));
 }
 

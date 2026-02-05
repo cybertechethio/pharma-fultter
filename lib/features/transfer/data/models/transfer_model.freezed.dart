@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$TransferModel {
 
- int get destinationBranchId; int? get relatedTransferId; String? get notes; List<TransferItemModel> get items;
+ int get id; int get companyId; String get transferType; String get transferNumber; String get status; int? get sourceBranchId; String? get sourceBranch; int? get destinationBranchId; String? get destinationBranch; int? get relatedTransferId; int? get transferId; String? get notes; DateTime get createdAt; DateTime get updatedAt; int? get createdBy; int? get updatedBy; String? get creatorName; String? get updatorName; List<TransferItemModel> get transferItems;
 /// Create a copy of TransferModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $TransferModelCopyWith<TransferModel> get copyWith => _$TransferModelCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TransferModel&&(identical(other.destinationBranchId, destinationBranchId) || other.destinationBranchId == destinationBranchId)&&(identical(other.relatedTransferId, relatedTransferId) || other.relatedTransferId == relatedTransferId)&&(identical(other.notes, notes) || other.notes == notes)&&const DeepCollectionEquality().equals(other.items, items));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TransferModel&&(identical(other.id, id) || other.id == id)&&(identical(other.companyId, companyId) || other.companyId == companyId)&&(identical(other.transferType, transferType) || other.transferType == transferType)&&(identical(other.transferNumber, transferNumber) || other.transferNumber == transferNumber)&&(identical(other.status, status) || other.status == status)&&(identical(other.sourceBranchId, sourceBranchId) || other.sourceBranchId == sourceBranchId)&&(identical(other.sourceBranch, sourceBranch) || other.sourceBranch == sourceBranch)&&(identical(other.destinationBranchId, destinationBranchId) || other.destinationBranchId == destinationBranchId)&&(identical(other.destinationBranch, destinationBranch) || other.destinationBranch == destinationBranch)&&(identical(other.relatedTransferId, relatedTransferId) || other.relatedTransferId == relatedTransferId)&&(identical(other.transferId, transferId) || other.transferId == transferId)&&(identical(other.notes, notes) || other.notes == notes)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.createdBy, createdBy) || other.createdBy == createdBy)&&(identical(other.updatedBy, updatedBy) || other.updatedBy == updatedBy)&&(identical(other.creatorName, creatorName) || other.creatorName == creatorName)&&(identical(other.updatorName, updatorName) || other.updatorName == updatorName)&&const DeepCollectionEquality().equals(other.transferItems, transferItems));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,destinationBranchId,relatedTransferId,notes,const DeepCollectionEquality().hash(items));
+int get hashCode => Object.hashAll([runtimeType,id,companyId,transferType,transferNumber,status,sourceBranchId,sourceBranch,destinationBranchId,destinationBranch,relatedTransferId,transferId,notes,createdAt,updatedAt,createdBy,updatedBy,creatorName,updatorName,const DeepCollectionEquality().hash(transferItems)]);
 
 @override
 String toString() {
-  return 'TransferModel(destinationBranchId: $destinationBranchId, relatedTransferId: $relatedTransferId, notes: $notes, items: $items)';
+  return 'TransferModel(id: $id, companyId: $companyId, transferType: $transferType, transferNumber: $transferNumber, status: $status, sourceBranchId: $sourceBranchId, sourceBranch: $sourceBranch, destinationBranchId: $destinationBranchId, destinationBranch: $destinationBranch, relatedTransferId: $relatedTransferId, transferId: $transferId, notes: $notes, createdAt: $createdAt, updatedAt: $updatedAt, createdBy: $createdBy, updatedBy: $updatedBy, creatorName: $creatorName, updatorName: $updatorName, transferItems: $transferItems)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $TransferModelCopyWith<$Res>  {
   factory $TransferModelCopyWith(TransferModel value, $Res Function(TransferModel) _then) = _$TransferModelCopyWithImpl;
 @useResult
 $Res call({
- int destinationBranchId, int? relatedTransferId, String? notes, List<TransferItemModel> items
+ int id, int companyId, String transferType, String transferNumber, String status, int? sourceBranchId, String? sourceBranch, int? destinationBranchId, String? destinationBranch, int? relatedTransferId, int? transferId, String? notes, DateTime createdAt, DateTime updatedAt, int? createdBy, int? updatedBy, String? creatorName, String? updatorName, List<TransferItemModel> transferItems
 });
 
 
@@ -65,12 +65,27 @@ class _$TransferModelCopyWithImpl<$Res>
 
 /// Create a copy of TransferModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? destinationBranchId = null,Object? relatedTransferId = freezed,Object? notes = freezed,Object? items = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? companyId = null,Object? transferType = null,Object? transferNumber = null,Object? status = null,Object? sourceBranchId = freezed,Object? sourceBranch = freezed,Object? destinationBranchId = freezed,Object? destinationBranch = freezed,Object? relatedTransferId = freezed,Object? transferId = freezed,Object? notes = freezed,Object? createdAt = null,Object? updatedAt = null,Object? createdBy = freezed,Object? updatedBy = freezed,Object? creatorName = freezed,Object? updatorName = freezed,Object? transferItems = null,}) {
   return _then(_self.copyWith(
-destinationBranchId: null == destinationBranchId ? _self.destinationBranchId : destinationBranchId // ignore: cast_nullable_to_non_nullable
-as int,relatedTransferId: freezed == relatedTransferId ? _self.relatedTransferId : relatedTransferId // ignore: cast_nullable_to_non_nullable
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int,companyId: null == companyId ? _self.companyId : companyId // ignore: cast_nullable_to_non_nullable
+as int,transferType: null == transferType ? _self.transferType : transferType // ignore: cast_nullable_to_non_nullable
+as String,transferNumber: null == transferNumber ? _self.transferNumber : transferNumber // ignore: cast_nullable_to_non_nullable
+as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as String,sourceBranchId: freezed == sourceBranchId ? _self.sourceBranchId : sourceBranchId // ignore: cast_nullable_to_non_nullable
+as int?,sourceBranch: freezed == sourceBranch ? _self.sourceBranch : sourceBranch // ignore: cast_nullable_to_non_nullable
+as String?,destinationBranchId: freezed == destinationBranchId ? _self.destinationBranchId : destinationBranchId // ignore: cast_nullable_to_non_nullable
+as int?,destinationBranch: freezed == destinationBranch ? _self.destinationBranch : destinationBranch // ignore: cast_nullable_to_non_nullable
+as String?,relatedTransferId: freezed == relatedTransferId ? _self.relatedTransferId : relatedTransferId // ignore: cast_nullable_to_non_nullable
+as int?,transferId: freezed == transferId ? _self.transferId : transferId // ignore: cast_nullable_to_non_nullable
 as int?,notes: freezed == notes ? _self.notes : notes // ignore: cast_nullable_to_non_nullable
-as String?,items: null == items ? _self.items : items // ignore: cast_nullable_to_non_nullable
+as String?,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as DateTime,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
+as DateTime,createdBy: freezed == createdBy ? _self.createdBy : createdBy // ignore: cast_nullable_to_non_nullable
+as int?,updatedBy: freezed == updatedBy ? _self.updatedBy : updatedBy // ignore: cast_nullable_to_non_nullable
+as int?,creatorName: freezed == creatorName ? _self.creatorName : creatorName // ignore: cast_nullable_to_non_nullable
+as String?,updatorName: freezed == updatorName ? _self.updatorName : updatorName // ignore: cast_nullable_to_non_nullable
+as String?,transferItems: null == transferItems ? _self.transferItems : transferItems // ignore: cast_nullable_to_non_nullable
 as List<TransferItemModel>,
   ));
 }
@@ -153,10 +168,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int destinationBranchId,  int? relatedTransferId,  String? notes,  List<TransferItemModel> items)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  int companyId,  String transferType,  String transferNumber,  String status,  int? sourceBranchId,  String? sourceBranch,  int? destinationBranchId,  String? destinationBranch,  int? relatedTransferId,  int? transferId,  String? notes,  DateTime createdAt,  DateTime updatedAt,  int? createdBy,  int? updatedBy,  String? creatorName,  String? updatorName,  List<TransferItemModel> transferItems)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _TransferModel() when $default != null:
-return $default(_that.destinationBranchId,_that.relatedTransferId,_that.notes,_that.items);case _:
+return $default(_that.id,_that.companyId,_that.transferType,_that.transferNumber,_that.status,_that.sourceBranchId,_that.sourceBranch,_that.destinationBranchId,_that.destinationBranch,_that.relatedTransferId,_that.transferId,_that.notes,_that.createdAt,_that.updatedAt,_that.createdBy,_that.updatedBy,_that.creatorName,_that.updatorName,_that.transferItems);case _:
   return orElse();
 
 }
@@ -174,10 +189,10 @@ return $default(_that.destinationBranchId,_that.relatedTransferId,_that.notes,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int destinationBranchId,  int? relatedTransferId,  String? notes,  List<TransferItemModel> items)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  int companyId,  String transferType,  String transferNumber,  String status,  int? sourceBranchId,  String? sourceBranch,  int? destinationBranchId,  String? destinationBranch,  int? relatedTransferId,  int? transferId,  String? notes,  DateTime createdAt,  DateTime updatedAt,  int? createdBy,  int? updatedBy,  String? creatorName,  String? updatorName,  List<TransferItemModel> transferItems)  $default,) {final _that = this;
 switch (_that) {
 case _TransferModel():
-return $default(_that.destinationBranchId,_that.relatedTransferId,_that.notes,_that.items);}
+return $default(_that.id,_that.companyId,_that.transferType,_that.transferNumber,_that.status,_that.sourceBranchId,_that.sourceBranch,_that.destinationBranchId,_that.destinationBranch,_that.relatedTransferId,_that.transferId,_that.notes,_that.createdAt,_that.updatedAt,_that.createdBy,_that.updatedBy,_that.creatorName,_that.updatorName,_that.transferItems);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -191,10 +206,10 @@ return $default(_that.destinationBranchId,_that.relatedTransferId,_that.notes,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int destinationBranchId,  int? relatedTransferId,  String? notes,  List<TransferItemModel> items)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  int companyId,  String transferType,  String transferNumber,  String status,  int? sourceBranchId,  String? sourceBranch,  int? destinationBranchId,  String? destinationBranch,  int? relatedTransferId,  int? transferId,  String? notes,  DateTime createdAt,  DateTime updatedAt,  int? createdBy,  int? updatedBy,  String? creatorName,  String? updatorName,  List<TransferItemModel> transferItems)?  $default,) {final _that = this;
 switch (_that) {
 case _TransferModel() when $default != null:
-return $default(_that.destinationBranchId,_that.relatedTransferId,_that.notes,_that.items);case _:
+return $default(_that.id,_that.companyId,_that.transferType,_that.transferNumber,_that.status,_that.sourceBranchId,_that.sourceBranch,_that.destinationBranchId,_that.destinationBranch,_that.relatedTransferId,_that.transferId,_that.notes,_that.createdAt,_that.updatedAt,_that.createdBy,_that.updatedBy,_that.creatorName,_that.updatorName,_that.transferItems);case _:
   return null;
 
 }
@@ -206,17 +221,32 @@ return $default(_that.destinationBranchId,_that.relatedTransferId,_that.notes,_t
 @JsonSerializable()
 
 class _TransferModel implements TransferModel {
-  const _TransferModel({required this.destinationBranchId, this.relatedTransferId, this.notes, required final  List<TransferItemModel> items}): _items = items;
+  const _TransferModel({required this.id, required this.companyId, required this.transferType, required this.transferNumber, required this.status, this.sourceBranchId, this.sourceBranch, this.destinationBranchId, this.destinationBranch, this.relatedTransferId, this.transferId, this.notes, required this.createdAt, required this.updatedAt, this.createdBy, this.updatedBy, this.creatorName, this.updatorName, final  List<TransferItemModel> transferItems = const []}): _transferItems = transferItems;
   factory _TransferModel.fromJson(Map<String, dynamic> json) => _$TransferModelFromJson(json);
 
-@override final  int destinationBranchId;
+@override final  int id;
+@override final  int companyId;
+@override final  String transferType;
+@override final  String transferNumber;
+@override final  String status;
+@override final  int? sourceBranchId;
+@override final  String? sourceBranch;
+@override final  int? destinationBranchId;
+@override final  String? destinationBranch;
 @override final  int? relatedTransferId;
+@override final  int? transferId;
 @override final  String? notes;
- final  List<TransferItemModel> _items;
-@override List<TransferItemModel> get items {
-  if (_items is EqualUnmodifiableListView) return _items;
+@override final  DateTime createdAt;
+@override final  DateTime updatedAt;
+@override final  int? createdBy;
+@override final  int? updatedBy;
+@override final  String? creatorName;
+@override final  String? updatorName;
+ final  List<TransferItemModel> _transferItems;
+@override@JsonKey() List<TransferItemModel> get transferItems {
+  if (_transferItems is EqualUnmodifiableListView) return _transferItems;
   // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_items);
+  return EqualUnmodifiableListView(_transferItems);
 }
 
 
@@ -233,16 +263,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TransferModel&&(identical(other.destinationBranchId, destinationBranchId) || other.destinationBranchId == destinationBranchId)&&(identical(other.relatedTransferId, relatedTransferId) || other.relatedTransferId == relatedTransferId)&&(identical(other.notes, notes) || other.notes == notes)&&const DeepCollectionEquality().equals(other._items, _items));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TransferModel&&(identical(other.id, id) || other.id == id)&&(identical(other.companyId, companyId) || other.companyId == companyId)&&(identical(other.transferType, transferType) || other.transferType == transferType)&&(identical(other.transferNumber, transferNumber) || other.transferNumber == transferNumber)&&(identical(other.status, status) || other.status == status)&&(identical(other.sourceBranchId, sourceBranchId) || other.sourceBranchId == sourceBranchId)&&(identical(other.sourceBranch, sourceBranch) || other.sourceBranch == sourceBranch)&&(identical(other.destinationBranchId, destinationBranchId) || other.destinationBranchId == destinationBranchId)&&(identical(other.destinationBranch, destinationBranch) || other.destinationBranch == destinationBranch)&&(identical(other.relatedTransferId, relatedTransferId) || other.relatedTransferId == relatedTransferId)&&(identical(other.transferId, transferId) || other.transferId == transferId)&&(identical(other.notes, notes) || other.notes == notes)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.createdBy, createdBy) || other.createdBy == createdBy)&&(identical(other.updatedBy, updatedBy) || other.updatedBy == updatedBy)&&(identical(other.creatorName, creatorName) || other.creatorName == creatorName)&&(identical(other.updatorName, updatorName) || other.updatorName == updatorName)&&const DeepCollectionEquality().equals(other._transferItems, _transferItems));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,destinationBranchId,relatedTransferId,notes,const DeepCollectionEquality().hash(_items));
+int get hashCode => Object.hashAll([runtimeType,id,companyId,transferType,transferNumber,status,sourceBranchId,sourceBranch,destinationBranchId,destinationBranch,relatedTransferId,transferId,notes,createdAt,updatedAt,createdBy,updatedBy,creatorName,updatorName,const DeepCollectionEquality().hash(_transferItems)]);
 
 @override
 String toString() {
-  return 'TransferModel(destinationBranchId: $destinationBranchId, relatedTransferId: $relatedTransferId, notes: $notes, items: $items)';
+  return 'TransferModel(id: $id, companyId: $companyId, transferType: $transferType, transferNumber: $transferNumber, status: $status, sourceBranchId: $sourceBranchId, sourceBranch: $sourceBranch, destinationBranchId: $destinationBranchId, destinationBranch: $destinationBranch, relatedTransferId: $relatedTransferId, transferId: $transferId, notes: $notes, createdAt: $createdAt, updatedAt: $updatedAt, createdBy: $createdBy, updatedBy: $updatedBy, creatorName: $creatorName, updatorName: $updatorName, transferItems: $transferItems)';
 }
 
 
@@ -253,7 +283,7 @@ abstract mixin class _$TransferModelCopyWith<$Res> implements $TransferModelCopy
   factory _$TransferModelCopyWith(_TransferModel value, $Res Function(_TransferModel) _then) = __$TransferModelCopyWithImpl;
 @override @useResult
 $Res call({
- int destinationBranchId, int? relatedTransferId, String? notes, List<TransferItemModel> items
+ int id, int companyId, String transferType, String transferNumber, String status, int? sourceBranchId, String? sourceBranch, int? destinationBranchId, String? destinationBranch, int? relatedTransferId, int? transferId, String? notes, DateTime createdAt, DateTime updatedAt, int? createdBy, int? updatedBy, String? creatorName, String? updatorName, List<TransferItemModel> transferItems
 });
 
 
@@ -270,12 +300,27 @@ class __$TransferModelCopyWithImpl<$Res>
 
 /// Create a copy of TransferModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? destinationBranchId = null,Object? relatedTransferId = freezed,Object? notes = freezed,Object? items = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? companyId = null,Object? transferType = null,Object? transferNumber = null,Object? status = null,Object? sourceBranchId = freezed,Object? sourceBranch = freezed,Object? destinationBranchId = freezed,Object? destinationBranch = freezed,Object? relatedTransferId = freezed,Object? transferId = freezed,Object? notes = freezed,Object? createdAt = null,Object? updatedAt = null,Object? createdBy = freezed,Object? updatedBy = freezed,Object? creatorName = freezed,Object? updatorName = freezed,Object? transferItems = null,}) {
   return _then(_TransferModel(
-destinationBranchId: null == destinationBranchId ? _self.destinationBranchId : destinationBranchId // ignore: cast_nullable_to_non_nullable
-as int,relatedTransferId: freezed == relatedTransferId ? _self.relatedTransferId : relatedTransferId // ignore: cast_nullable_to_non_nullable
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int,companyId: null == companyId ? _self.companyId : companyId // ignore: cast_nullable_to_non_nullable
+as int,transferType: null == transferType ? _self.transferType : transferType // ignore: cast_nullable_to_non_nullable
+as String,transferNumber: null == transferNumber ? _self.transferNumber : transferNumber // ignore: cast_nullable_to_non_nullable
+as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as String,sourceBranchId: freezed == sourceBranchId ? _self.sourceBranchId : sourceBranchId // ignore: cast_nullable_to_non_nullable
+as int?,sourceBranch: freezed == sourceBranch ? _self.sourceBranch : sourceBranch // ignore: cast_nullable_to_non_nullable
+as String?,destinationBranchId: freezed == destinationBranchId ? _self.destinationBranchId : destinationBranchId // ignore: cast_nullable_to_non_nullable
+as int?,destinationBranch: freezed == destinationBranch ? _self.destinationBranch : destinationBranch // ignore: cast_nullable_to_non_nullable
+as String?,relatedTransferId: freezed == relatedTransferId ? _self.relatedTransferId : relatedTransferId // ignore: cast_nullable_to_non_nullable
+as int?,transferId: freezed == transferId ? _self.transferId : transferId // ignore: cast_nullable_to_non_nullable
 as int?,notes: freezed == notes ? _self.notes : notes // ignore: cast_nullable_to_non_nullable
-as String?,items: null == items ? _self._items : items // ignore: cast_nullable_to_non_nullable
+as String?,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as DateTime,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
+as DateTime,createdBy: freezed == createdBy ? _self.createdBy : createdBy // ignore: cast_nullable_to_non_nullable
+as int?,updatedBy: freezed == updatedBy ? _self.updatedBy : updatedBy // ignore: cast_nullable_to_non_nullable
+as int?,creatorName: freezed == creatorName ? _self.creatorName : creatorName // ignore: cast_nullable_to_non_nullable
+as String?,updatorName: freezed == updatorName ? _self.updatorName : updatorName // ignore: cast_nullable_to_non_nullable
+as String?,transferItems: null == transferItems ? _self._transferItems : transferItems // ignore: cast_nullable_to_non_nullable
 as List<TransferItemModel>,
   ));
 }

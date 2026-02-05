@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/state/locale_provider.dart';
 import 'package:cyber_pos/l10n/app_localizations.dart';
+import '../../app/theme/app_sizes.dart';
 import '../../app/theme/brand_colors.dart';
 
 /// A reusable language selector widget
@@ -32,7 +33,7 @@ class LanguageSelector extends ConsumerWidget {
           value: entry.key,
           child: Text(
             entry.value,
-            style: const TextStyle(fontSize: 16),
+            style: TextStyle(fontSize: AppSizes.fontSizeBody),
           ),
         );
       }).toList(),
@@ -85,7 +86,7 @@ class LanguageSelectorSheet {
                     l10n.changeLanguage,
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: AppSizes.xl),
                   ...LocaleNotifier.availableLanguages.entries.map((entry) {
                     final isSelected = localeState.locale.languageCode == entry.key;
                     
@@ -110,7 +111,7 @@ class LanguageSelectorSheet {
                       },
                     );
                   }).toList(),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: AppSizes.sm2),
                 ],
               ),
             );

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import '../../../app/theme/app_sizes.dart';
+import '../../../app/theme/brand_colors.dart';
 
 /// Reusable date picker field widget (date only, no time)
 /// 
@@ -71,7 +73,16 @@ class DatePickerField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
+
+    final labelStyle = textTheme.bodySmall?.copyWith(
+      color: BrandColors.inputPlaceholder,
+      fontWeight: FontWeight.normal,
+    );
+    final inputStyle = textTheme.bodyMedium?.copyWith(
+      color: BrandColors.inputText,
+    );
 
     return ValueListenableBuilder<TextEditingValue>(
       valueListenable: controller,
@@ -83,33 +94,36 @@ class DatePickerField extends StatelessWidget {
           onTap: () => _selectDate(context),
           decoration: InputDecoration(
             labelText: labelText,
-            prefixIcon: prefixIcon != null
-                ? Icon(
-                    prefixIcon,
-                    size: AppSizes.iconSize,
-                    color: colorScheme.primary,
-                  )
-                : const Icon(Icons.calendar_today_outlined),
+            labelStyle: labelStyle,
+            prefixIcon: Icon(
+              prefixIcon ?? Icons.calendar_today_outlined,
+              size: AppSizes.iconSize,
+              color: BrandColors.inputPlaceholder,
+            ),
             suffixIcon: value.text.isNotEmpty
                 ? IconButton(
                     icon: Icon(
-                      Icons.clear,
-                      size: 18,
-                      color: colorScheme.onSurface.withOpacity(0.6),
+                      Icons.clear_rounded,
+                      size: AppSizes.iconSizeSm,
+                      color: BrandColors.inputPlaceholder,
                     ),
                     onPressed: _clearDate,
                     tooltip: 'Clear date',
-                    padding: const EdgeInsets.all(8),
+                    padding: const EdgeInsets.all(AppSizes.sm),
                     constraints: const BoxConstraints(),
                   )
-                : const Icon(Icons.arrow_drop_down),
-            labelStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
-              color: colorScheme.primary,
+                : Icon(
+                    Icons.keyboard_arrow_down_rounded,
+                    size: AppSizes.iconSizeLg,
+                    color: BrandColors.inputPlaceholder,
+                  ),
+            isDense: true,
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: AppSizes.md,
+              vertical: 15,
             ),
-            ),
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color: colorScheme.onSurface,
           ),
+          style: inputStyle,
         );
       },
     );

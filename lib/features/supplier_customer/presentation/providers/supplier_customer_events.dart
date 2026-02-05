@@ -29,6 +29,20 @@ class SupplierCustomerFailure extends SupplierCustomerUiEvent {
   SupplierCustomerFailure(this.failure);
 }
 
+class AddBalanceSuccess extends SupplierCustomerUiEvent {
+  final String? customerId;
+  final String? supplierId;
+  final String message;
+  AddBalanceSuccess({this.customerId, this.supplierId, required this.message});
+}
+
+class RefundSuccess extends SupplierCustomerUiEvent {
+  final String? customerId;
+  final String? supplierId;
+  final String message;
+  RefundSuccess({this.customerId, this.supplierId, required this.message});
+}
+
 @riverpod
 class SupplierCustomerUiEvents extends _$SupplierCustomerUiEvents {
   @override

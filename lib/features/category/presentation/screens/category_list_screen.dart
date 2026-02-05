@@ -67,14 +67,15 @@ class _CategoryListScreenState extends ConsumerState<CategoryListScreen> {
       (prev, next) {
         if (next == null) return;
         final snackbar = ref.read(snackbarServiceProvider);
+        final l10n = AppLocalizations.of(context);
         if (next is CategoryFailure) {
           snackbar.showError(next.failure);
         } else if (next is CategoryCreated) {
-          snackbar.showSuccess(next.message);
+          snackbar.showSuccess(l10n.categoryCreatedSuccessfully);
         } else if (next is CategoryUpdated) {
-          snackbar.showSuccess(next.message);
+          snackbar.showSuccess(l10n.categoryUpdatedSuccessfully);
         } else if (next is CategoryDeleted) {
-          snackbar.showSuccess(next.message);
+          snackbar.showSuccess(l10n.categoryDeletedSuccessfully);
         }
         ref.read(categoryUiEventsProvider.notifier).clear();
       },
@@ -90,7 +91,7 @@ class _CategoryListScreenState extends ConsumerState<CategoryListScreen> {
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(60),
           child: search.AppSearchBar(
-            hintText: 'Search by name...',
+            hintText: l10n.searchByName,
             onSearch: (query) => ref.read(categoryProvider.notifier).search(query),
             onClear: () => ref.read(categoryProvider.notifier).refresh(),
           ),
@@ -103,8 +104,8 @@ class _CategoryListScreenState extends ConsumerState<CategoryListScreen> {
             return Center(
               child: EmptyWidget(
                 icon: Icons.category_outlined,
-                title: 'No categories',
-                message: "You don't have any categories yet.",
+                title: l10n.noCategories,
+                message: l10n.noCategoriesMessage,
               ),
             );
           }
@@ -147,7 +148,7 @@ class _CategoryListScreenState extends ConsumerState<CategoryListScreen> {
               app_err.ErrorsWidget(
                 failure: error is Failure ? error : Failure.unexpectedError(error.toString()),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSizes.lg),
               ElevatedButton(
                 onPressed: () => ref.read(categoryProvider.notifier).refresh(),
                 child: Text(l10n.retry),
@@ -165,10 +166,13 @@ class _CategoryListScreenState extends ConsumerState<CategoryListScreen> {
   void _openCreateDialog(BuildContext context) {
     showDialog(
       context: context,
-      builder: (context) => const CategoryFormDialog(
-        title: 'Create Category',
-        buttonText: 'Create',
-      ),
+      builder: (context) {
+        final l10n = AppLocalizations.of(context);
+        return CategoryFormDialog(
+          title: l10n.createCategory,
+          buttonText: l10n.create,
+        );
+      },
     );
   }
 }

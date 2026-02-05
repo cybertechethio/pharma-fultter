@@ -74,11 +74,11 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: BrandColors.transparent,
         elevation: 0,
         actions: [
           const LanguageToggleButton(),
-          const SizedBox(width: 8),
+          const SizedBox(width: AppSizes.sm),
         ],
       ),
       body: Center(
@@ -127,7 +127,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
                       },
                       child: Text(
                         l10n.back,
-                        style: context.bodyPrimary(),
+                        style: context.bodyPrimary().copyWith(fontSize: AppSizes.fontSizeBodySmall),
                       ),
                     ),
                   ),
@@ -145,7 +145,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
                       children: [
                         Text(
                           l10n.didntReceiveCode,
-                          style: context.bodySecondary(bold: true),
+                          style: context.bodySecondary(bold: true).copyWith(fontSize: AppSizes.fontSizeBodySmall),
                         ),
                         const SizedBox(height: AppSizes.sm),
                         Text(

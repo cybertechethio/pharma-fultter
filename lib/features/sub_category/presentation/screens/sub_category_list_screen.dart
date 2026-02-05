@@ -93,11 +93,11 @@ class _SubCategoryListScreenState extends ConsumerState<SubCategoryListScreen> {
 
     return Scaffold(
       appBar: CustomAppBar(
-        title: widget.categoryId != null ? 'Sub-Categories' : 'All Sub-Categories',
+        title: widget.categoryId != null ? l10n.subCategories : l10n.allSubCategories,
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(60),
           child: search.AppSearchBar(
-            hintText: 'Search by name...',
+            hintText: l10n.searchByName,
             onSearch: (query) => ref.read(subCategoryProvider(widget.categoryId).notifier).search(query),
             onClear: () => ref.read(subCategoryProvider(widget.categoryId).notifier).refresh(),
           ),
@@ -110,10 +110,10 @@ class _SubCategoryListScreenState extends ConsumerState<SubCategoryListScreen> {
             return Center(
               child: EmptyWidget(
                 icon: Icons.category_outlined,
-                title: 'No sub-categories',
+                title: l10n.noSubCategories,
                 message: widget.categoryId != null
-                    ? "This category doesn't have any sub-categories yet."
-                    : "You don't have any sub-categories yet.",
+                    ? l10n.noSubCategoriesInCategoryMessage
+                    : l10n.noSubCategoriesMessage,
               ),
             );
           }
@@ -161,7 +161,7 @@ class _SubCategoryListScreenState extends ConsumerState<SubCategoryListScreen> {
               app_err.ErrorsWidget(
                 failure: error is Failure ? error : Failure.unexpectedError(error.toString()),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSizes.lg),
               ElevatedButton(
                 onPressed: () {
                   ref.read(subCategoryProvider(widget.categoryId).notifier).refresh();
@@ -181,12 +181,15 @@ class _SubCategoryListScreenState extends ConsumerState<SubCategoryListScreen> {
   void _openCreateDialog(BuildContext context) {
     showDialog(
       context: context,
-      builder: (context) => SubCategoryFormDialog(
-        title: 'Create Sub-Category',
-        buttonText: 'Create',
-        categoryId: widget.categoryId != null ? int.tryParse(widget.categoryId!) : null,
-        currentViewCategoryId: widget.categoryId, // Pass the current view's categoryId for provider updates
-      ),
+      builder: (context) {
+        final l10n = AppLocalizations.of(context);
+        return SubCategoryFormDialog(
+          title: l10n.createSubCategory,
+          buttonText: 'Create',
+          categoryId: widget.categoryId != null ? int.tryParse(widget.categoryId!) : null,
+          currentViewCategoryId: widget.categoryId, // Pass the current view's categoryId for provider updates
+        );
+      },
     );
   }
 }

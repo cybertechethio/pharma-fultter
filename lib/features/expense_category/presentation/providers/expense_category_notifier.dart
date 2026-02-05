@@ -8,7 +8,7 @@ import 'expense_category_providers.dart';
 
 part 'expense_category_notifier.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class ExpenseCategoryNotifier extends _$ExpenseCategoryNotifier {
   @override
   Future<List<ExpenseCategory>> build() async {
@@ -46,9 +46,9 @@ class ExpenseCategoryNotifier extends _$ExpenseCategoryNotifier {
         final current = state.value ?? const <ExpenseCategory>[];
         state = AsyncValue.data([created, ...current]);
 
-        // Emit success event
+        // Emit success event (message will be localized in listener)
         ref.read(expenseCategoryUiEventsProvider.notifier).emit(
-          ExpenseCategoryCreated(created, 'Expense category created successfully'),
+          ExpenseCategoryCreated(created, ''),
         );
       },
     );
@@ -87,9 +87,9 @@ class ExpenseCategoryNotifier extends _$ExpenseCategoryNotifier {
         if (idx != -1) list[idx] = updated;
         state = AsyncValue.data(list);
 
-        // Emit success event
+        // Emit success event (message will be localized in listener)
         ref.read(expenseCategoryUiEventsProvider.notifier).emit(
-          ExpenseCategoryUpdated(updated, 'Expense category updated successfully'),
+          ExpenseCategoryUpdated(updated, ''),
         );
       },
     );
@@ -121,9 +121,9 @@ class ExpenseCategoryNotifier extends _$ExpenseCategoryNotifier {
         list.removeWhere((e) => e.id == id);
         state = AsyncValue.data(list);
 
-        // Emit success event
+        // Emit success event (message will be localized in listener)
         ref.read(expenseCategoryUiEventsProvider.notifier).emit(
-          ExpenseCategoryDeleted(id, 'Expense category deleted successfully'),
+          ExpenseCategoryDeleted(id, ''),
         );
       },
     );

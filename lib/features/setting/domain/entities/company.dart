@@ -17,8 +17,9 @@ sealed class Company with _$Company {
     String? wereda,
     required bool autoPrint,
     DateTime? defaultStartDate,
+    String? businessType,
     required DateTime createdAt,
-    DateTime? updatedAt,
+     DateTime? updatedAt,
   }) = _Company;
 }
 

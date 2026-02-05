@@ -20,8 +20,9 @@ sealed class CompanyModel with _$CompanyModel {
     String? wereda,
     @Default(false) bool autoPrint,
     DateTime? defaultStartDate,
+    String? businessType,
     required DateTime createdAt,
-    DateTime? updatedAt,
+     DateTime? updatedAt,
   }) = _CompanyModel;
 
   factory CompanyModel.fromJson(Map<String, dynamic> json) =>

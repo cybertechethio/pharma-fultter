@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import '../../../routes/route_name.dart';
-import '../../../features/profile/presentation/providers/profile_notifier.dart';
-import '../../../features/auth/domain/entities/user.dart';
+import '../../../app/theme/app_sizes.dart';
+import '../../../app/theme/brand_colors.dart';
+import '../../../app/theme/text_styles.dart';
+import '../common/app_bar.dart';
 import 'drawer/drawer.dart';
 
 class BottomNavScreen extends ConsumerStatefulWidget {
@@ -28,47 +28,44 @@ class _BottomNavScreenState extends ConsumerState<BottomNavScreen> {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final userAsync = ref.watch(profileProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          Badge(
-            label: const Text('3'),
-            child: IconButton( 
-              icon: const Icon(Icons.notifications_outlined),
-              tooltip: 'Notifications',
-              onPressed: () {},
-            ),
+      appBar: CustomAppBar(
+        titleWidget: Image.asset(
+          'assets/logo/cyber_logo.png',
+          color: BrandColors.textLight,
+          height: 36,
+          fit: BoxFit.contain,
+          errorBuilder: (_, __, ___) => Icon(
+            Icons.storefront_rounded,
+            color: BrandColors.textLight,
+            size: AppSizes.iconSizeLg,
           ),
-          const SizedBox(width: 8),
-          Padding(
-            padding: const EdgeInsets.only(right: 8),
-            child: InkWell(
-              onTap: () => context.push(RouteName.profile),
-              borderRadius: BorderRadius.circular(20),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    _buildAvatar(userAsync, colorScheme),
-                    const SizedBox(width: 8),
-                    _buildUserName(userAsync),
-                  ],
-                ),
-              ),
-            ),
+        ),
+        centerTitle: true,
+        leading: Builder(
+          builder: (context) => IconButton(
+            icon: const Icon(Icons.menu_rounded),
+            onPressed: () => Scaffold.of(context).openDrawer(),
+            tooltip: 'Menu',
+          ),
+        ),
+        actions: [
+          _NotificationAction(
+            count: 0,
+            onTap: () {
+              // TODO: Navigate to notifications
+            },
           ),
         ],
       ),
       drawer: const AppDrawer(),
-      body: SafeArea(child: widget.navigationShell),
+      body: widget.navigationShell,
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(
           splashFactory: NoSplash.splashFactory,
-          splashColor: Colors.transparent,
-          highlightColor: Colors.transparent,
+          splashColor: BrandColors.transparent,
+          highlightColor: BrandColors.transparent,
         ),
         child: BottomNavigationBar(
           currentIndex: widget.navigationShell.currentIndex,
@@ -103,136 +100,49 @@ class _BottomNavScreenState extends ConsumerState<BottomNavScreen> {
       ),
     );
   }
+}
 
-  Widget _buildAvatar(AsyncValue<User?> userAsync, ColorScheme colorScheme) {
-    return userAsync.when(
-      data: (user) {
-        if (user == null) {
-          return CircleAvatar(
-            backgroundColor: colorScheme.primaryContainer,
-            child: Icon(Icons.person, color: colorScheme.onPrimaryContainer),
-          );
-        }
+class _NotificationAction extends StatelessWidget {
+  final int count;
+  final VoidCallback onTap;
 
-        // User has profile picture
-        if (user.profilePicture != null && user.profilePicture!.isNotEmpty) {
-          // Calculate initials for fallback
-          final initials = user.fullName
-              .split(' ')
-              .map((n) => n.isNotEmpty ? n[0].toUpperCase() : '')
-              .take(2)
-              .join();
-          
-          return ClipOval(
-            child: CachedNetworkImage(
-              imageUrl: user.profilePicture!,
-              width: 32,
-              height: 32,
-              fit: BoxFit.cover,
-              placeholder: (context, url) => CircleAvatar(
-                backgroundColor: colorScheme.primaryContainer,
-                radius: 16,
-                child: SizedBox(
-                  width: 16,
-                  height: 16,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 2,
-                    valueColor: AlwaysStoppedAnimation<Color>(colorScheme.primary),
+  const _NotificationAction({required this.count, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      onPressed: onTap,
+      icon: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          const Icon(Icons.notifications_outlined),
+          if (count > 0)
+            Positioned(
+              top: -AppSizes.xs,
+              right: -AppSizes.xs,
+              child: Container(
+                padding: const EdgeInsets.all(AppSizes.xs),
+                decoration: BoxDecoration(
+                  color: BrandColors.error,
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: BrandColors.textLight,
+                    width: AppSizes.br,
                   ),
                 ),
+                constraints: const BoxConstraints(
+                  minWidth: 18,
+                  minHeight: 18,
+                ),
+                child: Text(
+                  count > 99 ? '99+' : count.toString(),
+                  style: context.caption(color: BrandColors.textLight, bold: true).copyWith(fontSize: AppSizes.fontSizeCaption),
+                  textAlign: TextAlign.center,
+                ),
               ),
-              errorWidget: (context, url, error) {
-                // Fallback to initials if image fails to load
-                return CircleAvatar(
-                  backgroundColor: colorScheme.primary.withOpacity(0.1),
-                  radius: 16,
-                  child: Text(
-                    initials.isNotEmpty ? initials : 'U',
-                    style: TextStyle(
-                      color: colorScheme.primary,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
-                    ),
-                  ),
-                );
-              },
             ),
-          );
-        }
-
-        // No profile picture - show initials
-        final initials = user.fullName
-            .split(' ')
-            .map((n) => n.isNotEmpty ? n[0].toUpperCase() : '')
-            .take(2)
-            .join();
-        
-        return CircleAvatar(
-          backgroundColor: colorScheme.primary.withOpacity(0.1),
-          child: Text(
-            initials.isNotEmpty ? initials : 'U',
-            style: TextStyle(
-              color: colorScheme.primary,
-              fontWeight: FontWeight.bold,
-              fontSize: 14,
-            ),
-          ),
-        );
-      },
-      loading: () => CircleAvatar(
-        backgroundColor: colorScheme.primaryContainer,
-        radius: 16,
-        child: SizedBox(
-          width: 16,
-          height: 16,
-          child: CircularProgressIndicator(
-            strokeWidth: 2,
-            valueColor: AlwaysStoppedAnimation<Color>(colorScheme.primary),
-          ),
-        ),
-      ),
-      error: (_, __) => CircleAvatar(
-        backgroundColor: colorScheme.primaryContainer,
-        child: Icon(Icons.person, color: colorScheme.onPrimaryContainer),
-      ),
-    );
-  }
-
-  Widget _buildUserName(AsyncValue<User?> userAsync) {
-    return userAsync.when(
-      data: (user) {
-        if (user == null) {
-          return Text(
-            'Profile',
-            style: Theme.of(context).textTheme.bodyMedium,
-            overflow: TextOverflow.ellipsis,
-          );
-        }
-        
-        // Truncate name if longer than 7 characters
-        final displayName = user.fullName.length > 7
-            ? '${user.fullName.substring(0, 7)}...'
-            : user.fullName;
-        
-        return Text(
-          displayName,
-          style: Theme.of(context).textTheme.bodyMedium,
-          overflow: TextOverflow.ellipsis,
-          maxLines: 1,
-        );
-      },
-      loading: () => Text(
-        'Profile',
-        style: Theme.of(context).textTheme.bodyMedium,
-        overflow: TextOverflow.ellipsis,
-      ),
-      error: (_, __) => Text(
-        'Profile',
-        style: Theme.of(context).textTheme.bodyMedium,
-        overflow: TextOverflow.ellipsis,
+        ],
       ),
     );
   }
 }
-
-

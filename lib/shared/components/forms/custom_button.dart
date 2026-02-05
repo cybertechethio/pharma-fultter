@@ -62,7 +62,9 @@ class CustomButton extends StatelessWidget {
                       loadingText!,
                       style: Theme.of(context).textTheme.labelLarge?.copyWith(
                         color: textColor ?? BrandColors.textLight,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w800,
+                        fontSize: AppSizes.fontSizeBody,
+                        letterSpacing: 0.5,
                       ),
                     ),
                   ],
@@ -73,7 +75,7 @@ class CustomButton extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   if (isSocial) ...[
-                    Image.asset(AppImages.googleLogo, width: 24, height: 24),
+                    Image.asset(AppImages.googleLogo, width: AppSizes.iconSizeLg, height: AppSizes.iconSizeLg),
                     const SizedBox(width: AppSizes.sm),
                   ] else if (icon != null) ...[
                     Icon(icon, color: textColor ?? BrandColors.textLight, size: 20),
@@ -85,7 +87,9 @@ class CustomButton extends StatelessWidget {
                       color: isSocial
                           ? BrandColors.textPrimary
                           : (textColor ?? BrandColors.textLight),
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w800,
+                      fontSize: AppSizes.fontSizeBody,
+                      letterSpacing: 0.5,
                     ),
                   ),
                 ],

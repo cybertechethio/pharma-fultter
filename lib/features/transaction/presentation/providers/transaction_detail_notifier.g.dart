@@ -15,13 +15,11 @@ const transactionDetailProvider = TransactionDetailFamily._();
 final class TransactionDetailProvider
     extends
         $FunctionalProvider<
-          AsyncValue<TransactionDetail>,
-          TransactionDetail,
-          FutureOr<TransactionDetail>
+          AsyncValue<Transaction>,
+          Transaction,
+          FutureOr<Transaction>
         >
-    with
-        $FutureModifier<TransactionDetail>,
-        $FutureProvider<TransactionDetail> {
+    with $FutureModifier<Transaction>, $FutureProvider<Transaction> {
   const TransactionDetailProvider._({
     required TransactionDetailFamily super.from,
     required int super.argument,
@@ -45,12 +43,12 @@ final class TransactionDetailProvider
 
   @$internal
   @override
-  $FutureProviderElement<TransactionDetail> $createElement(
+  $FutureProviderElement<Transaction> $createElement(
     $ProviderPointer pointer,
   ) => $FutureProviderElement(pointer);
 
   @override
-  FutureOr<TransactionDetail> create(Ref ref) {
+  FutureOr<Transaction> create(Ref ref) {
     final argument = this.argument as int;
     return transactionDetail(ref, argument);
   }
@@ -66,10 +64,10 @@ final class TransactionDetailProvider
   }
 }
 
-String _$transactionDetailHash() => r'17e2507cb4a2d21b02d4a9d1ddda18cfa3d17b93';
+String _$transactionDetailHash() => r'4f2fd76b32784cb12c09eb9e81c3196986c442e8';
 
 final class TransactionDetailFamily extends $Family
-    with $FunctionalFamilyOverride<FutureOr<TransactionDetail>, int> {
+    with $FunctionalFamilyOverride<FutureOr<Transaction>, int> {
   const TransactionDetailFamily._()
     : super(
         retry: null,

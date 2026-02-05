@@ -2202,36 +2202,6 @@
     "description": "Sale reverse transaction type label"
   },
 
-  "salesOrder": "Sales Order",
-  "@salesOrder": {
-    "description": "Sales order transaction type label"
-  },
-
-  "salesOrders": "Sales Orders",
-  "@salesOrders": {
-    "description": "Sales orders menu label"
-  },
-
-  "noSalesOrders": "No Sales Orders",
-  "@noSalesOrders": {
-    "description": "Empty sales orders list title"
-  },
-
-  "noSalesOrdersMessage": "You don't have any sales orders yet.",
-  "@noSalesOrdersMessage": {
-    "description": "Empty sales orders list message"
-  },
-
-  "createSalesOrder": "Create Sales Order",
-  "@createSalesOrder": {
-    "description": "Create sales order button and screen title"
-  },
-
-  "salesOrderDetails": "Sales Order Details",
-  "@salesOrderDetails": {
-    "description": "Sales order details screen title"
-  },
-
   "fulfillmentBranch": "Fulfillment Branch",
   "@fulfillmentBranch": {
     "description": "Fulfillment branch field label"
@@ -2295,41 +2265,6 @@
   "fulfillOrder": "Fulfill Order",
   "@fulfillOrder": {
     "description": "Fulfill order dialog title"
-  },
-
-  "confirmApproveOrder": "Are you sure you want to approve this sales order?",
-  "@confirmApproveOrder": {
-    "description": "Approve order confirmation message"
-  },
-
-  "confirmFulfillOrder": "Are you sure you want to fulfill this sales order? This will create a transaction and deduct inventory.",
-  "@confirmFulfillOrder": {
-    "description": "Fulfill order confirmation message"
-  },
-
-  "confirmCancelOrder": "Are you sure you want to cancel this sales order?",
-  "@confirmCancelOrder": {
-    "description": "Cancel order confirmation message"
-  },
-
-  "orderApprovedSuccessfully": "Sales order approved successfully",
-  "@orderApprovedSuccessfully": {
-    "description": "Order approval success message"
-  },
-
-  "orderFulfilledSuccessfully": "Sales order fulfilled successfully",
-  "@orderFulfilledSuccessfully": {
-    "description": "Order fulfillment success message"
-  },
-
-  "orderCancelledSuccessfully": "Sales order cancelled successfully",
-  "@orderCancelledSuccessfully": {
-    "description": "Order cancellation success message"
-  },
-
-  "salesOrderCreatedSuccessfully": "Sales order created successfully",
-  "@salesOrderCreatedSuccessfully": {
-    "description": "Sales order creation success message"
   },
 
   "subtotal": "Subtotal",
@@ -2460,6 +2395,35 @@
   "switchBranch": "Switch Branch",
   "@switchBranch": {
     "description": "Switch branch action label"
+  },
+
+  "main": "Main",
+  "@main": {
+    "description": "Main section label in drawer"
+  },
+  "people": "People",
+  "@people": {
+    "description": "People section label in drawer"
+  },
+  "products": "Products",
+  "@products": {
+    "description": "Products menu label"
+  },
+  "pointOfSale": "Point of Sale",
+  "@pointOfSale": {
+    "description": "Point of Sale menu label"
+  },
+  "stockTransfer": "Stock Transfer",
+  "@stockTransfer": {
+    "description": "Stock transfer menu label"
+  },
+  "billers": "Billers",
+  "@billers": {
+    "description": "Billers menu label"
+  },
+  "dailySalesReport": "Daily Sales Report",
+  "@dailySalesReport": {
+    "description": "Daily sales report menu label"
   },
 
   "core": "Core",
@@ -2963,6 +2927,16 @@
     "description": "Default start date setting label"
   },
 
+  "defaultCalendarType": "Default Calendar Type",
+  "@defaultCalendarType": {
+    "description": "Default calendar type setting label"
+  },
+
+  "businessType": "Business Type",
+  "@businessType": {
+    "description": "Business type setting label"
+  },
+
   "uploadLogo": "Upload Logo",
   "@uploadLogo": {
     "description": "Upload logo button label"
@@ -3123,11 +3097,6 @@
     "description": "Overview section title"
   },
 
-  "fulfillSalesOrder": "Fulfill Sales Order",
-  "@fulfillSalesOrder": {
-    "description": "Fulfill sales order dialog title"
-  },
-
   "editPaymentMethod": "Edit Payment Method",
   "@editPaymentMethod": {
     "description": "Edit payment method dialog title"
@@ -3208,6 +3177,46 @@
     "description": "Stock details screen title"
   },
 
+  "stockMovementDetails": "Stock Movement Details",
+  "@stockMovementDetails": {
+    "description": "Stock movement details screen title"
+  },
+
+  "movementInformation": "Movement Information",
+  "@movementInformation": {
+    "description": "Movement information section title"
+  },
+
+  "previousStock": "Previous Stock",
+  "@previousStock": {
+    "description": "Previous stock label"
+  },
+
+  "newStock": "New Stock",
+  "@newStock": {
+    "description": "New stock label"
+  },
+
+  "inbound": "Inbound",
+  "@inbound": {
+    "description": "Inbound movement label"
+  },
+
+  "outbound": "Outbound",
+  "@outbound": {
+    "description": "Outbound movement label"
+  },
+
+  "transferId": "Transfer ID",
+  "@transferId": {
+    "description": "Transfer ID label"
+  },
+
+  "reversedMovement": "Reversed Movement ID",
+  "@reversedMovement": {
+    "description": "Reversed movement ID label"
+  },
+
   "noTransactionsYet": "No transactions yet.",
   "@noTransactionsYet": {
     "description": "No transactions message"
@@ -3273,34 +3282,19 @@
     "description": "Empty items message"
   },
 
-  "cancelSalesOrder": "Cancel Sales Order",
-  "@cancelSalesOrder": {
-    "description": "Cancel sales order dialog title"
-  },
-
-  "confirmCancelSalesOrder": "Are you sure you want to cancel this sales order?",
-  "@confirmCancelSalesOrder": {
-    "description": "Cancel sales order confirmation message"
-  },
-
-  "newSalesOrder": "New Sales Order",
-  "@newSalesOrder": {
-    "description": "New sales order screen title"
-  },
-
   "attachment": "Attachment",
   "@attachment": {
     "description": "Attachment label"
   },
 
-  "salesOrderDetails": "Sales Order Details",
-  "@salesOrderDetails": {
-    "description": "Sales order details screen title"
-  },
-
   "newTransaction": "New Transaction",
   "@newTransaction": {
     "description": "New transaction screen title"
+  },
+
+  "cart": "Cart",
+  "@cart": {
+    "description": "Cart menu item label"
   },
 
   "reverseTransaction": "Reverse Transaction",
@@ -3999,11 +3993,6 @@
         "example": "REF001"
       }
     }
-  },
-
-  "approveSalesOrder": "Approve Sales Order",
-  "@approveSalesOrder": {
-    "description": "Approve sales order dialog title"
   },
 
   "notesOptional": "Notes (optional)",

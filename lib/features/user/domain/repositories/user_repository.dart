@@ -11,6 +11,7 @@ abstract class UserRepository {
     required String email,
     required String phone,
     bool isActive = true,
+    required String userType,
   });
   
   Future<Either<Failure, UserEntity>> updateUser({
@@ -20,6 +21,7 @@ abstract class UserRepository {
     required String email,
     required String phone,
     bool isActive = true,
+    required String userType,
   });
   
   Future<Either<Failure, UserEntity>> deleteUser({

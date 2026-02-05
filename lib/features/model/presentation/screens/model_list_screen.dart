@@ -28,11 +28,11 @@ class ModelListScreen extends ConsumerWidget {
         if (next is ModelFailure) {
           snackbar.showError(next.failure);
         } else if (next is ModelCreated) {
-          snackbar.showSuccess(next.message);
+          snackbar.showSuccess(l10n.modelCreatedSuccessfully);
         } else if (next is ModelUpdated) {
-          snackbar.showSuccess(next.message);
+          snackbar.showSuccess(l10n.modelUpdatedSuccessfully);
         } else if (next is ModelDeleted) {
-          snackbar.showSuccess(next.message);
+          snackbar.showSuccess(l10n.modelDeletedSuccessfully);
         }
         ref.read(modelUiEventsProvider.notifier).clear();
       },
@@ -77,7 +77,7 @@ class ModelListScreen extends ConsumerWidget {
               app_err.ErrorsWidget(
                 failure: error is Failure ? error : Failure.unexpectedError(error.toString()),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSizes.lg),
               ElevatedButton(
                 onPressed: () => ref.read(modelProvider.notifier).load(),
                 child: Text(l10n.retry),

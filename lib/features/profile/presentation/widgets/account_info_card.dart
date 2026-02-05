@@ -16,29 +16,28 @@ class AccountInfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
     final theme = Theme.of(context);
-
+    final l10n = AppLocalizations.of(context);
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: AppSizes.lg),
       child: Column(
         children: [
           ListTile(
-            leading: Icon(Icons.person_outline, color: theme.colorScheme.primary),
+            leading: Icon(Icons.person_outline, color: BrandColors.primary),
             title: Text(l10n.fullName),
             subtitle: Text(user.fullName),
           ),
           if (user.email != null && user.email!.isNotEmpty) ...[
             const Divider(height: 1),
             ListTile(
-              leading: Icon(Icons.email_outlined, color: theme.colorScheme.primary),
+              leading: Icon(Icons.email_outlined, color: BrandColors.primary),
               title: Text(l10n.email),
               subtitle: Text(user.email!),
             ),
           ],
           const Divider(height: 1),
           ListTile(
-            leading: Icon(Icons.phone_outlined, color: theme.colorScheme.primary),
+            leading: Icon(Icons.phone_outlined, color: BrandColors.primary),
             title: Text(l10n.phoneNumber),
             subtitle: Text(user.phone),
           ),
@@ -54,16 +53,16 @@ class AccountInfoCard extends StatelessWidget {
           ),
           const Divider(height: 1),
           ListTile(
-            leading: Icon(Icons.verified_user_outlined, color: theme.colorScheme.primary),
+            leading: Icon(Icons.verified_user_outlined, color: BrandColors.primary),
             title: Text(l10n.accountStatus),
             subtitle: Text(user.isAccountVerified ? l10n.verified : l10n.notVerified),
             trailing: user.isAccountVerified
-                ? const Icon(Icons.check_circle, color: BrandColors.success, size: 20)
-                : const Icon(Icons.cancel_outlined, color: BrandColors.warning, size: 20),
+                ? Icon(Icons.check_circle, color: BrandColors.success, size: AppSizes.iconSize)
+                : Icon(Icons.cancel_outlined, color: BrandColors.warning, size: AppSizes.iconSize),
           ),
           const Divider(height: 1),
           ListTile(
-            leading: Icon(Icons.calendar_today_outlined, color: theme.colorScheme.primary),
+            leading: Icon(Icons.calendar_today_outlined, color: BrandColors.primary),
             title: Text(l10n.memberSince),
             subtitle: Text(DateFormat('MMM dd, yyyy').format(user.createdAt)),
           ),

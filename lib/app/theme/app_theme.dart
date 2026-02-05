@@ -32,7 +32,7 @@ class AppTheme {
       scaffoldBackgroundColor: BrandColors.background,
     ).copyWith(
       inputDecorationTheme: InputDecorationTheme(
-        contentPadding: const EdgeInsets.all(15),
+        contentPadding: const EdgeInsets.all(AppSizes.contentPaddingInput),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color: BrandColors.inputBorderFocused,
@@ -62,8 +62,18 @@ class AppTheme {
           borderRadius: BorderRadius.circular(AppSizes.radius),
         ),
        
-        labelStyle: TextStyle(color: BrandColors.inputText),
-        hintStyle: TextStyle(color: BrandColors.inputPlaceholder),
+        labelStyle: TextStyle(
+          color: BrandColors.inputText,
+          fontSize: AppSizes.fontSizeLabel,
+        ),
+        floatingLabelStyle: TextStyle(
+          color: BrandColors.inputText,
+          fontSize: AppSizes.fontSizeLabel,
+        ),
+        hintStyle: TextStyle(
+          color: BrandColors.inputPlaceholder,
+          fontSize: AppSizes.fontSizeBody,
+        ),
       ),
       dividerTheme: DividerThemeData(
         color: BrandColors.divider,
@@ -77,13 +87,13 @@ class AppTheme {
         ),
       ),
       dialogTheme: DialogThemeData(
-        backgroundColor: Colors.white,
+        backgroundColor: BrandColors.background,
         elevation: 8,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(6),
+          borderRadius: BorderRadius.circular(AppSizes.radiusDialog),
         ),
         titleTextStyle: TextStyle(
-          fontSize: 16,
+          fontSize: AppSizes.fontSizeBody,
           fontWeight: FontWeight.bold,
           color: BrandColors.textPrimary,
         ),

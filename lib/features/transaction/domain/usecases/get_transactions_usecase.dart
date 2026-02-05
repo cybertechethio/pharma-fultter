@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import '../../../../core/enums/transaction_type_enum.dart';
 import '../../../../core/errors/failure.dart';
 import '../../../../shared/models/paginated_response.dart';
 import '../entities/transaction.dart';
@@ -12,8 +13,13 @@ class GetTransactionsUseCase {
   Future<Either<Failure, PaginatedResponse<Transaction>>> call({
     int page = 1,
     int limit = 25,
+    TransactionType? transactionType,
   }) async {
-    return await repository.getTransactions(page: page, limit: limit);
+    return await repository.getTransactions(
+      page: page,
+      limit: limit,
+      transactionType: transactionType,
+    );
   }
 }
 

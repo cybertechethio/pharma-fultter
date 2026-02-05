@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 mixin _$SupplierCustomerModel {
 
 @JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) String get id; String get name; String get phone; String get accountCode; String get tinNumber;/// API returns uppercase strings: CUSTOMER | SUPPLIER
- String get type; bool get isActive; DateTime get createdAt; DateTime? get updatedAt;
+ String get type; String get balance; bool get isActive; DateTime get createdAt; DateTime? get updatedAt;
 /// Create a copy of SupplierCustomerModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $SupplierCustomerModelCopyWith<SupplierCustomerModel> get copyWith => _$Supplier
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SupplierCustomerModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.accountCode, accountCode) || other.accountCode == accountCode)&&(identical(other.tinNumber, tinNumber) || other.tinNumber == tinNumber)&&(identical(other.type, type) || other.type == type)&&(identical(other.isActive, isActive) || other.isActive == isActive)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SupplierCustomerModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.accountCode, accountCode) || other.accountCode == accountCode)&&(identical(other.tinNumber, tinNumber) || other.tinNumber == tinNumber)&&(identical(other.type, type) || other.type == type)&&(identical(other.balance, balance) || other.balance == balance)&&(identical(other.isActive, isActive) || other.isActive == isActive)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,phone,accountCode,tinNumber,type,isActive,createdAt,updatedAt);
+int get hashCode => Object.hash(runtimeType,id,name,phone,accountCode,tinNumber,type,balance,isActive,createdAt,updatedAt);
 
 @override
 String toString() {
-  return 'SupplierCustomerModel(id: $id, name: $name, phone: $phone, accountCode: $accountCode, tinNumber: $tinNumber, type: $type, isActive: $isActive, createdAt: $createdAt, updatedAt: $updatedAt)';
+  return 'SupplierCustomerModel(id: $id, name: $name, phone: $phone, accountCode: $accountCode, tinNumber: $tinNumber, type: $type, balance: $balance, isActive: $isActive, createdAt: $createdAt, updatedAt: $updatedAt)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $SupplierCustomerModelCopyWith<$Res>  {
   factory $SupplierCustomerModelCopyWith(SupplierCustomerModel value, $Res Function(SupplierCustomerModel) _then) = _$SupplierCustomerModelCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) String id, String name, String phone, String accountCode, String tinNumber, String type, bool isActive, DateTime createdAt, DateTime? updatedAt
+@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) String id, String name, String phone, String accountCode, String tinNumber, String type, String balance, bool isActive, DateTime createdAt, DateTime? updatedAt
 });
 
 
@@ -66,7 +66,7 @@ class _$SupplierCustomerModelCopyWithImpl<$Res>
 
 /// Create a copy of SupplierCustomerModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? phone = null,Object? accountCode = null,Object? tinNumber = null,Object? type = null,Object? isActive = null,Object? createdAt = null,Object? updatedAt = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? phone = null,Object? accountCode = null,Object? tinNumber = null,Object? type = null,Object? balance = null,Object? isActive = null,Object? createdAt = null,Object? updatedAt = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -74,6 +74,7 @@ as String,phone: null == phone ? _self.phone : phone // ignore: cast_nullable_to
 as String,accountCode: null == accountCode ? _self.accountCode : accountCode // ignore: cast_nullable_to_non_nullable
 as String,tinNumber: null == tinNumber ? _self.tinNumber : tinNumber // ignore: cast_nullable_to_non_nullable
 as String,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as String,balance: null == balance ? _self.balance : balance // ignore: cast_nullable_to_non_nullable
 as String,isActive: null == isActive ? _self.isActive : isActive // ignore: cast_nullable_to_non_nullable
 as bool,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
@@ -159,10 +160,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic)  String id,  String name,  String phone,  String accountCode,  String tinNumber,  String type,  bool isActive,  DateTime createdAt,  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic)  String id,  String name,  String phone,  String accountCode,  String tinNumber,  String type,  String balance,  bool isActive,  DateTime createdAt,  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SupplierCustomerModel() when $default != null:
-return $default(_that.id,_that.name,_that.phone,_that.accountCode,_that.tinNumber,_that.type,_that.isActive,_that.createdAt,_that.updatedAt);case _:
+return $default(_that.id,_that.name,_that.phone,_that.accountCode,_that.tinNumber,_that.type,_that.balance,_that.isActive,_that.createdAt,_that.updatedAt);case _:
   return orElse();
 
 }
@@ -180,10 +181,10 @@ return $default(_that.id,_that.name,_that.phone,_that.accountCode,_that.tinNumbe
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic)  String id,  String name,  String phone,  String accountCode,  String tinNumber,  String type,  bool isActive,  DateTime createdAt,  DateTime? updatedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic)  String id,  String name,  String phone,  String accountCode,  String tinNumber,  String type,  String balance,  bool isActive,  DateTime createdAt,  DateTime? updatedAt)  $default,) {final _that = this;
 switch (_that) {
 case _SupplierCustomerModel():
-return $default(_that.id,_that.name,_that.phone,_that.accountCode,_that.tinNumber,_that.type,_that.isActive,_that.createdAt,_that.updatedAt);}
+return $default(_that.id,_that.name,_that.phone,_that.accountCode,_that.tinNumber,_that.type,_that.balance,_that.isActive,_that.createdAt,_that.updatedAt);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -197,10 +198,10 @@ return $default(_that.id,_that.name,_that.phone,_that.accountCode,_that.tinNumbe
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic)  String id,  String name,  String phone,  String accountCode,  String tinNumber,  String type,  bool isActive,  DateTime createdAt,  DateTime? updatedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic)  String id,  String name,  String phone,  String accountCode,  String tinNumber,  String type,  String balance,  bool isActive,  DateTime createdAt,  DateTime? updatedAt)?  $default,) {final _that = this;
 switch (_that) {
 case _SupplierCustomerModel() when $default != null:
-return $default(_that.id,_that.name,_that.phone,_that.accountCode,_that.tinNumber,_that.type,_that.isActive,_that.createdAt,_that.updatedAt);case _:
+return $default(_that.id,_that.name,_that.phone,_that.accountCode,_that.tinNumber,_that.type,_that.balance,_that.isActive,_that.createdAt,_that.updatedAt);case _:
   return null;
 
 }
@@ -212,7 +213,7 @@ return $default(_that.id,_that.name,_that.phone,_that.accountCode,_that.tinNumbe
 @JsonSerializable()
 
 class _SupplierCustomerModel implements SupplierCustomerModel {
-  const _SupplierCustomerModel({@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) required this.id, required this.name, required this.phone, required this.accountCode, this.tinNumber = 'N/A', required this.type, this.isActive = true, required this.createdAt, this.updatedAt});
+  const _SupplierCustomerModel({@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) required this.id, required this.name, required this.phone, required this.accountCode, this.tinNumber = 'N/A', required this.type, this.balance = '0.0', this.isActive = true, required this.createdAt, this.updatedAt});
   factory _SupplierCustomerModel.fromJson(Map<String, dynamic> json) => _$SupplierCustomerModelFromJson(json);
 
 @override@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) final  String id;
@@ -222,6 +223,7 @@ class _SupplierCustomerModel implements SupplierCustomerModel {
 @override@JsonKey() final  String tinNumber;
 /// API returns uppercase strings: CUSTOMER | SUPPLIER
 @override final  String type;
+@override@JsonKey() final  String balance;
 @override@JsonKey() final  bool isActive;
 @override final  DateTime createdAt;
 @override final  DateTime? updatedAt;
@@ -239,16 +241,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SupplierCustomerModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.accountCode, accountCode) || other.accountCode == accountCode)&&(identical(other.tinNumber, tinNumber) || other.tinNumber == tinNumber)&&(identical(other.type, type) || other.type == type)&&(identical(other.isActive, isActive) || other.isActive == isActive)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SupplierCustomerModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.accountCode, accountCode) || other.accountCode == accountCode)&&(identical(other.tinNumber, tinNumber) || other.tinNumber == tinNumber)&&(identical(other.type, type) || other.type == type)&&(identical(other.balance, balance) || other.balance == balance)&&(identical(other.isActive, isActive) || other.isActive == isActive)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,phone,accountCode,tinNumber,type,isActive,createdAt,updatedAt);
+int get hashCode => Object.hash(runtimeType,id,name,phone,accountCode,tinNumber,type,balance,isActive,createdAt,updatedAt);
 
 @override
 String toString() {
-  return 'SupplierCustomerModel(id: $id, name: $name, phone: $phone, accountCode: $accountCode, tinNumber: $tinNumber, type: $type, isActive: $isActive, createdAt: $createdAt, updatedAt: $updatedAt)';
+  return 'SupplierCustomerModel(id: $id, name: $name, phone: $phone, accountCode: $accountCode, tinNumber: $tinNumber, type: $type, balance: $balance, isActive: $isActive, createdAt: $createdAt, updatedAt: $updatedAt)';
 }
 
 
@@ -259,7 +261,7 @@ abstract mixin class _$SupplierCustomerModelCopyWith<$Res> implements $SupplierC
   factory _$SupplierCustomerModelCopyWith(_SupplierCustomerModel value, $Res Function(_SupplierCustomerModel) _then) = __$SupplierCustomerModelCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) String id, String name, String phone, String accountCode, String tinNumber, String type, bool isActive, DateTime createdAt, DateTime? updatedAt
+@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) String id, String name, String phone, String accountCode, String tinNumber, String type, String balance, bool isActive, DateTime createdAt, DateTime? updatedAt
 });
 
 
@@ -276,7 +278,7 @@ class __$SupplierCustomerModelCopyWithImpl<$Res>
 
 /// Create a copy of SupplierCustomerModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? phone = null,Object? accountCode = null,Object? tinNumber = null,Object? type = null,Object? isActive = null,Object? createdAt = null,Object? updatedAt = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? phone = null,Object? accountCode = null,Object? tinNumber = null,Object? type = null,Object? balance = null,Object? isActive = null,Object? createdAt = null,Object? updatedAt = freezed,}) {
   return _then(_SupplierCustomerModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -284,6 +286,7 @@ as String,phone: null == phone ? _self.phone : phone // ignore: cast_nullable_to
 as String,accountCode: null == accountCode ? _self.accountCode : accountCode // ignore: cast_nullable_to_non_nullable
 as String,tinNumber: null == tinNumber ? _self.tinNumber : tinNumber // ignore: cast_nullable_to_non_nullable
 as String,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as String,balance: null == balance ? _self.balance : balance // ignore: cast_nullable_to_non_nullable
 as String,isActive: null == isActive ? _self.isActive : isActive // ignore: cast_nullable_to_non_nullable
 as bool,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable

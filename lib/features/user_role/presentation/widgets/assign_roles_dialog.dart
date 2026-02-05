@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../app/theme/app_sizes.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../core/services/snackbar_service.dart';
 import '../../../../shared/components/forms/custom_button.dart';
@@ -95,7 +96,8 @@ class _AssignRolesDialogState extends ConsumerState<AssignRolesDialog> {
   Future<void> _handleSave() async {
     if (_selectedBranches.isEmpty) {
       final snackbar = ref.read(snackbarServiceProvider);
-      snackbar.showWarning('Please select at least one branch');
+      final l10n = AppLocalizations.of(context);
+      snackbar.showWarning(l10n.pleaseSelectAtLeastOneBranch);
       return;
     }
 
@@ -132,7 +134,7 @@ class _AssignRolesDialogState extends ConsumerState<AssignRolesDialog> {
           children: [
             // Header
             Padding(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(AppSizes.lg),
               child: Row(
                 children: [
                   Expanded(
@@ -140,14 +142,14 @@ class _AssignRolesDialogState extends ConsumerState<AssignRolesDialog> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Assign Roles to User',
+                          l10n.assignRolesToUser,
                           style: theme.textTheme.titleLarge?.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(height: 4),
+                        const SizedBox(height: AppSizes.xs),
                         Text(
-                          'User: ${widget.userName}',
+                          l10n.userLabel(widget.userName),
                           style: theme.textTheme.bodyMedium?.copyWith(
                             color: colorScheme.onSurfaceVariant,
                           ),
@@ -167,16 +169,16 @@ class _AssignRolesDialogState extends ConsumerState<AssignRolesDialog> {
             // Content
             Expanded(
               child: SingleChildScrollView(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.all(AppSizes.lg),
                 child: branchesAsync.when(
                   loading: () => const Center(
                     child: Padding(
-                      padding: EdgeInsets.all(16.0),
+                      padding: EdgeInsets.all(AppSizes.lg),
                       child: CircularProgressIndicator(),
                     ),
                   ),
                   error: (error, stack) => Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(AppSizes.lg),
                     child: app_err.ErrorsWidget(
                       failure: error is Failure
                           ? error
@@ -186,8 +188,8 @@ class _AssignRolesDialogState extends ConsumerState<AssignRolesDialog> {
                   data: (branches) {
                     if (branches.isEmpty) {
                       return Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Text('No branches available'),
+                        padding: const EdgeInsets.all(AppSizes.lg),
+                        child: Text(l10n.noBranchesAvailable),
                       );
                     }
 
@@ -204,18 +206,18 @@ class _AssignRolesDialogState extends ConsumerState<AssignRolesDialog> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Select branches and assign roles',
+                              l10n.selectBranchesAndAssignRoles,
                               style: theme.textTheme.titleMedium?.copyWith(
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                             TextButton(
                               onPressed: () => _selectAllBranches(!allSelected),
-                              child: Text(allSelected ? 'Clear All' : 'Select All'),
+                              child: Text(allSelected ? l10n.clearAll : l10n.selectAll),
                             ),
                           ],
                         ),
-                        const SizedBox(height: 16),
+                        const SizedBox(height: AppSizes.lg),
 
                         // Branches with roles grouped together
                         ...branches.map((branch) {
@@ -242,35 +244,35 @@ class _AssignRolesDialogState extends ConsumerState<AssignRolesDialog> {
                                   ),
                                   dense: true,
                                   contentPadding: const EdgeInsets.symmetric(
-                                    horizontal: 16,
-                                    vertical: 8,
+                                    horizontal: AppSizes.lg,
+                                    vertical: AppSizes.sm,
                                   ),
                                 ),
                                 // Roles section (only show if branch is selected)
                                 if (isSelected) ...[
                                   const Divider(height: 1),
                                   Padding(
-                                    padding: const EdgeInsets.all(16),
+                                    padding: const EdgeInsets.all(AppSizes.lg),
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         rolesAsync.when(
                                           loading: () => const Center(
                                             child: Padding(
-                                              padding: EdgeInsets.all(16.0),
+                                              padding: EdgeInsets.all(AppSizes.lg),
                                               child: CircularProgressIndicator(),
                                             ),
                                           ),
                                           error: (error, stack) => Padding(
-                                            padding: const EdgeInsets.all(16.0),
-                                            child: Text('Error loading roles'),
+                                            padding: const EdgeInsets.all(AppSizes.lg),
+                                            child: Text(l10n.errorLoadingRoles),
                                           ),
                                           data: (roles) {
                                             if (roles.isEmpty) {
                                               return Padding(
-                                                padding: const EdgeInsets.all(16.0),
+                                                padding: const EdgeInsets.all(AppSizes.lg),
                                                 child: Text(
-                                                  'No roles available',
+                                                  l10n.noRolesAvailable,
                                                   style: theme.textTheme.bodyMedium?.copyWith(
                                                     color: colorScheme.onSurfaceVariant,
                                                   ),
@@ -297,7 +299,7 @@ class _AssignRolesDialogState extends ConsumerState<AssignRolesDialog> {
                                             );
                                           },
                                         ),
-                                        const SizedBox(height: 8),
+                                        const SizedBox(height: AppSizes.sm),
                                         Text(
                                           'Selected: ${currentRoleIds.length} ${currentRoleIds.length == 1 ? 'role' : 'roles'}',
                                           style: theme.textTheme.bodySmall?.copyWith(
@@ -313,7 +315,7 @@ class _AssignRolesDialogState extends ConsumerState<AssignRolesDialog> {
                           );
                         }).toList(),
 
-                        const SizedBox(height: 16),
+                        const SizedBox(height: AppSizes.lg),
 
                         // Summary
                         if (_selectedBranches.isNotEmpty)
@@ -330,7 +332,7 @@ class _AssignRolesDialogState extends ConsumerState<AssignRolesDialog> {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  const SizedBox(height: 4),
+                                  const SizedBox(height: AppSizes.xs),
                                   ..._selectedBranches.map((branchId) {
                                     final roleCount = _selectedRolesByBranch[branchId]?.length ?? 0;
                                     final branchName = branches.firstWhere(
@@ -343,7 +345,7 @@ class _AssignRolesDialogState extends ConsumerState<AssignRolesDialog> {
                                       style: theme.textTheme.bodySmall,
                                     );
                                   }).toList(),
-                                  const SizedBox(height: 4),
+                                  const SizedBox(height: AppSizes.xs),
                                   Builder(
                                     builder: (context) {
                                       final totalRoles = _selectedRolesByBranch.values
@@ -370,7 +372,7 @@ class _AssignRolesDialogState extends ConsumerState<AssignRolesDialog> {
             // Footer
             const Divider(height: 1),
             Padding(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(AppSizes.lg),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -378,7 +380,7 @@ class _AssignRolesDialogState extends ConsumerState<AssignRolesDialog> {
                     onPressed: () => Navigator.of(context).pop(),
                     child: Text(l10n.cancel),
                   ),
-                  const SizedBox(width: 8),
+                  const SizedBox(width: AppSizes.sm),
                   Flexible(
                     child: CustomButton(
                       text: 'Save All Assignments',

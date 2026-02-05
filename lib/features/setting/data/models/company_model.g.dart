@@ -24,6 +24,7 @@ _CompanyModel _$CompanyModelFromJson(
       'defaultStartDate',
       (v) => v == null ? null : DateTime.parse(v as String),
     ),
+    businessType: $checkedConvert('businessType', (v) => v as String?),
     createdAt: $checkedConvert('createdAt', (v) => DateTime.parse(v as String)),
     updatedAt: $checkedConvert(
       'updatedAt',
@@ -46,6 +47,7 @@ Map<String, dynamic> _$CompanyModelToJson(_CompanyModel instance) =>
       'wereda': ?instance.wereda,
       'autoPrint': instance.autoPrint,
       'defaultStartDate': ?instance.defaultStartDate?.toIso8601String(),
+      'businessType': ?instance.businessType,
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': ?instance.updatedAt?.toIso8601String(),
     };
