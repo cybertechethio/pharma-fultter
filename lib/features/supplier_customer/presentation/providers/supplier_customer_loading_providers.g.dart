@@ -311,3 +311,109 @@ abstract class _$SupplierCustomerDeleteLoading extends $Notifier<Set<String>> {
     element.handleValue(ref, created);
   }
 }
+
+@ProviderFor(AddBalanceLoading)
+const addBalanceLoadingProvider = AddBalanceLoadingProvider._();
+
+final class AddBalanceLoadingProvider
+    extends $NotifierProvider<AddBalanceLoading, bool> {
+  const AddBalanceLoadingProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'addBalanceLoadingProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$addBalanceLoadingHash();
+
+  @$internal
+  @override
+  AddBalanceLoading create() => AddBalanceLoading();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$addBalanceLoadingHash() => r'3d3feb15a704d325876193ba1c23e209c94ca820';
+
+abstract class _$AddBalanceLoading extends $Notifier<bool> {
+  bool build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build();
+    final ref = this.ref as $Ref<bool, bool>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<bool, bool>,
+              bool,
+              Object?,
+              Object?
+            >;
+    element.handleValue(ref, created);
+  }
+}
+
+@ProviderFor(RefundLoading)
+const refundLoadingProvider = RefundLoadingProvider._();
+
+final class RefundLoadingProvider
+    extends $NotifierProvider<RefundLoading, bool> {
+  const RefundLoadingProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'refundLoadingProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$refundLoadingHash();
+
+  @$internal
+  @override
+  RefundLoading create() => RefundLoading();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$refundLoadingHash() => r'24f6025f966dd2f84a82981129dfc4fe69dde39c';
+
+abstract class _$RefundLoading extends $Notifier<bool> {
+  bool build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build();
+    final ref = this.ref as $Ref<bool, bool>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<bool, bool>,
+              bool,
+              Object?,
+              Object?
+            >;
+    element.handleValue(ref, created);
+  }
+}

@@ -60,6 +60,10 @@ extension TextStyleExtension on BuildContext {
     return small(color: BrandColors.primary, bold: bold);
   }
 
+  TextStyle smallSecondary({bool bold = false}) {
+    return small(color: BrandColors.textSecondary, bold: bold);
+  }
+
   TextStyle label({Color? color, bool bold = false}) {
     return Theme.of(this).textTheme.labelSmall?.copyWith(
           color: color ?? BrandColors.textPrimary,

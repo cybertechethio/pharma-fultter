@@ -17,15 +17,3 @@ class GetTransfersUseCase {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-

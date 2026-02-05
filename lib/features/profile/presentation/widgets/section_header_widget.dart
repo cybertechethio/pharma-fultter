@@ -21,15 +21,15 @@ class SectionHeaderWidget extends StatelessWidget {
     final headerColor = color ?? colorScheme.primary;
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(AppSizes.lg, 24, AppSizes.lg, 12),
+      padding: const EdgeInsets.fromLTRB(AppSizes.lg, AppSizes.xxl, AppSizes.lg, AppSizes.md),
       child: Row(
         children: [
           Icon(
             icon,
             color: headerColor,
-            size: 20,
+            size: AppSizes.iconSize,
           ),
-          const SizedBox(width: 8),
+          const SizedBox(width: AppSizes.sm),
           Text(
             title,
             style: theme.textTheme.titleMedium?.copyWith(

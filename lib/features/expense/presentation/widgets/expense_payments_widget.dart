@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/utils/formatters.dart';
+import '../../../../app/theme/app_sizes.dart';
+import '../../../../app/theme/brand_colors.dart';
+import '../../../../app/theme/text_styles.dart';
 import '../../domain/entities/expense_detail.dart';
 import 'expense_payment_method_card.dart';
 
@@ -15,8 +19,7 @@ class ExpensePaymentsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
+    final l10n = AppLocalizations.of(context);
 
     // Flatten all payment methods from all payments
     final allPaymentMethods = <ExpensePaymentMethod>[];
@@ -36,9 +39,9 @@ class ExpensePaymentsWidget extends StatelessWidget {
     }
 
     return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      margin: const EdgeInsets.symmetric(horizontal: AppSizes.lg, vertical: AppSizes.sm),
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(AppSizes.lg),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -46,39 +49,33 @@ class ExpensePaymentsWidget extends StatelessWidget {
               children: [
                 Icon(
                   Icons.payment,
-                  size: 20,
-                  color: colorScheme.primary,
+                  size: AppSizes.iconSize,
+                  color: BrandColors.primary,
                 ),
-                const SizedBox(width: 8),
+                const SizedBox(width: AppSizes.sm),
                 Text(
-                  'Payment Details',
-                  style: theme.textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+                  l10n.paymentDetails,
+                  style: context.subtitle(bold: true),
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: AppSizes.lg),
             _PaymentInfoRow(
-              label: 'Total Amount',
+              label: l10n.totalAmount,
               value: Formatters.formatAmount(totalAmount),
-              theme: theme,
-              colorScheme: colorScheme,
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: AppSizes.lg),
             const Divider(),
-            const SizedBox(height: 12),
+            const SizedBox(height: AppSizes.md),
             Text(
-              'Payment Methods (${allPaymentMethods.length})',
-              style: theme.textTheme.titleSmall?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+              l10n.paymentMethodsCount(allPaymentMethods.length),
+              style: context.subtitle(bold: true),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: AppSizes.md),
             ...allPaymentMethods.map((method) => ExpensePaymentMethodCard(
               paymentMethod: method,
               expenseId: expenseId,
-              canDelete: allPaymentMethods.length > 1, // Can delete if more than one method
+              canDelete: allPaymentMethods.length > 1,
             )),
           ],
         ),
@@ -90,14 +87,10 @@ class ExpensePaymentsWidget extends StatelessWidget {
 class _PaymentInfoRow extends StatelessWidget {
   final String label;
   final String value;
-  final ThemeData theme;
-  final ColorScheme colorScheme;
 
   const _PaymentInfoRow({
     required this.label,
     required this.value,
-    required this.theme,
-    required this.colorScheme,
   });
 
   @override
@@ -107,15 +100,11 @@ class _PaymentInfoRow extends StatelessWidget {
       children: [
         Text(
           label,
-          style: theme.textTheme.bodyMedium?.copyWith(
-            color: colorScheme.onSurfaceVariant,
-          ),
+          style: context.bodySecondary(),
         ),
         Text(
           value,
-          style: theme.textTheme.bodyMedium?.copyWith(
-            fontWeight: FontWeight.w600,
-          ),
+          style: context.body(bold: true),
         ),
       ],
     );

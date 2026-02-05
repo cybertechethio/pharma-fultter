@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../app/theme/app_sizes.dart';
 
 /// Custom checkbox component following Material Design 3 and project theme
 /// 
@@ -88,7 +89,7 @@ class CustomCheckbox extends StatelessWidget {
         children: [
           labelWidget,
           if (description != null) ...[
-            const SizedBox(height: 4),
+            const SizedBox(height: AppSizes.xs),
             descriptionWidget,
           ],
         ],
@@ -152,12 +153,12 @@ class CustomCheckbox extends StatelessWidget {
   ) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(4),
+        borderRadius: BorderRadius.circular(AppSizes.radiusXs),
         boxShadow: value && !isDisabled ? [
           BoxShadow(
             color: (activeColor ?? colorScheme.primary).withOpacity(0.3),
-            blurRadius: 4,
-            offset: const Offset(0, 2),
+            blurRadius: AppSizes.xs,
+            offset: const Offset(0, AppSizes.xxs),
           ),
         ] : null,
       ),

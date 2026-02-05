@@ -66,7 +66,7 @@ abstract class _$ItemCreateLoading extends $Notifier<bool> {
 const itemUpdateLoadingProvider = ItemUpdateLoadingProvider._();
 
 final class ItemUpdateLoadingProvider
-    extends $NotifierProvider<ItemUpdateLoading, Set<String>> {
+    extends $NotifierProvider<ItemUpdateLoading, Set<int>> {
   const ItemUpdateLoadingProvider._()
     : super(
         from: null,
@@ -86,28 +86,28 @@ final class ItemUpdateLoadingProvider
   ItemUpdateLoading create() => ItemUpdateLoading();
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(Set<String> value) {
+  Override overrideWithValue(Set<int> value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<Set<String>>(value),
+      providerOverride: $SyncValueProvider<Set<int>>(value),
     );
   }
 }
 
-String _$itemUpdateLoadingHash() => r'8ad2609d4828d8365560ef9af0c179f4662e7c6a';
+String _$itemUpdateLoadingHash() => r'fdcba70b4e4d806055a001fe76a85c848194a882';
 
-abstract class _$ItemUpdateLoading extends $Notifier<Set<String>> {
-  Set<String> build();
+abstract class _$ItemUpdateLoading extends $Notifier<Set<int>> {
+  Set<int> build();
   @$mustCallSuper
   @override
   void runBuild() {
     final created = build();
-    final ref = this.ref as $Ref<Set<String>, Set<String>>;
+    final ref = this.ref as $Ref<Set<int>, Set<int>>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<Set<String>, Set<String>>,
-              Set<String>,
+              AnyNotifier<Set<int>, Set<int>>,
+              Set<int>,
               Object?,
               Object?
             >;
@@ -119,7 +119,7 @@ abstract class _$ItemUpdateLoading extends $Notifier<Set<String>> {
 const itemDeleteLoadingProvider = ItemDeleteLoadingProvider._();
 
 final class ItemDeleteLoadingProvider
-    extends $NotifierProvider<ItemDeleteLoading, Set<String>> {
+    extends $NotifierProvider<ItemDeleteLoading, Set<int>> {
   const ItemDeleteLoadingProvider._()
     : super(
         from: null,
@@ -139,28 +139,28 @@ final class ItemDeleteLoadingProvider
   ItemDeleteLoading create() => ItemDeleteLoading();
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(Set<String> value) {
+  Override overrideWithValue(Set<int> value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<Set<String>>(value),
+      providerOverride: $SyncValueProvider<Set<int>>(value),
     );
   }
 }
 
-String _$itemDeleteLoadingHash() => r'1d8b480cddfa1c6a6aff8a374db5dea71a3775ae';
+String _$itemDeleteLoadingHash() => r'fb14e3b8401c5dac2aac7902541fee3c3d2dfb75';
 
-abstract class _$ItemDeleteLoading extends $Notifier<Set<String>> {
-  Set<String> build();
+abstract class _$ItemDeleteLoading extends $Notifier<Set<int>> {
+  Set<int> build();
   @$mustCallSuper
   @override
   void runBuild() {
     final created = build();
-    final ref = this.ref as $Ref<Set<String>, Set<String>>;
+    final ref = this.ref as $Ref<Set<int>, Set<int>>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<Set<String>, Set<String>>,
-              Set<String>,
+              AnyNotifier<Set<int>, Set<int>>,
+              Set<int>,
               Object?,
               Object?
             >;

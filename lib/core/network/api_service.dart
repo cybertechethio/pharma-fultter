@@ -51,10 +51,11 @@ class ApiService {
     Options? options,
     bool skipWrapping = false,
   }) async {
+    print('speeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeed 1, ${data}');
     try {
       // Wrap data with meta information if it's a Map and wrapping is not skipped
       dynamic wrappedData = data;
-      if (!skipWrapping && data is Map<String, dynamic>) {
+      if (!skipWrapping){
         wrappedData = RequestWrapper.wrap(data);
       }
 
@@ -75,6 +76,7 @@ class ApiService {
           headers: existingHeaders.isEmpty ? null : existingHeaders,
         );
       }
+      print('speeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeed 2, ${wrappedData}');
 
       final response = await _dio.post<T>(
         endpoint,

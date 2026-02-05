@@ -17,6 +17,7 @@ class UserApiService {
     required String email,
     required String phone,
     bool isActive = true,
+    required String userType,
   }) async {
     try {
       final response = await ApiService.post<Map<String, dynamic>>(
@@ -27,6 +28,7 @@ class UserApiService {
           'email': email,
           'phone': phone,
           'isActive': isActive,
+          'userType': userType,
         },
       );
 
@@ -69,6 +71,7 @@ class UserApiService {
     required String email,
     required String phone,
     bool isActive = true,
+    required String userType,
   }) async {
     try {
       final response = await ApiService.put<Map<String, dynamic>>(
@@ -79,6 +82,7 @@ class UserApiService {
           'email': email,
           'phone': phone,
           'isActive': isActive,
+          'userType': userType,
         },
       );
 

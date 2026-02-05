@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../l10n/app_localizations.dart';
+import '../../../../app/theme/app_sizes.dart';
+import '../../../../app/theme/brand_colors.dart';
+import '../../../../app/theme/text_styles.dart';
 import '../../../category/presentation/providers/category_filter_provider.dart';
 import '../../../category/domain/entities/category.dart';
 
@@ -49,9 +53,8 @@ class _CategorySelectionDialogState extends ConsumerState<CategorySelectionDialo
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final categories = ref.watch(categoryFilterProvider);
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
 
     // Initialize filtered list
     if (_filteredCategories.isEmpty && categories.isNotEmpty) {
@@ -66,7 +69,7 @@ class _CategorySelectionDialogState extends ConsumerState<CategorySelectionDialo
 
     return Dialog(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(AppSizes.radiusLg),
       ),
       child: Container(
         constraints: const BoxConstraints(maxWidth: 400, maxHeight: 600),
@@ -75,20 +78,18 @@ class _CategorySelectionDialogState extends ConsumerState<CategorySelectionDialo
           children: [
             // Header
             Padding(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(AppSizes.lg),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Select Category',
-                    style: theme.textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                    l10n.selectCategory,
+                    style: context.subtitle(bold: true),
                   ),
                   IconButton(
                     icon: const Icon(Icons.close),
                     onPressed: () => Navigator.of(context).pop(),
-                    tooltip: 'Close',
+                    tooltip: l10n.close,
                   ),
                 ],
               ),
@@ -96,44 +97,42 @@ class _CategorySelectionDialogState extends ConsumerState<CategorySelectionDialo
 
             // Search bar
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: AppSizes.lg),
               child: TextField(
                 controller: _searchController,
                 decoration: InputDecoration(
-                  hintText: 'Search categories...',
+                  hintText: l10n.searchCategories,
                   prefixIcon: const Icon(Icons.search),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(AppSizes.radius),
                   ),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: AppSizes.lg, vertical: AppSizes.md),
                 ),
               ),
             ),
 
-            const SizedBox(height: 8),
+            const SizedBox(height: AppSizes.sm),
 
             // Categories list
             Expanded(
               child: _filteredCategories.isEmpty
                   ? Center(
                       child: Padding(
-                        padding: const EdgeInsets.all(32),
+                        padding: const EdgeInsets.all(AppSizes.xxxl),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Icon(
                               Icons.category_outlined,
-                              size: 64,
-                              color: colorScheme.onSurface.withOpacity(0.3),
+                              size: AppSizes.xxxxl + AppSizes.lg,
+                              color: BrandColors.textPrimary.withOpacity(0.3),
                             ),
-                            const SizedBox(height: 16),
+                            const SizedBox(height: AppSizes.lg),
                             Text(
                               categories.isEmpty
-                                  ? 'No categories found'
-                                  : 'No categories match your search',
-                              style: theme.textTheme.bodyLarge?.copyWith(
-                                color: colorScheme.onSurface.withOpacity(0.6),
-                              ),
+                                  ? l10n.noCategoriesFound
+                                  : l10n.noCategoriesMatchSearch,
+                              style: context.body(color: BrandColors.textPrimary.withOpacity(0.6)),
                             ),
                           ],
                         ),
@@ -150,14 +149,14 @@ class _CategorySelectionDialogState extends ConsumerState<CategorySelectionDialo
                         return ListTile(
                           title: Text(category.name),
                           selected: isSelected,
-                          selectedTileColor: colorScheme.primaryContainer.withOpacity(0.3),
+                          selectedTileColor: BrandColors.primaryContainer.withOpacity(0.3),
                           onTap: () {
                             Navigator.of(context).pop(categoryId);
                           },
                           trailing: isSelected
                               ? Icon(
                                   Icons.check_circle,
-                                  color: colorScheme.primary,
+                                  color: BrandColors.primary,
                                 )
                               : null,
                         );
@@ -168,11 +167,11 @@ class _CategorySelectionDialogState extends ConsumerState<CategorySelectionDialo
             // Clear selection button
             if (widget.selectedCategoryId != null)
               Padding(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.all(AppSizes.lg),
                 child: OutlinedButton.icon(
                   onPressed: () => Navigator.of(context).pop(null),
                   icon: const Icon(Icons.clear),
-                  label: const Text('Clear Selection'),
+                  label: Text(l10n.clearSelection),
                   style: OutlinedButton.styleFrom(
                     minimumSize: const Size(double.infinity, 48),
                   ),

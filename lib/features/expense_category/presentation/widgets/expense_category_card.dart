@@ -66,7 +66,7 @@ class ExpenseCategoryCard extends ConsumerWidget {
     showDialog(
       context: context,
       builder: (context) => ExpenseCategoryFormDialog(
-        title: 'Edit Expense Category',
+        title: l10n.editExpenseCategory,
         buttonText: l10n.update,
         initial: item,
       ),
@@ -77,7 +77,7 @@ class ExpenseCategoryCard extends ConsumerWidget {
     final confirmed = await DeleteConfirmationHelper.showItemDeleteConfirmation(
       context: context,
       itemName: item.name,
-      itemType: 'expense category',
+      itemType: l10n.expenseCategory,
     );
     if (!confirmed) return;
 

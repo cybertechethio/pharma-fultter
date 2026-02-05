@@ -1,12 +1,11 @@
+import 'package:cyber_pos/features/transfer/data/mappers/transfer_mapper.dart';
 import 'package:dartz/dartz.dart';
 import '../../../../core/errors/failure.dart';
 import '../../../../shared/models/paginated_response.dart';
-import '../../../../shared/models/pagination_model.dart';
 import '../../domain/entities/transfer.dart';
-import '../../domain/entities/transfer_data.dart';
 import '../../domain/repositories/transfer_repository.dart';
 import '../datasources/transfer_remote_data_source.dart';
-import '../mappers/transfer_mapper.dart';
+import '../models/create_transfer_request.dart';
 
 class TransferRepositoryImpl implements TransferRepository {
   final TransferRemoteDataSource _remoteDataSource;
@@ -22,25 +21,19 @@ class TransferRepositoryImpl implements TransferRepository {
       page: page,
       limit: limit,
     );
-
+    
     return result.fold(
       (failure) => Left(failure),
-      (models) {
-        final transfers = models.map((model) => model.toDomain()).toList();
-        // Create pagination model from response
-        final pagination = PaginationModel(
-          currentPage: page,
-          totalPages: (transfers.length / limit).ceil(),
-          totalItems: transfers.length,
-          itemsPerPage: limit,
-          hasNextPage: transfers.length == limit,
-          hasPrevPage: page > 1,
-          nextPage: transfers.length == limit ? page + 1 : null,
-          prevPage: page > 1 ? page - 1 : null,
-        );
+      (paginatedModels) {
+        // Convert models to entities
+        final entities = paginatedModels.data
+            .map((model) => model.toDomain())
+            .toList();
+
+        // Return paginated response with entities
         return Right(PaginatedResponse(
-          data: transfers,
-          pagination: pagination,
+          data: entities,
+          pagination: paginatedModels.pagination,
         ));
       },
     );
@@ -48,9 +41,9 @@ class TransferRepositoryImpl implements TransferRepository {
 
   @override
   Future<Either<Failure, Transfer>> getTransferDetail(int id) async {
-    final result = await _remoteDataSource.getTransferDetail(id);
+    final response = await _remoteDataSource.getTransferDetail(id);
 
-    return result.fold(
+    return response.fold(
       (failure) => Left(failure),
       (model) => Right(model.toDomain()),
     );
@@ -58,27 +51,33 @@ class TransferRepositoryImpl implements TransferRepository {
 
   @override
   Future<Either<Failure, Transfer>> createTransfer({
-    required TransferData data,
+    required CreateTransferRequest data,
   }) async {
-    final model = data.toModel();
-    final result = await _remoteDataSource.createTransfer(request: model);
+    
+    final response = await _remoteDataSource.createTransfer(
+      request: data,
+    );
 
-    return result.fold(
+    return response.fold(
+      (failure) => Left(failure),
+      (model) => Right(model.toDomain()),
+    );
+  }
+
+  @override
+  Future<Either<Failure, Transfer>> updateStatus({
+    required int id,
+    required String status,
+  }) async {
+    final response = await _remoteDataSource.updateStatus(
+      id: id,
+      status: status,
+    );
+
+    return response.fold(
       (failure) => Left(failure),
       (model) => Right(model.toDomain()),
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
 

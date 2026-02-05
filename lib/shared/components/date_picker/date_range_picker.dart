@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:abushakir/abushakir.dart';
 import 'package:cyber_pos/l10n/app_localizations.dart';
+import '../../../app/theme/app_sizes.dart';
 import '../../utils/calendar_converter.dart';
 import '../../models/calendar_type.dart';
 
@@ -160,7 +161,7 @@ class _DateRangePickerSheetState extends State<_DateRangePickerSheet> {
             height: 4,
             decoration: BoxDecoration(
               color: theme.colorScheme.onSurfaceVariant.withOpacity(0.4),
-              borderRadius: BorderRadius.circular(2),
+              borderRadius: BorderRadius.circular(AppSizes.radiusXxs),
             ),
           ),
 
@@ -202,12 +203,12 @@ class _DateRangePickerSheetState extends State<_DateRangePickerSheet> {
                         theme: theme,
                       ),
                     ),
-                    const SizedBox(width: 8),
+                    const SizedBox(width: AppSizes.sm),
                     Icon(
                       Icons.arrow_forward,
                       color: theme.colorScheme.onSurfaceVariant,
                     ),
-                    const SizedBox(width: 8),
+                    const SizedBox(width: AppSizes.sm),
                     Expanded(
                       child: _DateChip(
                         label: l10n.endDate,
@@ -219,7 +220,7 @@ class _DateRangePickerSheetState extends State<_DateRangePickerSheet> {
                   ],
                 ),
                 if (_getDuration() != null) ...[
-                  const SizedBox(height: 8),
+                  const SizedBox(height: AppSizes.sm),
                   Text(
                     '${l10n.duration}: ${l10n.days(_getDuration()!)}',
                     style: theme.textTheme.bodySmall?.copyWith(
@@ -284,7 +285,7 @@ class _DateRangePickerSheetState extends State<_DateRangePickerSheet> {
                     child: Text(l10n.clearSelection),
                   ),
                 ),
-                const SizedBox(width: 12),
+                const SizedBox(width: AppSizes.md),
                 Expanded(
                   flex: 2,
                   child: ElevatedButton(
@@ -330,7 +331,7 @@ class _DateChip extends StatelessWidget {
               : theme.colorScheme.outline.withOpacity(0.5),
           width: isSelected ? 2 : 1,
         ),
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(AppSizes.radiusSm),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -341,7 +342,7 @@ class _DateChip extends StatelessWidget {
               color: theme.colorScheme.onSurfaceVariant,
             ),
           ),
-          const SizedBox(height: 4),
+          const SizedBox(height: AppSizes.xs),
           Text(
             date != null
                 ? '${date!.month}/${date!.day}'
@@ -455,7 +456,7 @@ class _GregorianRangeCalendarState extends State<_GregorianRangeCalendar> {
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: theme.colorScheme.primaryContainer,
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(AppSizes.radius),
           ),
           margin: const EdgeInsets.symmetric(horizontal: 16),
           child: Row(
@@ -487,7 +488,7 @@ class _GregorianRangeCalendarState extends State<_GregorianRangeCalendar> {
           ),
         ),
         
-        const SizedBox(height: 16),
+        const SizedBox(height: AppSizes.lg),
         
         // Day names header
         Padding(
@@ -509,7 +510,7 @@ class _GregorianRangeCalendarState extends State<_GregorianRangeCalendar> {
           ),
         ),
         
-        const SizedBox(height: 8),
+        const SizedBox(height: AppSizes.sm),
         
         // Calendar grid
         Padding(
@@ -540,7 +541,7 @@ class _GregorianRangeCalendarState extends State<_GregorianRangeCalendar> {
 
               return InkWell(
                 onTap: () => widget.onDateSelected(date),
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(AppSizes.radiusSm),
                 child: Container(
                   decoration: BoxDecoration(
                     color: isStartOrEnd
@@ -548,7 +549,7 @@ class _GregorianRangeCalendarState extends State<_GregorianRangeCalendar> {
                         : isInRange
                             ? theme.colorScheme.primaryContainer
                             : null,
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(AppSizes.radiusSm),
                     border: isToday && !isStartOrEnd
                         ? Border.all(
                             color: theme.colorScheme.primary,
@@ -668,7 +669,7 @@ class _EthiopianRangeCalendarState extends State<_EthiopianRangeCalendar> {
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: theme.colorScheme.primaryContainer,
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(AppSizes.radius),
           ),
           margin: const EdgeInsets.symmetric(horizontal: 16),
           child: Row(
@@ -700,7 +701,7 @@ class _EthiopianRangeCalendarState extends State<_EthiopianRangeCalendar> {
           ),
         ),
         
-        const SizedBox(height: 16),
+        const SizedBox(height: AppSizes.lg),
         
         // Calendar grid
         Padding(
@@ -727,7 +728,7 @@ class _EthiopianRangeCalendarState extends State<_EthiopianRangeCalendar> {
 
               return InkWell(
                 onTap: () => widget.onDateSelected(gcDate),
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(AppSizes.radiusSm),
                 child: Container(
                   decoration: BoxDecoration(
                     color: isStartOrEnd
@@ -735,7 +736,7 @@ class _EthiopianRangeCalendarState extends State<_EthiopianRangeCalendar> {
                         : isInRange
                             ? theme.colorScheme.primaryContainer
                             : null,
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(AppSizes.radiusSm),
                   ),
                   alignment: Alignment.center,
                   child: Text(

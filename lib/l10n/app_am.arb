@@ -1228,36 +1228,6 @@
     "description": "ሽያጭ መመለስ ግብይት ዓይነት መለያ"
   },
 
-  "salesOrder": "የሽያጭ ትዕዛዝ",
-  "@salesOrder": {
-    "description": "የሽያጭ ትዕዛዝ ግብይት ዓይነት መለያ"
-  },
-
-  "salesOrders": "የሽያጭ ትዕዛዞች",
-  "@salesOrders": {
-    "description": "የሽያጭ ትዕዛዞች ምናሌ መለያ"
-  },
-
-  "noSalesOrders": "ምንም የሽያጭ ትዕዛዝ የለም",
-  "@noSalesOrders": {
-    "description": "ባዶ የሽያጭ ትዕዛዞች ዝርዝር ርዕስ"
-  },
-
-  "noSalesOrdersMessage": "እስካሁን ምንም የሽያጭ ትዕዛዝ የሎትም።",
-  "@noSalesOrdersMessage": {
-    "description": "ባዶ የሽያጭ ትዕዛዞች ዝርዝር መልዕክት"
-  },
-
-  "createSalesOrder": "የሽያጭ ትዕዛዝ ፍጠር",
-  "@createSalesOrder": {
-    "description": "የሽያጭ ትዕዛዝ ማፍጠር ቁልፍ እና ገጽ ርዕስ"
-  },
-
-  "salesOrderDetails": "የሽያጭ ትዕዛዝ ዝርዝሮች",
-  "@salesOrderDetails": {
-    "description": "የሽያጭ ትዕዛዝ ዝርዝሮች ገጽ ርዕስ"
-  },
-
   "fulfillmentBranch": "የመፈጸሚያ ቅርንጫፍ",
   "@fulfillmentBranch": {
     "description": "የመፈጸሚያ ቅርንጫፍ መስክ መለያ"
@@ -1388,11 +1358,6 @@
     "description": "ትዕዛዝ መሰረዝ የተሳካ መልዕክት"
   },
 
-  "salesOrderCreatedSuccessfully": "የሽያጭ ትዕዛዝ በተሳካ ሁኔታ ተፈጥሯል",
-  "@salesOrderCreatedSuccessfully": {
-    "description": "የሽያጭ ትዕዛዝ መፍጠር የተሳካ መልዕክት"
-  },
-
   "subtotal": "ንዑስ ድምር",
   "@subtotal": {
     "description": "ንዑስ ድምር መለያ"
@@ -1446,6 +1411,35 @@
   "switchBranch": "ቅርንጫፍ ይቀይሩ",
   "@switchBranch": {
     "description": "ቅርንጫፍ መቀየር እርምጃ መለያ"
+  },
+
+  "main": "ዋና",
+  "@main": {
+    "description": "በአሰሳ ውስጥ ዋና ክፍል መለያ"
+  },
+  "people": "ሰዎች",
+  "@people": {
+    "description": "በአሰሳ ውስጥ ሰዎች ክፍል መለያ"
+  },
+  "products": "ምርቶች",
+  "@products": {
+    "description": "ምርቶች ምናሌ መለያ"
+  },
+  "pointOfSale": "የሽያጭ ነጥብ",
+  "@pointOfSale": {
+    "description": "የሽያጭ ነጥብ ምናሌ መለያ"
+  },
+  "stockTransfer": "ክምችት ማስተላለፍ",
+  "@stockTransfer": {
+    "description": "ክምችት ማስተላለፍ ምናሌ መለያ"
+  },
+  "billers": "ቢለርስ",
+  "@billers": {
+    "description": "ቢለርስ ምናሌ መለያ"
+  },
+  "dailySalesReport": "ዕለታዊ የሽያጭ ሪፖርት",
+  "@dailySalesReport": {
+    "description": "ዕለታዊ የሽያጭ ሪፖርት ምናሌ መለያ"
   },
 
   "core": "መሰረታዊ",
@@ -2119,11 +2113,6 @@
     "description": "አጠቃላይ እይታ ክፍል ርዕስ"
   },
 
-  "fulfillSalesOrder": "የሽያጭ ትዕዛዝ ሙሉ ማድረግ",
-  "@fulfillSalesOrder": {
-    "description": "የሽያጭ ትዕዛዝ ሙሉ ማድረግ ዲያሎግ ርዕስ"
-  },
-
   "editPaymentMethod": "የመክፈያ ዘዴ ያርትዑ",
   "@editPaymentMethod": {
     "description": "የመክፈያ ዘዴ ያርትዑ ዲያሎግ ርዕስ"
@@ -2197,6 +2186,46 @@
   "stockDetails": "የክምችት ዝርዝሮች",
   "@stockDetails": {
     "description": "የክምችት ዝርዝሮች ስክሪን ርዕስ"
+  },
+
+  "stockMovementDetails": "የክምችት እንቅስቃሴ ዝርዝሮች",
+  "@stockMovementDetails": {
+    "description": "የክምችት እንቅስቃሴ ዝርዝሮች ስክሪን ርዕስ"
+  },
+
+  "movementInformation": "የእንቅስቃሴ መረጃ",
+  "@movementInformation": {
+    "description": "የእንቅስቃሴ መረጃ ክፍል ርዕስ"
+  },
+
+  "previousStock": "የቀድሞ ክምችት",
+  "@previousStock": {
+    "description": "የቀድሞ ክምችት መለያ"
+  },
+
+  "newStock": "አዲስ ክምችት",
+  "@newStock": {
+    "description": "አዲስ ክምችት መለያ"
+  },
+
+  "inbound": "ገቢ",
+  "@inbound": {
+    "description": "ገቢ እንቅስቃሴ መለያ"
+  },
+
+  "outbound": "ወጪ",
+  "@outbound": {
+    "description": "ወጪ እንቅስቃሴ መለያ"
+  },
+
+  "transferId": "የማስተላለፍ መታወቂያ",
+  "@transferId": {
+    "description": "የማስተላለፍ መታወቂያ መለያ"
+  },
+
+  "reversedMovement": "የተመለሰ እንቅስቃሴ መታወቂያ",
+  "@reversedMovement": {
+    "description": "የተመለሰ እንቅስቃሴ መታወቂያ መለያ"
   },
 
   "noTransactionsYet": "እስካሁን ግብይቶች የሉም።",
@@ -2274,34 +2303,19 @@
     "description": "ባዶ ንጥሎች መልዕክት"
   },
 
-  "cancelSalesOrder": "የሽያጭ ትዕዛዝ ይቅር",
-  "@cancelSalesOrder": {
-    "description": "የሽያጭ ትዕዛዝ ይቅር ዲያሎግ ርዕስ"
-  },
-
-  "confirmCancelSalesOrder": "ይህንን የሽያጭ ትዕዛዝ ማስረዝ እንደፈለጉ እርግጠኛ ነዎት?",
-  "@confirmCancelSalesOrder": {
-    "description": "የሽያጭ ትዕዛዝ ማረጋገጫ መልዕክት ይቅር"
-  },
-
-  "newSalesOrder": "አዲስ የሽያጭ ትዕዛዝ",
-  "@newSalesOrder": {
-    "description": "አዲስ የሽያጭ ትዕዛዝ ስክሪን ርዕስ"
-  },
-
   "attachment": "መያዣ",
   "@attachment": {
     "description": "መያዣ መለያ"
   },
 
-  "salesOrderDetails": "የሽያጭ ትዕዛዝ ዝርዝሮች",
-  "@salesOrderDetails": {
-    "description": "የሽያጭ ትዕዛዝ ዝርዝሮች ስክሪን ርዕስ"
-  },
-
   "newTransaction": "አዲስ ግብይት",
   "@newTransaction": {
     "description": "አዲስ ግብይት ስክሪን ርዕስ"
+  },
+
+  "cart": "ጋሪ",
+  "@cart": {
+    "description": "ጋሪ የምናሌ ንጥል መለያ"
   },
 
   "reverseTransaction": "ግብይት ይቀይሩ",
@@ -2678,7 +2692,6 @@
   "myCompany": "የእኔ ኩባንያ",
   "viewAndManageCompanyDetails": "የኩባንያ ዝርዝሮችን ይመልከቱ እና ያቀናብሩ",
   "refLabel": "ማጣቀሻ: {ref}",
-  "approveSalesOrder": "የሽያጭ ትዕዛዝ ይፈቀድ",
   "notesOptional": "ማስታወሻዎች (አማራጭ)",
   "paymentNotesOptional": "የክፍያ ማስታወሻዎች (አማራጭ)",
   "orderTotal": "የትዕዛዝ ጠቅላላ",

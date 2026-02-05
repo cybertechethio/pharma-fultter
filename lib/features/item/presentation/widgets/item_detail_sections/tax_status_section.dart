@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import '../../../../../l10n/app_localizations.dart';
 import '../../../domain/entities/item.dart';
+import '../../../../../app/theme/app_sizes.dart';
+import '../../../../../app/theme/text_styles.dart';
 import 'compact_info_row.dart';
 
 class TaxStatusSection extends StatelessWidget {
@@ -12,43 +15,41 @@ class TaxStatusSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context);
 
     return Card(
       elevation: 1,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(AppSizes.radiusSm),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.all(AppSizes.md),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Tax & Status',
-              style: theme.textTheme.titleSmall?.copyWith(
-                fontWeight: FontWeight.w600,
-              ),
+              l10n.taxAndStatus,
+              style: context.subtitle(bold: true),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: AppSizes.md),
             CompactInfoRow(
               icon: Icons.receipt_outlined,
-              label: 'Is Taxable',
-              value: item.isTaxable ? 'Yes' : 'No',
+              label: l10n.isTaxable,
+              value: item.isTaxable ? l10n.yes : l10n.no,
               isCompact: true,
             ),
-            const Divider(height: 12),
+            const Divider(height: AppSizes.md),
             CompactInfoRow(
               icon: Icons.percent_outlined,
-              label: 'Tax Rate',
+              label: l10n.taxRate,
               value: '${item.taxRate}%',
               isCompact: true,
             ),
-            const Divider(height: 12),
+            const Divider(height: AppSizes.md),
             CompactInfoRow(
               icon: Icons.toggle_on_outlined,
-              label: 'Status',
-              value: item.isActive ? 'Active' : 'Inactive',
+              label: l10n.status,
+              value: item.isActive ? l10n.active : l10n.inactive,
               isCompact: true,
             ),
           ],

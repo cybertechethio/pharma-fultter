@@ -5,6 +5,7 @@ import '../../data/datasources/stock_remote_data_source_impl.dart';
 import '../../data/repositories/stock_repository_impl.dart';
 import '../../domain/repositories/stock_repository.dart';
 import '../../domain/usecases/get_stocks_usecase.dart';
+import '../../domain/usecases/update_stock_usecase.dart';
 
 part 'stock_providers.g.dart';
 
@@ -31,6 +32,13 @@ StockRepository stockRepository(Ref ref) {
 @riverpod
 GetStocksUseCase getStocksUseCase(Ref ref) {
   return GetStocksUseCase(
+    ref.watch(stockRepositoryProvider),
+  );
+}
+
+@riverpod
+UpdateStockUseCase updateStockUseCase(Ref ref) {
+  return UpdateStockUseCase(
     ref.watch(stockRepositoryProvider),
   );
 }

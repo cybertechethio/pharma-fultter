@@ -30,11 +30,11 @@ class ExpenseCategoryListScreen extends ConsumerWidget {
         if (next is ExpenseCategoryFailure) {
           snackbar.showError(next.failure);
         } else if (next is ExpenseCategoryCreated) {
-          snackbar.showSuccess(next.message);
+          snackbar.showSuccess(l10n.expenseCategoryCreatedSuccessfully);
         } else if (next is ExpenseCategoryUpdated) {
-          snackbar.showSuccess(next.message);
+          snackbar.showSuccess(l10n.expenseCategoryUpdatedSuccessfully);
         } else if (next is ExpenseCategoryDeleted) {
-          snackbar.showSuccess(next.message);
+          snackbar.showSuccess(l10n.expenseCategoryDeletedSuccessfully);
         }
         ref.read(expenseCategoryUiEventsProvider.notifier).clear();
       },
@@ -53,8 +53,8 @@ class ExpenseCategoryListScreen extends ConsumerWidget {
             return Center(
               child: EmptyWidget(
                 icon: Icons.category_outlined,
-                title: 'No expense categories',
-                message: "You don't have any expense categories yet.",
+                title: l10n.noExpenseCategories,
+                message: l10n.noExpenseCategoriesMessage,
               ),
             );
           }
@@ -80,7 +80,7 @@ class ExpenseCategoryListScreen extends ConsumerWidget {
               app_err.ErrorsWidget(
                 failure: error is Failure ? error : Failure.unexpectedError(error.toString()),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSizes.lg),
               ElevatedButton(
                 onPressed: () => ref.read(expenseCategoryProvider.notifier).load(),
                 child: Text(l10n.retry),

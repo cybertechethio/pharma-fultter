@@ -1,5 +1,6 @@
-  import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:cyber_pos/l10n/app_localizations.dart';
+import '../../../app/theme/app_sizes.dart';
 
 /// Empty state widget for displaying empty content
 /// 
@@ -78,7 +79,7 @@ class EmptyWidget extends StatelessWidget {
     this.iconColor,
     this.iconSize,
     this.spacing = 16.0,
-    this.horizontalPadding = 24.0,
+    this.horizontalPadding = AppSizes.xxl,
     this.verticalPadding = 32.0,
   });
 
@@ -201,9 +202,9 @@ class EmptyWidget extends StatelessWidget {
             backgroundColor: colorScheme.primary,
             foregroundColor: colorScheme.onPrimary,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(AppSizes.radiusSm),
             ),
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            padding: const EdgeInsets.symmetric(horizontal: AppSizes.xxl, vertical: AppSizes.md),
           ),
           child: Text(actionText ?? 'Get Started'),
         ),
@@ -213,7 +214,7 @@ class EmptyWidget extends StatelessWidget {
     // Add custom actions
     if (actions != null && actions!.isNotEmpty) {
       if (actionWidgets.isNotEmpty) {
-        actionWidgets.add(const SizedBox(width: 12));
+        actionWidgets.add(const SizedBox(width: AppSizes.md));
       }
       actionWidgets.addAll(actions!);
     }

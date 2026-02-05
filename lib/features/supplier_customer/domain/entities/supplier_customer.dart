@@ -13,6 +13,7 @@ sealed class SupplierCustomer with _$SupplierCustomer {
     required String accountCode,
     required String tinNumber,
     required SupplierCustomerType type,
+    required String balance,
     required bool isActive,
     required DateTime createdAt,
     DateTime? updatedAt,

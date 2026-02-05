@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import '../../../../core/errors/failure.dart';
 import '../entities/batch.dart';
+import '../entities/batch_input.dart';
 import '../repositories/batch_repository.dart';
 
 class UpdateBatchUseCase {
@@ -8,14 +9,8 @@ class UpdateBatchUseCase {
 
   UpdateBatchUseCase(this.repository);
 
-  Future<Either<Failure, BatchEntity>> call({
-    required int id,
-    required String batchName,
-  }) async {
-    return await repository.updateBatch(
-      id: id,
-      batchName: batchName,
-    );
+  Future<Either<Failure, BatchEntity>> call(int id, BatchInput input) async {
+    return await repository.updateBatch(id, input);
   }
 }
 

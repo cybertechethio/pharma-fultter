@@ -1333,24 +1333,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get saleReverse => 'Sale Reverse';
 
   @override
-  String get salesOrder => 'Sales Order';
-
-  @override
-  String get salesOrders => 'Sales Orders';
-
-  @override
-  String get noSalesOrders => 'No Sales Orders';
-
-  @override
-  String get noSalesOrdersMessage => 'You don\'t have any sales orders yet.';
-
-  @override
-  String get createSalesOrder => 'Create Sales Order';
-
-  @override
-  String get salesOrderDetails => 'Sales Order Details';
-
-  @override
   String get fulfillmentBranch => 'Fulfillment Branch';
 
   @override
@@ -1388,31 +1370,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get fulfillOrder => 'Fulfill Order';
-
-  @override
-  String get confirmApproveOrder =>
-      'Are you sure you want to approve this sales order?';
-
-  @override
-  String get confirmFulfillOrder =>
-      'Are you sure you want to fulfill this sales order? This will create a transaction and deduct inventory.';
-
-  @override
-  String get confirmCancelOrder =>
-      'Are you sure you want to cancel this sales order?';
-
-  @override
-  String get orderApprovedSuccessfully => 'Sales order approved successfully';
-
-  @override
-  String get orderFulfilledSuccessfully => 'Sales order fulfilled successfully';
-
-  @override
-  String get orderCancelledSuccessfully => 'Sales order cancelled successfully';
-
-  @override
-  String get salesOrderCreatedSuccessfully =>
-      'Sales order created successfully';
 
   @override
   String get subtotal => 'Subtotal';
@@ -1492,6 +1449,27 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get switchBranch => 'Switch Branch';
+
+  @override
+  String get main => 'Main';
+
+  @override
+  String get people => 'People';
+
+  @override
+  String get products => 'Products';
+
+  @override
+  String get pointOfSale => 'Point of Sale';
+
+  @override
+  String get stockTransfer => 'Stock Transfer';
+
+  @override
+  String get billers => 'Billers';
+
+  @override
+  String get dailySalesReport => 'Daily Sales Report';
 
   @override
   String get core => 'Core';
@@ -1769,6 +1747,12 @@ class AppLocalizationsEn extends AppLocalizations {
       'Automatically print receipts after transactions';
 
   @override
+  String get defaultCalendarType => 'Default Calendar Type';
+
+  @override
+  String get businessType => 'Business Type';
+
+  @override
   String get uploadLogo => 'Upload Logo';
 
   @override
@@ -1845,9 +1829,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get overview => 'Overview';
 
   @override
-  String get fulfillSalesOrder => 'Fulfill Sales Order';
-
-  @override
   String get editPaymentMethod => 'Edit Payment Method';
 
   @override
@@ -1886,6 +1867,30 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get stockDetails => 'Stock Details';
+
+  @override
+  String get stockMovementDetails => 'Stock Movement Details';
+
+  @override
+  String get movementInformation => 'Movement Information';
+
+  @override
+  String get previousStock => 'Previous Stock';
+
+  @override
+  String get newStock => 'New Stock';
+
+  @override
+  String get inbound => 'Inbound';
+
+  @override
+  String get outbound => 'Outbound';
+
+  @override
+  String get transferId => 'Transfer ID';
+
+  @override
+  String get reversedMovement => 'Reversed Movement ID';
 
   @override
   String get noTransactionsYet => 'No transactions yet.';
@@ -1927,17 +1932,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get youDontHaveAnyItemsYet => 'You don\'t have any items yet.';
 
   @override
-  String get cancelSalesOrder => 'Cancel Sales Order';
-
-  @override
-  String get confirmCancelSalesOrder =>
-      'Are you sure you want to cancel this sales order?';
-
-  @override
-  String get newSalesOrder => 'New Sales Order';
-
-  @override
   String get newTransaction => 'New Transaction';
+
+  @override
+  String get cart => 'Cart';
 
   @override
   String get additionalInformation => 'Additional Information';
@@ -2279,9 +2277,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String refLabel(String ref) {
     return 'Ref: $ref';
   }
-
-  @override
-  String get approveSalesOrder => 'Approve Sales Order';
 
   @override
   String get notesOptional => 'Notes (optional)';

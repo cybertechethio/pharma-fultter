@@ -9,9 +9,9 @@ part 'item_model.g.dart';
 @freezed
 sealed class ItemModel with _$ItemModel {
   const factory ItemModel({
-    @JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) required String id,
+    required int id,
     required String name,
-    required String code,
+    String? code,
     
     // Optional fields with defaults where appropriate
     int? companyId,
@@ -22,10 +22,21 @@ sealed class ItemModel with _$ItemModel {
     String? color,
     String? size,
     String? material,
-    @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) @Default(0.0) double weight,
-    @Default(false) bool isTaxable,
+    @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicNullable)
+    double? weight,
+    required bool isTaxable,
     @Default(0) int taxRate,
-    @Default(true) bool isActive,
+    required bool isActive,
+
+    // Pricing fields (mandatory)
+    @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)
+    required double costPrice,
+    @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)
+    required double unitPrice,
+    
+    // Date fields
+    DateTime? expirationDate,
+    DateTime? manufacturingDate,
     
     // Optional Foreign Keys
     int? categoryId,
@@ -34,17 +45,26 @@ sealed class ItemModel with _$ItemModel {
     int? unitId,
     int? modelId,
     
-    // Optional Display Names (from API response - plural keys)
+    // Display Names from API response (plural form)
+    String? categories,
+    String? subCategories,
+    String? brands,
+    String? units,
+    String? models,
+    
+    // Legacy display names (kept for backward compatibility)
     String? categoryName,
     String? subCategoryName,
     String? brandName,
     String? unitName,
     String? modelName,
     
-    DateTime? createdAt,
-    DateTime? updatedAt,
+    // Timestamps (mandatory)
+    required DateTime createdAt,
+    required DateTime updatedAt,
     int? createdBy,
     int? updatedBy,
+    String? createdByName,
   }) = _ItemModel;
 
   factory ItemModel.fromJson(Map<String, dynamic> json) =>

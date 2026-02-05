@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import '../../../../app/theme/app_sizes.dart';
+import '../../../../app/theme/brand_colors.dart';
+import '../../../../app/theme/text_styles.dart';
 
 class CompactInfoRow extends StatelessWidget {
   final IconData icon;
@@ -18,32 +21,25 @@ class CompactInfoRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-
     if (isCompact) {
       // Compact: Label and value on same line
       return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 6),
+        padding: const EdgeInsets.symmetric(vertical: AppSizes.xs2),
         child: Row(
           children: [
-            Icon(icon, size: 18, color: colorScheme.primary),
-            const SizedBox(width: 8),
+            Icon(icon, size: AppSizes.iconSize, color: BrandColors.primary),
+            const SizedBox(width: AppSizes.sm),
             Text(
               label,
-              style: theme.textTheme.bodySmall?.copyWith(
-                color: colorScheme.onSurfaceVariant,
-              ),
+              style: context.small(color: BrandColors.textSecondary),
             ),
             const Spacer(),
             Text(
               value ?? fallbackText,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                fontWeight: FontWeight.w500,
-                color: value == null 
-                    ? colorScheme.onSurfaceVariant 
-                    : null,
-              ),
+              style: context.body(
+                color: value == null ? BrandColors.textSecondary : null,
+                bold: false,
+              ).copyWith(fontWeight: FontWeight.w500),
             ),
           ],
         ),
@@ -51,31 +47,27 @@ class CompactInfoRow extends StatelessWidget {
     } else {
       // Expanded: Label above value (for long text)
       return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 6),
+        padding: const EdgeInsets.symmetric(vertical: AppSizes.xs2),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Icon(icon, size: 18, color: colorScheme.primary),
-            const SizedBox(width: 8),
+            Icon(icon, size: AppSizes.iconSize, color: BrandColors.primary),
+            const SizedBox(width: AppSizes.sm),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     label,
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      color: colorScheme.onSurfaceVariant,
-                    ),
+                    style: context.small(color: BrandColors.textSecondary),
                   ),
-                  const SizedBox(height: 2),
+                  const SizedBox(height: AppSizes.xxs),
                   Text(
                     value ?? fallbackText,
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      fontWeight: FontWeight.w500,
-                      color: value == null 
-                          ? colorScheme.onSurfaceVariant 
-                          : null,
-                    ),
+                    style: context.body(
+                      color: value == null ? BrandColors.textSecondary : null,
+                      bold: false,
+                    ).copyWith(fontWeight: FontWeight.w500),
                   ),
                 ],
               ),

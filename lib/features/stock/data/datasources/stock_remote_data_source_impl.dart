@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import '../../../../core/errors/exceptions.dart';
 import '../../../../core/errors/failure.dart';
+import '../../../../core/enums/stock_status_enum.dart';
 import '../../../../core/services/logging_service.dart';
 import '../../../../shared/models/api_response.dart';
 import '../../../../shared/models/paginated_response.dart';
@@ -72,6 +73,59 @@ class StockRemoteDataSourceImpl implements StockRemoteDataSource {
     } catch (e) {
       LoggingService.error('Get stocks unexpected error', e, StackTrace.current);
       return Left(Failure.unexpectedError('Get stocks failed: ${e.toString()}'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, StockModel>> updateStock({
+    required int id,
+    String? lowStockThreshold,
+    String? location,
+    StockStatus? lowStockStatus,
+  }) async {
+    LoggingService.auth('Starting update stock process', {
+      'id': id,
+      'lowStockThreshold': lowStockThreshold,
+      'location': location,
+      'lowStockStatus': lowStockStatus == null 
+          ? null 
+          : (lowStockStatus == StockStatus.newStatus ? 'new' : lowStockStatus.name),
+    });
+    try {
+      final ApiResponse<StockModel> response = await _api.update(
+        id: id,
+        lowStockThreshold: lowStockThreshold,
+        location: location,
+        lowStockStatus: lowStockStatus,
+      );
+      return response.when(
+        success: (success, message, data, meta, pagination) {
+          LoggingService.auth('Update stock successful', {
+            'stockId': data.id,
+            'message': message,
+          });
+          return Right(data);
+        },
+        error: (success, error, meta) {
+          LoggingService.auth('Update stock failed - server error', {
+            'error': error.message,
+            'code': error.statusCode,
+          });
+          return Left(Failure.serverError(error.message));
+        },
+      );
+    } on DioException catch (e) {
+      final exception = NetworkExceptions.getDioException(e);
+      return Left(Failure.networkError(NetworkExceptions.getErrorMessage(exception)));
+    } on TypeError catch (e) {
+      LoggingService.error('Update stock data parsing error', e, StackTrace.current);
+      return Left(Failure.unexpectedError('Data parsing error: ${e.toString()}'));
+    } on FormatException catch (e) {
+      LoggingService.error('Update stock response format error', e, StackTrace.current);
+      return Left(Failure.unexpectedError('Invalid response format: ${e.toString()}'));
+    } catch (e) {
+      LoggingService.error('Update stock unexpected error', e, StackTrace.current);
+      return Left(Failure.unexpectedError('Update stock failed: ${e.toString()}'));
     }
   }
 }

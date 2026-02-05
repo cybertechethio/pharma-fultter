@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import '../../../../l10n/app_localizations.dart';
+import '../../../../app/theme/app_sizes.dart';
 import '../../../../app/theme/brand_colors.dart';
+import '../../../../app/theme/text_styles.dart';
+import '../../../../l10n/app_localizations.dart';
+import '../../../../shared/components/common/active_status.dart';
 import '../../../../shared/components/common/app_bar.dart';
+import '../../../../shared/utils/formatters.dart';
 import '../../domain/entities/batch.dart';
 import '../providers/batch_loading_providers.dart';
 import '../widgets/batch_form_dialog.dart';
-import '../widgets/batch_detail_sections/compact_info_row.dart';
 
 class BatchDetailScreen extends ConsumerWidget {
   final BatchEntity batch;
@@ -20,321 +23,109 @@ class BatchDetailScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
     final updating = ref.watch(batchUpdateLoadingProvider).contains(batch.id);
+    final dateFormat = DateFormat('yyyy-MM-dd');
+    final dateTimeFormat = DateFormat('yyyy-MM-dd HH:mm');
 
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Batch Details',
+        title: batch.batchName,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.symmetric(horizontal: AppSizes.lg, vertical: AppSizes.md),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Header Card
-            Card(
-              elevation: 1,
-              child: Padding(
-                padding: const EdgeInsets.all(12),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            batch.batchName,
-                            style: theme.textTheme.titleLarge?.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            'Batch #: ${batch.batchNumber}',
-                            style: theme.textTheme.bodySmall?.copyWith(
-                              color: colorScheme.onSurfaceVariant,
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                      decoration: BoxDecoration(
-                        color: batch.isActive
-                            ? BrandColors.successWithOpacity(0.1)
-                            : BrandColors.textMuted.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(
-                          color: batch.isActive ? BrandColors.success : BrandColors.textMuted,
-                          width: 1,
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(
-                            batch.isActive ? Icons.check_circle : Icons.cancel,
-                            size: 14,
-                            color: batch.isActive ? BrandColors.success : BrandColors.textMuted,
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            batch.isActive ? 'Active' : 'Inactive',
-                            style: TextStyle(
-                              color: batch.isActive ? BrandColors.success : BrandColors.textMuted,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+            // Hero card: identity + status + edit
+            _HeroCard(
+              batchNumber: batch.batchNumber,
+              isActive: batch.isActive,
+              itemName: batch.itemName,
+              itemCode: batch.itemCode,
+              onEdit: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => BatchFormDialog(
+                    title: l10n.edit,
+                    buttonText: l10n.update,
+                    initial: batch,
+                  ),
+                );
+              },
+              isUpdating: updating,
+            ),
+            const SizedBox(height: AppSizes.lg),
+            _SectionCard(
+              children: [
+                _DetailRow(
+                  label: 'Quantity',
+                  value: batch.quantity.toString(),
+                  highlight: true,
                 ),
+                if (batch.costPrice != null)
+                  _DetailRow(
+                    label: 'Cost price',
+                    value: Formatters.formatCurrency(batch.costPrice!),
+                  ),
+                if (batch.unitPrice != null)
+                  _DetailRow(
+                    label: 'Unit price',
+                    value: Formatters.formatCurrency(batch.unitPrice!),
+                  ),
+              ],
+            ),
+            if (batch.expirationDate != null ||
+                batch.manufacturingDate != null ||
+                (batch.supplierBatchNumber != null && batch.supplierBatchNumber!.isNotEmpty)) ...[
+              const SizedBox(height: AppSizes.lg),
+              _SectionCard(
+                children: [
+                  if (batch.expirationDate != null)
+                    _DetailRow(
+                      label: 'Expiration',
+                      value: dateFormat.format(batch.expirationDate!),
+                    ),
+                  if (batch.manufacturingDate != null)
+                    _DetailRow(
+                      label: 'Manufacturing',
+                      value: dateFormat.format(batch.manufacturingDate!),
+                    ),
+                  if (batch.supplierBatchNumber != null && batch.supplierBatchNumber!.isNotEmpty)
+                    _DetailRow(
+                      label: 'Supplier batch',
+                      value: batch.supplierBatchNumber!,
+                    ),
+                ],
               ),
-            ),
-
-            const SizedBox(height: 12),
-
-            // Basic Information Section
-            _buildBasicInfoSection(context, theme, colorScheme, batch),
-
-            const SizedBox(height: 12),
-
-            // Additional Details Section
-            _buildAdditionalDetailsSection(context, theme, colorScheme, batch),
-
-            const SizedBox(height: 12),
-
-            // Metadata Section
-            _buildMetadataSection(context, theme, colorScheme, batch),
-
-            const SizedBox(height: 24),
-
-            // Action Button
-            OutlinedButton.icon(
-              onPressed: updating
-                  ? null
-                  : () {
-                      showDialog(
-                        context: context,
-                        builder: (context) => BatchFormDialog(
-                          title: l10n.edit,
-                          buttonText: l10n.update,
-                          initial: batch,
-                        ),
-                      );
-                    },
-              icon: updating
-                  ? const SizedBox(
-                      width: 18,
-                      height: 18,
-                      child: CircularProgressIndicator(strokeWidth: 2),
-                    )
-                  : const Icon(Icons.edit_outlined),
-              label: Text(l10n.edit),
-            ),
-
-            const SizedBox(height: 16),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildBasicInfoSection(BuildContext context, ThemeData theme, ColorScheme colorScheme, BatchEntity batch) {
-    return Card(
-      elevation: 1,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Basic Information',
-              style: theme.textTheme.titleSmall?.copyWith(
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            const SizedBox(height: 12),
-            CompactInfoRow(
-              icon: Icons.label_outline,
-              label: 'Batch Name',
-              value: batch.batchName,
-            ),
-            const Divider(height: 12),
-            CompactInfoRow(
-              icon: Icons.qr_code_outlined,
-              label: 'Batch Number',
-              value: batch.batchNumber,
-              isCompact: true,
-            ),
-            const Divider(height: 12),
-            CompactInfoRow(
-              icon: Icons.inventory_2_outlined,
-              label: 'Item ID',
-              value: batch.itemId.toString(),
-              isCompact: true,
-            ),
-            const Divider(height: 12),
-            CompactInfoRow(
-              icon: Icons.shopping_bag_outlined,
-              label: 'Item Name',
-              value: batch.itemName,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildAdditionalDetailsSection(BuildContext context, ThemeData theme, ColorScheme colorScheme, BatchEntity batch) {
-    final dateFormat = DateFormat('yyyy-MM-dd');
-    
-    return Card(
-      elevation: 1,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Additional Details',
-              style: theme.textTheme.titleSmall?.copyWith(
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            const SizedBox(height: 12),
-            if (batch.expirationDate != null) ...[
-              CompactInfoRow(
-                icon: Icons.calendar_today_outlined,
-                label: 'Expiration Date',
-                value: dateFormat.format(batch.expirationDate!),
-                isCompact: true,
-              ),
-              const Divider(height: 12),
-            ],
-            if (batch.manufacturingDate != null) ...[
-              CompactInfoRow(
-                icon: Icons.date_range_outlined,
-                label: 'Manufacturing Date',
-                value: dateFormat.format(batch.manufacturingDate!),
-                isCompact: true,
-              ),
-              const Divider(height: 12),
-            ],
-            if (batch.costPrice != null && batch.costPrice!.isNotEmpty) ...[
-              CompactInfoRow(
-                icon: Icons.attach_money_outlined,
-                label: 'Cost Price',
-                value: batch.costPrice!,
-                isCompact: true,
-              ),
-              const Divider(height: 12),
-            ],
-            if (batch.supplierBatchNumber != null && batch.supplierBatchNumber!.isNotEmpty) ...[
-              CompactInfoRow(
-                icon: Icons.numbers_outlined,
-                label: 'Supplier Batch Number',
-                value: batch.supplierBatchNumber!,
-                isCompact: true,
-              ),
-              const Divider(height: 12),
             ],
             if (batch.notes != null && batch.notes!.isNotEmpty) ...[
-              CompactInfoRow(
-                icon: Icons.note_outlined,
-                label: 'Notes',
-                value: batch.notes!,
-              ),
-            ],
-            if (batch.expirationDate == null &&
-                batch.manufacturingDate == null &&
-                (batch.costPrice == null || batch.costPrice!.isEmpty) &&
-                (batch.supplierBatchNumber == null || batch.supplierBatchNumber!.isEmpty) &&
-                (batch.notes == null || batch.notes!.isEmpty))
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                child: Text(
-                  'No additional details available',
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    color: colorScheme.onSurfaceVariant,
-                    fontStyle: FontStyle.italic,
+              const SizedBox(height: AppSizes.lg),
+              _SectionCard(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: AppSizes.xs),
+                    child: Text(
+                      batch.notes!,
+                      style: context.body(),
+                    ),
                   ),
+                ],
+              ),
+            ],
+            const SizedBox(height: AppSizes.lg),
+            _SectionCard(
+              children: [
+                _DetailRow(
+                  label: 'Created',
+                  value: dateTimeFormat.format(batch.createdAt),
                 ),
-              ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildMetadataSection(BuildContext context, ThemeData theme, ColorScheme colorScheme, BatchEntity batch) {
-    final dateFormat = DateFormat('yyyy-MM-dd HH:mm');
-    
-    return Card(
-      elevation: 1,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Metadata',
-              style: theme.textTheme.titleSmall?.copyWith(
-                fontWeight: FontWeight.w600,
-              ),
+                if (batch.createdBy != null)
+                  _DetailRow(label: 'Created by', value: batch.createdBy!),
+                if (batch.updatedBy != null)
+                  _DetailRow(label: 'Updated by', value: batch.updatedBy!),
+              ],
             ),
-            const SizedBox(height: 12),
-            CompactInfoRow(
-              icon: Icons.calendar_today_outlined,
-              label: 'Created At',
-              value: dateFormat.format(batch.createdAt),
-              isCompact: true,
-            ),
-            if (batch.updatedAt != null) ...[
-              const Divider(height: 12),
-              CompactInfoRow(
-                icon: Icons.update_outlined,
-                label: 'Updated At',
-                value: dateFormat.format(batch.updatedAt!),
-                isCompact: true,
-              ),
-            ],
-            if (batch.createdBy != null) ...[
-              const Divider(height: 12),
-              CompactInfoRow(
-                icon: Icons.person_outline,
-                label: 'Created By',
-                value: batch.createdBy.toString(),
-                isCompact: true,
-              ),
-            ],
-            if (batch.updatedBy != null) ...[
-              const Divider(height: 12),
-              CompactInfoRow(
-                icon: Icons.person_outline,
-                label: 'Updated By',
-                value: batch.updatedBy.toString(),
-                isCompact: true,
-              ),
-            ],
+            const SizedBox(height: AppSizes.xl),
           ],
         ),
       ),
@@ -342,3 +133,142 @@ class BatchDetailScreen extends ConsumerWidget {
   }
 }
 
+class _HeroCard extends StatelessWidget {
+  final String batchNumber;
+  final bool isActive;
+  final String itemName;
+  final String itemCode;
+  final VoidCallback? onEdit;
+  final bool isUpdating;
+
+  const _HeroCard({
+    required this.batchNumber,
+    required this.isActive,
+    required this.itemName,
+    required this.itemCode,
+    this.onEdit,
+    this.isUpdating = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(AppSizes.lg),
+      
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  batchNumber,
+                  style: context.titlePrimary(bold: true),
+                ),
+              ),
+              if (onEdit != null)
+                IconButton(
+                  icon: isUpdating
+                      ? SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            color: BrandColors.primary,
+                          ),
+                        )
+                      : Icon(Icons.edit_outlined, size: 22, color: BrandColors.primary),
+                  onPressed: isUpdating ? null : onEdit,
+                  padding: EdgeInsets.zero,
+                  constraints: const BoxConstraints(minWidth: 36, minHeight: 36),
+                ),
+            ],
+          ),
+          const SizedBox(height: AppSizes.sm),
+          Row(
+            children: [
+              Icon(Icons.shopping_bag_outlined, size: 18, color: BrandColors.textSecondary),
+              const SizedBox(width: AppSizes.sm),
+              Expanded(
+                child: Text(
+                  itemName,
+                  style: context.body(),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: AppSizes.xxs),
+          Row(
+            children: [
+              if (itemCode.isNotEmpty)
+                Text(
+                  'Code: $itemCode',
+                  style: context.small(),
+                ),
+              const Spacer(),
+              ActiveStatus(isActive: isActive),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SectionCard extends StatelessWidget {
+  final List<Widget> children;
+
+  const _SectionCard({
+    required this.children,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: AppSizes.lg),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: children,
+      ),
+    );
+  }
+}
+
+class _DetailRow extends StatelessWidget {
+  final String label;
+  final String value;
+  final bool highlight;
+
+  const _DetailRow({
+    required this.label,
+    required this.value,
+    this.highlight = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: AppSizes.sm),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label,
+            style: highlight ? context.bodySecondary(bold: true) : context.bodySecondary(),
+          ),
+          const SizedBox(width: AppSizes.md),
+          Flexible(
+            child: Text(
+              value,
+              textAlign: TextAlign.end,
+              style: highlight ? context.bodyPrimary(bold: true) : context.body(bold: true),
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

@@ -19,7 +19,7 @@ class ItemUpdated extends ItemUiEvent {
 }
 
 class ItemDeleted extends ItemUiEvent {
-  final String id;
+  final int id;
   final String message;
   ItemDeleted(this.id, this.message);
 }

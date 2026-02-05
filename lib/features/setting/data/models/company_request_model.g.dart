@@ -22,6 +22,7 @@ _CompanyRequestModel _$CompanyRequestModelFromJson(Map<String, dynamic> json) =>
           'defaultStartDate',
           (v) => v == null ? null : DateTime.parse(v as String),
         ),
+        businessType: $checkedConvert('businessType', (v) => v as String?),
       );
       return val;
     });
@@ -39,4 +40,5 @@ Map<String, dynamic> _$CompanyRequestModelToJson(
   'wereda': ?instance.wereda,
   'autoPrint': ?instance.autoPrint,
   'defaultStartDate': ?instance.defaultStartDate?.toIso8601String(),
+  'businessType': ?instance.businessType,
 };

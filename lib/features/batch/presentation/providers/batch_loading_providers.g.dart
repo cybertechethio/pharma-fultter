@@ -116,3 +116,63 @@ abstract class _$BatchUpdateLoading extends $Notifier<Set<int>> {
     element.handleValue(ref, created);
   }
 }
+
+/// Tracks which batch operation is in progress: 'transfer', 'consolidation', 'split'.
+
+@ProviderFor(BatchOperationLoading)
+const batchOperationLoadingProvider = BatchOperationLoadingProvider._();
+
+/// Tracks which batch operation is in progress: 'transfer', 'consolidation', 'split'.
+final class BatchOperationLoadingProvider
+    extends $NotifierProvider<BatchOperationLoading, Set<String>> {
+  /// Tracks which batch operation is in progress: 'transfer', 'consolidation', 'split'.
+  const BatchOperationLoadingProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'batchOperationLoadingProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$batchOperationLoadingHash();
+
+  @$internal
+  @override
+  BatchOperationLoading create() => BatchOperationLoading();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(Set<String> value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<Set<String>>(value),
+    );
+  }
+}
+
+String _$batchOperationLoadingHash() =>
+    r'2159760a1fbcf7875827daeb30576a0211fdcd5d';
+
+/// Tracks which batch operation is in progress: 'transfer', 'consolidation', 'split'.
+
+abstract class _$BatchOperationLoading extends $Notifier<Set<String>> {
+  Set<String> build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build();
+    final ref = this.ref as $Ref<Set<String>, Set<String>>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<Set<String>, Set<String>>,
+              Set<String>,
+              Object?,
+              Object?
+            >;
+    element.handleValue(ref, created);
+  }
+}

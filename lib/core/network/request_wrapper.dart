@@ -3,7 +3,7 @@ import '../constants/app_constant.dart';
 
 class RequestWrapper {
   static Map<String, dynamic> wrap(
-    Map<String, dynamic> data, {
+     data, {
     String? requestId,
   }) {
     return {

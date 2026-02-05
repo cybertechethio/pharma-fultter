@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import '../../../../core/errors/failure.dart';
+import '../../data/models/create_trans_request.dart';
 import '../entities/transaction.dart';
-import '../entities/transaction_data.dart';
 import '../repositories/transaction_repository.dart';
 
 class CreateTransactionUseCase {
@@ -10,7 +10,7 @@ class CreateTransactionUseCase {
   CreateTransactionUseCase(this.repository);
 
   Future<Either<Failure, Transaction>> call({
-    required TransactionData data,
+    required CreateTransRequest data,
     required List<String> receiptFilePaths,
     required Map<String, String> paymentAttachmentFilePaths,
   }) async {

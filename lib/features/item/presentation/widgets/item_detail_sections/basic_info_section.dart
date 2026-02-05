@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import '../../../../../l10n/app_localizations.dart';
+import '../../../../../app/theme/app_sizes.dart';
+import '../../../../../app/theme/text_styles.dart';
 import '../../../domain/entities/item.dart';
 import 'compact_info_row.dart';
 
@@ -12,54 +15,52 @@ class BasicInfoSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context);
 
     return Card(
       elevation: 1,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(AppSizes.radiusSm),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.all(AppSizes.md),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Basic Information',
-              style: theme.textTheme.titleSmall?.copyWith(
-                fontWeight: FontWeight.w600,
-              ),
+              l10n.basicInformation,
+              style: context.subtitle(bold: true),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: AppSizes.md),
             CompactInfoRow(
               icon: Icons.label_outline,
-              label: 'Name',
+              label: l10n.name,
               value: item.name,
             ),
-            const Divider(height: 12),
+            const Divider(height: AppSizes.md),
             CompactInfoRow(
               icon: Icons.description_outlined,
-              label: 'Description',
+              label: l10n.description,
               value: item.description,
             ),
-            const Divider(height: 12),
+            const Divider(height: AppSizes.md),
             CompactInfoRow(
               icon: Icons.qr_code_outlined,
-              label: 'SKU',
+              label: l10n.sku,
               value: item.sku,
               isCompact: true,
             ),
-            const Divider(height: 12),
+            const Divider(height: AppSizes.md),
             CompactInfoRow(
               icon: Icons.tag_outlined,
-              label: 'Code',
+              label: l10n.itemCode,
               value: item.code,
               isCompact: true,
             ),
-            const Divider(height: 12),
+            const Divider(height: AppSizes.md),
             CompactInfoRow(
               icon: Icons.barcode_reader,
-              label: 'Barcode',
+              label: l10n.barcode,
               value: item.barcode,
               isCompact: true,
             ),

@@ -6,7 +6,7 @@ import 'unit_loading_providers.dart';
 
 part 'unit_notifier.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class UnitNotifier extends _$UnitNotifier {
   @override
   Future<List<UnitEntity>> build() async {

@@ -12,15 +12,17 @@ class TransferCreateLoading extends _$TransferCreateLoading {
   }
 }
 
+@riverpod
+class TransferStatusUpdateLoading extends _$TransferStatusUpdateLoading {
+  @override
+  Set<int> build() => {};
 
+  void start(int id) {
+    state = {...state, id};
+  }
 
-
-
-
-
-
-
-
-
-
+  void stop(int id) {
+    state = state.where((e) => e != id).toSet();
+  }
+}
 

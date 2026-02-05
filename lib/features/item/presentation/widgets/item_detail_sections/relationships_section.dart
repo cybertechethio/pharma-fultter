@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import '../../../../../l10n/app_localizations.dart';
 import '../../../domain/entities/item.dart';
+import '../../../../../app/theme/app_sizes.dart';
+import '../../../../../app/theme/text_styles.dart';
 import 'compact_info_row.dart';
 
 class RelationshipsSection extends StatelessWidget {
@@ -12,57 +15,55 @@ class RelationshipsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context);
 
     return Card(
       elevation: 1,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(AppSizes.radiusSm),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.all(AppSizes.md),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Relationships',
-              style: theme.textTheme.titleSmall?.copyWith(
-                fontWeight: FontWeight.w600,
-              ),
+              l10n.relationships,
+              style: context.subtitle(bold: true),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: AppSizes.md),
             CompactInfoRow(
               icon: Icons.category_outlined,
-              label: 'Category',
-              value: item.categoryName ?? 'N/A',
+              label: l10n.category,
+              value: item.categories ?? item.categoryName ?? l10n.nA,
               isCompact: true,
             ),
-            const Divider(height: 12),
+            const Divider(height: AppSizes.md),
             CompactInfoRow(
               icon: Icons.subdirectory_arrow_right,
-              label: 'Sub-Category',
-              value: item.subCategoryName ?? 'N/A',
+              label: l10n.subCategory,
+              value: item.subCategories ?? item.subCategoryName ?? l10n.nA,
               isCompact: true,
             ),
-            const Divider(height: 12),
+            const Divider(height: AppSizes.md),
             CompactInfoRow(
               icon: Icons.branding_watermark_outlined,
-              label: 'Brand',
-              value: item.brandName ?? 'N/A',
+              label: l10n.brand,
+              value: item.brands ?? item.brandName ?? l10n.nA,
               isCompact: true,
             ),
-            const Divider(height: 12),
+            const Divider(height: AppSizes.md),
             CompactInfoRow(
               icon: Icons.square_foot_outlined,
-              label: 'Unit',
-              value: item.unitName ?? 'N/A',
+              label: l10n.unit,
+              value: item.units ?? item.unitName ?? l10n.nA,
               isCompact: true,
             ),
-            const Divider(height: 12),
+            const Divider(height: AppSizes.md),
             CompactInfoRow(
               icon: Icons.model_training_outlined,
-              label: 'Model',
-              value: item.modelName ?? 'N/A',
+              label: l10n.model,
+              value: item.models ?? item.modelName ?? l10n.nA,
               isCompact: true,
             ),
           ],

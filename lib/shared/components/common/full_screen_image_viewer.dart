@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import '../../../app/theme/app_sizes.dart';
 import '../../../app/theme/brand_colors.dart';
 
 /// Full-screen image viewer with zoom and pan capabilities
@@ -52,9 +53,9 @@ class FullScreenImageViewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      backgroundColor: BrandColors.transparent,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: BrandColors.transparent,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.close, color: BrandColors.textLight),
@@ -86,8 +87,8 @@ class FullScreenImageViewer extends StatelessWidget {
                 loadingBuilder: (context, event) => Center(
                   child: placeholder ??
                       CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                          Theme.of(context).colorScheme.primary,
+                        valueColor: const AlwaysStoppedAnimation<Color>(
+                          BrandColors.primary,
                         ),
                       ),
                 ),
@@ -99,17 +100,17 @@ class FullScreenImageViewer extends StatelessWidget {
                           Icon(
                             Icons.error_outline,
                             color: BrandColors.textLight.withOpacity(0.7),
-                            size: 48,
+                            size: AppSizes.xxxxxl,
                           ),
-                          const SizedBox(height: 16),
+                          const SizedBox(height: AppSizes.lg),
                           Text(
                             'Failed to load image',
                             style: TextStyle(
                               color: BrandColors.textLight.withOpacity(0.7),
-                              fontSize: 16,
+                              fontSize: AppSizes.fontSizeBody,
                             ),
                           ),
-                          const SizedBox(height: 8),
+                          const SizedBox(height: AppSizes.sm),
                           TextButton(
                             onPressed: () => Navigator.of(context).pop(),
                             child: const Text(

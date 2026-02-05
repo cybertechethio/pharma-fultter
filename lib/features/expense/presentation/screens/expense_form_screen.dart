@@ -6,14 +6,22 @@ import 'package:image_picker/image_picker.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../core/enums/payment_method_type_enum.dart';
 import '../../../../shared/components/common/app_bar.dart';
+import '../../../../app/theme/app_sizes.dart';
+import '../../../../app/theme/brand_colors.dart';
+import '../../../../app/theme/text_styles.dart';
+import '../../../../core/errors/failure.dart';
+import '../../../../shared/components/common/error_widget.dart' as app_err;
 import '../../../../shared/components/forms/custom_text_field.dart';
 import '../../../../shared/components/forms/custom_button.dart';
+import '../../../../shared/components/forms/date_picker_field.dart';
+import '../../../../shared/components/forms/dropdown.dart';
 import '../../../bank/domain/entities/bank.dart';
 import '../../../bank/presentation/providers/bank_notifier.dart';
+import '../../../expense_category/domain/entities/expense_category.dart';
+import '../../../expense_category/presentation/providers/expense_category_notifier.dart';
 import '../providers/expense_notifier.dart';
 import '../providers/expense_events.dart';
 import '../providers/expense_loading_providers.dart';
-import '../widgets/expense_category_dropdown.dart';
 
 class ExpenseFormScreen extends ConsumerStatefulWidget {
   const ExpenseFormScreen({super.key});
@@ -29,36 +37,43 @@ class _ExpenseFormScreenState extends ConsumerState<ExpenseFormScreen> {
   final _nameController = TextEditingController();
   final _amountController = TextEditingController();
   final _notesController = TextEditingController();
+  final _expenseDateController = TextEditingController();
 
   // State variables
   String? _selectedCategoryId;
-  DateTime _selectedDate = DateTime.now();
+  DateTime? _selectedDate;
   final List<String> _attachmentFilePaths = [];
   final List<Map<String, dynamic>> _paymentMethods = [];
 
   final ImagePicker _picker = ImagePicker();
 
   @override
+  void initState() {
+    super.initState();
+    final now = DateTime.now();
+    _expenseDateController.text = '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}';
+    _selectedDate = now;
+    _expenseDateController.addListener(_syncExpenseDate);
+  }
+
+  @override
   void dispose() {
+    _expenseDateController.removeListener(_syncExpenseDate);
+    _expenseDateController.dispose();
     _nameController.dispose();
     _amountController.dispose();
     _notesController.dispose();
     super.dispose();
   }
 
-  Future<void> _selectDate() async {
-    final pickedDate = await showDatePicker(
-      context: context,
-      initialDate: _selectedDate,
-      firstDate: DateTime(2020),
-      lastDate: DateTime.now().add(const Duration(days: 365)),
-    );
-
-    if (pickedDate != null && pickedDate != _selectedDate) {
-      setState(() {
-        _selectedDate = pickedDate;
-      });
+  void _syncExpenseDate() {
+    final t = _expenseDateController.text.trim();
+    if (t.isEmpty) {
+      setState(() => _selectedDate = null);
+      return;
     }
+    final d = DateTime.tryParse(t);
+    setState(() => _selectedDate = d);
   }
 
   Future<void> _pickImages() async {
@@ -76,8 +91,9 @@ class _ExpenseFormScreenState extends ConsumerState<ExpenseFormScreen> {
       }
     } catch (e) {
       if (mounted) {
+        final l10n = AppLocalizations.of(context);
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error picking images: $e')),
+          SnackBar(content: Text(l10n.errorPickingImages(e.toString()))),
         );
       }
     }
@@ -100,10 +116,10 @@ class _ExpenseFormScreenState extends ConsumerState<ExpenseFormScreen> {
               fit: BoxFit.contain,
             ),
             Positioned(
-              top: 8,
-              right: 8,
+              top: AppSizes.sm,
+              right: AppSizes.sm,
               child: IconButton(
-                icon: const Icon(Icons.close, color: Colors.white),
+                icon: Icon(Icons.close, color: BrandColors.textLight),
                 onPressed: () => Navigator.of(context).pop(),
               ),
             ),
@@ -149,10 +165,11 @@ class _ExpenseFormScreenState extends ConsumerState<ExpenseFormScreen> {
   Future<void> _handleSubmit() async {
     if (!_formKey.currentState!.validate()) return;
 
+    final l10n = AppLocalizations.of(context);
     final expenseAmount = double.tryParse(_amountController.text.trim());
     if (expenseAmount == null || expenseAmount <= 0) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please enter a valid amount')),
+        SnackBar(content: Text(l10n.pleaseEnterValidAmount)),
       );
       return;
     }
@@ -160,7 +177,7 @@ class _ExpenseFormScreenState extends ConsumerState<ExpenseFormScreen> {
     // Validate payment methods
     if (_paymentMethods.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please add at least one payment method')),
+        SnackBar(content: Text(l10n.pleaseAddAtLeastOnePaymentMethod)),
       );
       return;
     }
@@ -175,7 +192,7 @@ class _ExpenseFormScreenState extends ConsumerState<ExpenseFormScreen> {
       // Check if bank transfer requires bank selection
       if (paymentMethod == PaymentMethodType.bankTransfer && method['bankId'] == null) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Please select a bank for bank transfer payment method')),
+          SnackBar(content: Text(l10n.pleaseSelectBankForBankTransfer)),
         );
         return;
       }
@@ -183,7 +200,7 @@ class _ExpenseFormScreenState extends ConsumerState<ExpenseFormScreen> {
       // Check if reference number is required
       if (paymentMethod.requiresReferenceNumber() && (method['referenceNumber'] == null || method['referenceNumber'].toString().trim().isEmpty)) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Reference number is required for ${paymentMethod.getDisplayLabel()}')),
+          SnackBar(content: Text(l10n.referenceNumberRequired(paymentMethod.getDisplayLabel()))),
         );
         return;
       }
@@ -197,7 +214,7 @@ class _ExpenseFormScreenState extends ConsumerState<ExpenseFormScreen> {
 
     if ((totalPaymentAmount - expenseAmount).abs() > 0.01) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Payment methods total (${totalPaymentAmount.toStringAsFixed(2)}) must equal expense amount (${expenseAmount.toStringAsFixed(2)})')),
+        SnackBar(content: Text(l10n.paymentMethodsTotalMustEqual(totalPaymentAmount.toStringAsFixed(2), expenseAmount.toStringAsFixed(2)))),
       );
       return;
     }
@@ -212,9 +229,12 @@ class _ExpenseFormScreenState extends ConsumerState<ExpenseFormScreen> {
       };
     }).toList();
 
+    final expenseDate = _selectedDate;
+    if (expenseDate == null) return;
+
     await ref.read(expenseProvider.notifier).createExpense(
       categoryId: _selectedCategoryId,
-      expenseDate: _selectedDate,
+      expenseDate: expenseDate,
       name: _nameController.text.trim(),
       notes: _notesController.text.trim().isEmpty ? null : _notesController.text.trim(),
       attachmentFilePaths: _attachmentFilePaths.isEmpty ? null : _attachmentFilePaths,
@@ -248,276 +268,217 @@ class _ExpenseFormScreenState extends ConsumerState<ExpenseFormScreen> {
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(AppSizes.lg),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Basic Information Section
-              _buildSection(
-                context,
-                title: 'Basic Information',
-                children: [
-                  CustomTextField(
-                    labelText: 'Expense Name *',
-                    controller: _nameController,
-                    prefixIcon: Icons.description_outlined,
-                    validator: (value) {
-                      if (value == null || value.trim().isEmpty) {
-                        return 'Expense name is required';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(height: 16),
-                  CustomTextField(
-                    labelText: 'Amount *',
-                    controller: _amountController,
-                    prefixIcon: Icons.attach_money,
-                    inputType: TextInputType.number,
-                    validator: (value) {
-                      if (value == null || value.trim().isEmpty) {
-                        return 'Amount is required';
-                      }
-                      final amount = double.tryParse(value.trim());
-                      if (amount == null || amount <= 0) {
-                        return 'Please enter a valid amount';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(height: 16),
-                  // Date Picker
-                  Column(
+              Card(
+                margin: EdgeInsets.zero,
+                child: Padding(
+                  padding: const EdgeInsets.all(AppSizes.lg),
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Expense Date *',
-                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          color: Theme.of(context).colorScheme.onSurface,
-                        ),
+                      CustomTextField(
+                        labelText: l10n.expenseName,
+                        controller: _nameController,
+                        prefixIcon: Icons.description_outlined,
+                        validator: (value) {
+                          if (value == null || value.trim().isEmpty) {
+                            return l10n.expenseNameRequired;
+                          }
+                          return null;
+                        },
                       ),
-                      const SizedBox(height: 8),
-                      InkWell(
-                        onTap: _selectDate,
-                        borderRadius: BorderRadius.circular(12),
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.surface,
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(
-                              color: Theme.of(context).colorScheme.outline.withOpacity(0.5),
-                            ),
-                          ),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.calendar_today,
-                                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
-                              ),
-                              const SizedBox(width: 12),
-                              Text(
-                                '${_selectedDate.day}/${_selectedDate.month}/${_selectedDate.year}',
-                                style: Theme.of(context).textTheme.bodyLarge,
-                              ),
-                            ],
-                          ),
-                        ),
+                      const SizedBox(height: AppSizes.lg),
+                      CustomTextField(
+                        labelText: l10n.expenseAmount,
+                        controller: _amountController,
+                        prefixIcon: Icons.attach_money,
+                        inputType: TextInputType.number,
+                        validator: (value) {
+                          if (value == null || value.trim().isEmpty) {
+                            return l10n.amountRequired;
+                          }
+                          final amount = double.tryParse(value.trim());
+                          if (amount == null || amount <= 0) {
+                            return l10n.pleaseEnterValidAmount;
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: AppSizes.lg),
+                      DatePickerField(
+                        labelText: l10n.expenseDate,
+                        controller: _expenseDateController,
+                        prefixIcon: Icons.calendar_today_outlined,
+                        firstDate: DateTime(2020),
+                        lastDate: DateTime.now().add(const Duration(days: 365)),
+                        validator: (v) =>
+                            (v == null || v.trim().isEmpty) ? l10n.fieldRequired : null,
+                      ),
+                      const SizedBox(height: AppSizes.lg),
+                      _buildExpenseCategoryDropdown(),
+                      const SizedBox(height: AppSizes.lg),
+                      CustomTextField(
+                        labelText: l10n.notes,
+                        controller: _notesController,
+                        prefixIcon: Icons.notes_outlined,
+                        maxLines: 3,
                       ),
                     ],
                   ),
-                ],
+                ),
               ),
 
-              const SizedBox(height: 24),
+              const SizedBox(height: AppSizes.xxl),
 
-              // Category Section
-              _buildSection(
-                context,
-                title: 'Category',
-                children: [
-                  InkWell(
-                    onTap: () async {
-                      final selectedId = await showDialog<String>(
-                        context: context,
-                        builder: (context) => const ExpenseCategorySelectionDialog(),
-                      );
-                      if (selectedId != null) {
-                        setState(() {
-                          _selectedCategoryId = selectedId;
-                        });
-                      }
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.surface,
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(
-                          color: Theme.of(context).colorScheme.outline.withOpacity(0.5),
-                        ),
-                      ),
-                      child: Row(
+              // Attachments Section (title + add button on same row)
+              Card(
+                margin: EdgeInsets.zero,
+                child: Padding(
+                  padding: const EdgeInsets.all(AppSizes.lg),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Icon(
-                            Icons.category,
-                            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                          Text(
+                            l10n.attachments,
+                            style: context.subtitle(bold: true),
                           ),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: Text(
-                              _selectedCategoryId != null
-                                  ? 'Category selected' // In real app, show category name
-                                  : 'Select category (optional)',
-                              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                color: _selectedCategoryId != null
-                                    ? Theme.of(context).colorScheme.onSurface
-                                    : Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                          TextButton.icon(
+                            onPressed: _pickImages,
+                            icon: Icon(Icons.add, size: AppSizes.md2),
+                            label: Text(l10n.add),
+                            style: TextButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: AppSizes.md,
+                                vertical: AppSizes.xs,
                               ),
                             ),
-                          ),
-                          Icon(
-                            Icons.arrow_drop_down,
-                            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
                           ),
                         ],
                       ),
-                    ),
-                  ),
-                ],
-              ),
-
-              const SizedBox(height: 24),
-
-              // Additional Information Section
-              _buildSection(
-                context,
-                title: 'Additional Information',
-                children: [
-                  TextFormField(
-                    controller: _notesController,
-                    decoration: InputDecoration(
-                      labelText: 'Notes',
-                      prefixIcon: const Icon(Icons.notes),
-                      filled: true,
-                      fillColor: Theme.of(context).colorScheme.surfaceContainerHighest,
-                    ),
-                    maxLines: 3,
-                  ),
-                ],
-              ),
-
-              const SizedBox(height: 24),
-
-              // Attachments Section
-              _buildSection(
-                context,
-                title: 'Attachments',
-                children: [
-                  OutlinedButton.icon(
-                    onPressed: _pickImages,
-                    icon: const Icon(Icons.add_photo_alternate),
-                    label: const Text('Add Attachments'),
-                  ),
-                  if (_attachmentFilePaths.isNotEmpty) ...[
-                    const SizedBox(height: 16),
-                    Wrap(
-                      spacing: 8,
-                      runSpacing: 8,
-                      children: List.generate(
-                        _attachmentFilePaths.length,
-                        (index) => Stack(
-                          children: [
-                            GestureDetector(
-                              onTap: () => _previewImage(index),
-                              child: Container(
-                                width: 100,
-                                height: 100,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  border: Border.all(color: Theme.of(context).colorScheme.outline),
-                                ),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8),
-                                  child: Image.file(
-                                    File(_attachmentFilePaths[index]),
-                                    fit: BoxFit.cover,
+                      if (_attachmentFilePaths.isNotEmpty) ...[
+                        const SizedBox(height: AppSizes.lg),
+                        Wrap(
+                          spacing: AppSizes.sm,
+                          runSpacing: AppSizes.sm,
+                          children: List.generate(
+                            _attachmentFilePaths.length,
+                            (index) => Stack(
+                              children: [
+                                GestureDetector(
+                                  onTap: () => _previewImage(index),
+                                  child: Container(
+                                    width: 100,
+                                    height: 100,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(AppSizes.radiusSm),
+                                      border: Border.all(color: BrandColors.outline),
+                                    ),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(AppSizes.radiusSm),
+                                      child: Image.file(
+                                        File(_attachmentFilePaths[index]),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ),
-                            Positioned(
-                              top: 4,
-                              right: 4,
-                              child: CircleAvatar(
-                                radius: 12,
-                                backgroundColor: Theme.of(context).colorScheme.error,
-                                child: IconButton(
-                                  padding: EdgeInsets.zero,
-                                  iconSize: 16,
-                                  icon: const Icon(Icons.close, color: Colors.white),
-                                  onPressed: () => _removeImage(index),
+                                Positioned(
+                                  top: AppSizes.xs,
+                                  right: AppSizes.xs,
+                                  child: CircleAvatar(
+                                    radius: AppSizes.md,
+                                    backgroundColor: BrandColors.error,
+                                    child: IconButton(
+                                      padding: EdgeInsets.zero,
+                                      iconSize: AppSizes.lg,
+                                      icon: Icon(Icons.close, color: BrandColors.textLight),
+                                      onPressed: () => _removeImage(index),
+                                    ),
+                                  ),
                                 ),
-                              ),
+                              ],
                             ),
-                          ],
+                          ),
                         ),
-                      ),
-                    ),
-                  ],
-                ],
-              ),
-
-              const SizedBox(height: 24),
-
-              // Payment Methods Section
-              _buildSection(
-                context,
-                title: 'Payment Methods',
-                children: [
-                  if (_paymentMethods.isEmpty)
-                    Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(32),
-                        child: Column(
-                          children: [
-                            Icon(
-                              Icons.payment,
-                              size: 64,
-                              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.3),
-                            ),
-                            const SizedBox(height: 16),
-                            Text(
-                              'No payment methods added',
-                              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    )
-                  else
-                    ..._paymentMethods.asMap().entries.map((entry) {
-                      final index = entry.key;
-                      final method = entry.value;
-                      return _buildPaymentMethodCard(context, index, method);
-                    }),
-
-                  const SizedBox(height: 16),
-
-                  OutlinedButton.icon(
-                    onPressed: _addPaymentMethod,
-                    icon: const Icon(Icons.add),
-                    label: const Text('Add Payment Method'),
-                    style: OutlinedButton.styleFrom(
-                      minimumSize: const Size(double.infinity, 48),
-                    ),
+                      ],
+                    ],
                   ),
-                ],
+                ),
               ),
 
-              const SizedBox(height: 32),
+              const SizedBox(height: AppSizes.xxl),
+
+              // Payment Methods Section (title + add button on same row)
+              Card(
+                margin: EdgeInsets.zero,
+                child: Padding(
+                  padding: const EdgeInsets.all(AppSizes.lg),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            l10n.paymentMethods,
+                            style: context.subtitle(bold: true),
+                          ),
+                          TextButton.icon(
+                            onPressed: _addPaymentMethod,
+                            icon: Icon(Icons.add, size: AppSizes.md2),
+                            label: Text(l10n.add),
+                            style: TextButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: AppSizes.md,
+                                vertical: AppSizes.xs,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      if (_paymentMethods.isEmpty) ...[
+                        const SizedBox(height: AppSizes.lg),
+                        Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(AppSizes.xxl),
+                            child: Column(
+                              children: [
+                                Icon(
+                                  Icons.payment,
+                                  size: 64,
+                                  color: BrandColors.textPrimary.withOpacity(0.3),
+                                ),
+                                const SizedBox(height: AppSizes.lg),
+                                Text(
+                                  l10n.noPaymentMethodsAdded,
+                                  style: context.body(
+                                    color: BrandColors.textPrimary.withOpacity(0.6),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ] else ...[
+                        const SizedBox(height: AppSizes.lg),
+                        ..._paymentMethods.asMap().entries.map((entry) {
+                          final index = entry.key;
+                          final method = entry.value;
+                          return _buildPaymentMethodCard(context, index, method);
+                        }),
+                      ],
+                    ],
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: AppSizes.xxl),
 
               // Submit Button
               CustomButton(
@@ -526,7 +487,7 @@ class _ExpenseFormScreenState extends ConsumerState<ExpenseFormScreen> {
                 isLoading: creating,
               ),
 
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSizes.lg),
             ],
           ),
         ),
@@ -535,15 +496,16 @@ class _ExpenseFormScreenState extends ConsumerState<ExpenseFormScreen> {
   }
 
   Widget _buildPaymentMethodCard(BuildContext context, int index, Map<String, dynamic> method) {
+    final l10n = AppLocalizations.of(context);
     final paymentMethod = PaymentMethodType.values.firstWhere(
       (type) => type.toApiString() == method['method'],
       orElse: () => PaymentMethodType.cash,
     );
 
     return Card(
-      margin: const EdgeInsets.only(bottom: 8),
+      margin: const EdgeInsets.only(bottom: AppSizes.sm),
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(AppSizes.lg),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -551,41 +513,39 @@ class _ExpenseFormScreenState extends ConsumerState<ExpenseFormScreen> {
               children: [
                 Icon(
                   _getPaymentMethodIcon(paymentMethod),
-                  color: Theme.of(context).colorScheme.primary,
+                  color: BrandColors.primary,
                 ),
-                const SizedBox(width: 8),
+                const SizedBox(width: AppSizes.sm),
                 Text(
                   paymentMethod.getDisplayLabel(),
-                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: context.subtitle(bold: true),
                 ),
                 const Spacer(),
                 IconButton(
-                  icon: const Icon(Icons.delete, color: Colors.red),
+                  icon: Icon(Icons.delete, color: BrandColors.error),
                   onPressed: () => _removePaymentMethod(index),
-                  tooltip: 'Remove payment method',
+                  tooltip: l10n.removePaymentMethod,
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: AppSizes.lg),
 
             // Amount field
             TextFormField(
               initialValue: method['amount'].toString(),
-              decoration: const InputDecoration(
-                labelText: 'Amount *',
-                prefixIcon: Icon(Icons.attach_money),
-                border: OutlineInputBorder(),
+              decoration: InputDecoration(
+                labelText: l10n.expenseAmount,
+                prefixIcon: const Icon(Icons.attach_money),
+                border: const OutlineInputBorder(),
               ),
               keyboardType: TextInputType.number,
               validator: (value) {
                 if (value == null || value.trim().isEmpty) {
-                  return 'Amount is required';
+                  return l10n.amountRequired;
                 }
                 final amount = double.tryParse(value.trim());
                 if (amount == null || amount <= 0) {
-                  return 'Please enter a valid amount';
+                  return l10n.pleaseEnterValidAmount;
                 }
                 return null;
               },
@@ -598,14 +558,14 @@ class _ExpenseFormScreenState extends ConsumerState<ExpenseFormScreen> {
               },
             ),
 
-            const SizedBox(height: 12),
+            const SizedBox(height: AppSizes.md),
 
             // Reference number field (if required)
             if (paymentMethod.requiresReferenceNumber())
               TextFormField(
                 initialValue: method['referenceNumber'] ?? '',
                 decoration: InputDecoration(
-                  labelText: 'Reference Number',
+                  labelText: l10n.referenceNumberLabel,
                   prefixIcon: const Icon(Icons.tag),
                   border: const OutlineInputBorder(),
                 ),
@@ -617,13 +577,13 @@ class _ExpenseFormScreenState extends ConsumerState<ExpenseFormScreen> {
                 },
               ),
 
-            const SizedBox(height: 12),
+            const SizedBox(height: AppSizes.md),
 
             // Bank selector (only for bank transfer)
             if (paymentMethod == PaymentMethodType.bankTransfer)
               _buildBankSelector(context, index, method),
 
-            const SizedBox(height: 12),
+            const SizedBox(height: AppSizes.md),
 
             // Payment method selector
             _buildPaymentMethodSelector(context, index, paymentMethod),
@@ -634,6 +594,7 @@ class _ExpenseFormScreenState extends ConsumerState<ExpenseFormScreen> {
   }
 
   Widget _buildBankSelector(BuildContext context, int index, Map<String, dynamic> method) {
+    final l10n = AppLocalizations.of(context);
     return Consumer(
       builder: (context, ref, child) {
         final banksAsync = ref.watch(bankProvider);
@@ -642,12 +603,12 @@ class _ExpenseFormScreenState extends ConsumerState<ExpenseFormScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Bank *',
-              style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                color: Theme.of(context).colorScheme.onSurface,
+              l10n.bankRequired,
+              style: context.label(
+                color: BrandColors.textPrimary,
               ),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: AppSizes.sm),
             banksAsync.when(
               loading: () => const SizedBox(
                 height: 48,
@@ -655,16 +616,16 @@ class _ExpenseFormScreenState extends ConsumerState<ExpenseFormScreen> {
               ),
               error: (error, stackTrace) => Container(
                 height: 48,
-                padding: const EdgeInsets.symmetric(horizontal: 12),
+                padding: const EdgeInsets.symmetric(horizontal: AppSizes.md),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.error.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(8),
+                  color: BrandColors.error.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(AppSizes.radiusSm),
                   border: Border.all(
-                    color: Theme.of(context).colorScheme.error.withOpacity(0.5),
+                    color: BrandColors.error.withOpacity(0.5),
                   ),
                 ),
-                child: const Center(
-                  child: Text('Failed to load banks'),
+                child: Center(
+                  child: Text(l10n.failedToLoadBanks),
                 ),
               ),
               data: (banks) {
@@ -689,35 +650,35 @@ class _ExpenseFormScreenState extends ConsumerState<ExpenseFormScreen> {
                   },
                   child: Container(
                     height: 48,
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    padding: const EdgeInsets.symmetric(horizontal: AppSizes.md),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.surface,
-                      borderRadius: BorderRadius.circular(8),
+                      color: BrandColors.surface,
+                      borderRadius: BorderRadius.circular(AppSizes.radiusSm),
                       border: Border.all(
-                        color: Theme.of(context).colorScheme.outline.withOpacity(0.5),
+                        color: BrandColors.outline.withOpacity(0.5),
                       ),
                     ),
                     child: Row(
                       children: [
                         Icon(
                           Icons.account_balance,
-                          color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                          color: BrandColors.textPrimary.withOpacity(0.6),
                           size: 20,
                         ),
-                        const SizedBox(width: 12),
+                        const SizedBox(width: AppSizes.md),
                         Expanded(
                           child: Text(
-                            selectedBank?.name ?? 'Select bank',
-                            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            selectedBank?.name ?? l10n.selectBankPlaceholder,
+                            style: context.body(
                               color: selectedBank != null
-                                  ? Theme.of(context).colorScheme.onSurface
-                                  : Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                                  ? BrandColors.textPrimary
+                                  : BrandColors.textPrimary.withOpacity(0.6),
                             ),
                           ),
                         ),
                         Icon(
                           Icons.arrow_drop_down,
-                          color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                          color: BrandColors.textPrimary.withOpacity(0.6),
                         ),
                       ],
                     ),
@@ -732,8 +693,9 @@ class _ExpenseFormScreenState extends ConsumerState<ExpenseFormScreen> {
   }
 
   Widget _buildBankSelectionDialog(BuildContext context, List<dynamic> banks, int? selectedBankId) {
+    final l10n = AppLocalizations.of(context);
     return AlertDialog(
-      title: const Text('Select Bank'),
+      title: Text(l10n.selectBank),
       content: SizedBox(
         width: double.maxFinite,
         child: ListView.builder(
@@ -746,10 +708,10 @@ class _ExpenseFormScreenState extends ConsumerState<ExpenseFormScreen> {
             return ListTile(
               title: Text(bank.name),
               selected: isSelected,
-              selectedTileColor: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.3),
+              selectedTileColor: BrandColors.primaryContainer.withOpacity(0.3),
               onTap: () => Navigator.of(context).pop(bank.id),
               trailing: isSelected
-                  ? Icon(Icons.check_circle, color: Theme.of(context).colorScheme.primary)
+                  ? Icon(Icons.check_circle, color: BrandColors.primary)
                   : null,
             );
           },
@@ -758,25 +720,26 @@ class _ExpenseFormScreenState extends ConsumerState<ExpenseFormScreen> {
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: const Text('Cancel'),
+          child: Text(l10n.cancel),
         ),
       ],
     );
   }
 
   Widget _buildPaymentMethodSelector(BuildContext context, int index, PaymentMethodType currentMethod) {
+    final l10n = AppLocalizations.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Payment Method',
-          style: Theme.of(context).textTheme.labelLarge?.copyWith(
-            color: Theme.of(context).colorScheme.onSurface,
+          l10n.paymentMethod,
+          style: context.label(
+            color: BrandColors.textPrimary,
           ),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: AppSizes.sm),
         Wrap(
-          spacing: 8,
+          spacing: AppSizes.sm,
           children: PaymentMethodType.values.map((method) {
             final isSelected = method == currentMethod;
             return ChoiceChip(
@@ -811,34 +774,64 @@ class _ExpenseFormScreenState extends ConsumerState<ExpenseFormScreen> {
         return Icons.account_balance;
       case PaymentMethodType.check:
         return Icons.receipt;
-      case PaymentMethodType.other:
-        return Icons.more_horiz;
     }
   }
 
-  Widget _buildSection(BuildContext context, {
-    required String title,
-    required List<Widget> children,
-  }) {
-    return Card(
-      margin: EdgeInsets.zero,
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: Theme.of(context).colorScheme.primary,
-              ),
-            ),
-            const SizedBox(height: 16),
-            ...children,
-          ],
-        ),
+  Widget _buildExpenseCategoryDropdown() {
+    final l10n = AppLocalizations.of(context);
+    final categoriesAsync = ref.watch(expenseCategoryProvider);
+
+    return categoriesAsync.when(
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (error, stack) => app_err.ErrorsWidget(
+        failure: error is Failure
+            ? error
+            : Failure.unexpectedError(error.toString()),
       ),
+      data: (List<ExpenseCategory> categories) {
+        if (categories.isEmpty) {
+          return Container(
+            padding: const EdgeInsets.all(AppSizes.sm),
+            decoration: BoxDecoration(
+              color: BrandColors.surfaceContainerHighest,
+              borderRadius: BorderRadius.circular(AppSizes.radiusSm),
+            ),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.info_outline,
+                  size: 18,
+                  color: BrandColors.textSecondary,
+                ),
+                const SizedBox(width: AppSizes.sm),
+                Expanded(
+                  child: Text(
+                    l10n.noExpenseCategories,
+                    style: context.small(
+                      color: BrandColors.textSecondary,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        }
+        return CustomDropdown<String?>(
+          value: _selectedCategoryId,
+          items: [
+            DropdownItem<String?>(value: null, label: l10n.none),
+            ...categories.map(
+              (c) => DropdownItem<String?>(value: c.id, label: c.name),
+            ),
+          ],
+          onChanged: (value) {
+            setState(() => _selectedCategoryId = value);
+          },
+          label: l10n.category,
+          hintText: l10n.selectCategory,
+          hideLabel: true,
+        );
+      },
     );
   }
 }

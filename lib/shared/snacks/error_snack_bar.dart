@@ -2,6 +2,7 @@ import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import '../../core/errors/failure.dart';
 import '../../app/theme/app_sizes.dart';
+import '../../app/theme/brand_colors.dart';
 
 class ErrorSnackBar {
   static void show(
@@ -24,15 +25,14 @@ class ErrorSnackBar {
       unexpectedError: (msg) => message = msg,
     );
 
-    final colorScheme = Theme.of(context).colorScheme;
     Flushbar(
       message: message,
       title: code != null ? 'Error: $code' : null,
       duration: duration,
-      backgroundColor: colorScheme.error,
+      backgroundColor: BrandColors.error,
       margin: const EdgeInsets.all(AppSizes.sm),
       borderRadius: BorderRadius.circular(AppSizes.radius),
-      icon: Icon(Icons.error_outline, color: colorScheme.onError),
+      icon: const Icon(Icons.error_outline, color: BrandColors.onError),
       flushbarPosition: FlushbarPosition.TOP,
       animationDuration: const Duration(milliseconds: 300),
       forwardAnimationCurve: Curves.easeOutBack,

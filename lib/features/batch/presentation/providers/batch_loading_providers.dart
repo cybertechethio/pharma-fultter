@@ -26,3 +26,18 @@ class BatchUpdateLoading extends _$BatchUpdateLoading {
   }
 }
 
+/// Tracks which batch operation is in progress: 'transfer', 'consolidation', 'split'.
+@riverpod
+class BatchOperationLoading extends _$BatchOperationLoading {
+  @override
+  Set<String> build() => {};
+
+  void start(String operation) {
+    state = {...state, operation};
+  }
+
+  void stop(String operation) {
+    state = state.where((e) => e != operation).toSet();
+  }
+}
+

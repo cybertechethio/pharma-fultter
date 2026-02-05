@@ -103,7 +103,7 @@ final class TransferRemoteDataSourceProvider
 }
 
 String _$transferRemoteDataSourceHash() =>
-    r'e4757bd307ab1c9790a54373d2b139e0dc278364';
+    r'b90d7aa09f951f3ad43c9a3630fd2cf307d70b5a';
 
 @ProviderFor(transferRepository)
 const transferRepositoryProvider = TransferRepositoryProvider._();
@@ -151,103 +151,7 @@ final class TransferRepositoryProvider
 }
 
 String _$transferRepositoryHash() =>
-    r'ed8b37167d7cbc931d10ae8da3a573528836c853';
-
-@ProviderFor(getTransfersUseCase)
-const getTransfersUseCaseProvider = GetTransfersUseCaseProvider._();
-
-final class GetTransfersUseCaseProvider
-    extends
-        $FunctionalProvider<
-          GetTransfersUseCase,
-          GetTransfersUseCase,
-          GetTransfersUseCase
-        >
-    with $Provider<GetTransfersUseCase> {
-  const GetTransfersUseCaseProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'getTransfersUseCaseProvider',
-        isAutoDispose: true,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
-
-  @override
-  String debugGetCreateSourceHash() => _$getTransfersUseCaseHash();
-
-  @$internal
-  @override
-  $ProviderElement<GetTransfersUseCase> $createElement(
-    $ProviderPointer pointer,
-  ) => $ProviderElement(pointer);
-
-  @override
-  GetTransfersUseCase create(Ref ref) {
-    return getTransfersUseCase(ref);
-  }
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(GetTransfersUseCase value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<GetTransfersUseCase>(value),
-    );
-  }
-}
-
-String _$getTransfersUseCaseHash() =>
-    r'27cdede29fffbae556d44cc8a83cfb37bc6bd2af';
-
-@ProviderFor(getTransferDetailUseCase)
-const getTransferDetailUseCaseProvider = GetTransferDetailUseCaseProvider._();
-
-final class GetTransferDetailUseCaseProvider
-    extends
-        $FunctionalProvider<
-          GetTransferDetailUseCase,
-          GetTransferDetailUseCase,
-          GetTransferDetailUseCase
-        >
-    with $Provider<GetTransferDetailUseCase> {
-  const GetTransferDetailUseCaseProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'getTransferDetailUseCaseProvider',
-        isAutoDispose: true,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
-
-  @override
-  String debugGetCreateSourceHash() => _$getTransferDetailUseCaseHash();
-
-  @$internal
-  @override
-  $ProviderElement<GetTransferDetailUseCase> $createElement(
-    $ProviderPointer pointer,
-  ) => $ProviderElement(pointer);
-
-  @override
-  GetTransferDetailUseCase create(Ref ref) {
-    return getTransferDetailUseCase(ref);
-  }
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(GetTransferDetailUseCase value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<GetTransferDetailUseCase>(value),
-    );
-  }
-}
-
-String _$getTransferDetailUseCaseHash() =>
-    r'ffc5a7d1b3b21afd54b31737375be0b9f6a20e62';
+    r'4d174a14f98833243527b6a1e700652543bcb523';
 
 @ProviderFor(createTransferUseCase)
 const createTransferUseCaseProvider = CreateTransferUseCaseProvider._();
@@ -295,4 +199,149 @@ final class CreateTransferUseCaseProvider
 }
 
 String _$createTransferUseCaseHash() =>
-    r'77cf86798f6675efafeec6de673cb9c907052df4';
+    r'eedf5c8d03bae14af11bca02725bc02076800b24';
+
+@ProviderFor(getTransfersUseCase)
+const getTransfersUseCaseProvider = GetTransfersUseCaseProvider._();
+
+final class GetTransfersUseCaseProvider
+    extends
+        $FunctionalProvider<
+          GetTransfersUseCase,
+          GetTransfersUseCase,
+          GetTransfersUseCase
+        >
+    with $Provider<GetTransfersUseCase> {
+  const GetTransfersUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'getTransfersUseCaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$getTransfersUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<GetTransfersUseCase> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  GetTransfersUseCase create(Ref ref) {
+    return getTransfersUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(GetTransfersUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<GetTransfersUseCase>(value),
+    );
+  }
+}
+
+String _$getTransfersUseCaseHash() =>
+    r'46e93bafba79ca5c09ae7c158d42f644f277571b';
+
+@ProviderFor(getTransferDetailUseCase)
+const getTransferDetailUseCaseProvider = GetTransferDetailUseCaseProvider._();
+
+final class GetTransferDetailUseCaseProvider
+    extends
+        $FunctionalProvider<
+          GetTransferDetailUseCase,
+          GetTransferDetailUseCase,
+          GetTransferDetailUseCase
+        >
+    with $Provider<GetTransferDetailUseCase> {
+  const GetTransferDetailUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'getTransferDetailUseCaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$getTransferDetailUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<GetTransferDetailUseCase> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  GetTransferDetailUseCase create(Ref ref) {
+    return getTransferDetailUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(GetTransferDetailUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<GetTransferDetailUseCase>(value),
+    );
+  }
+}
+
+String _$getTransferDetailUseCaseHash() =>
+    r'79836a5a1432c77f9753a8b50302984bcca7aa3f';
+
+@ProviderFor(updateTransferStatusUseCase)
+const updateTransferStatusUseCaseProvider =
+    UpdateTransferStatusUseCaseProvider._();
+
+final class UpdateTransferStatusUseCaseProvider
+    extends
+        $FunctionalProvider<
+          UpdateTransferStatusUseCase,
+          UpdateTransferStatusUseCase,
+          UpdateTransferStatusUseCase
+        >
+    with $Provider<UpdateTransferStatusUseCase> {
+  const UpdateTransferStatusUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'updateTransferStatusUseCaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$updateTransferStatusUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<UpdateTransferStatusUseCase> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  UpdateTransferStatusUseCase create(Ref ref) {
+    return updateTransferStatusUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(UpdateTransferStatusUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<UpdateTransferStatusUseCase>(value),
+    );
+  }
+}
+
+String _$updateTransferStatusUseCaseHash() =>
+    r'f9bb7261dbe31f62c119455604a92d3ec4a377a9';

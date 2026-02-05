@@ -16,6 +16,7 @@ sealed class CompanyRequestModel with _$CompanyRequestModel {
     String? wereda,
     bool? autoPrint,
     DateTime? defaultStartDate,
+    String? businessType,
   }) = _CompanyRequestModel;
 
   factory CompanyRequestModel.fromJson(Map<String, dynamic> json) =>

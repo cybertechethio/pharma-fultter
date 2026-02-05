@@ -12,18 +12,18 @@ class ItemCreateLoading extends _$ItemCreateLoading {
 @riverpod
 class ItemUpdateLoading extends _$ItemUpdateLoading {
   @override
-  Set<String> build() => <String>{};
-  void start(String id) => state = {...state, id};
-  void stop(String id) => state = state.where((e) => e != id).toSet();
-  bool isLoading(String id) => state.contains(id);
+  Set<int> build() => <int>{};
+  void start(int id) => state = {...state, id};
+  void stop(int id) => state = state.where((e) => e != id).toSet();
+  bool isLoading(int id) => state.contains(id);
 }
 
 @riverpod
 class ItemDeleteLoading extends _$ItemDeleteLoading {
   @override
-  Set<String> build() => <String>{};
-  void start(String id) => state = {...state, id};
-  void stop(String id) => state = state.where((e) => e != id).toSet();
-  bool isLoading(String id) => state.contains(id);
+  Set<int> build() => <int>{};
+  void start(int id) => state = {...state, id};
+  void stop(int id) => state = state.where((e) => e != id).toSet();
+  bool isLoading(int id) => state.contains(id);
 }
 

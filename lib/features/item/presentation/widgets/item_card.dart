@@ -26,7 +26,6 @@ class ItemCard extends ConsumerWidget {
     final deleting = ref.watch(itemDeleteLoadingProvider).contains(item.id);
     final updating = ref.watch(itemUpdateLoadingProvider).contains(item.id);
     final l10n = AppLocalizations.of(context);
-    final theme = Theme.of(context);
 
     return InkWell(
       onTap: () => _navigateToDetail(context),
@@ -39,7 +38,7 @@ class ItemCard extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Image
-            _buildImage(context, theme),
+            _buildImage(context),
             const SizedBox(width: AppSizes.md),
             // Content
             Expanded(
@@ -57,21 +56,12 @@ class ItemCard extends ConsumerWidget {
                        style: context.small(),
                      ),
                    if (item.code.isNotEmpty) const SizedBox(height: AppSizes.sm),
-                   // Status, Time, and Actions Row
+                   // Status and Actions Row
             Row(
               children: [
                        // Status (just colored text, no background/border)
                        ActiveStatus(isActive: item.isActive),
                        const Spacer(),
-                       // Created Date (next to action buttons)
-                       if (item.createdAt != null)
-                         Padding(
-                           padding: const EdgeInsets.only(right: AppSizes.sm),
-                           child: Text(
-                             Formatters.formatRelativeDate(item.createdAt!),
-                             style: context.small(),
-                           ),
-                         ),
                        // Action Buttons
                        ActionButtons(
                          onEdit: () => _openEdit(context),
@@ -93,7 +83,7 @@ class ItemCard extends ConsumerWidget {
     );
   }
 
-  Widget _buildImage(BuildContext context, ThemeData theme) {
+  Widget _buildImage(BuildContext context) {
     if (item.imageUrl != null && item.imageUrl!.isNotEmpty) {
       final imageUrl = UrlUtils.getFullImageUrl(item.imageUrl);
       if (imageUrl != null) {

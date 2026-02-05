@@ -1,10 +1,11 @@
+import 'package:flutter/material.dart';
+
 enum PaymentMethodType {
   cash,
   telebirr,
   mPesa,
   bankTransfer,
   check,
-  other,
 }
 
 extension PaymentMethodTypeExtension on PaymentMethodType {
@@ -23,8 +24,6 @@ extension PaymentMethodTypeExtension on PaymentMethodType {
         return PaymentMethodType.bankTransfer;
       case 'check':
         return PaymentMethodType.check;
-      case 'other':
-        return PaymentMethodType.other;
       default:
         return PaymentMethodType.cash; // Default fallback
     }
@@ -43,8 +42,6 @@ extension PaymentMethodTypeExtension on PaymentMethodType {
         return 'bank_transfer';
       case PaymentMethodType.check:
         return 'check';
-      case PaymentMethodType.other:
-        return 'other';
     }
   }
 
@@ -74,8 +71,22 @@ extension PaymentMethodTypeExtension on PaymentMethodType {
         return 'Bank Transfer';
       case PaymentMethodType.check:
         return 'Check';
-      case PaymentMethodType.other:
-        return 'Other';
+    }
+  }
+
+  /// Get icon for payment method type
+  IconData getIcon() {
+    switch (this) {
+      case PaymentMethodType.cash:
+        return Icons.money;
+      case PaymentMethodType.telebirr:
+        return Icons.phone_android;
+      case PaymentMethodType.mPesa:
+        return Icons.phone_android;
+      case PaymentMethodType.bankTransfer:
+        return Icons.account_balance;
+      case PaymentMethodType.check:
+        return Icons.receipt;
     }
   }
 }

@@ -9,14 +9,20 @@ part of 'transfer_item_model.dart';
 _TransferItemModel _$TransferItemModelFromJson(Map<String, dynamic> json) =>
     $checkedCreate('_TransferItemModel', json, ($checkedConvert) {
       final val = _TransferItemModel(
-        itemId: $checkedConvert('itemId', (v) => (v as num).toInt()),
-        batches: $checkedConvert(
-          'batches',
-          (v) => (v as List<dynamic>)
-              .map(
-                (e) => TransferBatchModel.fromJson(e as Map<String, dynamic>),
-              )
-              .toList(),
+        id: $checkedConvert('id', (v) => (v as num).toInt()),
+        itemName: $checkedConvert('itemName', (v) => v as String),
+        itemCode: $checkedConvert('itemCode', (v) => v as String?),
+        quantity: $checkedConvert(
+          'quantity',
+          (v) => JsonTypeConverters.doubleFromDynamic(v),
+        ),
+        createdAt: $checkedConvert(
+          'createdAt',
+          (v) => v == null ? null : DateTime.parse(v as String),
+        ),
+        updatedAt: $checkedConvert(
+          'updatedAt',
+          (v) => v == null ? null : DateTime.parse(v as String),
         ),
       );
       return val;
@@ -24,6 +30,10 @@ _TransferItemModel _$TransferItemModelFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$TransferItemModelToJson(_TransferItemModel instance) =>
     <String, dynamic>{
-      'itemId': instance.itemId,
-      'batches': instance.batches.map((e) => e.toJson()).toList(),
+      'id': instance.id,
+      'itemName': instance.itemName,
+      'itemCode': ?instance.itemCode,
+      'quantity': instance.quantity,
+      'createdAt': ?instance.createdAt?.toIso8601String(),
+      'updatedAt': ?instance.updatedAt?.toIso8601String(),
     };

@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import '../../../../core/errors/failure.dart';
+import '../../data/models/create_transfer_request.dart';
 import '../entities/transfer.dart';
-import '../entities/transfer_data.dart';
 import '../repositories/transfer_repository.dart';
 
 class CreateTransferUseCase {
@@ -10,21 +10,9 @@ class CreateTransferUseCase {
   CreateTransferUseCase(this.repository);
 
   Future<Either<Failure, Transfer>> call({
-    required TransferData data,
+    required CreateTransferRequest data,
   }) async {
     return await repository.createTransfer(data: data);
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
 

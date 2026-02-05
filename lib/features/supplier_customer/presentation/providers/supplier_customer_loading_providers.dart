@@ -28,4 +28,18 @@ class SupplierCustomerDeleteLoading extends _$SupplierCustomerDeleteLoading {
   bool isLoading(String id) => state.contains(id);
 }
 
+@riverpod
+class AddBalanceLoading extends _$AddBalanceLoading {
+  @override
+  bool build() => false;
+  void setLoading(bool value) => state = value;
+}
+
+@riverpod
+class RefundLoading extends _$RefundLoading {
+  @override
+  bool build() => false;
+  void setLoading(bool value) => state = value;
+}
+
 

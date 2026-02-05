@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/components/common/full_screen_image_viewer.dart';
 import '../../../../shared/utils/url_utils.dart';
+import '../../../../app/theme/app_sizes.dart';
+import '../../../../app/theme/brand_colors.dart';
+import '../../../../app/theme/text_styles.dart';
 
 class ExpenseAttachmentsWidget extends StatelessWidget {
   final List<String> attachments;
@@ -13,17 +17,16 @@ class ExpenseAttachmentsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
+    final l10n = AppLocalizations.of(context);
 
     if (attachments.isEmpty) {
       return const SizedBox.shrink();
     }
 
     return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      margin: const EdgeInsets.symmetric(horizontal: AppSizes.lg, vertical: AppSizes.sm),
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(AppSizes.lg),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -31,21 +34,19 @@ class ExpenseAttachmentsWidget extends StatelessWidget {
               children: [
                 Icon(
                   Icons.attach_file,
-                  size: 20,
-                  color: colorScheme.primary,
+                  size: AppSizes.iconSize,
+                  color: BrandColors.primary,
                 ),
-                const SizedBox(width: 8),
+                const SizedBox(width: AppSizes.sm),
                 Text(
-                  'Attachments (${attachments.length})',
-                  style: theme.textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+                  l10n.attachmentsCount(attachments.length),
+                  style: context.subtitle(bold: true),
                 ),
               ],
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: AppSizes.md),
             SizedBox(
-              height: 100,
+              height: AppSizes.horizontalListHeight + AppSizes.xxl,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: attachments.length,
@@ -54,49 +55,50 @@ class ExpenseAttachmentsWidget extends StatelessWidget {
                   final imageUrl = UrlUtils.getFullImageUrl(attachment);
 
                   if (imageUrl == null) {
-                    return _buildPlaceholder(context, colorScheme, index);
+                    return _buildPlaceholder(context, index);
                   }
 
                   return GestureDetector(
                     onTap: () {
+                      final l10n = AppLocalizations.of(context);
                       FullScreenImageViewer.show(
                         context: context,
                         imageUrl: imageUrl,
                         heroTag: 'expense_attachment_$index',
-                        title: 'Attachment ${index + 1}',
+                        title: l10n.attachmentNumber(index + 1),
                       );
                     },
                     child: Container(
-                      width: 100,
-                      height: 100,
-                      margin: const EdgeInsets.only(right: 12),
+                      width: AppSizes.attachmentThumbSize,
+                      height: AppSizes.attachmentThumbSize,
+                      margin: const EdgeInsets.only(right: AppSizes.md),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(AppSizes.radiusSm),
                         border: Border.all(
-                          color: colorScheme.outline.withOpacity(0.2),
+                          color: BrandColors.outline.withOpacity(0.2),
                         ),
                       ),
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(AppSizes.radiusSm),
                         child: Hero(
                           tag: 'expense_attachment_$index',
                           child: CachedNetworkImage(
                             imageUrl: imageUrl,
                             fit: BoxFit.cover,
                             placeholder: (context, url) => Container(
-                              color: colorScheme.surfaceVariant,
+                              color: BrandColors.surfaceVariant,
                               child: Center(
                                 child: CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                  color: colorScheme.primary,
+                                  strokeWidth: AppSizes.xxs,
+                                  color: BrandColors.primary,
                                 ),
                               ),
                             ),
                             errorWidget: (context, url, error) => Container(
-                              color: colorScheme.surfaceVariant,
+                              color: BrandColors.surfaceVariant,
                               child: Icon(
                                 Icons.broken_image,
-                                color: colorScheme.onSurfaceVariant,
+                                color: BrandColors.textSecondary,
                               ),
                             ),
                           ),
@@ -113,21 +115,21 @@ class ExpenseAttachmentsWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildPlaceholder(BuildContext context, ColorScheme colorScheme, int index) {
+  Widget _buildPlaceholder(BuildContext context, int index) {
     return Container(
-      width: 100,
-      height: 100,
-      margin: const EdgeInsets.only(right: 12),
+      width: AppSizes.attachmentThumbSize,
+      height: AppSizes.attachmentThumbSize,
+      margin: const EdgeInsets.only(right: AppSizes.md),
       decoration: BoxDecoration(
-        color: colorScheme.surfaceVariant,
-        borderRadius: BorderRadius.circular(8),
+        color: BrandColors.surfaceVariant,
+        borderRadius: BorderRadius.circular(AppSizes.radiusSm),
         border: Border.all(
-          color: colorScheme.outline.withOpacity(0.2),
+          color: BrandColors.outline.withOpacity(0.2),
         ),
       ),
       child: Icon(
         Icons.image_not_supported,
-        color: colorScheme.onSurfaceVariant,
+        color: BrandColors.textSecondary,
       ),
     );
   }

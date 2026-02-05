@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cyber_pos/l10n/app_localizations.dart';
+import '../../../app/theme/app_sizes.dart';
+import '../../../app/theme/brand_colors.dart';
 /// Custom bottom sheet component following Material Design 3 and project theme
 /// 
 /// Features:
@@ -232,7 +234,7 @@ class CustomBottomSheet extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: backgroundColor ?? colorScheme.surface,
-        borderRadius: borderRadius ?? BorderRadius.circular(16),
+        borderRadius: borderRadius ?? BorderRadius.circular(AppSizes.radiusLg),
         boxShadow: [
           BoxShadow(
             color: shadowColor ?? colorScheme.shadow,
@@ -534,7 +536,7 @@ class CustomBottomSheetHelper {
       context: context,
       isDismissible: isDismissible,
       isScrollControlled: isScrollable,
-      backgroundColor: Colors.transparent,
+      backgroundColor: BrandColors.transparent,
       builder: (context) => CustomBottomSheetConstructors.standard(
         key: key,
         child: child,
@@ -566,7 +568,7 @@ class CustomBottomSheetHelper {
       context: context,
       isDismissible: isDismissible,
       isScrollControlled: isScrollable,
-      backgroundColor: Colors.transparent,
+      backgroundColor: BrandColors.transparent,
       builder: (context) => CustomBottomSheetConstructors.standardLocalized(
         key: key,
         context: context,
@@ -598,7 +600,7 @@ class CustomBottomSheetHelper {
       context: context,
       isDismissible: isDismissible,
       isScrollControlled: isScrollable,
-      backgroundColor: Colors.transparent,
+      backgroundColor: BrandColors.transparent,
       builder: (context) => CustomBottomSheetConstructors.modal(
         key: key,
         child: child,

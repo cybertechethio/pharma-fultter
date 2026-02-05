@@ -17,6 +17,13 @@ class TransferFailure extends TransferUiEvent {
   TransferFailure(this.failure);
 }
 
+class TransferStatusUpdated extends TransferUiEvent {
+  final int id;
+  final String status; // "completed" or "rejected"
+  final String message;
+  TransferStatusUpdated(this.id, this.status, this.message);
+}
+
 @riverpod
 class TransferUiEvents extends _$TransferUiEvents {
   @override
@@ -32,16 +39,4 @@ class TransferUiEvents extends _$TransferUiEvents {
     state = null;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
 

@@ -6,7 +6,7 @@ import 'model_loading_providers.dart';
 
 part 'model_notifier.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class ModelNotifier extends _$ModelNotifier {
   @override
   Future<List<ModelEntity>> build() async {

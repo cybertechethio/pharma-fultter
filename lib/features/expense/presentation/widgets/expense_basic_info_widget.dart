@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/utils/formatters.dart';
+import '../../../../app/theme/app_sizes.dart';
+import '../../../../app/theme/brand_colors.dart';
+import '../../../../app/theme/text_styles.dart';
 import '../../domain/entities/expense_detail.dart';
 
 class ExpenseBasicInfoWidget extends StatelessWidget {
@@ -12,13 +16,12 @@ class ExpenseBasicInfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
+    final l10n = AppLocalizations.of(context);
 
     return Card(
-      margin: const EdgeInsets.all(16),
+      margin: const EdgeInsets.all(AppSizes.lg),
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(AppSizes.lg),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -31,57 +34,48 @@ class ExpenseBasicInfoWidget extends StatelessWidget {
                     children: [
                       Text(
                         expense.name,
-                        style: theme.textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: context.subtitle(bold: true),
                       ),
                       if (expense.catName != null) ...[
-                        const SizedBox(height: 4),
+                        const SizedBox(height: AppSizes.xs),
                         Text(
                           expense.catName!,
-                          style: theme.textTheme.bodyMedium?.copyWith(
-                            color: colorScheme.onSurfaceVariant,
-                          ),
+                          style: context.bodySecondary(),
                         ),
                       ],
                     ],
                   ),
                 ),
-                _buildStatusBadge(context, expense.status ?? '', colorScheme),
+                _buildStatusBadge(context, expense.status ?? ''),
               ],
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: AppSizes.lg),
             const Divider(),
-            const SizedBox(height: 16),
+            const SizedBox(height: AppSizes.lg),
             _InfoRow(
-              label: 'Date',
+              label: l10n.date,
               value: Formatters.formatDateTime(expense.expenseDate),
-              theme: theme,
-              colorScheme: colorScheme,
+              isTotal: false,
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: AppSizes.sm),
             _InfoRow(
-              label: 'Amount',
+              label: l10n.amount,
               value: Formatters.formatAmount(double.tryParse(expense.amount) ?? 0.0),
-              theme: theme,
-              colorScheme: colorScheme,
               isTotal: true,
             ),
             if (expense.notes != null && expense.notes!.isNotEmpty) ...[
-              const SizedBox(height: 8),
+              const SizedBox(height: AppSizes.sm),
               _InfoRow(
-                label: 'Notes',
+                label: l10n.notes,
                 value: expense.notes!,
-                theme: theme,
-                colorScheme: colorScheme,
+                isTotal: false,
               ),
             ],
-            const SizedBox(height: 8),
+            const SizedBox(height: AppSizes.sm),
             _InfoRow(
-              label: 'Created',
+              label: l10n.created,
               value: Formatters.formatDateTime(expense.createdAt),
-              theme: theme,
-              colorScheme: colorScheme,
+              isTotal: false,
             ),
           ],
         ),
@@ -89,24 +83,20 @@ class ExpenseBasicInfoWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildStatusBadge(BuildContext context, String status, ColorScheme colorScheme) {
+  Widget _buildStatusBadge(BuildContext context, String status) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      padding: const EdgeInsets.symmetric(horizontal: AppSizes.md, vertical: AppSizes.xs2),
       decoration: BoxDecoration(
-        color: colorScheme.primary.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(16),
+        color: BrandColors.primaryWithOpacity(0.1),
+        borderRadius: BorderRadius.circular(AppSizes.radiusLg),
         border: Border.all(
-          color: colorScheme.primary,
+          color: BrandColors.primary,
           width: 1,
         ),
       ),
       child: Text(
         status.toUpperCase(),
-        style: TextStyle(
-          color: colorScheme.primary,
-          fontSize: 12,
-          fontWeight: FontWeight.w600,
-        ),
+        style: context.labelPrimary(bold: true),
       ),
     );
   }
@@ -115,15 +105,11 @@ class ExpenseBasicInfoWidget extends StatelessWidget {
 class _InfoRow extends StatelessWidget {
   final String label;
   final String value;
-  final ThemeData theme;
-  final ColorScheme colorScheme;
   final bool isTotal;
 
   const _InfoRow({
     required this.label,
     required this.value,
-    required this.theme,
-    required this.colorScheme,
     this.isTotal = false,
   });
 
@@ -134,19 +120,13 @@ class _InfoRow extends StatelessWidget {
       children: [
         Text(
           label,
-          style: theme.textTheme.bodyMedium?.copyWith(
-            color: colorScheme.onSurfaceVariant,
-            fontWeight: isTotal ? FontWeight.bold : FontWeight.normal,
-          ),
+          style: context.bodySecondary(bold: isTotal),
         ),
         Flexible(
           child: Text(
             value,
             textAlign: TextAlign.end,
-            style: theme.textTheme.bodyMedium?.copyWith(
-              fontWeight: isTotal ? FontWeight.bold : FontWeight.w600,
-              color: isTotal ? colorScheme.primary : null,
-            ),
+            style: isTotal ? context.bodyPrimary(bold: true) : context.body(bold: true),
           ),
         ),
       ],

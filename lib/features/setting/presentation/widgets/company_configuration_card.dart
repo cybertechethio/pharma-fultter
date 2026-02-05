@@ -21,7 +21,7 @@ class CompanyConfigurationCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: AppSizes.lg),
       elevation: 1,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(AppSizes.radiusSm),
       ),
       child: Column(
         children: [
@@ -53,6 +53,17 @@ class CompanyConfigurationCard extends StatelessWidget {
               subtitle: Text(
                 company.defaultStartDate!.toIso8601String().split('T')[0],
               ),
+            ),
+          ],
+          if (company.businessType != null) ...[
+            const Divider(height: 1),
+            ListTile(
+              leading: Icon(
+                Icons.business_outlined,
+                color: theme.colorScheme.primary,
+              ),
+              title: Text(l10n.businessType),
+              subtitle: Text(company.businessType!),
             ),
           ],
         ],

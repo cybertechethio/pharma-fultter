@@ -2,8 +2,8 @@ import '../../../../core/network/api_service.dart';
 import '../../../../core/constants/api_endpoints.dart';
 import '../../../../core/services/logging_service.dart';
 import '../../../../shared/models/api_response.dart';
+import '../models/create_transfer_request.dart';
 import '../models/transfer_model.dart';
-import '../models/transfer_response_model.dart';
 
 class TransferApiService {
   const TransferApiService();
@@ -13,7 +13,10 @@ class TransferApiService {
   }
 
   /// Get all transfers with pagination
-  Future<ApiResponse<List<TransferResponseModel>>> getAll({
+  /// 
+  /// [page] - Page number (default: 1)
+  /// [limit] - Items per page (default: 25)
+  Future<ApiResponse<List<TransferModel>>> getAll({
     int page = 1,
     int limit = 25,
   }) async {
@@ -26,10 +29,10 @@ class TransferApiService {
         },
       );
 
-      final apiResponse = ApiResponse<List<TransferResponseModel>>.fromJson(
+      final apiResponse = ApiResponse<List<TransferModel>>.fromJson(
         response.data!,
         (json) => (json as List)
-            .map((item) => TransferResponseModel.fromJson(item as Map<String, dynamic>))
+            .map((item) => TransferModel.fromJson(item as Map<String, dynamic>))
             .toList(),
       );
 
@@ -40,15 +43,14 @@ class TransferApiService {
     }
   }
 
-  /// Get transfer detail by ID
-  Future<ApiResponse<TransferResponseModel>> getById(int id) async {
+  Future<ApiResponse<TransferModel>> getById(int id) async {
     try {
       final endpoint = ApiEndpoints.getTransferDetail(id);
       final response = await ApiService.get<Map<String, dynamic>>(endpoint);
 
-      final apiResponse = ApiResponse<TransferResponseModel>.fromJson(
+      final apiResponse = ApiResponse<TransferModel>.fromJson(
         response.data!,
-        (json) => TransferResponseModel.fromJson(json as Map<String, dynamic>),
+        (json) => TransferModel.fromJson(json as Map<String, dynamic>),
       );
 
       return apiResponse;
@@ -58,22 +60,14 @@ class TransferApiService {
     }
   }
 
-  /// Create a new transfer (always transfer_out)
-  Future<ApiResponse<TransferResponseModel>> create({
-    required TransferModel request,
+  Future<ApiResponse<TransferModel>> create({
+    required CreateTransferRequest request,
   }) async {
     try {
-      LoggingService.apiRequest('POST', ApiEndpoints.createTransfer, {
-        'destinationBranchId': request.destinationBranchId,
-        'itemsCount': request.items.length,
-      });
-
-      // Build request JSON with transferType hardcoded as transfer_out
       var requestJson = request.toJson();
-      requestJson['transferType'] = 'transfer_out';
       
-      // Remove null fields
-      requestJson.removeWhere((key, value) => value == null);
+      // Manually set transferType to "transfer_out" string
+      requestJson['transferType'] = 'transfer_out';
 
       // ApiService.post will automatically wrap with RequestWrapper
       final response = await ApiService.post<Map<String, dynamic>>(
@@ -89,9 +83,9 @@ class TransferApiService {
         response.data,
       );
 
-      final apiResponse = ApiResponse<TransferResponseModel>.fromJson(
+      final apiResponse = ApiResponse<TransferModel>.fromJson(
         response.data!,
-        (json) => TransferResponseModel.fromJson(json as Map<String, dynamic>),
+        (json) => TransferModel.fromJson(json as Map<String, dynamic>),
       );
 
       return apiResponse;
@@ -100,17 +94,38 @@ class TransferApiService {
       rethrow;
     }
   }
+
+  Future<ApiResponse<TransferModel>> updateStatus({
+    required int id,
+    required String status,
+  }) async {
+    try {
+      final endpoint = ApiEndpoints.updateTransferStatus(id);
+      var requestJson = {'status': status};
+
+      // ApiService.put will automatically wrap with RequestWrapper
+      final response = await ApiService.put<Map<String, dynamic>>(
+        endpoint,
+        data: requestJson,
+        skipWrapping: false,
+      );
+
+      LoggingService.apiResponse(
+        'PUT',
+        endpoint,
+        response.statusCode ?? 0,
+        response.data,
+      );
+
+      final apiResponse = ApiResponse<TransferModel>.fromJson(
+        response.data!,
+        (json) => TransferModel.fromJson(json as Map<String, dynamic>),
+      );
+
+      return apiResponse;
+    } catch (e) {
+      LoggingService.error('Failed to update transfer status: $e');
+      rethrow;
+    }
+  }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

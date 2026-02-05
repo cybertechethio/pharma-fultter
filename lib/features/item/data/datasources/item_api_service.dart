@@ -3,6 +3,7 @@ import '../../../../core/constants/api_endpoints.dart';
 import '../../../../core/services/logging_service.dart';
 import '../../../../shared/models/api_response.dart';
 import '../models/item_model.dart';
+import '../models/item_request_model.dart';
 
 class ItemApiService {
   const ItemApiService();
@@ -11,52 +12,11 @@ class ItemApiService {
     return const ItemApiService();
   }
 
-  Future<ApiResponse<ItemModel>> create({
-    required String name,
-    required String description,
-    required String sku,
-    required String code,
-    required String barcode,
-    required String color,
-    required String size,
-    required String material,
-    required double weight,
-    required bool isTaxable,
-    required int taxRate,
-    required bool isActive,
-    String? imageUrl,
-    int? categoryId,
-    int? subCategoryId,
-    int? brandId,
-    int? unitId,
-    int? modelId,
-  }) async {
+  Future<ApiResponse<ItemModel>> create(ItemRequestModel request) async {
     try {
-      final data = <String, dynamic>{
-        'name': name,
-        'description': description,
-        'sku': sku,
-        'code': code,
-        'barcode': barcode,
-        'color': color,
-        'size': size,
-        'material': material,
-        'weight': weight,
-        'isTaxable': isTaxable,
-        'taxRate': taxRate,
-        'isActive': isActive,
-      };
-
-      if (imageUrl != null) data['imageUrl'] = imageUrl;
-      if (categoryId != null) data['categoryId'] = categoryId;
-      if (subCategoryId != null) data['subCategoryId'] = subCategoryId;
-      if (brandId != null) data['brandId'] = brandId;
-      if (unitId != null) data['unitId'] = unitId;
-      if (modelId != null) data['modelId'] = modelId;
-
       final response = await ApiService.post<Map<String, dynamic>>(
         ApiEndpoints.createItem,
-        data: data,
+        data: request.toJson(),
       );
 
       final apiResponse = ApiResponse<ItemModel>.fromJson(
@@ -117,52 +77,13 @@ class ItemApiService {
   }
 
   Future<ApiResponse<ItemModel>> update({
-    required String id,
-    required String name,
-    required String description,
-    required String sku,
-    required String code,
-    required String barcode,
-    required String color,
-    required String size,
-    required String material,
-    required double weight,
-    required bool isTaxable,
-    required int taxRate,
-    required bool isActive,
-    String? imageUrl,
-    int? categoryId,
-    int? subCategoryId,
-    int? brandId,
-    int? unitId,
-    int? modelId,
+    required int id,
+    required ItemRequestModel request,
   }) async {
     try {
-      final data = <String, dynamic>{
-        'name': name,
-        'description': description,
-        'sku': sku,
-        'code': code,
-        'barcode': barcode,
-        'color': color,
-        'size': size,
-        'material': material,
-        'weight': weight,
-        'isTaxable': isTaxable,
-        'taxRate': taxRate,
-        'isActive': isActive,
-      };
-
-      if (imageUrl != null) data['imageUrl'] = imageUrl;
-      if (categoryId != null) data['categoryId'] = categoryId;
-      if (subCategoryId != null) data['subCategoryId'] = subCategoryId;
-      if (brandId != null) data['brandId'] = brandId;
-      if (unitId != null) data['unitId'] = unitId;
-      if (modelId != null) data['modelId'] = modelId;
-
       final response = await ApiService.put<Map<String, dynamic>>(
         ApiEndpoints.updateItem(id),
-        data: data,
+        data: request.toJson(),
       );
 
       final apiResponse = ApiResponse<ItemModel>.fromJson(
@@ -178,7 +99,7 @@ class ItemApiService {
   }
 
   Future<ApiResponse<ItemModel>> delete({
-    required String id,
+    required int id,
   }) async {
     try {
       final response = await ApiService.delete<Map<String, dynamic>>(

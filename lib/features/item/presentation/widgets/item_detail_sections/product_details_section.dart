@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import '../../../../../l10n/app_localizations.dart';
 import '../../../domain/entities/item.dart';
+import '../../../../../app/theme/app_sizes.dart';
+import '../../../../../app/theme/text_styles.dart';
 import 'compact_info_row.dart';
 
 class ProductDetailsSection extends StatelessWidget {
@@ -12,52 +15,68 @@ class ProductDetailsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context);
 
     return Card(
       elevation: 1,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(AppSizes.radiusSm),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.all(AppSizes.md),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Product Details',
-              style: theme.textTheme.titleSmall?.copyWith(
-                fontWeight: FontWeight.w600,
-              ),
+              l10n.productDetails,
+              style: context.subtitle(bold: true),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: AppSizes.md),
             CompactInfoRow(
               icon: Icons.palette_outlined,
-              label: 'Color',
+              label: l10n.color,
               value: item.color,
               isCompact: true,
             ),
-            const Divider(height: 12),
+            const Divider(height: AppSizes.md),
             CompactInfoRow(
               icon: Icons.straighten_outlined,
-              label: 'Size',
+              label: l10n.size,
               value: item.size,
               isCompact: true,
             ),
-            const Divider(height: 12),
+            const Divider(height: AppSizes.md),
             CompactInfoRow(
               icon: Icons.texture_outlined,
-              label: 'Material',
+              label: l10n.material,
               value: item.material,
               isCompact: true,
             ),
-            const Divider(height: 12),
+            const Divider(height: AppSizes.md),
             CompactInfoRow(
               icon: Icons.scale_outlined,
-              label: 'Weight',
-              value: '${item.weight} kg',
+              label: l10n.weight,
+              value: item.weight != null ? '${item.weight} kg' : null,
               isCompact: true,
             ),
+            if (item.expirationDate != null) ...[
+              const Divider(height: AppSizes.md),
+              CompactInfoRow(
+                icon: Icons.calendar_today_outlined,
+                label: l10n.expirationDate,
+                value: '${item.expirationDate!.year}-${item.expirationDate!.month.toString().padLeft(2, '0')}-${item.expirationDate!.day.toString().padLeft(2, '0')}',
+                isCompact: true,
+              ),
+            ],
+            if (item.manufacturingDate != null) ...[
+              const Divider(height: AppSizes.md),
+              CompactInfoRow(
+                icon: Icons.date_range_outlined,
+                label: l10n.manufacturingDate,
+                value: '${item.manufacturingDate!.year}-${item.manufacturingDate!.month.toString().padLeft(2, '0')}-${item.manufacturingDate!.day.toString().padLeft(2, '0')}',
+                isCompact: true,
+              ),
+            ],
           ],
         ),
       ),

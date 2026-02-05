@@ -16,6 +16,7 @@ _SupplierCustomerModel _$SupplierCustomerModelFromJson(
     accountCode: $checkedConvert('accountCode', (v) => v as String),
     tinNumber: $checkedConvert('tinNumber', (v) => v as String? ?? 'N/A'),
     type: $checkedConvert('type', (v) => v as String),
+    balance: $checkedConvert('balance', (v) => v as String? ?? '0.0'),
     isActive: $checkedConvert('isActive', (v) => v as bool? ?? true),
     createdAt: $checkedConvert('createdAt', (v) => DateTime.parse(v as String)),
     updatedAt: $checkedConvert(
@@ -35,6 +36,7 @@ Map<String, dynamic> _$SupplierCustomerModelToJson(
   'accountCode': instance.accountCode,
   'tinNumber': instance.tinNumber,
   'type': instance.type,
+  'balance': instance.balance,
   'isActive': instance.isActive,
   'createdAt': instance.createdAt.toIso8601String(),
   'updatedAt': ?instance.updatedAt?.toIso8601String(),

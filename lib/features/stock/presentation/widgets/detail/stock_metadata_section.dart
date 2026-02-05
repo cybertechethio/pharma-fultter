@@ -1,0 +1,87 @@
+import 'package:flutter/material.dart';
+import '../../../../../app/theme/app_sizes.dart';
+import '../../../../../app/theme/text_styles.dart';
+import '../../../../../l10n/app_localizations.dart';
+import '../../../../../shared/utils/formatters.dart';
+import '../../../domain/entities/stock.dart';
+
+class StockMetadataSection extends StatelessWidget {
+  final Stock stock;
+
+  const StockMetadataSection({
+    super.key,
+    required this.stock,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return Container(
+      padding: const EdgeInsets.all(AppSizes.lg),
+      decoration: BoxDecoration(
+        color: colorScheme.surface,
+        borderRadius: BorderRadius.circular(AppSizes.radius),
+        border: Border.all(color: colorScheme.outline.withOpacity(0.1)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(l10n.metadata, style: context.subtitle(bold: true)),
+          const SizedBox(height: AppSizes.md),
+          _InfoRow(
+            icon: Icons.calendar_today_outlined,
+            label: l10n.createdAt,
+            value: Formatters.formatDateTime(stock.createdAt),
+          ),
+          const Divider(height: AppSizes.lg),
+          _InfoRow(
+            icon: Icons.update_outlined,
+            label: l10n.updatedAt,
+            value: Formatters.formatDateTime(stock.updatedAt),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _InfoRow extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final String value;
+
+  const _InfoRow({
+    required this.icon,
+    required this.label,
+    required this.value,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
+    return Row(
+      children: [
+        Icon(icon, size: 18, color: colorScheme.primary),
+        const SizedBox(width: AppSizes.sm),
+        Text(
+          label,
+          style: theme.textTheme.bodySmall?.copyWith(
+            color: colorScheme.onSurfaceVariant,
+          ),
+        ),
+        const Spacer(),
+        Text(
+          value,
+          style: theme.textTheme.bodyMedium?.copyWith(
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ],
+    );
+  }
+}
+

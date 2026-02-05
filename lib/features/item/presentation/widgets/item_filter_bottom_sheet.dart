@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import '../../../../l10n/app_localizations.dart';
+import '../../../../app/theme/app_sizes.dart';
+import '../../../../app/theme/brand_colors.dart';
+import '../../../../app/theme/text_styles.dart';
 
 /// Bottom sheet for filtering items
 /// 
@@ -96,8 +100,7 @@ class _ItemFilterBottomSheetState extends State<ItemFilterBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
+    final l10n = AppLocalizations.of(context);
 
     return DraggableScrollableSheet(
       initialChildSize: 0.75,
@@ -106,38 +109,36 @@ class _ItemFilterBottomSheetState extends State<ItemFilterBottomSheet> {
       builder: (context, scrollController) {
         return Container(
           decoration: BoxDecoration(
-            color: colorScheme.surface,
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+            color: BrandColors.background,
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(AppSizes.xl)),
           ),
           child: Column(
             children: [
               // Draggable handle
               Container(
-                margin: const EdgeInsets.only(top: 8, bottom: 8),
-                width: 40,
-                height: 4,
+                margin: const EdgeInsets.only(top: AppSizes.sm, bottom: AppSizes.sm),
+                width: AppSizes.xxxxl,
+                height: AppSizes.xxs,
                 decoration: BoxDecoration(
-                  color: colorScheme.onSurface.withOpacity(0.3),
-                  borderRadius: BorderRadius.circular(2),
+                  color: BrandColors.textPrimary.withOpacity(0.3),
+                  borderRadius: BorderRadius.circular(AppSizes.xxs),
                 ),
               ),
 
               // Header
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding: const EdgeInsets.symmetric(horizontal: AppSizes.lg, vertical: AppSizes.sm),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Advanced Filters',
-                      style: theme.textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+                      l10n.advancedFilters,
+                      style: context.subtitle(bold: true),
                     ),
                     IconButton(
                       icon: const Icon(Icons.close),
                       onPressed: () => Navigator.of(context).pop(),
-                      tooltip: 'Close',
+                      tooltip: l10n.close,
                     ),
                   ],
                 ),
@@ -149,37 +150,37 @@ class _ItemFilterBottomSheetState extends State<ItemFilterBottomSheet> {
               Expanded(
                 child: SingleChildScrollView(
                   controller: scrollController,
-                  padding: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(AppSizes.lg),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Sort Section
-                      _buildSortSection(theme, colorScheme),
+                      _buildSortSection(),
 
-                      const SizedBox(height: 24),
+                      const SizedBox(height: AppSizes.xxl),
 
                       // Categories Section
-                      _buildCategoriesSection(theme, colorScheme),
+                      _buildCategoriesSection(),
 
-                      const SizedBox(height: 24),
+                      const SizedBox(height: AppSizes.xxl),
 
                       // Product Information Section
-                      _buildProductInfoSection(theme, colorScheme),
+                      _buildProductInfoSection(),
 
-                      const SizedBox(height: 24),
+                      const SizedBox(height: AppSizes.xxl),
 
                       // Status Section
-                      _buildStatusSection(theme, colorScheme),
+                      _buildStatusSection(),
 
-                      const SizedBox(height: 24),
+                      const SizedBox(height: AppSizes.xxl),
 
                       // Price Ranges Section
-                      _buildPriceRangesSection(theme, colorScheme),
+                      _buildPriceRangesSection(),
 
-                      const SizedBox(height: 24),
+                      const SizedBox(height: AppSizes.xxl),
 
                       // Attributes Section
-                      _buildAttributesSection(theme, colorScheme),
+                      _buildAttributesSection(),
                     ],
                   ),
                 ),
@@ -187,12 +188,12 @@ class _ItemFilterBottomSheetState extends State<ItemFilterBottomSheet> {
 
               // Footer buttons
               Container(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.all(AppSizes.lg),
                 decoration: BoxDecoration(
-                  color: colorScheme.surface,
+                  color: BrandColors.background,
                   border: Border(
                     top: BorderSide(
-                      color: colorScheme.outline.withOpacity(0.2),
+                      color: BrandColors.outline.withOpacity(0.2),
                       width: 1,
                     ),
                   ),
@@ -202,14 +203,14 @@ class _ItemFilterBottomSheetState extends State<ItemFilterBottomSheet> {
                     Expanded(
                       child: OutlinedButton(
                         onPressed: _clearAllFilters,
-                        child: const Text('Clear All'),
+                        child: Text(l10n.clearAll),
                       ),
                     ),
-                    const SizedBox(width: 16),
+                    const SizedBox(width: AppSizes.lg),
                     Expanded(
                       child: ElevatedButton(
                         onPressed: _applyFilters,
-                        child: const Text('Apply Filters'),
+                        child: Text(l10n.applyFilters),
                       ),
                     ),
                   ],
@@ -222,36 +223,35 @@ class _ItemFilterBottomSheetState extends State<ItemFilterBottomSheet> {
     );
   }
 
-  Widget _buildSortSection(ThemeData theme, ColorScheme colorScheme) {
+  Widget _buildSortSection() {
+    final l10n = AppLocalizations.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Sort:',
-          style: theme.textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.w600,
-          ),
+          l10n.sortLabel,
+          style: context.subtitle(bold: true),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: AppSizes.sm),
         DropdownButtonFormField<String>(
           value: _selectedSort,
           decoration: InputDecoration(
-            hintText: 'Name (A-Z)',
+            hintText: l10n.nameAZ,
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(AppSizes.radiusSm),
             ),
-            contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            contentPadding: const EdgeInsets.symmetric(horizontal: AppSizes.md, vertical: AppSizes.sm),
             isDense: true,
           ),
-          items: const [
-            DropdownMenuItem(value: 'name_asc', child: Text('Name (A-Z)')),
-            DropdownMenuItem(value: 'name_desc', child: Text('Name (Z-A)')),
-            DropdownMenuItem(value: 'created_desc', child: Text('Created Date (Newest)')),
-            DropdownMenuItem(value: 'created_asc', child: Text('Created Date (Oldest)')),
-            DropdownMenuItem(value: 'unit_price_asc', child: Text('Unit Price (Low to High)')),
-            DropdownMenuItem(value: 'unit_price_desc', child: Text('Unit Price (High to Low)')),
-            DropdownMenuItem(value: 'cost_price_asc', child: Text('Cost Price (Low to High)')),
-            DropdownMenuItem(value: 'cost_price_desc', child: Text('Cost Price (High to Low)')),
+          items: [
+            DropdownMenuItem(value: 'name_asc', child: Text(l10n.nameAZ)),
+            DropdownMenuItem(value: 'name_desc', child: Text(l10n.nameZA)),
+            DropdownMenuItem(value: 'created_desc', child: Text(l10n.createdDateNewest)),
+            DropdownMenuItem(value: 'created_asc', child: Text(l10n.createdDateOldest)),
+            DropdownMenuItem(value: 'unit_price_asc', child: Text(l10n.unitPriceAsc)),
+            DropdownMenuItem(value: 'unit_price_desc', child: Text(l10n.unitPriceDesc)),
+            DropdownMenuItem(value: 'cost_price_asc', child: Text(l10n.costPriceAsc)),
+            DropdownMenuItem(value: 'cost_price_desc', child: Text(l10n.costPriceDesc)),
           ],
           onChanged: (value) {
             setState(() {
@@ -263,7 +263,8 @@ class _ItemFilterBottomSheetState extends State<ItemFilterBottomSheet> {
     );
   }
 
-  Widget _buildCategoriesSection(ThemeData theme, ColorScheme colorScheme) {
+  Widget _buildCategoriesSection() {
+    final l10n = AppLocalizations.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -279,31 +280,29 @@ class _ItemFilterBottomSheetState extends State<ItemFilterBottomSheet> {
                 _categoriesExpanded ? Icons.expand_more : Icons.chevron_right,
                 size: 20,
               ),
-              const SizedBox(width: 8),
+              const SizedBox(width: AppSizes.sm),
               Text(
-                'Categories',
-                style: theme.textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.w600,
-                ),
+                l10n.categories,
+                style: context.subtitle(bold: true),
               ),
             ],
           ),
         ),
         if (_categoriesExpanded) ...[
-          const SizedBox(height: 12),
+          const SizedBox(height: AppSizes.md),
           DropdownButtonFormField<String>(
             value: _selectedCategory,
             decoration: InputDecoration(
-              labelText: 'Category',
-              hintText: 'All Categories',
+              labelText: l10n.category,
+              hintText: l10n.allCategories,
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(AppSizes.radiusSm),
               ),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              contentPadding: const EdgeInsets.symmetric(horizontal: AppSizes.md, vertical: AppSizes.sm),
               isDense: true,
             ),
-            items: const [
-              DropdownMenuItem(value: 'all', child: Text('All Categories')),
+            items: [
+              DropdownMenuItem(value: 'all', child: Text(l10n.allCategories)),
               // TODO: Load actual categories
             ],
             onChanged: (value) {
@@ -315,20 +314,20 @@ class _ItemFilterBottomSheetState extends State<ItemFilterBottomSheet> {
               });
             },
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: AppSizes.md),
           DropdownButtonFormField<String>(
             value: _selectedSubCategory,
             decoration: InputDecoration(
-              labelText: 'Sub Category',
-              hintText: 'All Sub Categories',
+              labelText: l10n.subCategory,
+              hintText: l10n.allSubCategories,
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(AppSizes.radiusSm),
               ),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              contentPadding: const EdgeInsets.symmetric(horizontal: AppSizes.md, vertical: AppSizes.sm),
               isDense: true,
             ),
-            items: const [
-              DropdownMenuItem(value: 'all', child: Text('All Sub Categories')),
+            items: [
+              DropdownMenuItem(value: 'all', child: Text(l10n.allSubCategories)),
               // TODO: Load actual sub categories based on selected category
             ],
             onChanged: _selectedCategory == null || _selectedCategory == 'all'
@@ -344,7 +343,8 @@ class _ItemFilterBottomSheetState extends State<ItemFilterBottomSheet> {
     );
   }
 
-  Widget _buildProductInfoSection(ThemeData theme, ColorScheme colorScheme) {
+  Widget _buildProductInfoSection() {
+    final l10n = AppLocalizations.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -360,31 +360,29 @@ class _ItemFilterBottomSheetState extends State<ItemFilterBottomSheet> {
                 _productInfoExpanded ? Icons.expand_more : Icons.chevron_right,
                 size: 20,
               ),
-              const SizedBox(width: 8),
+              const SizedBox(width: AppSizes.sm),
               Text(
-                'Product Information',
-                style: theme.textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.w600,
-                ),
+                l10n.productInformation,
+                style: context.subtitle(bold: true),
               ),
             ],
           ),
         ),
         if (_productInfoExpanded) ...[
-          const SizedBox(height: 12),
+          const SizedBox(height: AppSizes.md),
           DropdownButtonFormField<String>(
             value: _selectedBrand,
             decoration: InputDecoration(
-              labelText: 'Brand',
-              hintText: 'All Brands',
+              labelText: l10n.brand,
+              hintText: l10n.allBrands,
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(AppSizes.radiusSm),
               ),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              contentPadding: const EdgeInsets.symmetric(horizontal: AppSizes.md, vertical: AppSizes.sm),
               isDense: true,
             ),
-            items: const [
-              DropdownMenuItem(value: 'all', child: Text('All Brands')),
+            items: [
+              DropdownMenuItem(value: 'all', child: Text(l10n.allBrands)),
               // TODO: Load actual brands
             ],
             onChanged: (value) {
@@ -393,20 +391,20 @@ class _ItemFilterBottomSheetState extends State<ItemFilterBottomSheet> {
               });
             },
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: AppSizes.md),
           DropdownButtonFormField<String>(
             value: _selectedUnit,
             decoration: InputDecoration(
-              labelText: 'Unit',
-              hintText: 'All Units',
+              labelText: l10n.unit,
+              hintText: l10n.allUnits,
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(AppSizes.radiusSm),
               ),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              contentPadding: const EdgeInsets.symmetric(horizontal: AppSizes.md, vertical: AppSizes.sm),
               isDense: true,
             ),
-            items: const [
-              DropdownMenuItem(value: 'all', child: Text('All Units')),
+            items: [
+              DropdownMenuItem(value: 'all', child: Text(l10n.allUnits)),
               // TODO: Load actual units
             ],
             onChanged: (value) {
@@ -415,20 +413,20 @@ class _ItemFilterBottomSheetState extends State<ItemFilterBottomSheet> {
               });
             },
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: AppSizes.md),
           DropdownButtonFormField<String>(
             value: _selectedModel,
             decoration: InputDecoration(
-              labelText: 'Model',
-              hintText: 'All Models',
+              labelText: l10n.model,
+              hintText: l10n.allModels,
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(AppSizes.radiusSm),
               ),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              contentPadding: const EdgeInsets.symmetric(horizontal: AppSizes.md, vertical: AppSizes.sm),
               isDense: true,
             ),
-            items: const [
-              DropdownMenuItem(value: 'all', child: Text('All Models')),
+            items: [
+              DropdownMenuItem(value: 'all', child: Text(l10n.allModels)),
               // TODO: Load actual models
             ],
             onChanged: (value) {
@@ -442,7 +440,8 @@ class _ItemFilterBottomSheetState extends State<ItemFilterBottomSheet> {
     );
   }
 
-  Widget _buildStatusSection(ThemeData theme, ColorScheme colorScheme) {
+  Widget _buildStatusSection() {
+    final l10n = AppLocalizations.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -458,30 +457,26 @@ class _ItemFilterBottomSheetState extends State<ItemFilterBottomSheet> {
                 _statusExpanded ? Icons.expand_more : Icons.chevron_right,
                 size: 20,
               ),
-              const SizedBox(width: 8),
+              const SizedBox(width: AppSizes.sm),
               Text(
-                'Status',
-                style: theme.textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.w600,
-                ),
+                l10n.status,
+                style: context.subtitle(bold: true),
               ),
             ],
           ),
         ),
         if (_statusExpanded) ...[
-          const SizedBox(height: 12),
+          const SizedBox(height: AppSizes.md),
           Text(
-            'Active Status',
-            style: theme.textTheme.bodyMedium?.copyWith(
-              fontWeight: FontWeight.w500,
-            ),
+            l10n.activeStatus,
+style: context.body(bold: true),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: AppSizes.sm),
           Row(
             children: [
               Expanded(
                 child: RadioListTile<bool>(
-                  title: const Text('Active'),
+                  title: Text(l10n.active),
                   value: true,
                   groupValue: _isActive,
                   onChanged: (value) {
@@ -495,7 +490,7 @@ class _ItemFilterBottomSheetState extends State<ItemFilterBottomSheet> {
               ),
               Expanded(
                 child: RadioListTile<bool>(
-                  title: const Text('Inactive'),
+                  title: Text(l10n.inactive),
                   value: false,
                   groupValue: _isActive,
                   onChanged: (value) {
@@ -509,19 +504,17 @@ class _ItemFilterBottomSheetState extends State<ItemFilterBottomSheet> {
               ),
             ],
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: AppSizes.lg),
           Text(
-            'Tax Status',
-            style: theme.textTheme.bodyMedium?.copyWith(
-              fontWeight: FontWeight.w500,
-            ),
+            l10n.taxStatus,
+style: context.body(bold: true),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: AppSizes.sm),
           Row(
             children: [
               Expanded(
                 child: RadioListTile<bool>(
-                  title: const Text('Taxable'),
+                  title: Text(l10n.taxable),
                   value: true,
                   groupValue: _isTaxable,
                   onChanged: (value) {
@@ -535,7 +528,7 @@ class _ItemFilterBottomSheetState extends State<ItemFilterBottomSheet> {
               ),
               Expanded(
                 child: RadioListTile<bool>(
-                  title: const Text('Non-taxable'),
+                  title: Text(l10n.nonTaxable),
                   value: false,
                   groupValue: _isTaxable,
                   onChanged: (value) {
@@ -554,7 +547,8 @@ class _ItemFilterBottomSheetState extends State<ItemFilterBottomSheet> {
     );
   }
 
-  Widget _buildPriceRangesSection(ThemeData theme, ColorScheme colorScheme) {
+  Widget _buildPriceRangesSection() {
+    final l10n = AppLocalizations.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -570,51 +564,47 @@ class _ItemFilterBottomSheetState extends State<ItemFilterBottomSheet> {
                 _priceRangesExpanded ? Icons.expand_more : Icons.chevron_right,
                 size: 20,
               ),
-              const SizedBox(width: 8),
+              const SizedBox(width: AppSizes.sm),
               Text(
-                'Price Ranges',
-                style: theme.textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.w600,
-                ),
+                l10n.priceRanges,
+                style: context.subtitle(bold: true),
               ),
             ],
           ),
         ),
         if (_priceRangesExpanded) ...[
-          const SizedBox(height: 12),
+          const SizedBox(height: AppSizes.md),
           Text(
-            'Unit Price',
-            style: theme.textTheme.bodyMedium?.copyWith(
-              fontWeight: FontWeight.w500,
-            ),
+            l10n.unitPrice,
+style: context.body(bold: true),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: AppSizes.sm),
           Row(
             children: [
               Expanded(
                 child: TextField(
                   controller: _unitPriceMinController,
                   decoration: InputDecoration(
-                    labelText: 'Min',
+                    labelText: l10n.min,
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(AppSizes.radiusSm),
                     ),
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: AppSizes.md, vertical: AppSizes.sm),
                     isDense: true,
                   ),
                   keyboardType: TextInputType.number,
                 ),
               ),
-              const SizedBox(width: 12),
+              const SizedBox(width: AppSizes.md),
               Expanded(
                 child: TextField(
                   controller: _unitPriceMaxController,
                   decoration: InputDecoration(
-                    labelText: 'Max',
+                    labelText: l10n.max,
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(AppSizes.radiusSm),
                     ),
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: AppSizes.md, vertical: AppSizes.sm),
                     isDense: true,
                   ),
                   keyboardType: TextInputType.number,
@@ -622,40 +612,38 @@ class _ItemFilterBottomSheetState extends State<ItemFilterBottomSheet> {
               ),
             ],
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: AppSizes.lg),
           Text(
-            'Cost Price',
-            style: theme.textTheme.bodyMedium?.copyWith(
-              fontWeight: FontWeight.w500,
-            ),
+            l10n.costPrice,
+style: context.body(bold: true),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: AppSizes.sm),
           Row(
             children: [
               Expanded(
                 child: TextField(
                   controller: _costPriceMinController,
                   decoration: InputDecoration(
-                    labelText: 'Min',
+                    labelText: l10n.min,
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(AppSizes.radiusSm),
                     ),
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: AppSizes.md, vertical: AppSizes.sm),
                     isDense: true,
                   ),
                   keyboardType: TextInputType.number,
                 ),
               ),
-              const SizedBox(width: 12),
+              const SizedBox(width: AppSizes.md),
               Expanded(
                 child: TextField(
                   controller: _costPriceMaxController,
                   decoration: InputDecoration(
-                    labelText: 'Max',
+                    labelText: l10n.max,
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(AppSizes.radiusSm),
                     ),
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: AppSizes.md, vertical: AppSizes.sm),
                     isDense: true,
                   ),
                   keyboardType: TextInputType.number,
@@ -663,40 +651,38 @@ class _ItemFilterBottomSheetState extends State<ItemFilterBottomSheet> {
               ),
             ],
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: AppSizes.lg),
           Text(
-            'Tax Rate',
-            style: theme.textTheme.bodyMedium?.copyWith(
-              fontWeight: FontWeight.w500,
-            ),
+            l10n.taxRate,
+style: context.body(bold: true),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: AppSizes.sm),
           Row(
             children: [
               Expanded(
                 child: TextField(
                   controller: _taxRateMinController,
                   decoration: InputDecoration(
-                    labelText: 'Min',
+                    labelText: l10n.min,
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(AppSizes.radiusSm),
                     ),
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: AppSizes.md, vertical: AppSizes.sm),
                     isDense: true,
                   ),
                   keyboardType: TextInputType.number,
                 ),
               ),
-              const SizedBox(width: 12),
+              const SizedBox(width: AppSizes.md),
               Expanded(
                 child: TextField(
                   controller: _taxRateMaxController,
                   decoration: InputDecoration(
-                    labelText: 'Max',
+                    labelText: l10n.max,
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(AppSizes.radiusSm),
                     ),
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: AppSizes.md, vertical: AppSizes.sm),
                     isDense: true,
                   ),
                   keyboardType: TextInputType.number,
@@ -709,7 +695,8 @@ class _ItemFilterBottomSheetState extends State<ItemFilterBottomSheet> {
     );
   }
 
-  Widget _buildAttributesSection(ThemeData theme, ColorScheme colorScheme) {
+  Widget _buildAttributesSection() {
+    final l10n = AppLocalizations.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -725,50 +712,48 @@ class _ItemFilterBottomSheetState extends State<ItemFilterBottomSheet> {
                 _attributesExpanded ? Icons.expand_more : Icons.chevron_right,
                 size: 20,
               ),
-              const SizedBox(width: 8),
+              const SizedBox(width: AppSizes.sm),
               Text(
-                'Attributes',
-                style: theme.textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.w600,
-                ),
+                l10n.attributes,
+                style: context.subtitle(bold: true),
               ),
             ],
           ),
         ),
         if (_attributesExpanded) ...[
-          const SizedBox(height: 12),
+          const SizedBox(height: AppSizes.md),
           TextField(
             controller: _colorController,
             decoration: InputDecoration(
-              labelText: 'Color',
+              labelText: l10n.color,
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(AppSizes.radiusSm),
               ),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              contentPadding: const EdgeInsets.symmetric(horizontal: AppSizes.md, vertical: AppSizes.sm),
               isDense: true,
             ),
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: AppSizes.md),
           TextField(
             controller: _sizeController,
             decoration: InputDecoration(
-              labelText: 'Size',
+              labelText: l10n.size,
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(AppSizes.radiusSm),
               ),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              contentPadding: const EdgeInsets.symmetric(horizontal: AppSizes.md, vertical: AppSizes.sm),
               isDense: true,
             ),
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: AppSizes.md),
           TextField(
             controller: _materialController,
             decoration: InputDecoration(
-              labelText: 'Material',
+              labelText: l10n.material,
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(AppSizes.radiusSm),
               ),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              contentPadding: const EdgeInsets.symmetric(horizontal: AppSizes.md, vertical: AppSizes.sm),
               isDense: true,
             ),
           ),

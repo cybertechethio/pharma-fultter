@@ -1,33 +1,24 @@
 import 'package:dartz/dartz.dart';
 import '../../../../core/errors/failure.dart';
+import '../../../../shared/models/paginated_response.dart';
+import '../models/create_transfer_request.dart';
 import '../models/transfer_model.dart';
-import '../models/transfer_response_model.dart';
 
 abstract class TransferRemoteDataSource {
-  /// Get all transfers with pagination
-  Future<Either<Failure, List<TransferResponseModel>>> getTransfers({
-    int page,
-    int limit,
+  Future<Either<Failure, PaginatedResponse<TransferModel>>> getTransfers({
+    int page = 1,
+    int limit = 25,
   });
-
-  /// Get transfer detail by ID
-  Future<Either<Failure, TransferResponseModel>> getTransferDetail(int id);
-
-  /// Create a new transfer
-  Future<Either<Failure, TransferResponseModel>> createTransfer({
-    required TransferModel request,
+  
+  Future<Either<Failure, TransferModel>> getTransferDetail(int id);
+  
+  Future<Either<Failure, TransferModel>> createTransfer({
+    required CreateTransferRequest request,
+  });
+  
+  Future<Either<Failure, TransferModel>> updateStatus({
+    required int id,
+    required String status,
   });
 }
-
-
-
-
-
-
-
-
-
-
-
-
 

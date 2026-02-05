@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../../../app/theme/app_sizes.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/components/common/app_bar.dart';
 import '../../../../shared/components/forms/custom_text_field.dart';
 import '../../../../shared/components/forms/custom_button.dart';
+import '../../../../shared/components/forms/dropdown.dart';
 import '../../../../shared/utils/validators.dart';
+import '../../../../core/enums/user_type_enum.dart';
 import '../../domain/entities/user.dart';
 import '../providers/user_notifier.dart';
 import '../providers/user_loading_providers.dart';
@@ -32,6 +35,7 @@ class _UserFormScreenState extends ConsumerState<UserFormScreen> {
   late final TextEditingController _emailController;
   late final TextEditingController _phoneController;
   bool _isActive = true;
+  UserType _userType = UserType.standard;
 
   bool get _isEditing => widget.initialUser != null || widget.userId != null;
   
@@ -57,6 +61,7 @@ class _UserFormScreenState extends ConsumerState<UserFormScreen> {
       _emailController.text = user.email;
       _phoneController.text = user.phone;
       _isActive = user.isActive;
+      _userType = user.userType;
     }
   }
 
@@ -88,6 +93,7 @@ class _UserFormScreenState extends ConsumerState<UserFormScreen> {
             email: _emailController.text.trim(),
             phone: _phoneController.text.trim(),
             isActive: _isActive,
+            userType: _userType.toApiString(),
           );
     } else {
       await ref.read(userProvider.notifier).create(
@@ -96,6 +102,7 @@ class _UserFormScreenState extends ConsumerState<UserFormScreen> {
             email: _emailController.text.trim(),
             phone: _phoneController.text.trim(),
             isActive: _isActive,
+            userType: _userType.toApiString(),
           );
     }
   }
@@ -146,7 +153,7 @@ class _UserFormScreenState extends ConsumerState<UserFormScreen> {
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(AppSizes.lg),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -157,7 +164,7 @@ class _UserFormScreenState extends ConsumerState<UserFormScreen> {
                 prefixIcon: Icons.person_outline,
                 validator: Validators.validateFirstName,
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSizes.lg),
 
               // Last Name Field
               CustomTextField(
@@ -166,7 +173,7 @@ class _UserFormScreenState extends ConsumerState<UserFormScreen> {
                 prefixIcon: Icons.person_outline,
                 validator: Validators.validateLastName,
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSizes.lg),
 
               // Email Field
               CustomTextField(
@@ -176,7 +183,7 @@ class _UserFormScreenState extends ConsumerState<UserFormScreen> {
                 inputType: TextInputType.emailAddress,
                 validator: Validators.validateEmail,
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSizes.lg),
 
               // Phone Field
               CustomTextField(
@@ -186,7 +193,35 @@ class _UserFormScreenState extends ConsumerState<UserFormScreen> {
                 inputType: TextInputType.phone,
                 validator: Validators.validatePhone,
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSizes.lg),
+
+              // User Type Dropdown
+              Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(AppSizes.lg),
+                  child: CustomDropdown<UserType>(
+                    value: _userType,
+                    items: [
+                      DropdownItem<UserType>(value: UserType.admin, label: l10n.admin),
+                      DropdownItem<UserType>(value: UserType.manager, label: l10n.manager),
+                      DropdownItem<UserType>(value: UserType.cashier, label: l10n.cashier),
+                      DropdownItem<UserType>(value: UserType.storekeeper, label: l10n.storekeeper),
+                      DropdownItem<UserType>(value: UserType.supervisor, label: l10n.supervisor),
+                      DropdownItem<UserType>(value: UserType.standard, label: l10n.standard),
+                    ],
+                    onChanged: (value) {
+                      if (value != null) {
+                        setState(() {
+                          _userType = value;
+                        });
+                      }
+                    },
+                    label: l10n.userType,
+                    hintText: l10n.selectUserType,
+                  ),
+                ),
+              ),
+              const SizedBox(height: AppSizes.lg),
 
               // Active Status Toggle
               Card(
@@ -201,7 +236,7 @@ class _UserFormScreenState extends ConsumerState<UserFormScreen> {
                   },
                 ),
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: AppSizes.xxl),
 
               // Submit Button
               CustomButton(
@@ -210,7 +245,7 @@ class _UserFormScreenState extends ConsumerState<UserFormScreen> {
                 loadingText: _isEditing ? l10n.updating : l10n.creating,
                 onPressed: _handleSubmit,
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSizes.lg),
             ],
           ),
         ),

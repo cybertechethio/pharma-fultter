@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../domain/entities/user_role.dart';
+import '../../../../app/theme/app_sizes.dart';
 import '../../../../app/theme/brand_colors.dart';
 
 class BranchRoleAssignmentCard extends StatelessWidget {
@@ -49,18 +50,18 @@ class BranchRoleAssignmentCard extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
                     color: colorScheme.secondaryContainer,
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(AppSizes.radius),
                   ),
                   child: Text(
                     '${assignment.roles.length} ${assignment.roles.length == 1 ? 'role' : 'roles'}',
                     style: TextStyle(
                       color: colorScheme.onSecondaryContainer,
-                      fontSize: 12,
+                      fontSize: AppSizes.fontSizeLabel,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
-                const SizedBox(width: 8),
+                const SizedBox(width: AppSizes.sm),
                 Icon(
                   isExpanded ? Icons.expand_less : Icons.expand_more,
                   color: colorScheme.onSurfaceVariant,
@@ -85,7 +86,7 @@ class BranchRoleAssignmentCard extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: AppSizes.sm),
                   if (assignment.roles.isEmpty)
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8),

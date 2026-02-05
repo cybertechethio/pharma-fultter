@@ -17,33 +17,46 @@ import '../features/expense/presentation/screens/expense_form_screen.dart';
 import '../features/expense/presentation/screens/expense_update_screen.dart';
 import '../features/expense/presentation/screens/expense_detail_screen.dart';
 import '../features/expense/domain/entities/expense.dart';
+import '../features/report/presentation/screens/annual_report_screen.dart';
+import '../features/report/presentation/screens/best_seller_report_screen.dart';
+import '../features/report/presentation/screens/customer_report_screen.dart';
+import '../features/report/presentation/screens/expense_report_screen.dart';
+import '../features/report/presentation/screens/profit_loss_report_screen.dart';
+import '../features/report/presentation/screens/purchase_report_screen.dart';
 import '../features/supplier_customer/presentation/screens/customer_list_screen.dart';
 import '../features/supplier_customer/presentation/screens/supplier_list_screen.dart';
+import '../features/supplier_customer/presentation/screens/supplier_customer_detail_screen.dart';
 import '../features/category/presentation/screens/category_list_screen.dart';
 import '../features/expense_category/presentation/screens/expense_category_list_screen.dart';
 import '../features/expense/presentation/screens/expense_list_screen.dart';
 import '../features/sub_category/presentation/screens/sub_category_list_screen.dart';
+import '../features/transaction/presentation/screens/create_transaction_form.dart';
+import '../features/transaction/presentation/screens/cart_screen.dart';
+import '../features/transaction/presentation/screens/transaction_detail_screen.dart';
 import '../features/unit/presentation/screens/unit_list_screen.dart';
 import '../features/brand/presentation/screens/brand_list_screen.dart';
 import '../features/bank/presentation/screens/bank_list_screen.dart';
 import '../features/model/presentation/screens/model_list_screen.dart';
 import '../features/item/presentation/screens/item_list_screen.dart';
-import '../features/item/presentation/screens/item_create_screen.dart';
+import '../features/item/presentation/screens/item_create_or_update_screen.dart';
 import '../features/item/presentation/screens/item_detail_screen.dart';
-import '../features/item/presentation/screens/item_update_screen.dart';
 import '../features/item/domain/entities/item.dart';
-import '../features/batch/presentation/screens/batch_list_screen.dart';
+import '../features/batch/domain/entities/batch.dart' as batch_entity;
 import '../features/batch/presentation/screens/batch_detail_screen.dart';
-import '../features/batch/domain/entities/batch.dart';
+import '../features/batch/presentation/screens/batch_item_list_screen.dart';
+import '../features/batch/presentation/screens/batch_list_screen.dart';
+import '../features/batch/presentation/screens/batch_transfer_form_screen.dart';
+import '../features/batch/presentation/screens/batch_consolidation_form_screen.dart';
+import '../features/batch/presentation/screens/batch_split_form_screen.dart';
 import '../features/stock/presentation/screens/stock_list_screen.dart';
 import '../features/stock/presentation/screens/stock_detail_screen.dart';
 import '../features/stock/domain/entities/stock.dart';
-import '../features/transaction/presentation/screens/transaction_form_screen.dart';
+import '../features/stock_movement/presentation/screens/stock_movement_detail_screen.dart';
+import '../features/stock_movement/domain/entities/stock_movement.dart';
 import '../features/transaction/presentation/screens/transaction_list_screen.dart';
-import '../features/transaction/presentation/screens/transaction_detail_screen.dart';
 import '../features/transfer/presentation/screens/transfer_list_screen.dart';
-import '../features/transfer/presentation/screens/transfer_form_screen.dart';
 import '../features/transfer/presentation/screens/transfer_detail_screen.dart';
+import '../features/transfer/presentation/screens/create_transfer_screen.dart';
 import '../features/role/presentation/screens/role_list_screen.dart';
 import '../features/role/presentation/screens/role_detail_screen.dart';
 import '../features/role/presentation/screens/role_form_screen.dart';
@@ -51,8 +64,11 @@ import '../features/user/presentation/screens/user_list_screen.dart';
 import '../features/user/presentation/screens/user_detail_screen.dart';
 import '../features/user/presentation/screens/user_form_screen.dart';
 import '../features/profile/presentation/screens/profile_screen.dart';
+import '../features/report/presentation/screens/sales_report_screen.dart';
 import '../shared/components/common/app_bar.dart';
 import '../shared/components/layout/bottom_nav_screen.dart';
+import '../features/dashboard/presentation/screens/home_screen.dart';
+import '../splash_screen.dart';
 import 'route_name.dart';
 
 /// Singleton router instance - created once and reused
@@ -69,7 +85,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
 GoRouter _createRouter() {
   return GoRouter(
     navigatorKey: SnackbarService.rootNavigatorKey,
-    initialLocation: RouteName.login,
+    initialLocation: RouteName.splash,
     routes: AppRouter._buildRoutes(),
     errorBuilder: (context, state) => AppRouter._buildErrorPage(context, state),
   );
@@ -83,6 +99,11 @@ class AppRouter {
   
   static List<RouteBase> _buildRoutes() {
     return [
+        GoRoute(
+          path: RouteName.splash,
+          name: 'splash',
+          builder: (context, state) => const SplashScreen(),
+        ),
         GoRoute(
           path: RouteName.login,
           name: 'login',
@@ -138,6 +159,14 @@ class AppRouter {
           path: RouteName.suppliers,
           name: 'suppliers',
           builder: (context, state) => const SupplierListScreen(),
+        ),
+        GoRoute(
+          path: RouteName.supplierCustomerDetail,
+          name: 'supplier-customer-detail',
+          builder: (context, state) {
+            final id = state.pathParameters['id']!;
+            return SupplierCustomerDetailScreen(id: id);
+          },
         ),
         GoRoute(
           path: RouteName.categories,
@@ -211,14 +240,14 @@ class AppRouter {
             GoRoute(
               path: 'create',
               name: 'create-item',
-              builder: (context, state) => const ItemCreateScreen(),
+              builder: (context, state) => const ItemCreateOrUpdateScreen(),
             ),
             GoRoute(
               path: ':id/edit',
               name: 'edit-item',
               builder: (context, state) {
                 final item = state.extra as Item;
-                return ItemUpdateScreen(item: item);
+                return ItemCreateOrUpdateScreen(item: item);
               },
             ),
           ],
@@ -232,16 +261,48 @@ class AppRouter {
           },
         ),
         GoRoute(
-          path: RouteName.batches,
-          name: 'batches',
-          builder: (context, state) => const BatchListScreen(),
+          path: RouteName.batchItems,
+          name: 'batch-items',
+          builder: (context, state) => const BatchItemListScreen(),
+        ),
+        GoRoute(
+          path: RouteName.batchList,
+          name: 'batch-list',
+          builder: (context, state) {
+            final item = state.extra as Item;
+            return BatchListScreen(item: item);
+          },
         ),
         GoRoute(
           path: RouteName.batchDetail,
           name: 'batch-detail',
           builder: (context, state) {
-            final batch = state.extra as BatchEntity;
+            final batch = state.extra as batch_entity.BatchEntity;
             return BatchDetailScreen(batch: batch);
+          },
+        ),
+        GoRoute(
+          path: RouteName.batchTransferForm,
+          name: 'batch-transfer',
+          builder: (context, state) {
+            final item = state.extra as Item;
+            return BatchTransferFormScreen(item: item);
+          },
+        ),
+        GoRoute(
+          path: RouteName.batchConsolidationForm,
+          name: 'batch-consolidation',
+          builder: (context, state) {
+            final item = state.extra as Item;
+            return BatchConsolidationFormScreen(item: item);
+          },
+        ),
+        GoRoute(
+          path: RouteName.batchSplitForm,
+          name: 'batch-split',
+          builder: (context, state) {
+            final item = state.extra as Item;
+            return BatchSplitFormScreen(item: item);
           },
         ),
         GoRoute(
@@ -258,9 +319,22 @@ class AppRouter {
           },
         ),
         GoRoute(
+          path: RouteName.stockMovementDetail,
+          name: 'stock-movement-detail',
+          builder: (context, state) {
+            final stockMovement = state.extra as StockMovement;
+            return StockMovementDetailScreen(stockMovement: stockMovement);
+          },
+        ),
+        GoRoute(
           path: RouteName.transactionForm,
           name: 'transaction-form',
-          builder: (context, state) => const TransactionFormScreen(),
+          builder: (context, state) => const CreateTransactionForm(),
+        ),
+        GoRoute(
+          path: RouteName.cartScreen,
+          name: 'cart-screen',
+          builder: (context, state) => const CartScreen(),
         ),
         GoRoute(
           path: RouteName.transactionDetail,
@@ -278,7 +352,7 @@ class AppRouter {
         GoRoute(
           path: RouteName.transferForm,
           name: 'transfer-form',
-          builder: (context, state) => const TransferFormScreen(),
+          builder: (context, state) => const CreateTransferScreen(),
         ),
         GoRoute(
           path: RouteName.transferDetail,
@@ -359,6 +433,41 @@ class AppRouter {
           builder: (context, state) => const _PlaceholderScreen(title: 'Reports'),
         ),
         GoRoute(
+          path: RouteName.salesReport,
+          name: 'sales-report',
+          builder: (context, state) => const SalesReportScreen(),
+        ),
+        GoRoute(
+          path: RouteName.annualReport,
+          name: 'annual-report',
+          builder: (context, state) => const AnnualReportScreen(),
+        ),
+        GoRoute(
+          path: RouteName.bestSellerReport,
+          name: 'best-seller-report',
+          builder: (context, state) => const BestSellerReportScreen(),
+        ),
+        GoRoute(
+          path: RouteName.customerReport,
+          name: 'customer-report',
+          builder: (context, state) => const CustomerReportScreen(),
+        ),
+        GoRoute(
+          path: RouteName.expenseReport,
+          name: 'expense-report',
+          builder: (context, state) => const ExpenseReportScreen(),
+        ),
+        GoRoute(
+          path: RouteName.profitLossReport,
+          name: 'profit-loss-report',
+          builder: (context, state) => const ProfitLossReportScreen(),
+        ),
+        GoRoute(
+          path: RouteName.purchaseReport,
+          name: 'purchase-report',
+          builder: (context, state) => const PurchaseReportScreen(),
+        ),
+        GoRoute(
           path: RouteName.help,
           name: 'help',
           builder: (context, state) => const _PlaceholderScreen(title: 'Help'),
@@ -368,7 +477,7 @@ class AppRouter {
           name: 'settings',
           builder: (context, state) => const SettingsScreen(),
         ),
-        
+       
         GoRoute(
           path: RouteName.profile,
           name: 'profile',
@@ -385,7 +494,7 @@ class AppRouter {
                 GoRoute(
                   path: RouteName.home,
                   name: 'home',
-                  builder: (context, state) => const _ShellRouteScreen(title: 'Home'),
+                  builder: (context, state) => const HomeScreen(),
                 ),
                 
               ],
@@ -395,7 +504,7 @@ class AppRouter {
                 GoRoute(
                   path: RouteName.sell,
                   name: 'sell',
-                  builder: (context, state) => const _ShellRouteScreen(title: 'Sell'),
+                  builder: (context, state) => const TransactionListScreen(),
                 ),
               ],
             ),
@@ -404,7 +513,7 @@ class AppRouter {
                 GoRoute(
                   path: RouteName.stock,
                   name: 'stock',
-                  builder: (context, state) => const _ShellRouteScreen(title: 'Stock'),
+                  builder: (context, state) => const StockListScreen(),
                 ),
               ],
             ),
@@ -469,14 +578,11 @@ class _PlaceholderScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final textStyle = Theme.of(context).textTheme.headlineSmall;
     return Scaffold(
-      appBar: CustomAppBar(
-        title: title,
-      ),
+      appBar:CustomAppBar(title: title),
       body: Center(child: Text('$title screen', style: textStyle)),
     );
   }
 }
-
 class _ShellRouteScreen extends ConsumerWidget {
   final String title;
 
@@ -492,7 +598,7 @@ class _ShellRouteScreen extends ConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('$title screen', style: textStyle),
+            Text('$title screens', style: textStyle),
             const SizedBox(height: AppSizes.xxl),
             contextAsync.when(
               loading: () => const CircularProgressIndicator(),

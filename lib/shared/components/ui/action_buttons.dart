@@ -64,7 +64,7 @@ class ActionButtons extends StatelessWidget {
                   width: iconSize,
                   height: iconSize,
                   child: const CircularProgressIndicator(
-                    strokeWidth: 2,
+                    strokeWidth: AppSizes.loaderStrokeWidth,
                     valueColor: AlwaysStoppedAnimation<Color>(BrandColors.primary),
                   ),
                 )
@@ -85,7 +85,7 @@ class ActionButtons extends StatelessWidget {
                     width: iconSize,
                     height: iconSize,
                     child: const CircularProgressIndicator(
-                      strokeWidth: 2,
+                      strokeWidth: AppSizes.loaderStrokeWidth,
                       valueColor: AlwaysStoppedAnimation<Color>(BrandColors.error),
                     ),
                   )
@@ -116,7 +116,7 @@ class ActionButtons extends StatelessWidget {
                   width: 14,
                   height: 14,
                   child: CircularProgressIndicator(
-                    strokeWidth: 2,
+                    strokeWidth: AppSizes.loaderStrokeWidth,
                     valueColor: AlwaysStoppedAnimation<Color>(BrandColors.primary),
                   ),
                 )
@@ -151,7 +151,7 @@ class ActionButtons extends StatelessWidget {
                     width: 14,
                     height: 14,
                     child: CircularProgressIndicator(
-                      strokeWidth: 2,
+                      strokeWidth: AppSizes.loaderStrokeWidth,
                       valueColor: AlwaysStoppedAnimation<Color>(BrandColors.error),
                     ),
                   )

@@ -1322,24 +1322,6 @@ class AppLocalizationsAm extends AppLocalizations {
   String get saleReverse => 'ሽያጭ መመለስ';
 
   @override
-  String get salesOrder => 'የሽያጭ ትዕዛዝ';
-
-  @override
-  String get salesOrders => 'የሽያጭ ትዕዛዞች';
-
-  @override
-  String get noSalesOrders => 'ምንም የሽያጭ ትዕዛዝ የለም';
-
-  @override
-  String get noSalesOrdersMessage => 'እስካሁን ምንም የሽያጭ ትዕዛዝ የሎትም።';
-
-  @override
-  String get createSalesOrder => 'የሽያጭ ትዕዛዝ ፍጠር';
-
-  @override
-  String get salesOrderDetails => 'የሽያጭ ትዕዛዝ ዝርዝሮች';
-
-  @override
   String get fulfillmentBranch => 'የመፈጸሚያ ቅርንጫፍ';
 
   @override
@@ -1377,28 +1359,6 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get fulfillOrder => 'ትዕዛዝ ፈጽም';
-
-  @override
-  String get confirmApproveOrder => 'እርግጠኛ ነዎት ይህን የሽያጭ ትዕዛዝ ማፅደቅ ይፈልጋሉ?';
-
-  @override
-  String get confirmFulfillOrder =>
-      'እርግጠኛ ነዎት ይህን የሽያጭ ትዕዛዝ መፈጸም ይፈልጋሉ? ይህ ግብይት ይፈጥራል እና ክምችት ይቀንሳል።';
-
-  @override
-  String get confirmCancelOrder => 'እርግጠኛ ነዎት ይህን የሽያጭ ትዕዛዝ መሰረዝ ይፈልጋሉ?';
-
-  @override
-  String get orderApprovedSuccessfully => 'የሽያጭ ትዕዛዝ በተሳካ ሁኔታ ፀድቋል';
-
-  @override
-  String get orderFulfilledSuccessfully => 'የሽያጭ ትዕዛዝ በተሳካ ሁኔታ ተሟልቷል';
-
-  @override
-  String get orderCancelledSuccessfully => 'የሽያጭ ትዕዛዝ በተሳካ ሁኔታ ተሰርዟል';
-
-  @override
-  String get salesOrderCreatedSuccessfully => 'የሽያጭ ትዕዛዝ በተሳካ ሁኔታ ተፈጥሯል';
 
   @override
   String get subtotal => 'ንዑስ ድምር';
@@ -1478,6 +1438,27 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get switchBranch => 'ቅርንጫፍ ይቀይሩ';
+
+  @override
+  String get main => 'ዋና';
+
+  @override
+  String get people => 'ሰዎች';
+
+  @override
+  String get products => 'ምርቶች';
+
+  @override
+  String get pointOfSale => 'የሽያጭ ነጥብ';
+
+  @override
+  String get stockTransfer => 'ክምችት ማስተላለፍ';
+
+  @override
+  String get billers => 'ቢለርስ';
+
+  @override
+  String get dailySalesReport => 'ዕለታዊ የሽያጭ ሪፖርት';
 
   @override
   String get core => 'መሰረታዊ';
@@ -1753,6 +1734,12 @@ class AppLocalizationsAm extends AppLocalizations {
   String get automaticallyPrintReceipts => 'ከግብይቶች በኋላ ደረሰኞችን በራስ-ሰር ያትሙ';
 
   @override
+  String get defaultCalendarType => 'ነባሪ የቀን መቁጠሪያ አይነት';
+
+  @override
+  String get businessType => 'የንግድ አይነት';
+
+  @override
   String get uploadLogo => 'ሎጎ ይጭኑ';
 
   @override
@@ -1823,9 +1810,6 @@ class AppLocalizationsAm extends AppLocalizations {
   String get overview => 'አጠቃላይ እይታ';
 
   @override
-  String get fulfillSalesOrder => 'የሽያጭ ትዕዛዝ ሙሉ ማድረግ';
-
-  @override
   String get editPaymentMethod => 'የመክፈያ ዘዴ ያርትዑ';
 
   @override
@@ -1866,6 +1850,30 @@ class AppLocalizationsAm extends AppLocalizations {
   String get stockDetails => 'የክምችት ዝርዝሮች';
 
   @override
+  String get stockMovementDetails => 'የክምችት እንቅስቃሴ ዝርዝሮች';
+
+  @override
+  String get movementInformation => 'የእንቅስቃሴ መረጃ';
+
+  @override
+  String get previousStock => 'የቀድሞ ክምችት';
+
+  @override
+  String get newStock => 'አዲስ ክምችት';
+
+  @override
+  String get inbound => 'ገቢ';
+
+  @override
+  String get outbound => 'ወጪ';
+
+  @override
+  String get transferId => 'የማስተላለፍ መታወቂያ';
+
+  @override
+  String get reversedMovement => 'የተመለሰ እንቅስቃሴ መታወቂያ';
+
+  @override
   String get noTransactionsYet => 'እስካሁን ግብይቶች የሉም።';
 
   @override
@@ -1902,16 +1910,10 @@ class AppLocalizationsAm extends AppLocalizations {
   String get youDontHaveAnyItemsYet => 'እስካሁን ምንም ንጥሎች የሎትም።';
 
   @override
-  String get cancelSalesOrder => 'የሽያጭ ትዕዛዝ ይቅር';
-
-  @override
-  String get confirmCancelSalesOrder => 'ይህንን የሽያጭ ትዕዛዝ ማስረዝ እንደፈለጉ እርግጠኛ ነዎት?';
-
-  @override
-  String get newSalesOrder => 'አዲስ የሽያጭ ትዕዛዝ';
-
-  @override
   String get newTransaction => 'አዲስ ግብይት';
+
+  @override
+  String get cart => 'ጋሪ';
 
   @override
   String get additionalInformation => 'ተጨማሪ መረጃ';
@@ -2249,9 +2251,6 @@ class AppLocalizationsAm extends AppLocalizations {
   String refLabel(String ref) {
     return 'ማጣቀሻ: $ref';
   }
-
-  @override
-  String get approveSalesOrder => 'የሽያጭ ትዕዛዝ ይፈቀድ';
 
   @override
   String get notesOptional => 'ማስታወሻዎች (አማራጭ)';

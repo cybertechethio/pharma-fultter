@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../app/theme/app_sizes.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/components/forms/custom_text_field.dart';
 import '../../../../shared/components/forms/custom_button.dart';
@@ -84,7 +85,7 @@ class _ChangePasswordDialogState extends ConsumerState<ChangePasswordDialog> {
                   return null;
                 },
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: AppSizes.md),
               CustomTextField(
                 labelText: l10n.newPassword,
                 controller: _newPasswordController,
@@ -108,7 +109,7 @@ class _ChangePasswordDialogState extends ConsumerState<ChangePasswordDialog> {
                   return isValid ? null : l10n.enterValidPassword;
                 },
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: AppSizes.md),
               CustomTextField(
                 labelText: l10n.confirmNewPassword,
                 controller: _confirmPasswordController,

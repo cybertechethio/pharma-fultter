@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../auth/domain/entities/user.dart';
+import '../../../../app/theme/app_sizes.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/components/forms/custom_text_field.dart';
 import '../../../../shared/components/forms/custom_button.dart';
@@ -92,7 +93,7 @@ class _EditProfileDialogState extends ConsumerState<EditProfileDialog> {
                   return null;
                 },
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: AppSizes.md),
               CustomTextField(
                 labelText: l10n.lastName,
                 controller: _lastNameController,
@@ -104,7 +105,7 @@ class _EditProfileDialogState extends ConsumerState<EditProfileDialog> {
                   return null;
                 },
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: AppSizes.md),
               CustomTextField(
                 labelText: l10n.email,
                 controller: _emailController,
@@ -115,7 +116,7 @@ class _EditProfileDialogState extends ConsumerState<EditProfileDialog> {
                   return isValid ? null : l10n.enterValidEmail;
                 },
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: AppSizes.md),
               CustomTextField(
                 labelText: l10n.phoneNumber,
                 controller: _phoneController,

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../../../app/theme/app_sizes.dart';
+import '../../../../app/theme/brand_colors.dart';
 
 /// An enhanced navigation item with hover effects, selection indicator,
 /// and smooth animations.
@@ -55,7 +57,7 @@ class _DrawerNavItemState extends State<DrawerNavItem>
     final effectiveIconColor = widget.iconColor ?? colorScheme.primary;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+      padding: const EdgeInsets.symmetric(horizontal: AppSizes.md, vertical: AppSizes.xxs),
       child: MouseRegion(
         onEnter: (_) => setState(() => _isHovered = true),
         onExit: (_) => setState(() => _isHovered = false),
@@ -73,43 +75,32 @@ class _DrawerNavItemState extends State<DrawerNavItem>
                     ? colorScheme.primaryContainer.withOpacity(0.7)
                     : _isHovered
                         ? colorScheme.surfaceContainerHighest.withOpacity(0.7)
-                        : Colors.transparent,
-                borderRadius: BorderRadius.circular(12),
+                        : BrandColors.transparent,
+                borderRadius: BorderRadius.circular(AppSizes.radius),
               ),
               child: Material(
-                color: Colors.transparent,
+                color: BrandColors.transparent,
                 child: InkWell(
                   onTap: widget.onTap,
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(AppSizes.radius),
                   splashColor: colorScheme.primary.withOpacity(0.1),
                   highlightColor: colorScheme.primary.withOpacity(0.05),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 14,
-                      vertical: 12,
+                      horizontal: AppSizes.md2,
+                      vertical: AppSizes.sm,
                     ),
                     child: Row(
                       children: [
-                        // Icon Container
-                        AnimatedContainer(
-                          duration: const Duration(milliseconds: 200),
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            color: isActive
-                                ? effectiveIconColor.withOpacity(0.15)
-                                : colorScheme.surfaceContainerHighest
-                                    .withOpacity(0.5),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Icon(
-                            widget.icon,
-                            size: 20,
-                            color: isActive
-                                ? effectiveIconColor
-                                : colorScheme.onSurfaceVariant,
-                          ),
+                        // Icon - brand color, 50% opacity when inactive
+                        Icon(
+                          widget.icon,
+                          size: AppSizes.iconSizeLg - 2,
+                          color: isActive
+                              ? effectiveIconColor
+                              : (widget.iconColor ?? BrandColors.primary).withValues(alpha: 0.5),
                         ),
-                        const SizedBox(width: 14),
+                        const SizedBox(width: AppSizes.md2),
                         // Label
                         Expanded(
                           child: Text(
@@ -129,11 +120,11 @@ class _DrawerNavItemState extends State<DrawerNavItem>
                           duration: const Duration(milliseconds: 200),
                           opacity: widget.isSelected ? 1.0 : 0.0,
                           child: Container(
-                            width: 4,
-                            height: 20,
+                            width: AppSizes.xs,
+                            height: AppSizes.xl,
                             decoration: BoxDecoration(
                               color: colorScheme.primary,
-                              borderRadius: BorderRadius.circular(2),
+                              borderRadius: BorderRadius.circular(AppSizes.xxs),
                             ),
                           ),
                         ),

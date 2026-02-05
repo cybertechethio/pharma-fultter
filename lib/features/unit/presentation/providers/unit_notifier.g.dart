@@ -20,7 +20,7 @@ final class UnitNotifierProvider
         argument: null,
         retry: null,
         name: r'unitProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -33,7 +33,7 @@ final class UnitNotifierProvider
   UnitNotifier create() => UnitNotifier();
 }
 
-String _$unitNotifierHash() => r'e6dc2494fa6f01394d732bdf30d4787532dab7ba';
+String _$unitNotifierHash() => r'12f65fe1fa0cf4f43a43222f90bb4c2cabc106c1';
 
 abstract class _$UnitNotifier extends $AsyncNotifier<List<UnitEntity>> {
   FutureOr<List<UnitEntity>> build();

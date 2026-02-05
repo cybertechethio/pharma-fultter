@@ -50,7 +50,7 @@ class SupplierListScreen extends ConsumerWidget {
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(60),
           child: search.AppSearchBar(
-            hintText: 'Search by name, phone, or account code...',
+            hintText: l10n.searchByNamePhoneOrAccountCode,
             onSearch: (query) => ref.read(supplierCustomerProvider(type).notifier).search(type, query),
             onClear: () => ref.read(supplierCustomerProvider(type).notifier).load(type),
           ),
@@ -63,8 +63,8 @@ class SupplierListScreen extends ConsumerWidget {
             return Center(
               child: EmptyWidget(
                 icon: Icons.store_outlined,
-                title: 'No suppliers',
-                message: "You don't have any suppliers yet.",
+                title: l10n.noSuppliers,
+                message: l10n.noSuppliersMessage,
               ),
             );
           }
@@ -114,8 +114,8 @@ class SupplierListScreen extends ConsumerWidget {
       context: context,
       builder: (context) => SupplierCustomerFormDialog(
         type: type,
-        title: 'Create Supplier',
-        buttonText: 'Create',
+        title: l10n.createSupplier,
+        buttonText: l10n.create,
       ),
     );
   }

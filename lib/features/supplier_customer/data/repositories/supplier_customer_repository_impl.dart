@@ -1,9 +1,12 @@
 import 'package:dartz/dartz.dart';
 import '../../../../core/errors/failure.dart';
+import '../../../transaction/data/mappers/transaction_mapper.dart';
+import '../../../transaction/domain/entities/transaction.dart';
 import '../../domain/entities/supplier_customer.dart';
 import '../../domain/repositories/supplier_customer_repository.dart';
 import '../datasources/supplier_customer_remote_data_source.dart';
 import '../mappers/supplier_customer_mapper.dart';
+import '../models/supplier_customer_payment_request.dart';
 
 class SupplierCustomerRepositoryImpl implements SupplierCustomerRepository {
   final SupplierCustomerRemoteDataSource _remote;
@@ -80,6 +83,62 @@ class SupplierCustomerRepositoryImpl implements SupplierCustomerRepository {
     );
   }
 
+  @override
+  Future<Either<Failure, SupplierCustomer>> getSupplierCustomerById({
+    required String id,
+  }) async {
+    final response = await _remote.getById(id: id);
+    return response.fold(
+      (failure) => Left(failure),
+      (model) => Right(model.toDomain()),
+    );
+  }
+
+  @override
+  Future<Either<Failure, Unit>> addBalance({
+    required SupplierCustomerPaymentRequest request,
+    required Map<String, String> paymentAttachmentFilePaths,
+  }) async {
+    final response = await _remote.addBalance(
+      request: request,
+      paymentAttachmentFilePaths: paymentAttachmentFilePaths,
+    );
+
+    return response.fold(
+      (failure) => Left(failure),
+      (unit) => Right(unit),
+    );
+  }
+
+  @override
+  Future<Either<Failure, Unit>> refund({
+    required SupplierCustomerPaymentRequest request,
+    required Map<String, String> paymentAttachmentFilePaths,
+  }) async {
+    final response = await _remote.refund(
+      request: request,
+      paymentAttachmentFilePaths: paymentAttachmentFilePaths,
+    );
+
+    return response.fold(
+      (failure) => Left(failure),
+      (unit) => Right(unit),
+    );
+  }
+
+  @override
+  Future<Either<Failure, List<Transaction>>> getTransactions({
+    required String supplierCustomerId,
+  }) async {
+    final response = await _remote.getTransactions(
+      supplierCustomerId: supplierCustomerId,
+    );
+    return response.fold(
+      (failure) => Left(failure),
+      (models) => Right(models.map((m) => m.toDomain()).toList()),
+    );
+  }
+
   String _mapTypeToApi(SupplierCustomerType type) {
     switch (type) {
       case SupplierCustomerType.customer:
@@ -98,5 +157,3 @@ class SupplierCustomerRepositoryImpl implements SupplierCustomerRepository {
     }
   }
 }
-
-

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../app/theme/app_sizes.dart';
 import '../../../../app/theme/brand_colors.dart';
+import '../../../../app/theme/text_styles.dart';
 import '../../../../core/errors/failure.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/components/common/app_bar.dart';
@@ -68,21 +69,18 @@ class SettingsScreen extends ConsumerWidget {
               children: [
                 // Company Basic Information Section with Edit Button
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(AppSizes.lg, 24, AppSizes.lg, 12),
+                  padding: const EdgeInsets.fromLTRB(AppSizes.lg, AppSizes.xxl, AppSizes.lg, AppSizes.md),
                   child: Row(
                     children: [
                       Icon(
                         Icons.business,
-                        color: Theme.of(context).colorScheme.primary,
-                        size: 20,
+                        color: BrandColors.primary,
+                        size: AppSizes.iconSize,
                       ),
-                      const SizedBox(width: 8),
+                      const SizedBox(width: AppSizes.sm),
                       Text(
                         l10n.companyInformation,
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: Theme.of(context).colorScheme.primary,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: context.title(color: BrandColors.primary, bold: true),
                       ),
                       const Spacer(),
                       TextButton.icon(
@@ -94,9 +92,9 @@ class SettingsScreen extends ConsumerWidget {
                             ),
                           );
                         },
-                        icon: const Icon(
+                        icon: Icon(
                           Icons.edit_outlined,
-                          size: 16,
+                          size: AppSizes.iconSizeSm,
                         ),
                         label: Text(l10n.edit),
                         style: TextButton.styleFrom(

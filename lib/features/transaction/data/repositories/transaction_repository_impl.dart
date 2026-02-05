@@ -1,13 +1,12 @@
+import 'package:cyber_pos/features/transaction/data/mappers/transaction_mapper.dart';
 import 'package:dartz/dartz.dart';
 import '../../../../core/enums/transaction_type_enum.dart';
 import '../../../../core/errors/failure.dart';
 import '../../../../shared/models/paginated_response.dart';
 import '../../domain/entities/transaction.dart';
-import '../../domain/entities/transaction_data.dart';
-import '../../domain/entities/transaction_detail.dart';
 import '../../domain/repositories/transaction_repository.dart';
 import '../datasources/transaction_remote_data_source.dart';
-import '../mappers/transaction_mapper.dart';
+import '../models/create_trans_request.dart';
 
 class TransactionRepositoryImpl implements TransactionRepository {
   final TransactionRemoteDataSource _remoteDataSource;
@@ -18,10 +17,12 @@ class TransactionRepositoryImpl implements TransactionRepository {
   Future<Either<Failure, PaginatedResponse<Transaction>>> getTransactions({
     int page = 1,
     int limit = 25,
+    TransactionType? transactionType,
   }) async {
     final result = await _remoteDataSource.getTransactions(
       page: page,
       limit: limit,
+      transactionType: transactionType,
     );
     
     return result.fold(
@@ -42,7 +43,7 @@ class TransactionRepositoryImpl implements TransactionRepository {
   }
 
   @override
-  Future<Either<Failure, TransactionDetail>> getTransactionDetail(int id) async {
+  Future<Either<Failure, Transaction>> getTransactionDetail(int id) async {
     final response = await _remoteDataSource.getTransactionDetail(id);
 
     return response.fold(
@@ -53,15 +54,13 @@ class TransactionRepositoryImpl implements TransactionRepository {
 
   @override
   Future<Either<Failure, Transaction>> createTransaction({
-    required TransactionData data,
+    required CreateTransRequest data,
     required List<String> receiptFilePaths,
     required Map<String, String> paymentAttachmentFilePaths,
   }) async {
-    // Convert domain entity to data model
-    final request = data.toModel();
     
     final response = await _remoteDataSource.createTransaction(
-      request: request,
+      request: data,
       receiptFilePaths: receiptFilePaths,
       paymentAttachmentFilePaths: paymentAttachmentFilePaths,
     );

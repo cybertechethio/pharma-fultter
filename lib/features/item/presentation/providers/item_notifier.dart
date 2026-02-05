@@ -1,13 +1,14 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../../shared/models/pagination_model.dart';
 import '../../domain/entities/item.dart';
+import '../../data/models/item_request_model.dart';
 import 'item_providers.dart';
 import 'item_events.dart';
 import 'item_loading_providers.dart';
 
 part 'item_notifier.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class ItemNotifier extends _$ItemNotifier {
   // State: List of all loaded items (accumulated)
   @override
@@ -26,7 +27,7 @@ class ItemNotifier extends _$ItemNotifier {
     final useCase = ref.read(getItemsUseCaseProvider);
     final result = await useCase.call(
       page: 1,
-      limit: 25,
+      limit: 500,
       search: search,
       categoryId: categoryId,
     );
@@ -69,7 +70,7 @@ class ItemNotifier extends _$ItemNotifier {
       final useCase = ref.read(getItemsUseCaseProvider);
       final result = await useCase.call(
         page: nextPage,
-        limit: 25,
+        limit: 500,
         search: _currentSearch,
         categoryId: _currentCategoryId,
       );
@@ -104,50 +105,12 @@ class ItemNotifier extends _$ItemNotifier {
   /// Check if currently loading more
   bool get isLoadingMore => _isLoadingMore;
 
-  Future<void> create({
-    required String name,
-    required String description,
-    required String sku,
-    required String code,
-    required String barcode,
-    required String color,
-    required String size,
-    required String material,
-    required double weight,
-    required bool isTaxable,
-    required int taxRate,
-    required bool isActive,
-    String? imageUrl,
-    int? categoryId,
-    int? subCategoryId,
-    int? brandId,
-    int? unitId,
-    int? modelId,
-  }) async {
+  Future<void> create(ItemRequestModel request) async {
     final createLoading = ref.read(itemCreateLoadingProvider.notifier);
     createLoading.setLoading(true);
 
     final useCase = ref.read(createItemUseCaseProvider);
-    final result = await useCase.call(
-      name: name,
-      description: description,
-      sku: sku,
-      code: code,
-      barcode: barcode,
-      color: color,
-      size: size,
-      material: material,
-      weight: weight,
-      isTaxable: isTaxable,
-      taxRate: taxRate,
-      isActive: isActive,
-      imageUrl: imageUrl,
-      categoryId: categoryId,
-      subCategoryId: subCategoryId,
-      brandId: brandId,
-      unitId: unitId,
-      modelId: modelId,
-    );
+    final result = await useCase.call(request);
 
     result.fold(
       (failure) {
@@ -157,7 +120,7 @@ class ItemNotifier extends _$ItemNotifier {
         final current = state.value ?? const <Item>[];
         state = AsyncValue.data([created, ...current]);
         ref.read(itemUiEventsProvider.notifier).emit(
-          ItemCreated(created, 'Item created successfully'),
+          ItemCreated(created, ''),
         );
       },
     );
@@ -166,49 +129,15 @@ class ItemNotifier extends _$ItemNotifier {
   }
 
   Future<void> updateItem({
-    required String id,
-    required String name,
-    required String description,
-    required String sku,
-    required String code,
-    required String barcode,
-    required String color,
-    required String size,
-    required String material,
-    required double weight,
-    required bool isTaxable,
-    required int taxRate,
-    required bool isActive,
-    String? imageUrl,
-    int? categoryId,
-    int? subCategoryId,
-    int? brandId,
-    int? unitId,
-    int? modelId,
+    required int id,
+    required ItemRequestModel request,
   }) async {
     final updating = ref.read(itemUpdateLoadingProvider.notifier);
     updating.start(id);
     final useCase = ref.read(updateItemUseCaseProvider);
     final result = await useCase.call(
       id: id,
-      name: name,
-      description: description,
-      sku: sku,
-      code: code,
-      barcode: barcode,
-      color: color,
-      size: size,
-      material: material,
-      weight: weight,
-      isTaxable: isTaxable,
-      taxRate: taxRate,
-      isActive: isActive,
-      imageUrl: imageUrl,
-      categoryId: categoryId,
-      subCategoryId: subCategoryId,
-      brandId: brandId,
-      unitId: unitId,
-      modelId: modelId,
+      request: request,
     );
 
     result.fold(
@@ -221,7 +150,7 @@ class ItemNotifier extends _$ItemNotifier {
         if (idx != -1) list[idx] = updated;
         state = AsyncValue.data(list);
         ref.read(itemUiEventsProvider.notifier).emit(
-          ItemUpdated(updated, 'Item updated successfully'),
+          ItemUpdated(updated, ''),
         );
       },
     );
@@ -230,7 +159,7 @@ class ItemNotifier extends _$ItemNotifier {
   }
 
   Future<void> delete({
-    required String id,
+    required int id,
   }) async {
     final deleting = ref.read(itemDeleteLoadingProvider.notifier);
     deleting.start(id);
@@ -247,7 +176,7 @@ class ItemNotifier extends _$ItemNotifier {
         list.removeWhere((e) => e.id == id);
         state = AsyncValue.data(list);
         ref.read(itemUiEventsProvider.notifier).emit(
-          ItemDeleted(id, 'Item deleted successfully'),
+          ItemDeleted(id, ''),
         );
       },
     );

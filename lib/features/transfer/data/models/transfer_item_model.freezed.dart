@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$TransferItemModel {
 
- int get itemId; List<TransferBatchModel> get batches;
+ int get id; String get itemName; String? get itemCode;@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) double get quantity; DateTime? get createdAt; DateTime? get updatedAt;
 /// Create a copy of TransferItemModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $TransferItemModelCopyWith<TransferItemModel> get copyWith => _$TransferItemMode
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TransferItemModel&&(identical(other.itemId, itemId) || other.itemId == itemId)&&const DeepCollectionEquality().equals(other.batches, batches));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TransferItemModel&&(identical(other.id, id) || other.id == id)&&(identical(other.itemName, itemName) || other.itemName == itemName)&&(identical(other.itemCode, itemCode) || other.itemCode == itemCode)&&(identical(other.quantity, quantity) || other.quantity == quantity)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,itemId,const DeepCollectionEquality().hash(batches));
+int get hashCode => Object.hash(runtimeType,id,itemName,itemCode,quantity,createdAt,updatedAt);
 
 @override
 String toString() {
-  return 'TransferItemModel(itemId: $itemId, batches: $batches)';
+  return 'TransferItemModel(id: $id, itemName: $itemName, itemCode: $itemCode, quantity: $quantity, createdAt: $createdAt, updatedAt: $updatedAt)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $TransferItemModelCopyWith<$Res>  {
   factory $TransferItemModelCopyWith(TransferItemModel value, $Res Function(TransferItemModel) _then) = _$TransferItemModelCopyWithImpl;
 @useResult
 $Res call({
- int itemId, List<TransferBatchModel> batches
+ int id, String itemName, String? itemCode,@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) double quantity, DateTime? createdAt, DateTime? updatedAt
 });
 
 
@@ -65,11 +65,15 @@ class _$TransferItemModelCopyWithImpl<$Res>
 
 /// Create a copy of TransferItemModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? itemId = null,Object? batches = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? itemName = null,Object? itemCode = freezed,Object? quantity = null,Object? createdAt = freezed,Object? updatedAt = freezed,}) {
   return _then(_self.copyWith(
-itemId: null == itemId ? _self.itemId : itemId // ignore: cast_nullable_to_non_nullable
-as int,batches: null == batches ? _self.batches : batches // ignore: cast_nullable_to_non_nullable
-as List<TransferBatchModel>,
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int,itemName: null == itemName ? _self.itemName : itemName // ignore: cast_nullable_to_non_nullable
+as String,itemCode: freezed == itemCode ? _self.itemCode : itemCode // ignore: cast_nullable_to_non_nullable
+as String?,quantity: null == quantity ? _self.quantity : quantity // ignore: cast_nullable_to_non_nullable
+as double,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,
   ));
 }
 
@@ -151,10 +155,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int itemId,  List<TransferBatchModel> batches)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String itemName,  String? itemCode, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)  double quantity,  DateTime? createdAt,  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _TransferItemModel() when $default != null:
-return $default(_that.itemId,_that.batches);case _:
+return $default(_that.id,_that.itemName,_that.itemCode,_that.quantity,_that.createdAt,_that.updatedAt);case _:
   return orElse();
 
 }
@@ -172,10 +176,10 @@ return $default(_that.itemId,_that.batches);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int itemId,  List<TransferBatchModel> batches)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String itemName,  String? itemCode, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)  double quantity,  DateTime? createdAt,  DateTime? updatedAt)  $default,) {final _that = this;
 switch (_that) {
 case _TransferItemModel():
-return $default(_that.itemId,_that.batches);}
+return $default(_that.id,_that.itemName,_that.itemCode,_that.quantity,_that.createdAt,_that.updatedAt);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -189,10 +193,10 @@ return $default(_that.itemId,_that.batches);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int itemId,  List<TransferBatchModel> batches)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String itemName,  String? itemCode, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)  double quantity,  DateTime? createdAt,  DateTime? updatedAt)?  $default,) {final _that = this;
 switch (_that) {
 case _TransferItemModel() when $default != null:
-return $default(_that.itemId,_that.batches);case _:
+return $default(_that.id,_that.itemName,_that.itemCode,_that.quantity,_that.createdAt,_that.updatedAt);case _:
   return null;
 
 }
@@ -204,17 +208,15 @@ return $default(_that.itemId,_that.batches);case _:
 @JsonSerializable()
 
 class _TransferItemModel implements TransferItemModel {
-  const _TransferItemModel({required this.itemId, required final  List<TransferBatchModel> batches}): _batches = batches;
+  const _TransferItemModel({required this.id, required this.itemName, this.itemCode, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) required this.quantity, this.createdAt, this.updatedAt});
   factory _TransferItemModel.fromJson(Map<String, dynamic> json) => _$TransferItemModelFromJson(json);
 
-@override final  int itemId;
- final  List<TransferBatchModel> _batches;
-@override List<TransferBatchModel> get batches {
-  if (_batches is EqualUnmodifiableListView) return _batches;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_batches);
-}
-
+@override final  int id;
+@override final  String itemName;
+@override final  String? itemCode;
+@override@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) final  double quantity;
+@override final  DateTime? createdAt;
+@override final  DateTime? updatedAt;
 
 /// Create a copy of TransferItemModel
 /// with the given fields replaced by the non-null parameter values.
@@ -229,16 +231,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TransferItemModel&&(identical(other.itemId, itemId) || other.itemId == itemId)&&const DeepCollectionEquality().equals(other._batches, _batches));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TransferItemModel&&(identical(other.id, id) || other.id == id)&&(identical(other.itemName, itemName) || other.itemName == itemName)&&(identical(other.itemCode, itemCode) || other.itemCode == itemCode)&&(identical(other.quantity, quantity) || other.quantity == quantity)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,itemId,const DeepCollectionEquality().hash(_batches));
+int get hashCode => Object.hash(runtimeType,id,itemName,itemCode,quantity,createdAt,updatedAt);
 
 @override
 String toString() {
-  return 'TransferItemModel(itemId: $itemId, batches: $batches)';
+  return 'TransferItemModel(id: $id, itemName: $itemName, itemCode: $itemCode, quantity: $quantity, createdAt: $createdAt, updatedAt: $updatedAt)';
 }
 
 
@@ -249,7 +251,7 @@ abstract mixin class _$TransferItemModelCopyWith<$Res> implements $TransferItemM
   factory _$TransferItemModelCopyWith(_TransferItemModel value, $Res Function(_TransferItemModel) _then) = __$TransferItemModelCopyWithImpl;
 @override @useResult
 $Res call({
- int itemId, List<TransferBatchModel> batches
+ int id, String itemName, String? itemCode,@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) double quantity, DateTime? createdAt, DateTime? updatedAt
 });
 
 
@@ -266,11 +268,15 @@ class __$TransferItemModelCopyWithImpl<$Res>
 
 /// Create a copy of TransferItemModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? itemId = null,Object? batches = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? itemName = null,Object? itemCode = freezed,Object? quantity = null,Object? createdAt = freezed,Object? updatedAt = freezed,}) {
   return _then(_TransferItemModel(
-itemId: null == itemId ? _self.itemId : itemId // ignore: cast_nullable_to_non_nullable
-as int,batches: null == batches ? _self._batches : batches // ignore: cast_nullable_to_non_nullable
-as List<TransferBatchModel>,
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int,itemName: null == itemName ? _self.itemName : itemName // ignore: cast_nullable_to_non_nullable
+as String,itemCode: freezed == itemCode ? _self.itemCode : itemCode // ignore: cast_nullable_to_non_nullable
+as String?,quantity: null == quantity ? _self.quantity : quantity // ignore: cast_nullable_to_non_nullable
+as double,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,
   ));
 }
 

@@ -1,15 +1,13 @@
 import 'package:cyber_pos/core/enums/transaction_type_enum.dart';
-import '../../../../core/enums/payment_method_type_enum.dart';
 import '../../../../core/network/api_service.dart';
 import '../../../../core/constants/api_endpoints.dart';
 import '../../../../core/services/logging_service.dart';
 import '../../../../core/services/upload_service.dart';
 import '../../../../shared/models/api_response.dart';
 import '../../../../shared/models/upload_response_model.dart';
+import '../models/create_trans_request.dart';
+import '../models/payment_method_model.dart';
 import '../models/transaction_model.dart';
-import '../models/transaction_payment_model.dart';
-import '../models/transaction_response_model.dart';
-import '../models/transaction_detail_response_model.dart';
 
 class TransactionApiService {
   final UploadService _uploadService;
@@ -28,23 +26,31 @@ class TransactionApiService {
   /// 
   /// [page] - Page number (default: 1)
   /// [limit] - Items per page (default: 25)
-  Future<ApiResponse<List<TransactionResponseModel>>> getAll({
+  /// [transactionType] - Optional filter by transaction type
+  Future<ApiResponse<List<TransactionModel>>> getAll({
     int page = 1,
     int limit = 25,
+    TransactionType? transactionType,
   }) async {
     try {
+      final queryParams = <String, dynamic>{
+        'page': page,
+        'limit': limit,
+      };
+      
+      if (transactionType != null) {
+        queryParams['transactionType'] = transactionType.name;
+      }
+      
       final response = await ApiService.get<Map<String, dynamic>>(
         ApiEndpoints.getTransactions,
-        queryParameters: {
-          'page': page,
-          'limit': limit,
-        },
+        queryParameters: queryParams,
       );
 
-      final apiResponse = ApiResponse<List<TransactionResponseModel>>.fromJson(
+      final apiResponse = ApiResponse<List<TransactionModel>>.fromJson(
         response.data!,
         (json) => (json as List)
-            .map((item) => TransactionResponseModel.fromJson(item as Map<String, dynamic>))
+            .map((item) => TransactionModel.fromJson(item as Map<String, dynamic>))
             .toList(),
       );
 
@@ -55,14 +61,14 @@ class TransactionApiService {
     }
   }
 
-  Future<ApiResponse<TransactionDetailResponseModel>> getById(int id) async {
+  Future<ApiResponse<TransactionModel>> getById(int id) async {
     try {
       final endpoint = ApiEndpoints.getTransactionDetail(id);
       final response = await ApiService.get<Map<String, dynamic>>(endpoint);
 
-      final apiResponse = ApiResponse<TransactionDetailResponseModel>.fromJson(
+      final apiResponse = ApiResponse<TransactionModel>.fromJson(
         response.data!,
-        (json) => TransactionDetailResponseModel.fromJson(json as Map<String, dynamic>),
+        (json) => TransactionModel.fromJson(json as Map<String, dynamic>),
       );
 
       return apiResponse;
@@ -72,18 +78,12 @@ class TransactionApiService {
     }
   }
 
-  Future<ApiResponse<TransactionResponseModel>> create({
-    required TransactionModel request,
+  Future<ApiResponse<TransactionModel>> create({
+    required CreateTransRequest request,
     required List<String> receiptFilePaths,
     required Map<String, String> paymentAttachmentFilePaths,
   }) async {
     try {
-      LoggingService.apiRequest('POST', ApiEndpoints.createTransaction, {
-        'transactionType': request.transactionType.toApiString(),
-        'itemsCount': request.items.length,
-        'receiptsCount': receiptFilePaths.length,
-        'paymentMethodsCount': request.paymentMethods?.length ?? 0,
-      });
 
       // Step 1: Upload receipt files (transaction attachments)
       List<String> attachmentUrls = [];
@@ -152,12 +152,12 @@ class TransactionApiService {
 
       // Step 3: Build transaction model with uploaded URLs
       // Update payment methods with attachment URLs
-      List<TransactionPaymentModel>? updatedPaymentMethods;
+      List<PaymentMethodModel>? updatedPaymentMethods;
       if (request.paymentMethods != null && request.paymentMethods!.isNotEmpty) {
         updatedPaymentMethods = request.paymentMethods!.map((pm) {
           // Find matching attachment URL by payment method type
           // PaymentMethodType has toApiString() extension method
-          final methodType = pm.method.toApiString(); // Convert enum to API string
+          final methodType = pm.method; // Convert enum to API string
           final attachmentUrl = paymentAttachmentUrls[methodType];
           
           // Use copyWith to update attachment field
@@ -169,7 +169,7 @@ class TransactionApiService {
 
       // Create updated request with URLs
       final updatedRequest = request.copyWith(
-        attachments: attachmentUrls.isNotEmpty ? attachmentUrls : null,
+        attachments: attachmentUrls.isNotEmpty ? attachmentUrls : [],
         paymentMethods: updatedPaymentMethods,
       );
 
@@ -194,11 +194,6 @@ class TransactionApiService {
         }
       }
 
-      LoggingService.apiRequest('POST', ApiEndpoints.createTransaction, {
-        'transactionType': updatedRequest.transactionType.toApiString(),
-        'attachmentsCount': attachmentUrls.length,
-        'paymentMethodsCount': updatedPaymentMethods?.length ?? 0,
-      });
 
       // ApiService.post will automatically wrap with RequestWrapper
       final response = await ApiService.post<Map<String, dynamic>>(
@@ -214,9 +209,9 @@ class TransactionApiService {
         response.data,
       );
 
-      final apiResponse = ApiResponse<TransactionResponseModel>.fromJson(
+      final apiResponse = ApiResponse<TransactionModel>.fromJson(
         response.data!,
-        (json) => TransactionResponseModel.fromJson(json as Map<String, dynamic>),
+        (json) => TransactionModel.fromJson(json as Map<String, dynamic>),
       );
 
       return apiResponse;
@@ -232,20 +227,15 @@ class TransactionApiService {
   /// [transactionType] - The reversal type (purchase_reverse or sale_reverse)
   /// [reversesTransactionId] - The ID of the transaction to reverse
   /// [notes] - Optional note for the reversal
-  Future<ApiResponse<TransactionResponseModel>> reverseTransaction({
+  Future<ApiResponse<TransactionModel>> reverseTransaction({
     required TransactionType transactionType,
     required int reversesTransactionId,
     String? notes,
   }) async {
     try {
-      LoggingService.apiRequest('POST', ApiEndpoints.createTransaction, {
-        'transactionType': transactionType.toApiString(),
-        'reversesTransactionId': reversesTransactionId,
-        'notes': notes,
-      });
 
       final requestJson = <String, dynamic>{
-        'transactionType': transactionType.toApiString(),
+        'transactionType': transactionType.name,
         'reversesTransactionId': reversesTransactionId,
       };
 
@@ -268,9 +258,9 @@ class TransactionApiService {
         response.data,
       );
 
-      final apiResponse = ApiResponse<TransactionResponseModel>.fromJson(
+      final apiResponse = ApiResponse<TransactionModel>.fromJson(
         response.data!,
-        (json) => TransactionResponseModel.fromJson(json as Map<String, dynamic>),
+        (json) => TransactionModel.fromJson(json as Map<String, dynamic>),
       );
 
       return apiResponse;

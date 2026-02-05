@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 
+import '../../../app/theme/app_sizes.dart';
+import '../../../app/theme/brand_colors.dart';
+
 /// Dropdown item model
 class DropdownItem<T> {
   final T value;
   final String label;
+  /// When false, the item is shown but not selectable (e.g. greyed out).
+  final bool enabled;
 
   const DropdownItem({
     required this.value,
     required this.label,
+    this.enabled = true,
   });
 }
 
@@ -19,6 +25,7 @@ class CustomDropdown<T> extends StatefulWidget {
   final String label;
   final String? hintText;
   final bool required;
+  final bool hideLabel;
   final String? errorText;
   final bool searchable;
   final String? searchHint;
@@ -31,6 +38,7 @@ class CustomDropdown<T> extends StatefulWidget {
     required this.label,
     this.hintText,
     this.required = false,
+    this.hideLabel = false,
     this.errorText,
     this.searchable = false,
     this.searchHint,
@@ -73,7 +81,6 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
 
     // Find selected item only if value is not null and items are not empty
@@ -85,7 +92,6 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> {
           orElse: () => widget.items.first,
         );
       } catch (e) {
-        // If no matching item found, selectedItem remains null
         selectedItem = null;
       }
     }
@@ -95,43 +101,62 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> {
         ? selectedItem.label
         : widget.hintText ?? 'Select an option';
 
+    // Match CustomTextField: subtle label (bodySmall, fuzzy), same padding/size/border
+    final labelStyle = textTheme.bodySmall?.copyWith(
+      color: BrandColors.inputPlaceholder,
+      fontWeight: FontWeight.normal,
+    );
+    // "Select x" hint: same fuzzy style as label (bodySmall, placeholder) to match text fields
+    final hintStyle = textTheme.bodySmall?.copyWith(
+      color: BrandColors.inputPlaceholder,
+      fontWeight: FontWeight.normal,
+    );
+    // Selected value: bodyMedium, inputText (matches CustomTextField input style)
+    final valueStyle = textTheme.bodyMedium?.copyWith(
+      color: BrandColors.inputText,
+    );
+    final isEmptyStyle = textTheme.bodySmall?.copyWith(
+      color: BrandColors.textMuted,
+      fontWeight: FontWeight.normal,
+    );
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Label
-        Row(
-          children: [
-            Text(
-              widget.label,
-              style: textTheme.labelLarge?.copyWith(
-                color: colorScheme.onSurface,
-              ),
-            ),
-            if (widget.required)
+        if (!widget.hideLabel) ...[
+          Row(
+            children: [
               Text(
-                ' *',
-                style: textTheme.labelLarge?.copyWith(
-                  color: colorScheme.error,
-                ),
+                widget.label,
+                style: labelStyle,
               ),
-          ],
-        ),
-        const SizedBox(height: 8),
-        // Dropdown
+              if (widget.required)
+                Text(
+                  ' *',
+                  style: labelStyle?.copyWith(color: BrandColors.error),
+                ),
+            ],
+          ),
+          const SizedBox(height: AppSizes.sm),
+        ],
         InkWell(
           onTap: isEmpty ? null : () => _showDropdownDialog(context),
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(AppSizes.radius),
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppSizes.md,
+              vertical: 15,
+            ),
             decoration: BoxDecoration(
               color: isEmpty
-                  ? colorScheme.surface.withOpacity(0.5)
-                  : colorScheme.surface,
-              borderRadius: BorderRadius.circular(12),
+                  ? BrandColors.inputBackground
+                  : BrandColors.background,
+              borderRadius: BorderRadius.circular(AppSizes.radius),
               border: Border.all(
                 color: widget.errorText != null
-                    ? colorScheme.error
-                    : colorScheme.outline.withOpacity(0.5),
+                    ? BrandColors.inputErrorBorder
+                    : BrandColors.inputBorder,
+                width: AppSizes.br,
               ),
             ),
             child: Row(
@@ -141,32 +166,30 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> {
                     isEmpty
                         ? 'No ${widget.label.toLowerCase()} available'
                         : displayText,
-                    style: textTheme.bodyLarge?.copyWith(
-                      color: isEmpty
-                          ? colorScheme.onSurface.withOpacity(0.4)
-                          : widget.value != null
-                              ? colorScheme.onSurface
-                              : colorScheme.onSurface.withOpacity(0.6),
-                    ),
+                    style: isEmpty
+                        ? isEmptyStyle
+                        : (widget.value != null && selectedItem != null)
+                            ? valueStyle
+                            : hintStyle,
                   ),
                 ),
                 Icon(
-                  Icons.arrow_drop_down,
+                  Icons.keyboard_arrow_down_rounded,
+                  size: AppSizes.iconSizeLg,
                   color: isEmpty
-                      ? colorScheme.onSurface.withOpacity(0.3)
-                      : colorScheme.onSurface.withOpacity(0.6),
+                      ? BrandColors.textDisabled
+                      : BrandColors.inputPlaceholder,
                 ),
               ],
             ),
           ),
         ),
-        // Error text
         if (widget.errorText != null) ...[
-          const SizedBox(height: 4),
+          const SizedBox(height: AppSizes.xs),
           Text(
             widget.errorText!,
             style: textTheme.bodySmall?.copyWith(
-              color: colorScheme.error,
+              color: BrandColors.error,
             ),
           ),
         ],
@@ -254,14 +277,14 @@ class _DropdownDialogState<T> extends State<_DropdownDialog<T>> {
             // Search field (if searchable)
             if (widget.searchable) ...[
               Padding(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.all(AppSizes.lg),
                 child: TextField(
                   controller: _searchController,
                   decoration: InputDecoration(
                     hintText: widget.searchHint ?? 'Search...',
                     prefixIcon: const Icon(Icons.search),
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(AppSizes.radius),
                     ),
                   ),
                 ),
@@ -275,11 +298,22 @@ class _DropdownDialogState<T> extends State<_DropdownDialog<T>> {
                 itemBuilder: (context, index) {
                   final item = _filteredItems[index];
                   final isSelected = item.value == widget.selectedValue;
+                  final isEnabled = item.enabled;
 
                   return ListTile(
-                    title: Text(item.label),
+                    title: Text(
+                      item.label,
+                      style: TextStyle(
+                        color: isEnabled
+                            ? null
+                            : colorScheme.onSurface.withOpacity(0.38),
+                      ),
+                    ),
                     selected: isSelected,
-                    onTap: () => widget.onSelected(item.value),
+                    enabled: isEnabled,
+                    onTap: isEnabled
+                        ? () => widget.onSelected(item.value)
+                        : null,
                     trailing: isSelected
                         ? Icon(Icons.check, color: colorScheme.primary)
                         : null,

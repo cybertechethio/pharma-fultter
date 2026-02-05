@@ -20,7 +20,7 @@ final class ItemNotifierProvider
         argument: null,
         retry: null,
         name: r'itemProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -33,7 +33,7 @@ final class ItemNotifierProvider
   ItemNotifier create() => ItemNotifier();
 }
 
-String _$itemNotifierHash() => r'0a93272b076df0539b4be093e6bd1935b1bcf01d';
+String _$itemNotifierHash() => r'553e816465e034dacf36325f90493bc852a6734f';
 
 abstract class _$ItemNotifier extends $AsyncNotifier<List<Item>> {
   FutureOr<List<Item>> build();

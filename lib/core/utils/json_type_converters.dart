@@ -48,13 +48,11 @@ class JsonTypeConverters {
       if (parsed != null) {
         return parsed;
       }
-      throw ArgumentError(
-        'Cannot convert String "$value" to int',
-      );
+      return 0;
+    }else if (value is double) {
+      return value.toInt();
     } else {
-      throw ArgumentError(
-        'Expected int or String, got ${value.runtimeType}. Value: $value',
-      );
+      return 0;
     }
   }
 
@@ -74,13 +72,9 @@ class JsonTypeConverters {
       if (parsed != null) {
         return parsed;
       }
-      throw ArgumentError(
-        'Cannot convert String "$value" to double',
-      );
+     return 0.0;
     } else {
-      throw ArgumentError(
-        'Expected int, double, or String, got ${value.runtimeType}. Value: $value',
-      );
+      return 0.0;
     }
   }
 
@@ -222,6 +216,20 @@ class JsonTypeConverters {
   static double? doubleFromDynamicNullable(dynamic value) {
     if (value == null) {
       return null;
+    }
+    return doubleFromDynamic(value);
+  }
+
+  /// Converts dynamic value to double, returning 0.0 for null values
+  ///
+  /// This is useful for decimal fields that might be null from the backend
+  /// but should default to 0.0 in the app.
+  ///
+  /// Returns 0.0 if the value is null.
+  /// Throws [ArgumentError] if the value cannot be converted to double.
+  static double doubleFromDynamicOrZero(dynamic value) {
+    if (value == null) {
+      return 0.0;
     }
     return doubleFromDynamic(value);
   }

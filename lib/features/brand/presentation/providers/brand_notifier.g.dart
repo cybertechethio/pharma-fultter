@@ -20,7 +20,7 @@ final class BrandNotifierProvider
         argument: null,
         retry: null,
         name: r'brandProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -33,7 +33,7 @@ final class BrandNotifierProvider
   BrandNotifier create() => BrandNotifier();
 }
 
-String _$brandNotifierHash() => r'10408ffee982ce3970e8909696466b8aba0e9d71';
+String _$brandNotifierHash() => r'77d49fa8616f978b17c2a2c0e7ebc0c80ec5bfd1';
 
 abstract class _$BrandNotifier extends $AsyncNotifier<List<BrandEntity>> {
   FutureOr<List<BrandEntity>> build();

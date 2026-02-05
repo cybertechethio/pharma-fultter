@@ -9,7 +9,7 @@ class DeleteItemUseCase {
   DeleteItemUseCase(this._repository);
 
   Future<Either<Failure, Item>> call({
-    required String id,
+    required int id,
   }) async {
     return await _repository.deleteItem(id: id);
   }

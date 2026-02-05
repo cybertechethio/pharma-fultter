@@ -1,7 +1,10 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import '../../../../core/enums/stock_status_enum.dart';
 import '../../../../shared/models/pagination_model.dart';
 import '../../domain/entities/stock.dart';
 import 'stock_providers.dart';
+import 'stock_events.dart';
+import 'stock_loading_providers.dart';
 
 part 'stocks_provider.g.dart';
 
@@ -96,6 +99,40 @@ class StockNotifier extends _$StockNotifier {
     _currentSearch = query.trim().isEmpty ? null : query.trim();
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() => _loadInitial(search: _currentSearch));
+  }
+
+  /// Update stock
+  Future<void> updateStock({
+    required int id,
+    String? lowStockThreshold,
+    String? location,
+    StockStatus? lowStockStatus,
+  }) async {
+    final updateLoading = ref.read(stockUpdateLoadingProvider.notifier);
+    updateLoading.start(id);
+
+    final useCase = ref.read(updateStockUseCaseProvider);
+
+    final result = await useCase.call(
+      id: id,
+      lowStockThreshold: lowStockThreshold,
+      location: location,
+      lowStockStatus: lowStockStatus,
+    );
+
+    result.fold(
+      (failure) {
+        ref.read(stockUiEventsProvider.notifier).emit(StockFailure(failure));
+      },
+      (updated) {
+        // Emit success event
+        ref.read(stockUiEventsProvider.notifier).emit(
+          StockUpdated(updated, ''),
+        );
+      },
+    );
+
+    updateLoading.stop(id);
   }
 }
 

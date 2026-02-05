@@ -6,7 +6,7 @@ import 'bank_loading_providers.dart';
 
 part 'bank_notifier.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class BankNotifier extends _$BankNotifier {
   @override
   Future<List<BankEntity>> build() async {
@@ -48,7 +48,7 @@ class BankNotifier extends _$BankNotifier {
         final current = state.value ?? const <BankEntity>[];
         state = AsyncValue.data([created, ...current]);
         ref.read(bankUiEventsProvider.notifier).emit(
-          BankCreated(created, 'Bank created successfully'),
+          BankCreated(created, 'bankCreatedSuccessfully'),
         );
       },
     );
@@ -78,7 +78,7 @@ class BankNotifier extends _$BankNotifier {
         if (idx != -1) list[idx] = updated;
         state = AsyncValue.data(list);
         ref.read(bankUiEventsProvider.notifier).emit(
-          BankUpdated(updated, 'Bank updated successfully'),
+          BankUpdated(updated, 'bankUpdatedSuccessfully'),
         );
       },
     );
@@ -104,7 +104,7 @@ class BankNotifier extends _$BankNotifier {
         list.removeWhere((e) => e.id == id);
         state = AsyncValue.data(list);
         ref.read(bankUiEventsProvider.notifier).emit(
-          BankDeleted(id, 'Bank deleted successfully'),
+          BankDeleted(id, 'bankDeletedSuccessfully'),
         );
       },
     );

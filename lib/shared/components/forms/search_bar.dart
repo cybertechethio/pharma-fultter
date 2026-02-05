@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
+import '../../../app/theme/app_sizes.dart';
 import '../../../app/theme/brand_colors.dart';
 
 /// Reusable search bar widget with debounce functionality
@@ -47,9 +48,9 @@ class AppSearchBar extends StatefulWidget {
     required this.onSearch,
     this.onClear,
     this.debounceDuration = const Duration(milliseconds: 500),
-    this.padding = const EdgeInsets.all(8.0),
+    this.padding = const EdgeInsets.all(AppSizes.sm),
     this.filled = true,
-    this.borderRadius = 10.0,
+    this.borderRadius = AppSizes.radiusMd,
   });
 
   @override
@@ -94,7 +95,7 @@ class _AppSearchBarState extends State<AppSearchBar> {
       valueListenable: _controller,
       builder: (context, value, child) {
         return Container(
-           padding: const EdgeInsets.all(18.0),
+           padding: const EdgeInsets.all(AppSizes.md2),
           // decoration: BoxDecoration(
           //   color: BrandColors.primary.withValues(alpha: 0.5),
           //  // borderRadius: BorderRadius.circular(widget.borderRadius),
@@ -121,7 +122,7 @@ class _AppSearchBarState extends State<AppSearchBar> {
                       ),
                       onPressed: _onClear,
                       tooltip: 'Clear search',
-                      padding: const EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(AppSizes.sm),
                       constraints: const BoxConstraints(),
                     )
                   : null,
@@ -147,10 +148,10 @@ class _AppSearchBarState extends State<AppSearchBar> {
                 ),
               ),
               filled: widget.filled,
-              fillColor: Colors.white,
+              fillColor: BrandColors.background,
               contentPadding: const EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 12,
+                horizontal: AppSizes.lg,
+                vertical: AppSizes.md,
               ),
               isDense: true,
             ),

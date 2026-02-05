@@ -29,11 +29,11 @@ class BankListScreen extends ConsumerWidget {
         if (next is BankFailure) {
           snackbar.showError(next.failure);
         } else if (next is BankCreated) {
-          snackbar.showSuccess(next.message);
+          snackbar.showSuccess(l10n.bankCreatedSuccessfully);
         } else if (next is BankUpdated) {
-          snackbar.showSuccess(next.message);
+          snackbar.showSuccess(l10n.bankUpdatedSuccessfully);
         } else if (next is BankDeleted) {
-          snackbar.showSuccess(next.message);
+          snackbar.showSuccess(l10n.bankDeletedSuccessfully);
         }
         ref.read(bankUiEventsProvider.notifier).clear();
       },
@@ -46,7 +46,7 @@ class BankListScreen extends ConsumerWidget {
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(60),
           child: search.AppSearchBar(
-            hintText: 'Search by name...',
+            hintText: l10n.searchByName,
             onSearch: (query) => ref.read(bankProvider.notifier).search(query),
             onClear: () => ref.read(bankProvider.notifier).load(),
           ),
@@ -86,7 +86,7 @@ class BankListScreen extends ConsumerWidget {
               app_err.ErrorsWidget(
                 failure: error is Failure ? error : Failure.unexpectedError(error.toString()),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSizes.lg),
               ElevatedButton(
                 onPressed: () => ref.read(bankProvider.notifier).load(),
                 child: Text(l10n.retry),

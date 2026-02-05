@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import '../../../../core/errors/failure.dart';
+import '../../../../core/enums/stock_status_enum.dart';
 import '../../../../shared/models/paginated_response.dart';
 import '../entities/stock.dart';
 
@@ -8,6 +9,13 @@ abstract class StockRepository {
     int page = 1,
     int limit = 25,
     String? search,
+  });
+
+  Future<Either<Failure, Stock>> updateStock({
+    required int id,
+    String? lowStockThreshold,
+    String? location,
+    StockStatus? lowStockStatus,
   });
 }
 

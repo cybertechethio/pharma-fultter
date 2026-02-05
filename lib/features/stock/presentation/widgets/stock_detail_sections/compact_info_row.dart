@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../../app/theme/app_sizes.dart';
 
 class CompactInfoRow extends StatelessWidget {
   final IconData icon;
@@ -26,7 +27,7 @@ class CompactInfoRow extends StatelessWidget {
         child: Row(
           children: [
             Icon(icon, size: 18, color: colorScheme.primary),
-            const SizedBox(width: 8),
+            const SizedBox(width: AppSizes.sm),
             Text(
               label,
               style: theme.textTheme.bodySmall?.copyWith(
@@ -53,7 +54,7 @@ class CompactInfoRow extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Icon(icon, size: 18, color: colorScheme.primary),
-            const SizedBox(width: 8),
+            const SizedBox(width: AppSizes.sm),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,7 +65,7 @@ class CompactInfoRow extends StatelessWidget {
                       color: colorScheme.onSurfaceVariant,
                     ),
                   ),
-                  const SizedBox(height: 2),
+                  const SizedBox(height: AppSizes.xxs),
                   Text(
                     value,
                     style: theme.textTheme.bodyMedium?.copyWith(

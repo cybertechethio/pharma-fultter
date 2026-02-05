@@ -19,6 +19,8 @@ class CompanySchema {
   String? wereda;
   bool? autoPrint;
   DateTime? defaultStartDate;
+  String? defaultCalendarType;
+  String? businessType;
   late DateTime createdAt;
   DateTime? updatedAt;
 }

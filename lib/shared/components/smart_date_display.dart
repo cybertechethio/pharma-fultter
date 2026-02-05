@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cyber_pos/l10n/app_localizations.dart';
+import '../../app/theme/app_sizes.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../utils/calendar_converter.dart';
 import '../providers/settings_provider.dart';
@@ -160,7 +161,7 @@ class DualDateDisplay extends ConsumerWidget {
           isHighlighted: !highlightEthiopian,
           theme: theme,
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: AppSizes.sm),
         _DateRow(
           icon: Icons.calendar_month,
           label: l10n.ethiopianCalendar,
@@ -199,7 +200,7 @@ class _DateRow extends StatelessWidget {
               ? theme.colorScheme.primary 
               : theme.colorScheme.onSurfaceVariant,
         ),
-        const SizedBox(width: 8),
+        const SizedBox(width: AppSizes.sm),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

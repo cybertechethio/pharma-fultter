@@ -20,7 +20,7 @@ final class BankNotifierProvider
         argument: null,
         retry: null,
         name: r'bankProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -33,7 +33,7 @@ final class BankNotifierProvider
   BankNotifier create() => BankNotifier();
 }
 
-String _$bankNotifierHash() => r'74e3c1c902872cf9ddbb1e32b4c0920276b409fa';
+String _$bankNotifierHash() => r'2d587e90e6d07bcbfe4319036e986228aefb13ab';
 
 abstract class _$BankNotifier extends $AsyncNotifier<List<BankEntity>> {
   FutureOr<List<BankEntity>> build();

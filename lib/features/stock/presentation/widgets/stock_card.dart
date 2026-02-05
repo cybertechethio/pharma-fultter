@@ -7,7 +7,7 @@ import '../../../../shared/components/common/card_title.dart';
 import '../../../../shared/components/common/stock_status_widget.dart';
 import '../../../../shared/utils/formatters.dart';
 import '../../../../app/theme/app_sizes.dart';
-import '../../../../core/enums/stock_status_enum.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../../domain/entities/stock.dart';
 
 class StockCard extends ConsumerWidget {
@@ -16,62 +16,67 @@ class StockCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
-   
+    final item = stock.item;
+    final l10n = AppLocalizations.of(context);
 
     return InkWell(
-        onTap: () => _navigateToDetail(context),
-        child: Padding(
+      onTap: () => _navigateToDetail(context),
+      child: Padding(
         padding: const EdgeInsets.symmetric(
           vertical: AppSizes.md,
           horizontal: AppSizes.xs,
         ),
-          child: Row(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-            // Left side: Main content
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                  // Item Name
-                  cardTitle(title: stock.item.name),
-                  const SizedBox(height: AppSizes.xs),
-                  // Item Code, Quantity, Batches in a row
-                  Wrap(
-                    spacing: AppSizes.sm,
-                    runSpacing: AppSizes.xs,
-                      children: [
-                      if (stock.item.code.isNotEmpty)
-                        Text(
-                          'Code: ${stock.item.code}',
-                          style: context.small(),
-                          ),
-                      Text(
-                        'Qty: ${stock.totalQuantity}',
-                        style: context.small(),
-                          ),
-                      Text(
-                        'Batches: ${stock.branchStockBatches.length}',
-                        style: context.small(),
-                      ),
-                    ],
-                              ),
-                  const SizedBox(height: AppSizes.xs),
-                  // Status
-                        StockStatusWidget(status: stock.lowStockStatus),
-                            ],
-                          ),
-                        ),
-            // Right side: Time
-            Padding(
-              padding: const EdgeInsets.only(left: AppSizes.sm),
-              child: Text(
-                Formatters.formatRelativeDate(stock.createdAt),
-                style: context.small(),
+          children: [
+            // Row 1: Name .............. Qty
+            Row(
+              children: [
+                Expanded(
+                  child: cardTitle(
+                    title: item?.name ?? l10n.unknownItem,
+                  ),
                 ),
-              ),
-            ],
+                Text(
+                  'Qty: ${stock.totalQuantity}',
+                  style: context.small(),
+                ),
+              ],
+            ),
+            const SizedBox(height: AppSizes.xs),
+            // Row 2: Code ................ Status
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    item?.code?.isNotEmpty ?? false
+                        ? 'Code: ${item!.code}'
+                        : '',
+                    style: context.small(),
+                  ),
+                ),
+                StockStatusWidget(status: stock.lowStockStatus),
+              ],
+            ),
+            const SizedBox(height: AppSizes.xs),
+            // Row 3: Category .......... Time
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    item?.categories?.isNotEmpty ?? false
+                        ? item!.categories!
+                        : '',
+                    style: context.small(),
+                  ),
+                ),
+                Text(
+                  Formatters.formatRelativeDate(stock.createdAt),
+                  style: context.small(),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );

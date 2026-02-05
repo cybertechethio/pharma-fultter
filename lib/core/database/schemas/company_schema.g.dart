@@ -22,42 +22,52 @@ const CompanySchemaSchema = CollectionSchema(
       name: r'autoPrint',
       type: IsarType.bool,
     ),
-    r'city': PropertySchema(id: 1, name: r'city', type: IsarType.string),
+    r'businessType': PropertySchema(
+      id: 1,
+      name: r'businessType',
+      type: IsarType.string,
+    ),
+    r'city': PropertySchema(id: 2, name: r'city', type: IsarType.string),
     r'companyId': PropertySchema(
-      id: 2,
+      id: 3,
       name: r'companyId',
       type: IsarType.string,
     ),
     r'createdAt': PropertySchema(
-      id: 3,
+      id: 4,
       name: r'createdAt',
       type: IsarType.dateTime,
     ),
+    r'defaultCalendarType': PropertySchema(
+      id: 5,
+      name: r'defaultCalendarType',
+      type: IsarType.string,
+    ),
     r'defaultStartDate': PropertySchema(
-      id: 4,
+      id: 6,
       name: r'defaultStartDate',
       type: IsarType.dateTime,
     ),
-    r'logoUrl': PropertySchema(id: 5, name: r'logoUrl', type: IsarType.string),
-    r'name': PropertySchema(id: 6, name: r'name', type: IsarType.string),
-    r'phone1': PropertySchema(id: 7, name: r'phone1', type: IsarType.string),
-    r'phone2': PropertySchema(id: 8, name: r'phone2', type: IsarType.string),
+    r'logoUrl': PropertySchema(id: 7, name: r'logoUrl', type: IsarType.string),
+    r'name': PropertySchema(id: 8, name: r'name', type: IsarType.string),
+    r'phone1': PropertySchema(id: 9, name: r'phone1', type: IsarType.string),
+    r'phone2': PropertySchema(id: 10, name: r'phone2', type: IsarType.string),
     r'tinNumber': PropertySchema(
-      id: 9,
+      id: 11,
       name: r'tinNumber',
       type: IsarType.string,
     ),
     r'tradeName': PropertySchema(
-      id: 10,
+      id: 12,
       name: r'tradeName',
       type: IsarType.string,
     ),
     r'updatedAt': PropertySchema(
-      id: 11,
+      id: 13,
       name: r'updatedAt',
       type: IsarType.dateTime,
     ),
-    r'wereda': PropertySchema(id: 12, name: r'wereda', type: IsarType.string),
+    r'wereda': PropertySchema(id: 14, name: r'wereda', type: IsarType.string),
   },
 
   estimateSize: _companySchemaEstimateSize,
@@ -96,12 +106,24 @@ int _companySchemaEstimateSize(
 ) {
   var bytesCount = offsets.last;
   {
+    final value = object.businessType;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
     final value = object.city;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
   }
   bytesCount += 3 + object.companyId.length * 3;
+  {
+    final value = object.defaultCalendarType;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   {
     final value = object.logoUrl;
     if (value != null) {
@@ -149,18 +171,20 @@ void _companySchemaSerialize(
   Map<Type, List<int>> allOffsets,
 ) {
   writer.writeBool(offsets[0], object.autoPrint);
-  writer.writeString(offsets[1], object.city);
-  writer.writeString(offsets[2], object.companyId);
-  writer.writeDateTime(offsets[3], object.createdAt);
-  writer.writeDateTime(offsets[4], object.defaultStartDate);
-  writer.writeString(offsets[5], object.logoUrl);
-  writer.writeString(offsets[6], object.name);
-  writer.writeString(offsets[7], object.phone1);
-  writer.writeString(offsets[8], object.phone2);
-  writer.writeString(offsets[9], object.tinNumber);
-  writer.writeString(offsets[10], object.tradeName);
-  writer.writeDateTime(offsets[11], object.updatedAt);
-  writer.writeString(offsets[12], object.wereda);
+  writer.writeString(offsets[1], object.businessType);
+  writer.writeString(offsets[2], object.city);
+  writer.writeString(offsets[3], object.companyId);
+  writer.writeDateTime(offsets[4], object.createdAt);
+  writer.writeString(offsets[5], object.defaultCalendarType);
+  writer.writeDateTime(offsets[6], object.defaultStartDate);
+  writer.writeString(offsets[7], object.logoUrl);
+  writer.writeString(offsets[8], object.name);
+  writer.writeString(offsets[9], object.phone1);
+  writer.writeString(offsets[10], object.phone2);
+  writer.writeString(offsets[11], object.tinNumber);
+  writer.writeString(offsets[12], object.tradeName);
+  writer.writeDateTime(offsets[13], object.updatedAt);
+  writer.writeString(offsets[14], object.wereda);
 }
 
 CompanySchema _companySchemaDeserialize(
@@ -171,19 +195,21 @@ CompanySchema _companySchemaDeserialize(
 ) {
   final object = CompanySchema();
   object.autoPrint = reader.readBoolOrNull(offsets[0]);
-  object.city = reader.readStringOrNull(offsets[1]);
-  object.companyId = reader.readString(offsets[2]);
-  object.createdAt = reader.readDateTime(offsets[3]);
-  object.defaultStartDate = reader.readDateTimeOrNull(offsets[4]);
+  object.businessType = reader.readStringOrNull(offsets[1]);
+  object.city = reader.readStringOrNull(offsets[2]);
+  object.companyId = reader.readString(offsets[3]);
+  object.createdAt = reader.readDateTime(offsets[4]);
+  object.defaultCalendarType = reader.readStringOrNull(offsets[5]);
+  object.defaultStartDate = reader.readDateTimeOrNull(offsets[6]);
   object.id = id;
-  object.logoUrl = reader.readStringOrNull(offsets[5]);
-  object.name = reader.readString(offsets[6]);
-  object.phone1 = reader.readStringOrNull(offsets[7]);
-  object.phone2 = reader.readStringOrNull(offsets[8]);
-  object.tinNumber = reader.readStringOrNull(offsets[9]);
-  object.tradeName = reader.readStringOrNull(offsets[10]);
-  object.updatedAt = reader.readDateTimeOrNull(offsets[11]);
-  object.wereda = reader.readStringOrNull(offsets[12]);
+  object.logoUrl = reader.readStringOrNull(offsets[7]);
+  object.name = reader.readString(offsets[8]);
+  object.phone1 = reader.readStringOrNull(offsets[9]);
+  object.phone2 = reader.readStringOrNull(offsets[10]);
+  object.tinNumber = reader.readStringOrNull(offsets[11]);
+  object.tradeName = reader.readStringOrNull(offsets[12]);
+  object.updatedAt = reader.readDateTimeOrNull(offsets[13]);
+  object.wereda = reader.readStringOrNull(offsets[14]);
   return object;
 }
 
@@ -199,26 +225,30 @@ P _companySchemaDeserializeProp<P>(
     case 1:
       return (reader.readStringOrNull(offset)) as P;
     case 2:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 3:
-      return (reader.readDateTime(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 4:
-      return (reader.readDateTimeOrNull(offset)) as P;
+      return (reader.readDateTime(offset)) as P;
     case 5:
       return (reader.readStringOrNull(offset)) as P;
     case 6:
-      return (reader.readString(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 7:
       return (reader.readStringOrNull(offset)) as P;
     case 8:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 9:
       return (reader.readStringOrNull(offset)) as P;
     case 10:
       return (reader.readStringOrNull(offset)) as P;
     case 11:
-      return (reader.readDateTimeOrNull(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 12:
+      return (reader.readStringOrNull(offset)) as P;
+    case 13:
+      return (reader.readDateTimeOrNull(offset)) as P;
+    case 14:
       return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -459,6 +489,165 @@ extension CompanySchemaQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         FilterCondition.equalTo(property: r'autoPrint', value: value),
+      );
+    });
+  }
+
+  QueryBuilder<CompanySchema, CompanySchema, QAfterFilterCondition>
+  businessTypeIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        const FilterCondition.isNull(property: r'businessType'),
+      );
+    });
+  }
+
+  QueryBuilder<CompanySchema, CompanySchema, QAfterFilterCondition>
+  businessTypeIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        const FilterCondition.isNotNull(property: r'businessType'),
+      );
+    });
+  }
+
+  QueryBuilder<CompanySchema, CompanySchema, QAfterFilterCondition>
+  businessTypeEqualTo(String? value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(
+          property: r'businessType',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<CompanySchema, CompanySchema, QAfterFilterCondition>
+  businessTypeGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'businessType',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<CompanySchema, CompanySchema, QAfterFilterCondition>
+  businessTypeLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'businessType',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<CompanySchema, CompanySchema, QAfterFilterCondition>
+  businessTypeBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'businessType',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<CompanySchema, CompanySchema, QAfterFilterCondition>
+  businessTypeStartsWith(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.startsWith(
+          property: r'businessType',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<CompanySchema, CompanySchema, QAfterFilterCondition>
+  businessTypeEndsWith(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.endsWith(
+          property: r'businessType',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<CompanySchema, CompanySchema, QAfterFilterCondition>
+  businessTypeContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.contains(
+          property: r'businessType',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<CompanySchema, CompanySchema, QAfterFilterCondition>
+  businessTypeMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.matches(
+          property: r'businessType',
+          wildcard: pattern,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<CompanySchema, CompanySchema, QAfterFilterCondition>
+  businessTypeIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'businessType', value: ''),
+      );
+    });
+  }
+
+  QueryBuilder<CompanySchema, CompanySchema, QAfterFilterCondition>
+  businessTypeIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(property: r'businessType', value: ''),
       );
     });
   }
@@ -816,6 +1005,168 @@ extension CompanySchemaQueryFilter
           includeLower: includeLower,
           upper: upper,
           includeUpper: includeUpper,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<CompanySchema, CompanySchema, QAfterFilterCondition>
+  defaultCalendarTypeIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        const FilterCondition.isNull(property: r'defaultCalendarType'),
+      );
+    });
+  }
+
+  QueryBuilder<CompanySchema, CompanySchema, QAfterFilterCondition>
+  defaultCalendarTypeIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        const FilterCondition.isNotNull(property: r'defaultCalendarType'),
+      );
+    });
+  }
+
+  QueryBuilder<CompanySchema, CompanySchema, QAfterFilterCondition>
+  defaultCalendarTypeEqualTo(String? value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(
+          property: r'defaultCalendarType',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<CompanySchema, CompanySchema, QAfterFilterCondition>
+  defaultCalendarTypeGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'defaultCalendarType',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<CompanySchema, CompanySchema, QAfterFilterCondition>
+  defaultCalendarTypeLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'defaultCalendarType',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<CompanySchema, CompanySchema, QAfterFilterCondition>
+  defaultCalendarTypeBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'defaultCalendarType',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<CompanySchema, CompanySchema, QAfterFilterCondition>
+  defaultCalendarTypeStartsWith(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.startsWith(
+          property: r'defaultCalendarType',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<CompanySchema, CompanySchema, QAfterFilterCondition>
+  defaultCalendarTypeEndsWith(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.endsWith(
+          property: r'defaultCalendarType',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<CompanySchema, CompanySchema, QAfterFilterCondition>
+  defaultCalendarTypeContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.contains(
+          property: r'defaultCalendarType',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<CompanySchema, CompanySchema, QAfterFilterCondition>
+  defaultCalendarTypeMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.matches(
+          property: r'defaultCalendarType',
+          wildcard: pattern,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<CompanySchema, CompanySchema, QAfterFilterCondition>
+  defaultCalendarTypeIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'defaultCalendarType', value: ''),
+      );
+    });
+  }
+
+  QueryBuilder<CompanySchema, CompanySchema, QAfterFilterCondition>
+  defaultCalendarTypeIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          property: r'defaultCalendarType',
+          value: '',
         ),
       );
     });
@@ -2144,6 +2495,20 @@ extension CompanySchemaQuerySortBy
     });
   }
 
+  QueryBuilder<CompanySchema, CompanySchema, QAfterSortBy>
+  sortByBusinessType() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'businessType', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CompanySchema, CompanySchema, QAfterSortBy>
+  sortByBusinessTypeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'businessType', Sort.desc);
+    });
+  }
+
   QueryBuilder<CompanySchema, CompanySchema, QAfterSortBy> sortByCity() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'city', Sort.asc);
@@ -2179,6 +2544,20 @@ extension CompanySchemaQuerySortBy
   sortByCreatedAtDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'createdAt', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CompanySchema, CompanySchema, QAfterSortBy>
+  sortByDefaultCalendarType() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'defaultCalendarType', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CompanySchema, CompanySchema, QAfterSortBy>
+  sortByDefaultCalendarTypeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'defaultCalendarType', Sort.desc);
     });
   }
 
@@ -2311,6 +2690,20 @@ extension CompanySchemaQuerySortThenBy
     });
   }
 
+  QueryBuilder<CompanySchema, CompanySchema, QAfterSortBy>
+  thenByBusinessType() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'businessType', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CompanySchema, CompanySchema, QAfterSortBy>
+  thenByBusinessTypeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'businessType', Sort.desc);
+    });
+  }
+
   QueryBuilder<CompanySchema, CompanySchema, QAfterSortBy> thenByCity() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'city', Sort.asc);
@@ -2346,6 +2739,20 @@ extension CompanySchemaQuerySortThenBy
   thenByCreatedAtDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'createdAt', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CompanySchema, CompanySchema, QAfterSortBy>
+  thenByDefaultCalendarType() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'defaultCalendarType', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CompanySchema, CompanySchema, QAfterSortBy>
+  thenByDefaultCalendarTypeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'defaultCalendarType', Sort.desc);
     });
   }
 
@@ -2483,6 +2890,14 @@ extension CompanySchemaQueryWhereDistinct
     });
   }
 
+  QueryBuilder<CompanySchema, CompanySchema, QDistinct> distinctByBusinessType({
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'businessType', caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<CompanySchema, CompanySchema, QDistinct> distinctByCity({
     bool caseSensitive = true,
   }) {
@@ -2502,6 +2917,16 @@ extension CompanySchemaQueryWhereDistinct
   QueryBuilder<CompanySchema, CompanySchema, QDistinct> distinctByCreatedAt() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'createdAt');
+    });
+  }
+
+  QueryBuilder<CompanySchema, CompanySchema, QDistinct>
+  distinctByDefaultCalendarType({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(
+        r'defaultCalendarType',
+        caseSensitive: caseSensitive,
+      );
     });
   }
 
@@ -2589,6 +3014,13 @@ extension CompanySchemaQueryProperty
     });
   }
 
+  QueryBuilder<CompanySchema, String?, QQueryOperations>
+  businessTypeProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'businessType');
+    });
+  }
+
   QueryBuilder<CompanySchema, String?, QQueryOperations> cityProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'city');
@@ -2604,6 +3036,13 @@ extension CompanySchemaQueryProperty
   QueryBuilder<CompanySchema, DateTime, QQueryOperations> createdAtProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'createdAt');
+    });
+  }
+
+  QueryBuilder<CompanySchema, String?, QQueryOperations>
+  defaultCalendarTypeProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'defaultCalendarType');
     });
   }
 

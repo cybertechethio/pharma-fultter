@@ -186,3 +186,51 @@ final class GetStocksUseCaseProvider
 }
 
 String _$getStocksUseCaseHash() => r'70c24cbb7ae54291d07962c753b3ea77ff0e82fe';
+
+@ProviderFor(updateStockUseCase)
+const updateStockUseCaseProvider = UpdateStockUseCaseProvider._();
+
+final class UpdateStockUseCaseProvider
+    extends
+        $FunctionalProvider<
+          UpdateStockUseCase,
+          UpdateStockUseCase,
+          UpdateStockUseCase
+        >
+    with $Provider<UpdateStockUseCase> {
+  const UpdateStockUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'updateStockUseCaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$updateStockUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<UpdateStockUseCase> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  UpdateStockUseCase create(Ref ref) {
+    return updateStockUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(UpdateStockUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<UpdateStockUseCase>(value),
+    );
+  }
+}
+
+String _$updateStockUseCaseHash() =>
+    r'5a1f66210f7947fbd7be211876b74f4432a2c357';
