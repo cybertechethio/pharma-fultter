@@ -12,7 +12,6 @@ import '../providers/expense_events.dart';
 import '../widgets/expense_basic_info_widget.dart';
 import '../widgets/expense_attachments_widget.dart';
 import '../widgets/expense_payments_widget.dart';
-import '../widgets/payment_method_create_dialog.dart';
 
 class ExpenseDetailScreen extends ConsumerWidget {
   final String expenseId;
@@ -74,17 +73,8 @@ class ExpenseDetailScreen extends ConsumerWidget {
     );
   }
 
-  void _showCreatePaymentMethodDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => PaymentMethodCreateDialog(
-        expenseId: expenseId,
-      ),
-    );
-  }
 
   Widget _buildContent(BuildContext context, ExpenseDetail detail, WidgetRef ref) {
-    final l10n = AppLocalizations.of(context);
     return RefreshIndicator(
       onRefresh: () async {
         ref.invalidate(expenseDetailProvider(expenseId));
@@ -99,21 +89,7 @@ class ExpenseDetailScreen extends ConsumerWidget {
             ExpenseBasicInfoWidget(expense: detail),
             // Attachments
             ExpenseAttachmentsWidget(attachments: detail.attachments),
-            // Add Payment Method Button
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppSizes.lg, vertical: AppSizes.sm),
-              child: SizedBox(
-                width: double.infinity,
-                child: ElevatedButton.icon(
-                  onPressed: () => _showCreatePaymentMethodDialog(context),
-                  icon: const Icon(Icons.add),
-                  label: Text(l10n.addPaymentMethod),
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: AppSizes.md),
-                  ),
-                ),
-              ),
-            ),
+            
             // Payments
             ExpensePaymentsWidget(
               expensePayments: detail.expensePayments,

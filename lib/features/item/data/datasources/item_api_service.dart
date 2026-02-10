@@ -4,6 +4,7 @@ import '../../../../core/services/logging_service.dart';
 import '../../../../shared/models/api_response.dart';
 import '../models/item_model.dart';
 import '../models/item_request_model.dart';
+import '../models/item_with_batches_model.dart';
 
 class ItemApiService {
   const ItemApiService();
@@ -72,6 +73,47 @@ class ItemApiService {
       return apiResponse;
     } catch (e) {
       LoggingService.error('Failed to get items: $e');
+      rethrow;
+    }
+  }
+
+  /// Get all items with batches (cart / include-batch)
+  Future<ApiResponse<List<ItemWithBatchesModel>>> getItemsIncludeBatches({
+    int page = 1,
+    int limit = 1000,
+    String? search,
+    int? categoryId,
+  }) async {
+    try {
+      final queryParameters = <String, dynamic>{
+        'page': page,
+        'limit': limit,
+      };
+
+      if (search != null && search.trim().isNotEmpty) {
+        queryParameters['search'] = search.trim();
+      }
+
+      if (categoryId != null) {
+        queryParameters['categoryId'] = categoryId;
+      }
+
+      final response = await ApiService.get<Map<String, dynamic>>(
+        ApiEndpoints.getItemsIncludeBatches,
+        queryParameters: queryParameters,
+      );
+
+      final apiResponse = ApiResponse<List<ItemWithBatchesModel>>.fromJson(
+        response.data!,
+        (json) => (json as List)
+            .map((item) =>
+                ItemWithBatchesModel.fromJson(item as Map<String, dynamic>))
+            .toList(),
+      );
+
+      return apiResponse;
+    } catch (e) {
+      LoggingService.error('Failed to get items include batches: $e');
       rethrow;
     }
   }

@@ -10,27 +10,22 @@ part 'transfer_model.g.dart';
 sealed class TransferModel with _$TransferModel {
   const factory TransferModel({
     required int id,
-    required int companyId,
-    required String transferType,
     required String transferNumber,
+    required int sourceBranchId,
+    required int destinationBranchId,
     required String status,
-    int? sourceBranchId,
-    String? sourceBranch,
-    int? destinationBranchId,
-    String? destinationBranch,
-    int? relatedTransferId,
-    int? transferId,
     String? notes,
     required DateTime createdAt,
     required DateTime updatedAt,
     int? createdBy,
     int? updatedBy,
+    String? sourceBranchName,
+    String? destinationBranchName,
     String? creatorName,
-    String? updatorName,
+    String? updaterName,
     @Default([]) List<TransferItemModel> transferItems,
   }) = _TransferModel;
 
   factory TransferModel.fromJson(Map<String, dynamic> json) =>
       _$TransferModelFromJson(json);
 }
-

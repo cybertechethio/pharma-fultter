@@ -63,19 +63,7 @@ class _TransferListScreenState extends ConsumerState<TransferListScreen> {
     final l10n = AppLocalizations.of(context);
     
     // Listen to UI events for user feedback
-    ref.listen<TransferUiEvent?>(
-      transferUiEventsProvider,
-      (prev, next) {
-        if (next == null) return;
-        final snackbar = ref.read(snackbarServiceProvider);
-        if (next is TransferFailure) {
-          snackbar.showError(next.failure);
-        } else if (next is TransferCreated) {
-          snackbar.showSuccess(next.message);
-        }
-        ref.read(transferUiEventsProvider.notifier).clear();
-      },
-    );
+   
 
     final asyncList = ref.watch(transferProvider);
     final notifier = ref.read(transferProvider.notifier);

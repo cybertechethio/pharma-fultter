@@ -12,7 +12,6 @@ class GetExpensesUseCase {
   Future<Either<Failure, PaginatedResponse<Expense>>> call({
     int page = 1,
     int limit = 25,
-    String? categoryId,
     DateTime? fromDate,
     DateTime? toDate,
     String? search,
@@ -21,7 +20,6 @@ class GetExpensesUseCase {
     return await _repository.getExpenses(
       page: page,
       limit: limit,
-      categoryId: categoryId,
       fromDate: fromDate,
       toDate: toDate,
       search: search,

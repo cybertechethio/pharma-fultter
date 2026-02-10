@@ -11,5 +11,7 @@ sealed class Expense with _$Expense {
     required String name,
     required DateTime createdAt,
     int? createdBy,
+    required List<String> attachments,
   }) = _Expense;
 }
+ 

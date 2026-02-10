@@ -13,6 +13,7 @@ class CreateExpensePaymentMethodUseCase {
     required String amount,
     String? referenceNumber,
     int? bankId,
+    String? attachment,
   }) async {
     return await _repository.createExpensePaymentMethod(
       expenseId: expenseId,
@@ -20,6 +21,7 @@ class CreateExpensePaymentMethodUseCase {
       amount: amount,
       referenceNumber: referenceNumber,
       bankId: bankId,
+      attachment: attachment,
     );
   }
 }

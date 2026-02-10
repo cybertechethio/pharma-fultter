@@ -38,5 +38,5 @@
   "cursor.ai.guaranteeTestability": true,
   "cursor.ai.ensureScalability": true,
   "cursor.ai.protectArchitecture": true,
-  "cmake.sourceDirectory": "D:/cyber_pos/linux/flutter"
+  "cmake.sourceDirectory": "D:/Flutter Projects/pharma/pharma-fultter/linux"
 }

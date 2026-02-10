@@ -27,7 +27,6 @@ import '../features/supplier_customer/presentation/screens/customer_list_screen.
 import '../features/supplier_customer/presentation/screens/supplier_list_screen.dart';
 import '../features/supplier_customer/presentation/screens/supplier_customer_detail_screen.dart';
 import '../features/category/presentation/screens/category_list_screen.dart';
-import '../features/expense_category/presentation/screens/expense_category_list_screen.dart';
 import '../features/expense/presentation/screens/expense_list_screen.dart';
 import '../features/sub_category/presentation/screens/sub_category_list_screen.dart';
 import '../features/transaction/presentation/screens/create_transaction_form.dart';
@@ -172,11 +171,6 @@ class AppRouter {
           path: RouteName.categories,
           name: 'categories',
           builder: (context, state) => const CategoryListScreen(),
-        ),
-        GoRoute(
-          path: RouteName.expenseCategories,
-          name: 'expense-categories',
-          builder: (context, state) => const ExpenseCategoryListScreen(),
         ),
         GoRoute(
           path: RouteName.expenses,

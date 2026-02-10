@@ -14,7 +14,7 @@ class EnvConfig {
   /// - Staging: https://staging-api.yourapp.com
   /// - Production: https://api.yourapp.com 10.255.17.164 //'https://npback.cybeerpos.com/api'; //
   //static const String baseUrl = 'https://api.yourapp.com'; cybertech01 = 10.209.102.164
-   static const String baseUrl = 'http://192.168.8.156:5001/api';// cyber001 wifi
+   static const String baseUrl = 'http://192.168.8.156:5001/api'; //'http://192.168.8.156:5001/api';// cyber001 wifi
 
   /// Full API base URL
   static String get apiBaseUrl => baseUrl;

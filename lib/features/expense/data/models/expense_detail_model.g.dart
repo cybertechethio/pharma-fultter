@@ -11,7 +11,6 @@ _ExpenseDetailModel _$ExpenseDetailModelFromJson(
 ) => $checkedCreate('_ExpenseDetailModel', json, ($checkedConvert) {
   final val = _ExpenseDetailModel(
     id: $checkedConvert('id', (v) => JsonTypeConverters.stringFromDynamic(v)),
-    categoryId: $checkedConvert('categoryId', (v) => (v as num?)?.toInt()),
     expenseDate: $checkedConvert(
       'expenseDate',
       (v) => DateTime.parse(v as String),
@@ -32,7 +31,6 @@ _ExpenseDetailModel _$ExpenseDetailModelFromJson(
       'updatedAt',
       (v) => v == null ? null : DateTime.parse(v as String),
     ),
-    catName: $checkedConvert('catName', (v) => v as String?),
     expensePayments: $checkedConvert(
       'expensePayments',
       (v) =>
@@ -51,7 +49,6 @@ Map<String, dynamic> _$ExpenseDetailModelToJson(
   _ExpenseDetailModel instance,
 ) => <String, dynamic>{
   'id': instance.id,
-  'categoryId': ?instance.categoryId,
   'expenseDate': instance.expenseDate.toIso8601String(),
   'name': instance.name,
   'amount': instance.amount,
@@ -60,7 +57,6 @@ Map<String, dynamic> _$ExpenseDetailModelToJson(
   'status': ?instance.status,
   'createdAt': instance.createdAt.toIso8601String(),
   'updatedAt': ?instance.updatedAt?.toIso8601String(),
-  'catName': ?instance.catName,
   'expensePayments': instance.expensePayments.map((e) => e.toJson()).toList(),
 };
 
@@ -121,6 +117,7 @@ _ExpensePaymentMethodModel _$ExpensePaymentMethodModelFromJson(
       'banks',
       (v) => JsonTypeConverters.bankNameFromDynamic(v),
     ),
+    attachment: $checkedConvert('attachment', (v) => v as String?),
   );
   return val;
 }, fieldKeyMap: const {'bankName': 'banks'});
@@ -135,4 +132,5 @@ Map<String, dynamic> _$ExpensePaymentMethodModelToJson(
   'bankId': ?instance.bankId,
   'createdAt': instance.createdAt.toIso8601String(),
   'banks': ?instance.bankName,
+  'attachment': ?instance.attachment,
 };

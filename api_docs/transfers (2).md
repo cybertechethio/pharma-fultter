@@ -121,11 +121,7 @@ Source branch from context. Only endpoints that exist in backend are documented.
       "batches": [
         {
           "batchNumber": "BATCH-001" (string (M)),
-          "quantity": 10 (number (M) — > 0; must not exceed available at source),
-          "costPrice": 80 (number | null (O)),
-          "unitPrice": 100 (number | null (O)),
-          "expirationDate": "2024-12-31T00:00:00.000Z" (string | null (O)),
-          "allocatedFrom": "system" (string | null (O))
+          "quantity": 10 (number (M) — > 0; must not exceed available at source)
         }
       ]
     }
@@ -141,15 +137,11 @@ Source branch from context. Only endpoints that exist in backend are documented.
   "message": "Transfer created successfully" (string (M)),
   "data": {
     "id": 456 (number (M)),
-    "companyId": 1 (number (M)),
-    "transferType": "transfer" (string (M)),
     "transferNumber": "TR24010001-1234" (string (M)),
     "sourceBranchId": 2 (number (M)),
     "destinationBranchId": 3 (number (M)),
-    "relatedTransferId": null (number | null (M)),
     "status": "pending" (string (M) — TransferStatus),
     "notes": "Optional notes" (string | null (M)),
-    "attachments": [] (array (M)),
     "createdAt": "2024-01-15T10:30:00.000Z" (string (M)),
     "updatedAt": "2024-01-15T10:30:00.000Z" (string (M)),
     "createdBy": 1 (number | null (M)),
@@ -157,9 +149,7 @@ Source branch from context. Only endpoints that exist in backend are documented.
     "sourceBranchName": "Source Branch" (string (M)),
     "destinationBranchName": "Destination Branch" (string (M)),
     "creatorName": null (string | null (M)),
-    "updaterName": null (string | null (M)),
-    "relatedTransfer": null (object | null (M)),
-    "relatedTransfers": null (array | null (M))
+    "updaterName": null (string | null (M))
   },
   "metadata": { ... }
 }
@@ -191,26 +181,20 @@ Source branch from context. Only endpoints that exist in backend are documented.
   "message": "Transfers fetched successfully" (string (M)),
   "data": [
     {
-      "id": 456 (number (M)),
-      "companyId": 1 (number (M)),
-      "transferType": "transfer" (string (M)),
-      "transferNumber": "TR24010001-1234" (string (M)),
-      "sourceBranchId": 2 (number (M)),
-      "destinationBranchId": 3 (number (M)),
-      "relatedTransferId": null (number | null (M)),
-      "status": "pending" (string (M) — TransferStatus),
-      "notes": "Optional notes" (string | null (M)),
-      "attachments": [] (array (M)),
-      "createdAt": "2024-01-15T10:30:00.000Z" (string (M)),
-      "updatedAt": "2024-01-15T10:30:00.000Z" (string (M)),
-      "createdBy": 1 (number | null (M)),
-      "updatedBy": null (number | null (M)),
-      "sourceBranchName": "Source Branch" (string (M)),
-      "destinationBranchName": "Destination Branch" (string (M)),
-      "creatorName": null (string | null (M)),
-      "updaterName": null (string | null (M)),
-      "relatedTransfer": null (object | null (M)),
-      "relatedTransfers": null (array | null (M))
+     "id": 456 (number (M)),
+    "transferNumber": "TR24010001-1234" (string (M)),
+    "sourceBranchId": 2 (number (M)),
+    "destinationBranchId": 3 (number (M)),
+    "status": "pending" (string (M) — TransferStatus),
+    "notes": "Optional notes" (string | null (M)),
+    "createdAt": "2024-01-15T10:30:00.000Z" (string (M)),
+    "updatedAt": "2024-01-15T10:30:00.000Z" (string (M)),
+    "createdBy": 1 (number | null (M)),
+    "updatedBy": null (number | null (M)),
+    "sourceBranchName": "Source Branch" (string (M)),
+    "destinationBranchName": "Destination Branch" (string (M)),
+    "creatorName": null (string | null (M)),
+    "updaterName": null (string | null (M))
     }
   ],
   "pagination": {
@@ -245,15 +229,11 @@ Source branch from context. Only endpoints that exist in backend are documented.
   "message": "Transfer fetched successfully" (string (M)),
   "data": {
     "id": 456 (number (M)),
-    "companyId": 1 (number (M)),
-    "transferType": "transfer" (string (M)),
     "transferNumber": "TR24010001-1234" (string (M)),
     "sourceBranchId": 2 (number (M)),
     "destinationBranchId": 3 (number (M)),
-    "relatedTransferId": null (number | null (M)),
     "status": "pending" (string (M) — TransferStatus),
     "notes": "Optional notes" (string | null (M)),
-    "attachments": [] (array (M)),
     "createdAt": "2024-01-15T10:30:00.000Z" (string (M)),
     "updatedAt": "2024-01-15T10:30:00.000Z" (string (M)),
     "createdBy": 1 (number | null (M)),
@@ -261,21 +241,14 @@ Source branch from context. Only endpoints that exist in backend are documented.
     "sourceBranchName": "Source Branch" (string (M)),
     "destinationBranchName": "Destination Branch" (string (M)),
     "creatorName": null (string | null (M)),
-    "updaterName": null (string | null (M)),
-    "relatedTransfer": null (object | null (M)),
-    "relatedTransfers": null (array | null (M)),
+    "updaterName": null (string | null (M))
     "transferItems": [
       {
         "id": 1 (number (M)),
-        "transferId": 456 (number (M)),
-        "itemId": 1 (number (M)),
         "itemName": "Item A" (string | null (M)),
         "itemCode": "CODE-A" (string | null (M)),
         "quantity": 10 (number (M)),
-        "createdAt": "2024-01-15T10:30:00.000Z" (string (M)),
-        "updatedAt": "2024-01-15T10:30:00.000Z" (string (M)),
-        "createdBy": 1 (number | null (M)),
-        "updatedBy": null (number | null (M)),
+       
         "transferItemBatches": [
           {
             "id": 1 (number (M)),
@@ -285,11 +258,7 @@ Source branch from context. Only endpoints that exist in backend are documented.
             "costPrice": 80 (number | null (M)),
             "unitPrice": 100 (number | null (M)),
             "expirationDate": "2024-12-31T00:00:00.000Z" (string | null (M)),
-            "allocatedFrom": "system" (string | null (M)),
-            "createdAt": "2024-01-15T10:30:00.000Z" (string (M)),
-            "updatedAt": "2024-01-15T10:30:00.000Z" (string (M)),
-            "createdBy": 1 (number | null (M)),
-            "updatedBy": null (number | null (M))
+        
           }
         ]
       }

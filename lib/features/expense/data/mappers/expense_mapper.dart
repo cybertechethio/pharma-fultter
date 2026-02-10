@@ -10,6 +10,7 @@ extension ExpenseMapper on ExpenseModel {
       name: name,
       createdAt: createdAt,
       createdBy: createdBy,
+      attachments: attachments,
     );
   }
 }

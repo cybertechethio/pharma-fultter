@@ -5,6 +5,7 @@ import '../../../../../app/theme/text_styles.dart';
 import '../../../../../l10n/app_localizations.dart';
 import '../../../domain/entities/transfer.dart';
 import '../../../domain/entities/transfer_item.dart';
+import 'transfer_item_batch_tile.dart';
 
 class TransferItemsSection extends StatelessWidget {
   final Transfer transfer;
@@ -83,10 +84,11 @@ class _ItemCard extends StatelessWidget {
     required this.index,
   });
 
-  String _formatDouble(double? value) => value?.toStringAsFixed(2) ?? '0.00';
-
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final batches = item.transferItemBatches;
+
     return Container(
       padding: const EdgeInsets.all(AppSizes.md),
       decoration: BoxDecoration(
@@ -119,7 +121,7 @@ class _ItemCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      item.itemName,
+                      item.itemName ?? item.itemCode ?? '',
                       style: context.body(bold: true),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -135,11 +137,24 @@ class _ItemCard extends StatelessWidget {
                 ),
               ),
               Text(
-                'Qty: ${_formatDouble(item.quantity)}',
+                'Qty: ${item.quantity}',
                 style: context.bodyPrimary(bold: true),
               ),
             ],
           ),
+          if (batches.isNotEmpty) ...[
+            const SizedBox(height: AppSizes.sm),
+            const Divider(height: AppSizes.xs),
+            const SizedBox(height: AppSizes.xs),
+            Text(l10n.batches, style: context.small(bold: true)),
+            const SizedBox(height: AppSizes.xs),
+            ...batches.map(
+              (batch) => Padding(
+                padding: const EdgeInsets.only(bottom: AppSizes.xs),
+                child: TransferItemBatchTile(batch: batch),
+              ),
+            ),
+          ],
         ],
       ),
     );

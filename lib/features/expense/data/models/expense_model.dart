@@ -15,6 +15,7 @@ sealed class ExpenseModel with _$ExpenseModel {
     required String name,
     required DateTime createdAt,
     int? createdBy,
+    @JsonKey(defaultValue: <String>[]) required List<String> attachments,
   }) = _ExpenseModel;
 
   factory ExpenseModel.fromJson(Map<String, dynamic> json) =>

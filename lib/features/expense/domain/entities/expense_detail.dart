@@ -6,7 +6,6 @@ part 'expense_detail.freezed.dart';
 sealed class ExpenseDetail with _$ExpenseDetail {
   const factory ExpenseDetail({
     required String id,
-    int? categoryId,
     required DateTime expenseDate,
     required String name,
     required String amount,
@@ -15,7 +14,6 @@ sealed class ExpenseDetail with _$ExpenseDetail {
      String? status,
     required DateTime createdAt,
     DateTime? updatedAt,
-    String? catName,
     required List<ExpensePayment> expensePayments,
   }) = _ExpenseDetail;
 }
@@ -41,6 +39,7 @@ sealed class ExpensePaymentMethod with _$ExpensePaymentMethod {
     String? referenceNumber,
     required DateTime createdAt,
     String? bankName,
+    String? attachment,
   }) = _ExpensePaymentMethod;
 }
 

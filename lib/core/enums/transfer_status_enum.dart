@@ -5,10 +5,9 @@ import '../../app/theme/brand_colors.dart';
 /// Represents the lifecycle states of a transfer
 enum TransferStatus {
   pending,
-  inTransit,
-  completed,
-  cancelled,
   rejected,
+  returned,
+  completed,
 }
 
 extension TransferStatusExtension on TransferStatus {
@@ -17,14 +16,12 @@ extension TransferStatusExtension on TransferStatus {
     switch (value.toLowerCase()) {
       case 'pending':
         return TransferStatus.pending;
-      case 'in_transit':
-        return TransferStatus.inTransit;
-      case 'completed':
-        return TransferStatus.completed;
-      case 'cancelled':
-        return TransferStatus.cancelled;
       case 'rejected':
         return TransferStatus.rejected;
+      case 'returned':
+        return TransferStatus.returned;
+      case 'completed':
+        return TransferStatus.completed;
       default:
         return TransferStatus.pending; // Default fallback
     }
@@ -35,14 +32,12 @@ extension TransferStatusExtension on TransferStatus {
     switch (this) {
       case TransferStatus.pending:
         return 'pending';
-      case TransferStatus.inTransit:
-        return 'in_transit';
-      case TransferStatus.completed:
-        return 'completed';
-      case TransferStatus.cancelled:
-        return 'cancelled';
       case TransferStatus.rejected:
         return 'rejected';
+      case TransferStatus.returned:
+        return 'returned';
+      case TransferStatus.completed:
+        return 'completed';
     }
   }
 
@@ -51,14 +46,12 @@ extension TransferStatusExtension on TransferStatus {
     switch (this) {
       case TransferStatus.pending:
         return 'Pending';
-      case TransferStatus.inTransit:
-        return 'In Transit';
-      case TransferStatus.completed:
-        return 'Completed';
-      case TransferStatus.cancelled:
-        return 'Cancelled';
       case TransferStatus.rejected:
         return 'Rejected';
+      case TransferStatus.returned:
+        return 'Returned';
+      case TransferStatus.completed:
+        return 'Completed';
     }
   }
 
@@ -67,14 +60,12 @@ extension TransferStatusExtension on TransferStatus {
     switch (this) {
       case TransferStatus.pending:
         return Icons.hourglass_empty;
-      case TransferStatus.inTransit:
-        return Icons.local_shipping;
-      case TransferStatus.completed:
-        return Icons.check_circle_outline;
-      case TransferStatus.cancelled:
-        return Icons.cancel_outlined;
       case TransferStatus.rejected:
         return Icons.block_outlined;
+      case TransferStatus.returned:
+        return Icons.keyboard_return;
+      case TransferStatus.completed:
+        return Icons.check_circle_outline;
     }
   }
 
@@ -83,22 +74,20 @@ extension TransferStatusExtension on TransferStatus {
     switch (this) {
       case TransferStatus.pending:
         return BrandColors.warning;
-      case TransferStatus.inTransit:
+      case TransferStatus.rejected:
+        return BrandColors.error;
+      case TransferStatus.returned:
         return BrandColors.info;
       case TransferStatus.completed:
         return BrandColors.success;
-      case TransferStatus.cancelled:
-        return BrandColors.error;
-      case TransferStatus.rejected:
-        return BrandColors.error;
     }
   }
 
   /// Check if status is terminal (no further actions)
   bool isTerminal() {
-    return this == TransferStatus.completed || 
-           this == TransferStatus.cancelled || 
-           this == TransferStatus.rejected;
+    return this == TransferStatus.completed ||
+        this == TransferStatus.rejected ||
+        this == TransferStatus.returned;
   }
 }
 

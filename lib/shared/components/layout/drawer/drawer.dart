@@ -311,12 +311,6 @@ class _DrawerScrollableContent extends StatelessWidget {
                 onTap: () => onNavigate(RouteName.expenses),
                 route: RouteName.expenses,
               ),
-              DrawerNavItemData(
-                icon: Icons.category_outlined,
-                label: l10n.expenseCategories,
-                onTap: () => onNavigate(RouteName.expenseCategories),
-                route: RouteName.expenseCategories,
-              ),
             ],
           ),
 

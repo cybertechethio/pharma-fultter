@@ -14,6 +14,7 @@ class UpdateExpensePaymentMethodUseCase {
     String? amount,
     String? referenceNumber,
     int? bankId,
+    String? attachment,
   }) async {
     return await _repository.updateExpensePaymentMethod(
       expenseId: expenseId,
@@ -22,6 +23,7 @@ class UpdateExpensePaymentMethodUseCase {
       amount: amount,
       referenceNumber: referenceNumber,
       bankId: bankId,
+      attachment: attachment,
     );
   }
 }

@@ -19,6 +19,10 @@ _ExpenseModel _$ExpenseModelFromJson(
     name: $checkedConvert('name', (v) => v as String),
     createdAt: $checkedConvert('createdAt', (v) => DateTime.parse(v as String)),
     createdBy: $checkedConvert('createdBy', (v) => (v as num?)?.toInt()),
+    attachments: $checkedConvert(
+      'attachments',
+      (v) => (v as List<dynamic>?)?.map((e) => e as String).toList() ?? [],
+    ),
   );
   return val;
 });
@@ -31,4 +35,5 @@ Map<String, dynamic> _$ExpenseModelToJson(_ExpenseModel instance) =>
       'name': instance.name,
       'createdAt': instance.createdAt.toIso8601String(),
       'createdBy': ?instance.createdBy,
+      'attachments': instance.attachments,
     };

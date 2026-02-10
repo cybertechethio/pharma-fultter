@@ -14,8 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$TransferFormState {
 
- CreateTransferRequest get request; Map<int, Item> get cartItems;// itemId -> Item for display
- Map<int, int> get cartQuantities;
+ CreateTransferRequest get request; Map<int, ItemWithBatches> get cartItems; Map<int, List<CreateTransferBatchRequest>> get cartItemBatches; List<int> get itemIdsRequiringBatch;
 /// Create a copy of TransferFormState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -26,16 +25,16 @@ $TransferFormStateCopyWith<TransferFormState> get copyWith => _$TransferFormStat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TransferFormState&&(identical(other.request, request) || other.request == request)&&const DeepCollectionEquality().equals(other.cartItems, cartItems)&&const DeepCollectionEquality().equals(other.cartQuantities, cartQuantities));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TransferFormState&&(identical(other.request, request) || other.request == request)&&const DeepCollectionEquality().equals(other.cartItems, cartItems)&&const DeepCollectionEquality().equals(other.cartItemBatches, cartItemBatches)&&const DeepCollectionEquality().equals(other.itemIdsRequiringBatch, itemIdsRequiringBatch));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,request,const DeepCollectionEquality().hash(cartItems),const DeepCollectionEquality().hash(cartQuantities));
+int get hashCode => Object.hash(runtimeType,request,const DeepCollectionEquality().hash(cartItems),const DeepCollectionEquality().hash(cartItemBatches),const DeepCollectionEquality().hash(itemIdsRequiringBatch));
 
 @override
 String toString() {
-  return 'TransferFormState(request: $request, cartItems: $cartItems, cartQuantities: $cartQuantities)';
+  return 'TransferFormState(request: $request, cartItems: $cartItems, cartItemBatches: $cartItemBatches, itemIdsRequiringBatch: $itemIdsRequiringBatch)';
 }
 
 
@@ -46,7 +45,7 @@ abstract mixin class $TransferFormStateCopyWith<$Res>  {
   factory $TransferFormStateCopyWith(TransferFormState value, $Res Function(TransferFormState) _then) = _$TransferFormStateCopyWithImpl;
 @useResult
 $Res call({
- CreateTransferRequest request, Map<int, Item> cartItems, Map<int, int> cartQuantities
+ CreateTransferRequest request, Map<int, ItemWithBatches> cartItems, Map<int, List<CreateTransferBatchRequest>> cartItemBatches, List<int> itemIdsRequiringBatch
 });
 
 
@@ -63,12 +62,13 @@ class _$TransferFormStateCopyWithImpl<$Res>
 
 /// Create a copy of TransferFormState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? request = null,Object? cartItems = null,Object? cartQuantities = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? request = null,Object? cartItems = null,Object? cartItemBatches = null,Object? itemIdsRequiringBatch = null,}) {
   return _then(_self.copyWith(
 request: null == request ? _self.request : request // ignore: cast_nullable_to_non_nullable
 as CreateTransferRequest,cartItems: null == cartItems ? _self.cartItems : cartItems // ignore: cast_nullable_to_non_nullable
-as Map<int, Item>,cartQuantities: null == cartQuantities ? _self.cartQuantities : cartQuantities // ignore: cast_nullable_to_non_nullable
-as Map<int, int>,
+as Map<int, ItemWithBatches>,cartItemBatches: null == cartItemBatches ? _self.cartItemBatches : cartItemBatches // ignore: cast_nullable_to_non_nullable
+as Map<int, List<CreateTransferBatchRequest>>,itemIdsRequiringBatch: null == itemIdsRequiringBatch ? _self.itemIdsRequiringBatch : itemIdsRequiringBatch // ignore: cast_nullable_to_non_nullable
+as List<int>,
   ));
 }
 /// Create a copy of TransferFormState
@@ -159,10 +159,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( CreateTransferRequest request,  Map<int, Item> cartItems,  Map<int, int> cartQuantities)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( CreateTransferRequest request,  Map<int, ItemWithBatches> cartItems,  Map<int, List<CreateTransferBatchRequest>> cartItemBatches,  List<int> itemIdsRequiringBatch)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _TransferFormState() when $default != null:
-return $default(_that.request,_that.cartItems,_that.cartQuantities);case _:
+return $default(_that.request,_that.cartItems,_that.cartItemBatches,_that.itemIdsRequiringBatch);case _:
   return orElse();
 
 }
@@ -180,10 +180,10 @@ return $default(_that.request,_that.cartItems,_that.cartQuantities);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( CreateTransferRequest request,  Map<int, Item> cartItems,  Map<int, int> cartQuantities)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( CreateTransferRequest request,  Map<int, ItemWithBatches> cartItems,  Map<int, List<CreateTransferBatchRequest>> cartItemBatches,  List<int> itemIdsRequiringBatch)  $default,) {final _that = this;
 switch (_that) {
 case _TransferFormState():
-return $default(_that.request,_that.cartItems,_that.cartQuantities);}
+return $default(_that.request,_that.cartItems,_that.cartItemBatches,_that.itemIdsRequiringBatch);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -197,10 +197,10 @@ return $default(_that.request,_that.cartItems,_that.cartQuantities);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( CreateTransferRequest request,  Map<int, Item> cartItems,  Map<int, int> cartQuantities)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( CreateTransferRequest request,  Map<int, ItemWithBatches> cartItems,  Map<int, List<CreateTransferBatchRequest>> cartItemBatches,  List<int> itemIdsRequiringBatch)?  $default,) {final _that = this;
 switch (_that) {
 case _TransferFormState() when $default != null:
-return $default(_that.request,_that.cartItems,_that.cartQuantities);case _:
+return $default(_that.request,_that.cartItems,_that.cartItemBatches,_that.itemIdsRequiringBatch);case _:
   return null;
 
 }
@@ -212,24 +212,29 @@ return $default(_that.request,_that.cartItems,_that.cartQuantities);case _:
 
 
 class _TransferFormState extends TransferFormState {
-  const _TransferFormState({required this.request, final  Map<int, Item> cartItems = const {}, final  Map<int, int> cartQuantities = const {}}): _cartItems = cartItems,_cartQuantities = cartQuantities,super._();
+  const _TransferFormState({required this.request, final  Map<int, ItemWithBatches> cartItems = const {}, final  Map<int, List<CreateTransferBatchRequest>> cartItemBatches = const {}, final  List<int> itemIdsRequiringBatch = const []}): _cartItems = cartItems,_cartItemBatches = cartItemBatches,_itemIdsRequiringBatch = itemIdsRequiringBatch,super._();
   
 
 @override final  CreateTransferRequest request;
- final  Map<int, Item> _cartItems;
-@override@JsonKey() Map<int, Item> get cartItems {
+ final  Map<int, ItemWithBatches> _cartItems;
+@override@JsonKey() Map<int, ItemWithBatches> get cartItems {
   if (_cartItems is EqualUnmodifiableMapView) return _cartItems;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableMapView(_cartItems);
 }
 
-// itemId -> Item for display
- final  Map<int, int> _cartQuantities;
-// itemId -> Item for display
-@override@JsonKey() Map<int, int> get cartQuantities {
-  if (_cartQuantities is EqualUnmodifiableMapView) return _cartQuantities;
+ final  Map<int, List<CreateTransferBatchRequest>> _cartItemBatches;
+@override@JsonKey() Map<int, List<CreateTransferBatchRequest>> get cartItemBatches {
+  if (_cartItemBatches is EqualUnmodifiableMapView) return _cartItemBatches;
   // ignore: implicit_dynamic_type
-  return EqualUnmodifiableMapView(_cartQuantities);
+  return EqualUnmodifiableMapView(_cartItemBatches);
+}
+
+ final  List<int> _itemIdsRequiringBatch;
+@override@JsonKey() List<int> get itemIdsRequiringBatch {
+  if (_itemIdsRequiringBatch is EqualUnmodifiableListView) return _itemIdsRequiringBatch;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_itemIdsRequiringBatch);
 }
 
 
@@ -243,16 +248,16 @@ _$TransferFormStateCopyWith<_TransferFormState> get copyWith => __$TransferFormS
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TransferFormState&&(identical(other.request, request) || other.request == request)&&const DeepCollectionEquality().equals(other._cartItems, _cartItems)&&const DeepCollectionEquality().equals(other._cartQuantities, _cartQuantities));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TransferFormState&&(identical(other.request, request) || other.request == request)&&const DeepCollectionEquality().equals(other._cartItems, _cartItems)&&const DeepCollectionEquality().equals(other._cartItemBatches, _cartItemBatches)&&const DeepCollectionEquality().equals(other._itemIdsRequiringBatch, _itemIdsRequiringBatch));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,request,const DeepCollectionEquality().hash(_cartItems),const DeepCollectionEquality().hash(_cartQuantities));
+int get hashCode => Object.hash(runtimeType,request,const DeepCollectionEquality().hash(_cartItems),const DeepCollectionEquality().hash(_cartItemBatches),const DeepCollectionEquality().hash(_itemIdsRequiringBatch));
 
 @override
 String toString() {
-  return 'TransferFormState(request: $request, cartItems: $cartItems, cartQuantities: $cartQuantities)';
+  return 'TransferFormState(request: $request, cartItems: $cartItems, cartItemBatches: $cartItemBatches, itemIdsRequiringBatch: $itemIdsRequiringBatch)';
 }
 
 
@@ -263,7 +268,7 @@ abstract mixin class _$TransferFormStateCopyWith<$Res> implements $TransferFormS
   factory _$TransferFormStateCopyWith(_TransferFormState value, $Res Function(_TransferFormState) _then) = __$TransferFormStateCopyWithImpl;
 @override @useResult
 $Res call({
- CreateTransferRequest request, Map<int, Item> cartItems, Map<int, int> cartQuantities
+ CreateTransferRequest request, Map<int, ItemWithBatches> cartItems, Map<int, List<CreateTransferBatchRequest>> cartItemBatches, List<int> itemIdsRequiringBatch
 });
 
 
@@ -280,12 +285,13 @@ class __$TransferFormStateCopyWithImpl<$Res>
 
 /// Create a copy of TransferFormState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? request = null,Object? cartItems = null,Object? cartQuantities = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? request = null,Object? cartItems = null,Object? cartItemBatches = null,Object? itemIdsRequiringBatch = null,}) {
   return _then(_TransferFormState(
 request: null == request ? _self.request : request // ignore: cast_nullable_to_non_nullable
 as CreateTransferRequest,cartItems: null == cartItems ? _self._cartItems : cartItems // ignore: cast_nullable_to_non_nullable
-as Map<int, Item>,cartQuantities: null == cartQuantities ? _self._cartQuantities : cartQuantities // ignore: cast_nullable_to_non_nullable
-as Map<int, int>,
+as Map<int, ItemWithBatches>,cartItemBatches: null == cartItemBatches ? _self._cartItemBatches : cartItemBatches // ignore: cast_nullable_to_non_nullable
+as Map<int, List<CreateTransferBatchRequest>>,itemIdsRequiringBatch: null == itemIdsRequiringBatch ? _self._itemIdsRequiringBatch : itemIdsRequiringBatch // ignore: cast_nullable_to_non_nullable
+as List<int>,
   ));
 }
 

@@ -22,7 +22,6 @@ class ExpenseApiService {
   }
 
   Future<ApiResponse<ExpenseModel>> create({
-    required String? categoryId,
     required DateTime expenseDate,
     required String name,
     required String? notes,
@@ -56,16 +55,58 @@ class ExpenseApiService {
         );
       }
 
-      // Step 2: Create expense with uploaded URLs
+      // Step 2: Upload each payment method's attachment file (if file path) and get URLs
+      final List<Map<String, dynamic>> paymentMethodsWithUrls = [];
+      for (final pm in paymentMethods) {
+        final attachment = pm['attachment'];
+        String? attachmentUrl;
+        if (attachment != null && attachment is String && attachment.isNotEmpty) {
+          final isFilePath = !attachment.startsWith('http://') &&
+              !attachment.startsWith('https://') &&
+              !attachment.startsWith('/');
+          if (isFilePath) {
+            LoggingService.auth('Uploading payment method attachment file', {
+              'file': attachment,
+            });
+            final uploadResponse = await _uploadService.uploadFile(attachment);
+            uploadResponse.when(
+              success: (success, message, data, meta, pagination) {
+                attachmentUrl = data.when(
+                  single: (fileData) => fileData.url,
+                  multiple: (filesData) =>
+                      filesData.files.isNotEmpty ? filesData.files.first.url : null,
+                );
+                if (attachmentUrl != null) {
+                  LoggingService.auth(
+                    'Payment method attachment uploaded successfully',
+                    {'url': attachmentUrl},
+                  );
+                }
+              },
+              error: (success, error, meta) {
+                throw Exception(
+                  'Failed to upload payment method attachment: ${error.message}',
+                );
+              },
+            );
+          } else {
+            attachmentUrl = attachment;
+          }
+        }
+        final pmData = Map<String, dynamic>.from(pm);
+        pmData['attachment'] = attachmentUrl;
+        paymentMethodsWithUrls.add(pmData);
+      }
+
+      // Step 3: Create expense with uploaded URLs
       final response = await ApiService.post<Map<String, dynamic>>(
         ApiEndpoints.createExpense,
         data: {
-          'categoryId': categoryId,
           'expenseDate': expenseDate.toIso8601String(),
           'name': name,
           'notes': notes,
           'attachments': attachmentUrls,
-          'paymentMethods': paymentMethods,
+          'paymentMethods': paymentMethodsWithUrls,
         },
       );
 
@@ -84,7 +125,6 @@ class ExpenseApiService {
   Future<ApiResponse<List<ExpenseModel>>> getAll({
     int page = 1,
     int limit = 25,
-    String? categoryId,
     DateTime? fromDate,
     DateTime? toDate,
     String? search,
@@ -96,7 +136,6 @@ class ExpenseApiService {
         'limit': limit,
       };
 
-      if (categoryId != null) queryParameters['categoryId'] = categoryId;
       if (fromDate != null) queryParameters['fromDate'] = fromDate.toIso8601String();
       if (toDate != null) queryParameters['toDate'] = toDate.toIso8601String();
       if (search != null && search.trim().isNotEmpty) queryParameters['search'] = search.trim();
@@ -143,15 +182,17 @@ class ExpenseApiService {
 
   Future<ApiResponse<ExpenseModel>> update({
     required String id,
-    required String? categoryId,
     required DateTime expenseDate,
     required String name,
     required String? notes,
+    required List<String>? attachmentUrls,
     required List<String>? attachmentFilePaths,
   }) async {
     try {
-      // Step 1: Upload attachment files if any
-      List<String> attachmentUrls = [];
+      // Step 1: Start with existing attachment URLs
+      List<String> allAttachmentUrls = attachmentUrls ?? [];
+
+      // Step 2: Upload new attachment files if any
       if (attachmentFilePaths != null && attachmentFilePaths.isNotEmpty) {
         LoggingService.auth('Uploading expense attachment files', {
           'count': attachmentFilePaths.length,
@@ -161,13 +202,16 @@ class ExpenseApiService {
         uploadResponse.when(
           success: (success, message, data, meta, pagination) {
             // Extract URLs from upload response
-            attachmentUrls = data.when(
+            final uploadedUrls = data.when(
               single: (fileData) => [fileData.url],
               multiple: (filesData) => filesData.files.map((f) => f.url).toList(),
             );
+            // Combine existing URLs with newly uploaded URLs
+            allAttachmentUrls.addAll(uploadedUrls);
             LoggingService.auth('Expense attachments uploaded successfully', {
-              'count': attachmentUrls.length,
-              'urls': attachmentUrls,
+              'uploadedCount': uploadedUrls.length,
+              'totalCount': allAttachmentUrls.length,
+              'urls': allAttachmentUrls,
             });
           },
           error: (success, error, meta) {
@@ -176,15 +220,14 @@ class ExpenseApiService {
         );
       }
 
-      // Step 2: Update expense with uploaded URLs
+      // Step 3: Update expense with complete attachment URLs
       final response = await ApiService.put<Map<String, dynamic>>(
         ApiEndpoints.updateExpense(id),
         data: {
-          'categoryId': categoryId,
           'expenseDate': expenseDate.toIso8601String(),
           'name': name,
           'notes': notes,
-          'attachments': attachmentUrls,
+          'attachments': allAttachmentUrls,
         },
       );
 
@@ -226,8 +269,37 @@ class ExpenseApiService {
     required String amount,
     String? referenceNumber,
     int? bankId,
+    String? attachment,
   }) async {
     try {
+      // Step 1: Upload attachment file if provided
+      String? attachmentUrl;
+      if (attachment != null && attachment.isNotEmpty) {
+        LoggingService.auth('Uploading expense payment method attachment file', {
+          'file': attachment,
+        });
+
+        final uploadResponse = await _uploadService.uploadFile(attachment);
+        uploadResponse.when(
+          success: (success, message, data, meta, pagination) {
+            // Extract URL from upload response
+            attachmentUrl = data.when(
+              single: (fileData) => fileData.url,
+              multiple: (filesData) => filesData.files.isNotEmpty ? filesData.files.first.url : null,
+            );
+            if (attachmentUrl != null) {
+              LoggingService.auth('Expense payment method attachment uploaded successfully', {
+                'url': attachmentUrl,
+              });
+            }
+          },
+          error: (success, error, meta) {
+            throw Exception('Failed to upload attachment file: ${error.message}');
+          },
+        );
+      }
+
+      // Step 2: Prepare request data
       final Map<String, dynamic> data = {
         'method': method,
         'amount': amount,
@@ -235,6 +307,7 @@ class ExpenseApiService {
 
       if (referenceNumber != null) data['referenceNumber'] = referenceNumber;
       if (bankId != null) data['bankId'] = bankId;
+      if (attachmentUrl != null) data['attachment'] = attachmentUrl;
 
       final response = await ApiService.post<Map<String, dynamic>>(
         ApiEndpoints.createExpensePaymentMethod(expenseId),
@@ -260,14 +333,44 @@ class ExpenseApiService {
     String? amount,
     String? referenceNumber,
     int? bankId,
+    String? attachment,
   }) async {
     try {
+      // Step 1: Upload attachment file if provided
+      String? attachmentUrl;
+      if (attachment != null && attachment.isNotEmpty) {
+        LoggingService.auth('Uploading expense payment method attachment file', {
+          'file': attachment,
+        });
+
+        final uploadResponse = await _uploadService.uploadFile(attachment);
+        uploadResponse.when(
+          success: (success, message, data, meta, pagination) {
+            // Extract URL from upload response
+            attachmentUrl = data.when(
+              single: (fileData) => fileData.url,
+              multiple: (filesData) => filesData.files.isNotEmpty ? filesData.files.first.url : null,
+            );
+            if (attachmentUrl != null) {
+              LoggingService.auth('Expense payment method attachment uploaded successfully', {
+                'url': attachmentUrl,
+              });
+            }
+          },
+          error: (success, error, meta) {
+            throw Exception('Failed to upload attachment file: ${error.message}');
+          },
+        );
+      }
+
+      // Step 2: Prepare request data
       final Map<String, dynamic> data = {};
 
       if (method != null) data['method'] = method;
       if (amount != null) data['amount'] = amount;
       if (referenceNumber != null) data['referenceNumber'] = referenceNumber;
       if (bankId != null) data['bankId'] = bankId;
+      if (attachmentUrl != null) data['attachment'] = attachmentUrl;
 
       final response = await ApiService.put<Map<String, dynamic>>(
         ApiEndpoints.updateExpensePaymentMethod(expenseId, paymentMethodId),

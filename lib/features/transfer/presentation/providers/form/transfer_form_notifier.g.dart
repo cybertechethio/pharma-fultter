@@ -42,7 +42,7 @@ final class TransferFormNotifierProvider
 }
 
 String _$transferFormNotifierHash() =>
-    r'61a1d9ed60e76ae2d090f79937d6dd9b5afa0fd0';
+    r'2ad96e44a8736a3ef6039b41350f5132a837503d';
 
 abstract class _$TransferFormNotifier extends $Notifier<TransferFormState> {
   TransferFormState build();

@@ -1,5 +1,6 @@
 import '../../../../core/network/api_service.dart';
 import '../../../../core/constants/api_endpoints.dart';
+import '../../../../core/enums/transfer_status_enum.dart';
 import '../../../../core/services/logging_service.dart';
 import '../../../../shared/models/api_response.dart';
 import '../models/create_transfer_request.dart';
@@ -66,8 +67,8 @@ class TransferApiService {
     try {
       var requestJson = request.toJson();
       
-      // Manually set transferType to "transfer_out" string
-      requestJson['transferType'] = 'transfer_out';
+      // Manually set transferType to "transfer" string
+      requestJson['transferType'] = 'transfer';
 
       // ApiService.post will automatically wrap with RequestWrapper
       final response = await ApiService.post<Map<String, dynamic>>(
@@ -97,11 +98,11 @@ class TransferApiService {
 
   Future<ApiResponse<TransferModel>> updateStatus({
     required int id,
-    required String status,
+    required TransferStatus status,
   }) async {
     try {
       final endpoint = ApiEndpoints.updateTransferStatus(id);
-      var requestJson = {'status': status};
+      var requestJson = {'status': status.toApiString()};
 
       // ApiService.put will automatically wrap with RequestWrapper
       final response = await ApiService.put<Map<String, dynamic>>(

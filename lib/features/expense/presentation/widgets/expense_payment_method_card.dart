@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../l10n/app_localizations.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import '../../../../shared/utils/formatters.dart';
+import '../../../../shared/utils/url_utils.dart';
+import '../../../../shared/components/common/full_screen_image_viewer.dart';
 import '../../../../app/theme/app_sizes.dart';
 import '../../../../app/theme/brand_colors.dart';
 import '../../../../app/theme/text_styles.dart';
@@ -8,7 +12,7 @@ import '../../../../core/enums/payment_method_type_enum.dart';
 import '../../domain/entities/expense_detail.dart';
 import '../providers/expense_payment_methods_notifier.dart';
 import '../providers/expense_loading_providers.dart';
-import 'payment_method_edit_dialog.dart';
+import 'expense_payment_method_form_dialog.dart';
 
 class ExpensePaymentMethodCard extends ConsumerWidget {
   final ExpensePaymentMethod paymentMethod;
@@ -51,11 +55,7 @@ class ExpensePaymentMethodCard extends ConsumerWidget {
               Expanded(
                 child: Row(
                   children: [
-                    Icon(
-                      _getPaymentMethodIcon(method),
-                      size: AppSizes.iconSize,
-                      color: BrandColors.primary,
-                    ),
+                    _buildPaymentMethodIconOrAttachment(method, context),
                     const SizedBox(width: AppSizes.sm),
                     Flexible(
                       child: Text(
@@ -113,6 +113,71 @@ class ExpensePaymentMethodCard extends ConsumerWidget {
     );
   }
 
+  Widget _buildPaymentMethodIconOrAttachment(PaymentMethodType method, BuildContext context) {
+    final imageUrl = UrlUtils.getFullImageUrl(paymentMethod.attachment);
+
+    if (imageUrl != null) {
+      // Show attachment thumbnail
+      final thumbSize = AppSizes.attachmentThumbSize * 0.6; // 60px - larger than icon but not full size
+      return GestureDetector(
+        onTap: () => FullScreenImageViewer.show(
+          context: context,
+          imageUrl: imageUrl,
+          heroTag: 'expense_payment_receipt_${paymentMethod.id}',
+          title: 'Receipt',
+        ),
+        child: Hero(
+          tag: 'expense_payment_receipt_${paymentMethod.id}',
+          child: Container(
+            width: thumbSize,
+            height: thumbSize,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(AppSizes.radiusSm),
+              border: Border.all(color: BrandColors.outline.withOpacity(0.3)),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(AppSizes.radiusSm),
+              child: CachedNetworkImage(
+                imageUrl: imageUrl,
+                fit: BoxFit.cover,
+                width: thumbSize,
+                height: thumbSize,
+                placeholder: (context, url) => Container(
+                  color: BrandColors.surfaceContainerHighest,
+                  child: Center(
+                    child: SizedBox(
+                      width: AppSizes.iconSizeSm,
+                      height: AppSizes.iconSizeSm,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        valueColor: AlwaysStoppedAnimation<Color>(BrandColors.primary),
+                      ),
+                    ),
+                  ),
+                ),
+                errorWidget: (context, url, error) => Container(
+                  color: BrandColors.surfaceContainerHighest,
+                  child: Icon(
+                    Icons.broken_image,
+                    size: AppSizes.iconSizeSm,
+                    color: BrandColors.textSecondary,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+    } else {
+      // Show payment method icon
+      return Icon(
+        _getPaymentMethodIcon(method),
+        size: AppSizes.iconSize,
+        color: BrandColors.primary,
+      );
+    }
+  }
+
   IconData _getPaymentMethodIcon(PaymentMethodType method) {
     switch (method) {
       case PaymentMethodType.cash:
@@ -125,31 +190,20 @@ class ExpensePaymentMethodCard extends ConsumerWidget {
         return Icons.account_balance;
       case PaymentMethodType.check:
         return Icons.receipt;
-      
+
     }
   }
 
-  Future<void> _handleEdit(BuildContext context, WidgetRef ref) async {
-    final updated = await showDialog<Map<String, dynamic>>(
+  void _handleEdit(BuildContext context, WidgetRef ref) {
+    showDialog(
       context: context,
-      builder: (context) => PaymentMethodEditDialog(
-        initialMethod: paymentMethod.method,
-        initialAmount: paymentMethod.amount,
-        initialReferenceNumber: paymentMethod.referenceNumber,
-        initialBankId: paymentMethod.bankId,
+      builder: (dialogContext) => ExpensePaymentMethodFormDialog(
+        expenseId: expenseId,
+        title: AppLocalizations.of(context).editPaymentMethod,
+        buttonText: AppLocalizations.of(context).update,
+        initial: paymentMethod,
       ),
     );
-
-    if (updated != null && context.mounted) {
-      await ref.read(expensePaymentMethodsProvider.notifier).updatePaymentMethod(
-        expenseId: expenseId,
-        paymentMethodId: paymentMethod.id,
-        method: updated['method'] as String?,
-        amount: updated['amount'] as String?,
-        referenceNumber: updated['referenceNumber'] as String?,
-        bankId: updated['bankId'] as int?,
-      );
-    }
   }
 
   Future<void> _handleDelete(BuildContext context, WidgetRef ref) async {

@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../app/theme/app_sizes.dart';
 import '../../../../app/theme/brand_colors.dart';
 import '../../../../app/theme/text_styles.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/components/common/card_title.dart';
 import '../../../../shared/utils/formatters.dart';
-import '../../../../core/enums/transfer_type_enum.dart';
 import '../../../../core/enums/transfer_status_enum.dart';
+import '../../../auth/presentation/providers/current_context_provider.dart';
 import '../../domain/entities/transfer.dart';
+import '../utils/transfer_branch_helpers.dart';
 
-class TransferCard extends StatelessWidget {
+class TransferCard extends ConsumerWidget {
   final Transfer transfer;
   final VoidCallback? onTap;
 
@@ -19,7 +22,13 @@ class TransferCard extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final currentBranchId = ref.watch(currentContextProvider).value?.currentBranchId;
+    final isSource = isCurrentBranchSource(transfer, currentBranchId);
+    final typeColor = isSource ? BrandColors.warning : BrandColors.success;
+    final typeLabel = isSource ? l10n.transferOut : l10n.transferIn;
+    final typeIcon = isSource ? Icons.call_made : Icons.call_received;
     final status = TransferStatusExtension.fromString(transfer.status);
     final statusColor = status.getColor();
 
@@ -44,7 +53,7 @@ class TransferCard extends StatelessWidget {
                         // Transfer number
                         cardTitle(title: transfer.transferNumber),
                         const SizedBox(height: AppSizes.xs),
-                        // Type badge
+                        // Type badge (based on current branch: source = Out, else = In)
                         Row(
                           children: [
                             Container(
@@ -53,24 +62,35 @@ class TransferCard extends StatelessWidget {
                                 vertical: 2,
                               ),
                               decoration: BoxDecoration(
-                                color: transfer.transferType.getColor().withOpacity(0.1),
+                                color: typeColor.withOpacity(0.1),
                                 borderRadius: BorderRadius.circular(AppSizes.radiusXs),
                               ),
-                              child: Text(
-                                transfer.transferType.getDisplayLabel(),
-                                style: context.small(
-                                  color: transfer.transferType.getColor(),
-                                  bold: true,
-                                ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(
+                                    typeIcon,
+                                    size: AppSizes.iconSizeSm,
+                                    color: typeColor,
+                                  ),
+                                  const SizedBox(width: AppSizes.xs),
+                                  Text(
+                                    typeLabel,
+                                    style: context.small(
+                                      color: typeColor,
+                                      bold: true,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],
                         ),
                         // Branches info
-                        if (transfer.sourceBranch != null || transfer.destinationBranch != null) ...[
+                        if ((transfer.sourceBranchName ?? '').isNotEmpty || (transfer.destinationBranchName ?? '').isNotEmpty) ...[
                           const SizedBox(height: AppSizes.xs),
                           Text(
-                            '${transfer.sourceBranch ?? "N/A"} → ${transfer.destinationBranch ?? "N/A"}',
+                            '${transfer.sourceBranchName ?? "N/A"} → ${transfer.destinationBranchName ?? "N/A"}',
                             style: context.small(),
                           ),
                         ],

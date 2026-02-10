@@ -9,8 +9,8 @@ import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/components/common/error_widget.dart' as app_err;
 import '../../../../shared/components/common/empty_widget.dart';
 import '../../../../shared/components/forms/search_bar.dart' as search;
-import '../../../item/domain/entities/item.dart';
-import '../../../item/presentation/providers/item_notifier.dart';
+import '../../../item/domain/entities/item_with_batches.dart';
+import '../../../item/presentation/providers/item_with_batches_notifier.dart';
 import '../providers/form/transfer_form_notifier.dart';
 import 'transfer_cart_card.dart';
 
@@ -46,7 +46,7 @@ class _TransferCartDialogState extends ConsumerState<TransferCartDialog> {
 
   void _onScroll() {
     if (_isBottom) {
-      final notifier = ref.read(itemProvider.notifier);
+      final notifier = ref.read(itemWithBatchesProvider.notifier);
       if (notifier.canLoadMore) {
         notifier.loadMore();
       }
@@ -64,8 +64,8 @@ class _TransferCartDialogState extends ConsumerState<TransferCartDialog> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final formState = ref.watch(transferFormProvider);
-    final itemsAsync = ref.watch(itemProvider);
-    final notifier = ref.read(itemProvider.notifier);
+    final itemsAsync = ref.watch(itemWithBatchesProvider);
+    final notifier = ref.read(itemWithBatchesProvider.notifier);
     final canLoadMore = notifier.canLoadMore;
 
     // Sort items: cart items first, then others
@@ -76,7 +76,7 @@ class _TransferCartDialogState extends ConsumerState<TransferCartDialog> {
         final otherItems = items.where((item) => !cartItemIds.contains(item.id)).toList();
         return [...cartItems, ...otherItems];
       },
-      orElse: () => <Item>[],
+      orElse: () => <ItemWithBatches>[],
     );
 
     return Dialog(
@@ -119,8 +119,8 @@ class _TransferCartDialogState extends ConsumerState<TransferCartDialog> {
               padding: EdgeInsets.all(AppSizes.md),
               child: search.AppSearchBar(
                 hintText: l10n.searchByNameCodeSku,
-                onSearch: (query) => ref.read(itemProvider.notifier).search(query),
-                onClear: () => ref.read(itemProvider.notifier).refresh(),
+                onSearch: (query) => ref.read(itemWithBatchesProvider.notifier).search(query),
+                onClear: () => ref.read(itemWithBatchesProvider.notifier).refresh(),
                 padding: EdgeInsets.zero,
               ),
             ),
@@ -139,7 +139,7 @@ class _TransferCartDialogState extends ConsumerState<TransferCartDialog> {
                     );
                   }
                   return RefreshIndicator(
-                    onRefresh: () => ref.read(itemProvider.notifier).refresh(),
+                    onRefresh: () => ref.read(itemWithBatchesProvider.notifier).refresh(),
                     child: ListView.separated(
                       controller: _scrollController,
                       padding: EdgeInsets.all(AppSizes.md),
@@ -165,12 +165,15 @@ class _TransferCartDialogState extends ConsumerState<TransferCartDialog> {
 
                         final item = sortedItems[index];
                         final isInCart = formState.cartItems.containsKey(item.id);
-                        final quantity = formState.cartQuantities[item.id] ?? 0;
+                        final batches = formState.cartItemBatches[item.id] ?? [];
+                        final addDisabled = item.batches.isEmpty;
 
                         return TransferCartCard(
-                          item: item,
+                          itemWithBatches: item,
                           isInCart: isInCart,
-                          quantity: quantity,
+                          batchSelections: batches,
+                          isInDialog: true,
+                          addDisabled: addDisabled,
                         );
                       },
                     ),
@@ -187,7 +190,7 @@ class _TransferCartDialogState extends ConsumerState<TransferCartDialog> {
                       ),
                       const SizedBox(height: AppSizes.lg),
                       ElevatedButton(
-                        onPressed: () => ref.read(itemProvider.notifier).refresh(),
+                        onPressed: () => ref.read(itemWithBatchesProvider.notifier).refresh(),
                         child: Text(AppLocalizations.of(context).retry),
                       ),
                     ],

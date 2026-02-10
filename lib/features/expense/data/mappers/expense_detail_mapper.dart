@@ -5,7 +5,6 @@ extension ExpenseDetailMapper on ExpenseDetailModel {
   ExpenseDetail toDomain() {
     return ExpenseDetail(
       id: id,
-      categoryId: categoryId,
       expenseDate: expenseDate,
       name: name,
       amount: amount,
@@ -14,7 +13,6 @@ extension ExpenseDetailMapper on ExpenseDetailModel {
       status: status,
       createdAt: createdAt,
       updatedAt: updatedAt,
-      catName: catName,
       expensePayments: expensePayments.map((payment) => payment.toDomain()).toList(),
     );
   }
@@ -42,6 +40,7 @@ extension ExpensePaymentMethodMapper on ExpensePaymentMethodModel {
       createdAt: createdAt,
       bankId: bankId,
       bankName: bankName,
+      attachment: attachment,
     );
   }
 }

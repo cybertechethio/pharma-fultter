@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import '../../../../core/enums/transfer_status_enum.dart';
 import '../../../../core/errors/exceptions.dart';
 import '../../../../core/errors/failure.dart';
 import '../../../../core/services/logging_service.dart';
@@ -113,10 +114,6 @@ class TransferRemoteDataSourceImpl implements TransferRemoteDataSource {
   Future<Either<Failure, TransferModel>> createTransfer({
     required CreateTransferRequest request,
   }) async {
-    LoggingService.auth('Starting create transfer process', {
-      'transferType': request.transferType.name,
-      'itemsCount': request.items.length,
-    });
 
     try {
       final ApiResponse<TransferModel> response = await _api.create(
@@ -157,11 +154,11 @@ class TransferRemoteDataSourceImpl implements TransferRemoteDataSource {
   @override
   Future<Either<Failure, TransferModel>> updateStatus({
     required int id,
-    required String status,
+    required TransferStatus status,
   }) async {
     LoggingService.auth('Starting update transfer status process', {
       'id': id,
-      'status': status,
+      'status': status.name,
     });
 
     try {

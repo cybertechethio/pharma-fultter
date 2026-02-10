@@ -5,11 +5,12 @@ import '../../../../../app/theme/text_styles.dart';
 import '../../../../../app/theme/brand_colors.dart';
 import '../../../../../l10n/app_localizations.dart';
 import '../../../../../shared/components/common/card_title.dart';
-import '../../../../../core/enums/transfer_type_enum.dart';
 import '../../../../../core/enums/transfer_status_enum.dart';
+import '../../../../auth/presentation/providers/current_context_provider.dart';
 import '../../../domain/entities/transfer.dart';
 import '../../providers/transfer_notifier.dart';
 import '../../providers/transfer_loading_providers.dart';
+import '../../utils/transfer_branch_helpers.dart';
 
 class TransferHeaderSection extends ConsumerWidget {
   final Transfer transfer;
@@ -22,7 +23,13 @@ class TransferHeaderSection extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    final typeColor = transfer.transferType.getColor();
+    final contextAsync = ref.watch(currentContextProvider);
+    final currentBranchId = contextAsync.value?.currentBranchId;
+    final showAcceptReject = canAcceptOrReject(transfer, currentBranchId);
+    final isSource = isCurrentBranchSource(transfer, currentBranchId);
+    final typeColor = isSource ? BrandColors.warning : BrandColors.success;
+    final typeLabel = isSource ? l10n.transferOut : l10n.transferIn;
+    final typeIcon = isSource ? Icons.call_made : Icons.call_received;
     final status = TransferStatusExtension.fromString(transfer.status);
     final statusColor = status.getColor();
     return Container(
@@ -57,13 +64,13 @@ class TransferHeaderSection extends ConsumerWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(
-                      transfer.transferType.getIcon(),
+                      typeIcon,
                       size: AppSizes.iconSizeSm,
                       color: typeColor,
                     ),
                     const SizedBox(width: AppSizes.xs),
                     Text(
-                      transfer.transferType.getDisplayLabel(),
+                      typeLabel,
                       style: context.small(color: typeColor, bold: true),
                     ),
                   ],
@@ -91,9 +98,8 @@ class TransferHeaderSection extends ConsumerWidget {
               ),
             ],
           ),
-          // Action Buttons - Only show for transfer_in with pending status
-          if (transfer.transferType == TransferType.transferIn && 
-              transfer.status.toLowerCase() == 'pending') ...[
+          // Action Buttons - Only show for acceptors (current branch = destination branch, status pending)
+          if (showAcceptReject) ...[
             const SizedBox(height: AppSizes.lg),
             const Divider(height: AppSizes.xxs),
             const SizedBox(height: AppSizes.md),
@@ -106,8 +112,8 @@ class TransferHeaderSection extends ConsumerWidget {
                   label: l10n.accept,
                   icon: Icons.check_circle_outline,
                   color: BrandColors.success,
-                  isLoading: ref.watch(transferStatusUpdateLoadingProvider).contains(transfer.id),
-                  isDisabled: ref.watch(transferStatusUpdateLoadingProvider).contains(transfer.id),
+                  isLoading: ref.watch(transferStatusUpdateLoadingProvider)[transfer.id] == TransferStatus.completed,
+                  isDisabled: ref.watch(transferStatusUpdateLoadingProvider).containsKey(transfer.id),
                   onPressed: () => _showAcceptConfirmation(context, ref),
                 ),
                 // Reject Button
@@ -115,8 +121,8 @@ class TransferHeaderSection extends ConsumerWidget {
                   label: l10n.reject,
                   icon: Icons.cancel_outlined,
                   color: BrandColors.error,
-                  isLoading: ref.watch(transferStatusUpdateLoadingProvider).contains(transfer.id),
-                  isDisabled: ref.watch(transferStatusUpdateLoadingProvider).contains(transfer.id),
+                  isLoading: ref.watch(transferStatusUpdateLoadingProvider)[transfer.id] == TransferStatus.rejected,
+                  isDisabled: ref.watch(transferStatusUpdateLoadingProvider).containsKey(transfer.id),
                   onPressed: () => _showRejectConfirmation(context, ref),
                 ),
               ],
@@ -140,7 +146,7 @@ class TransferHeaderSection extends ConsumerWidget {
       onConfirm: () {
         ref.read(transferProvider.notifier).updateTransferStatus(
           id: transfer.id,
-          status: 'completed',
+          status: TransferStatus.completed,
         );
       },
     );
@@ -160,7 +166,7 @@ class TransferHeaderSection extends ConsumerWidget {
       onConfirm: () {
         ref.read(transferProvider.notifier).updateTransferStatus(
           id: transfer.id,
-          status: 'rejected',
+          status: TransferStatus.rejected,
         );
       },
     );

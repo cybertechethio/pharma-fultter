@@ -8,7 +8,6 @@ part 'expense_detail_model.g.dart';
 sealed class ExpenseDetailModel with _$ExpenseDetailModel {
   const factory ExpenseDetailModel({
     @JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) required String id,
-    int? categoryId,
     required DateTime expenseDate,
     required String name,
     @JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) required String amount,
@@ -17,7 +16,6 @@ sealed class ExpenseDetailModel with _$ExpenseDetailModel {
     String? status,
     required DateTime createdAt,
     DateTime? updatedAt,
-    String? catName,
     @JsonKey(name: 'expensePayments', defaultValue: <ExpensePaymentModel>[])
     required List<ExpensePaymentModel> expensePayments,
   }) = _ExpenseDetailModel;
@@ -51,6 +49,7 @@ sealed class ExpensePaymentMethodModel with _$ExpensePaymentMethodModel {
       int? bankId,
     required DateTime createdAt,
     @JsonKey(name: 'banks', fromJson: JsonTypeConverters.bankNameFromDynamic) String? bankName,
+    String? attachment,
   }) = _ExpensePaymentMethodModel;
 
   factory ExpensePaymentMethodModel.fromJson(Map<String, dynamic> json) =>

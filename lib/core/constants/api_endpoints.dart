@@ -206,21 +206,6 @@ class ApiEndpoints {
 
   // ==================== EXPENSE CATEGORY ENDPOINTS ====================
 
-  /// Expense Category base path
-  static const String expenseCategories = '/expenses/categories';
-
-  /// Get all expense categories
-  static const String getExpenseCategories = expenseCategories;
-
-  /// Create expense category
-  static const String createExpenseCategory = expenseCategories;
-
-  /// Update expense category
-  static String updateExpenseCategory(String id) => '$expenseCategories/$id';
-
-  /// Delete expense category
-  static String deleteExpenseCategory(String id) => '$expenseCategories/$id';
-
   // ==================== EXPENSE ENDPOINTS ====================
 
   /// Expense base path
@@ -327,6 +312,9 @@ class ApiEndpoints {
 
   /// Get all items
   static const String getItems = items;
+
+  /// Get items with batches (cart / include-batch)
+  static const String getItemsIncludeBatches = '$items/include-batch';
 
   /// Create item
   static const String createItem = items;
