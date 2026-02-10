@@ -36,13 +36,6 @@ class ExpenseBasicInfoWidget extends StatelessWidget {
                         expense.name,
                         style: context.subtitle(bold: true),
                       ),
-                      if (expense.catName != null) ...[
-                        const SizedBox(height: AppSizes.xs),
-                        Text(
-                          expense.catName!,
-                          style: context.bodySecondary(),
-                        ),
-                      ],
                     ],
                   ),
                 ),

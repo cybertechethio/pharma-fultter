@@ -82,8 +82,24 @@ class TransferBottomSheet extends ConsumerWidget {
   }
 
   Future<void> _handleCreateTransfer(BuildContext context, WidgetRef ref) async {
+    final formState = ref.read(transferFormProvider);
     final formNotifier = ref.read(transferFormProvider.notifier);
     final snackbar = ref.read(snackbarServiceProvider);
+
+    // Check items that have no batch selected
+    final itemIdsWithNoBatch = <int>[];
+    for (final itemId in formState.cartItems.keys) {
+      final batches = formState.cartItemBatches[itemId] ?? [];
+      if (batches.isEmpty) {
+        itemIdsWithNoBatch.add(itemId);
+      }
+    }
+    if (itemIdsWithNoBatch.isNotEmpty) {
+      formNotifier.setItemIdsRequiringBatch(itemIdsWithNoBatch);
+      return;
+    }
+
+    formNotifier.setItemIdsRequiringBatch([]);
 
     // Build request from form state (with cart items)
     final request = formNotifier.buildRequest();

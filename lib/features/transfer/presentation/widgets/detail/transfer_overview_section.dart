@@ -34,14 +34,14 @@ class TransferOverviewSection extends StatelessWidget {
           _InfoRow(
             icon: Icons.location_on_outlined,
             label: l10n.sourceBranch,
-            value: transfer.sourceBranch ?? l10n.notAvailable,
+            value: transfer.sourceBranchName ?? l10n.notAvailable,
           ),
           const Divider(height: AppSizes.lg),
           // Destination Branch
           _InfoRow(
             icon: Icons.location_city_outlined,
             label: l10n.destinationBranch,
-            value: transfer.destinationBranch ?? l10n.notAvailable,
+            value: transfer.destinationBranchName ?? l10n.notAvailable,
           ),
           const Divider(height: AppSizes.lg),
           // Created At
@@ -69,7 +69,7 @@ class TransferOverviewSection extends StatelessWidget {
           _InfoRow(
             icon: Icons.edit_outlined,
             label: l10n.updatedBy,
-            value: transfer.updatorName ?? l10n.notAvailable,
+            value: transfer.updaterName ?? l10n.notAvailable,
           ),
         ],
       ),
@@ -91,17 +91,25 @@ class _InfoRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Icon(icon, size: AppSizes.md2, color: BrandColors.primary),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(icon, size: AppSizes.md2, color: BrandColors.primary),
+            const SizedBox(width: AppSizes.sm),
+            Text(label, style: context.small()),
+          ],
+        ),
         const SizedBox(width: AppSizes.sm),
         Expanded(
-          child: Text(label, style: context.small()),
-        ),
-        Flexible(
           child: Text(
             value,
             style: context.body(bold: true),
             textAlign: TextAlign.end,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
           ),
         ),
       ],

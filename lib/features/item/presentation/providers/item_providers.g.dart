@@ -181,6 +181,57 @@ final class GetItemsUseCaseProvider
 
 String _$getItemsUseCaseHash() => r'7cee55a4f35947e2a68bfe003d824d0ef41859b2';
 
+@ProviderFor(getItemsIncludeBatchesUseCase)
+const getItemsIncludeBatchesUseCaseProvider =
+    GetItemsIncludeBatchesUseCaseProvider._();
+
+final class GetItemsIncludeBatchesUseCaseProvider
+    extends
+        $FunctionalProvider<
+          GetItemsIncludeBatchesUseCase,
+          GetItemsIncludeBatchesUseCase,
+          GetItemsIncludeBatchesUseCase
+        >
+    with $Provider<GetItemsIncludeBatchesUseCase> {
+  const GetItemsIncludeBatchesUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'getItemsIncludeBatchesUseCaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$getItemsIncludeBatchesUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<GetItemsIncludeBatchesUseCase> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  GetItemsIncludeBatchesUseCase create(Ref ref) {
+    return getItemsIncludeBatchesUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(GetItemsIncludeBatchesUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<GetItemsIncludeBatchesUseCase>(
+        value,
+      ),
+    );
+  }
+}
+
+String _$getItemsIncludeBatchesUseCaseHash() =>
+    r'66511989a16585e982d693a021cb09b4e5879a11';
+
 @ProviderFor(createItemUseCase)
 const createItemUseCaseProvider = CreateItemUseCaseProvider._();
 

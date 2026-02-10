@@ -11,35 +11,28 @@ _TransferModel _$TransferModelFromJson(
 ) => $checkedCreate('_TransferModel', json, ($checkedConvert) {
   final val = _TransferModel(
     id: $checkedConvert('id', (v) => (v as num).toInt()),
-    companyId: $checkedConvert('companyId', (v) => (v as num).toInt()),
-    transferType: $checkedConvert('transferType', (v) => v as String),
     transferNumber: $checkedConvert('transferNumber', (v) => v as String),
-    status: $checkedConvert('status', (v) => v as String),
     sourceBranchId: $checkedConvert(
       'sourceBranchId',
-      (v) => (v as num?)?.toInt(),
+      (v) => (v as num).toInt(),
     ),
-    sourceBranch: $checkedConvert('sourceBranch', (v) => v as String?),
     destinationBranchId: $checkedConvert(
       'destinationBranchId',
-      (v) => (v as num?)?.toInt(),
+      (v) => (v as num).toInt(),
     ),
-    destinationBranch: $checkedConvert(
-      'destinationBranch',
-      (v) => v as String?,
-    ),
-    relatedTransferId: $checkedConvert(
-      'relatedTransferId',
-      (v) => (v as num?)?.toInt(),
-    ),
-    transferId: $checkedConvert('transferId', (v) => (v as num?)?.toInt()),
+    status: $checkedConvert('status', (v) => v as String),
     notes: $checkedConvert('notes', (v) => v as String?),
     createdAt: $checkedConvert('createdAt', (v) => DateTime.parse(v as String)),
     updatedAt: $checkedConvert('updatedAt', (v) => DateTime.parse(v as String)),
     createdBy: $checkedConvert('createdBy', (v) => (v as num?)?.toInt()),
     updatedBy: $checkedConvert('updatedBy', (v) => (v as num?)?.toInt()),
+    sourceBranchName: $checkedConvert('sourceBranchName', (v) => v as String?),
+    destinationBranchName: $checkedConvert(
+      'destinationBranchName',
+      (v) => v as String?,
+    ),
     creatorName: $checkedConvert('creatorName', (v) => v as String?),
-    updatorName: $checkedConvert('updatorName', (v) => v as String?),
+    updaterName: $checkedConvert('updaterName', (v) => v as String?),
     transferItems: $checkedConvert(
       'transferItems',
       (v) =>
@@ -57,22 +50,18 @@ _TransferModel _$TransferModelFromJson(
 Map<String, dynamic> _$TransferModelToJson(_TransferModel instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'companyId': instance.companyId,
-      'transferType': instance.transferType,
       'transferNumber': instance.transferNumber,
+      'sourceBranchId': instance.sourceBranchId,
+      'destinationBranchId': instance.destinationBranchId,
       'status': instance.status,
-      'sourceBranchId': ?instance.sourceBranchId,
-      'sourceBranch': ?instance.sourceBranch,
-      'destinationBranchId': ?instance.destinationBranchId,
-      'destinationBranch': ?instance.destinationBranch,
-      'relatedTransferId': ?instance.relatedTransferId,
-      'transferId': ?instance.transferId,
       'notes': ?instance.notes,
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),
       'createdBy': ?instance.createdBy,
       'updatedBy': ?instance.updatedBy,
+      'sourceBranchName': ?instance.sourceBranchName,
+      'destinationBranchName': ?instance.destinationBranchName,
       'creatorName': ?instance.creatorName,
-      'updatorName': ?instance.updatorName,
+      'updaterName': ?instance.updaterName,
       'transferItems': instance.transferItems.map((e) => e.toJson()).toList(),
     };

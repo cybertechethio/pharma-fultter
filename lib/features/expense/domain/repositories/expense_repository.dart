@@ -6,7 +6,6 @@ import '../entities/expense_detail.dart';
 
 abstract class ExpenseRepository {
   Future<Either<Failure, Expense>> createExpense({
-    required String? categoryId,
     required DateTime expenseDate,
     required String name,
     required String? notes,
@@ -17,7 +16,6 @@ abstract class ExpenseRepository {
   Future<Either<Failure, PaginatedResponse<Expense>>> getExpenses({
     int page = 1,
     int limit = 25,
-    String? categoryId,
     DateTime? fromDate,
     DateTime? toDate,
     String? search,
@@ -30,10 +28,10 @@ abstract class ExpenseRepository {
 
   Future<Either<Failure, Expense>> updateExpense({
     required String id,
-    required String? categoryId,
     required DateTime expenseDate,
     required String name,
     required String? notes,
+    required List<String>? attachmentUrls,
     required List<String>? attachmentFilePaths,
   });
 
@@ -47,6 +45,7 @@ abstract class ExpenseRepository {
     required String amount,
     String? referenceNumber,
     int? bankId,
+    String? attachment,
   });
 
   Future<Either<Failure, Unit>> updateExpensePaymentMethod({
@@ -56,6 +55,7 @@ abstract class ExpenseRepository {
     String? amount,
     String? referenceNumber,
     int? bankId,
+    String? attachment,
   });
 
   Future<Either<Failure, Unit>> deleteExpensePaymentMethod({

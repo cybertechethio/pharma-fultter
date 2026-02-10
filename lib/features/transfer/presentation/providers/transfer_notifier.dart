@@ -1,4 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import '../../../../core/enums/transfer_status_enum.dart';
 import '../../../../shared/models/pagination_model.dart';
 import '../../domain/entities/transfer.dart';
 import '../../data/models/create_transfer_request.dart';
@@ -129,10 +130,10 @@ class TransferNotifier extends _$TransferNotifier {
   /// Update transfer status (accept or reject)
   Future<void> updateTransferStatus({
     required int id,
-    required String status, // "completed" or "rejected"
+    required TransferStatus status,
   }) async {
     final statusLoading = ref.read(transferStatusUpdateLoadingProvider.notifier);
-    statusLoading.start(id);
+    statusLoading.start(id, status);
 
     final useCase = ref.read(updateTransferStatusUseCaseProvider);
 
@@ -140,6 +141,8 @@ class TransferNotifier extends _$TransferNotifier {
       id: id,
       status: status,
     );
+
+    final statusStr = status.name;
 
     result.fold(
       (failure) {
@@ -150,17 +153,17 @@ class TransferNotifier extends _$TransferNotifier {
         final current = state.value ?? const <Transfer>[];
         final updatedList = current.map((transfer) {
           if (transfer.id == id) {
-            return transfer.copyWith(status: status);
+            return transfer.copyWith(status: statusStr);
           }
           return transfer;
         }).toList();
         state = AsyncValue.data(updatedList);
-        
-        final message = status == 'completed' 
+
+        final message = status == TransferStatus.completed
             ? 'Transfer accepted successfully'
             : 'Transfer rejected successfully';
         ref.read(transferUiEventsProvider.notifier).emit(
-          TransferStatusUpdated(id, status, message),
+          TransferStatusUpdated(id, statusStr, message),
         );
       },
     );

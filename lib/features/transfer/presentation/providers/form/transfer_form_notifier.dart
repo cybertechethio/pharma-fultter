@@ -1,5 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import '../../../../item/domain/entities/item.dart';
+import '../../../../item/domain/entities/item_with_batches.dart';
 import '../../../data/models/create_transfer_request.dart';
 import 'transfer_form_state.dart';
 
@@ -12,116 +12,137 @@ class TransferFormNotifier extends _$TransferFormNotifier {
     return TransferFormState.initial();
   }
 
-  /// Set destination branch
   void setDestinationBranch(int? branchId) {
     state = state.copyWith(
-      request: state.request.copyWith(destinationBranchId: branchId),
+      request: state.request.copyWith(
+        destinationBranchId: branchId ?? 0,
+      ),
     );
   }
 
-  /// Set notes
   void setNotes(String? notes) {
     state = state.copyWith(
-      request: state.request.copyWith(notes: notes?.isNotEmpty == true ? notes : null),
+      request: state.request.copyWith(
+        notes: notes?.isNotEmpty == true ? notes : null,
+      ),
     );
   }
 
-  // ============================================================================
-  // CART METHODS
-  // ============================================================================
-
-  /// Add item to cart
-  /// If qty is provided, it overrides existing quantity
-  /// If qty is null, increments by 1
-  void addToCart(Item item, int? qty) {
-    final cartItems = Map<int, Item>.from(state.cartItems);
-    final cartQuantities = Map<int, int>.from(state.cartQuantities);
-
-    if (qty != null) {
-      // Override quantity
-      cartItems[item.id] = item;
-      cartQuantities[item.id] = qty;
-    } else {
-      // Increment by 1
-      cartItems[item.id] = item;
-      final currentQty = cartQuantities[item.id] ?? 0;
-      cartQuantities[item.id] = currentQty + 1;
+  void addToCart(ItemWithBatches item) {
+    final cartItems = Map<int, ItemWithBatches>.from(state.cartItems);
+    final cartItemBatches =
+        Map<int, List<CreateTransferBatchRequest>>.from(state.cartItemBatches);
+    cartItems[item.id] = item;
+    if (!cartItemBatches.containsKey(item.id)) {
+      cartItemBatches[item.id] = [];
     }
-
     state = state.copyWith(
       cartItems: cartItems,
-      cartQuantities: cartQuantities,
+      cartItemBatches: cartItemBatches,
     );
   }
 
-  /// Remove from cart (decrease quantity by 1)
-  void removeFromCart(int itemId) {
-    final cartQuantities = Map<int, int>.from(state.cartQuantities);
-    final currentQty = cartQuantities[itemId] ?? 0;
-
-    if (currentQty <= 1) {
-      deleteFromCart(itemId);
-      return;
-    }
-
-    cartQuantities[itemId] = currentQty - 1;
-    state = state.copyWith(cartQuantities: cartQuantities);
-  }
-
-  /// Delete item from cart completely
   void deleteFromCart(int itemId) {
-    final cartItems = Map<int, Item>.from(state.cartItems);
-    final cartQuantities = Map<int, int>.from(state.cartQuantities);
-
+    final cartItems = Map<int, ItemWithBatches>.from(state.cartItems);
+    final cartItemBatches =
+        Map<int, List<CreateTransferBatchRequest>>.from(state.cartItemBatches);
     cartItems.remove(itemId);
-    cartQuantities.remove(itemId);
-
+    cartItemBatches.remove(itemId);
     state = state.copyWith(
       cartItems: cartItems,
-      cartQuantities: cartQuantities,
+      cartItemBatches: cartItemBatches,
     );
   }
 
-  /// Check if item is in cart
-  bool isInCart(int itemId) {
-    return state.cartItems.containsKey(itemId);
+  bool isInCart(int itemId) => state.cartItems.containsKey(itemId);
+
+  void setItemIdsRequiringBatch(List<int> itemIds) {
+    state = state.copyWith(itemIdsRequiringBatch: itemIds);
   }
 
-  /// Get quantity for item in cart
-  int getQty(int itemId) {
-    return state.cartQuantities[itemId] ?? 0;
+  void addBatchToItem(int itemId, String batchNumber, int quantity) {
+    if (quantity <= 0) return;
+    final cartItemBatches =
+        Map<int, List<CreateTransferBatchRequest>>.from(state.cartItemBatches);
+    final list = List<CreateTransferBatchRequest>.from(
+      cartItemBatches[itemId] ?? [],
+    );
+    list.add(CreateTransferBatchRequest(
+      batchNumber: batchNumber,
+      quantity: quantity,
+    ));
+    cartItemBatches[itemId] = list;
+    final clearedRequiring =
+        state.itemIdsRequiringBatch.where((id) => id != itemId).toList();
+    state = state.copyWith(
+      cartItemBatches: cartItemBatches,
+      itemIdsRequiringBatch: clearedRequiring,
+    );
   }
 
-  /// Get cart item count (unique items)
-  int getCartItemCount() {
-    return state.cartItems.length;
+  void removeBatchFromItem(int itemId, int index) {
+    final cartItemBatches =
+        Map<int, List<CreateTransferBatchRequest>>.from(state.cartItemBatches);
+    final list = List<CreateTransferBatchRequest>.from(
+      cartItemBatches[itemId] ?? [],
+    );
+    if (index >= 0 && index < list.length) {
+      list.removeAt(index);
+      cartItemBatches[itemId] = list;
+      if (list.isEmpty) {
+        cartItemBatches.remove(itemId);
+      }
+      state = state.copyWith(cartItemBatches: cartItemBatches);
+    }
   }
 
-  /// Build CreateTransferRequest from current state (for submission)
-  CreateTransferRequest buildRequest() {
-    final items = state.cartItems.entries.map((entry) {
-      final itemId = entry.key;
-      final qty = state.cartQuantities[itemId] ?? 1;
-      return CreateTransferItemRequest(
-        itemId: itemId,
-        quantity: qty.toDouble(),
+  void updateBatchQuantity(int itemId, int index, int quantity) {
+    if (quantity <= 0) return;
+    final cartItemBatches =
+        Map<int, List<CreateTransferBatchRequest>>.from(state.cartItemBatches);
+    final list = List<CreateTransferBatchRequest>.from(
+      cartItemBatches[itemId] ?? [],
+    );
+    if (index >= 0 && index < list.length) {
+      final batch = list[index];
+      list[index] = CreateTransferBatchRequest(
+        batchNumber: batch.batchNumber,
+        quantity: quantity,
       );
-    }).toList();
+      cartItemBatches[itemId] = list;
+      state = state.copyWith(cartItemBatches: cartItemBatches);
+    }
+  }
 
+  List<CreateTransferBatchRequest> getBatchesForItem(int itemId) {
+    return state.cartItemBatches[itemId] ?? [];
+  }
+
+  int getCartItemCount() => state.cartItems.length;
+
+  CreateTransferRequest buildRequest() {
+    final items = <CreateTransferItemRequest>[];
+    for (final entry in state.cartItems.entries) {
+      final itemId = entry.key;
+      final batches = state.cartItemBatches[itemId] ?? [];
+      if (batches.isEmpty) continue;
+      items.add(CreateTransferItemRequest(
+        itemId: itemId,
+        batches: batches,
+      ));
+    }
     return state.request.copyWith(items: items);
   }
 
-  /// Reset form to initial state
   void reset() {
     state = TransferFormState.initial();
   }
 
-  /// Clear cart
   void clearCart() {
     state = state.copyWith(
       cartItems: const {},
-      cartQuantities: const {},
+      cartItemBatches: const {},
+      itemIdsRequiringBatch: const [],
     );
   }
 }
-

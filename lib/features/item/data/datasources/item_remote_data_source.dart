@@ -3,11 +3,20 @@ import '../../../../core/errors/failure.dart';
 import '../../../../shared/models/paginated_response.dart';
 import '../models/item_model.dart';
 import '../models/item_request_model.dart';
+import '../models/item_with_batches_model.dart';
 
 abstract class ItemRemoteDataSource {
   Future<Either<Failure, PaginatedResponse<ItemModel>>> getItems({
     int page = 1,
     int limit = 25,
+    String? search,
+    int? categoryId,
+  });
+
+  Future<Either<Failure, PaginatedResponse<ItemWithBatchesModel>>>
+      getItemsIncludeBatches({
+    int page = 1,
+    int limit = 1000,
     String? search,
     int? categoryId,
   });

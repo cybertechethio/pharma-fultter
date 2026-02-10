@@ -1,5 +1,6 @@
 import 'package:cyber_pos/features/transfer/data/mappers/transfer_mapper.dart';
 import 'package:dartz/dartz.dart';
+import '../../../../core/enums/transfer_status_enum.dart';
 import '../../../../core/errors/failure.dart';
 import '../../../../shared/models/paginated_response.dart';
 import '../../domain/entities/transfer.dart';
@@ -67,7 +68,7 @@ class TransferRepositoryImpl implements TransferRepository {
   @override
   Future<Either<Failure, Transfer>> updateStatus({
     required int id,
-    required String status,
+    required TransferStatus status,
   }) async {
     final response = await _remoteDataSource.updateStatus(
       id: id,

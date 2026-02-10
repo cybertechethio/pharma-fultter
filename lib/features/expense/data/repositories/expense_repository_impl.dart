@@ -15,7 +15,6 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
 
   @override
   Future<Either<Failure, Expense>> createExpense({
-    required String? categoryId,
     required DateTime expenseDate,
     required String name,
     required String? notes,
@@ -23,7 +22,6 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
     required List<Map<String, dynamic>> paymentMethods,
   }) async {
     final result = await _remote.create(
-      categoryId: categoryId,
       expenseDate: expenseDate,
       name: name,
       notes: notes,
@@ -41,7 +39,6 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
   Future<Either<Failure, PaginatedResponse<Expense>>> getExpenses({
     int page = 1,
     int limit = 25,
-    String? categoryId,
     DateTime? fromDate,
     DateTime? toDate,
     String? search,
@@ -50,7 +47,6 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
     final result = await _remote.getAll(
       page: page,
       limit: limit,
-      categoryId: categoryId,
       fromDate: fromDate,
       toDate: toDate,
       search: search,
@@ -88,18 +84,18 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
   @override
   Future<Either<Failure, Expense>> updateExpense({
     required String id,
-    required String? categoryId,
     required DateTime expenseDate,
     required String name,
     required String? notes,
+    required List<String>? attachmentUrls,
     required List<String>? attachmentFilePaths,
   }) async {
     final result = await _remote.update(
       id: id,
-      categoryId: categoryId,
       expenseDate: expenseDate,
       name: name,
       notes: notes,
+      attachmentUrls: attachmentUrls,
       attachmentFilePaths: attachmentFilePaths,
     );
 
@@ -128,6 +124,7 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
     required String amount,
     String? referenceNumber,
     int? bankId,
+    String? attachment,
   }) async {
     final result = await _remote.createPaymentMethod(
       expenseId: expenseId,
@@ -135,6 +132,7 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
       amount: amount,
       referenceNumber: referenceNumber,
       bankId: bankId,
+      attachment: attachment,
     );
 
     return result.fold(
@@ -151,6 +149,7 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
     String? amount,
     String? referenceNumber,
     int? bankId,
+    String? attachment,
   }) async {
     final result = await _remote.updatePaymentMethod(
       expenseId: expenseId,
@@ -159,6 +158,7 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
       amount: amount,
       referenceNumber: referenceNumber,
       bankId: bankId,
+      attachment: attachment,
     );
 
     return result.fold(

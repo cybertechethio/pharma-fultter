@@ -1,4 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import '../../../../core/enums/transfer_status_enum.dart';
 
 part 'transfer_loading_providers.g.dart';
 
@@ -15,14 +16,14 @@ class TransferCreateLoading extends _$TransferCreateLoading {
 @riverpod
 class TransferStatusUpdateLoading extends _$TransferStatusUpdateLoading {
   @override
-  Set<int> build() => {};
+  Map<int, TransferStatus> build() => {};
 
-  void start(int id) {
-    state = {...state, id};
+  void start(int id, TransferStatus status) {
+    state = Map<int, TransferStatus>.from(state)..[id] = status;
   }
 
   void stop(int id) {
-    state = state.where((e) => e != id).toSet();
+    state = Map.from(state)..remove(id);
   }
 }
 

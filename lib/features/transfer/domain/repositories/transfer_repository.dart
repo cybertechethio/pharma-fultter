@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import '../../../../core/enums/transfer_status_enum.dart';
 import '../../../../core/errors/failure.dart';
 import '../../../../shared/models/paginated_response.dart';
 import '../../data/models/create_transfer_request.dart';
@@ -18,7 +19,7 @@ abstract class TransferRepository {
   
   Future<Either<Failure, Transfer>> updateStatus({
     required int id,
-    required String status,
+    required TransferStatus status,
   });
 }
 

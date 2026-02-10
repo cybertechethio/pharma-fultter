@@ -39,7 +39,7 @@ class TransferDetailScreen extends ConsumerWidget {
             ref.invalidate(transferDetailProvider(transferId));
           } else if (next is TransferStatusUpdated) {
             snackbar.showSuccess(next.message);
-            // Refresh the transfer detail
+            ref.invalidate(transferDetailProvider(next.id));
           }
         ref.read(transferUiEventsProvider.notifier).clear();
       },

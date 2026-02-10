@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ExpenseDetailModel {
 
-@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) String get id; int? get categoryId; DateTime get expenseDate; String get name;@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) String get amount; String? get notes;@JsonKey(defaultValue: <String>[]) List<String> get attachments; String? get status; DateTime get createdAt; DateTime? get updatedAt; String? get catName;@JsonKey(name: 'expensePayments', defaultValue: <ExpensePaymentModel>[]) List<ExpensePaymentModel> get expensePayments;
+@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) String get id; DateTime get expenseDate; String get name;@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) String get amount; String? get notes;@JsonKey(defaultValue: <String>[]) List<String> get attachments; String? get status; DateTime get createdAt; DateTime? get updatedAt;@JsonKey(name: 'expensePayments', defaultValue: <ExpensePaymentModel>[]) List<ExpensePaymentModel> get expensePayments;
 /// Create a copy of ExpenseDetailModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $ExpenseDetailModelCopyWith<ExpenseDetailModel> get copyWith => _$ExpenseDetailM
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ExpenseDetailModel&&(identical(other.id, id) || other.id == id)&&(identical(other.categoryId, categoryId) || other.categoryId == categoryId)&&(identical(other.expenseDate, expenseDate) || other.expenseDate == expenseDate)&&(identical(other.name, name) || other.name == name)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.notes, notes) || other.notes == notes)&&const DeepCollectionEquality().equals(other.attachments, attachments)&&(identical(other.status, status) || other.status == status)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.catName, catName) || other.catName == catName)&&const DeepCollectionEquality().equals(other.expensePayments, expensePayments));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ExpenseDetailModel&&(identical(other.id, id) || other.id == id)&&(identical(other.expenseDate, expenseDate) || other.expenseDate == expenseDate)&&(identical(other.name, name) || other.name == name)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.notes, notes) || other.notes == notes)&&const DeepCollectionEquality().equals(other.attachments, attachments)&&(identical(other.status, status) || other.status == status)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&const DeepCollectionEquality().equals(other.expensePayments, expensePayments));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,categoryId,expenseDate,name,amount,notes,const DeepCollectionEquality().hash(attachments),status,createdAt,updatedAt,catName,const DeepCollectionEquality().hash(expensePayments));
+int get hashCode => Object.hash(runtimeType,id,expenseDate,name,amount,notes,const DeepCollectionEquality().hash(attachments),status,createdAt,updatedAt,const DeepCollectionEquality().hash(expensePayments));
 
 @override
 String toString() {
-  return 'ExpenseDetailModel(id: $id, categoryId: $categoryId, expenseDate: $expenseDate, name: $name, amount: $amount, notes: $notes, attachments: $attachments, status: $status, createdAt: $createdAt, updatedAt: $updatedAt, catName: $catName, expensePayments: $expensePayments)';
+  return 'ExpenseDetailModel(id: $id, expenseDate: $expenseDate, name: $name, amount: $amount, notes: $notes, attachments: $attachments, status: $status, createdAt: $createdAt, updatedAt: $updatedAt, expensePayments: $expensePayments)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $ExpenseDetailModelCopyWith<$Res>  {
   factory $ExpenseDetailModelCopyWith(ExpenseDetailModel value, $Res Function(ExpenseDetailModel) _then) = _$ExpenseDetailModelCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) String id, int? categoryId, DateTime expenseDate, String name,@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) String amount, String? notes,@JsonKey(defaultValue: <String>[]) List<String> attachments, String? status, DateTime createdAt, DateTime? updatedAt, String? catName,@JsonKey(name: 'expensePayments', defaultValue: <ExpensePaymentModel>[]) List<ExpensePaymentModel> expensePayments
+@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) String id, DateTime expenseDate, String name,@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) String amount, String? notes,@JsonKey(defaultValue: <String>[]) List<String> attachments, String? status, DateTime createdAt, DateTime? updatedAt,@JsonKey(name: 'expensePayments', defaultValue: <ExpensePaymentModel>[]) List<ExpensePaymentModel> expensePayments
 });
 
 
@@ -65,11 +65,10 @@ class _$ExpenseDetailModelCopyWithImpl<$Res>
 
 /// Create a copy of ExpenseDetailModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? categoryId = freezed,Object? expenseDate = null,Object? name = null,Object? amount = null,Object? notes = freezed,Object? attachments = null,Object? status = freezed,Object? createdAt = null,Object? updatedAt = freezed,Object? catName = freezed,Object? expensePayments = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? expenseDate = null,Object? name = null,Object? amount = null,Object? notes = freezed,Object? attachments = null,Object? status = freezed,Object? createdAt = null,Object? updatedAt = freezed,Object? expensePayments = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,categoryId: freezed == categoryId ? _self.categoryId : categoryId // ignore: cast_nullable_to_non_nullable
-as int?,expenseDate: null == expenseDate ? _self.expenseDate : expenseDate // ignore: cast_nullable_to_non_nullable
+as String,expenseDate: null == expenseDate ? _self.expenseDate : expenseDate // ignore: cast_nullable_to_non_nullable
 as DateTime,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
 as String,notes: freezed == notes ? _self.notes : notes // ignore: cast_nullable_to_non_nullable
@@ -77,8 +76,7 @@ as String?,attachments: null == attachments ? _self.attachments : attachments //
 as List<String>,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as String?,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
-as DateTime?,catName: freezed == catName ? _self.catName : catName // ignore: cast_nullable_to_non_nullable
-as String?,expensePayments: null == expensePayments ? _self.expensePayments : expensePayments // ignore: cast_nullable_to_non_nullable
+as DateTime?,expensePayments: null == expensePayments ? _self.expensePayments : expensePayments // ignore: cast_nullable_to_non_nullable
 as List<ExpensePaymentModel>,
   ));
 }
@@ -161,10 +159,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic)  String id,  int? categoryId,  DateTime expenseDate,  String name, @JsonKey(fromJson: JsonTypeConverters.stringFromDynamic)  String amount,  String? notes, @JsonKey(defaultValue: <String>[])  List<String> attachments,  String? status,  DateTime createdAt,  DateTime? updatedAt,  String? catName, @JsonKey(name: 'expensePayments', defaultValue: <ExpensePaymentModel>[])  List<ExpensePaymentModel> expensePayments)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic)  String id,  DateTime expenseDate,  String name, @JsonKey(fromJson: JsonTypeConverters.stringFromDynamic)  String amount,  String? notes, @JsonKey(defaultValue: <String>[])  List<String> attachments,  String? status,  DateTime createdAt,  DateTime? updatedAt, @JsonKey(name: 'expensePayments', defaultValue: <ExpensePaymentModel>[])  List<ExpensePaymentModel> expensePayments)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ExpenseDetailModel() when $default != null:
-return $default(_that.id,_that.categoryId,_that.expenseDate,_that.name,_that.amount,_that.notes,_that.attachments,_that.status,_that.createdAt,_that.updatedAt,_that.catName,_that.expensePayments);case _:
+return $default(_that.id,_that.expenseDate,_that.name,_that.amount,_that.notes,_that.attachments,_that.status,_that.createdAt,_that.updatedAt,_that.expensePayments);case _:
   return orElse();
 
 }
@@ -182,10 +180,10 @@ return $default(_that.id,_that.categoryId,_that.expenseDate,_that.name,_that.amo
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic)  String id,  int? categoryId,  DateTime expenseDate,  String name, @JsonKey(fromJson: JsonTypeConverters.stringFromDynamic)  String amount,  String? notes, @JsonKey(defaultValue: <String>[])  List<String> attachments,  String? status,  DateTime createdAt,  DateTime? updatedAt,  String? catName, @JsonKey(name: 'expensePayments', defaultValue: <ExpensePaymentModel>[])  List<ExpensePaymentModel> expensePayments)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic)  String id,  DateTime expenseDate,  String name, @JsonKey(fromJson: JsonTypeConverters.stringFromDynamic)  String amount,  String? notes, @JsonKey(defaultValue: <String>[])  List<String> attachments,  String? status,  DateTime createdAt,  DateTime? updatedAt, @JsonKey(name: 'expensePayments', defaultValue: <ExpensePaymentModel>[])  List<ExpensePaymentModel> expensePayments)  $default,) {final _that = this;
 switch (_that) {
 case _ExpenseDetailModel():
-return $default(_that.id,_that.categoryId,_that.expenseDate,_that.name,_that.amount,_that.notes,_that.attachments,_that.status,_that.createdAt,_that.updatedAt,_that.catName,_that.expensePayments);}
+return $default(_that.id,_that.expenseDate,_that.name,_that.amount,_that.notes,_that.attachments,_that.status,_that.createdAt,_that.updatedAt,_that.expensePayments);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -199,10 +197,10 @@ return $default(_that.id,_that.categoryId,_that.expenseDate,_that.name,_that.amo
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic)  String id,  int? categoryId,  DateTime expenseDate,  String name, @JsonKey(fromJson: JsonTypeConverters.stringFromDynamic)  String amount,  String? notes, @JsonKey(defaultValue: <String>[])  List<String> attachments,  String? status,  DateTime createdAt,  DateTime? updatedAt,  String? catName, @JsonKey(name: 'expensePayments', defaultValue: <ExpensePaymentModel>[])  List<ExpensePaymentModel> expensePayments)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic)  String id,  DateTime expenseDate,  String name, @JsonKey(fromJson: JsonTypeConverters.stringFromDynamic)  String amount,  String? notes, @JsonKey(defaultValue: <String>[])  List<String> attachments,  String? status,  DateTime createdAt,  DateTime? updatedAt, @JsonKey(name: 'expensePayments', defaultValue: <ExpensePaymentModel>[])  List<ExpensePaymentModel> expensePayments)?  $default,) {final _that = this;
 switch (_that) {
 case _ExpenseDetailModel() when $default != null:
-return $default(_that.id,_that.categoryId,_that.expenseDate,_that.name,_that.amount,_that.notes,_that.attachments,_that.status,_that.createdAt,_that.updatedAt,_that.catName,_that.expensePayments);case _:
+return $default(_that.id,_that.expenseDate,_that.name,_that.amount,_that.notes,_that.attachments,_that.status,_that.createdAt,_that.updatedAt,_that.expensePayments);case _:
   return null;
 
 }
@@ -214,11 +212,10 @@ return $default(_that.id,_that.categoryId,_that.expenseDate,_that.name,_that.amo
 @JsonSerializable()
 
 class _ExpenseDetailModel implements ExpenseDetailModel {
-  const _ExpenseDetailModel({@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) required this.id, this.categoryId, required this.expenseDate, required this.name, @JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) required this.amount, this.notes, @JsonKey(defaultValue: <String>[]) required final  List<String> attachments, this.status, required this.createdAt, this.updatedAt, this.catName, @JsonKey(name: 'expensePayments', defaultValue: <ExpensePaymentModel>[]) required final  List<ExpensePaymentModel> expensePayments}): _attachments = attachments,_expensePayments = expensePayments;
+  const _ExpenseDetailModel({@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) required this.id, required this.expenseDate, required this.name, @JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) required this.amount, this.notes, @JsonKey(defaultValue: <String>[]) required final  List<String> attachments, this.status, required this.createdAt, this.updatedAt, @JsonKey(name: 'expensePayments', defaultValue: <ExpensePaymentModel>[]) required final  List<ExpensePaymentModel> expensePayments}): _attachments = attachments,_expensePayments = expensePayments;
   factory _ExpenseDetailModel.fromJson(Map<String, dynamic> json) => _$ExpenseDetailModelFromJson(json);
 
 @override@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) final  String id;
-@override final  int? categoryId;
 @override final  DateTime expenseDate;
 @override final  String name;
 @override@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) final  String amount;
@@ -233,7 +230,6 @@ class _ExpenseDetailModel implements ExpenseDetailModel {
 @override final  String? status;
 @override final  DateTime createdAt;
 @override final  DateTime? updatedAt;
-@override final  String? catName;
  final  List<ExpensePaymentModel> _expensePayments;
 @override@JsonKey(name: 'expensePayments', defaultValue: <ExpensePaymentModel>[]) List<ExpensePaymentModel> get expensePayments {
   if (_expensePayments is EqualUnmodifiableListView) return _expensePayments;
@@ -255,16 +251,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ExpenseDetailModel&&(identical(other.id, id) || other.id == id)&&(identical(other.categoryId, categoryId) || other.categoryId == categoryId)&&(identical(other.expenseDate, expenseDate) || other.expenseDate == expenseDate)&&(identical(other.name, name) || other.name == name)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.notes, notes) || other.notes == notes)&&const DeepCollectionEquality().equals(other._attachments, _attachments)&&(identical(other.status, status) || other.status == status)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.catName, catName) || other.catName == catName)&&const DeepCollectionEquality().equals(other._expensePayments, _expensePayments));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ExpenseDetailModel&&(identical(other.id, id) || other.id == id)&&(identical(other.expenseDate, expenseDate) || other.expenseDate == expenseDate)&&(identical(other.name, name) || other.name == name)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.notes, notes) || other.notes == notes)&&const DeepCollectionEquality().equals(other._attachments, _attachments)&&(identical(other.status, status) || other.status == status)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&const DeepCollectionEquality().equals(other._expensePayments, _expensePayments));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,categoryId,expenseDate,name,amount,notes,const DeepCollectionEquality().hash(_attachments),status,createdAt,updatedAt,catName,const DeepCollectionEquality().hash(_expensePayments));
+int get hashCode => Object.hash(runtimeType,id,expenseDate,name,amount,notes,const DeepCollectionEquality().hash(_attachments),status,createdAt,updatedAt,const DeepCollectionEquality().hash(_expensePayments));
 
 @override
 String toString() {
-  return 'ExpenseDetailModel(id: $id, categoryId: $categoryId, expenseDate: $expenseDate, name: $name, amount: $amount, notes: $notes, attachments: $attachments, status: $status, createdAt: $createdAt, updatedAt: $updatedAt, catName: $catName, expensePayments: $expensePayments)';
+  return 'ExpenseDetailModel(id: $id, expenseDate: $expenseDate, name: $name, amount: $amount, notes: $notes, attachments: $attachments, status: $status, createdAt: $createdAt, updatedAt: $updatedAt, expensePayments: $expensePayments)';
 }
 
 
@@ -275,7 +271,7 @@ abstract mixin class _$ExpenseDetailModelCopyWith<$Res> implements $ExpenseDetai
   factory _$ExpenseDetailModelCopyWith(_ExpenseDetailModel value, $Res Function(_ExpenseDetailModel) _then) = __$ExpenseDetailModelCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) String id, int? categoryId, DateTime expenseDate, String name,@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) String amount, String? notes,@JsonKey(defaultValue: <String>[]) List<String> attachments, String? status, DateTime createdAt, DateTime? updatedAt, String? catName,@JsonKey(name: 'expensePayments', defaultValue: <ExpensePaymentModel>[]) List<ExpensePaymentModel> expensePayments
+@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) String id, DateTime expenseDate, String name,@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) String amount, String? notes,@JsonKey(defaultValue: <String>[]) List<String> attachments, String? status, DateTime createdAt, DateTime? updatedAt,@JsonKey(name: 'expensePayments', defaultValue: <ExpensePaymentModel>[]) List<ExpensePaymentModel> expensePayments
 });
 
 
@@ -292,11 +288,10 @@ class __$ExpenseDetailModelCopyWithImpl<$Res>
 
 /// Create a copy of ExpenseDetailModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? categoryId = freezed,Object? expenseDate = null,Object? name = null,Object? amount = null,Object? notes = freezed,Object? attachments = null,Object? status = freezed,Object? createdAt = null,Object? updatedAt = freezed,Object? catName = freezed,Object? expensePayments = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? expenseDate = null,Object? name = null,Object? amount = null,Object? notes = freezed,Object? attachments = null,Object? status = freezed,Object? createdAt = null,Object? updatedAt = freezed,Object? expensePayments = null,}) {
   return _then(_ExpenseDetailModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,categoryId: freezed == categoryId ? _self.categoryId : categoryId // ignore: cast_nullable_to_non_nullable
-as int?,expenseDate: null == expenseDate ? _self.expenseDate : expenseDate // ignore: cast_nullable_to_non_nullable
+as String,expenseDate: null == expenseDate ? _self.expenseDate : expenseDate // ignore: cast_nullable_to_non_nullable
 as DateTime,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
 as String,notes: freezed == notes ? _self.notes : notes // ignore: cast_nullable_to_non_nullable
@@ -304,8 +299,7 @@ as String?,attachments: null == attachments ? _self._attachments : attachments /
 as List<String>,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as String?,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
-as DateTime?,catName: freezed == catName ? _self.catName : catName // ignore: cast_nullable_to_non_nullable
-as String?,expensePayments: null == expensePayments ? _self._expensePayments : expensePayments // ignore: cast_nullable_to_non_nullable
+as DateTime?,expensePayments: null == expensePayments ? _self._expensePayments : expensePayments // ignore: cast_nullable_to_non_nullable
 as List<ExpensePaymentModel>,
   ));
 }
@@ -592,7 +586,7 @@ as List<ExpensePaymentMethodModel>,
 /// @nodoc
 mixin _$ExpensePaymentMethodModel {
 
-@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) String get id; String get method;@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) String get amount; String? get referenceNumber; int? get bankId; DateTime get createdAt;@JsonKey(name: 'banks', fromJson: JsonTypeConverters.bankNameFromDynamic) String? get bankName;
+@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) String get id; String get method;@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) String get amount; String? get referenceNumber; int? get bankId; DateTime get createdAt;@JsonKey(name: 'banks', fromJson: JsonTypeConverters.bankNameFromDynamic) String? get bankName; String? get attachment;
 /// Create a copy of ExpensePaymentMethodModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -605,16 +599,16 @@ $ExpensePaymentMethodModelCopyWith<ExpensePaymentMethodModel> get copyWith => _$
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ExpensePaymentMethodModel&&(identical(other.id, id) || other.id == id)&&(identical(other.method, method) || other.method == method)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.referenceNumber, referenceNumber) || other.referenceNumber == referenceNumber)&&(identical(other.bankId, bankId) || other.bankId == bankId)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.bankName, bankName) || other.bankName == bankName));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ExpensePaymentMethodModel&&(identical(other.id, id) || other.id == id)&&(identical(other.method, method) || other.method == method)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.referenceNumber, referenceNumber) || other.referenceNumber == referenceNumber)&&(identical(other.bankId, bankId) || other.bankId == bankId)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.bankName, bankName) || other.bankName == bankName)&&(identical(other.attachment, attachment) || other.attachment == attachment));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,method,amount,referenceNumber,bankId,createdAt,bankName);
+int get hashCode => Object.hash(runtimeType,id,method,amount,referenceNumber,bankId,createdAt,bankName,attachment);
 
 @override
 String toString() {
-  return 'ExpensePaymentMethodModel(id: $id, method: $method, amount: $amount, referenceNumber: $referenceNumber, bankId: $bankId, createdAt: $createdAt, bankName: $bankName)';
+  return 'ExpensePaymentMethodModel(id: $id, method: $method, amount: $amount, referenceNumber: $referenceNumber, bankId: $bankId, createdAt: $createdAt, bankName: $bankName, attachment: $attachment)';
 }
 
 
@@ -625,7 +619,7 @@ abstract mixin class $ExpensePaymentMethodModelCopyWith<$Res>  {
   factory $ExpensePaymentMethodModelCopyWith(ExpensePaymentMethodModel value, $Res Function(ExpensePaymentMethodModel) _then) = _$ExpensePaymentMethodModelCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) String id, String method,@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) String amount, String? referenceNumber, int? bankId, DateTime createdAt,@JsonKey(name: 'banks', fromJson: JsonTypeConverters.bankNameFromDynamic) String? bankName
+@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) String id, String method,@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) String amount, String? referenceNumber, int? bankId, DateTime createdAt,@JsonKey(name: 'banks', fromJson: JsonTypeConverters.bankNameFromDynamic) String? bankName, String? attachment
 });
 
 
@@ -642,7 +636,7 @@ class _$ExpensePaymentMethodModelCopyWithImpl<$Res>
 
 /// Create a copy of ExpensePaymentMethodModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? method = null,Object? amount = null,Object? referenceNumber = freezed,Object? bankId = freezed,Object? createdAt = null,Object? bankName = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? method = null,Object? amount = null,Object? referenceNumber = freezed,Object? bankId = freezed,Object? createdAt = null,Object? bankName = freezed,Object? attachment = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,method: null == method ? _self.method : method // ignore: cast_nullable_to_non_nullable
@@ -651,6 +645,7 @@ as String,referenceNumber: freezed == referenceNumber ? _self.referenceNumber : 
 as String?,bankId: freezed == bankId ? _self.bankId : bankId // ignore: cast_nullable_to_non_nullable
 as int?,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,bankName: freezed == bankName ? _self.bankName : bankName // ignore: cast_nullable_to_non_nullable
+as String?,attachment: freezed == attachment ? _self.attachment : attachment // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -733,10 +728,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic)  String id,  String method, @JsonKey(fromJson: JsonTypeConverters.stringFromDynamic)  String amount,  String? referenceNumber,  int? bankId,  DateTime createdAt, @JsonKey(name: 'banks', fromJson: JsonTypeConverters.bankNameFromDynamic)  String? bankName)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic)  String id,  String method, @JsonKey(fromJson: JsonTypeConverters.stringFromDynamic)  String amount,  String? referenceNumber,  int? bankId,  DateTime createdAt, @JsonKey(name: 'banks', fromJson: JsonTypeConverters.bankNameFromDynamic)  String? bankName,  String? attachment)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ExpensePaymentMethodModel() when $default != null:
-return $default(_that.id,_that.method,_that.amount,_that.referenceNumber,_that.bankId,_that.createdAt,_that.bankName);case _:
+return $default(_that.id,_that.method,_that.amount,_that.referenceNumber,_that.bankId,_that.createdAt,_that.bankName,_that.attachment);case _:
   return orElse();
 
 }
@@ -754,10 +749,10 @@ return $default(_that.id,_that.method,_that.amount,_that.referenceNumber,_that.b
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic)  String id,  String method, @JsonKey(fromJson: JsonTypeConverters.stringFromDynamic)  String amount,  String? referenceNumber,  int? bankId,  DateTime createdAt, @JsonKey(name: 'banks', fromJson: JsonTypeConverters.bankNameFromDynamic)  String? bankName)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic)  String id,  String method, @JsonKey(fromJson: JsonTypeConverters.stringFromDynamic)  String amount,  String? referenceNumber,  int? bankId,  DateTime createdAt, @JsonKey(name: 'banks', fromJson: JsonTypeConverters.bankNameFromDynamic)  String? bankName,  String? attachment)  $default,) {final _that = this;
 switch (_that) {
 case _ExpensePaymentMethodModel():
-return $default(_that.id,_that.method,_that.amount,_that.referenceNumber,_that.bankId,_that.createdAt,_that.bankName);}
+return $default(_that.id,_that.method,_that.amount,_that.referenceNumber,_that.bankId,_that.createdAt,_that.bankName,_that.attachment);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -771,10 +766,10 @@ return $default(_that.id,_that.method,_that.amount,_that.referenceNumber,_that.b
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic)  String id,  String method, @JsonKey(fromJson: JsonTypeConverters.stringFromDynamic)  String amount,  String? referenceNumber,  int? bankId,  DateTime createdAt, @JsonKey(name: 'banks', fromJson: JsonTypeConverters.bankNameFromDynamic)  String? bankName)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic)  String id,  String method, @JsonKey(fromJson: JsonTypeConverters.stringFromDynamic)  String amount,  String? referenceNumber,  int? bankId,  DateTime createdAt, @JsonKey(name: 'banks', fromJson: JsonTypeConverters.bankNameFromDynamic)  String? bankName,  String? attachment)?  $default,) {final _that = this;
 switch (_that) {
 case _ExpensePaymentMethodModel() when $default != null:
-return $default(_that.id,_that.method,_that.amount,_that.referenceNumber,_that.bankId,_that.createdAt,_that.bankName);case _:
+return $default(_that.id,_that.method,_that.amount,_that.referenceNumber,_that.bankId,_that.createdAt,_that.bankName,_that.attachment);case _:
   return null;
 
 }
@@ -786,7 +781,7 @@ return $default(_that.id,_that.method,_that.amount,_that.referenceNumber,_that.b
 @JsonSerializable()
 
 class _ExpensePaymentMethodModel implements ExpensePaymentMethodModel {
-  const _ExpensePaymentMethodModel({@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) required this.id, required this.method, @JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) required this.amount, this.referenceNumber, this.bankId, required this.createdAt, @JsonKey(name: 'banks', fromJson: JsonTypeConverters.bankNameFromDynamic) this.bankName});
+  const _ExpensePaymentMethodModel({@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) required this.id, required this.method, @JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) required this.amount, this.referenceNumber, this.bankId, required this.createdAt, @JsonKey(name: 'banks', fromJson: JsonTypeConverters.bankNameFromDynamic) this.bankName, this.attachment});
   factory _ExpensePaymentMethodModel.fromJson(Map<String, dynamic> json) => _$ExpensePaymentMethodModelFromJson(json);
 
 @override@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) final  String id;
@@ -796,6 +791,7 @@ class _ExpensePaymentMethodModel implements ExpensePaymentMethodModel {
 @override final  int? bankId;
 @override final  DateTime createdAt;
 @override@JsonKey(name: 'banks', fromJson: JsonTypeConverters.bankNameFromDynamic) final  String? bankName;
+@override final  String? attachment;
 
 /// Create a copy of ExpensePaymentMethodModel
 /// with the given fields replaced by the non-null parameter values.
@@ -810,16 +806,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ExpensePaymentMethodModel&&(identical(other.id, id) || other.id == id)&&(identical(other.method, method) || other.method == method)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.referenceNumber, referenceNumber) || other.referenceNumber == referenceNumber)&&(identical(other.bankId, bankId) || other.bankId == bankId)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.bankName, bankName) || other.bankName == bankName));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ExpensePaymentMethodModel&&(identical(other.id, id) || other.id == id)&&(identical(other.method, method) || other.method == method)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.referenceNumber, referenceNumber) || other.referenceNumber == referenceNumber)&&(identical(other.bankId, bankId) || other.bankId == bankId)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.bankName, bankName) || other.bankName == bankName)&&(identical(other.attachment, attachment) || other.attachment == attachment));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,method,amount,referenceNumber,bankId,createdAt,bankName);
+int get hashCode => Object.hash(runtimeType,id,method,amount,referenceNumber,bankId,createdAt,bankName,attachment);
 
 @override
 String toString() {
-  return 'ExpensePaymentMethodModel(id: $id, method: $method, amount: $amount, referenceNumber: $referenceNumber, bankId: $bankId, createdAt: $createdAt, bankName: $bankName)';
+  return 'ExpensePaymentMethodModel(id: $id, method: $method, amount: $amount, referenceNumber: $referenceNumber, bankId: $bankId, createdAt: $createdAt, bankName: $bankName, attachment: $attachment)';
 }
 
 
@@ -830,7 +826,7 @@ abstract mixin class _$ExpensePaymentMethodModelCopyWith<$Res> implements $Expen
   factory _$ExpensePaymentMethodModelCopyWith(_ExpensePaymentMethodModel value, $Res Function(_ExpensePaymentMethodModel) _then) = __$ExpensePaymentMethodModelCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) String id, String method,@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) String amount, String? referenceNumber, int? bankId, DateTime createdAt,@JsonKey(name: 'banks', fromJson: JsonTypeConverters.bankNameFromDynamic) String? bankName
+@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) String id, String method,@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) String amount, String? referenceNumber, int? bankId, DateTime createdAt,@JsonKey(name: 'banks', fromJson: JsonTypeConverters.bankNameFromDynamic) String? bankName, String? attachment
 });
 
 
@@ -847,7 +843,7 @@ class __$ExpensePaymentMethodModelCopyWithImpl<$Res>
 
 /// Create a copy of ExpensePaymentMethodModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? method = null,Object? amount = null,Object? referenceNumber = freezed,Object? bankId = freezed,Object? createdAt = null,Object? bankName = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? method = null,Object? amount = null,Object? referenceNumber = freezed,Object? bankId = freezed,Object? createdAt = null,Object? bankName = freezed,Object? attachment = freezed,}) {
   return _then(_ExpensePaymentMethodModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,method: null == method ? _self.method : method // ignore: cast_nullable_to_non_nullable
@@ -856,6 +852,7 @@ as String,referenceNumber: freezed == referenceNumber ? _self.referenceNumber : 
 as String?,bankId: freezed == bankId ? _self.bankId : bankId // ignore: cast_nullable_to_non_nullable
 as int?,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,bankName: freezed == bankName ? _self.bankName : bankName // ignore: cast_nullable_to_non_nullable
+as String?,attachment: freezed == attachment ? _self.attachment : attachment // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }

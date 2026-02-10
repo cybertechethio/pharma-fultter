@@ -5,14 +5,11 @@ import '../../../../shared/components/common/app_bar.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/components/common/error_widget.dart' as app_err;
 import '../../../../app/theme/app_sizes.dart';
-import '../../../../app/theme/brand_colors.dart';
 import '../../../setting/presentation/providers/company_notifier.dart';
 import '../../../dashboard/presentation/widgets/dashboard_period_selector.dart';
 import '../providers/expense_report_notifier.dart';
 import '../widgets/expense_report/expense_summary_list.dart';
 import '../widgets/expense_report/expense_item_list.dart';
-import '../widgets/expense_report/expense_report_filter_bottom_sheet.dart';
-import '../widgets/expense_report/expense_report_filter_button.dart';
 
 /// Expense Report screen
 class ExpenseReportScreen extends ConsumerStatefulWidget {
@@ -27,8 +24,6 @@ class _ExpenseReportScreenState extends ConsumerState<ExpenseReportScreen> {
   DateTime? _startDate;
   DateTime? _endDate;
   
-  // Filter state
-  int? _categoryId;
 
   @override
   void initState() {
@@ -43,45 +38,7 @@ class _ExpenseReportScreenState extends ConsumerState<ExpenseReportScreen> {
       _startDate = range.start;
       _endDate = range.end;
     });
-    // Dates are now required parameters, so watching provider with new dates will automatically reload
-    // Apply filters when date changes
-    _applyFilters();
-  }
-
-  void _showFilterBottomSheet() {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: BrandColors.transparent,
-      builder: (context) => ExpenseReportFilterBottomSheet(
-        initialFilter: ExpenseReportFilter(
-          categoryId: _categoryId,
-        ),
-        onApply: (filter) {
-          setState(() {
-            _categoryId = filter.categoryId;
-          });
-          _applyFilters();
-        },
-      ),
-    );
-  }
-
-  void _applyFilters() {
-    final companyAsync = ref.read(companyProvider);
-    final defaultStartDate = companyAsync.whenOrNull(
-          data: (company) => company?.defaultStartDate,
-        ) ??
-        DateTime.now().subtract(const Duration(days: 7));
-    final startDate = _startDate ?? defaultStartDate;
-    final endDate = _endDate ?? DateTime.now();
-
-    final notifier = ref.read(
-      expenseReportProvider(startDate: startDate, endDate: endDate).notifier,
-    );
-    notifier.applyFilters(
-      categoryId: _categoryId,
-    );
+    // Dates are required parameters, so watching provider with new dates will automatically reload
   }
 
   @override
@@ -164,22 +121,10 @@ class _ExpenseReportScreenState extends ConsumerState<ExpenseReportScreen> {
                   // Summary Cards (from notifier)
                   if (summary != null) ExpenseSummaryList(summary: summary),
                   // Period Selector
-                  Row(
-                    children: [
-                      Expanded(
-                        child: DashboardPeriodSelector(
-                          initialStartDate: startDate,
-                          initialEndDate: endDate,
-                          onDateRangeChanged: _handleDateRangeChanged,
-                        ),
-                      ),
-                      const SizedBox(width: AppSizes.sm),
-                        ExpenseReportFilterButton(
-                          onTap: _showFilterBottomSheet,
-                          hasActiveFilters: _categoryId != null,
-                        ),
-                      const SizedBox(width: AppSizes.sm),
-                    ],
+                  DashboardPeriodSelector(
+                    initialStartDate: startDate,
+                    initialEndDate: endDate,
+                    onDateRangeChanged: _handleDateRangeChanged,
                   ),
 
                   // Items List

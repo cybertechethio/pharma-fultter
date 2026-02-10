@@ -19,6 +19,7 @@ Future<void> createPaymentMethod({
   required String amount,
   String? referenceNumber,
   int? bankId,
+  String? attachment,
 }) async {
   final createLoading = ref.read(expensePaymentMethodUpdateLoadingProvider.notifier);
   createLoading.start('creating'); // Use a temporary ID for loading state
@@ -30,6 +31,7 @@ Future<void> createPaymentMethod({
     amount: amount,
     referenceNumber: referenceNumber,
     bankId: bankId,
+    attachment: attachment,
   );
 
   result.fold(
@@ -55,6 +57,7 @@ Future<void> createPaymentMethod({
     String? amount,
     String? referenceNumber,
     int? bankId,
+    String? attachment,
   }) async {
     final updating = ref.read(expensePaymentMethodUpdateLoadingProvider.notifier);
     updating.start(paymentMethodId);
@@ -67,6 +70,7 @@ Future<void> createPaymentMethod({
       amount: amount,
       referenceNumber: referenceNumber,
       bankId: bankId,
+      attachment: attachment,
     );
 
     result.fold(

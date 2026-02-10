@@ -4,7 +4,7 @@ import 'expense_providers.dart';
 
 part 'expense_detail_provider.g.dart';
 
-@Riverpod(keepAlive: true)
+@riverpod
 Future<ExpenseDetail> expenseDetail(Ref ref, String expenseId) async {
   final useCase = ref.read(getExpenseByIdUseCaseProvider);
   final result = await useCase.call(id: expenseId);

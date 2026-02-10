@@ -42,7 +42,7 @@ final class ExpensePaymentMethodsNotifierProvider
 }
 
 String _$expensePaymentMethodsNotifierHash() =>
-    r'9298da9e66e9cb8c2f74110a26774d662895f57f';
+    r'1e2499fcad596fa331d6aa8ec9fada05f6057c73';
 
 abstract class _$ExpensePaymentMethodsNotifier extends $Notifier<void> {
   void build();

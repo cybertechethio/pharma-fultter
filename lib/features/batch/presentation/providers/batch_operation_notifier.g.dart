@@ -20,7 +20,7 @@ final class BatchOperationNotifierProvider
         argument: null,
         retry: null,
         name: r'batchOperationProvider',
-        isAutoDispose: false,
+        isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -42,7 +42,7 @@ final class BatchOperationNotifierProvider
 }
 
 String _$batchOperationNotifierHash() =>
-    r'e486f00a2530209fbede7a07fc118ede2706c8c8';
+    r'4d408dc85b9c3868232cc79b97c8a180d7d5544c';
 
 abstract class _$BatchOperationNotifier extends $Notifier<void> {
   void build();

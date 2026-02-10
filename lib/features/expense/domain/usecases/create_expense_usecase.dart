@@ -9,7 +9,6 @@ class CreateExpenseUseCase {
   CreateExpenseUseCase(this._repository);
 
   Future<Either<Failure, Expense>> call({
-    required String? categoryId,
     required DateTime expenseDate,
     required String name,
     required String? notes,
@@ -17,7 +16,6 @@ class CreateExpenseUseCase {
     required List<Map<String, dynamic>> paymentMethods,
   }) async {
     return await _repository.createExpense(
-      categoryId: categoryId,
       expenseDate: expenseDate,
       name: name,
       notes: notes,

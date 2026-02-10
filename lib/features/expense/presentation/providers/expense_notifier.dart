@@ -19,19 +19,17 @@ class ExpenseNotifier extends _$ExpenseNotifier {
   PaginationModel? _currentPagination;
   bool _isLoadingMore = false;
   // Filter state
-  String? _currentCategoryId;
   DateTime? _currentFromDate;
   DateTime? _currentToDate;
   String? _currentSearch;
   int? _currentBranchId;
 
   /// Load initial page (page 1)
-  Future<List<Expense>> _loadInitial({String? search, String? categoryId, DateTime? fromDate, DateTime? toDate, int? branchId}) async {
+  Future<List<Expense>> _loadInitial({String? search, DateTime? fromDate, DateTime? toDate, int? branchId}) async {
     final useCase = ref.read(getExpensesUseCaseProvider);
     final result = await useCase.call(
       page: 1,
       limit: 25,
-      categoryId: categoryId ?? _currentCategoryId,
       fromDate: fromDate ?? _currentFromDate,
       toDate: toDate ?? _currentToDate,
       search: search ?? _currentSearch,
@@ -52,7 +50,6 @@ class ExpenseNotifier extends _$ExpenseNotifier {
   /// Refresh: Reload from page 1
   Future<void> refresh() async {
     _currentSearch = null; // Reset search on refresh
-    _currentCategoryId = null; // Reset category filter on refresh
     _currentFromDate = null; // Reset date filters on refresh
     _currentToDate = null;
     _currentBranchId = null;
@@ -80,7 +77,6 @@ class ExpenseNotifier extends _$ExpenseNotifier {
       final result = await useCase.call(
         page: nextPage,
         limit: 25,
-        categoryId: _currentCategoryId,
         fromDate: _currentFromDate,
         toDate: _currentToDate,
         search: _currentSearch,
@@ -118,7 +114,6 @@ class ExpenseNotifier extends _$ExpenseNotifier {
   bool get isLoadingMore => _isLoadingMore;
 
   Future<void> createExpense({
-    required String? categoryId,
     required DateTime expenseDate,
     required String name,
     required String? notes,
@@ -130,7 +125,6 @@ class ExpenseNotifier extends _$ExpenseNotifier {
 
     final useCase = ref.read(createExpenseUseCaseProvider);
     final result = await useCase.call(
-      categoryId: categoryId,
       expenseDate: expenseDate,
       name: name,
       notes: notes,
@@ -156,10 +150,10 @@ class ExpenseNotifier extends _$ExpenseNotifier {
 
   Future<void> updateExpense({
     required String id,
-    required String? categoryId,
     required DateTime expenseDate,
     required String name,
     required String? notes,
+    required List<String>? attachmentUrls,
     required List<String>? attachmentFilePaths,
   }) async {
     final updating = ref.read(expenseUpdateLoadingProvider.notifier);
@@ -167,10 +161,10 @@ class ExpenseNotifier extends _$ExpenseNotifier {
     final useCase = ref.read(updateExpenseUseCaseProvider);
     final result = await useCase.call(
       id: id,
-      categoryId: categoryId,
       expenseDate: expenseDate,
       name: name,
       notes: notes,
+      attachmentUrls: attachmentUrls,
       attachmentFilePaths: attachmentFilePaths,
     );
 
@@ -220,13 +214,11 @@ class ExpenseNotifier extends _$ExpenseNotifier {
 
   /// Search expenses
   Future<void> search({
-    String? categoryId,
     DateTime? fromDate,
     DateTime? toDate,
     String? search,
     int? branchId,
   }) async {
-    _currentCategoryId = categoryId;
     _currentFromDate = fromDate;
     _currentToDate = toDate;
     _currentSearch = search?.trim().isEmpty == true ? null : search?.trim();

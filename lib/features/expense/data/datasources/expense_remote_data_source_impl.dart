@@ -17,7 +17,6 @@ class ExpenseRemoteDataSourceImpl implements ExpenseRemoteDataSource {
 
   @override
   Future<Either<Failure, ExpenseModel>> create({
-    required String? categoryId,
     required DateTime expenseDate,
     required String name,
     required String? notes,
@@ -25,14 +24,12 @@ class ExpenseRemoteDataSourceImpl implements ExpenseRemoteDataSource {
     required List<Map<String, dynamic>> paymentMethods,
   }) async {
     LoggingService.auth('Starting create expense process', {
-      'categoryId': categoryId,
       'expenseDate': expenseDate.toIso8601String(),
       'name': name,
       'paymentMethodsCount': paymentMethods.length,
     });
     try {
       final ApiResponse<ExpenseModel> response = await _api.create(
-        categoryId: categoryId,
         expenseDate: expenseDate,
         name: name,
         notes: notes,
@@ -70,7 +67,6 @@ class ExpenseRemoteDataSourceImpl implements ExpenseRemoteDataSource {
   Future<Either<Failure, PaginatedResponse<ExpenseModel>>> getAll({
     int page = 1,
     int limit = 25,
-    String? categoryId,
     DateTime? fromDate,
     DateTime? toDate,
     String? search,
@@ -79,7 +75,6 @@ class ExpenseRemoteDataSourceImpl implements ExpenseRemoteDataSource {
     LoggingService.auth('Starting get expenses process', {
       'page': page,
       'limit': limit,
-      'categoryId': categoryId,
       'fromDate': fromDate?.toIso8601String(),
       'toDate': toDate?.toIso8601String(),
       'search': search,
@@ -89,7 +84,6 @@ class ExpenseRemoteDataSourceImpl implements ExpenseRemoteDataSource {
       final ApiResponse<List<ExpenseModel>> response = await _api.getAll(
         page: page,
         limit: limit,
-        categoryId: categoryId,
         fromDate: fromDate,
         toDate: toDate,
         search: search,
@@ -169,24 +163,25 @@ class ExpenseRemoteDataSourceImpl implements ExpenseRemoteDataSource {
   @override
   Future<Either<Failure, ExpenseModel>> update({
     required String id,
-    required String? categoryId,
     required DateTime expenseDate,
     required String name,
     required String? notes,
+    required List<String>? attachmentUrls,
     required List<String>? attachmentFilePaths,
   }) async {
     LoggingService.auth('Starting update expense process', {
       'id': id,
-      'categoryId': categoryId,
       'name': name,
+      'existingAttachments': attachmentUrls?.length ?? 0,
+      'newFiles': attachmentFilePaths?.length ?? 0,
     });
     try {
       final ApiResponse<ExpenseModel> response = await _api.update(
         id: id,
-        categoryId: categoryId,
         expenseDate: expenseDate,
         name: name,
         notes: notes,
+        attachmentUrls: attachmentUrls,
         attachmentFilePaths: attachmentFilePaths,
       );
       return response.when(
@@ -257,6 +252,7 @@ class ExpenseRemoteDataSourceImpl implements ExpenseRemoteDataSource {
     required String amount,
     String? referenceNumber,
     int? bankId,
+    String? attachment,
   }) async {
     LoggingService.auth('Starting create expense payment method process', {
       'expenseId': expenseId,
@@ -264,6 +260,7 @@ class ExpenseRemoteDataSourceImpl implements ExpenseRemoteDataSource {
       'amount': amount,
       'referenceNumber': referenceNumber,
       'bankId': bankId,
+      'attachment': attachment,
     });
     try {
       final ApiResponse<ExpensePaymentMethodModel> response = await _api.createPaymentMethod(
@@ -272,6 +269,7 @@ class ExpenseRemoteDataSourceImpl implements ExpenseRemoteDataSource {
         amount: amount,
         referenceNumber: referenceNumber,
         bankId: bankId,
+        attachment: attachment,
       );
       return response.when(
         success: (success, message, data, meta, pagination) {
@@ -307,6 +305,7 @@ class ExpenseRemoteDataSourceImpl implements ExpenseRemoteDataSource {
     String? amount,
     String? referenceNumber,
     int? bankId,
+    String? attachment,
   }) async {
     LoggingService.auth('Starting update expense payment method process', {
       'expenseId': expenseId,
@@ -315,6 +314,7 @@ class ExpenseRemoteDataSourceImpl implements ExpenseRemoteDataSource {
       'amount': amount,
       'referenceNumber': referenceNumber,
       'bankId': bankId,
+      'attachment': attachment,
     });
     try {
       final ApiResponse<ExpensePaymentMethodModel> response = await _api.updatePaymentMethod(
@@ -324,6 +324,7 @@ class ExpenseRemoteDataSourceImpl implements ExpenseRemoteDataSource {
         amount: amount,
         referenceNumber: referenceNumber,
         bankId: bankId,
+        attachment: attachment,
       );
       return response.when(
         success: (success, message, data, meta, pagination) {

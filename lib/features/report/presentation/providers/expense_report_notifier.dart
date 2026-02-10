@@ -32,7 +32,6 @@ class ExpenseReportNotifier extends _$ExpenseReportNotifier {
   
   // Optional filter state
   int? _currentBranchId;
-  int? _currentCategoryId;
   
   /// Get the summary (from first page load)
   ExpenseSummary? get summary => _summary;
@@ -40,7 +39,6 @@ class ExpenseReportNotifier extends _$ExpenseReportNotifier {
   /// Load initial page (page 1)
   Future<List<ExpenseItemData>> _loadInitial({
     int? branchId,
-    int? categoryId,
   }) async {
     final useCase = ref.read(getExpenseReportUseCaseProvider);
     final result = await useCase.call(
@@ -49,7 +47,7 @@ class ExpenseReportNotifier extends _$ExpenseReportNotifier {
       startDate: _currentStartDate,
       endDate: _currentEndDate,
       branchId: branchId ?? _currentBranchId,
-      categoryId: categoryId ?? _currentCategoryId,
+      categoryId: null,
     );
 
     return result.fold(
@@ -96,7 +94,7 @@ class ExpenseReportNotifier extends _$ExpenseReportNotifier {
         startDate: _currentStartDate,
         endDate: _currentEndDate,
         branchId: _currentBranchId,
-        categoryId: _currentCategoryId,
+        categoryId: null,
       );
 
       result.fold(
@@ -133,16 +131,13 @@ class ExpenseReportNotifier extends _$ExpenseReportNotifier {
   /// Apply optional filters (dates are set via provider parameters, not here)
   Future<void> applyFilters({
     int? branchId,
-    int? categoryId,
   }) async {
     _currentBranchId = branchId;
-    _currentCategoryId = categoryId;
 
     _currentPagination = null; // Reset pagination when filtering
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() => _loadInitial(
       branchId: branchId,
-      categoryId: categoryId,
     ));
   }
 }

@@ -68,7 +68,11 @@ const transferStatusUpdateLoadingProvider =
     TransferStatusUpdateLoadingProvider._();
 
 final class TransferStatusUpdateLoadingProvider
-    extends $NotifierProvider<TransferStatusUpdateLoading, Set<int>> {
+    extends
+        $NotifierProvider<
+          TransferStatusUpdateLoading,
+          Map<int, TransferStatus>
+        > {
   const TransferStatusUpdateLoadingProvider._()
     : super(
         from: null,
@@ -88,29 +92,31 @@ final class TransferStatusUpdateLoadingProvider
   TransferStatusUpdateLoading create() => TransferStatusUpdateLoading();
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(Set<int> value) {
+  Override overrideWithValue(Map<int, TransferStatus> value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<Set<int>>(value),
+      providerOverride: $SyncValueProvider<Map<int, TransferStatus>>(value),
     );
   }
 }
 
 String _$transferStatusUpdateLoadingHash() =>
-    r'd2f3273bef9e578fadd17ce3b14a2ba19a9954a4';
+    r'1adbf36c9bdb71072c040bfd9309c97be09829a1';
 
-abstract class _$TransferStatusUpdateLoading extends $Notifier<Set<int>> {
-  Set<int> build();
+abstract class _$TransferStatusUpdateLoading
+    extends $Notifier<Map<int, TransferStatus>> {
+  Map<int, TransferStatus> build();
   @$mustCallSuper
   @override
   void runBuild() {
     final created = build();
-    final ref = this.ref as $Ref<Set<int>, Set<int>>;
+    final ref =
+        this.ref as $Ref<Map<int, TransferStatus>, Map<int, TransferStatus>>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<Set<int>, Set<int>>,
-              Set<int>,
+              AnyNotifier<Map<int, TransferStatus>, Map<int, TransferStatus>>,
+              Map<int, TransferStatus>,
               Object?,
               Object?
             >;

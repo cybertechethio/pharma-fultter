@@ -5,6 +5,7 @@ import '../../data/datasources/item_remote_data_source_impl.dart';
 import '../../data/repositories/item_repository_impl.dart';
 import '../../domain/repositories/item_repository.dart';
 import '../../domain/usecases/get_items_usecase.dart';
+import '../../domain/usecases/get_items_include_batches_usecase.dart';
 import '../../domain/usecases/create_item_usecase.dart';
 import '../../domain/usecases/update_item_usecase.dart';
 import '../../domain/usecases/delete_item_usecase.dart';
@@ -33,6 +34,13 @@ ItemRepository itemRepository(Ref ref) {
 @riverpod
 GetItemsUseCase getItemsUseCase(Ref ref) {
   return GetItemsUseCase(
+    ref.watch(itemRepositoryProvider),
+  );
+}
+
+@riverpod
+GetItemsIncludeBatchesUseCase getItemsIncludeBatchesUseCase(Ref ref) {
+  return GetItemsIncludeBatchesUseCase(
     ref.watch(itemRepositoryProvider),
   );
 }

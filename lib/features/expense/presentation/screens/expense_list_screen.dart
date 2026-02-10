@@ -15,7 +15,6 @@ import '../../../../app/theme/brand_colors.dart';
 import '../providers/expense_notifier.dart';
 import '../providers/expense_events.dart';
 import '../widgets/expense_card.dart';
-import '../widgets/expense_category_dropdown.dart' show ExpenseCategorySelectionDialog;
 
 class ExpenseListScreen extends ConsumerStatefulWidget {
   const ExpenseListScreen({super.key});
@@ -103,12 +102,6 @@ class _ExpenseListScreenState extends ConsumerState<ExpenseListScreen> {
                     padding: const EdgeInsets.all(AppSizes.sm),
                   ),
                 ),
-                const SizedBox(width: AppSizes.sm),
-                IconButton(
-                  icon: const Icon(Icons.filter_list),
-                  onPressed: () => _showCategoryFilterDialog(context),
-                  tooltip: 'Filter expenses',
-                ),
               ],
             ),
           ),
@@ -183,15 +176,5 @@ class _ExpenseListScreenState extends ConsumerState<ExpenseListScreen> {
 
   void _openCreateExpense(BuildContext context) {
     context.push(RouteName.expenseForm);
-  }
-
-  void _showCategoryFilterDialog(BuildContext context) async {
-    final selectedCategoryId = await showDialog<String>(
-      context: context,
-      builder: (dialogContext) => const ExpenseCategorySelectionDialog(),
-    );
-
-    // Apply category filter (null means clear filter)
-    ref.read(expenseProvider.notifier).search(categoryId: selectedCategoryId);
   }
 }

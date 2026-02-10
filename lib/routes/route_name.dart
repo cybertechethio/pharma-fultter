@@ -55,7 +55,6 @@ class RouteName {
   static const String roles = '/roles';
   static const String users = '/users';
   static const String employees = '/employees';
-  static const String expenseCategories = '/expense-categories';
   static const String expenses = '/expenses';
   static const String expenseDetail = '/expenses/detail';
   static const String expenseForm = '/expenses/create';

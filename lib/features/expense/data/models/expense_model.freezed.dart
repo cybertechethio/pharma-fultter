@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ExpenseModel {
 
-@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) String get id; String get amount; DateTime get expenseDate; String get name; DateTime get createdAt; int? get createdBy;
+@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) String get id; String get amount; DateTime get expenseDate; String get name; DateTime get createdAt; int? get createdBy;@JsonKey(defaultValue: <String>[]) List<String> get attachments;
 /// Create a copy of ExpenseModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $ExpenseModelCopyWith<ExpenseModel> get copyWith => _$ExpenseModelCopyWithImpl<E
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ExpenseModel&&(identical(other.id, id) || other.id == id)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.expenseDate, expenseDate) || other.expenseDate == expenseDate)&&(identical(other.name, name) || other.name == name)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.createdBy, createdBy) || other.createdBy == createdBy));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ExpenseModel&&(identical(other.id, id) || other.id == id)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.expenseDate, expenseDate) || other.expenseDate == expenseDate)&&(identical(other.name, name) || other.name == name)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.createdBy, createdBy) || other.createdBy == createdBy)&&const DeepCollectionEquality().equals(other.attachments, attachments));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,amount,expenseDate,name,createdAt,createdBy);
+int get hashCode => Object.hash(runtimeType,id,amount,expenseDate,name,createdAt,createdBy,const DeepCollectionEquality().hash(attachments));
 
 @override
 String toString() {
-  return 'ExpenseModel(id: $id, amount: $amount, expenseDate: $expenseDate, name: $name, createdAt: $createdAt, createdBy: $createdBy)';
+  return 'ExpenseModel(id: $id, amount: $amount, expenseDate: $expenseDate, name: $name, createdAt: $createdAt, createdBy: $createdBy, attachments: $attachments)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $ExpenseModelCopyWith<$Res>  {
   factory $ExpenseModelCopyWith(ExpenseModel value, $Res Function(ExpenseModel) _then) = _$ExpenseModelCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) String id, String amount, DateTime expenseDate, String name, DateTime createdAt, int? createdBy
+@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) String id, String amount, DateTime expenseDate, String name, DateTime createdAt, int? createdBy,@JsonKey(defaultValue: <String>[]) List<String> attachments
 });
 
 
@@ -65,7 +65,7 @@ class _$ExpenseModelCopyWithImpl<$Res>
 
 /// Create a copy of ExpenseModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? amount = null,Object? expenseDate = null,Object? name = null,Object? createdAt = null,Object? createdBy = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? amount = null,Object? expenseDate = null,Object? name = null,Object? createdAt = null,Object? createdBy = freezed,Object? attachments = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
@@ -73,7 +73,8 @@ as String,expenseDate: null == expenseDate ? _self.expenseDate : expenseDate // 
 as DateTime,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,createdBy: freezed == createdBy ? _self.createdBy : createdBy // ignore: cast_nullable_to_non_nullable
-as int?,
+as int?,attachments: null == attachments ? _self.attachments : attachments // ignore: cast_nullable_to_non_nullable
+as List<String>,
   ));
 }
 
@@ -155,10 +156,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic)  String id,  String amount,  DateTime expenseDate,  String name,  DateTime createdAt,  int? createdBy)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic)  String id,  String amount,  DateTime expenseDate,  String name,  DateTime createdAt,  int? createdBy, @JsonKey(defaultValue: <String>[])  List<String> attachments)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ExpenseModel() when $default != null:
-return $default(_that.id,_that.amount,_that.expenseDate,_that.name,_that.createdAt,_that.createdBy);case _:
+return $default(_that.id,_that.amount,_that.expenseDate,_that.name,_that.createdAt,_that.createdBy,_that.attachments);case _:
   return orElse();
 
 }
@@ -176,10 +177,10 @@ return $default(_that.id,_that.amount,_that.expenseDate,_that.name,_that.created
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic)  String id,  String amount,  DateTime expenseDate,  String name,  DateTime createdAt,  int? createdBy)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic)  String id,  String amount,  DateTime expenseDate,  String name,  DateTime createdAt,  int? createdBy, @JsonKey(defaultValue: <String>[])  List<String> attachments)  $default,) {final _that = this;
 switch (_that) {
 case _ExpenseModel():
-return $default(_that.id,_that.amount,_that.expenseDate,_that.name,_that.createdAt,_that.createdBy);}
+return $default(_that.id,_that.amount,_that.expenseDate,_that.name,_that.createdAt,_that.createdBy,_that.attachments);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -193,10 +194,10 @@ return $default(_that.id,_that.amount,_that.expenseDate,_that.name,_that.created
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic)  String id,  String amount,  DateTime expenseDate,  String name,  DateTime createdAt,  int? createdBy)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic)  String id,  String amount,  DateTime expenseDate,  String name,  DateTime createdAt,  int? createdBy, @JsonKey(defaultValue: <String>[])  List<String> attachments)?  $default,) {final _that = this;
 switch (_that) {
 case _ExpenseModel() when $default != null:
-return $default(_that.id,_that.amount,_that.expenseDate,_that.name,_that.createdAt,_that.createdBy);case _:
+return $default(_that.id,_that.amount,_that.expenseDate,_that.name,_that.createdAt,_that.createdBy,_that.attachments);case _:
   return null;
 
 }
@@ -208,7 +209,7 @@ return $default(_that.id,_that.amount,_that.expenseDate,_that.name,_that.created
 @JsonSerializable()
 
 class _ExpenseModel implements ExpenseModel {
-  const _ExpenseModel({@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) required this.id, required this.amount, required this.expenseDate, required this.name, required this.createdAt, this.createdBy});
+  const _ExpenseModel({@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) required this.id, required this.amount, required this.expenseDate, required this.name, required this.createdAt, this.createdBy, @JsonKey(defaultValue: <String>[]) required final  List<String> attachments}): _attachments = attachments;
   factory _ExpenseModel.fromJson(Map<String, dynamic> json) => _$ExpenseModelFromJson(json);
 
 @override@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) final  String id;
@@ -217,6 +218,13 @@ class _ExpenseModel implements ExpenseModel {
 @override final  String name;
 @override final  DateTime createdAt;
 @override final  int? createdBy;
+ final  List<String> _attachments;
+@override@JsonKey(defaultValue: <String>[]) List<String> get attachments {
+  if (_attachments is EqualUnmodifiableListView) return _attachments;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_attachments);
+}
+
 
 /// Create a copy of ExpenseModel
 /// with the given fields replaced by the non-null parameter values.
@@ -231,16 +239,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ExpenseModel&&(identical(other.id, id) || other.id == id)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.expenseDate, expenseDate) || other.expenseDate == expenseDate)&&(identical(other.name, name) || other.name == name)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.createdBy, createdBy) || other.createdBy == createdBy));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ExpenseModel&&(identical(other.id, id) || other.id == id)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.expenseDate, expenseDate) || other.expenseDate == expenseDate)&&(identical(other.name, name) || other.name == name)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.createdBy, createdBy) || other.createdBy == createdBy)&&const DeepCollectionEquality().equals(other._attachments, _attachments));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,amount,expenseDate,name,createdAt,createdBy);
+int get hashCode => Object.hash(runtimeType,id,amount,expenseDate,name,createdAt,createdBy,const DeepCollectionEquality().hash(_attachments));
 
 @override
 String toString() {
-  return 'ExpenseModel(id: $id, amount: $amount, expenseDate: $expenseDate, name: $name, createdAt: $createdAt, createdBy: $createdBy)';
+  return 'ExpenseModel(id: $id, amount: $amount, expenseDate: $expenseDate, name: $name, createdAt: $createdAt, createdBy: $createdBy, attachments: $attachments)';
 }
 
 
@@ -251,7 +259,7 @@ abstract mixin class _$ExpenseModelCopyWith<$Res> implements $ExpenseModelCopyWi
   factory _$ExpenseModelCopyWith(_ExpenseModel value, $Res Function(_ExpenseModel) _then) = __$ExpenseModelCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) String id, String amount, DateTime expenseDate, String name, DateTime createdAt, int? createdBy
+@JsonKey(fromJson: JsonTypeConverters.stringFromDynamic) String id, String amount, DateTime expenseDate, String name, DateTime createdAt, int? createdBy,@JsonKey(defaultValue: <String>[]) List<String> attachments
 });
 
 
@@ -268,7 +276,7 @@ class __$ExpenseModelCopyWithImpl<$Res>
 
 /// Create a copy of ExpenseModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? amount = null,Object? expenseDate = null,Object? name = null,Object? createdAt = null,Object? createdBy = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? amount = null,Object? expenseDate = null,Object? name = null,Object? createdAt = null,Object? createdBy = freezed,Object? attachments = null,}) {
   return _then(_ExpenseModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
@@ -276,7 +284,8 @@ as String,expenseDate: null == expenseDate ? _self.expenseDate : expenseDate // 
 as DateTime,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,createdBy: freezed == createdBy ? _self.createdBy : createdBy // ignore: cast_nullable_to_non_nullable
-as int?,
+as int?,attachments: null == attachments ? _self._attachments : attachments // ignore: cast_nullable_to_non_nullable
+as List<String>,
   ));
 }
 

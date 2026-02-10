@@ -6,7 +6,6 @@ import '../models/expense_detail_model.dart';
 
 abstract class ExpenseRemoteDataSource {
   Future<Either<Failure, ExpenseModel>> create({
-    required String? categoryId,
     required DateTime expenseDate,
     required String name,
     required String? notes,
@@ -17,7 +16,6 @@ abstract class ExpenseRemoteDataSource {
   Future<Either<Failure, PaginatedResponse<ExpenseModel>>> getAll({
     int page = 1,
     int limit = 25,
-    String? categoryId,
     DateTime? fromDate,
     DateTime? toDate,
     String? search,
@@ -30,10 +28,10 @@ abstract class ExpenseRemoteDataSource {
 
   Future<Either<Failure, ExpenseModel>> update({
     required String id,
-    required String? categoryId,
     required DateTime expenseDate,
     required String name,
     required String? notes,
+    required List<String>? attachmentUrls,
     required List<String>? attachmentFilePaths,
   });
 
@@ -47,6 +45,7 @@ abstract class ExpenseRemoteDataSource {
     required String amount,
     String? referenceNumber,
     int? bankId,
+    String? attachment,
   });
 
   Future<Either<Failure, Unit>> updatePaymentMethod({
@@ -56,6 +55,7 @@ abstract class ExpenseRemoteDataSource {
     String? amount,
     String? referenceNumber,
     int? bankId,
+    String? attachment,
   });
 
   Future<Either<Failure, Unit>> deletePaymentMethod({

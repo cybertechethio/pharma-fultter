@@ -26,7 +26,7 @@ final class ExpenseDetailProvider
   }) : super(
          retry: null,
          name: r'expenseDetailProvider',
-         isAutoDispose: false,
+         isAutoDispose: true,
          dependencies: null,
          $allTransitiveDependencies: null,
        );
@@ -64,7 +64,7 @@ final class ExpenseDetailProvider
   }
 }
 
-String _$expenseDetailHash() => r'2d369d6180471df51babd792fca5eb166daa661c';
+String _$expenseDetailHash() => r'ecc50a604f250d68db99ab7d2d6ccb814ba1014b';
 
 final class ExpenseDetailFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<ExpenseDetail>, String> {
@@ -74,7 +74,7 @@ final class ExpenseDetailFamily extends $Family
         name: r'expenseDetailProvider',
         dependencies: null,
         $allTransitiveDependencies: null,
-        isAutoDispose: false,
+        isAutoDispose: true,
       );
 
   ExpenseDetailProvider call(String expenseId) =>

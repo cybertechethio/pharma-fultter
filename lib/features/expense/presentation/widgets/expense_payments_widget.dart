@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/utils/formatters.dart';
 import '../../../../app/theme/app_sizes.dart';
-import '../../../../app/theme/brand_colors.dart';
 import '../../../../app/theme/text_styles.dart';
 import '../../domain/entities/expense_detail.dart';
+import 'expense_payment_method_form_dialog.dart';
 import 'expense_payment_method_card.dart';
 
-class ExpensePaymentsWidget extends StatelessWidget {
+class ExpensePaymentsWidget extends ConsumerWidget {
   final List<ExpensePayment> expensePayments;
   final String expenseId;
 
@@ -17,8 +18,21 @@ class ExpensePaymentsWidget extends StatelessWidget {
     required this.expenseId,
   });
 
+  void _showCreatePaymentMethodDialog(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    showDialog(
+      context: context,
+      builder: (dialogContext) => ExpensePaymentMethodFormDialog(
+        expenseId: expenseId,
+        title: l10n.addPaymentMethod,
+        buttonText: l10n.add,
+      ),
+    );
+  }
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+
     final l10n = AppLocalizations.of(context);
 
     // Flatten all payment methods from all payments
@@ -45,31 +59,27 @@ class ExpensePaymentsWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                Icon(
-                  Icons.payment,
-                  size: AppSizes.iconSize,
-                  color: BrandColors.primary,
-                ),
-                const SizedBox(width: AppSizes.sm),
-                Text(
-                  l10n.paymentDetails,
-                  style: context.subtitle(bold: true),
-                ),
-              ],
-            ),
-            const SizedBox(height: AppSizes.lg),
-            _PaymentInfoRow(
-              label: l10n.totalAmount,
-              value: Formatters.formatAmount(totalAmount),
-            ),
-            const SizedBox(height: AppSizes.lg),
             const Divider(),
             const SizedBox(height: AppSizes.md),
-            Text(
-              l10n.paymentMethodsCount(allPaymentMethods.length),
-              style: context.subtitle(bold: true),
+            Row(
+              children: [
+                Text(
+                  l10n.paymentMethodsCount(allPaymentMethods.length),
+                  style: context.subtitle(bold: true),
+                ),
+                Spacer(),
+                TextButton.icon(
+                    onPressed: () => _showCreatePaymentMethodDialog(context),
+                    icon: Icon(Icons.add, size: AppSizes.md2),
+                    label: Text(l10n.add),
+                    style: TextButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AppSizes.md,
+                        vertical: AppSizes.xs,
+                      ),
+                    ),
+                  ),
+              ],
             ),
             const SizedBox(height: AppSizes.md),
             ...allPaymentMethods.map((method) => ExpensePaymentMethodCard(
@@ -77,6 +87,13 @@ class ExpensePaymentsWidget extends StatelessWidget {
               expenseId: expenseId,
               canDelete: allPaymentMethods.length > 1,
             )),
+            const SizedBox(height: AppSizes.lg),
+            const Divider(),
+            const SizedBox(height: AppSizes.md),
+            _PaymentInfoRow(
+              label: l10n.totalAmount,
+              value: Formatters.formatAmount(totalAmount),
+            ),
           ],
         ),
       ),

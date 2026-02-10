@@ -7,6 +7,7 @@ import '../../../../shared/models/api_response.dart';
 import '../../../../shared/models/paginated_response.dart';
 import '../models/item_model.dart';
 import '../models/item_request_model.dart';
+import '../models/item_with_batches_model.dart';
 import 'item_api_service.dart';
 import 'item_remote_data_source.dart';
 
@@ -76,6 +77,74 @@ class ItemRemoteDataSourceImpl implements ItemRemoteDataSource {
     } catch (e) {
       LoggingService.error('Get items unexpected error', e, StackTrace.current);
       return Left(Failure.unexpectedError('Get items failed: ${e.toString()}'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, PaginatedResponse<ItemWithBatchesModel>>>
+      getItemsIncludeBatches({
+    int page = 1,
+    int limit = 1000,
+    String? search,
+    int? categoryId,
+  }) async {
+    LoggingService.info('Starting get items include batches process', {
+      'page': page,
+      'limit': limit,
+      'search': search,
+      'categoryId': categoryId,
+    });
+    try {
+      final ApiResponse<List<ItemWithBatchesModel>> response =
+          await _api.getItemsIncludeBatches(
+        page: page,
+        limit: limit,
+        search: search,
+        categoryId: categoryId,
+      );
+      return response.when(
+        success: (success, message, data, meta, pagination) {
+          if (pagination == null) {
+            LoggingService.warning(
+                'Get items include batches: pagination data missing');
+            return Left(Failure.unexpectedError(
+                'Pagination data is required for this endpoint'));
+          }
+          LoggingService.info('Get items include batches successful', {
+            'count': data.length,
+            'currentPage': pagination.currentPage,
+            'message': message,
+          });
+          return Right(PaginatedResponse(
+            data: data,
+            pagination: pagination,
+          ));
+        },
+        error: (success, error, meta) {
+          LoggingService.error('Get items include batches failed - server error',
+              {'error': error.message, 'code': error.statusCode});
+          return Left(Failure.serverError(error.message));
+        },
+      );
+    } on DioException catch (e) {
+      final exception = NetworkExceptions.getDioException(e);
+      return Left(Failure.networkError(NetworkExceptions.getErrorMessage(exception)));
+    } on TypeError catch (e) {
+      LoggingService.error(
+          'Get items include batches data parsing error', e, StackTrace.current);
+      return Left(Failure.unexpectedError('Data parsing error: ${e.toString()}'));
+    } on FormatException catch (e) {
+      LoggingService.error(
+          'Get items include batches response format error',
+          e,
+          StackTrace.current);
+      return Left(Failure.unexpectedError(
+          'Invalid response format: ${e.toString()}'));
+    } catch (e) {
+      LoggingService.error(
+          'Get items include batches unexpected error', e, StackTrace.current);
+      return Left(Failure.unexpectedError(
+          'Get items include batches failed: ${e.toString()}'));
     }
   }
 

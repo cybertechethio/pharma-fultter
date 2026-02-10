@@ -28,13 +28,15 @@ class TransferCartItemsList extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: cartItems.map((item) {
-        final quantity = formState.cartQuantities[item.id] ?? 0;
+        final batches = formState.cartItemBatches[item.id] ?? [];
         return Padding(
           padding: const EdgeInsets.only(bottom: AppSizes.sm),
           child: TransferCartCard(
-            item: item,
+            itemWithBatches: item,
             isInCart: true,
-            quantity: quantity,
+            batchSelections: batches,
+            isInDialog: false,
+            addDisabled: false,
           ),
         );
       }).toList(),

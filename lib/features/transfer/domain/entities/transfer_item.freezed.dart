@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$TransferItem {
 
- int get id; String get itemName; String? get itemCode; double get quantity; DateTime? get createdAt; DateTime? get updatedAt;
+ int get id; String? get itemName; String? get itemCode; int get quantity; List<TransferItemBatch> get transferItemBatches;
 /// Create a copy of TransferItem
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $TransferItemCopyWith<TransferItem> get copyWith => _$TransferItemCopyWithImpl<T
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TransferItem&&(identical(other.id, id) || other.id == id)&&(identical(other.itemName, itemName) || other.itemName == itemName)&&(identical(other.itemCode, itemCode) || other.itemCode == itemCode)&&(identical(other.quantity, quantity) || other.quantity == quantity)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TransferItem&&(identical(other.id, id) || other.id == id)&&(identical(other.itemName, itemName) || other.itemName == itemName)&&(identical(other.itemCode, itemCode) || other.itemCode == itemCode)&&(identical(other.quantity, quantity) || other.quantity == quantity)&&const DeepCollectionEquality().equals(other.transferItemBatches, transferItemBatches));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,itemName,itemCode,quantity,createdAt,updatedAt);
+int get hashCode => Object.hash(runtimeType,id,itemName,itemCode,quantity,const DeepCollectionEquality().hash(transferItemBatches));
 
 @override
 String toString() {
-  return 'TransferItem(id: $id, itemName: $itemName, itemCode: $itemCode, quantity: $quantity, createdAt: $createdAt, updatedAt: $updatedAt)';
+  return 'TransferItem(id: $id, itemName: $itemName, itemCode: $itemCode, quantity: $quantity, transferItemBatches: $transferItemBatches)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $TransferItemCopyWith<$Res>  {
   factory $TransferItemCopyWith(TransferItem value, $Res Function(TransferItem) _then) = _$TransferItemCopyWithImpl;
 @useResult
 $Res call({
- int id, String itemName, String? itemCode, double quantity, DateTime? createdAt, DateTime? updatedAt
+ int id, String? itemName, String? itemCode, int quantity, List<TransferItemBatch> transferItemBatches
 });
 
 
@@ -62,15 +62,14 @@ class _$TransferItemCopyWithImpl<$Res>
 
 /// Create a copy of TransferItem
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? itemName = null,Object? itemCode = freezed,Object? quantity = null,Object? createdAt = freezed,Object? updatedAt = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? itemName = freezed,Object? itemCode = freezed,Object? quantity = null,Object? transferItemBatches = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,itemName: null == itemName ? _self.itemName : itemName // ignore: cast_nullable_to_non_nullable
-as String,itemCode: freezed == itemCode ? _self.itemCode : itemCode // ignore: cast_nullable_to_non_nullable
+as int,itemName: freezed == itemName ? _self.itemName : itemName // ignore: cast_nullable_to_non_nullable
+as String?,itemCode: freezed == itemCode ? _self.itemCode : itemCode // ignore: cast_nullable_to_non_nullable
 as String?,quantity: null == quantity ? _self.quantity : quantity // ignore: cast_nullable_to_non_nullable
-as double,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
-as DateTime?,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
-as DateTime?,
+as int,transferItemBatches: null == transferItemBatches ? _self.transferItemBatches : transferItemBatches // ignore: cast_nullable_to_non_nullable
+as List<TransferItemBatch>,
   ));
 }
 
@@ -152,10 +151,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String itemName,  String? itemCode,  double quantity,  DateTime? createdAt,  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String? itemName,  String? itemCode,  int quantity,  List<TransferItemBatch> transferItemBatches)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _TransferItem() when $default != null:
-return $default(_that.id,_that.itemName,_that.itemCode,_that.quantity,_that.createdAt,_that.updatedAt);case _:
+return $default(_that.id,_that.itemName,_that.itemCode,_that.quantity,_that.transferItemBatches);case _:
   return orElse();
 
 }
@@ -173,10 +172,10 @@ return $default(_that.id,_that.itemName,_that.itemCode,_that.quantity,_that.crea
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String itemName,  String? itemCode,  double quantity,  DateTime? createdAt,  DateTime? updatedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String? itemName,  String? itemCode,  int quantity,  List<TransferItemBatch> transferItemBatches)  $default,) {final _that = this;
 switch (_that) {
 case _TransferItem():
-return $default(_that.id,_that.itemName,_that.itemCode,_that.quantity,_that.createdAt,_that.updatedAt);}
+return $default(_that.id,_that.itemName,_that.itemCode,_that.quantity,_that.transferItemBatches);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -190,10 +189,10 @@ return $default(_that.id,_that.itemName,_that.itemCode,_that.quantity,_that.crea
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String itemName,  String? itemCode,  double quantity,  DateTime? createdAt,  DateTime? updatedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String? itemName,  String? itemCode,  int quantity,  List<TransferItemBatch> transferItemBatches)?  $default,) {final _that = this;
 switch (_that) {
 case _TransferItem() when $default != null:
-return $default(_that.id,_that.itemName,_that.itemCode,_that.quantity,_that.createdAt,_that.updatedAt);case _:
+return $default(_that.id,_that.itemName,_that.itemCode,_that.quantity,_that.transferItemBatches);case _:
   return null;
 
 }
@@ -205,15 +204,20 @@ return $default(_that.id,_that.itemName,_that.itemCode,_that.quantity,_that.crea
 
 
 class _TransferItem implements TransferItem {
-  const _TransferItem({required this.id, required this.itemName, this.itemCode, required this.quantity, this.createdAt, this.updatedAt});
+  const _TransferItem({required this.id, this.itemName, this.itemCode, required this.quantity, final  List<TransferItemBatch> transferItemBatches = const []}): _transferItemBatches = transferItemBatches;
   
 
 @override final  int id;
-@override final  String itemName;
+@override final  String? itemName;
 @override final  String? itemCode;
-@override final  double quantity;
-@override final  DateTime? createdAt;
-@override final  DateTime? updatedAt;
+@override final  int quantity;
+ final  List<TransferItemBatch> _transferItemBatches;
+@override@JsonKey() List<TransferItemBatch> get transferItemBatches {
+  if (_transferItemBatches is EqualUnmodifiableListView) return _transferItemBatches;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_transferItemBatches);
+}
+
 
 /// Create a copy of TransferItem
 /// with the given fields replaced by the non-null parameter values.
@@ -225,16 +229,16 @@ _$TransferItemCopyWith<_TransferItem> get copyWith => __$TransferItemCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TransferItem&&(identical(other.id, id) || other.id == id)&&(identical(other.itemName, itemName) || other.itemName == itemName)&&(identical(other.itemCode, itemCode) || other.itemCode == itemCode)&&(identical(other.quantity, quantity) || other.quantity == quantity)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TransferItem&&(identical(other.id, id) || other.id == id)&&(identical(other.itemName, itemName) || other.itemName == itemName)&&(identical(other.itemCode, itemCode) || other.itemCode == itemCode)&&(identical(other.quantity, quantity) || other.quantity == quantity)&&const DeepCollectionEquality().equals(other._transferItemBatches, _transferItemBatches));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,itemName,itemCode,quantity,createdAt,updatedAt);
+int get hashCode => Object.hash(runtimeType,id,itemName,itemCode,quantity,const DeepCollectionEquality().hash(_transferItemBatches));
 
 @override
 String toString() {
-  return 'TransferItem(id: $id, itemName: $itemName, itemCode: $itemCode, quantity: $quantity, createdAt: $createdAt, updatedAt: $updatedAt)';
+  return 'TransferItem(id: $id, itemName: $itemName, itemCode: $itemCode, quantity: $quantity, transferItemBatches: $transferItemBatches)';
 }
 
 
@@ -245,7 +249,7 @@ abstract mixin class _$TransferItemCopyWith<$Res> implements $TransferItemCopyWi
   factory _$TransferItemCopyWith(_TransferItem value, $Res Function(_TransferItem) _then) = __$TransferItemCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String itemName, String? itemCode, double quantity, DateTime? createdAt, DateTime? updatedAt
+ int id, String? itemName, String? itemCode, int quantity, List<TransferItemBatch> transferItemBatches
 });
 
 
@@ -262,15 +266,14 @@ class __$TransferItemCopyWithImpl<$Res>
 
 /// Create a copy of TransferItem
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? itemName = null,Object? itemCode = freezed,Object? quantity = null,Object? createdAt = freezed,Object? updatedAt = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? itemName = freezed,Object? itemCode = freezed,Object? quantity = null,Object? transferItemBatches = null,}) {
   return _then(_TransferItem(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,itemName: null == itemName ? _self.itemName : itemName // ignore: cast_nullable_to_non_nullable
-as String,itemCode: freezed == itemCode ? _self.itemCode : itemCode // ignore: cast_nullable_to_non_nullable
+as int,itemName: freezed == itemName ? _self.itemName : itemName // ignore: cast_nullable_to_non_nullable
+as String?,itemCode: freezed == itemCode ? _self.itemCode : itemCode // ignore: cast_nullable_to_non_nullable
 as String?,quantity: null == quantity ? _self.quantity : quantity // ignore: cast_nullable_to_non_nullable
-as double,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
-as DateTime?,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
-as DateTime?,
+as int,transferItemBatches: null == transferItemBatches ? _self._transferItemBatches : transferItemBatches // ignore: cast_nullable_to_non_nullable
+as List<TransferItemBatch>,
   ));
 }
 

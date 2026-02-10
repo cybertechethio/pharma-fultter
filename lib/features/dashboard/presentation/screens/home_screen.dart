@@ -12,7 +12,6 @@ import '../../../brand/presentation/providers/brand_notifier.dart';
 import '../../../unit/presentation/providers/unit_notifier.dart';
 import '../../../model/presentation/providers/model_notifier.dart';
 import '../../../bank/presentation/providers/bank_notifier.dart';
-import '../../../expense_category/presentation/providers/expense_category_notifier.dart';
 import '../../../item/presentation/providers/item_notifier.dart';
 import '../providers/dashboard_providers.dart';
 import '../widgets/dashboard_period_selector.dart';
@@ -67,7 +66,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ref.read(unitProvider.future),
         ref.read(modelProvider.future),
         ref.read(bankProvider.future),
-        ref.read(expenseCategoryProvider.future),
         ref.read(itemProvider.future),
         // branchProvider is already being watched in build method
         // Note: subCategoryProvider and supplierCustomerProvider need parameters,

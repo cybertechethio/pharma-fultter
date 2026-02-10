@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../app/theme/app_sizes.dart';
 import '../../../../app/theme/brand_colors.dart';
@@ -10,8 +11,8 @@ import '../../../../app/theme/text_styles.dart';
 import '../../../../shared/components/common/app_bar.dart';
 import '../../../../shared/components/forms/custom_text_field.dart';
 import '../../../../shared/components/forms/custom_button.dart';
-import '../widgets/expense_category_dropdown.dart'
-    show ExpenseCategorySelectionDialog;
+import '../../../../shared/components/forms/date_picker_field.dart';
+import '../../../../shared/utils/url_utils.dart';
 import '../../domain/entities/expense.dart';
 import '../providers/expense_notifier.dart';
 import '../providers/expense_events.dart';
@@ -33,11 +34,12 @@ class _ExpenseUpdateScreenState extends ConsumerState<ExpenseUpdateScreen> {
   late final TextEditingController _nameController;
   late final TextEditingController _amountController;
   late final TextEditingController _notesController;
+  late final TextEditingController _expenseDateController;
 
   // State variables
-  String? _selectedCategoryId;
   late DateTime _selectedDate;
   final List<String> _attachmentFilePaths = [];
+  late List<String> _existingAttachments;
 
   final ImagePicker _picker = ImagePicker();
 
@@ -49,34 +51,37 @@ class _ExpenseUpdateScreenState extends ConsumerState<ExpenseUpdateScreen> {
     _nameController = TextEditingController(text: widget.expense?.name ?? '');
     _amountController = TextEditingController(text: widget.expense?.amount ?? '');
     _notesController = TextEditingController(); // Notes field - will be empty for now since not stored
+    _expenseDateController = TextEditingController();
 
     // Initialize state with existing expense data
-    _selectedCategoryId = null; // Category selection - will be empty for now since not stored
     _selectedDate = widget.expense?.expenseDate ?? DateTime.now();
+    _existingAttachments = List.from(widget.expense?.attachments ?? []);
+    _expenseDateController.text = '${_selectedDate.year}-${_selectedDate.month.toString().padLeft(2, '0')}-${_selectedDate.day.toString().padLeft(2, '0')}';
+    _expenseDateController.addListener(_syncExpenseDate);
   }
 
   @override
   void dispose() {
+    _expenseDateController.removeListener(_syncExpenseDate);
+    _expenseDateController.dispose();
     _nameController.dispose();
     _amountController.dispose();
     _notesController.dispose();
     super.dispose();
   }
 
-  Future<void> _selectDate() async {
-    final pickedDate = await showDatePicker(
-      context: context,
-      initialDate: _selectedDate,
-      firstDate: DateTime(2020),
-      lastDate: DateTime.now().add(const Duration(days: 365)),
-    );
-
-    if (pickedDate != null && pickedDate != _selectedDate) {
-      setState(() {
-        _selectedDate = pickedDate;
-      });
+  void _syncExpenseDate() {
+    final t = _expenseDateController.text.trim();
+    if (t.isEmpty) {
+      setState(() => _selectedDate = DateTime.now());
+      return;
+    }
+    final d = DateTime.tryParse(t);
+    if (d != null) {
+      setState(() => _selectedDate = d);
     }
   }
+
 
   Future<void> _pickImages() async {
     try {
@@ -107,28 +112,73 @@ class _ExpenseUpdateScreenState extends ConsumerState<ExpenseUpdateScreen> {
     });
   }
 
-  void _previewImage(int index) {
-    showDialog(
-      context: context,
-      builder: (context) => Dialog(
-        child: Stack(
-          children: [
-            Image.file(
-              File(_attachmentFilePaths[index]),
-              fit: BoxFit.contain,
-            ),
-            Positioned(
-              top: AppSizes.sm,
-              right: AppSizes.sm,
-              child: IconButton(
-                icon: Icon(Icons.close, color: BrandColors.textLight),
-                onPressed: () => Navigator.of(context).pop(),
+  void _removeExistingAttachment(int index) {
+    setState(() {
+      _existingAttachments.removeAt(index);
+    });
+  }
+
+  void _showImagePreview(String imagePath) {
+    // Check if it's a URL or file path
+    if (imagePath.startsWith('http')) {
+      // It's a URL - show network image
+      showDialog(
+        context: context,
+        builder: (context) => Dialog(
+          child: Stack(
+            children: [
+              CachedNetworkImage(
+                imageUrl: imagePath,
+                fit: BoxFit.contain,
+                placeholder: (context, url) => Center(
+                  child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(BrandColors.primary),
+                  ),
+                ),
+                errorWidget: (context, url, error) => Center(
+                  child: Icon(
+                    Icons.broken_image,
+                    color: BrandColors.textSecondary,
+                    size: 64,
+                  ),
+                ),
               ),
-            ),
-          ],
+              Positioned(
+                top: AppSizes.sm,
+                right: AppSizes.sm,
+                child: IconButton(
+                  icon: Icon(Icons.close, color: BrandColors.textLight),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+              ),
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    } else {
+      // It's a file path - show file image
+      showDialog(
+        context: context,
+        builder: (context) => Dialog(
+          child: Stack(
+            children: [
+              Image.file(
+                File(imagePath),
+                fit: BoxFit.contain,
+              ),
+              Positioned(
+                top: AppSizes.sm,
+                right: AppSizes.sm,
+                child: IconButton(
+                  icon: Icon(Icons.close, color: BrandColors.textLight),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
   }
 
   Future<void> _handleSubmit() async {
@@ -153,10 +203,10 @@ class _ExpenseUpdateScreenState extends ConsumerState<ExpenseUpdateScreen> {
 
     await ref.read(expenseProvider.notifier).updateExpense(
       id: widget.expense!.id,
-      categoryId: _selectedCategoryId,
       expenseDate: _selectedDate,
       name: _nameController.text.trim(),
       notes: _notesController.text.trim().isEmpty ? null : _notesController.text.trim(),
+      attachmentUrls: _existingAttachments.isEmpty ? null : _existingAttachments,
       attachmentFilePaths: _attachmentFilePaths.isEmpty ? null : _attachmentFilePaths,
     );
   }
@@ -184,20 +234,18 @@ class _ExpenseUpdateScreenState extends ConsumerState<ExpenseUpdateScreen> {
       appBar: CustomAppBar(
         title: l10n.editExpense,
       ),
-      body: Form(
-        key: _formKey,
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(AppSizes.lg),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(AppSizes.lg),
+        child: Form(
+          key: _formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Basic Information Section
-              _buildSection(
-                context,
-                title: l10n.basicInformation,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomTextField(
-                    labelText: '${l10n.expenseName} *',
+                    labelText: l10n.expenseName,
                     controller: _nameController,
                     prefixIcon: Icons.description_outlined,
                     validator: (value) {
@@ -209,7 +257,7 @@ class _ExpenseUpdateScreenState extends ConsumerState<ExpenseUpdateScreen> {
                   ),
                   const SizedBox(height: AppSizes.lg),
                   CustomTextField(
-                    labelText: '${l10n.amount} *',
+                    labelText: l10n.expenseAmount,
                     controller: _amountController,
                     prefixIcon: Icons.attach_money,
                     inputType: TextInputType.number,
@@ -225,193 +273,210 @@ class _ExpenseUpdateScreenState extends ConsumerState<ExpenseUpdateScreen> {
                     },
                   ),
                   const SizedBox(height: AppSizes.lg),
-                  // Date Picker
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '${l10n.expenseDate} *',
-                        style: context.label(
-                          color: BrandColors.textPrimary,
-                        ),
-                      ),
-                      const SizedBox(height: AppSizes.sm),
-                      InkWell(
-                        onTap: _selectDate,
-                        borderRadius: BorderRadius.circular(AppSizes.radius),
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: AppSizes.lg, vertical: AppSizes.lg),
-                          decoration: BoxDecoration(
-                            color: BrandColors.surface,
-                            borderRadius: BorderRadius.circular(AppSizes.radius),
-                            border: Border.all(
-                              color: BrandColors.outline.withOpacity(0.5),
-                            ),
-                          ),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.calendar_today,
-                                color: BrandColors.textPrimary.withOpacity(0.6),
-                              ),
-                              const SizedBox(width: AppSizes.md),
-                              Text(
-                                '${_selectedDate.day}/${_selectedDate.month}/${_selectedDate.year}',
-                                style: context.body(),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
+                  DatePickerField(
+                    labelText: l10n.expenseDate,
+                    controller: _expenseDateController,
+                    prefixIcon: Icons.calendar_today_outlined,
+                    firstDate: DateTime(2020),
+                    lastDate: DateTime.now().add(const Duration(days: 365)),
+                    validator: (v) =>
+                        (v == null || v.trim().isEmpty) ? l10n.fieldRequired : null,
+                  ),
+                  const SizedBox(height: AppSizes.lg),
+                  CustomTextField(
+                    labelText: l10n.notes,
+                    controller: _notesController,
+                    prefixIcon: Icons.notes_outlined,
+                    maxLines: 3,
+                    subtle: true,
                   ),
                 ],
               ),
 
               const SizedBox(height: AppSizes.xxl),
 
-              // Category Section
-              _buildSection(
-                context,
-                title: l10n.category,
-                children: [
-                  InkWell(
-                    onTap: () async {
-                      final selectedId = await showDialog<String>(
-                        context: context,
-                        builder: (context) => ExpenseCategorySelectionDialog(
-                          selectedCategoryId: _selectedCategoryId,
-                        ),
-                      );
-                      if (selectedId != null) {
-                        setState(() {
-                          _selectedCategoryId = selectedId;
-                        });
-                      }
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: AppSizes.lg, vertical: AppSizes.lg),
-                      decoration: BoxDecoration(
-                        color: BrandColors.surface,
-                        borderRadius: BorderRadius.circular(AppSizes.radius),
-                        border: Border.all(
-                          color: BrandColors.outline.withOpacity(0.5),
-                        ),
-                      ),
-                      child: Row(
+              // Attachments Section (title + add button on same row)
+              Card(
+                margin: EdgeInsets.zero,
+                child: Padding(
+                  padding: const EdgeInsets.all(AppSizes.lg),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Icon(
-                            Icons.category,
-                            color: BrandColors.textPrimary.withOpacity(0.6),
+                          Text(
+                            l10n.attachments,
+                            style: context.subtitle(bold: true),
                           ),
-                          const SizedBox(width: AppSizes.md),
-                          Expanded(
-                            child: Text(
-                              _selectedCategoryId != null
-                                  ? l10n.categorySelected
-                                  : l10n.selectCategory,
-                              style: context.body(
-                                color: _selectedCategoryId != null
-                                    ? BrandColors.textPrimary
-                                    : BrandColors.textPrimary.withOpacity(0.6),
+                          TextButton.icon(
+                            onPressed: _pickImages,
+                            icon: Icon(Icons.add, size: AppSizes.md2),
+                            label: Text(l10n.add),
+                            style: TextButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: AppSizes.md,
+                                vertical: AppSizes.xs,
                               ),
                             ),
-                          ),
-                          Icon(
-                            Icons.arrow_drop_down,
-                            color: BrandColors.textPrimary.withOpacity(0.6),
                           ),
                         ],
                       ),
-                    ),
-                  ),
-                ],
-              ),
+                      if (_existingAttachments.isNotEmpty || _attachmentFilePaths.isNotEmpty) ...[
+                        const SizedBox(height: AppSizes.lg),
+                        SizedBox(
+                          height: 100,
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              children: [
+                                // Existing attachments (URLs)
+                                ...List.generate(
+                                  _existingAttachments.length,
+                                  (index) => Container(
+                                    margin: EdgeInsets.only(
+                                      right: (index < _existingAttachments.length - 1) ||
+                                             _attachmentFilePaths.isNotEmpty
+                                          ? AppSizes.sm
+                                          : 0,
+                                    ),
+                                    child: Stack(
+                                      children: [
+                                        GestureDetector(
+                                          onTap: () {
+                                            final imageUrl = UrlUtils.getFullImageUrl(_existingAttachments[index]);
+                                            if (imageUrl != null) {
+                                              _showImagePreview(imageUrl);
+                                            }
+                                          },
+                                          child: Container(
+                                            width: 100,
+                                            height: 100,
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(AppSizes.radiusSm),
+                                              border: Border.all(color: BrandColors.outline),
+                                            ),
+                                            child: ClipRRect(
+                                              borderRadius: BorderRadius.circular(AppSizes.radiusSm),
+                                              child: Builder(
+                                                builder: (context) {
+                                                  final imageUrl = UrlUtils.getFullImageUrl(_existingAttachments[index]);
+                                                  if (imageUrl == null) {
+                                                    return Container(
+                                                      color: BrandColors.surfaceContainerHighest,
+                                                      child: Icon(
+                                                        Icons.broken_image,
+                                                        color: BrandColors.textSecondary,
+                                                        size: AppSizes.iconSize,
+                                                      ),
+                                                    );
+                                                  }
 
-              const SizedBox(height: AppSizes.xxl),
-
-              // Additional Information Section
-              _buildSection(
-                context,
-                title: l10n.additionalInformation,
-                children: [
-                  TextFormField(
-                    controller: _notesController,
-                    decoration: InputDecoration(
-                      labelText: l10n.notes,
-                      prefixIcon: const Icon(Icons.notes),
-                      filled: true,
-                      fillColor: BrandColors.surfaceContainerHighest,
-                    ),
-                    maxLines: 3,
-                  ),
-                ],
-              ),
-
-              const SizedBox(height: AppSizes.xxl),
-
-              // Attachments Section
-              _buildSection(
-                context,
-                title: l10n.attachments,
-                children: [
-                  OutlinedButton.icon(
-                    onPressed: _pickImages,
-                    icon: const Icon(Icons.add_photo_alternate),
-                    label: Text(l10n.addAttachments),
-                  ),
-                  if (_attachmentFilePaths.isNotEmpty) ...[
-                    const SizedBox(height: AppSizes.lg),
-                    Wrap(
-                      spacing: AppSizes.sm,
-                      runSpacing: AppSizes.sm,
-                      children: List.generate(
-                        _attachmentFilePaths.length,
-                        (index) => Stack(
-                          children: [
-                            GestureDetector(
-                              onTap: () => _previewImage(index),
-                              child: Container(
-                                width: 100,
-                                height: 100,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(AppSizes.radiusSm),
-                                  border: Border.all(color: BrandColors.outline),
-                                ),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(AppSizes.radiusSm),
-                                  child: Image.file(
-                                    File(_attachmentFilePaths[index]),
-                                    fit: BoxFit.cover,
+                                                  return CachedNetworkImage(
+                                                    imageUrl: imageUrl,
+                                                    fit: BoxFit.cover,
+                                                    width: 100,
+                                                    height: 100,
+                                                    placeholder: (context, url) => Container(
+                                                      color: BrandColors.surfaceContainerHighest,
+                                                      child: Center(
+                                                        child: CircularProgressIndicator(
+                                                          strokeWidth: 2,
+                                                          valueColor: AlwaysStoppedAnimation<Color>(BrandColors.primary),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    errorWidget: (context, url, error) => Container(
+                                                      color: BrandColors.surfaceContainerHighest,
+                                                      child: Icon(
+                                                        Icons.broken_image,
+                                                        color: BrandColors.textSecondary,
+                                                        size: AppSizes.iconSize,
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          top: AppSizes.xs,
+                                          right: AppSizes.xs,
+                                          child: CircleAvatar(
+                                            radius: AppSizes.md,
+                                            backgroundColor: BrandColors.error,
+                                            child: IconButton(
+                                              padding: EdgeInsets.zero,
+                                              iconSize: AppSizes.lg,
+                                              icon: Icon(Icons.close, color: BrandColors.textLight),
+                                              onPressed: () => _removeExistingAttachment(index),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ),
-                            Positioned(
-                              top: AppSizes.xs,
-                              right: AppSizes.xs,
-                              child: CircleAvatar(
-                                radius: AppSizes.md,
-                                backgroundColor: BrandColors.error,
-                                child: IconButton(
-                                  padding: EdgeInsets.zero,
-                                  iconSize: AppSizes.lg,
-                                  icon: Icon(Icons.close, color: BrandColors.textLight),
-                                  onPressed: () => _removeImage(index),
+                                // New file attachments
+                                ...List.generate(
+                                  _attachmentFilePaths.length,
+                                  (index) => Container(
+                                    margin: EdgeInsets.only(
+                                      right: index < _attachmentFilePaths.length - 1 ? AppSizes.sm : 0,
+                                    ),
+                                    child: Stack(
+                                      children: [
+                                        GestureDetector(
+                                          onTap: () => _showImagePreview(_attachmentFilePaths[index]),
+                                          child: Container(
+                                            width: 100,
+                                            height: 100,
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(AppSizes.radiusSm),
+                                              border: Border.all(color: BrandColors.outline),
+                                            ),
+                                            child: ClipRRect(
+                                              borderRadius: BorderRadius.circular(AppSizes.radiusSm),
+                                              child: Image.file(
+                                                File(_attachmentFilePaths[index]),
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          top: AppSizes.xs,
+                                          right: AppSizes.xs,
+                                          child: CircleAvatar(
+                                            radius: AppSizes.md,
+                                            backgroundColor: BrandColors.error,
+                                            child: IconButton(
+                                              padding: EdgeInsets.zero,
+                                              iconSize: AppSizes.lg,
+                                              icon: Icon(Icons.close, color: BrandColors.textLight),
+                                              onPressed: () => _removeImage(index),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ),
-                              ),
+                              ],
                             ),
-                          ],
+                          ),
                         ),
-                      ),
-                    ),
-                  ],
-                ],
+                      ],
+                    ],
+                  ),
+                ),
               ),
 
               const SizedBox(height: AppSizes.xxl),
 
-              // Update Button
+              // Submit Button
               CustomButton(
                 text: l10n.editExpense,
                 onPressed: updating ? null : _handleSubmit,
@@ -426,26 +491,4 @@ class _ExpenseUpdateScreenState extends ConsumerState<ExpenseUpdateScreen> {
     );
   }
 
-  Widget _buildSection(BuildContext context, {
-    required String title,
-    required List<Widget> children,
-  }) {
-    return Card(
-      margin: EdgeInsets.zero,
-      child: Padding(
-        padding: const EdgeInsets.all(AppSizes.lg),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: context.subtitle(color: BrandColors.primary, bold: true),
-            ),
-            const SizedBox(height: AppSizes.lg),
-            ...children,
-          ],
-        ),
-      ),
-    );
-  }
 }

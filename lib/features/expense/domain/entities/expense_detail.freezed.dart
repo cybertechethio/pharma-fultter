@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ExpenseDetail {
 
- String get id; int? get categoryId; DateTime get expenseDate; String get name; String get amount; String? get notes; List<String> get attachments; String? get status; DateTime get createdAt; DateTime? get updatedAt; String? get catName; List<ExpensePayment> get expensePayments;
+ String get id; DateTime get expenseDate; String get name; String get amount; String? get notes; List<String> get attachments; String? get status; DateTime get createdAt; DateTime? get updatedAt; List<ExpensePayment> get expensePayments;
 /// Create a copy of ExpenseDetail
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $ExpenseDetailCopyWith<ExpenseDetail> get copyWith => _$ExpenseDetailCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ExpenseDetail&&(identical(other.id, id) || other.id == id)&&(identical(other.categoryId, categoryId) || other.categoryId == categoryId)&&(identical(other.expenseDate, expenseDate) || other.expenseDate == expenseDate)&&(identical(other.name, name) || other.name == name)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.notes, notes) || other.notes == notes)&&const DeepCollectionEquality().equals(other.attachments, attachments)&&(identical(other.status, status) || other.status == status)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.catName, catName) || other.catName == catName)&&const DeepCollectionEquality().equals(other.expensePayments, expensePayments));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ExpenseDetail&&(identical(other.id, id) || other.id == id)&&(identical(other.expenseDate, expenseDate) || other.expenseDate == expenseDate)&&(identical(other.name, name) || other.name == name)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.notes, notes) || other.notes == notes)&&const DeepCollectionEquality().equals(other.attachments, attachments)&&(identical(other.status, status) || other.status == status)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&const DeepCollectionEquality().equals(other.expensePayments, expensePayments));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,categoryId,expenseDate,name,amount,notes,const DeepCollectionEquality().hash(attachments),status,createdAt,updatedAt,catName,const DeepCollectionEquality().hash(expensePayments));
+int get hashCode => Object.hash(runtimeType,id,expenseDate,name,amount,notes,const DeepCollectionEquality().hash(attachments),status,createdAt,updatedAt,const DeepCollectionEquality().hash(expensePayments));
 
 @override
 String toString() {
-  return 'ExpenseDetail(id: $id, categoryId: $categoryId, expenseDate: $expenseDate, name: $name, amount: $amount, notes: $notes, attachments: $attachments, status: $status, createdAt: $createdAt, updatedAt: $updatedAt, catName: $catName, expensePayments: $expensePayments)';
+  return 'ExpenseDetail(id: $id, expenseDate: $expenseDate, name: $name, amount: $amount, notes: $notes, attachments: $attachments, status: $status, createdAt: $createdAt, updatedAt: $updatedAt, expensePayments: $expensePayments)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $ExpenseDetailCopyWith<$Res>  {
   factory $ExpenseDetailCopyWith(ExpenseDetail value, $Res Function(ExpenseDetail) _then) = _$ExpenseDetailCopyWithImpl;
 @useResult
 $Res call({
- String id, int? categoryId, DateTime expenseDate, String name, String amount, String? notes, List<String> attachments, String? status, DateTime createdAt, DateTime? updatedAt, String? catName, List<ExpensePayment> expensePayments
+ String id, DateTime expenseDate, String name, String amount, String? notes, List<String> attachments, String? status, DateTime createdAt, DateTime? updatedAt, List<ExpensePayment> expensePayments
 });
 
 
@@ -62,11 +62,10 @@ class _$ExpenseDetailCopyWithImpl<$Res>
 
 /// Create a copy of ExpenseDetail
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? categoryId = freezed,Object? expenseDate = null,Object? name = null,Object? amount = null,Object? notes = freezed,Object? attachments = null,Object? status = freezed,Object? createdAt = null,Object? updatedAt = freezed,Object? catName = freezed,Object? expensePayments = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? expenseDate = null,Object? name = null,Object? amount = null,Object? notes = freezed,Object? attachments = null,Object? status = freezed,Object? createdAt = null,Object? updatedAt = freezed,Object? expensePayments = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,categoryId: freezed == categoryId ? _self.categoryId : categoryId // ignore: cast_nullable_to_non_nullable
-as int?,expenseDate: null == expenseDate ? _self.expenseDate : expenseDate // ignore: cast_nullable_to_non_nullable
+as String,expenseDate: null == expenseDate ? _self.expenseDate : expenseDate // ignore: cast_nullable_to_non_nullable
 as DateTime,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
 as String,notes: freezed == notes ? _self.notes : notes // ignore: cast_nullable_to_non_nullable
@@ -74,8 +73,7 @@ as String?,attachments: null == attachments ? _self.attachments : attachments //
 as List<String>,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as String?,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
-as DateTime?,catName: freezed == catName ? _self.catName : catName // ignore: cast_nullable_to_non_nullable
-as String?,expensePayments: null == expensePayments ? _self.expensePayments : expensePayments // ignore: cast_nullable_to_non_nullable
+as DateTime?,expensePayments: null == expensePayments ? _self.expensePayments : expensePayments // ignore: cast_nullable_to_non_nullable
 as List<ExpensePayment>,
   ));
 }
@@ -158,10 +156,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  int? categoryId,  DateTime expenseDate,  String name,  String amount,  String? notes,  List<String> attachments,  String? status,  DateTime createdAt,  DateTime? updatedAt,  String? catName,  List<ExpensePayment> expensePayments)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  DateTime expenseDate,  String name,  String amount,  String? notes,  List<String> attachments,  String? status,  DateTime createdAt,  DateTime? updatedAt,  List<ExpensePayment> expensePayments)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ExpenseDetail() when $default != null:
-return $default(_that.id,_that.categoryId,_that.expenseDate,_that.name,_that.amount,_that.notes,_that.attachments,_that.status,_that.createdAt,_that.updatedAt,_that.catName,_that.expensePayments);case _:
+return $default(_that.id,_that.expenseDate,_that.name,_that.amount,_that.notes,_that.attachments,_that.status,_that.createdAt,_that.updatedAt,_that.expensePayments);case _:
   return orElse();
 
 }
@@ -179,10 +177,10 @@ return $default(_that.id,_that.categoryId,_that.expenseDate,_that.name,_that.amo
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  int? categoryId,  DateTime expenseDate,  String name,  String amount,  String? notes,  List<String> attachments,  String? status,  DateTime createdAt,  DateTime? updatedAt,  String? catName,  List<ExpensePayment> expensePayments)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  DateTime expenseDate,  String name,  String amount,  String? notes,  List<String> attachments,  String? status,  DateTime createdAt,  DateTime? updatedAt,  List<ExpensePayment> expensePayments)  $default,) {final _that = this;
 switch (_that) {
 case _ExpenseDetail():
-return $default(_that.id,_that.categoryId,_that.expenseDate,_that.name,_that.amount,_that.notes,_that.attachments,_that.status,_that.createdAt,_that.updatedAt,_that.catName,_that.expensePayments);}
+return $default(_that.id,_that.expenseDate,_that.name,_that.amount,_that.notes,_that.attachments,_that.status,_that.createdAt,_that.updatedAt,_that.expensePayments);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -196,10 +194,10 @@ return $default(_that.id,_that.categoryId,_that.expenseDate,_that.name,_that.amo
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  int? categoryId,  DateTime expenseDate,  String name,  String amount,  String? notes,  List<String> attachments,  String? status,  DateTime createdAt,  DateTime? updatedAt,  String? catName,  List<ExpensePayment> expensePayments)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  DateTime expenseDate,  String name,  String amount,  String? notes,  List<String> attachments,  String? status,  DateTime createdAt,  DateTime? updatedAt,  List<ExpensePayment> expensePayments)?  $default,) {final _that = this;
 switch (_that) {
 case _ExpenseDetail() when $default != null:
-return $default(_that.id,_that.categoryId,_that.expenseDate,_that.name,_that.amount,_that.notes,_that.attachments,_that.status,_that.createdAt,_that.updatedAt,_that.catName,_that.expensePayments);case _:
+return $default(_that.id,_that.expenseDate,_that.name,_that.amount,_that.notes,_that.attachments,_that.status,_that.createdAt,_that.updatedAt,_that.expensePayments);case _:
   return null;
 
 }
@@ -211,11 +209,10 @@ return $default(_that.id,_that.categoryId,_that.expenseDate,_that.name,_that.amo
 
 
 class _ExpenseDetail implements ExpenseDetail {
-  const _ExpenseDetail({required this.id, this.categoryId, required this.expenseDate, required this.name, required this.amount, this.notes, required final  List<String> attachments, this.status, required this.createdAt, this.updatedAt, this.catName, required final  List<ExpensePayment> expensePayments}): _attachments = attachments,_expensePayments = expensePayments;
+  const _ExpenseDetail({required this.id, required this.expenseDate, required this.name, required this.amount, this.notes, required final  List<String> attachments, this.status, required this.createdAt, this.updatedAt, required final  List<ExpensePayment> expensePayments}): _attachments = attachments,_expensePayments = expensePayments;
   
 
 @override final  String id;
-@override final  int? categoryId;
 @override final  DateTime expenseDate;
 @override final  String name;
 @override final  String amount;
@@ -230,7 +227,6 @@ class _ExpenseDetail implements ExpenseDetail {
 @override final  String? status;
 @override final  DateTime createdAt;
 @override final  DateTime? updatedAt;
-@override final  String? catName;
  final  List<ExpensePayment> _expensePayments;
 @override List<ExpensePayment> get expensePayments {
   if (_expensePayments is EqualUnmodifiableListView) return _expensePayments;
@@ -249,16 +245,16 @@ _$ExpenseDetailCopyWith<_ExpenseDetail> get copyWith => __$ExpenseDetailCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ExpenseDetail&&(identical(other.id, id) || other.id == id)&&(identical(other.categoryId, categoryId) || other.categoryId == categoryId)&&(identical(other.expenseDate, expenseDate) || other.expenseDate == expenseDate)&&(identical(other.name, name) || other.name == name)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.notes, notes) || other.notes == notes)&&const DeepCollectionEquality().equals(other._attachments, _attachments)&&(identical(other.status, status) || other.status == status)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.catName, catName) || other.catName == catName)&&const DeepCollectionEquality().equals(other._expensePayments, _expensePayments));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ExpenseDetail&&(identical(other.id, id) || other.id == id)&&(identical(other.expenseDate, expenseDate) || other.expenseDate == expenseDate)&&(identical(other.name, name) || other.name == name)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.notes, notes) || other.notes == notes)&&const DeepCollectionEquality().equals(other._attachments, _attachments)&&(identical(other.status, status) || other.status == status)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&const DeepCollectionEquality().equals(other._expensePayments, _expensePayments));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,categoryId,expenseDate,name,amount,notes,const DeepCollectionEquality().hash(_attachments),status,createdAt,updatedAt,catName,const DeepCollectionEquality().hash(_expensePayments));
+int get hashCode => Object.hash(runtimeType,id,expenseDate,name,amount,notes,const DeepCollectionEquality().hash(_attachments),status,createdAt,updatedAt,const DeepCollectionEquality().hash(_expensePayments));
 
 @override
 String toString() {
-  return 'ExpenseDetail(id: $id, categoryId: $categoryId, expenseDate: $expenseDate, name: $name, amount: $amount, notes: $notes, attachments: $attachments, status: $status, createdAt: $createdAt, updatedAt: $updatedAt, catName: $catName, expensePayments: $expensePayments)';
+  return 'ExpenseDetail(id: $id, expenseDate: $expenseDate, name: $name, amount: $amount, notes: $notes, attachments: $attachments, status: $status, createdAt: $createdAt, updatedAt: $updatedAt, expensePayments: $expensePayments)';
 }
 
 
@@ -269,7 +265,7 @@ abstract mixin class _$ExpenseDetailCopyWith<$Res> implements $ExpenseDetailCopy
   factory _$ExpenseDetailCopyWith(_ExpenseDetail value, $Res Function(_ExpenseDetail) _then) = __$ExpenseDetailCopyWithImpl;
 @override @useResult
 $Res call({
- String id, int? categoryId, DateTime expenseDate, String name, String amount, String? notes, List<String> attachments, String? status, DateTime createdAt, DateTime? updatedAt, String? catName, List<ExpensePayment> expensePayments
+ String id, DateTime expenseDate, String name, String amount, String? notes, List<String> attachments, String? status, DateTime createdAt, DateTime? updatedAt, List<ExpensePayment> expensePayments
 });
 
 
@@ -286,11 +282,10 @@ class __$ExpenseDetailCopyWithImpl<$Res>
 
 /// Create a copy of ExpenseDetail
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? categoryId = freezed,Object? expenseDate = null,Object? name = null,Object? amount = null,Object? notes = freezed,Object? attachments = null,Object? status = freezed,Object? createdAt = null,Object? updatedAt = freezed,Object? catName = freezed,Object? expensePayments = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? expenseDate = null,Object? name = null,Object? amount = null,Object? notes = freezed,Object? attachments = null,Object? status = freezed,Object? createdAt = null,Object? updatedAt = freezed,Object? expensePayments = null,}) {
   return _then(_ExpenseDetail(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,categoryId: freezed == categoryId ? _self.categoryId : categoryId // ignore: cast_nullable_to_non_nullable
-as int?,expenseDate: null == expenseDate ? _self.expenseDate : expenseDate // ignore: cast_nullable_to_non_nullable
+as String,expenseDate: null == expenseDate ? _self.expenseDate : expenseDate // ignore: cast_nullable_to_non_nullable
 as DateTime,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
 as String,notes: freezed == notes ? _self.notes : notes // ignore: cast_nullable_to_non_nullable
@@ -298,8 +293,7 @@ as String?,attachments: null == attachments ? _self._attachments : attachments /
 as List<String>,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as String?,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
-as DateTime?,catName: freezed == catName ? _self.catName : catName // ignore: cast_nullable_to_non_nullable
-as String?,expensePayments: null == expensePayments ? _self._expensePayments : expensePayments // ignore: cast_nullable_to_non_nullable
+as DateTime?,expensePayments: null == expensePayments ? _self._expensePayments : expensePayments // ignore: cast_nullable_to_non_nullable
 as List<ExpensePayment>,
   ));
 }
@@ -579,7 +573,7 @@ as List<ExpensePaymentMethod>,
 /// @nodoc
 mixin _$ExpensePaymentMethod {
 
- String get id; String get method; String get amount; int? get bankId; String? get referenceNumber; DateTime get createdAt; String? get bankName;
+ String get id; String get method; String get amount; int? get bankId; String? get referenceNumber; DateTime get createdAt; String? get bankName; String? get attachment;
 /// Create a copy of ExpensePaymentMethod
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -590,16 +584,16 @@ $ExpensePaymentMethodCopyWith<ExpensePaymentMethod> get copyWith => _$ExpensePay
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ExpensePaymentMethod&&(identical(other.id, id) || other.id == id)&&(identical(other.method, method) || other.method == method)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.bankId, bankId) || other.bankId == bankId)&&(identical(other.referenceNumber, referenceNumber) || other.referenceNumber == referenceNumber)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.bankName, bankName) || other.bankName == bankName));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ExpensePaymentMethod&&(identical(other.id, id) || other.id == id)&&(identical(other.method, method) || other.method == method)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.bankId, bankId) || other.bankId == bankId)&&(identical(other.referenceNumber, referenceNumber) || other.referenceNumber == referenceNumber)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.bankName, bankName) || other.bankName == bankName)&&(identical(other.attachment, attachment) || other.attachment == attachment));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,method,amount,bankId,referenceNumber,createdAt,bankName);
+int get hashCode => Object.hash(runtimeType,id,method,amount,bankId,referenceNumber,createdAt,bankName,attachment);
 
 @override
 String toString() {
-  return 'ExpensePaymentMethod(id: $id, method: $method, amount: $amount, bankId: $bankId, referenceNumber: $referenceNumber, createdAt: $createdAt, bankName: $bankName)';
+  return 'ExpensePaymentMethod(id: $id, method: $method, amount: $amount, bankId: $bankId, referenceNumber: $referenceNumber, createdAt: $createdAt, bankName: $bankName, attachment: $attachment)';
 }
 
 
@@ -610,7 +604,7 @@ abstract mixin class $ExpensePaymentMethodCopyWith<$Res>  {
   factory $ExpensePaymentMethodCopyWith(ExpensePaymentMethod value, $Res Function(ExpensePaymentMethod) _then) = _$ExpensePaymentMethodCopyWithImpl;
 @useResult
 $Res call({
- String id, String method, String amount, int? bankId, String? referenceNumber, DateTime createdAt, String? bankName
+ String id, String method, String amount, int? bankId, String? referenceNumber, DateTime createdAt, String? bankName, String? attachment
 });
 
 
@@ -627,7 +621,7 @@ class _$ExpensePaymentMethodCopyWithImpl<$Res>
 
 /// Create a copy of ExpensePaymentMethod
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? method = null,Object? amount = null,Object? bankId = freezed,Object? referenceNumber = freezed,Object? createdAt = null,Object? bankName = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? method = null,Object? amount = null,Object? bankId = freezed,Object? referenceNumber = freezed,Object? createdAt = null,Object? bankName = freezed,Object? attachment = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,method: null == method ? _self.method : method // ignore: cast_nullable_to_non_nullable
@@ -636,6 +630,7 @@ as String,bankId: freezed == bankId ? _self.bankId : bankId // ignore: cast_null
 as int?,referenceNumber: freezed == referenceNumber ? _self.referenceNumber : referenceNumber // ignore: cast_nullable_to_non_nullable
 as String?,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,bankName: freezed == bankName ? _self.bankName : bankName // ignore: cast_nullable_to_non_nullable
+as String?,attachment: freezed == attachment ? _self.attachment : attachment // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -718,10 +713,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String method,  String amount,  int? bankId,  String? referenceNumber,  DateTime createdAt,  String? bankName)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String method,  String amount,  int? bankId,  String? referenceNumber,  DateTime createdAt,  String? bankName,  String? attachment)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ExpensePaymentMethod() when $default != null:
-return $default(_that.id,_that.method,_that.amount,_that.bankId,_that.referenceNumber,_that.createdAt,_that.bankName);case _:
+return $default(_that.id,_that.method,_that.amount,_that.bankId,_that.referenceNumber,_that.createdAt,_that.bankName,_that.attachment);case _:
   return orElse();
 
 }
@@ -739,10 +734,10 @@ return $default(_that.id,_that.method,_that.amount,_that.bankId,_that.referenceN
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String method,  String amount,  int? bankId,  String? referenceNumber,  DateTime createdAt,  String? bankName)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String method,  String amount,  int? bankId,  String? referenceNumber,  DateTime createdAt,  String? bankName,  String? attachment)  $default,) {final _that = this;
 switch (_that) {
 case _ExpensePaymentMethod():
-return $default(_that.id,_that.method,_that.amount,_that.bankId,_that.referenceNumber,_that.createdAt,_that.bankName);}
+return $default(_that.id,_that.method,_that.amount,_that.bankId,_that.referenceNumber,_that.createdAt,_that.bankName,_that.attachment);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -756,10 +751,10 @@ return $default(_that.id,_that.method,_that.amount,_that.bankId,_that.referenceN
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String method,  String amount,  int? bankId,  String? referenceNumber,  DateTime createdAt,  String? bankName)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String method,  String amount,  int? bankId,  String? referenceNumber,  DateTime createdAt,  String? bankName,  String? attachment)?  $default,) {final _that = this;
 switch (_that) {
 case _ExpensePaymentMethod() when $default != null:
-return $default(_that.id,_that.method,_that.amount,_that.bankId,_that.referenceNumber,_that.createdAt,_that.bankName);case _:
+return $default(_that.id,_that.method,_that.amount,_that.bankId,_that.referenceNumber,_that.createdAt,_that.bankName,_that.attachment);case _:
   return null;
 
 }
@@ -771,7 +766,7 @@ return $default(_that.id,_that.method,_that.amount,_that.bankId,_that.referenceN
 
 
 class _ExpensePaymentMethod implements ExpensePaymentMethod {
-  const _ExpensePaymentMethod({required this.id, required this.method, required this.amount, this.bankId, this.referenceNumber, required this.createdAt, this.bankName});
+  const _ExpensePaymentMethod({required this.id, required this.method, required this.amount, this.bankId, this.referenceNumber, required this.createdAt, this.bankName, this.attachment});
   
 
 @override final  String id;
@@ -781,6 +776,7 @@ class _ExpensePaymentMethod implements ExpensePaymentMethod {
 @override final  String? referenceNumber;
 @override final  DateTime createdAt;
 @override final  String? bankName;
+@override final  String? attachment;
 
 /// Create a copy of ExpensePaymentMethod
 /// with the given fields replaced by the non-null parameter values.
@@ -792,16 +788,16 @@ _$ExpensePaymentMethodCopyWith<_ExpensePaymentMethod> get copyWith => __$Expense
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ExpensePaymentMethod&&(identical(other.id, id) || other.id == id)&&(identical(other.method, method) || other.method == method)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.bankId, bankId) || other.bankId == bankId)&&(identical(other.referenceNumber, referenceNumber) || other.referenceNumber == referenceNumber)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.bankName, bankName) || other.bankName == bankName));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ExpensePaymentMethod&&(identical(other.id, id) || other.id == id)&&(identical(other.method, method) || other.method == method)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.bankId, bankId) || other.bankId == bankId)&&(identical(other.referenceNumber, referenceNumber) || other.referenceNumber == referenceNumber)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.bankName, bankName) || other.bankName == bankName)&&(identical(other.attachment, attachment) || other.attachment == attachment));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,method,amount,bankId,referenceNumber,createdAt,bankName);
+int get hashCode => Object.hash(runtimeType,id,method,amount,bankId,referenceNumber,createdAt,bankName,attachment);
 
 @override
 String toString() {
-  return 'ExpensePaymentMethod(id: $id, method: $method, amount: $amount, bankId: $bankId, referenceNumber: $referenceNumber, createdAt: $createdAt, bankName: $bankName)';
+  return 'ExpensePaymentMethod(id: $id, method: $method, amount: $amount, bankId: $bankId, referenceNumber: $referenceNumber, createdAt: $createdAt, bankName: $bankName, attachment: $attachment)';
 }
 
 
@@ -812,7 +808,7 @@ abstract mixin class _$ExpensePaymentMethodCopyWith<$Res> implements $ExpensePay
   factory _$ExpensePaymentMethodCopyWith(_ExpensePaymentMethod value, $Res Function(_ExpensePaymentMethod) _then) = __$ExpensePaymentMethodCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String method, String amount, int? bankId, String? referenceNumber, DateTime createdAt, String? bankName
+ String id, String method, String amount, int? bankId, String? referenceNumber, DateTime createdAt, String? bankName, String? attachment
 });
 
 
@@ -829,7 +825,7 @@ class __$ExpensePaymentMethodCopyWithImpl<$Res>
 
 /// Create a copy of ExpensePaymentMethod
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? method = null,Object? amount = null,Object? bankId = freezed,Object? referenceNumber = freezed,Object? createdAt = null,Object? bankName = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? method = null,Object? amount = null,Object? bankId = freezed,Object? referenceNumber = freezed,Object? createdAt = null,Object? bankName = freezed,Object? attachment = freezed,}) {
   return _then(_ExpensePaymentMethod(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,method: null == method ? _self.method : method // ignore: cast_nullable_to_non_nullable
@@ -838,6 +834,7 @@ as String,bankId: freezed == bankId ? _self.bankId : bankId // ignore: cast_null
 as int?,referenceNumber: freezed == referenceNumber ? _self.referenceNumber : referenceNumber // ignore: cast_nullable_to_non_nullable
 as String?,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,bankName: freezed == bankName ? _self.bankName : bankName // ignore: cast_nullable_to_non_nullable
+as String?,attachment: freezed == attachment ? _self.attachment : attachment // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
