@@ -3,9 +3,9 @@ import '../../../../../app/theme/app_sizes.dart';
 import '../../../../../app/theme/brand_colors.dart';
 import '../../../../../app/theme/text_styles.dart';
 import '../../../../../l10n/app_localizations.dart';
-import '../../../../../shared/utils/formatters.dart';
 import '../../../domain/entities/transaction.dart';
 import '../../../domain/entities/trans_item.dart';
+import 'transaction_item_batch_tile.dart';
 
 class TransactionItemsSection extends StatelessWidget {
   final Transaction transaction;
@@ -45,7 +45,7 @@ class TransactionItemsSection extends StatelessWidget {
                 ),
                 child: Text(
                   '${items.length}',
-                  style: context.small(color: BrandColors.primary, bold: true),
+                  style: context.smallPrimary(bold: true),
                 ),
               ),
             ],
@@ -84,11 +84,10 @@ class _ItemCard extends StatelessWidget {
     required this.index,
   });
 
-  String _formatDouble(double? value) => value?.toStringAsFixed(2) ?? '0.00';
-
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final batches = item.batches;
 
     return Container(
       padding: const EdgeInsets.all(AppSizes.md),
@@ -100,14 +99,12 @@ class _ItemCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Header: Name and Total
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Index badge
               Container(
-                width: AppSizes.iconSizeLg,
-                height: AppSizes.iconSizeLg,
+                width: AppSizes.xxl,
+                height: AppSizes.xxl,
                 decoration: BoxDecoration(
                   color: BrandColors.primary.withOpacity(0.1),
                   shape: BoxShape.circle,
@@ -115,7 +112,7 @@ class _ItemCard extends StatelessWidget {
                 alignment: Alignment.center,
                 child: Text(
                   '$index',
-                  style: context.small(color: BrandColors.primary, bold: true),
+                  style: context.smallPrimary(bold: true),
                 ),
               ),
               const SizedBox(width: AppSizes.sm),
@@ -131,61 +128,33 @@ class _ItemCard extends StatelessWidget {
                     ),
                     const SizedBox(height: AppSizes.xxs),
                     Text(
-                      l10n.itemCodeLabel(item.itemCode),
+                      'Code: ${item.itemCode}',
                       style: context.small(),
                     ),
                   ],
                 ),
               ),
               Text(
-                Formatters.formatCurrency(item.total),
-                style: context.body(bold: true, color: BrandColors.primary),
+                'Qty: ${item.quantity}',
+                style: context.bodyPrimary(bold: true),
               ),
             ],
           ),
-          const SizedBox(height: AppSizes.sm),
-          const Divider(height: AppSizes.xxs),
-          const SizedBox(height: AppSizes.sm),
-          // Details Grid
-          Row(
-            children: [
-              Expanded(child: _DetailCell(label: l10n.qty, value: _formatDouble(item.quantity))),
-              Expanded(child: _DetailCell(label: l10n.unitPrice, value: Formatters.formatCurrency(item.unitPrice))),
-              Expanded(child: _DetailCell(label: l10n.costPrice, value: Formatters.formatCurrency(item.costPrice))),
-            ],
-          ),
-          const SizedBox(height: AppSizes.xs),
-          Row(
-            children: [
-              Expanded(child: _DetailCell(label: l10n.taxRate, value: '${_formatDouble(item.taxRate)}%')),
-              Expanded(child: _DetailCell(label: l10n.taxableAmt, value: Formatters.formatCurrency(item.taxableAmount ?? 0))),
-              Expanded(child: _DetailCell(label: l10n.taxAmt, value: Formatters.formatCurrency(item.taxAmount ?? 0))),
-            ],
-          ),
+          if (batches.isNotEmpty) ...[
+            const SizedBox(height: AppSizes.sm),
+            const Divider(height: AppSizes.xs),
+            const SizedBox(height: AppSizes.xs),
+            Text(l10n.batches, style: context.small(bold: true)),
+            const SizedBox(height: AppSizes.xs),
+            ...batches.map(
+              (batch) => Padding(
+                padding: const EdgeInsets.only(bottom: AppSizes.xs),
+                child: TransactionItemBatchTile(batch: batch),
+              ),
+            ),
+          ],
         ],
       ),
-    );
-  }
-}
-
-class _DetailCell extends StatelessWidget {
-  final String label;
-  final String value;
-
-  const _DetailCell({
-    required this.label,
-    required this.value,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(label, style: context.caption()),
-        const SizedBox(height: AppSizes.xxs),
-        Text(value, style: context.small(bold: true)),
-      ],
     );
   }
 }

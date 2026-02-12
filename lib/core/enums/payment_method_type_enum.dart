@@ -29,7 +29,7 @@ extension PaymentMethodTypeExtension on PaymentMethodType {
     }
   }
 
-  /// Convert PaymentMethodType to string value for API
+  /// Convert PaymentMethodType to string value for API (backend expects camelCase e.g. mPesa)
   String toApiString() {
     switch (this) {
       case PaymentMethodType.cash:
@@ -37,9 +37,9 @@ extension PaymentMethodTypeExtension on PaymentMethodType {
       case PaymentMethodType.telebirr:
         return 'telebirr';
       case PaymentMethodType.mPesa:
-        return 'm_pesa';
+        return 'mPesa';
       case PaymentMethodType.bankTransfer:
-        return 'bank_transfer';
+        return 'bankTransfer';
       case PaymentMethodType.check:
         return 'check';
     }

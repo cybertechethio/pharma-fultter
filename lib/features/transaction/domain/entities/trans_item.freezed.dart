@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$TransItem {
 
- int get id; int get itemId; String get itemName; String get itemCode; double get quantity; double get unitPrice; double get costPrice; double? get taxRate; double? get taxableAmount; double? get taxAmount; double get total;
+ int get id; String get itemName; String get itemCode; double get quantity; List<TransItemBatch> get batches;
 /// Create a copy of TransItem
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $TransItemCopyWith<TransItem> get copyWith => _$TransItemCopyWithImpl<TransItem>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TransItem&&(identical(other.id, id) || other.id == id)&&(identical(other.itemId, itemId) || other.itemId == itemId)&&(identical(other.itemName, itemName) || other.itemName == itemName)&&(identical(other.itemCode, itemCode) || other.itemCode == itemCode)&&(identical(other.quantity, quantity) || other.quantity == quantity)&&(identical(other.unitPrice, unitPrice) || other.unitPrice == unitPrice)&&(identical(other.costPrice, costPrice) || other.costPrice == costPrice)&&(identical(other.taxRate, taxRate) || other.taxRate == taxRate)&&(identical(other.taxableAmount, taxableAmount) || other.taxableAmount == taxableAmount)&&(identical(other.taxAmount, taxAmount) || other.taxAmount == taxAmount)&&(identical(other.total, total) || other.total == total));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TransItem&&(identical(other.id, id) || other.id == id)&&(identical(other.itemName, itemName) || other.itemName == itemName)&&(identical(other.itemCode, itemCode) || other.itemCode == itemCode)&&(identical(other.quantity, quantity) || other.quantity == quantity)&&const DeepCollectionEquality().equals(other.batches, batches));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,itemId,itemName,itemCode,quantity,unitPrice,costPrice,taxRate,taxableAmount,taxAmount,total);
+int get hashCode => Object.hash(runtimeType,id,itemName,itemCode,quantity,const DeepCollectionEquality().hash(batches));
 
 @override
 String toString() {
-  return 'TransItem(id: $id, itemId: $itemId, itemName: $itemName, itemCode: $itemCode, quantity: $quantity, unitPrice: $unitPrice, costPrice: $costPrice, taxRate: $taxRate, taxableAmount: $taxableAmount, taxAmount: $taxAmount, total: $total)';
+  return 'TransItem(id: $id, itemName: $itemName, itemCode: $itemCode, quantity: $quantity, batches: $batches)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $TransItemCopyWith<$Res>  {
   factory $TransItemCopyWith(TransItem value, $Res Function(TransItem) _then) = _$TransItemCopyWithImpl;
 @useResult
 $Res call({
- int id, int itemId, String itemName, String itemCode, double quantity, double unitPrice, double costPrice, double? taxRate, double? taxableAmount, double? taxAmount, double total
+ int id, String itemName, String itemCode, double quantity, List<TransItemBatch> batches
 });
 
 
@@ -62,20 +62,14 @@ class _$TransItemCopyWithImpl<$Res>
 
 /// Create a copy of TransItem
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? itemId = null,Object? itemName = null,Object? itemCode = null,Object? quantity = null,Object? unitPrice = null,Object? costPrice = null,Object? taxRate = freezed,Object? taxableAmount = freezed,Object? taxAmount = freezed,Object? total = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? itemName = null,Object? itemCode = null,Object? quantity = null,Object? batches = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,itemId: null == itemId ? _self.itemId : itemId // ignore: cast_nullable_to_non_nullable
 as int,itemName: null == itemName ? _self.itemName : itemName // ignore: cast_nullable_to_non_nullable
 as String,itemCode: null == itemCode ? _self.itemCode : itemCode // ignore: cast_nullable_to_non_nullable
 as String,quantity: null == quantity ? _self.quantity : quantity // ignore: cast_nullable_to_non_nullable
-as double,unitPrice: null == unitPrice ? _self.unitPrice : unitPrice // ignore: cast_nullable_to_non_nullable
-as double,costPrice: null == costPrice ? _self.costPrice : costPrice // ignore: cast_nullable_to_non_nullable
-as double,taxRate: freezed == taxRate ? _self.taxRate : taxRate // ignore: cast_nullable_to_non_nullable
-as double?,taxableAmount: freezed == taxableAmount ? _self.taxableAmount : taxableAmount // ignore: cast_nullable_to_non_nullable
-as double?,taxAmount: freezed == taxAmount ? _self.taxAmount : taxAmount // ignore: cast_nullable_to_non_nullable
-as double?,total: null == total ? _self.total : total // ignore: cast_nullable_to_non_nullable
-as double,
+as double,batches: null == batches ? _self.batches : batches // ignore: cast_nullable_to_non_nullable
+as List<TransItemBatch>,
   ));
 }
 
@@ -157,10 +151,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  int itemId,  String itemName,  String itemCode,  double quantity,  double unitPrice,  double costPrice,  double? taxRate,  double? taxableAmount,  double? taxAmount,  double total)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String itemName,  String itemCode,  double quantity,  List<TransItemBatch> batches)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _TransItem() when $default != null:
-return $default(_that.id,_that.itemId,_that.itemName,_that.itemCode,_that.quantity,_that.unitPrice,_that.costPrice,_that.taxRate,_that.taxableAmount,_that.taxAmount,_that.total);case _:
+return $default(_that.id,_that.itemName,_that.itemCode,_that.quantity,_that.batches);case _:
   return orElse();
 
 }
@@ -178,10 +172,10 @@ return $default(_that.id,_that.itemId,_that.itemName,_that.itemCode,_that.quanti
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  int itemId,  String itemName,  String itemCode,  double quantity,  double unitPrice,  double costPrice,  double? taxRate,  double? taxableAmount,  double? taxAmount,  double total)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String itemName,  String itemCode,  double quantity,  List<TransItemBatch> batches)  $default,) {final _that = this;
 switch (_that) {
 case _TransItem():
-return $default(_that.id,_that.itemId,_that.itemName,_that.itemCode,_that.quantity,_that.unitPrice,_that.costPrice,_that.taxRate,_that.taxableAmount,_that.taxAmount,_that.total);}
+return $default(_that.id,_that.itemName,_that.itemCode,_that.quantity,_that.batches);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -195,10 +189,10 @@ return $default(_that.id,_that.itemId,_that.itemName,_that.itemCode,_that.quanti
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  int itemId,  String itemName,  String itemCode,  double quantity,  double unitPrice,  double costPrice,  double? taxRate,  double? taxableAmount,  double? taxAmount,  double total)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String itemName,  String itemCode,  double quantity,  List<TransItemBatch> batches)?  $default,) {final _that = this;
 switch (_that) {
 case _TransItem() when $default != null:
-return $default(_that.id,_that.itemId,_that.itemName,_that.itemCode,_that.quantity,_that.unitPrice,_that.costPrice,_that.taxRate,_that.taxableAmount,_that.taxAmount,_that.total);case _:
+return $default(_that.id,_that.itemName,_that.itemCode,_that.quantity,_that.batches);case _:
   return null;
 
 }
@@ -210,20 +204,20 @@ return $default(_that.id,_that.itemId,_that.itemName,_that.itemCode,_that.quanti
 
 
 class _TransItem implements TransItem {
-  const _TransItem({required this.id, required this.itemId, required this.itemName, required this.itemCode, required this.quantity, required this.unitPrice, required this.costPrice, this.taxRate, this.taxableAmount, this.taxAmount, required this.total});
+  const _TransItem({required this.id, required this.itemName, required this.itemCode, required this.quantity, final  List<TransItemBatch> batches = const []}): _batches = batches;
   
 
 @override final  int id;
-@override final  int itemId;
 @override final  String itemName;
 @override final  String itemCode;
 @override final  double quantity;
-@override final  double unitPrice;
-@override final  double costPrice;
-@override final  double? taxRate;
-@override final  double? taxableAmount;
-@override final  double? taxAmount;
-@override final  double total;
+ final  List<TransItemBatch> _batches;
+@override@JsonKey() List<TransItemBatch> get batches {
+  if (_batches is EqualUnmodifiableListView) return _batches;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_batches);
+}
+
 
 /// Create a copy of TransItem
 /// with the given fields replaced by the non-null parameter values.
@@ -235,16 +229,16 @@ _$TransItemCopyWith<_TransItem> get copyWith => __$TransItemCopyWithImpl<_TransI
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TransItem&&(identical(other.id, id) || other.id == id)&&(identical(other.itemId, itemId) || other.itemId == itemId)&&(identical(other.itemName, itemName) || other.itemName == itemName)&&(identical(other.itemCode, itemCode) || other.itemCode == itemCode)&&(identical(other.quantity, quantity) || other.quantity == quantity)&&(identical(other.unitPrice, unitPrice) || other.unitPrice == unitPrice)&&(identical(other.costPrice, costPrice) || other.costPrice == costPrice)&&(identical(other.taxRate, taxRate) || other.taxRate == taxRate)&&(identical(other.taxableAmount, taxableAmount) || other.taxableAmount == taxableAmount)&&(identical(other.taxAmount, taxAmount) || other.taxAmount == taxAmount)&&(identical(other.total, total) || other.total == total));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TransItem&&(identical(other.id, id) || other.id == id)&&(identical(other.itemName, itemName) || other.itemName == itemName)&&(identical(other.itemCode, itemCode) || other.itemCode == itemCode)&&(identical(other.quantity, quantity) || other.quantity == quantity)&&const DeepCollectionEquality().equals(other._batches, _batches));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,itemId,itemName,itemCode,quantity,unitPrice,costPrice,taxRate,taxableAmount,taxAmount,total);
+int get hashCode => Object.hash(runtimeType,id,itemName,itemCode,quantity,const DeepCollectionEquality().hash(_batches));
 
 @override
 String toString() {
-  return 'TransItem(id: $id, itemId: $itemId, itemName: $itemName, itemCode: $itemCode, quantity: $quantity, unitPrice: $unitPrice, costPrice: $costPrice, taxRate: $taxRate, taxableAmount: $taxableAmount, taxAmount: $taxAmount, total: $total)';
+  return 'TransItem(id: $id, itemName: $itemName, itemCode: $itemCode, quantity: $quantity, batches: $batches)';
 }
 
 
@@ -255,7 +249,7 @@ abstract mixin class _$TransItemCopyWith<$Res> implements $TransItemCopyWith<$Re
   factory _$TransItemCopyWith(_TransItem value, $Res Function(_TransItem) _then) = __$TransItemCopyWithImpl;
 @override @useResult
 $Res call({
- int id, int itemId, String itemName, String itemCode, double quantity, double unitPrice, double costPrice, double? taxRate, double? taxableAmount, double? taxAmount, double total
+ int id, String itemName, String itemCode, double quantity, List<TransItemBatch> batches
 });
 
 
@@ -272,20 +266,14 @@ class __$TransItemCopyWithImpl<$Res>
 
 /// Create a copy of TransItem
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? itemId = null,Object? itemName = null,Object? itemCode = null,Object? quantity = null,Object? unitPrice = null,Object? costPrice = null,Object? taxRate = freezed,Object? taxableAmount = freezed,Object? taxAmount = freezed,Object? total = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? itemName = null,Object? itemCode = null,Object? quantity = null,Object? batches = null,}) {
   return _then(_TransItem(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,itemId: null == itemId ? _self.itemId : itemId // ignore: cast_nullable_to_non_nullable
 as int,itemName: null == itemName ? _self.itemName : itemName // ignore: cast_nullable_to_non_nullable
 as String,itemCode: null == itemCode ? _self.itemCode : itemCode // ignore: cast_nullable_to_non_nullable
 as String,quantity: null == quantity ? _self.quantity : quantity // ignore: cast_nullable_to_non_nullable
-as double,unitPrice: null == unitPrice ? _self.unitPrice : unitPrice // ignore: cast_nullable_to_non_nullable
-as double,costPrice: null == costPrice ? _self.costPrice : costPrice // ignore: cast_nullable_to_non_nullable
-as double,taxRate: freezed == taxRate ? _self.taxRate : taxRate // ignore: cast_nullable_to_non_nullable
-as double?,taxableAmount: freezed == taxableAmount ? _self.taxableAmount : taxableAmount // ignore: cast_nullable_to_non_nullable
-as double?,taxAmount: freezed == taxAmount ? _self.taxAmount : taxAmount // ignore: cast_nullable_to_non_nullable
-as double?,total: null == total ? _self.total : total // ignore: cast_nullable_to_non_nullable
-as double,
+as double,batches: null == batches ? _self._batches : batches // ignore: cast_nullable_to_non_nullable
+as List<TransItemBatch>,
   ));
 }
 

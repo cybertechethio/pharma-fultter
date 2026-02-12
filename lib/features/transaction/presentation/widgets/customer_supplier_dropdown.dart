@@ -14,21 +14,22 @@ class CustomerSupplierDropdown extends ConsumerWidget {
     final formState = ref.watch(transactionFormProvider);
     final transactionType = formState.request.transactionType;
     
-    // Only show for sale or purchase
+    // Only show for sale, purchase, or imported (imported uses supplier like purchase)
     if (transactionType != TransactionType.sale &&
-        transactionType != TransactionType.purchase) {
+        transactionType != TransactionType.purchase &&
+        transactionType != TransactionType.imported) {
       return const SizedBox.shrink();
     }
 
     final isSale = transactionType == TransactionType.sale;
-    final type = isSale ? SupplierCustomerType.customer : SupplierCustomerType.supplier;
+    final type =
+        isSale ? SupplierCustomerType.customer : SupplierCustomerType.supplier;
     
     final supplierCustomers = ref.watch(supplierCustomerProvider(type));
     final items = supplierCustomers.value ?? [];
     
-    final selectedId = isSale 
-        ? formState.request.customerId 
-        : formState.request.supplierId;
+    final selectedId =
+        isSale ? formState.request.customerId : formState.request.supplierId;
     
     final formNotifier = ref.read(transactionFormProvider.notifier);
 

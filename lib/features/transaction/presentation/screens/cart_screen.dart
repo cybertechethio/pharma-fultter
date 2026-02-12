@@ -8,8 +8,8 @@ import '../../../../shared/components/common/app_bar.dart';
 import '../../../../shared/components/common/error_widget.dart' as app_err;
 import '../../../../shared/components/common/empty_widget.dart';
 import '../../../../shared/components/forms/search_bar.dart' as search;
-import '../../../item/domain/entities/item.dart';
-import '../../../item/presentation/providers/item_notifier.dart';
+import '../../../item/domain/entities/item_with_batches.dart';
+import '../../../item/presentation/providers/item_with_batches_notifier.dart';
 import '../providers/form/transaction_form_notifier.dart';
 
 import '../widgets/cart_card.dart';
@@ -38,7 +38,7 @@ class _CartScreenState extends ConsumerState<CartScreen> {
 
   void _onScroll() {
     if (_isBottom) {
-      final notifier = ref.read(itemProvider.notifier);
+      final notifier = ref.read(itemWithBatchesProvider.notifier);
       if (notifier.canLoadMore) {
         notifier.loadMore();
       }
@@ -55,8 +55,8 @@ class _CartScreenState extends ConsumerState<CartScreen> {
   @override
   Widget build(BuildContext context) {
     final formState = ref.watch(transactionFormProvider);
-    final itemsAsync = ref.watch(itemProvider);
-    final notifier = ref.read(itemProvider.notifier);
+    final itemsAsync = ref.watch(itemWithBatchesProvider);
+    final notifier = ref.read(itemWithBatchesProvider.notifier);
     final canLoadMore = notifier.canLoadMore;
 
     // Sort items: cart items first, then others
@@ -67,7 +67,7 @@ class _CartScreenState extends ConsumerState<CartScreen> {
         final otherItems = items.where((item) => !cartItemIds.contains(item.id)).toList();
         return [...cartItems, ...otherItems];
       },
-      orElse: () => <Item>[],
+      orElse: () => <ItemWithBatches>[],
     );
 
     final l10n = AppLocalizations.of(context);
@@ -80,8 +80,8 @@ class _CartScreenState extends ConsumerState<CartScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: search.AppSearchBar(
               hintText: l10n.searchByNameCodeSku,
-              onSearch: (query) => ref.read(itemProvider.notifier).search(query),
-              onClear: () => ref.read(itemProvider.notifier).refresh(),
+              onSearch: (query) => ref.read(itemWithBatchesProvider.notifier).search(query),
+              onClear: () => ref.read(itemWithBatchesProvider.notifier).refresh(),
               padding: const EdgeInsets.all(8.0),
             ),
           ),
@@ -100,7 +100,7 @@ class _CartScreenState extends ConsumerState<CartScreen> {
             );
           }
           return RefreshIndicator(
-            onRefresh: () => ref.read(itemProvider.notifier).refresh(),
+            onRefresh: () => ref.read(itemWithBatchesProvider.notifier).refresh(),
             child: ListView.separated(
               controller: _scrollController,
               padding: const EdgeInsets.all(AppSizes.lg),
@@ -125,12 +125,15 @@ class _CartScreenState extends ConsumerState<CartScreen> {
 
                 final item = sortedItems[index];
                 final isInCart = formState.cartItems.containsKey(item.id);
-                final quantity = formState.cartQuantities[item.id] ?? 0;
+                final batches = formState.cartItemBatches[item.id] ?? [];
+                final addDisabled = item.batches.isEmpty;
 
                 return CartCard(
-                  item: item,
+                  itemWithBatches: item,
                   isInCart: isInCart,
-                  quantity: quantity,
+                  batchSelections: batches,
+                  isInDialog: true,
+                  addDisabled: addDisabled,
                 );
               },
             ),
@@ -147,7 +150,7 @@ class _CartScreenState extends ConsumerState<CartScreen> {
               ),
               const SizedBox(height: AppSizes.lg),
               ElevatedButton(
-                onPressed: () => ref.read(itemProvider.notifier).refresh(),
+                onPressed: () => ref.read(itemWithBatchesProvider.notifier).refresh(),
                 child: Text(AppLocalizations.of(context).retry),
               ),
             ],

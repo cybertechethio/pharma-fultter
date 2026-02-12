@@ -1,11 +1,14 @@
+import 'package:cyber_pos/core/enums/transaction_type_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../../app/theme/app_sizes.dart';
 import '../../../../../app/theme/text_styles.dart';
 import '../../../../../app/theme/brand_colors.dart';
 import '../../../../../l10n/app_localizations.dart';
 import '../../../../../shared/components/common/card_title.dart';
-import '../../../../../core/enums/transaction_type_enum.dart';
+import '../../../../../shared/components/forms/custom_button.dart';
+import '../../../../../shared/components/forms/custom_text_field.dart';
 import '../../../../../core/enums/transaction_status_enum.dart';
 import '../../../domain/entities/transaction.dart';
 import '../../providers/transaction_notifier.dart';
@@ -49,8 +52,11 @@ class TransactionHeaderSection extends ConsumerWidget {
                 child: cardTitle(title: transaction.transactionNumber),
               ),
               const SizedBox(width: AppSizes.sm),
-              // Reverse Button (only show if not already reversed)
-              if (!isReversed)
+              // Reverse Button (only for sale, purchase, imported; hide if already reversed)
+              if (!isReversed &&
+                  (transaction.transactionType == TransactionType.sale ||
+                   transaction.transactionType == TransactionType.purchase ||
+                   transaction.transactionType == TransactionType.imported))
                 SizedBox(
                   height: AppSizes.xxxl,
                   child: OutlinedButton.icon(
@@ -138,19 +144,65 @@ class TransactionHeaderSection extends ConsumerWidget {
     );
   }
 
-  void _showReverseConfirmation(BuildContext context, WidgetRef ref) {
-    final l10n = AppLocalizations.of(context);
-    showDialog(
+  void _showReverseConfirmation(BuildContext context, WidgetRef ref) async {
+    final note = await showDialog<String>(
       context: context,
-      builder: (dialogContext) => AlertDialog(
-        title: Row(
-          children: [
-            Icon(Icons.warning_amber_rounded, color: BrandColors.warning),
-            const SizedBox(width: AppSizes.sm),
-            Text(l10n.reverseTransaction),
-          ],
-        ),
-        content: Column(
+      builder: (dialogContext) => _ReverseConfirmDialog(
+        transaction: transaction,
+      ),
+    );
+    if (note != null) {
+      _reverseTransaction(ref, notes: note.isEmpty ? null : note);
+    }
+  }
+
+  void _reverseTransaction(WidgetRef ref, {String? notes}) {
+    ref.read(transactionProvider.notifier).reverseTransaction(
+      reversesTransactionId: transaction.id,
+      notes: notes,
+    );
+  }
+}
+
+class _ReverseConfirmDialog extends StatefulWidget {
+  final Transaction transaction;
+
+  const _ReverseConfirmDialog({required this.transaction});
+
+  @override
+  State<_ReverseConfirmDialog> createState() => _ReverseConfirmDialogState();
+}
+
+class _ReverseConfirmDialogState extends State<_ReverseConfirmDialog> {
+  late final TextEditingController _notesController;
+
+  @override
+  void initState() {
+    super.initState();
+    _notesController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _notesController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final transaction = widget.transaction;
+
+    return AlertDialog(
+      title: Row(
+        children: [
+          Icon(Icons.warning_amber_rounded, color: BrandColors.warning),
+          const SizedBox(width: AppSizes.sm),
+          Text(l10n.reverseTransaction),
+        ],
+      ),
+      content: SingleChildScrollView(
+        child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -183,33 +235,28 @@ class TransactionHeaderSection extends ConsumerWidget {
                 ],
               ),
             ),
+            const SizedBox(height: AppSizes.md),
+            CustomTextField(
+              labelText: l10n.notesOptional,
+              controller: _notesController,
+              maxLines: 3,
+            ),
           ],
         ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(dialogContext).pop(),
-            child: Text(l10n.cancel),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.of(dialogContext).pop();
-              _reverseTransaction(ref);
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: BrandColors.warning,
-              foregroundColor: BrandColors.textLight,
-            ),
-            child: Text(l10n.reverse),
-          ),
-        ],
       ),
-    );
-  }
-
-  void _reverseTransaction(WidgetRef ref) {
-    ref.read(transactionProvider.notifier).reverseTransaction(
-      transactionType: TransactionType.reverse,
-      reversesTransactionId: transaction.id,
+      actions: [
+        TextButton(
+          onPressed: () => context.pop(null),
+          child: Text(l10n.cancel),
+        ),
+        CustomButton(
+          text: l10n.reverse,
+          color: BrandColors.warning,
+          textColor: BrandColors.textLight,
+          width: 120,
+          onPressed: () => context.pop(_notesController.text.trim()),
+        ),
+      ],
     );
   }
 }

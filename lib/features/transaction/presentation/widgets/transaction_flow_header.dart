@@ -107,13 +107,15 @@ class TransactionFlowHeader extends StatelessWidget {
   bool _isAttachmentsEnabled() {
     return selectedType != null &&
         (selectedType == TransactionType.sale ||
-            selectedType == TransactionType.purchase);
+            selectedType == TransactionType.purchase ||
+            selectedType == TransactionType.imported);
   }
 
   bool _isPaymentMethodsEnabled() {
     return selectedType != null &&
         (selectedType == TransactionType.sale ||
-            selectedType == TransactionType.purchase);
+            selectedType == TransactionType.purchase ||
+            selectedType == TransactionType.imported);
   }
 
   Widget _buildStep({

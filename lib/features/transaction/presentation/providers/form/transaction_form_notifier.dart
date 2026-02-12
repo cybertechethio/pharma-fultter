@@ -3,7 +3,7 @@ import '../../../../../core/enums/transaction_type_enum.dart';
 import '../../../../../core/enums/payment_method_type_enum.dart';
 import '../../../data/models/create_trans_request.dart';
 import '../../../data/models/payment_method_model.dart';
-import '../../../../item/domain/entities/item.dart';
+import '../../../../item/domain/entities/item_with_batches.dart';
 import 'transaction_form_state.dart';
 
 part 'transaction_form_notifier.g.dart';
@@ -57,80 +57,140 @@ class TransactionFormNotifier extends _$TransactionFormNotifier {
   }
 
   // ============================================================================
-  // CART METHODS
+  // CART METHODS (same pattern as transfer + price per batch)
   // ============================================================================
 
-  /// Add item to cart
-  /// If qty is provided, it overrides existing quantity
-  /// If qty is null, increments by 1
-  void addToCart(Item item, int? qty) {
-    final cartItems = Map<int, Item>.from(state.cartItems);
-    final cartQuantities = Map<int, int>.from(state.cartQuantities);
-    
-    if (qty != null) {
-      // Override quantity
-      cartItems[item.id] = item;
-      cartQuantities[item.id] = qty;
-    } else {
-      // Increment by 1
-      cartItems[item.id] = item;
-      final currentQty = cartQuantities[item.id] ?? 0;
-      cartQuantities[item.id] = currentQty + 1;
+  void addToCart(ItemWithBatches item) {
+    final cartItems = Map<int, ItemWithBatches>.from(state.cartItems);
+    final cartItemBatches =
+        Map<int, List<CreateTransactionBatchRequest>>.from(state.cartItemBatches);
+    cartItems[item.id] = item;
+    if (!cartItemBatches.containsKey(item.id)) {
+      cartItemBatches[item.id] = [];
     }
-    
     state = state.copyWith(
       cartItems: cartItems,
-      cartQuantities: cartQuantities,
+      cartItemBatches: cartItemBatches,
     );
   }
 
-  /// Remove from cart (decrease quantity by 1)
-  void removeFromCart(int itemId) {
-    final cartQuantities = Map<int, int>.from(state.cartQuantities);
-    final currentQty = cartQuantities[itemId] ?? 0;
-    
-    if (currentQty <= 1) {
-      // If qty is 1 or less, remove from cart completely
-      deleteFromCart(itemId);
-      return;
-    }
-    
-    cartQuantities[itemId] = currentQty - 1;
-    state = state.copyWith(cartQuantities: cartQuantities);
-  }
-
-  /// Delete item from cart completely
   void deleteFromCart(int itemId) {
-    final cartItems = Map<int, Item>.from(state.cartItems);
-    final cartQuantities = Map<int, int>.from(state.cartQuantities);
-    
+    final cartItems = Map<int, ItemWithBatches>.from(state.cartItems);
+    final cartItemBatches =
+        Map<int, List<CreateTransactionBatchRequest>>.from(state.cartItemBatches);
     cartItems.remove(itemId);
-    cartQuantities.remove(itemId);
-    
+    cartItemBatches.remove(itemId);
     state = state.copyWith(
       cartItems: cartItems,
-      cartQuantities: cartQuantities,
+      cartItemBatches: cartItemBatches,
     );
   }
 
-  /// Check if item is in cart
-  bool isInCart(int itemId) {
-    return state.cartItems.containsKey(itemId);
+  bool isInCart(int itemId) => state.cartItems.containsKey(itemId);
+
+  void setItemIdsRequiringBatch(List<int> itemIds) {
+    state = state.copyWith(itemIdsRequiringBatch: itemIds);
   }
 
-  /// Get quantity for item in cart
-  int getQty(int itemId) {
-    return state.cartQuantities[itemId] ?? 0;
+  void addBatchToItem(
+    int itemId,
+    String batchNumber,
+    int quantity, {
+    double? costPrice,
+    double? unitPrice,
+  }) {
+    if (quantity <= 0) return;
+    final cartItemBatches =
+        Map<int, List<CreateTransactionBatchRequest>>.from(state.cartItemBatches);
+    final list = List<CreateTransactionBatchRequest>.from(
+      cartItemBatches[itemId] ?? [],
+    );
+    list.add(CreateTransactionBatchRequest(
+      batchNumber: batchNumber,
+      quantity: quantity,
+      costPrice: costPrice,
+      unitPrice: unitPrice,
+    ));
+    cartItemBatches[itemId] = list;
+    final clearedRequiring =
+        state.itemIdsRequiringBatch.where((id) => id != itemId).toList();
+    state = state.copyWith(
+      cartItemBatches: cartItemBatches,
+      itemIdsRequiringBatch: clearedRequiring,
+    );
   }
 
-  /// Get total amount of cart
+  void removeBatchFromItem(int itemId, int index) {
+    final cartItemBatches =
+        Map<int, List<CreateTransactionBatchRequest>>.from(state.cartItemBatches);
+    final list = List<CreateTransactionBatchRequest>.from(
+      cartItemBatches[itemId] ?? [],
+    );
+    if (index >= 0 && index < list.length) {
+      list.removeAt(index);
+      cartItemBatches[itemId] = list;
+      if (list.isEmpty) {
+        cartItemBatches.remove(itemId);
+      }
+      state = state.copyWith(cartItemBatches: cartItemBatches);
+    }
+  }
+
+  void updateBatchQuantity(int itemId, int index, int quantity) {
+    if (quantity <= 0) return;
+    final cartItemBatches =
+        Map<int, List<CreateTransactionBatchRequest>>.from(state.cartItemBatches);
+    final list = List<CreateTransactionBatchRequest>.from(
+      cartItemBatches[itemId] ?? [],
+    );
+    if (index >= 0 && index < list.length) {
+      final batch = list[index];
+      list[index] = CreateTransactionBatchRequest(
+        batchNumber: batch.batchNumber,
+        quantity: quantity,
+        costPrice: batch.costPrice,
+        unitPrice: batch.unitPrice,
+      );
+      cartItemBatches[itemId] = list;
+      state = state.copyWith(cartItemBatches: cartItemBatches);
+    }
+  }
+
+  void updateBatchPrice(int itemId, int index, {double? costPrice, double? unitPrice}) {
+    final cartItemBatches =
+        Map<int, List<CreateTransactionBatchRequest>>.from(state.cartItemBatches);
+    final list = List<CreateTransactionBatchRequest>.from(
+      cartItemBatches[itemId] ?? [],
+    );
+    if (index >= 0 && index < list.length) {
+      final batch = list[index];
+      list[index] = CreateTransactionBatchRequest(
+        batchNumber: batch.batchNumber,
+        quantity: batch.quantity,
+        costPrice: costPrice ?? batch.costPrice,
+        unitPrice: unitPrice ?? batch.unitPrice,
+      );
+      cartItemBatches[itemId] = list;
+      state = state.copyWith(cartItemBatches: cartItemBatches);
+    }
+  }
+
+  List<CreateTransactionBatchRequest> getBatchesForItem(int itemId) {
+    return state.cartItemBatches[itemId] ?? [];
+  }
+
+  /// Get total amount of cart from batch quantities and prices (sale: unitPrice, purchase/import: costPrice)
   double getTotal() {
+    final type = state.request.transactionType;
     double total = 0.0;
-    for (final entry in state.cartItems.entries) {
-      final itemId = entry.key;
-      final item = entry.value;
-      final qty = state.cartQuantities[itemId] ?? 0;
-      total += item.unitPrice * qty;
+    for (final batches in state.cartItemBatches.values) {
+      for (final batch in batches) {
+        if (type == TransactionType.sale) {
+          total += (batch.unitPrice ?? 0) * batch.quantity;
+        } else if (type == TransactionType.purchase || type == TransactionType.imported) {
+          total += (batch.costPrice ?? 0) * batch.quantity;
+        }
+      }
     }
     return total;
   }
@@ -249,17 +309,17 @@ class TransactionFormNotifier extends _$TransactionFormNotifier {
   }
 
   /// Build CreateTransRequest from current state (for submission)
-  /// Converts cartItems to CreateTransItemRequest list
   CreateTransRequest buildRequest() {
-    final items = state.cartItems.entries.map((entry) {
+    final items = <CreateTransItemRequest>[];
+    for (final entry in state.cartItems.entries) {
       final itemId = entry.key;
-      final qty = state.cartQuantities[itemId] ?? 1;
-      return CreateTransItemRequest(
+      final batches = state.cartItemBatches[itemId] ?? [];
+      if (batches.isEmpty) continue;
+      items.add(CreateTransItemRequest(
         itemId: itemId,
-        quantity: qty.toDouble(),
-      );
-    }).toList();
-    
+        batches: batches,
+      ));
+    }
     return state.request.copyWith(items: items);
   }
 
@@ -272,7 +332,8 @@ class TransactionFormNotifier extends _$TransactionFormNotifier {
   void clearCart() {
     state = state.copyWith(
       cartItems: const {},
-      cartQuantities: const {},
+      cartItemBatches: const {},
+      itemIdsRequiringBatch: const [],
     );
   }
 }

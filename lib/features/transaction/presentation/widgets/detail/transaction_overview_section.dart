@@ -114,17 +114,25 @@ class _InfoRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Icon(icon, size: AppSizes.iconSizeSm, color: BrandColors.primary),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(icon, size: AppSizes.md2, color: BrandColors.primary),
+            const SizedBox(width: AppSizes.sm),
+            Text(label, style: context.small()),
+          ],
+        ),
         const SizedBox(width: AppSizes.sm),
         Expanded(
-          child: Text(label, style: context.small()),
-        ),
-        Flexible(
           child: Text(
             value,
             style: context.body(bold: true),
             textAlign: TextAlign.end,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
           ),
         ),
       ],

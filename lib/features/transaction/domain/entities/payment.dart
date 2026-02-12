@@ -9,6 +9,7 @@ sealed class Payment with _$Payment {
     required int id,
     required double totalAmount,
     required double paidAmount,
+    String? paymentType,
     String? notes,
     @Default([]) List<PaymentMethod> paymentMethods,
   }) = _Payment;

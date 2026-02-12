@@ -119,25 +119,11 @@ class PaymentMethodRemoteDataSourceImpl implements PaymentMethodRemoteDataSource
       'methodId': methodId,
     });
     try {
-      final response = await _api.delete(
+       await _api.delete(
         paymentId: paymentId,
         methodId: methodId,
       );
-      return response.when(
-        success: (success, message, data, meta, pagination) {
-          LoggingService.auth('Delete payment method successful', {
-            'message': message,
-          });
-          return const Right(null);
-        },
-        error: (success, error, meta) {
-          LoggingService.auth('Delete payment method failed - server error', {
-            'error': error.message,
-            'code': error.statusCode,
-          });
-          return Left(Failure.serverError(error.message));
-        },
-      );
+        return Right(null);
     } on DioException catch (e) {
       final exception = NetworkExceptions.getDioException(e);
       return Left(Failure.networkError(NetworkExceptions.getErrorMessage(exception)));

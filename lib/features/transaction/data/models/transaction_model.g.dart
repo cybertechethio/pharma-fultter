@@ -55,6 +55,11 @@ _TransactionModel _$TransactionModelFromJson(
       (v) =>
           v == null ? null : PaymentModel.fromJson(v as Map<String, dynamic>),
     ),
+    refund: $checkedConvert(
+      'refund',
+      (v) =>
+          v == null ? null : PaymentModel.fromJson(v as Map<String, dynamic>),
+    ),
   );
   return val;
 });
@@ -82,4 +87,5 @@ Map<String, dynamic> _$TransactionModelToJson(_TransactionModel instance) =>
       'updatorName': ?instance.updatorName,
       'items': instance.items.map((e) => e.toJson()).toList(),
       'payment': ?instance.payment?.toJson(),
+      'refund': ?instance.refund?.toJson(),
     };

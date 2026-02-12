@@ -73,12 +73,10 @@ class TransactionRepositoryImpl implements TransactionRepository {
 
   @override
   Future<Either<Failure, Transaction>> reverseTransaction({
-    required TransactionType transactionType,
     required int reversesTransactionId,
     String? notes,
   }) async {
     final response = await _remoteDataSource.reverseTransaction(
-      transactionType: transactionType,
       reversesTransactionId: reversesTransactionId,
       notes: notes,
     );

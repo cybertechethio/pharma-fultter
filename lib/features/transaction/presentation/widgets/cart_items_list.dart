@@ -35,15 +35,19 @@ class CartItemsList extends ConsumerWidget {
         ),
         SizedBox(height: AppSizes.md),
         ...cartItems.map((item) {
-          final quantity = formState.cartQuantities[item.id] ?? 0;
-          return CartCard(
-            item: item,
-            isInCart: true,
-            quantity: quantity,
+          final batches = formState.cartItemBatches[item.id] ?? [];
+          return Padding(
+            padding: const EdgeInsets.only(bottom: AppSizes.sm),
+            child: CartCard(
+              itemWithBatches: item,
+              isInCart: true,
+              batchSelections: batches,
+              isInDialog: false,
+              addDisabled: false,
+            ),
           );
         }).toList(),
       ],
     );
   }
 }
-
