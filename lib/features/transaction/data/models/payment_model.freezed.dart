@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PaymentModel {
 
- int get id;@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) double get totalAmount;@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) double get paidAmount; String? get notes; List<PaymentMethodModel> get paymentMethods;
+ int get id;@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) double get totalAmount;@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) double get paidAmount; String? get paymentType; String? get notes; List<PaymentMethodModel> get paymentMethods;
 /// Create a copy of PaymentModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $PaymentModelCopyWith<PaymentModel> get copyWith => _$PaymentModelCopyWithImpl<P
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PaymentModel&&(identical(other.id, id) || other.id == id)&&(identical(other.totalAmount, totalAmount) || other.totalAmount == totalAmount)&&(identical(other.paidAmount, paidAmount) || other.paidAmount == paidAmount)&&(identical(other.notes, notes) || other.notes == notes)&&const DeepCollectionEquality().equals(other.paymentMethods, paymentMethods));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PaymentModel&&(identical(other.id, id) || other.id == id)&&(identical(other.totalAmount, totalAmount) || other.totalAmount == totalAmount)&&(identical(other.paidAmount, paidAmount) || other.paidAmount == paidAmount)&&(identical(other.paymentType, paymentType) || other.paymentType == paymentType)&&(identical(other.notes, notes) || other.notes == notes)&&const DeepCollectionEquality().equals(other.paymentMethods, paymentMethods));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,totalAmount,paidAmount,notes,const DeepCollectionEquality().hash(paymentMethods));
+int get hashCode => Object.hash(runtimeType,id,totalAmount,paidAmount,paymentType,notes,const DeepCollectionEquality().hash(paymentMethods));
 
 @override
 String toString() {
-  return 'PaymentModel(id: $id, totalAmount: $totalAmount, paidAmount: $paidAmount, notes: $notes, paymentMethods: $paymentMethods)';
+  return 'PaymentModel(id: $id, totalAmount: $totalAmount, paidAmount: $paidAmount, paymentType: $paymentType, notes: $notes, paymentMethods: $paymentMethods)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $PaymentModelCopyWith<$Res>  {
   factory $PaymentModelCopyWith(PaymentModel value, $Res Function(PaymentModel) _then) = _$PaymentModelCopyWithImpl;
 @useResult
 $Res call({
- int id,@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) double totalAmount,@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) double paidAmount, String? notes, List<PaymentMethodModel> paymentMethods
+ int id,@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) double totalAmount,@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) double paidAmount, String? paymentType, String? notes, List<PaymentMethodModel> paymentMethods
 });
 
 
@@ -65,12 +65,13 @@ class _$PaymentModelCopyWithImpl<$Res>
 
 /// Create a copy of PaymentModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? totalAmount = null,Object? paidAmount = null,Object? notes = freezed,Object? paymentMethods = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? totalAmount = null,Object? paidAmount = null,Object? paymentType = freezed,Object? notes = freezed,Object? paymentMethods = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,totalAmount: null == totalAmount ? _self.totalAmount : totalAmount // ignore: cast_nullable_to_non_nullable
 as double,paidAmount: null == paidAmount ? _self.paidAmount : paidAmount // ignore: cast_nullable_to_non_nullable
-as double,notes: freezed == notes ? _self.notes : notes // ignore: cast_nullable_to_non_nullable
+as double,paymentType: freezed == paymentType ? _self.paymentType : paymentType // ignore: cast_nullable_to_non_nullable
+as String?,notes: freezed == notes ? _self.notes : notes // ignore: cast_nullable_to_non_nullable
 as String?,paymentMethods: null == paymentMethods ? _self.paymentMethods : paymentMethods // ignore: cast_nullable_to_non_nullable
 as List<PaymentMethodModel>,
   ));
@@ -154,10 +155,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)  double totalAmount, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)  double paidAmount,  String? notes,  List<PaymentMethodModel> paymentMethods)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)  double totalAmount, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)  double paidAmount,  String? paymentType,  String? notes,  List<PaymentMethodModel> paymentMethods)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _PaymentModel() when $default != null:
-return $default(_that.id,_that.totalAmount,_that.paidAmount,_that.notes,_that.paymentMethods);case _:
+return $default(_that.id,_that.totalAmount,_that.paidAmount,_that.paymentType,_that.notes,_that.paymentMethods);case _:
   return orElse();
 
 }
@@ -175,10 +176,10 @@ return $default(_that.id,_that.totalAmount,_that.paidAmount,_that.notes,_that.pa
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)  double totalAmount, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)  double paidAmount,  String? notes,  List<PaymentMethodModel> paymentMethods)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)  double totalAmount, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)  double paidAmount,  String? paymentType,  String? notes,  List<PaymentMethodModel> paymentMethods)  $default,) {final _that = this;
 switch (_that) {
 case _PaymentModel():
-return $default(_that.id,_that.totalAmount,_that.paidAmount,_that.notes,_that.paymentMethods);}
+return $default(_that.id,_that.totalAmount,_that.paidAmount,_that.paymentType,_that.notes,_that.paymentMethods);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -192,10 +193,10 @@ return $default(_that.id,_that.totalAmount,_that.paidAmount,_that.notes,_that.pa
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)  double totalAmount, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)  double paidAmount,  String? notes,  List<PaymentMethodModel> paymentMethods)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)  double totalAmount, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)  double paidAmount,  String? paymentType,  String? notes,  List<PaymentMethodModel> paymentMethods)?  $default,) {final _that = this;
 switch (_that) {
 case _PaymentModel() when $default != null:
-return $default(_that.id,_that.totalAmount,_that.paidAmount,_that.notes,_that.paymentMethods);case _:
+return $default(_that.id,_that.totalAmount,_that.paidAmount,_that.paymentType,_that.notes,_that.paymentMethods);case _:
   return null;
 
 }
@@ -207,12 +208,13 @@ return $default(_that.id,_that.totalAmount,_that.paidAmount,_that.notes,_that.pa
 @JsonSerializable()
 
 class _PaymentModel implements PaymentModel {
-  const _PaymentModel({required this.id, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) required this.totalAmount, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) required this.paidAmount, this.notes, final  List<PaymentMethodModel> paymentMethods = const []}): _paymentMethods = paymentMethods;
+  const _PaymentModel({required this.id, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) required this.totalAmount, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) required this.paidAmount, this.paymentType, this.notes, final  List<PaymentMethodModel> paymentMethods = const []}): _paymentMethods = paymentMethods;
   factory _PaymentModel.fromJson(Map<String, dynamic> json) => _$PaymentModelFromJson(json);
 
 @override final  int id;
 @override@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) final  double totalAmount;
 @override@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) final  double paidAmount;
+@override final  String? paymentType;
 @override final  String? notes;
  final  List<PaymentMethodModel> _paymentMethods;
 @override@JsonKey() List<PaymentMethodModel> get paymentMethods {
@@ -235,16 +237,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PaymentModel&&(identical(other.id, id) || other.id == id)&&(identical(other.totalAmount, totalAmount) || other.totalAmount == totalAmount)&&(identical(other.paidAmount, paidAmount) || other.paidAmount == paidAmount)&&(identical(other.notes, notes) || other.notes == notes)&&const DeepCollectionEquality().equals(other._paymentMethods, _paymentMethods));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PaymentModel&&(identical(other.id, id) || other.id == id)&&(identical(other.totalAmount, totalAmount) || other.totalAmount == totalAmount)&&(identical(other.paidAmount, paidAmount) || other.paidAmount == paidAmount)&&(identical(other.paymentType, paymentType) || other.paymentType == paymentType)&&(identical(other.notes, notes) || other.notes == notes)&&const DeepCollectionEquality().equals(other._paymentMethods, _paymentMethods));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,totalAmount,paidAmount,notes,const DeepCollectionEquality().hash(_paymentMethods));
+int get hashCode => Object.hash(runtimeType,id,totalAmount,paidAmount,paymentType,notes,const DeepCollectionEquality().hash(_paymentMethods));
 
 @override
 String toString() {
-  return 'PaymentModel(id: $id, totalAmount: $totalAmount, paidAmount: $paidAmount, notes: $notes, paymentMethods: $paymentMethods)';
+  return 'PaymentModel(id: $id, totalAmount: $totalAmount, paidAmount: $paidAmount, paymentType: $paymentType, notes: $notes, paymentMethods: $paymentMethods)';
 }
 
 
@@ -255,7 +257,7 @@ abstract mixin class _$PaymentModelCopyWith<$Res> implements $PaymentModelCopyWi
   factory _$PaymentModelCopyWith(_PaymentModel value, $Res Function(_PaymentModel) _then) = __$PaymentModelCopyWithImpl;
 @override @useResult
 $Res call({
- int id,@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) double totalAmount,@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) double paidAmount, String? notes, List<PaymentMethodModel> paymentMethods
+ int id,@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) double totalAmount,@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) double paidAmount, String? paymentType, String? notes, List<PaymentMethodModel> paymentMethods
 });
 
 
@@ -272,12 +274,13 @@ class __$PaymentModelCopyWithImpl<$Res>
 
 /// Create a copy of PaymentModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? totalAmount = null,Object? paidAmount = null,Object? notes = freezed,Object? paymentMethods = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? totalAmount = null,Object? paidAmount = null,Object? paymentType = freezed,Object? notes = freezed,Object? paymentMethods = null,}) {
   return _then(_PaymentModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,totalAmount: null == totalAmount ? _self.totalAmount : totalAmount // ignore: cast_nullable_to_non_nullable
 as double,paidAmount: null == paidAmount ? _self.paidAmount : paidAmount // ignore: cast_nullable_to_non_nullable
-as double,notes: freezed == notes ? _self.notes : notes // ignore: cast_nullable_to_non_nullable
+as double,paymentType: freezed == paymentType ? _self.paymentType : paymentType // ignore: cast_nullable_to_non_nullable
+as String?,notes: freezed == notes ? _self.notes : notes // ignore: cast_nullable_to_non_nullable
 as String?,paymentMethods: null == paymentMethods ? _self._paymentMethods : paymentMethods // ignore: cast_nullable_to_non_nullable
 as List<PaymentMethodModel>,
   ));

@@ -1,9 +1,11 @@
+import '../../domain/entities/trans_item_batch.dart';
 import '../../domain/entities/transaction.dart';
 import '../../domain/entities/trans_item.dart';
 import '../../domain/entities/payment.dart';
 import '../../domain/entities/payment_method.dart';
 import '../../../../core/enums/transaction_type_enum.dart';
 import '../../../../core/enums/payment_method_type_enum.dart';
+import '../models/trans_item_batch_model.dart';
 import '../models/transaction_model.dart';
 import '../models/trans_item_model.dart';
 import '../models/payment_model.dart';
@@ -31,6 +33,7 @@ extension PaymentModelMapper on PaymentModel {
       id: id,
       totalAmount: totalAmount,
       paidAmount: paidAmount,
+      paymentType: paymentType,
       notes: notes,
       paymentMethods: paymentMethods.map((pm) => pm.toDomain()).toList(),
     );
@@ -42,16 +45,25 @@ extension TransItemModelMapper on TransItemModel {
   TransItem toDomain() {
     return TransItem(
       id: id,
-      itemId: itemId,
       itemName: itemName,
       itemCode: itemCode,
       quantity: quantity,
-      unitPrice: unitPrice,
+      batches: batches.map((batch) => batch.toDomain()).toList(),
+    );
+  }
+}
+
+/// Extension for mapping TransItemBatchModel to TransItemBatch entity
+extension TransItemBatchModelMapper on TransItemBatchModel {
+  TransItemBatch toDomain() {
+    return TransItemBatch(
+      id: id,
+      transactionItemId: transactionItemId,
+      batchNumber: batchNumber,
+      quantity: quantity,
       costPrice: costPrice,
-      taxRate: taxRate,
-      taxableAmount: taxableAmount,
-      taxAmount: taxAmount,
-      total: total,
+      unitPrice: unitPrice,
+      expirationDate: expirationDate,
     );
   }
 }
@@ -81,6 +93,7 @@ extension TransactionModelMapper on TransactionModel {
       updatorName: updatorName,
       items: items.map((item) => item.toDomain()).toList(),
       payment: payment?.toDomain(),
+      refund: refund?.toDomain(),
     );
   }
 }

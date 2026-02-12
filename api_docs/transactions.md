@@ -14,7 +14,7 @@
 
 | Enum | Values | Usage |
 |------|--------|--------|
-| **TransactionType** | `purchase`, `imported`, `sale`, `adjustment`, `waste`, `damage`, `batchTransfer`, `batchConsolidation` | Request `transactionType` (create), response `transactionType` |
+| **TransactionType** | `purchase`, `imported`, `sale`, `adjustment`, `waste`, `damage`, `transactionType` |
 | **TransactionStatus** | `completed`, `reversed` | Response `status` |
 | **PaymentType** | `payment`, `refund`, `balanceAdjustment` | Response `payment.paymentType` |
 | **PaymentMethodType** | `cash`, `telebirr`, `mPesa`, `bankTransfer`, `check`, `other` | Response `paymentMethods[].method` |
@@ -472,11 +472,81 @@ Or with envelope: `{ "data": { "notes": "Reversal reason" } }`.
 
 ---
 
+## 5. Payment methods — add / update / remove
+
+These endpoints live under **`/api/payments`**. They apply to any payment (e.g. from GET `/api/transactions/:id` → `data.payment`), including:
+
+- **Payment** (`paymentType`: `payment`) — original transaction payment.
+- **Refund** (`paymentType`: `refund`) — refund payment linked to a reversed transaction.
+
+For **reversed transactions**, add/update/remove of payment methods is allowed; customer/supplier balance is **not** updated when the related transaction is `reversed`.
+
+### 5.1 ADD payment methods — POST `/api/payments/:paymentId/methods`
+
+**Request (body)** — array of payment method objects (non-empty).
+
+```json
+{
+  "data": [
+    {
+      "method": "cash" (string (M) — PaymentMethodType),
+      "amount": 500 (number (M)),
+      "attachment": null (string | null (O)),
+      "referenceNumber": null (string | null (O)),
+      "bankId": null (number | null (O))
+    }
+  ]
+}
+```
+
+**Response 201** — `data`: array of created PaymentMethod objects (same shape as in Payment object above).
+
+400 if validation fails or array empty. 404 if payment not found.
+
+### 5.2 UPDATE payment method — PUT `/api/payments/:paymentId/methods/:id`
+
+**Request (body)** — at least one field.
+
+```json
+{
+  "data": {
+    "method": "telebirr" (string (O) — PaymentMethodType),
+    "amount": 600 (number (O)),
+    "attachment": null (string | null (O)),
+    "referenceNumber": "REF-001" (string | null (O)),
+    "bankId": null (number | null (O))
+  }
+}
+```
+
+**Response 200** — `data`: updated PaymentMethod object.
+
+400 if validation fails. 404 if payment or payment method not found.
+
+### 5.3 REMOVE payment method — DELETE `/api/payments/:paymentId/methods/:id`
+
+No request body.
+
+**Response 200**
+
+```json
+{
+  "success": true (boolean (M)),
+  "message": "Payment method deleted successfully" (string (M)),
+  "data": null (null (M))
+}
+```
+
+404 if payment or payment method not found.
+
+---
+
 ## Notes
 
 - **Transaction number:** Backend-generated (e.g. `TXN-2024-001`).
 - **Tax rate:** Taken from Item (backend); do not send in create request.
 - **Expiration date:** Resolved from Batch by `batchNumber` (backend); do not send in create request.
 - **Payment:** Allowed only for `purchase`, `imported`, `sale`. Other types reject `payment`/`paymentMethods`.
+- **Payment methods (add/update/remove):** Apply to both **payment** and **refund**; for **reversed** transactions, payment method changes do not update customer/supplier balance.
 
 For **transfers**, see **docs/transfers.md**.

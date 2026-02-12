@@ -2,8 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../../../core/enums/transaction_type_enum.dart';
 import '../../../data/models/create_trans_request.dart';
-import '../../../../item/domain/entities/item.dart';
-
+import '../../../../item/domain/entities/item_with_batches.dart';
 
 part 'transaction_form_state.freezed.dart';
 
@@ -15,8 +14,9 @@ sealed class TransactionFormState with _$TransactionFormState {
     required CreateTransRequest request,
     @Default([]) List<String> receiptFilePaths,
     @Default({}) Map<String, String> paymentAttachmentFilePaths,
-    @Default({}) Map<int, Item> cartItems, // itemId -> Item for display
-    @Default({}) Map<int, int> cartQuantities, // itemId -> quantity
+    @Default({}) Map<int, ItemWithBatches> cartItems,
+    @Default({}) Map<int, List<CreateTransactionBatchRequest>> cartItemBatches,
+    @Default([]) List<int> itemIdsRequiringBatch,
   }) = _TransactionFormState;
 
   factory TransactionFormState.initial() {

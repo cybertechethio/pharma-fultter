@@ -27,10 +27,7 @@ class TransactionTypeDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    // Filter out reverse type
-    final selectableTypes = TransactionType.values
-        .where((type) => type != TransactionType.reverse)
-        .toList();
+    final selectableTypes = TransactionType.values;
 
     return SimpleDialog(
       title: Text(l10n.selectTransactionType),

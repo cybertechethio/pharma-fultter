@@ -21,7 +21,6 @@ abstract class TransactionRemoteDataSource {
   });
 
   Future<Either<Failure, TransactionModel>> reverseTransaction({
-    required TransactionType transactionType,
     required int reversesTransactionId,
     String? notes,
   });

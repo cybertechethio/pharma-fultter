@@ -221,39 +221,29 @@ class TransactionApiService {
     }
   }
 
-  /// Reverse a transaction (sale or purchase)
-  /// 
-  /// Creates a reversal transaction for the specified transaction ID
-  /// [transactionType] - The reversal type (purchase_reverse or sale_reverse)
-  /// [reversesTransactionId] - The ID of the transaction to reverse
+  /// Reverse a transaction — POST /api/transactions/:transactionId/reverse
+  ///
+  /// [transactionId] - The ID of the transaction to reverse
   /// [notes] - Optional note for the reversal
   Future<ApiResponse<TransactionModel>> reverseTransaction({
-    required TransactionType transactionType,
-    required int reversesTransactionId,
+    required int transactionId,
     String? notes,
   }) async {
     try {
-
-      final requestJson = <String, dynamic>{
-        'transactionType': transactionType.name,
-        'reversesTransactionId': reversesTransactionId,
-      };
-
-      // Only add notes if provided and not empty
+      final requestJson = <String, dynamic>{};
       if (notes != null && notes.isNotEmpty) {
         requestJson['notes'] = notes;
       }
 
-      // ApiService.post will automatically wrap with RequestWrapper
       final response = await ApiService.post<Map<String, dynamic>>(
-        ApiEndpoints.createTransaction,
+        ApiEndpoints.reverseTransaction(transactionId),
         data: requestJson,
         skipWrapping: false,
       );
 
       LoggingService.apiResponse(
         'POST',
-        ApiEndpoints.createTransaction,
+        ApiEndpoints.reverseTransaction(transactionId),
         response.statusCode ?? 0,
         response.data,
       );

@@ -161,20 +161,17 @@ class TransactionRemoteDataSourceImpl implements TransactionRemoteDataSource {
 
   @override
   Future<Either<Failure, TransactionModel>> reverseTransaction({
-    required TransactionType transactionType,
     required int reversesTransactionId,
     String? notes,
   }) async {
     LoggingService.auth('Starting reverse transaction process', {
-      'transactionType': transactionType.name,
       'reversesTransactionId': reversesTransactionId,
       'hasNotes': notes?.isNotEmpty ?? false,
     });
 
     try {
       final ApiResponse<TransactionModel> response = await _api.reverseTransaction(
-        transactionType: transactionType,
-        reversesTransactionId: reversesTransactionId,
+        transactionId: reversesTransactionId,
         notes: notes,
       );
 

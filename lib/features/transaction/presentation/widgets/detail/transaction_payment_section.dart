@@ -28,7 +28,6 @@ class TransactionPaymentSection extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    final payment = transaction.payment;
 
     return Container(
       padding: const EdgeInsets.all(AppSizes.lg),
@@ -40,79 +39,139 @@ class TransactionPaymentSection extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(l10n.payment, style: context.subtitle(bold: true)),
-          const SizedBox(height: AppSizes.md),
-          if (payment == null) ...[
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.all(AppSizes.lg),
-                child: Text(l10n.noPaymentData, style: context.body()),
-              ),
-            ),
-          ] else ...[
-            _PaymentSummary(payment: payment),
+          _PaymentBlock(
+            title: l10n.payment,
+            payment: transaction.payment,
+            transaction: transaction,
+            expandable: false,
+            heroTagPrefix: 'payment_receipt_',
+          ),
+          if (transaction.refund != null) ...[
             const SizedBox(height: AppSizes.md),
-            if (payment.paymentMethods.isNotEmpty) ...[
-              const Divider(height: AppSizes.lg),
-              Row(
-                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(l10n.paymentMethods, style: context.body(bold: true)),
-                 SizedBox(width: AppSizes.xxs),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: AppSizes.sm,
-                      vertical: AppSizes.xxs,
-                    ),
-                    decoration: BoxDecoration(
-                      color: BrandColors.primary.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(AppSizes.radiusSm),
-                    ),
-                    child: Text(
-                      '${payment.paymentMethods.length}',
-                      style: context.small(color: BrandColors.primary, bold: true),
-                    ),
-                  ),
-                  Spacer(),
-                  TextButton.icon(
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (dialogContext) => PaymentMethodFormDialog(
-                          paymentId: payment.id,
-                          title: l10n.addPaymentMethod,
-                          buttonText: l10n.add,
-                        ),
-                      );
-                    },
-                    icon: const Icon(Icons.add, size: 18),
-                    label: Text(l10n.addPayment),
-                  ),
-                ],
-              ),
-              const SizedBox(height: AppSizes.sm),
-              ...payment.paymentMethods.asMap().entries.map((entry) {
-                final index = entry.key;
-                final method = entry.value;
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: AppSizes.sm),
-                  child: _PaymentMethodCard(
-                    paymentMethod: method,
-                    heroTag: 'payment_receipt_${transaction.id}_$index',
-                    paymentId: payment.id,
-                  ),
-                );
-              }),
-            ],
-            if (payment.paymentMethods.isEmpty) ...[
-              const Divider(height: AppSizes.lg),
-              Text(l10n.paymentMethods, style: context.body(bold: true)),
-              const SizedBox(height: AppSizes.sm),
-              Text(l10n.noPaymentMethods, style: context.small()),
-            ],
+            _PaymentBlock(
+              title: l10n.refund,
+              payment: transaction.refund,
+              transaction: transaction,
+              expandable: true,
+              heroTagPrefix: 'refund_receipt_',
+            ),
           ],
         ],
       ),
+    );
+  }
+}
+
+class _PaymentBlock extends ConsumerWidget {
+  final String title;
+  final Payment? payment;
+  final Transaction transaction;
+  final bool expandable;
+  final String heroTagPrefix;
+
+  const _PaymentBlock({
+    required this.title,
+    required this.payment,
+    required this.transaction,
+    required this.expandable,
+    required this.heroTagPrefix,
+  });
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final content = payment == null
+        ? Center(
+            child: Padding(
+              padding: const EdgeInsets.all(AppSizes.lg),
+              child: Text(l10n.noPaymentData, style: context.body()),
+            ),
+          )
+        : Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _PaymentSummary(payment: payment!),
+              const SizedBox(height: AppSizes.md),
+              if (payment!.paymentMethods.isNotEmpty) ...[
+                const Divider(height: AppSizes.lg),
+                Row(
+                  children: [
+                    Text(l10n.paymentMethods, style: context.body(bold: true)),
+                    const SizedBox(width: AppSizes.xxs),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AppSizes.sm,
+                        vertical: AppSizes.xxs,
+                      ),
+                      decoration: BoxDecoration(
+                        color: BrandColors.primary.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(AppSizes.radiusSm),
+                      ),
+                      child: Text(
+                        '${payment!.paymentMethods.length}',
+                        style: context.small(color: BrandColors.primary, bold: true),
+                      ),
+                    ),
+                    Spacer(),
+                    TextButton.icon(
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (dialogContext) => PaymentMethodFormDialog(
+                            paymentId: payment!.id,
+                            title: l10n.addPaymentMethod,
+                            buttonText: l10n.add,
+                          ),
+                        );
+                      },
+                      icon: const Icon(Icons.add, size: 18),
+                      label: Text(l10n.add),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: AppSizes.sm),
+                ...payment!.paymentMethods.asMap().entries.map((entry) {
+                  final index = entry.key;
+                  final method = entry.value;
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: AppSizes.sm),
+                    child: _PaymentMethodCard(
+                      paymentMethod: method,
+                      heroTag: '${heroTagPrefix}${transaction.id}_$index',
+                      paymentId: payment!.id,
+                    ),
+                  );
+                }),
+              ],
+              if (payment!.paymentMethods.isEmpty) ...[
+                const Divider(height: AppSizes.lg),
+                Text(l10n.paymentMethods, style: context.body(bold: true)),
+                const SizedBox(height: AppSizes.sm),
+                Text(l10n.noPaymentMethods, style: context.small()),
+              ],
+            ],
+          );
+
+    if (expandable) {
+      return ExpansionTile(
+        controlAffinity: ListTileControlAffinity.leading,
+        title: Text(title, style: context.subtitle(bold: true)),
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: AppSizes.xs, bottom: AppSizes.md),
+            child: content,
+          ),
+        ],
+      );
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(title, style: context.subtitle(bold: true)),
+        const SizedBox(height: AppSizes.md),
+        content,
+      ],
     );
   }
 }
@@ -146,6 +205,11 @@ class _PaymentSummary extends StatelessWidget {
           label: l10n.remaining,
           value: Formatters.formatCurrency(remaining),
           valueColor: remaining > 0 ? BrandColors.error : BrandColors.primary,
+        ),
+        const SizedBox(height: AppSizes.sm),
+        _SummaryRow(
+          label: l10n.type,
+          value: payment.paymentType ?? l10n.notAvailable,
         ),
         const SizedBox(height: AppSizes.sm),
         Row(

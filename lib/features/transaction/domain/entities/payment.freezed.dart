@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Payment {
 
- int get id; double get totalAmount; double get paidAmount; String? get notes; List<PaymentMethod> get paymentMethods;
+ int get id; double get totalAmount; double get paidAmount; String? get paymentType; String? get notes; List<PaymentMethod> get paymentMethods;
 /// Create a copy of Payment
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $PaymentCopyWith<Payment> get copyWith => _$PaymentCopyWithImpl<Payment>(this as
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Payment&&(identical(other.id, id) || other.id == id)&&(identical(other.totalAmount, totalAmount) || other.totalAmount == totalAmount)&&(identical(other.paidAmount, paidAmount) || other.paidAmount == paidAmount)&&(identical(other.notes, notes) || other.notes == notes)&&const DeepCollectionEquality().equals(other.paymentMethods, paymentMethods));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Payment&&(identical(other.id, id) || other.id == id)&&(identical(other.totalAmount, totalAmount) || other.totalAmount == totalAmount)&&(identical(other.paidAmount, paidAmount) || other.paidAmount == paidAmount)&&(identical(other.paymentType, paymentType) || other.paymentType == paymentType)&&(identical(other.notes, notes) || other.notes == notes)&&const DeepCollectionEquality().equals(other.paymentMethods, paymentMethods));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,totalAmount,paidAmount,notes,const DeepCollectionEquality().hash(paymentMethods));
+int get hashCode => Object.hash(runtimeType,id,totalAmount,paidAmount,paymentType,notes,const DeepCollectionEquality().hash(paymentMethods));
 
 @override
 String toString() {
-  return 'Payment(id: $id, totalAmount: $totalAmount, paidAmount: $paidAmount, notes: $notes, paymentMethods: $paymentMethods)';
+  return 'Payment(id: $id, totalAmount: $totalAmount, paidAmount: $paidAmount, paymentType: $paymentType, notes: $notes, paymentMethods: $paymentMethods)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $PaymentCopyWith<$Res>  {
   factory $PaymentCopyWith(Payment value, $Res Function(Payment) _then) = _$PaymentCopyWithImpl;
 @useResult
 $Res call({
- int id, double totalAmount, double paidAmount, String? notes, List<PaymentMethod> paymentMethods
+ int id, double totalAmount, double paidAmount, String? paymentType, String? notes, List<PaymentMethod> paymentMethods
 });
 
 
@@ -62,12 +62,13 @@ class _$PaymentCopyWithImpl<$Res>
 
 /// Create a copy of Payment
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? totalAmount = null,Object? paidAmount = null,Object? notes = freezed,Object? paymentMethods = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? totalAmount = null,Object? paidAmount = null,Object? paymentType = freezed,Object? notes = freezed,Object? paymentMethods = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,totalAmount: null == totalAmount ? _self.totalAmount : totalAmount // ignore: cast_nullable_to_non_nullable
 as double,paidAmount: null == paidAmount ? _self.paidAmount : paidAmount // ignore: cast_nullable_to_non_nullable
-as double,notes: freezed == notes ? _self.notes : notes // ignore: cast_nullable_to_non_nullable
+as double,paymentType: freezed == paymentType ? _self.paymentType : paymentType // ignore: cast_nullable_to_non_nullable
+as String?,notes: freezed == notes ? _self.notes : notes // ignore: cast_nullable_to_non_nullable
 as String?,paymentMethods: null == paymentMethods ? _self.paymentMethods : paymentMethods // ignore: cast_nullable_to_non_nullable
 as List<PaymentMethod>,
   ));
@@ -151,10 +152,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  double totalAmount,  double paidAmount,  String? notes,  List<PaymentMethod> paymentMethods)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  double totalAmount,  double paidAmount,  String? paymentType,  String? notes,  List<PaymentMethod> paymentMethods)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Payment() when $default != null:
-return $default(_that.id,_that.totalAmount,_that.paidAmount,_that.notes,_that.paymentMethods);case _:
+return $default(_that.id,_that.totalAmount,_that.paidAmount,_that.paymentType,_that.notes,_that.paymentMethods);case _:
   return orElse();
 
 }
@@ -172,10 +173,10 @@ return $default(_that.id,_that.totalAmount,_that.paidAmount,_that.notes,_that.pa
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  double totalAmount,  double paidAmount,  String? notes,  List<PaymentMethod> paymentMethods)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  double totalAmount,  double paidAmount,  String? paymentType,  String? notes,  List<PaymentMethod> paymentMethods)  $default,) {final _that = this;
 switch (_that) {
 case _Payment():
-return $default(_that.id,_that.totalAmount,_that.paidAmount,_that.notes,_that.paymentMethods);}
+return $default(_that.id,_that.totalAmount,_that.paidAmount,_that.paymentType,_that.notes,_that.paymentMethods);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -189,10 +190,10 @@ return $default(_that.id,_that.totalAmount,_that.paidAmount,_that.notes,_that.pa
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  double totalAmount,  double paidAmount,  String? notes,  List<PaymentMethod> paymentMethods)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  double totalAmount,  double paidAmount,  String? paymentType,  String? notes,  List<PaymentMethod> paymentMethods)?  $default,) {final _that = this;
 switch (_that) {
 case _Payment() when $default != null:
-return $default(_that.id,_that.totalAmount,_that.paidAmount,_that.notes,_that.paymentMethods);case _:
+return $default(_that.id,_that.totalAmount,_that.paidAmount,_that.paymentType,_that.notes,_that.paymentMethods);case _:
   return null;
 
 }
@@ -204,12 +205,13 @@ return $default(_that.id,_that.totalAmount,_that.paidAmount,_that.notes,_that.pa
 
 
 class _Payment implements Payment {
-  const _Payment({required this.id, required this.totalAmount, required this.paidAmount, this.notes, final  List<PaymentMethod> paymentMethods = const []}): _paymentMethods = paymentMethods;
+  const _Payment({required this.id, required this.totalAmount, required this.paidAmount, this.paymentType, this.notes, final  List<PaymentMethod> paymentMethods = const []}): _paymentMethods = paymentMethods;
   
 
 @override final  int id;
 @override final  double totalAmount;
 @override final  double paidAmount;
+@override final  String? paymentType;
 @override final  String? notes;
  final  List<PaymentMethod> _paymentMethods;
 @override@JsonKey() List<PaymentMethod> get paymentMethods {
@@ -229,16 +231,16 @@ _$PaymentCopyWith<_Payment> get copyWith => __$PaymentCopyWithImpl<_Payment>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Payment&&(identical(other.id, id) || other.id == id)&&(identical(other.totalAmount, totalAmount) || other.totalAmount == totalAmount)&&(identical(other.paidAmount, paidAmount) || other.paidAmount == paidAmount)&&(identical(other.notes, notes) || other.notes == notes)&&const DeepCollectionEquality().equals(other._paymentMethods, _paymentMethods));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Payment&&(identical(other.id, id) || other.id == id)&&(identical(other.totalAmount, totalAmount) || other.totalAmount == totalAmount)&&(identical(other.paidAmount, paidAmount) || other.paidAmount == paidAmount)&&(identical(other.paymentType, paymentType) || other.paymentType == paymentType)&&(identical(other.notes, notes) || other.notes == notes)&&const DeepCollectionEquality().equals(other._paymentMethods, _paymentMethods));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,totalAmount,paidAmount,notes,const DeepCollectionEquality().hash(_paymentMethods));
+int get hashCode => Object.hash(runtimeType,id,totalAmount,paidAmount,paymentType,notes,const DeepCollectionEquality().hash(_paymentMethods));
 
 @override
 String toString() {
-  return 'Payment(id: $id, totalAmount: $totalAmount, paidAmount: $paidAmount, notes: $notes, paymentMethods: $paymentMethods)';
+  return 'Payment(id: $id, totalAmount: $totalAmount, paidAmount: $paidAmount, paymentType: $paymentType, notes: $notes, paymentMethods: $paymentMethods)';
 }
 
 
@@ -249,7 +251,7 @@ abstract mixin class _$PaymentCopyWith<$Res> implements $PaymentCopyWith<$Res> {
   factory _$PaymentCopyWith(_Payment value, $Res Function(_Payment) _then) = __$PaymentCopyWithImpl;
 @override @useResult
 $Res call({
- int id, double totalAmount, double paidAmount, String? notes, List<PaymentMethod> paymentMethods
+ int id, double totalAmount, double paidAmount, String? paymentType, String? notes, List<PaymentMethod> paymentMethods
 });
 
 
@@ -266,12 +268,13 @@ class __$PaymentCopyWithImpl<$Res>
 
 /// Create a copy of Payment
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? totalAmount = null,Object? paidAmount = null,Object? notes = freezed,Object? paymentMethods = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? totalAmount = null,Object? paidAmount = null,Object? paymentType = freezed,Object? notes = freezed,Object? paymentMethods = null,}) {
   return _then(_Payment(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,totalAmount: null == totalAmount ? _self.totalAmount : totalAmount // ignore: cast_nullable_to_non_nullable
 as double,paidAmount: null == paidAmount ? _self.paidAmount : paidAmount // ignore: cast_nullable_to_non_nullable
-as double,notes: freezed == notes ? _self.notes : notes // ignore: cast_nullable_to_non_nullable
+as double,paymentType: freezed == paymentType ? _self.paymentType : paymentType // ignore: cast_nullable_to_non_nullable
+as String?,notes: freezed == notes ? _self.notes : notes // ignore: cast_nullable_to_non_nullable
 as String?,paymentMethods: null == paymentMethods ? _self._paymentMethods : paymentMethods // ignore: cast_nullable_to_non_nullable
 as List<PaymentMethod>,
   ));

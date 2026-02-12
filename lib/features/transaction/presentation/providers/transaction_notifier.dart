@@ -150,7 +150,6 @@ class TransactionNotifier extends _$TransactionNotifier {
 
   /// Reverse a transaction (sale or purchase)
   Future<void> reverseTransaction({
-    required TransactionType transactionType,
     required int reversesTransactionId,
     String? notes,
   }) async {
@@ -164,7 +163,6 @@ class TransactionNotifier extends _$TransactionNotifier {
 
     // Call use case
     final result = await useCase.call(
-      transactionType: transactionType,
       reversesTransactionId: reversesTransactionId,
       notes: notes,
     );

@@ -26,9 +26,10 @@ class TransactionOrderBottomSheet extends ConsumerWidget {
     final total = formNotifier.getTotal();
     final transactionType = formState.request.transactionType;
     
-    // Check if should show payment summary (purchase or sale)
+    // Check if should show payment summary (purchase, sale, or imported)
     final showPaymentSummary = transactionType == TransactionType.purchase ||
-        transactionType == TransactionType.sale;
+        transactionType == TransactionType.sale ||
+        transactionType == TransactionType.imported;
     
     final totalPaid = showPaymentSummary ? formNotifier.getTotalPaid() : 0.0;
     final remaining = showPaymentSummary ? (total - totalPaid) : 0.0;
@@ -145,6 +146,22 @@ class TransactionOrderBottomSheet extends ConsumerWidget {
     final formState = ref.read(transactionFormProvider);
     final formNotifier = ref.read(transactionFormProvider.notifier);
     final snackbar = ref.read(snackbarServiceProvider);
+
+    // Check items that have no batch selected
+    final itemIdsWithNoBatch = <int>[];
+    for (final itemId in formState.cartItems.keys) {
+      final batches = formState.cartItemBatches[itemId] ?? [];
+      if (batches.isEmpty) {
+        itemIdsWithNoBatch.add(itemId);
+      }
+    }
+    if (itemIdsWithNoBatch.isNotEmpty) {
+      formNotifier.setItemIdsRequiringBatch(itemIdsWithNoBatch);
+      snackbar.showWarning('Please select at least one batch for each item');
+      return;
+    }
+
+    formNotifier.setItemIdsRequiringBatch([]);
 
     // Build request from form state (with cart items)
     final request = formNotifier.buildRequest();

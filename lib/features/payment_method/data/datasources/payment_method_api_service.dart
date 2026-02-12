@@ -178,7 +178,7 @@ class PaymentMethodApiService {
   }
 
   /// Delete payment method for a payment
-  Future<ApiResponse<void>> delete({
+  Future<void> delete({
     required int paymentId,
     required int methodId,
   }) async {
@@ -195,11 +195,6 @@ class PaymentMethodApiService {
         
       );
 
-      // DELETE returns 204 No Content, so we return success response
-      return ApiResponse<void>.fromJson(
-        {'success': true, 'message': 'Payment method deleted successfully', 'data': null},
-        (json) => null,
-      );
     } catch (e) {
       LoggingService.error('Failed to delete payment method: $e');
       rethrow;

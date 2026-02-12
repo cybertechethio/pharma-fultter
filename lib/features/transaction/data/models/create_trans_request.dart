@@ -9,13 +9,30 @@ import 'payment_method_model.dart';
 part 'create_trans_request.freezed.dart';
 part 'create_trans_request.g.dart';
 
-/// Request model for creating a transaction item
+/// Request model for a batch within a transaction item (API: items[].batches[])
+@freezed
+sealed class CreateTransactionBatchRequest with _$CreateTransactionBatchRequest {
+  const factory CreateTransactionBatchRequest({
+    required String batchNumber,
+    @JsonKey(fromJson: JsonTypeConverters.intFromDynamic)
+    required int quantity,
+    @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicNullable)
+    double? costPrice,
+    @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicNullable)
+    double? unitPrice,
+  }) = _CreateTransactionBatchRequest;
+
+  factory CreateTransactionBatchRequest.fromJson(Map<String, dynamic> json) =>
+      _$CreateTransactionBatchRequestFromJson(json);
+}
+
+/// Request model for creating a transaction item (API: items[])
 @freezed
 sealed class CreateTransItemRequest with _$CreateTransItemRequest {
   const factory CreateTransItemRequest({
+    @JsonKey(fromJson: JsonTypeConverters.intFromDynamic)
     required int itemId,
-    @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)
-    required double quantity,
+    required List<CreateTransactionBatchRequest> batches,
   }) = _CreateTransItemRequest;
 
   factory CreateTransItemRequest.fromJson(Map<String, dynamic> json) =>
@@ -27,7 +44,9 @@ sealed class CreateTransItemRequest with _$CreateTransItemRequest {
 sealed class CreateTransRequest with _$CreateTransRequest {
   const factory CreateTransRequest({
    required TransactionType transactionType,
+    @JsonKey(fromJson: JsonTypeConverters.intFromDynamicNullable)
     int? supplierId,
+    @JsonKey(fromJson: JsonTypeConverters.intFromDynamicNullable)
     int? customerId,
     String? notes,
     @Default([]) List<String> attachments,
@@ -48,8 +67,8 @@ extension CreateTransRequestX on CreateTransRequest {
       if (transactionType == TransactionType.sale && customerId == null) {
         return 'Customer is required for sale transactions';
       }
-      if (transactionType == TransactionType.purchase && supplierId == null) {
-        return 'Supplier is required for purchase transactions';
+      if ((transactionType == TransactionType.purchase || transactionType == TransactionType.imported) && supplierId == null) {
+        return 'Supplier is required for ${transactionType.name} transactions';
       }
     }
 
@@ -57,10 +76,35 @@ extension CreateTransRequestX on CreateTransRequest {
       return 'At least one item is required';
     }
 
-    // Validate items
+    // Validate items and batches
     for (var item in items) {
-      if (item.quantity <= 0) {
-        return 'Item quantity must be greater than 0';
+      if (item.batches.isEmpty) {
+        return 'Each item must have at least one batch';
+      }
+      for (var batch in item.batches) {
+        if (batch.batchNumber.isEmpty) {
+          return 'Batch number is required';
+        }
+        if (batch.quantity <= 0) {
+          return 'Batch quantity must be greater than 0';
+        }
+        if (batch.costPrice != null && batch.costPrice! < 0) {
+          return 'Batch cost price cannot be negative';
+        }
+        if (batch.unitPrice != null && batch.unitPrice! < 0) {
+          return 'Batch unit price cannot be negative';
+        }
+        if (batch.costPrice != null && batch.unitPrice != null && batch.unitPrice! < batch.costPrice!) {
+          return 'Batch unit price must be greater than or equal to cost price';
+        }
+        // Sale requires unit price per batch; purchase/import require cost price
+        if (transactionType == TransactionType.sale && (batch.unitPrice == null || batch.unitPrice! <= 0)) {
+          return 'Unit price is required for sale batches';
+        }
+        if ((transactionType == TransactionType.purchase || transactionType == TransactionType.imported) &&
+            (batch.costPrice == null || batch.costPrice! < 0)) {
+          return 'Cost price is required for purchase/import batches';
+        }
       }
     }
 

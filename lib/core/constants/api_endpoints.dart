@@ -411,6 +411,9 @@ class ApiEndpoints {
   /// Create transaction
   static const String createTransaction = transactions;
 
+  /// Reverse transaction — POST /api/transactions/:transactionId/reverse
+  static String reverseTransaction(int transactionId) => '$transactions/$transactionId/reverse';
+
   // ==================== PAYMENT METHODS ENDPOINTS ====================
   /// Payment methods base path
   static const String payments = '/payments';

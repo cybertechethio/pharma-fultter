@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$TransItemModel {
 
- int get id; int get itemId; String get itemName; String get itemCode;@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) double get quantity;@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicOrZero) double get unitPrice;@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicOrZero) double get costPrice;@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicNullable) double? get taxRate;@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicNullable) double? get taxableAmount;@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicNullable) double? get taxAmount;@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) double get total;
+ int get id; String get itemName; String get itemCode;@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) double get quantity; List<TransItemBatchModel> get batches;
 /// Create a copy of TransItemModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $TransItemModelCopyWith<TransItemModel> get copyWith => _$TransItemModelCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TransItemModel&&(identical(other.id, id) || other.id == id)&&(identical(other.itemId, itemId) || other.itemId == itemId)&&(identical(other.itemName, itemName) || other.itemName == itemName)&&(identical(other.itemCode, itemCode) || other.itemCode == itemCode)&&(identical(other.quantity, quantity) || other.quantity == quantity)&&(identical(other.unitPrice, unitPrice) || other.unitPrice == unitPrice)&&(identical(other.costPrice, costPrice) || other.costPrice == costPrice)&&(identical(other.taxRate, taxRate) || other.taxRate == taxRate)&&(identical(other.taxableAmount, taxableAmount) || other.taxableAmount == taxableAmount)&&(identical(other.taxAmount, taxAmount) || other.taxAmount == taxAmount)&&(identical(other.total, total) || other.total == total));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TransItemModel&&(identical(other.id, id) || other.id == id)&&(identical(other.itemName, itemName) || other.itemName == itemName)&&(identical(other.itemCode, itemCode) || other.itemCode == itemCode)&&(identical(other.quantity, quantity) || other.quantity == quantity)&&const DeepCollectionEquality().equals(other.batches, batches));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,itemId,itemName,itemCode,quantity,unitPrice,costPrice,taxRate,taxableAmount,taxAmount,total);
+int get hashCode => Object.hash(runtimeType,id,itemName,itemCode,quantity,const DeepCollectionEquality().hash(batches));
 
 @override
 String toString() {
-  return 'TransItemModel(id: $id, itemId: $itemId, itemName: $itemName, itemCode: $itemCode, quantity: $quantity, unitPrice: $unitPrice, costPrice: $costPrice, taxRate: $taxRate, taxableAmount: $taxableAmount, taxAmount: $taxAmount, total: $total)';
+  return 'TransItemModel(id: $id, itemName: $itemName, itemCode: $itemCode, quantity: $quantity, batches: $batches)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $TransItemModelCopyWith<$Res>  {
   factory $TransItemModelCopyWith(TransItemModel value, $Res Function(TransItemModel) _then) = _$TransItemModelCopyWithImpl;
 @useResult
 $Res call({
- int id, int itemId, String itemName, String itemCode,@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) double quantity,@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicOrZero) double unitPrice,@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicOrZero) double costPrice,@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicNullable) double? taxRate,@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicNullable) double? taxableAmount,@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicNullable) double? taxAmount,@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) double total
+ int id, String itemName, String itemCode,@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) double quantity, List<TransItemBatchModel> batches
 });
 
 
@@ -65,20 +65,14 @@ class _$TransItemModelCopyWithImpl<$Res>
 
 /// Create a copy of TransItemModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? itemId = null,Object? itemName = null,Object? itemCode = null,Object? quantity = null,Object? unitPrice = null,Object? costPrice = null,Object? taxRate = freezed,Object? taxableAmount = freezed,Object? taxAmount = freezed,Object? total = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? itemName = null,Object? itemCode = null,Object? quantity = null,Object? batches = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,itemId: null == itemId ? _self.itemId : itemId // ignore: cast_nullable_to_non_nullable
 as int,itemName: null == itemName ? _self.itemName : itemName // ignore: cast_nullable_to_non_nullable
 as String,itemCode: null == itemCode ? _self.itemCode : itemCode // ignore: cast_nullable_to_non_nullable
 as String,quantity: null == quantity ? _self.quantity : quantity // ignore: cast_nullable_to_non_nullable
-as double,unitPrice: null == unitPrice ? _self.unitPrice : unitPrice // ignore: cast_nullable_to_non_nullable
-as double,costPrice: null == costPrice ? _self.costPrice : costPrice // ignore: cast_nullable_to_non_nullable
-as double,taxRate: freezed == taxRate ? _self.taxRate : taxRate // ignore: cast_nullable_to_non_nullable
-as double?,taxableAmount: freezed == taxableAmount ? _self.taxableAmount : taxableAmount // ignore: cast_nullable_to_non_nullable
-as double?,taxAmount: freezed == taxAmount ? _self.taxAmount : taxAmount // ignore: cast_nullable_to_non_nullable
-as double?,total: null == total ? _self.total : total // ignore: cast_nullable_to_non_nullable
-as double,
+as double,batches: null == batches ? _self.batches : batches // ignore: cast_nullable_to_non_nullable
+as List<TransItemBatchModel>,
   ));
 }
 
@@ -160,10 +154,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  int itemId,  String itemName,  String itemCode, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)  double quantity, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicOrZero)  double unitPrice, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicOrZero)  double costPrice, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicNullable)  double? taxRate, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicNullable)  double? taxableAmount, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicNullable)  double? taxAmount, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)  double total)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String itemName,  String itemCode, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)  double quantity,  List<TransItemBatchModel> batches)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _TransItemModel() when $default != null:
-return $default(_that.id,_that.itemId,_that.itemName,_that.itemCode,_that.quantity,_that.unitPrice,_that.costPrice,_that.taxRate,_that.taxableAmount,_that.taxAmount,_that.total);case _:
+return $default(_that.id,_that.itemName,_that.itemCode,_that.quantity,_that.batches);case _:
   return orElse();
 
 }
@@ -181,10 +175,10 @@ return $default(_that.id,_that.itemId,_that.itemName,_that.itemCode,_that.quanti
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  int itemId,  String itemName,  String itemCode, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)  double quantity, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicOrZero)  double unitPrice, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicOrZero)  double costPrice, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicNullable)  double? taxRate, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicNullable)  double? taxableAmount, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicNullable)  double? taxAmount, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)  double total)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String itemName,  String itemCode, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)  double quantity,  List<TransItemBatchModel> batches)  $default,) {final _that = this;
 switch (_that) {
 case _TransItemModel():
-return $default(_that.id,_that.itemId,_that.itemName,_that.itemCode,_that.quantity,_that.unitPrice,_that.costPrice,_that.taxRate,_that.taxableAmount,_that.taxAmount,_that.total);}
+return $default(_that.id,_that.itemName,_that.itemCode,_that.quantity,_that.batches);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -198,10 +192,10 @@ return $default(_that.id,_that.itemId,_that.itemName,_that.itemCode,_that.quanti
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  int itemId,  String itemName,  String itemCode, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)  double quantity, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicOrZero)  double unitPrice, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicOrZero)  double costPrice, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicNullable)  double? taxRate, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicNullable)  double? taxableAmount, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicNullable)  double? taxAmount, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)  double total)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String itemName,  String itemCode, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)  double quantity,  List<TransItemBatchModel> batches)?  $default,) {final _that = this;
 switch (_that) {
 case _TransItemModel() when $default != null:
-return $default(_that.id,_that.itemId,_that.itemName,_that.itemCode,_that.quantity,_that.unitPrice,_that.costPrice,_that.taxRate,_that.taxableAmount,_that.taxAmount,_that.total);case _:
+return $default(_that.id,_that.itemName,_that.itemCode,_that.quantity,_that.batches);case _:
   return null;
 
 }
@@ -213,20 +207,20 @@ return $default(_that.id,_that.itemId,_that.itemName,_that.itemCode,_that.quanti
 @JsonSerializable()
 
 class _TransItemModel implements TransItemModel {
-  const _TransItemModel({required this.id, required this.itemId, required this.itemName, required this.itemCode, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) required this.quantity, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicOrZero) required this.unitPrice, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicOrZero) required this.costPrice, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicNullable) this.taxRate, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicNullable) this.taxableAmount, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicNullable) this.taxAmount, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) required this.total});
+  const _TransItemModel({required this.id, required this.itemName, required this.itemCode, @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) required this.quantity, final  List<TransItemBatchModel> batches = const []}): _batches = batches;
   factory _TransItemModel.fromJson(Map<String, dynamic> json) => _$TransItemModelFromJson(json);
 
 @override final  int id;
-@override final  int itemId;
 @override final  String itemName;
 @override final  String itemCode;
 @override@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) final  double quantity;
-@override@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicOrZero) final  double unitPrice;
-@override@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicOrZero) final  double costPrice;
-@override@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicNullable) final  double? taxRate;
-@override@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicNullable) final  double? taxableAmount;
-@override@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicNullable) final  double? taxAmount;
-@override@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) final  double total;
+ final  List<TransItemBatchModel> _batches;
+@override@JsonKey() List<TransItemBatchModel> get batches {
+  if (_batches is EqualUnmodifiableListView) return _batches;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_batches);
+}
+
 
 /// Create a copy of TransItemModel
 /// with the given fields replaced by the non-null parameter values.
@@ -241,16 +235,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TransItemModel&&(identical(other.id, id) || other.id == id)&&(identical(other.itemId, itemId) || other.itemId == itemId)&&(identical(other.itemName, itemName) || other.itemName == itemName)&&(identical(other.itemCode, itemCode) || other.itemCode == itemCode)&&(identical(other.quantity, quantity) || other.quantity == quantity)&&(identical(other.unitPrice, unitPrice) || other.unitPrice == unitPrice)&&(identical(other.costPrice, costPrice) || other.costPrice == costPrice)&&(identical(other.taxRate, taxRate) || other.taxRate == taxRate)&&(identical(other.taxableAmount, taxableAmount) || other.taxableAmount == taxableAmount)&&(identical(other.taxAmount, taxAmount) || other.taxAmount == taxAmount)&&(identical(other.total, total) || other.total == total));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TransItemModel&&(identical(other.id, id) || other.id == id)&&(identical(other.itemName, itemName) || other.itemName == itemName)&&(identical(other.itemCode, itemCode) || other.itemCode == itemCode)&&(identical(other.quantity, quantity) || other.quantity == quantity)&&const DeepCollectionEquality().equals(other._batches, _batches));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,itemId,itemName,itemCode,quantity,unitPrice,costPrice,taxRate,taxableAmount,taxAmount,total);
+int get hashCode => Object.hash(runtimeType,id,itemName,itemCode,quantity,const DeepCollectionEquality().hash(_batches));
 
 @override
 String toString() {
-  return 'TransItemModel(id: $id, itemId: $itemId, itemName: $itemName, itemCode: $itemCode, quantity: $quantity, unitPrice: $unitPrice, costPrice: $costPrice, taxRate: $taxRate, taxableAmount: $taxableAmount, taxAmount: $taxAmount, total: $total)';
+  return 'TransItemModel(id: $id, itemName: $itemName, itemCode: $itemCode, quantity: $quantity, batches: $batches)';
 }
 
 
@@ -261,7 +255,7 @@ abstract mixin class _$TransItemModelCopyWith<$Res> implements $TransItemModelCo
   factory _$TransItemModelCopyWith(_TransItemModel value, $Res Function(_TransItemModel) _then) = __$TransItemModelCopyWithImpl;
 @override @useResult
 $Res call({
- int id, int itemId, String itemName, String itemCode,@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) double quantity,@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicOrZero) double unitPrice,@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicOrZero) double costPrice,@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicNullable) double? taxRate,@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicNullable) double? taxableAmount,@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamicNullable) double? taxAmount,@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) double total
+ int id, String itemName, String itemCode,@JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic) double quantity, List<TransItemBatchModel> batches
 });
 
 
@@ -278,20 +272,14 @@ class __$TransItemModelCopyWithImpl<$Res>
 
 /// Create a copy of TransItemModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? itemId = null,Object? itemName = null,Object? itemCode = null,Object? quantity = null,Object? unitPrice = null,Object? costPrice = null,Object? taxRate = freezed,Object? taxableAmount = freezed,Object? taxAmount = freezed,Object? total = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? itemName = null,Object? itemCode = null,Object? quantity = null,Object? batches = null,}) {
   return _then(_TransItemModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,itemId: null == itemId ? _self.itemId : itemId // ignore: cast_nullable_to_non_nullable
 as int,itemName: null == itemName ? _self.itemName : itemName // ignore: cast_nullable_to_non_nullable
 as String,itemCode: null == itemCode ? _self.itemCode : itemCode // ignore: cast_nullable_to_non_nullable
 as String,quantity: null == quantity ? _self.quantity : quantity // ignore: cast_nullable_to_non_nullable
-as double,unitPrice: null == unitPrice ? _self.unitPrice : unitPrice // ignore: cast_nullable_to_non_nullable
-as double,costPrice: null == costPrice ? _self.costPrice : costPrice // ignore: cast_nullable_to_non_nullable
-as double,taxRate: freezed == taxRate ? _self.taxRate : taxRate // ignore: cast_nullable_to_non_nullable
-as double?,taxableAmount: freezed == taxableAmount ? _self.taxableAmount : taxableAmount // ignore: cast_nullable_to_non_nullable
-as double?,taxAmount: freezed == taxAmount ? _self.taxAmount : taxAmount // ignore: cast_nullable_to_non_nullable
-as double?,total: null == total ? _self.total : total // ignore: cast_nullable_to_non_nullable
-as double,
+as double,batches: null == batches ? _self._batches : batches // ignore: cast_nullable_to_non_nullable
+as List<TransItemBatchModel>,
   ));
 }
 

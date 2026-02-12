@@ -21,7 +21,6 @@ abstract class TransactionRepository {
   });
 
   Future<Either<Failure, Transaction>> reverseTransaction({
-    required TransactionType transactionType,
     required int reversesTransactionId,
     String? notes,
   });

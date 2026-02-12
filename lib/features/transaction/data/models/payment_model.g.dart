@@ -18,6 +18,7 @@ _PaymentModel _$PaymentModelFromJson(Map<String, dynamic> json) =>
           'paidAmount',
           (v) => JsonTypeConverters.doubleFromDynamic(v),
         ),
+        paymentType: $checkedConvert('paymentType', (v) => v as String?),
         notes: $checkedConvert('notes', (v) => v as String?),
         paymentMethods: $checkedConvert(
           'paymentMethods',
@@ -39,6 +40,7 @@ Map<String, dynamic> _$PaymentModelToJson(_PaymentModel instance) =>
       'id': instance.id,
       'totalAmount': instance.totalAmount,
       'paidAmount': instance.paidAmount,
+      'paymentType': ?instance.paymentType,
       'notes': ?instance.notes,
       'paymentMethods': instance.paymentMethods.map((e) => e.toJson()).toList(),
     };

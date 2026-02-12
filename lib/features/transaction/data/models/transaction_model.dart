@@ -35,6 +35,7 @@ sealed class TransactionModel with _$TransactionModel {
     String? updatorName,
     @Default([]) List<TransItemModel> items,
     PaymentModel? payment,
+    PaymentModel? refund,
   }) = _TransactionModel;
 
   factory TransactionModel.fromJson(Map<String, dynamic> json) =>

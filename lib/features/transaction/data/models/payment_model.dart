@@ -15,6 +15,7 @@ sealed class PaymentModel with _$PaymentModel {
     required double totalAmount,
     @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)
     required double paidAmount,
+    String? paymentType,
     String? notes,
     @Default([]) List<PaymentMethodModel> paymentMethods,
   }) = _PaymentModel;

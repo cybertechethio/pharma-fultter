@@ -29,6 +29,7 @@ sealed class Transaction with _$Transaction {
     String? updatorName,
     @Default([]) List<TransItem> items,
     Payment? payment,
+    Payment? refund
   }) = _Transaction;
 }
 
