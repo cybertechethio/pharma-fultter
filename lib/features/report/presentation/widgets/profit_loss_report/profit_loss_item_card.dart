@@ -6,7 +6,7 @@ import '../../../../../app/theme/text_styles.dart';
 import '../../../domain/entities/profitlossreport/profit_loss_item_data.dart';
 
 /// Card for profit-loss report item
-/// Displays: Item Type, Sales, Cost, VAT, Gross Profit
+/// Displays: Sales, Cost, VAT, Gross Profit
 class ProfitLossItemCard extends StatelessWidget {
   final ProfitLossItemData item;
 
@@ -37,13 +37,7 @@ class ProfitLossItemCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          // Line 1: Item Type
-          Text(
-            item.itemType,
-            style: context.body(bold: true),
-          ),
-          const SizedBox(height: AppSizes.xxs),
-          // Line 2: Sales + Cost
+          // Line 1: Sales + Cost
           Row(
             children: [
               Expanded(

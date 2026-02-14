@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../app/theme/app_sizes.dart';
 import '../../../../app/theme/brand_colors.dart';
+import '../../../../app/theme/text_styles.dart';
 
 /// An enhanced navigation item with hover effects, selection indicator,
 /// and smooth animations.
@@ -50,11 +51,8 @@ class _DrawerNavItemState extends State<DrawerNavItem>
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-
     final isActive = widget.isSelected || _isHovered;
-    final effectiveIconColor = widget.iconColor ?? colorScheme.primary;
+    final effectiveIconColor = widget.iconColor ?? BrandColors.primary;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: AppSizes.md, vertical: AppSizes.xxs),
@@ -72,9 +70,9 @@ class _DrawerNavItemState extends State<DrawerNavItem>
               curve: Curves.easeOutCubic,
               decoration: BoxDecoration(
                 color: widget.isSelected
-                    ? colorScheme.primaryContainer.withOpacity(0.7)
+                    ? BrandColors.primaryContainer.withValues(alpha: 0.7)
                     : _isHovered
-                        ? colorScheme.surfaceContainerHighest.withOpacity(0.7)
+                        ? BrandColors.surfaceContainerHighest.withValues(alpha: 0.7)
                         : BrandColors.transparent,
                 borderRadius: BorderRadius.circular(AppSizes.radius),
               ),
@@ -83,8 +81,8 @@ class _DrawerNavItemState extends State<DrawerNavItem>
                 child: InkWell(
                   onTap: widget.onTap,
                   borderRadius: BorderRadius.circular(AppSizes.radius),
-                  splashColor: colorScheme.primary.withOpacity(0.1),
-                  highlightColor: colorScheme.primary.withOpacity(0.05),
+                  splashColor: BrandColors.primary.withValues(alpha: 0.1),
+                  highlightColor: BrandColors.primary.withValues(alpha: 0.05),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: AppSizes.md2,
@@ -105,12 +103,14 @@ class _DrawerNavItemState extends State<DrawerNavItem>
                         Expanded(
                           child: Text(
                             widget.label,
-                            style: theme.textTheme.bodyMedium?.copyWith(
+                            style: context.body(
+                              color: isActive
+                                  ? BrandColors.textPrimary
+                                  : BrandColors.textSecondary,
+                              bold: isActive,
+                            ).copyWith(
                               fontWeight:
                                   isActive ? FontWeight.w600 : FontWeight.w500,
-                              color: isActive
-                                  ? colorScheme.onSurface
-                                  : colorScheme.onSurfaceVariant,
                               letterSpacing: 0.1,
                             ),
                           ),
@@ -123,7 +123,7 @@ class _DrawerNavItemState extends State<DrawerNavItem>
                             width: AppSizes.xs,
                             height: AppSizes.xl,
                             decoration: BoxDecoration(
-                              color: colorScheme.primary,
+                              color: BrandColors.primary,
                               borderRadius: BorderRadius.circular(AppSizes.xxs),
                             ),
                           ),

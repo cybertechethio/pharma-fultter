@@ -25,7 +25,7 @@ class SalesReportFilterButton extends StatelessWidget {
           padding: const EdgeInsets.all(AppSizes.sm),
           decoration: BoxDecoration(
             color: hasActiveFilters
-                ? BrandColors.primary.withOpacity(0.1)
+                ? BrandColors.primary.withValues(alpha: 0.1)
                 : BrandColors.transparent,
             borderRadius: BorderRadius.circular(AppSizes.radiusMd),
             border: Border.all(

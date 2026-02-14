@@ -8,11 +8,11 @@ import '../../../../shared/components/common/app_bar.dart';
 import '../../../../app/theme/app_sizes.dart';
 import '../../../../app/theme/brand_colors.dart';
 import '../../../../app/theme/text_styles.dart';
-import '../../../../core/errors/failure.dart';
-import '../../../../shared/components/common/error_widget.dart' as app_err;
 import '../../../../shared/components/forms/custom_text_field.dart';
 import '../../../../shared/components/forms/custom_button.dart';
 import '../../../../shared/components/forms/date_picker_field.dart';
+import '../../../../shared/utils/formatters.dart';
+import '../../../../shared/utils/formatters.dart';
 import '../../../transaction/presentation/widgets/payment_method_dialog.dart';
 import '../../../transaction/data/models/payment_method_model.dart';
 import '../providers/expense_notifier.dart';
@@ -171,11 +171,12 @@ class _ExpenseFormScreenState extends ConsumerState<ExpenseFormScreen> {
   }
 
   Widget _buildExpensePaymentMethodsList() {
+    final l10n = AppLocalizations.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Payment Methods (${_paymentMethods.length})',
+          '${l10n.paymentMethods} (${_paymentMethods.length})',
           style: context.subtitle(),
         ),
         SizedBox(height: AppSizes.md),
@@ -189,16 +190,15 @@ class _ExpenseFormScreenState extends ConsumerState<ExpenseFormScreen> {
   }
 
   Widget _buildExpensePaymentMethodCard(PaymentMethodModel method, int index) {
-    final l10n = AppLocalizations.of(context);
 
     return Container(
       margin: EdgeInsets.only(bottom: AppSizes.sm),
       padding: const EdgeInsets.all(AppSizes.sm),
       decoration: BoxDecoration(
-        color: BrandColors.surfaceVariant.withOpacity(0.3),
+        color: BrandColors.surfaceVariant.withValues(alpha: 0.3),
         borderRadius: BorderRadius.circular(AppSizes.radius),
         border: Border.all(
-          color: BrandColors.outline.withOpacity(0.2),
+          color: BrandColors.outline.withValues(alpha: 0.2),
         ),
       ),
       child: Row(
@@ -224,7 +224,7 @@ class _ExpenseFormScreenState extends ConsumerState<ExpenseFormScreen> {
                 if (method.referenceNumber != null) ...[
                   SizedBox(height: AppSizes.xs),
                   Text(
-                    'Ref: ${method.referenceNumber}',
+                    '${AppLocalizations.of(context).ref}: ${method.referenceNumber}',
                     style: context.small(),
                   ),
                 ],
@@ -239,7 +239,7 @@ class _ExpenseFormScreenState extends ConsumerState<ExpenseFormScreen> {
                       ),
                       SizedBox(width: AppSizes.xs),
                       Text(
-                        'Receipt attached',
+                        AppLocalizations.of(context).receiptAttached,
                         style: context.smallPrimary(bold: true),
                       ),
                     ],
@@ -249,7 +249,7 @@ class _ExpenseFormScreenState extends ConsumerState<ExpenseFormScreen> {
             ),
           ),
           Text(
-            'ETB ${method.amount}',
+            Formatters.formatAmount(method.amount),
             style: context.body(bold: true, color: BrandColors.primary),
           ),
           SizedBox(width: AppSizes.sm),
@@ -292,7 +292,7 @@ class _ExpenseFormScreenState extends ConsumerState<ExpenseFormScreen> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(AppSizes.radiusSm),
             border: Border.all(
-              color: BrandColors.outline.withOpacity(0.2),
+              color: BrandColors.outline.withValues(alpha: 0.2),
             ),
           ),
           child: ClipRRect(
@@ -634,13 +634,13 @@ class _ExpenseFormScreenState extends ConsumerState<ExpenseFormScreen> {
                                 Icon(
                                   Icons.payment,
                                   size: 64,
-                                  color: BrandColors.textPrimary.withOpacity(0.3),
+                                  color: BrandColors.textPrimary.withValues(alpha: 0.3),
                                 ),
                                 const SizedBox(height: AppSizes.lg),
                                 Text(
                                   l10n.noPaymentMethodsAdded,
                                   style: context.body(
-                                    color: BrandColors.textPrimary.withOpacity(0.6),
+                                    color: BrandColors.textPrimary.withValues(alpha: 0.6),
                                   ),
                                 ),
                               ],

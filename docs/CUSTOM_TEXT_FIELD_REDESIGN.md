@@ -86,10 +86,10 @@ Container(
   decoration: BoxDecoration(
     color: enabled 
         ? colorScheme.surfaceContainerHighest
-        : colorScheme.surfaceContainerHighest.withOpacity(0.5),
+        : colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
     borderRadius: BorderRadius.circular(12),
     border: Border.all(
-      color: colorScheme.outline.withOpacity(0.2),
+      color: colorScheme.outline.withValues(alpha: 0.2),
       width: 1,
     ),
   ),
@@ -108,7 +108,7 @@ Icon(
 ### **Text Styling**
 ```dart
 style: textTheme.bodyLarge?.copyWith(
-  color: enabled ? colorScheme.onSurface : colorScheme.onSurface.withOpacity(0.6),
+  color: enabled ? colorScheme.onSurface : colorScheme.onSurface.withValues(alpha: 0.6),
 )
 ```
 

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../app/theme/app_sizes.dart';
+import '../../../../app/theme/brand_colors.dart';
+import '../../../../app/theme/text_styles.dart';
 
 /// Reusable section header widget for profile sections
 class SectionHeaderWidget extends StatelessWidget {
@@ -16,9 +18,7 @@ class SectionHeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-    final headerColor = color ?? colorScheme.primary;
+    final headerColor = color ?? BrandColors.primary;
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(AppSizes.lg, AppSizes.xxl, AppSizes.lg, AppSizes.md),
@@ -32,9 +32,9 @@ class SectionHeaderWidget extends StatelessWidget {
           const SizedBox(width: AppSizes.sm),
           Text(
             title,
-            style: theme.textTheme.titleMedium?.copyWith(
+            style: context.title(
               color: headerColor,
-              fontWeight: FontWeight.bold,
+              bold: true,
             ),
           ),
         ],

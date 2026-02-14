@@ -15,7 +15,6 @@ sealed class CustomerItemData with _$CustomerItemData {
     required double totalAmount,
     required double paidAmount,
     required double dueAmount,
-    required bool hasDiscrepancy,
   }) = _CustomerItemData;
 }
 

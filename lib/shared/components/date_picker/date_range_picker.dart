@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:abushakir/abushakir.dart';
 import 'package:cyber_pos/l10n/app_localizations.dart';
 import '../../../app/theme/app_sizes.dart';
+import '../../../app/theme/brand_colors.dart';
+import '../../../app/theme/text_styles.dart';
 import '../../utils/calendar_converter.dart';
 import '../../models/calendar_type.dart';
 
@@ -139,7 +141,6 @@ class _DateRangePickerSheetState extends State<_DateRangePickerSheet> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context);
     final size = MediaQuery.of(context).size;
 
@@ -148,7 +149,7 @@ class _DateRangePickerSheetState extends State<_DateRangePickerSheet> {
         maxHeight: size.height * 0.9,
       ),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surface,
+        color: BrandColors.surface,
         borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
       ),
       child: Column(
@@ -160,7 +161,7 @@ class _DateRangePickerSheetState extends State<_DateRangePickerSheet> {
             width: 40,
             height: 4,
             decoration: BoxDecoration(
-              color: theme.colorScheme.onSurfaceVariant.withOpacity(0.4),
+              color: BrandColors.textSecondary.withValues(alpha: 0.4),
               borderRadius: BorderRadius.circular(AppSizes.radiusXxs),
             ),
           ),
@@ -173,9 +174,7 @@ class _DateRangePickerSheetState extends State<_DateRangePickerSheet> {
               children: [
                 Text(
                   l10n.selectDateRange,
-                  style: theme.textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: context.title(bold: true),
                 ),
                 IconButton(
                   icon: const Icon(Icons.close),
@@ -190,7 +189,7 @@ class _DateRangePickerSheetState extends State<_DateRangePickerSheet> {
           // Selection status
           Container(
             padding: const EdgeInsets.all(16),
-            color: theme.colorScheme.primaryContainer.withOpacity(0.5),
+            color: BrandColors.primaryContainer.withValues(alpha: 0.5),
             child: Column(
               children: [
                 Row(
@@ -200,13 +199,12 @@ class _DateRangePickerSheetState extends State<_DateRangePickerSheet> {
                         label: l10n.startDate,
                         date: _startGC,
                         isSelected: _mode == _SelectionMode.selectingStart,
-                        theme: theme,
                       ),
                     ),
                     const SizedBox(width: AppSizes.sm),
                     Icon(
                       Icons.arrow_forward,
-                      color: theme.colorScheme.onSurfaceVariant,
+                      color: BrandColors.textSecondary,
                     ),
                     const SizedBox(width: AppSizes.sm),
                     Expanded(
@@ -214,7 +212,6 @@ class _DateRangePickerSheetState extends State<_DateRangePickerSheet> {
                         label: l10n.endDate,
                         date: _endGC,
                         isSelected: _mode == _SelectionMode.selectingEnd,
-                        theme: theme,
                       ),
                     ),
                   ],
@@ -223,9 +220,7 @@ class _DateRangePickerSheetState extends State<_DateRangePickerSheet> {
                   const SizedBox(height: AppSizes.sm),
                   Text(
                     '${l10n.duration}: ${l10n.days(_getDuration()!)}',
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      color: theme.colorScheme.onSurfaceVariant,
-                    ),
+                    style: context.small(color: BrandColors.textSecondary),
                   ),
                 ],
               ],
@@ -308,13 +303,11 @@ class _DateChip extends StatelessWidget {
   final String label;
   final DateTime? date;
   final bool isSelected;
-  final ThemeData theme;
 
   const _DateChip({
     required this.label,
     required this.date,
     required this.isSelected,
-    required this.theme,
   });
 
   @override
@@ -323,12 +316,12 @@ class _DateChip extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: isSelected
-            ? theme.colorScheme.primary.withOpacity(0.1)
-            : theme.colorScheme.surface,
+            ? BrandColors.primary.withValues(alpha: 0.1)
+            : BrandColors.surface,
         border: Border.all(
           color: isSelected
-              ? theme.colorScheme.primary
-              : theme.colorScheme.outline.withOpacity(0.5),
+              ? BrandColors.primary
+              : BrandColors.outline.withValues(alpha: 0.5),
           width: isSelected ? 2 : 1,
         ),
         borderRadius: BorderRadius.circular(AppSizes.radiusSm),
@@ -338,20 +331,18 @@ class _DateChip extends StatelessWidget {
         children: [
           Text(
             label,
-            style: theme.textTheme.labelSmall?.copyWith(
-              color: theme.colorScheme.onSurfaceVariant,
-            ),
+            style: context.small(color: BrandColors.textSecondary),
           ),
           const SizedBox(height: AppSizes.xs),
           Text(
             date != null
                 ? '${date!.month}/${date!.day}'
                 : '---',
-            style: theme.textTheme.titleSmall?.copyWith(
-              fontWeight: FontWeight.bold,
+            style: context.small(
               color: date != null
-                  ? theme.colorScheme.onSurface
-                  : theme.colorScheme.onSurfaceVariant.withOpacity(0.5),
+                  ? BrandColors.textPrimary
+                  : BrandColors.textSecondary.withValues(alpha: 0.5),
+              bold: true,
             ),
           ),
         ],
@@ -433,19 +424,18 @@ class _GregorianRangeCalendarState extends State<_GregorianRangeCalendar> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final locale = Localizations.localeOf(context);
-    
+
     final monthNames = locale.languageCode == 'am'
         ? ['ጃንዋሪ', 'ፌብሯሪ', 'ማርች', 'ኤፕሪል', 'ሜይ', 'ጁን',
            'ጁላይ', 'ኦገስት', 'ሴፕቴምበር', 'ኦክቶበር', 'ኖቬምበር', 'ዲሴምበር']
         : ['January', 'February', 'March', 'April', 'May', 'June',
            'July', 'August', 'September', 'October', 'November', 'December'];
-    
+
     final dayNames = locale.languageCode == 'am'
         ? ['እሑድ', 'ሰኞ', 'ማክሰኞ', 'ረቡዕ', 'ሐሙስ', 'ዓርብ', 'ቅዳሜ']
         : ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    
+
     final daysInMonth = DateTime(_currentYear, _currentMonth + 1, 0).day;
     final firstDayOfWeek = DateTime(_currentYear, _currentMonth, 1).weekday;
 
@@ -455,7 +445,7 @@ class _GregorianRangeCalendarState extends State<_GregorianRangeCalendar> {
         Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: theme.colorScheme.primaryContainer,
+            color: BrandColors.primaryContainer,
             borderRadius: BorderRadius.circular(AppSizes.radius),
           ),
           margin: const EdgeInsets.symmetric(horizontal: 16),
@@ -470,13 +460,11 @@ class _GregorianRangeCalendarState extends State<_GregorianRangeCalendar> {
                 children: [
                   Text(
                     monthNames[_currentMonth - 1],
-                    style: theme.textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: context.title(bold: true),
                   ),
                   Text(
                     _currentYear.toString(),
-                    style: theme.textTheme.bodyMedium,
+                    style: context.body(),
                   ),
                 ],
               ),
@@ -487,9 +475,7 @@ class _GregorianRangeCalendarState extends State<_GregorianRangeCalendar> {
             ],
           ),
         ),
-        
         const SizedBox(height: AppSizes.lg),
-        
         // Day names header
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -500,18 +486,16 @@ class _GregorianRangeCalendarState extends State<_GregorianRangeCalendar> {
                 child: Text(
                   day,
                   textAlign: TextAlign.center,
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: theme.colorScheme.onSurfaceVariant,
+                  style: context.small(
+                    color: BrandColors.textSecondary,
+                    bold: true,
                   ),
                 ),
               );
             }).toList(),
           ),
         ),
-        
         const SizedBox(height: AppSizes.sm),
-        
         // Calendar grid
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -526,11 +510,11 @@ class _GregorianRangeCalendarState extends State<_GregorianRangeCalendar> {
             itemCount: 42,
             itemBuilder: (context, index) {
               final dayOffset = index - (firstDayOfWeek % 7);
-              
+
               if (dayOffset < 0 || dayOffset >= daysInMonth) {
                 return const SizedBox.shrink();
               }
-              
+
               final day = dayOffset + 1;
               final date = DateTime(_currentYear, _currentMonth, day);
               final isInRange = _isInRange(date);
@@ -545,14 +529,14 @@ class _GregorianRangeCalendarState extends State<_GregorianRangeCalendar> {
                 child: Container(
                   decoration: BoxDecoration(
                     color: isStartOrEnd
-                        ? theme.colorScheme.primary
+                        ? BrandColors.primary
                         : isInRange
-                            ? theme.colorScheme.primaryContainer
+                            ? BrandColors.primaryContainer
                             : null,
                     borderRadius: BorderRadius.circular(AppSizes.radiusSm),
                     border: isToday && !isStartOrEnd
                         ? Border.all(
-                            color: theme.colorScheme.primary,
+                            color: BrandColors.primary,
                             width: 2,
                           )
                         : null,
@@ -560,15 +544,13 @@ class _GregorianRangeCalendarState extends State<_GregorianRangeCalendar> {
                   alignment: Alignment.center,
                   child: Text(
                     day.toString(),
-                    style: theme.textTheme.bodyMedium?.copyWith(
+                    style: context.body(
                       color: isStartOrEnd
-                          ? theme.colorScheme.onPrimary
+                          ? BrandColors.buttonText
                           : isInRange
-                              ? theme.colorScheme.primary
-                              : theme.colorScheme.onSurface,
-                      fontWeight: isStartOrEnd || isToday
-                          ? FontWeight.bold
-                          : FontWeight.normal,
+                              ? BrandColors.primary
+                              : BrandColors.textPrimary,
+                      bold: isStartOrEnd || isToday,
                     ),
                   ),
                 ),
@@ -654,9 +636,8 @@ class _EthiopianRangeCalendarState extends State<_EthiopianRangeCalendar> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context);
-    
+
     final daysInMonth = CalendarConverter.getDaysInEthiopianMonth(
       _currentYear,
       _currentMonth,
@@ -668,7 +649,7 @@ class _EthiopianRangeCalendarState extends State<_EthiopianRangeCalendar> {
         Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: theme.colorScheme.primaryContainer,
+            color: BrandColors.primaryContainer,
             borderRadius: BorderRadius.circular(AppSizes.radius),
           ),
           margin: const EdgeInsets.symmetric(horizontal: 16),
@@ -683,13 +664,11 @@ class _EthiopianRangeCalendarState extends State<_EthiopianRangeCalendar> {
                 children: [
                   Text(
                     CalendarConverter.getEthiopianMonthName(_currentMonth, l10n),
-                    style: theme.textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: context.title(bold: true),
                   ),
                   Text(
                     _currentYear.toString(),
-                    style: theme.textTheme.bodyMedium,
+                    style: context.body(),
                   ),
                 ],
               ),
@@ -700,9 +679,7 @@ class _EthiopianRangeCalendarState extends State<_EthiopianRangeCalendar> {
             ],
           ),
         ),
-        
         const SizedBox(height: AppSizes.lg),
-        
         // Calendar grid
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -732,24 +709,22 @@ class _EthiopianRangeCalendarState extends State<_EthiopianRangeCalendar> {
                 child: Container(
                   decoration: BoxDecoration(
                     color: isStartOrEnd
-                        ? theme.colorScheme.primary
+                        ? BrandColors.primary
                         : isInRange
-                            ? theme.colorScheme.primaryContainer
+                            ? BrandColors.primaryContainer
                             : null,
                     borderRadius: BorderRadius.circular(AppSizes.radiusSm),
                   ),
                   alignment: Alignment.center,
                   child: Text(
                     day.toString(),
-                    style: theme.textTheme.bodyMedium?.copyWith(
+                    style: context.body(
                       color: isStartOrEnd
-                          ? theme.colorScheme.onPrimary
+                          ? BrandColors.buttonText
                           : isInRange
-                              ? theme.colorScheme.primary
-                              : theme.colorScheme.onSurface,
-                      fontWeight: isStartOrEnd
-                          ? FontWeight.bold
-                          : FontWeight.normal,
+                              ? BrandColors.primary
+                              : BrandColors.textPrimary,
+                      bold: isStartOrEnd,
                     ),
                   ),
                 ),

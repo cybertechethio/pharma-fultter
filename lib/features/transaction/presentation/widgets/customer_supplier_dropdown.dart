@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/enums/transaction_type_enum.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/components/forms/dropdown.dart';
 import '../../../supplier_customer/domain/entities/supplier_customer.dart';
 import '../../../supplier_customer/presentation/providers/supplier_customer_notifier.dart';
@@ -11,6 +12,7 @@ class CustomerSupplierDropdown extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
     final formState = ref.watch(transactionFormProvider);
     final transactionType = formState.request.transactionType;
     
@@ -48,8 +50,8 @@ class CustomerSupplierDropdown extends ConsumerWidget {
           formNotifier.setSupplier(value);
         }
       },
-      label: isSale ? 'Customer' : 'Supplier',
-      hintText: isSale ? 'Select Customer' : 'Select Supplier',
+      label: isSale ? l10n.customer : l10n.supplier,
+      hintText: isSale ? l10n.selectCustomer : l10n.selectSupplier,
       required: true,
     );
   }

@@ -45,7 +45,7 @@ class BatchListScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: CustomAppBar(
-        title: '${item.name} Batches',
+        title: '${item.name} ${l10n.batches}',
       ),
       body: asyncList.when(
         loading: () => const Center(child: CircularProgressIndicator()),

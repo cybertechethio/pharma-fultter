@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../app/theme/app_sizes.dart';
 import '../../../app/theme/brand_colors.dart';
+import '../../../app/theme/text_styles.dart';
 
 /// Dropdown item model
 class DropdownItem<T> {
@@ -80,9 +81,6 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final textTheme = theme.textTheme;
-
     // Find selected item only if value is not null and items are not empty
     DropdownItem<T>? selectedItem;
     if (widget.value != null && widget.items.isNotEmpty) {
@@ -102,23 +100,10 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> {
         : widget.hintText ?? 'Select an option';
 
     // Match CustomTextField: subtle label (bodySmall, fuzzy), same padding/size/border
-    final labelStyle = textTheme.bodySmall?.copyWith(
-      color: BrandColors.inputPlaceholder,
-      fontWeight: FontWeight.normal,
-    );
-    // "Select x" hint: same fuzzy style as label (bodySmall, placeholder) to match text fields
-    final hintStyle = textTheme.bodySmall?.copyWith(
-      color: BrandColors.inputPlaceholder,
-      fontWeight: FontWeight.normal,
-    );
-    // Selected value: bodyMedium, inputText (matches CustomTextField input style)
-    final valueStyle = textTheme.bodyMedium?.copyWith(
-      color: BrandColors.inputText,
-    );
-    final isEmptyStyle = textTheme.bodySmall?.copyWith(
-      color: BrandColors.textMuted,
-      fontWeight: FontWeight.normal,
-    );
+    final labelStyle = context.small(color: BrandColors.inputPlaceholder);
+    final hintStyle = context.small(color: BrandColors.inputPlaceholder);
+    final valueStyle = context.body(color: BrandColors.inputText);
+    final isEmptyStyle = context.small(color: BrandColors.textMuted);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -133,7 +118,7 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> {
               if (widget.required)
                 Text(
                   ' *',
-                  style: labelStyle?.copyWith(color: BrandColors.error),
+                  style: labelStyle.copyWith(color: BrandColors.error),
                 ),
             ],
           ),
@@ -188,9 +173,7 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> {
           const SizedBox(height: AppSizes.xs),
           Text(
             widget.errorText!,
-            style: textTheme.bodySmall?.copyWith(
-              color: BrandColors.error,
-            ),
+            style: context.small(color: BrandColors.error),
           ),
         ],
       ],
@@ -265,9 +248,6 @@ class _DropdownDialogState<T> extends State<_DropdownDialog<T>> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-
     return Dialog(
       child: Container(
         constraints: const BoxConstraints(maxWidth: 400, maxHeight: 600),
@@ -303,11 +283,11 @@ class _DropdownDialogState<T> extends State<_DropdownDialog<T>> {
                   return ListTile(
                     title: Text(
                       item.label,
-                      style: TextStyle(
-                        color: isEnabled
-                            ? null
-                            : colorScheme.onSurface.withOpacity(0.38),
-                      ),
+                      style: isEnabled
+                          ? null
+                          : context.body(
+                              color: BrandColors.textPrimary.withValues(alpha: 0.38),
+                            ),
                     ),
                     selected: isSelected,
                     enabled: isEnabled,
@@ -315,7 +295,7 @@ class _DropdownDialogState<T> extends State<_DropdownDialog<T>> {
                         ? () => widget.onSelected(item.value)
                         : null,
                     trailing: isSelected
-                        ? Icon(Icons.check, color: colorScheme.primary)
+                        ? Icon(Icons.check, color: BrandColors.primary)
                         : null,
                   );
                 },

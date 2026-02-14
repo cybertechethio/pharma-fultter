@@ -9,7 +9,6 @@ part 'profit_loss_item_data_model.g.dart';
 @freezed
 sealed class ProfitLossItemDataModel with _$ProfitLossItemDataModel {
   const factory ProfitLossItemDataModel({
-    required String itemType,
     @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)
     required double sales,
     @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)

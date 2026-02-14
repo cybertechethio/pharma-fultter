@@ -8,6 +8,8 @@ import '../../../../shared/components/dialogs/standard_form_dialog.dart';
 import '../../../../shared/components/forms/custom_text_field.dart';
 import '../../../../shared/components/forms/dropdown.dart';
 import '../../../../app/theme/app_sizes.dart';
+import '../../../../app/theme/brand_colors.dart';
+import '../../../../app/theme/text_styles.dart';
 import '../../../../core/enums/payment_method_type_enum.dart';
 import '../../../../core/services/snackbar_service.dart' show snackbarServiceProvider;
 import '../../../../shared/utils/url_utils.dart';
@@ -221,15 +223,13 @@ class _PaymentMethodFormDialogState extends ConsumerState<PaymentMethodFormDialo
         height: 48,
         padding: const EdgeInsets.all(AppSizes.md),
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.error.withOpacity(0.1),
+          color: BrandColors.error.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(AppSizes.radiusXs),
         ),
         child: Center(
           child: Text(
             l10n.failedToLoadBanks,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: Theme.of(context).colorScheme.error,
-            ),
+            style: context.body(color: BrandColors.error),
           ),
         ),
       ),
@@ -239,15 +239,13 @@ class _PaymentMethodFormDialogState extends ConsumerState<PaymentMethodFormDialo
             height: 48,
             padding: const EdgeInsets.all(AppSizes.md),
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.error.withOpacity(0.1),
+              color: BrandColors.error.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(AppSizes.radiusXs),
             ),
             child: Center(
               child: Text(
                 l10n.noBanksAvailable,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.error,
-                ),
+                style: context.body(color: BrandColors.error),
               ),
             ),
           );
@@ -294,14 +292,14 @@ class _PaymentMethodFormDialogState extends ConsumerState<PaymentMethodFormDialo
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
             decoration: BoxDecoration(
-              color: hasAttachment 
-                  ? Theme.of(context).colorScheme.primaryContainer.withOpacity(0.15)
-                  : Theme.of(context).colorScheme.surfaceContainerHighest.withOpacity(0.3),
+              color: hasAttachment
+                  ? BrandColors.primaryContainer.withValues(alpha: 0.15)
+                  : BrandColors.surfaceContainerHighest.withValues(alpha: 0.3),
               borderRadius: BorderRadius.circular(AppSizes.radiusSm),
               border: Border.all(
-                color: hasAttachment 
-                    ? Theme.of(context).colorScheme.primary.withOpacity(0.3)
-                    : Theme.of(context).colorScheme.outline.withOpacity(0.3),
+                color: hasAttachment
+                    ? BrandColors.primary.withValues(alpha: 0.3)
+                    : BrandColors.outline.withValues(alpha: 0.3),
               ),
             ),
             child: Row(
@@ -309,14 +307,14 @@ class _PaymentMethodFormDialogState extends ConsumerState<PaymentMethodFormDialo
                 Container(
                   padding: const EdgeInsets.all(AppSizes.sm),
                   decoration: BoxDecoration(
-                    color: hasAttachment 
-                        ? Theme.of(context).colorScheme.primary.withOpacity(0.1)
-                        : Theme.of(context).colorScheme.surfaceContainerHighest,
+                    color: hasAttachment
+                        ? BrandColors.primary.withValues(alpha: 0.1)
+                        : BrandColors.surfaceContainerHighest,
                     borderRadius: BorderRadius.circular(AppSizes.radiusSm),
                   ),
                   child: Icon(
                     hasAttachment ? Icons.check_circle_rounded : Icons.add_photo_alternate_outlined,
-                    color: hasAttachment ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.onSurfaceVariant,
+                    color: hasAttachment ? BrandColors.primary : BrandColors.textSecondary,
                     size: AppSizes.iconSize,
                   ),
                 ),
@@ -327,16 +325,16 @@ class _PaymentMethodFormDialogState extends ConsumerState<PaymentMethodFormDialo
                     children: [
                       Text(
                         hasAttachment ? l10n.receiptAttached : l10n.addReceipt,
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: hasAttachment ? Theme.of(context).colorScheme.onSurface : Theme.of(context).colorScheme.onSurfaceVariant,
-                          fontWeight: hasAttachment ? FontWeight.w500 : FontWeight.normal,
+                        style: context.body(
+                          color: hasAttachment ? BrandColors.textPrimary : BrandColors.textSecondary,
+                          bold: hasAttachment,
                         ),
                       ),
                       if (!hasAttachment)
                         Text(
                           l10n.tapToUpload,
-                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: Theme.of(context).colorScheme.onSurfaceVariant.withOpacity(0.7),
+                          style: context.small(
+                            color: BrandColors.textMuted,
                           ),
                         ),
                     ],
@@ -345,9 +343,9 @@ class _PaymentMethodFormDialogState extends ConsumerState<PaymentMethodFormDialo
                 if (hasAttachment)
                   IconButton(
                     icon: Icon(
-                      Icons.close_rounded, 
-                      size: 18, 
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      Icons.close_rounded,
+                      size: 18,
+                      color: BrandColors.textSecondary,
                     ),
                     padding: EdgeInsets.zero,
                     constraints: const BoxConstraints(),
@@ -361,7 +359,7 @@ class _PaymentMethodFormDialogState extends ConsumerState<PaymentMethodFormDialo
                 else
                   Icon(
                     Icons.chevron_right_rounded,
-                    color: Theme.of(context).colorScheme.onSurfaceVariant.withOpacity(0.5),
+                    color: BrandColors.textMuted,
                     size: AppSizes.iconSize,
                   ),
               ],
@@ -379,11 +377,11 @@ class _PaymentMethodFormDialogState extends ConsumerState<PaymentMethodFormDialo
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(AppSizes.radiusMd),
                 border: Border.all(
-                  color: Theme.of(context).colorScheme.outline.withOpacity(0.2),
+                  color: BrandColors.outline.withValues(alpha: 0.2),
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Theme.of(context).colorScheme.shadow.withOpacity(0.05),
+                    color: BrandColors.shadow.withValues(alpha: 0.05),
                     blurRadius: 8,
                     offset: const Offset(0, 2),
                   ),
@@ -396,19 +394,19 @@ class _PaymentMethodFormDialogState extends ConsumerState<PaymentMethodFormDialo
                         imageUrl: UrlUtils.getFullImageUrl(_attachmentUrl!) ?? _attachmentUrl!,
                         fit: BoxFit.cover,
                         placeholder: (context, url) => Container(
-                          color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                          color: BrandColors.surfaceContainerHighest,
                           child: Center(
                             child: CircularProgressIndicator(
                               strokeWidth: 2,
-                              color: Theme.of(context).colorScheme.primary,
+                              valueColor: AlwaysStoppedAnimation<Color>(BrandColors.primary),
                             ),
                           ),
                         ),
                         errorWidget: (context, url, error) => Container(
-                          color: Theme.of(context).colorScheme.errorContainer.withOpacity(0.1),
+                          color: BrandColors.error.withValues(alpha: 0.1),
                           child: Icon(
                             Icons.error_outline,
-                            color: Theme.of(context).colorScheme.error,
+                            color: BrandColors.error,
                             size: AppSizes.iconSizeLg,
                           ),
                         ),

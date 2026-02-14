@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cyber_pos/l10n/app_localizations.dart';
+import '../../../app/theme/brand_colors.dart';
 
 /// Reusable delete confirmation dialog that returns a boolean result
 /// 
@@ -41,13 +42,10 @@ class DeleteConfirmationDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-    
     return AlertDialog(
       icon: Icon(
         icon ?? (isDestructive ? Icons.warning_amber_rounded : Icons.help_outline),
-        color: isDestructive ? colorScheme.error : colorScheme.primary,
+        color: isDestructive ? BrandColors.error : BrandColors.primary,
       ),
       title: Text(title),
       content: Text(message),
@@ -58,12 +56,12 @@ class DeleteConfirmationDialog extends StatelessWidget {
         ),
         FilledButton(
           onPressed: () => context.pop(true),
-          style: isDestructive 
-            ? FilledButton.styleFrom(
-                backgroundColor: colorScheme.error,
-                foregroundColor: colorScheme.onError,
-              )
-            : null,
+          style: isDestructive
+              ? FilledButton.styleFrom(
+                  backgroundColor: BrandColors.error,
+                  foregroundColor: BrandColors.onError,
+                )
+              : null,
           child: Text(confirmText),
         ),
       ],
@@ -138,11 +136,12 @@ class DeleteConfirmationHelper {
   }) async {
     final l10n = AppLocalizations.of(context);
     final type = itemType ?? 'item';
-    
+    final typeLabel = type.capitalize();
+
     return showDeleteConfirmation(
       context: context,
-      title: 'Delete ${type.capitalize()}',
-      message: 'Are you sure you want to delete "$itemName"? This action cannot be undone.',
+      title: l10n.deleteTypeTitle(typeLabel),
+      message: l10n.confirmDeleteItem(itemName),
       confirmText: confirmText ?? l10n.delete,
       cancelText: cancelText ?? l10n.cancel,
       isDestructive: isDestructive,

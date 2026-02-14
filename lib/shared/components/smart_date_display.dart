@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cyber_pos/l10n/app_localizations.dart';
 import '../../app/theme/app_sizes.dart';
+import '../../app/theme/brand_colors.dart';
+import '../../app/theme/text_styles.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../utils/calendar_converter.dart';
 import '../providers/settings_provider.dart';
@@ -85,7 +87,6 @@ class SmartDateDisplayWithLabel extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final locale = Localizations.localeOf(context);
     final l10n = AppLocalizations.of(context);
-    final theme = Theme.of(context);
     final settingsState = ref.watch(settingsProvider);
     
     // Get effective display calendar type
@@ -111,15 +112,11 @@ class SmartDateDisplayWithLabel extends ConsumerWidget {
       children: [
         Text(
           displayText,
-          style: dateStyle ?? theme.textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+          style: dateStyle ?? context.title(bold: true),
         ),
         Text(
           calendarType,
-          style: labelStyle ?? theme.textTheme.bodySmall?.copyWith(
-            color: theme.colorScheme.onSurfaceVariant,
-          ),
+          style: labelStyle ?? context.small(color: BrandColors.textSecondary),
         ),
       ],
     );
@@ -143,7 +140,6 @@ class DualDateDisplay extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context);
     
     final etDate = CalendarConverter.toEthiopian(date);
@@ -159,7 +155,6 @@ class DualDateDisplay extends ConsumerWidget {
           label: l10n.gregorianCalendar,
           value: gcDisplay,
           isHighlighted: !highlightEthiopian,
-          theme: theme,
         ),
         const SizedBox(height: AppSizes.sm),
         _DateRow(
@@ -167,7 +162,6 @@ class DualDateDisplay extends ConsumerWidget {
           label: l10n.ethiopianCalendar,
           value: etDisplay,
           isHighlighted: highlightEthiopian,
-          theme: theme,
         ),
       ],
     );
@@ -179,14 +173,12 @@ class _DateRow extends StatelessWidget {
   final String label;
   final String value;
   final bool isHighlighted;
-  final ThemeData theme;
 
   const _DateRow({
     required this.icon,
     required this.label,
     required this.value,
     required this.isHighlighted,
-    required this.theme,
   });
 
   @override
@@ -195,10 +187,10 @@ class _DateRow extends StatelessWidget {
       children: [
         Icon(
           icon,
-          size: 16,
-          color: isHighlighted 
-              ? theme.colorScheme.primary 
-              : theme.colorScheme.onSurfaceVariant,
+          size: AppSizes.iconSize,
+          color: isHighlighted
+              ? BrandColors.primary
+              : BrandColors.textSecondary,
         ),
         const SizedBox(width: AppSizes.sm),
         Expanded(
@@ -207,17 +199,15 @@ class _DateRow extends StatelessWidget {
             children: [
               Text(
                 label,
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: theme.colorScheme.onSurfaceVariant,
-                ),
+                style: context.small(color: BrandColors.textSecondary),
               ),
               Text(
                 value,
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  fontWeight: isHighlighted ? FontWeight.bold : FontWeight.normal,
-                  color: isHighlighted 
-                      ? theme.colorScheme.onSurface 
-                      : theme.colorScheme.onSurfaceVariant,
+                style: context.body(
+                  bold: isHighlighted,
+                  color: isHighlighted
+                      ? BrandColors.textPrimary
+                      : BrandColors.textSecondary,
                 ),
               ),
             ],
@@ -273,7 +263,7 @@ class SmartDateFormField extends ConsumerWidget {
             : Text(
                 l10n.selectDate,
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  color: BrandColors.textSecondary,
                 ),
               ),
       ),

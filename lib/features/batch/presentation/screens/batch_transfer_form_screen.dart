@@ -165,7 +165,7 @@ class _BatchTransferFormScreenState extends ConsumerState<BatchTransferFormScree
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 CustomDropdown<String>(
-                  label: 'Source batch',
+                  label: l10n.sourceBatch,
                   value: _sourceBatchNumber,
                   items: sourceItems,
                   onChanged: (v) => setState(() {
@@ -173,11 +173,11 @@ class _BatchTransferFormScreenState extends ConsumerState<BatchTransferFormScree
                     if (_destinationBatchNumber == v) _destinationBatchNumber = null;
                   }),
                   required: true,
-                  hintText: 'Select source batch',
+                  hintText: l10n.selectSourceBatch,
                 ),
                 const SizedBox(height: AppSizes.lg),
                 CustomDropdown<String>(
-                  label: 'Destination batch',
+                  label: l10n.destinationBatch,
                   value: _destinationBatchNumber,
                   items: destinationItems,
                   onChanged: (v) => setState(() {
@@ -185,7 +185,7 @@ class _BatchTransferFormScreenState extends ConsumerState<BatchTransferFormScree
                     if (_sourceBatchNumber == v) _sourceBatchNumber = null;
                   }),
                   required: true,
-                  hintText: 'Select destination batch',
+                  hintText: l10n.selectDestinationBatch,
                 ),
                 Align(
                   alignment: Alignment.centerRight,
@@ -202,7 +202,7 @@ class _BatchTransferFormScreenState extends ConsumerState<BatchTransferFormScree
                         ref.invalidate(batchProvider(widget.item.id));
                       });
                     },
-                    icon: Icon(Icons.add, size: 18, color: BrandColors.primary),
+                    icon: Icon(Icons.add, size: AppSizes.iconSizeSm, color: BrandColors.primary),
                     label: Text(l10n.createBatch),
                     style: TextButton.styleFrom(
                       foregroundColor: BrandColors.primary,
@@ -217,10 +217,10 @@ class _BatchTransferFormScreenState extends ConsumerState<BatchTransferFormScree
                   validator: (v) {
                     final n = _parseInt(v ?? '');
                     if (n == null || n < 1) {
-                      return 'Quantity must be at least 1';
+                      return l10n.quantityMustBeAtLeast1;
                     }
                     if (sourceQty > 0 && n > sourceQty) {
-                      return 'Quantity cannot exceed source batch quantity ($sourceQty)';
+                      return l10n.quantityCannotExceedSourceBatch(sourceQty);
                     }
                     return null;
                   },
@@ -236,12 +236,12 @@ class _BatchTransferFormScreenState extends ConsumerState<BatchTransferFormScree
                       children: [
                         Icon(
                           _showMoreOptions ? Icons.expand_less : Icons.expand_more,
-                          size: 20,
+                          size: AppSizes.iconSize,
                           color: BrandColors.primary,
                         ),
                         const SizedBox(width: AppSizes.xs),
                         Text(
-                          _showMoreOptions ? 'Hide optional fields' : 'More options',
+                          _showMoreOptions ? l10n.hideOptionalFields : l10n.moreOptions,
                           style: context.bodyPrimary(bold: true),
                         ),
                       ],
@@ -257,7 +257,7 @@ class _BatchTransferFormScreenState extends ConsumerState<BatchTransferFormScree
                     prefixIcon: Icons.attach_money_outlined,
                     validator: (v) {
                       final n = _parseDouble(v ?? '');
-                      if (n != null && n < 0) return 'Cost price cannot be negative';
+                      if (n != null && n < 0) return l10n.costPriceCannotBeNegative;
                       return null;
                     },
                   ),
@@ -269,7 +269,7 @@ class _BatchTransferFormScreenState extends ConsumerState<BatchTransferFormScree
                     prefixIcon: Icons.attach_money_outlined,
                     validator: (v) {
                       final n = _parseDouble(v ?? '');
-                      if (n != null && n < 0) return 'Unit price cannot be negative';
+                      if (n != null && n < 0) return l10n.unitPriceCannotBeNegative;
                       return null;
                     },
                   ),
@@ -305,10 +305,11 @@ class _BatchTransferFormScreenState extends ConsumerState<BatchTransferFormScree
 
   Future<void> _submit() async {
     if (!_formKey.currentState!.validate()) return;
+    final l10n = AppLocalizations.of(context);
     final source = _sourceBatchNumber?.trim();
     final destination = _destinationBatchNumber?.trim();
     if (source == null || source.isEmpty || destination == null || destination.isEmpty) {
-      ref.read(snackbarServiceProvider).showWarning('Source and destination batch are required');
+      ref.read(snackbarServiceProvider).showWarning(l10n.sourceAndDestinationBatchRequired);
       return;
     }
     final quantity = _parseInt(_quantity.text) ?? 0;

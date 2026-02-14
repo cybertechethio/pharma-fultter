@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ProfitLossItemData {
 
- String get itemType; double get sales; double get cost; double get vat; double get grossProfit;
+ double get sales; double get cost; double get vat; double get grossProfit;
 /// Create a copy of ProfitLossItemData
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $ProfitLossItemDataCopyWith<ProfitLossItemData> get copyWith => _$ProfitLossItem
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfitLossItemData&&(identical(other.itemType, itemType) || other.itemType == itemType)&&(identical(other.sales, sales) || other.sales == sales)&&(identical(other.cost, cost) || other.cost == cost)&&(identical(other.vat, vat) || other.vat == vat)&&(identical(other.grossProfit, grossProfit) || other.grossProfit == grossProfit));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfitLossItemData&&(identical(other.sales, sales) || other.sales == sales)&&(identical(other.cost, cost) || other.cost == cost)&&(identical(other.vat, vat) || other.vat == vat)&&(identical(other.grossProfit, grossProfit) || other.grossProfit == grossProfit));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,itemType,sales,cost,vat,grossProfit);
+int get hashCode => Object.hash(runtimeType,sales,cost,vat,grossProfit);
 
 @override
 String toString() {
-  return 'ProfitLossItemData(itemType: $itemType, sales: $sales, cost: $cost, vat: $vat, grossProfit: $grossProfit)';
+  return 'ProfitLossItemData(sales: $sales, cost: $cost, vat: $vat, grossProfit: $grossProfit)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $ProfitLossItemDataCopyWith<$Res>  {
   factory $ProfitLossItemDataCopyWith(ProfitLossItemData value, $Res Function(ProfitLossItemData) _then) = _$ProfitLossItemDataCopyWithImpl;
 @useResult
 $Res call({
- String itemType, double sales, double cost, double vat, double grossProfit
+ double sales, double cost, double vat, double grossProfit
 });
 
 
@@ -62,10 +62,9 @@ class _$ProfitLossItemDataCopyWithImpl<$Res>
 
 /// Create a copy of ProfitLossItemData
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? itemType = null,Object? sales = null,Object? cost = null,Object? vat = null,Object? grossProfit = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? sales = null,Object? cost = null,Object? vat = null,Object? grossProfit = null,}) {
   return _then(_self.copyWith(
-itemType: null == itemType ? _self.itemType : itemType // ignore: cast_nullable_to_non_nullable
-as String,sales: null == sales ? _self.sales : sales // ignore: cast_nullable_to_non_nullable
+sales: null == sales ? _self.sales : sales // ignore: cast_nullable_to_non_nullable
 as double,cost: null == cost ? _self.cost : cost // ignore: cast_nullable_to_non_nullable
 as double,vat: null == vat ? _self.vat : vat // ignore: cast_nullable_to_non_nullable
 as double,grossProfit: null == grossProfit ? _self.grossProfit : grossProfit // ignore: cast_nullable_to_non_nullable
@@ -151,10 +150,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String itemType,  double sales,  double cost,  double vat,  double grossProfit)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( double sales,  double cost,  double vat,  double grossProfit)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ProfitLossItemData() when $default != null:
-return $default(_that.itemType,_that.sales,_that.cost,_that.vat,_that.grossProfit);case _:
+return $default(_that.sales,_that.cost,_that.vat,_that.grossProfit);case _:
   return orElse();
 
 }
@@ -172,10 +171,10 @@ return $default(_that.itemType,_that.sales,_that.cost,_that.vat,_that.grossProfi
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String itemType,  double sales,  double cost,  double vat,  double grossProfit)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( double sales,  double cost,  double vat,  double grossProfit)  $default,) {final _that = this;
 switch (_that) {
 case _ProfitLossItemData():
-return $default(_that.itemType,_that.sales,_that.cost,_that.vat,_that.grossProfit);}
+return $default(_that.sales,_that.cost,_that.vat,_that.grossProfit);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -189,10 +188,10 @@ return $default(_that.itemType,_that.sales,_that.cost,_that.vat,_that.grossProfi
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String itemType,  double sales,  double cost,  double vat,  double grossProfit)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( double sales,  double cost,  double vat,  double grossProfit)?  $default,) {final _that = this;
 switch (_that) {
 case _ProfitLossItemData() when $default != null:
-return $default(_that.itemType,_that.sales,_that.cost,_that.vat,_that.grossProfit);case _:
+return $default(_that.sales,_that.cost,_that.vat,_that.grossProfit);case _:
   return null;
 
 }
@@ -204,10 +203,9 @@ return $default(_that.itemType,_that.sales,_that.cost,_that.vat,_that.grossProfi
 
 
 class _ProfitLossItemData implements ProfitLossItemData {
-  const _ProfitLossItemData({required this.itemType, required this.sales, required this.cost, required this.vat, required this.grossProfit});
+  const _ProfitLossItemData({required this.sales, required this.cost, required this.vat, required this.grossProfit});
   
 
-@override final  String itemType;
 @override final  double sales;
 @override final  double cost;
 @override final  double vat;
@@ -223,16 +221,16 @@ _$ProfitLossItemDataCopyWith<_ProfitLossItemData> get copyWith => __$ProfitLossI
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProfitLossItemData&&(identical(other.itemType, itemType) || other.itemType == itemType)&&(identical(other.sales, sales) || other.sales == sales)&&(identical(other.cost, cost) || other.cost == cost)&&(identical(other.vat, vat) || other.vat == vat)&&(identical(other.grossProfit, grossProfit) || other.grossProfit == grossProfit));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProfitLossItemData&&(identical(other.sales, sales) || other.sales == sales)&&(identical(other.cost, cost) || other.cost == cost)&&(identical(other.vat, vat) || other.vat == vat)&&(identical(other.grossProfit, grossProfit) || other.grossProfit == grossProfit));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,itemType,sales,cost,vat,grossProfit);
+int get hashCode => Object.hash(runtimeType,sales,cost,vat,grossProfit);
 
 @override
 String toString() {
-  return 'ProfitLossItemData(itemType: $itemType, sales: $sales, cost: $cost, vat: $vat, grossProfit: $grossProfit)';
+  return 'ProfitLossItemData(sales: $sales, cost: $cost, vat: $vat, grossProfit: $grossProfit)';
 }
 
 
@@ -243,7 +241,7 @@ abstract mixin class _$ProfitLossItemDataCopyWith<$Res> implements $ProfitLossIt
   factory _$ProfitLossItemDataCopyWith(_ProfitLossItemData value, $Res Function(_ProfitLossItemData) _then) = __$ProfitLossItemDataCopyWithImpl;
 @override @useResult
 $Res call({
- String itemType, double sales, double cost, double vat, double grossProfit
+ double sales, double cost, double vat, double grossProfit
 });
 
 
@@ -260,10 +258,9 @@ class __$ProfitLossItemDataCopyWithImpl<$Res>
 
 /// Create a copy of ProfitLossItemData
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? itemType = null,Object? sales = null,Object? cost = null,Object? vat = null,Object? grossProfit = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? sales = null,Object? cost = null,Object? vat = null,Object? grossProfit = null,}) {
   return _then(_ProfitLossItemData(
-itemType: null == itemType ? _self.itemType : itemType // ignore: cast_nullable_to_non_nullable
-as String,sales: null == sales ? _self.sales : sales // ignore: cast_nullable_to_non_nullable
+sales: null == sales ? _self.sales : sales // ignore: cast_nullable_to_non_nullable
 as double,cost: null == cost ? _self.cost : cost // ignore: cast_nullable_to_non_nullable
 as double,vat: null == vat ? _self.vat : vat // ignore: cast_nullable_to_non_nullable
 as double,grossProfit: null == grossProfit ? _self.grossProfit : grossProfit // ignore: cast_nullable_to_non_nullable

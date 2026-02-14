@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../../app/theme/app_sizes.dart';
+import '../../../../../app/theme/brand_colors.dart';
 import '../../../../../app/theme/text_styles.dart';
 import '../../../../../l10n/app_localizations.dart';
 import '../../../../../shared/components/common/card_title.dart';
@@ -17,17 +18,16 @@ class StockHeaderSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final colorScheme = Theme.of(context).colorScheme;
     final statusColor = stock.lowStockStatus.getColor();
     final item = stock.item;
 
     return Container(
       padding: const EdgeInsets.all(AppSizes.lg),
       decoration: BoxDecoration(
-        color: colorScheme.surface,
+        color: BrandColors.surface,
         borderRadius: BorderRadius.circular(AppSizes.radius),
         border: Border.all(
-          color: colorScheme.outline.withOpacity(0.1),
+          color: BrandColors.outline.withOpacity(0.1),
         ),
       ),
       child: Column(
@@ -49,7 +49,7 @@ class StockHeaderSection extends StatelessWidget {
                   vertical: 4,
                 ),
                 decoration: BoxDecoration(
-                  color: statusColor.withOpacity(0.1),
+                  color: statusColor.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(AppSizes.radiusXs2),
                 ),
                 child: Row(
@@ -57,7 +57,7 @@ class StockHeaderSection extends StatelessWidget {
                   children: [
                     Icon(
                       stock.lowStockStatus.getIcon(),
-                      size: 16,
+                      size: AppSizes.iconSize,
                       color: statusColor,
                     ),
                     const SizedBox(width: AppSizes.xs),
@@ -81,7 +81,7 @@ class StockHeaderSection extends StatelessWidget {
                   vertical: 4,
                 ),
                 decoration: BoxDecoration(
-                  color: colorScheme.primaryContainer,
+                  color: BrandColors.primaryContainer,
                   borderRadius: BorderRadius.circular(AppSizes.radiusXs2),
                 ),
                 child: Row(
@@ -89,14 +89,14 @@ class StockHeaderSection extends StatelessWidget {
                   children: [
                     Icon(
                       Icons.inventory_2_outlined,
-                      size: 16,
-                      color: colorScheme.onPrimaryContainer,
+                      size: AppSizes.iconSize,
+                      color: BrandColors.onPrimaryContainer,
                     ),
                     const SizedBox(width: AppSizes.xs),
                     Text(
                       l10n.quantityLabel(stock.totalQuantity.toString()),
                       style: context.small(
-                        color: colorScheme.onPrimaryContainer,
+                        color: BrandColors.onPrimaryContainer,
                         bold: true,
                       ),
                     ),
@@ -112,7 +112,7 @@ class StockHeaderSection extends StatelessWidget {
                     vertical: 4,
                   ),
                   decoration: BoxDecoration(
-                    color: colorScheme.surfaceVariant,
+                    color: BrandColors.surfaceVariant,
                     borderRadius: BorderRadius.circular(AppSizes.radiusXs2),
                   ),
                   child: Row(
@@ -120,14 +120,14 @@ class StockHeaderSection extends StatelessWidget {
                     children: [
                       Icon(
                         Icons.qr_code_outlined,
-                        size: 16,
-                        color: colorScheme.onSurfaceVariant,
+                        size: AppSizes.iconSize,
+                        color: BrandColors.textSecondary,
                       ),
                       const SizedBox(width: AppSizes.xs),
                       Text(
                         item!.code!,
                         style: context.small(
-                          color: colorScheme.onSurfaceVariant,
+                          color: BrandColors.textSecondary,
                         ),
                       ),
                     ],

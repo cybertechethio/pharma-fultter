@@ -25,8 +25,6 @@ sealed class CustomerItemDataModel with _$CustomerItemDataModel {
     required double paidAmount,
     @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)
     required double dueAmount,
-    @JsonKey(fromJson: JsonTypeConverters.boolFromDynamic)
-    required bool hasDiscrepancy,
   }) = _CustomerItemDataModel;
 
   factory CustomerItemDataModel.fromJson(Map<String, dynamic> json) =>

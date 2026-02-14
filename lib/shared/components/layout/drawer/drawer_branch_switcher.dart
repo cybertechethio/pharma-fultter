@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../app/theme/app_sizes.dart';
 import '../../../../app/theme/brand_colors.dart';
+import '../../../../app/theme/text_styles.dart';
 import '../../../../features/branch/domain/entities/branch.dart';
 import '../../../../features/auth/presentation/providers/auth_providers.dart';
 
@@ -61,10 +62,7 @@ class _DrawerBranchSwitcherState extends ConsumerState<DrawerBranchSwitcher>
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
     final branchesAsync = ref.watch(localBranchesProviderProvider);
-
     final isActive = _isExpanded || _isHovered;
 
     return Padding(
@@ -77,9 +75,9 @@ class _DrawerBranchSwitcherState extends ConsumerState<DrawerBranchSwitcher>
           curve: Curves.easeOutCubic,
           decoration: BoxDecoration(
             color: _isExpanded
-                ? colorScheme.surfaceContainerHighest.withOpacity(0.4)
+                ? BrandColors.surfaceContainerHighest.withValues(alpha: 0.4)
                 : _isHovered
-                    ? colorScheme.surfaceContainerHighest.withOpacity(0.4)
+                    ? BrandColors.surfaceContainerHighest.withValues(alpha: 0.4)
                     : BrandColors.transparent,
             borderRadius: BorderRadius.circular(AppSizes.radius),
           ),
@@ -111,12 +109,14 @@ class _DrawerBranchSwitcherState extends ConsumerState<DrawerBranchSwitcher>
                         Expanded(
                           child: Text(
                             widget.activeBranchName ?? 'Select Branch',
-                            style: theme.textTheme.bodyMedium?.copyWith(
+                            style: context.body(
+                              color: isActive
+                                  ? BrandColors.textPrimary
+                                  : BrandColors.textSecondary,
+                              bold: isActive,
+                            ).copyWith(
                               fontWeight:
                                   isActive ? FontWeight.w600 : FontWeight.w500,
-                              color: isActive
-                                  ? colorScheme.onSurface
-                                  : colorScheme.onSurfaceVariant,
                               letterSpacing: 0.1,
                             ),
                             maxLines: 1,
@@ -129,7 +129,7 @@ class _DrawerBranchSwitcherState extends ConsumerState<DrawerBranchSwitcher>
                           child: Icon(
                             Icons.keyboard_arrow_down_outlined,
                             size: 20,
-                            color: colorScheme.onSurfaceVariant,
+                            color: BrandColors.textSecondary,
                           ),
                         ),
                       ],
@@ -207,9 +207,6 @@ class _BranchItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-
     return Material(
       color: BrandColors.transparent,
       child: InkWell(
@@ -227,16 +224,16 @@ class _BranchItem extends StatelessWidget {
                 width: 36,
                 height: 36,
                 decoration: BoxDecoration(
-                  color: colorScheme.secondaryContainer,
+                  color: BrandColors.secondaryContainer,
                   borderRadius: BorderRadius.circular(AppSizes.radiusMd),
                 ),
                 child: Center(
                   child: Text(
                     branch.name.isNotEmpty ? branch.name[0].toUpperCase() : '?',
-                    style: theme.textTheme.titleSmall?.copyWith(
-                      color: colorScheme.onSecondaryContainer,
-                      fontWeight: FontWeight.w700,
-                    ),
+                    style: context.small(
+                      color: BrandColors.onSecondaryContainer,
+                      bold: true,
+                    ).copyWith(fontWeight: FontWeight.w700),
                   ),
                 ),
               ),
@@ -245,10 +242,9 @@ class _BranchItem extends StatelessWidget {
               Expanded(
                 child: Text(
                   branch.name,
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    fontWeight: FontWeight.w500,
-                    color: colorScheme.onSurface,
-                  ),
+                  style: context.body(
+                    color: BrandColors.textPrimary,
+                  ).copyWith(fontWeight: FontWeight.w500),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -257,7 +253,7 @@ class _BranchItem extends StatelessWidget {
               Icon(
                 Icons.arrow_forward_ios_outlined,
                 size: AppSizes.md2,
-                color: colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
+                color: BrandColors.textSecondary.withValues(alpha: 0.5),
               ),
             ],
           ),

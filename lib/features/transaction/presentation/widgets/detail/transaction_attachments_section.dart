@@ -26,7 +26,7 @@ class TransactionAttachmentsSection extends StatelessWidget {
       decoration: BoxDecoration(
         color: BrandColors.surface,
         borderRadius: BorderRadius.circular(AppSizes.radius),
-        border: Border.all(color: BrandColors.outline.withOpacity(0.1)),
+        border: Border.all(color: BrandColors.outline.withValues(alpha: 0.1)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,7 +41,7 @@ class TransactionAttachmentsSection extends StatelessWidget {
                   vertical: AppSizes.xxs,
                 ),
                 decoration: BoxDecoration(
-                  color: BrandColors.primary.withOpacity(0.1),
+                  color: BrandColors.primary.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(AppSizes.radiusSm),
                 ),
                 child: Text(
@@ -95,7 +95,7 @@ class TransactionAttachmentsSection extends StatelessWidget {
       decoration: BoxDecoration(
         color: BrandColors.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(AppSizes.radius),
-        border: Border.all(color: BrandColors.outline.withOpacity(0.3)),
+        border: Border.all(color: BrandColors.outline.withValues(alpha: 0.3)),
       ),
       child: Icon(
         Icons.broken_image,
@@ -133,7 +133,7 @@ class _AttachmentThumbnail extends StatelessWidget {
         margin: EdgeInsets.only(right: AppSizes.sm),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppSizes.radius),
-          border: Border.all(color: BrandColors.outline.withOpacity(0.3)),
+          border: Border.all(color: BrandColors.outline.withValues(alpha: 0.3)),
         ),
         child: Stack(
           children: [
@@ -172,7 +172,7 @@ class _AttachmentThumbnail extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: AppSizes.xs, vertical: AppSizes.xxs),
                 decoration: BoxDecoration(
-                  color: BrandColors.overlaySolid.withOpacity(0.54),
+                  color: BrandColors.overlaySolid.withValues(alpha: 0.54),
                   borderRadius: BorderRadius.circular(AppSizes.radiusSm),
                 ),
                 child: Text(

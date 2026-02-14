@@ -3,6 +3,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../../../app/theme/app_sizes.dart';
 import '../../../app/theme/app_images.dart';
 import '../../../app/theme/brand_colors.dart';
+import '../../../app/theme/text_styles.dart';
 
 /// Custom button component with simplified design
 class CustomButton extends StatelessWidget {
@@ -40,7 +41,7 @@ class CustomButton extends StatelessWidget {
         onPressed: isLoading ? null : onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: color ?? BrandColors.primary,
-          disabledBackgroundColor: (color ?? BrandColors.primary).withOpacity(0.6),
+          disabledBackgroundColor: (color ?? BrandColors.primary).withValues(alpha: 0.6),
           foregroundColor: textColor ?? BrandColors.textLight,
           elevation: 2,
           shape: RoundedRectangleBorder(
@@ -60,9 +61,7 @@ class CustomButton extends StatelessWidget {
                     const SizedBox(width: AppSizes.sm),
                     Text(
                       loadingText!,
-                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        color: textColor ?? BrandColors.textLight,
-                        fontWeight: FontWeight.w800,
+                      style: context.label(color: textColor ?? BrandColors.textLight, bold: true).copyWith(
                         fontSize: AppSizes.fontSizeBody,
                         letterSpacing: 0.5,
                       ),
@@ -83,11 +82,12 @@ class CustomButton extends StatelessWidget {
                   ],
                   Text(
                     text,
-                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                    style: context.label(
                       color: isSocial
                           ? BrandColors.textPrimary
                           : (textColor ?? BrandColors.textLight),
-                      fontWeight: FontWeight.w800,
+                      bold: true,
+                    ).copyWith(
                       fontSize: AppSizes.fontSizeBody,
                       letterSpacing: 0.5,
                     ),

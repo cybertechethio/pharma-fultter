@@ -58,18 +58,18 @@ class BatchDetailScreen extends ConsumerWidget {
             _SectionCard(
               children: [
                 _DetailRow(
-                  label: 'Quantity',
+                  label: l10n.quantity,
                   value: batch.quantity.toString(),
                   highlight: true,
                 ),
                 if (batch.costPrice != null)
                   _DetailRow(
-                    label: 'Cost price',
+                    label: l10n.costPrice,
                     value: Formatters.formatCurrency(batch.costPrice!),
                   ),
                 if (batch.unitPrice != null)
                   _DetailRow(
-                    label: 'Unit price',
+                    label: l10n.unitPrice,
                     value: Formatters.formatCurrency(batch.unitPrice!),
                   ),
               ],
@@ -82,17 +82,17 @@ class BatchDetailScreen extends ConsumerWidget {
                 children: [
                   if (batch.expirationDate != null)
                     _DetailRow(
-                      label: 'Expiration',
+                      label: l10n.expirationDate,
                       value: dateFormat.format(batch.expirationDate!),
                     ),
                   if (batch.manufacturingDate != null)
                     _DetailRow(
-                      label: 'Manufacturing',
+                      label: l10n.manufacturingDate,
                       value: dateFormat.format(batch.manufacturingDate!),
                     ),
                   if (batch.supplierBatchNumber != null && batch.supplierBatchNumber!.isNotEmpty)
                     _DetailRow(
-                      label: 'Supplier batch',
+                      label: l10n.supplierBatchNumber,
                       value: batch.supplierBatchNumber!,
                     ),
                 ],
@@ -116,13 +116,13 @@ class BatchDetailScreen extends ConsumerWidget {
             _SectionCard(
               children: [
                 _DetailRow(
-                  label: 'Created',
+                  label: l10n.created,
                   value: dateTimeFormat.format(batch.createdAt),
                 ),
                 if (batch.createdBy != null)
-                  _DetailRow(label: 'Created by', value: batch.createdBy!),
+                  _DetailRow(label: l10n.createdBy, value: batch.createdBy!),
                 if (batch.updatedBy != null)
-                  _DetailRow(label: 'Updated by', value: batch.updatedBy!),
+                  _DetailRow(label: l10n.updatedBy, value: batch.updatedBy!),
               ],
             ),
             const SizedBox(height: AppSizes.xl),
@@ -170,24 +170,24 @@ class _HeroCard extends StatelessWidget {
                 IconButton(
                   icon: isUpdating
                       ? SizedBox(
-                          width: 20,
-                          height: 20,
+                          width: AppSizes.iconSize,
+                          height: AppSizes.iconSize,
                           child: CircularProgressIndicator(
-                            strokeWidth: 2,
+                            strokeWidth: AppSizes.loaderStrokeWidth,
                             color: BrandColors.primary,
                           ),
                         )
-                      : Icon(Icons.edit_outlined, size: 22, color: BrandColors.primary),
+                      : Icon(Icons.edit_outlined, size: AppSizes.iconSizeLg, color: BrandColors.primary),
                   onPressed: isUpdating ? null : onEdit,
                   padding: EdgeInsets.zero,
-                  constraints: const BoxConstraints(minWidth: 36, minHeight: 36),
+                  constraints: const BoxConstraints(minWidth: AppSizes.xxxl, minHeight: AppSizes.xxxl),
                 ),
             ],
           ),
           const SizedBox(height: AppSizes.sm),
           Row(
             children: [
-              Icon(Icons.shopping_bag_outlined, size: 18, color: BrandColors.textSecondary),
+              Icon(Icons.shopping_bag_outlined, size: AppSizes.iconSizeSm, color: BrandColors.textSecondary),
               const SizedBox(width: AppSizes.sm),
               Expanded(
                 child: Text(
@@ -203,7 +203,7 @@ class _HeroCard extends StatelessWidget {
             children: [
               if (itemCode.isNotEmpty)
                 Text(
-                  'Code: $itemCode',
+                  AppLocalizations.of(context).itemCodeLabel(itemCode),
                   style: context.small(),
                 ),
               const Spacer(),

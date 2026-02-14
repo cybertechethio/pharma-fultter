@@ -29,7 +29,7 @@ class StockMovementHeaderSection extends StatelessWidget {
         color: BrandColors.surface,
         borderRadius: BorderRadius.circular(AppSizes.radius),
         border: Border.all(
-          color: BrandColors.outline.withOpacity(0.1),
+          color: BrandColors.outline.withValues(alpha: 0.1),
         ),
       ),
       child: Column(
@@ -53,7 +53,7 @@ class StockMovementHeaderSection extends StatelessWidget {
                   vertical: 4,
                 ),
                 decoration: BoxDecoration(
-                  color: statusColor.withOpacity(0.1),
+                  color: statusColor.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(AppSizes.radiusXs2),
                 ),
                 child: Row(
@@ -85,7 +85,7 @@ class StockMovementHeaderSection extends StatelessWidget {
                   vertical: 4,
                 ),
                 decoration: BoxDecoration(
-                  color: typeColor.withOpacity(0.1),
+                  color: typeColor.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(AppSizes.radiusXs2),
                 ),
                 child: Row(

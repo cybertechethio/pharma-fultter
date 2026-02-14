@@ -15,7 +15,6 @@ class CompanyConfigurationCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final theme = Theme.of(context);
 
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: AppSizes.lg),
@@ -29,7 +28,7 @@ class CompanyConfigurationCard extends StatelessWidget {
           ListTile(
             leading: Icon(
               Icons.print,
-              color: theme.colorScheme.primary,
+              color: BrandColors.primary,
             ),
             title: Text(l10n.autoPrint),
             subtitle: Text(
@@ -47,7 +46,7 @@ class CompanyConfigurationCard extends StatelessWidget {
             ListTile(
               leading: Icon(
                 Icons.calendar_today,
-                color: theme.colorScheme.primary,
+                color: BrandColors.primary,
               ),
               title: Text(l10n.defaultStartDate),
               subtitle: Text(
@@ -60,7 +59,7 @@ class CompanyConfigurationCard extends StatelessWidget {
             ListTile(
               leading: Icon(
                 Icons.business_outlined,
-                color: theme.colorScheme.primary,
+                color: BrandColors.primary,
               ),
               title: Text(l10n.businessType),
               subtitle: Text(company.businessType!),

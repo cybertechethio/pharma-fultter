@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../../../app/theme/app_sizes.dart';
 import '../../../../app/theme/brand_colors.dart';
 import '../../../../app/theme/text_styles.dart';
-import '../../../../core/enums/transaction_type_enum.dart';
 
 class TransactionTypeFilterCard extends StatelessWidget {
   final String label;
@@ -32,7 +31,7 @@ class TransactionTypeFilterCard extends StatelessWidget {
         margin: const EdgeInsets.only(right: AppSizes.xs),
         decoration: BoxDecoration(
           color: isSelected
-              ? cardColor.withOpacity(0.15)
+              ? cardColor.withValues(alpha: 0.15)
               : BrandColors.background,
           borderRadius: BorderRadius.circular(AppSizes.radiusXs),
           border: Border.all(

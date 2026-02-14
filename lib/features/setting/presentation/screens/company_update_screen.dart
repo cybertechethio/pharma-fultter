@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../../../../app/theme/app_sizes.dart';
 import '../../../../app/theme/brand_colors.dart';
+import '../../../../app/theme/text_styles.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/components/common/app_bar.dart';
 import '../../../../shared/components/forms/custom_text_field.dart';
@@ -366,7 +367,6 @@ class _CompanyUpdateScreenState extends ConsumerState<CompanyUpdateScreen> {
     required String title,
     required List<Widget> children,
   }) {
-    final theme = Theme.of(context);
 
     return Card(
       elevation: 1,
@@ -381,9 +381,7 @@ class _CompanyUpdateScreenState extends ConsumerState<CompanyUpdateScreen> {
           children: [
             Text(
               title,
-              style: theme.textTheme.titleSmall?.copyWith(
-                fontWeight: FontWeight.w600,
-              ),
+              style: context.small(bold: true),
             ),
             const SizedBox(height: AppSizes.md),
             ...children,
@@ -395,17 +393,13 @@ class _CompanyUpdateScreenState extends ConsumerState<CompanyUpdateScreen> {
 
   Widget _buildLogoPicker(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           l10n.companyLogo,
-          style: theme.textTheme.bodySmall?.copyWith(
-            color: colorScheme.onSurfaceVariant,
-          ),
+          style: context.small(color: BrandColors.textSecondary),
         ),
         const SizedBox(height: AppSizes.sm),
         Row(
@@ -417,7 +411,7 @@ class _CompanyUpdateScreenState extends ConsumerState<CompanyUpdateScreen> {
                 height: 80,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(AppSizes.radiusSm),
-                  border: Border.all(color: colorScheme.outline),
+                  border: Border.all(color: BrandColors.outline),
                 ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(AppSizes.radiusSm),
@@ -427,7 +421,7 @@ class _CompanyUpdateScreenState extends ConsumerState<CompanyUpdateScreen> {
                               fit: BoxFit.cover,
                             )
                           : _logoUrl != null
-                              ? _buildNetworkImage(colorScheme)
+                              ? _buildNetworkImage()
                               : null,
                     ),
               )
@@ -436,13 +430,13 @@ class _CompanyUpdateScreenState extends ConsumerState<CompanyUpdateScreen> {
                 width: 80,
                 height: 80,
                 decoration: BoxDecoration(
-                  color: colorScheme.surfaceVariant,
+                  color: BrandColors.surfaceVariant,
                   borderRadius: BorderRadius.circular(AppSizes.radiusSm),
-                  border: Border.all(color: colorScheme.outline),
+                  border: Border.all(color: BrandColors.outline),
                 ),
                 child: Icon(
                   Icons.image,
-                  color: colorScheme.onSurfaceVariant,
+                  color: BrandColors.textSecondary,
                 ),
               ),
             const SizedBox(width: AppSizes.md),
@@ -466,7 +460,7 @@ class _CompanyUpdateScreenState extends ConsumerState<CompanyUpdateScreen> {
                   });
                 },
                 icon: const Icon(Icons.delete_outline),
-                color: colorScheme.error,
+                color: BrandColors.error,
               ),
             ],
           ],
@@ -475,12 +469,12 @@ class _CompanyUpdateScreenState extends ConsumerState<CompanyUpdateScreen> {
     );
   }
 
-  Widget _buildNetworkImage(ColorScheme colorScheme) {
+  Widget _buildNetworkImage() {
     final imageUrl = UrlUtils.getFullImageUrl(_logoUrl);
     if (imageUrl == null) {
       return Icon(
         Icons.broken_image,
-        color: colorScheme.error,
+        color: BrandColors.error,
       );
     }
 
@@ -488,17 +482,17 @@ class _CompanyUpdateScreenState extends ConsumerState<CompanyUpdateScreen> {
       imageUrl: imageUrl,
       fit: BoxFit.cover,
       placeholder: (context, url) => Container(
-        color: colorScheme.surfaceVariant,
+        color: BrandColors.surfaceVariant,
         child: Center(
           child: CircularProgressIndicator(
             strokeWidth: 2,
-            color: colorScheme.primary,
+            color: BrandColors.primary,
           ),
         ),
       ),
       errorWidget: (context, url, error) => Icon(
         Icons.broken_image,
-        color: colorScheme.error,
+        color: BrandColors.error,
       ),
     );
   }

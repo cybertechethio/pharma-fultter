@@ -377,6 +377,11 @@
   "@selectDate": {
     "description": "Select date button/title"
   },
+
+  "select": "Select",
+  "@select": {
+    "description": "Select button label (e.g. date picker confirm)"
+  },
   
   "gregorianCalendar": "Gregorian Calendar",
   "@gregorianCalendar": {
@@ -2063,6 +2068,69 @@
   "@batchNameRequired": {
     "description": "Batch name field validation message"
   },
+  "split": "Split",
+  "consolidation": "Consolidation",
+  "consolidate": "Consolidate",
+  "sourceBatch": "Source batch",
+  "destinationBatch": "Destination batch",
+  "selectSourceBatch": "Select source batch",
+  "selectDestinationBatch": "Select destination batch",
+  "sourceBatches": "Source batches",
+  "destinationBatches": "Destination batches",
+  "addSource": "Add source",
+  "addDestination": "Add destination",
+  "sourceNumber": "Source {number}",
+  "@sourceNumber": {
+    "placeholders": {
+      "number": {"type": "int"}
+    }
+  },
+  "destinationNumber": "Destination {number}",
+  "@destinationNumber": {
+    "placeholders": {
+      "number": {"type": "int"}
+    }
+  },
+  "selectBatch": "Select batch",
+  "removeSource": "Remove source",
+  "removeDestination": "Remove destination",
+  "hideDetails": "Hide details",
+  "moreOptions": "More options",
+  "hideOptionalFields": "Hide optional fields",
+  "qtyOptional": "Qty (optional)",
+  "itemRequiredToCreateBatch": "Item is required to create a batch",
+  "sourceAndDestinationBatchRequired": "Source and destination batch are required",
+  "destinationBatchRequired": "Destination batch is required",
+  "sourceBatchRequired": "Source batch is required",
+  "eachSourceMustHaveBatch": "Each source must have a batch selected",
+  "eachDestinationMustHaveBatch": "Each destination must have a batch selected",
+  "eachDestinationQuantityAtLeast1": "Each destination quantity must be at least 1",
+  "atLeastOneSourceRequired": "At least one source is required",
+  "atLeastOneDestinationRequired": "At least one destination is required",
+  "totalQuantityMustNotExceedSource": "Total quantity must not exceed source ({count})",
+  "@totalQuantityMustNotExceedSource": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "totalQuantityCannotExceedSource": "Total quantity ({total}) cannot exceed source batch quantity ({source})",
+  "@totalQuantityCannotExceedSource": {
+    "placeholders": {
+      "total": {"type": "int"},
+      "source": {"type": "int"}
+    }
+  },
+  "quantityMustBeAtLeast1": "Quantity must be at least 1",
+  "quantityCannotExceedSourceBatch": "Quantity cannot exceed source batch quantity ({count})",
+  "@quantityCannotExceedSourceBatch": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "costPriceCannotBeNegative": "Cost price cannot be negative",
+  "unitPriceCannotBeNegative": "Unit price cannot be negative",
+  "cannotBeNegative": "Cannot be negative",
+  "operationComingSoon": "Operation – coming soon",
 
   "stocks": "Stocks",
   "@stocks": {
@@ -3543,6 +3611,17 @@
     }
   },
 
+  "deleteTypeTitle": "Delete {type}",
+  "@deleteTypeTitle": {
+    "description": "Delete confirmation dialog title with item type",
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "example": "Item"
+      }
+    }
+  },
+
   "confirmDeleteItem": "Are you sure you want to delete {itemName}? This action cannot be undone.",
   "@confirmDeleteItem": {
     "description": "Delete item confirmation message",
@@ -4340,6 +4419,14 @@
   },
 
   "receiptAttached": "Receipt attached",
+  "walkingCustomer": "Walking",
+  "allTransactions": "All",
+  "selectCustomer": "Select Customer",
+  "noBanksAvailable": "No banks available",
+  "pleaseSelectBank": "Please select a bank",
+  "bankRequired": "Bank *",
+  "pleaseSelectBatchForItem": "Please select a batch for this item",
+  "pleaseSelectAtLeastOneBatch": "Please select at least one batch for each item",
   "@receiptAttached": {
     "description": "Receipt attached label"
   },
@@ -5380,6 +5467,25 @@
     "description": "No authenticated user message"
   },
 
+  "sendingResetLink": "Sending reset link...",
+  "validatingOtp": "Validating OTP...",
+  "changingPassword": "Changing password...",
+  "updatingProfile": "Updating profile...",
+  "deletingAccount": "Deleting account...",
+  "loggingOut": "Logging out...",
+  "refreshing": "Refreshing...",
+
+  "companySelected": "Company Selected",
+  "branchSelected": "Branch Selected",
+  "noContextSelected": "No Context Selected",
+  "companyAndBranchSelected": "Company & Branch Selected",
+
+  "guest": "Guest",
+  "viewDetails": "View details",
+  "noRolesAssigned": "No roles assigned",
+  "balanceAddedSuccess": "Balance added successfully",
+  "refundProcessedSuccess": "Refund processed successfully",
+
   "bankCreatedSuccessfully": "Bank created successfully",
   "@bankCreatedSuccessfully": {
     "description": "Bank creation success message"
@@ -5599,6 +5705,17 @@
   "profilePictureUploadedSuccessfully": "Profile picture uploaded successfully",
   "@profilePictureUploadedSuccessfully": {
     "description": "Profile picture uploaded success message"
-  }
+  },
+  "transferLabel": "Transfer: {number}",
+  "@transferLabel": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "by": "by",
+  "arrow": "→",
+  "nA": "N/A"
 }
 

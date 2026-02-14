@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../../../../app/theme/app_sizes.dart';
 import '../../../../app/theme/brand_colors.dart';
 import '../../../../app/theme/text_styles.dart';
@@ -20,7 +21,7 @@ class WelcomeSection extends ConsumerWidget {
         data: (user) {
           final displayName = user != null
               ? '${user.firstName} ${user.lastName}'.trim()
-              : 'Guest';
+              : AppLocalizations.of(context).guest;
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -52,7 +53,7 @@ class WelcomeSection extends ConsumerWidget {
             ),
             const SizedBox(height: AppSizes.xs),
             Text(
-              'Guest',
+              AppLocalizations.of(context).guest,
               style: context.title(color: BrandColors.textPrimary, bold: true)
                   .copyWith(fontSize: AppSizes.fontSizeTitle),
             ),
@@ -70,7 +71,7 @@ class WelcomeSection extends ConsumerWidget {
           width: 100,
           height: AppSizes.md2,
           decoration: BoxDecoration(
-            color: BrandColors.textDisabled.withOpacity(0.5),
+            color: BrandColors.textDisabled.withValues(alpha: 0.5),
             borderRadius: BorderRadius.circular(AppSizes.radiusXs),
           ),
         ),
@@ -79,7 +80,7 @@ class WelcomeSection extends ConsumerWidget {
           width: 150,
           height: AppSizes.xl + AppSizes.xs,
           decoration: BoxDecoration(
-            color: BrandColors.textDisabled.withOpacity(0.5),
+            color: BrandColors.textDisabled.withValues(alpha: 0.5),
             borderRadius: BorderRadius.circular(AppSizes.radiusXs),
           ),
         ),

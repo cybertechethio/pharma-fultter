@@ -104,7 +104,7 @@ class _TransactionListScreenState extends ConsumerState<TransactionListScreen> {
                 children: [
                   // All types card
                   TransactionTypeFilterCard(
-                    label: 'All',
+                    label: l10n.allTransactions,
                     icon: Icons.list_rounded,
                     isSelected: _selectedType == null,
                     onTap: () {
@@ -160,7 +160,7 @@ class _TransactionListScreenState extends ConsumerState<TransactionListScreen> {
                     }),
                   // More card (always at the end)
                   TransactionTypeFilterCard(
-                    label: 'More',
+                    label: l10n.more,
                     icon: _showMoreTypes ? Icons.expand_less : Icons.expand_more,
                     isSelected: false,
                     onTap: () {
@@ -187,7 +187,7 @@ class _TransactionListScreenState extends ConsumerState<TransactionListScreen> {
                 // Header title
                 SliverToBoxAdapter(
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(AppSizes.sm2, AppSizes.sm2, AppSizes.sm2, AppSizes.sm2),
+                    padding: const EdgeInsets.all(AppSizes.sm2),
                     child: Text(
                       l10n.yourTransactions,
                       style: context.title(color: BrandColors.textPrimary),
@@ -205,7 +205,7 @@ class _TransactionListScreenState extends ConsumerState<TransactionListScreen> {
                       children: [
                         // All types card
                         TransactionTypeFilterCard(
-                          label: 'All',
+                          label: l10n.allTransactions,
                           icon: Icons.list_rounded,
                           isSelected: _selectedType == null,
                           onTap: () {
@@ -261,7 +261,7 @@ class _TransactionListScreenState extends ConsumerState<TransactionListScreen> {
                           }),
                         // More card (always at the end)
                         TransactionTypeFilterCard(
-                          label: 'More',
+                          label: l10n.more,
                           icon: _showMoreTypes ? Icons.expand_less : Icons.expand_more,
                           isSelected: false,
                           onTap: () {

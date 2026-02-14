@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../app/theme/app_sizes.dart';
+import '../../../../app/theme/brand_colors.dart';
+import '../../../../app/theme/text_styles.dart';
 import '../../../../core/enums/stock_status_enum.dart';
 import '../../../../shared/components/dialogs/standard_form_dialog.dart';
 import '../../../../shared/components/forms/custom_text_field.dart';
@@ -111,28 +113,24 @@ class _UpdateStockDialogState extends ConsumerState<UpdateStockDialog> {
   }
 
   Widget _buildItemInfo(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    
     return Container(
       padding: const EdgeInsets.all(AppSizes.md),
       decoration: BoxDecoration(
-        color: colorScheme.surfaceContainerHighest.withOpacity(0.5),
+        color: BrandColors.surfaceContainerHighest.withOpacity(0.5),
         borderRadius: BorderRadius.circular(AppSizes.radiusSm),
       ),
       child: Row(
         children: [
           Icon(
             Icons.inventory_2_outlined,
-            size: 18,
-            color: colorScheme.onSurfaceVariant,
+            size: AppSizes.iconSize,
+            color: BrandColors.textSecondary,
           ),
           const SizedBox(width: AppSizes.sm),
           Expanded(
             child: Text(
               widget.stock.item?.name ?? AppLocalizations.of(context).unknownItem,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                fontWeight: FontWeight.w500,
-              ),
+              style: context.body(bold: true),
             ),
           ),
         ],
@@ -141,17 +139,12 @@ class _UpdateStockDialogState extends ConsumerState<UpdateStockDialog> {
   }
 
   Widget _buildStatusDropdown(BuildContext context, AppLocalizations l10n) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           l10n.status,
-          style: theme.textTheme.bodySmall?.copyWith(
-            color: colorScheme.onSurfaceVariant.withOpacity(0.7),
-          ),
+          style: context.small(color: BrandColors.textMuted),
         ),
         const SizedBox(height: AppSizes.xs),
         DropdownButtonFormField<StockStatus>(
@@ -166,13 +159,13 @@ class _UpdateStockDialogState extends ConsumerState<UpdateStockDialog> {
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(AppSizes.radiusSm),
               borderSide: BorderSide(
-                color: colorScheme.outline.withOpacity(0.5),
+                color: BrandColors.outline.withOpacity(0.5),
               ),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(AppSizes.radiusSm),
               borderSide: BorderSide(
-                color: colorScheme.outline.withOpacity(0.5),
+                color: BrandColors.outline.withOpacity(0.5),
               ),
             ),
             isDense: true,

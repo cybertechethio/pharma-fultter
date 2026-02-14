@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cyber_pos/l10n/app_localizations.dart';
 import '../../../app/theme/app_sizes.dart';
+import '../../../app/theme/brand_colors.dart';
+import '../../../app/theme/text_styles.dart';
 
 /// Empty state widget for displaying empty content
 /// 
@@ -85,9 +87,6 @@ class EmptyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-    
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: horizontalPadding,
@@ -96,101 +95,72 @@ class EmptyWidget extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          _buildEmptyContent(context, theme, colorScheme),
+          _buildEmptyContent(context),
           SizedBox(height: spacing),
           if (showTitle && title != null) ...[
-            _buildTitle(context, theme, colorScheme),
+            _buildTitle(context),
             SizedBox(height: spacing),
           ],
-          _buildMessage(context, theme, colorScheme),
+          _buildMessage(context),
           SizedBox(height: spacing),
-          _buildActions(context, theme, colorScheme),
+          _buildActions(context),
         ],
       ),
     );
   }
   
-  Widget _buildEmptyContent(
-    BuildContext context,
-    ThemeData theme,
-    ColorScheme colorScheme,
-  ) {
+  Widget _buildEmptyContent(BuildContext context) {
     switch (variant) {
       case EmptyVariant.icon:
-        return _buildIconEmpty(context, theme, colorScheme);
+        return _buildIconEmpty(context);
       case EmptyVariant.illustration:
-        return _buildIllustrationEmpty(context, theme, colorScheme);
+        return _buildIllustrationEmpty(context);
       case EmptyVariant.custom:
-        return illustration ?? _buildIconEmpty(context, theme, colorScheme);
+        return illustration ?? _buildIconEmpty(context);
     }
   }
   
-  Widget _buildIconEmpty(
-    BuildContext context,
-    ThemeData theme,
-    ColorScheme colorScheme,
-  ) {
+  Widget _buildIconEmpty(BuildContext context) {
     return Icon(
       icon ?? Icons.inbox_outlined,
       size: iconSize ?? 64,
-      color: iconColor ?? colorScheme.onSurfaceVariant,
+      color: iconColor ?? BrandColors.textSecondary,
     );
   }
   
-  Widget _buildIllustrationEmpty(
-    BuildContext context,
-    ThemeData theme,
-    ColorScheme colorScheme,
-  ) {
+  Widget _buildIllustrationEmpty(BuildContext context) {
     return Container(
       width: 120,
       height: 120,
       decoration: BoxDecoration(
-        color: colorScheme.surfaceContainerHighest.withOpacity(0.3),
+        color: BrandColors.surfaceContainerHighest.withValues(alpha: 0.3),
         shape: BoxShape.circle,
       ),
       child: Icon(
         icon ?? Icons.inbox_outlined,
         size: 48,
-        color: iconColor ?? colorScheme.onSurfaceVariant,
+        color: iconColor ?? BrandColors.textSecondary,
       ),
     );
   }
   
-  Widget _buildTitle(
-    BuildContext context,
-    ThemeData theme,
-    ColorScheme colorScheme,
-  ) {
+  Widget _buildTitle(BuildContext context) {
     return Text(
       title!,
-      style: titleStyle ?? theme.textTheme.headlineSmall?.copyWith(
-        color: colorScheme.onSurface,
-        fontWeight: FontWeight.w600,
-      ),
+      style: titleStyle ?? context.header(color: BrandColors.textPrimary),
       textAlign: TextAlign.center,
     );
   }
   
-  Widget _buildMessage(
-    BuildContext context,
-    ThemeData theme,
-    ColorScheme colorScheme,
-  ) {
+  Widget _buildMessage(BuildContext context) {
     return Text(
       message,
-      style: messageStyle ?? theme.textTheme.bodyLarge?.copyWith(
-        color: colorScheme.onSurfaceVariant,
-      ),
+      style: messageStyle ?? context.body(color: BrandColors.textSecondary),
       textAlign: TextAlign.center,
     );
   }
   
-  Widget _buildActions(
-    BuildContext context,
-    ThemeData theme,
-    ColorScheme colorScheme,
-  ) {
+  Widget _buildActions(BuildContext context) {
     final List<Widget> actionWidgets = [];
     
     // Add primary action button if enabled
@@ -199,14 +169,14 @@ class EmptyWidget extends StatelessWidget {
         ElevatedButton(
           onPressed: onAction,
           style: ElevatedButton.styleFrom(
-            backgroundColor: colorScheme.primary,
-            foregroundColor: colorScheme.onPrimary,
+            backgroundColor: BrandColors.primary,
+            foregroundColor: BrandColors.buttonText,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(AppSizes.radiusSm),
             ),
             padding: const EdgeInsets.symmetric(horizontal: AppSizes.xxl, vertical: AppSizes.md),
           ),
-          child: Text(actionText ?? 'Get Started'),
+          child: Text(actionText ?? AppLocalizations.of(context).getStarted),
         ),
       );
     }
@@ -239,21 +209,23 @@ enum EmptyVariant {
 
 /// Convenience constructors for common empty states
 extension EmptyWidgetConstructors on EmptyWidget {
-  /// Empty list state
+  /// Empty list state. Pass [context] for localized default message and action text.
   static EmptyWidget list({
+    BuildContext? context,
     String? message,
     String? actionText,
     VoidCallback? onAction,
     Key? key,
   }) {
+    final l10n = context != null ? AppLocalizations.of(context) : null;
     return EmptyWidget(
       key: key,
-      message: message ?? 'No items found. Start by adding your first item.',
+      message: message ?? (l10n?.noItemsFound ?? 'No items found. Start by adding your first item.'),
       variant: EmptyVariant.icon,
       icon: Icons.list_alt_outlined,
       showAction: onAction != null,
       onAction: onAction,
-      actionText: actionText ?? 'Add Item',
+      actionText: actionText ?? (l10n?.addItem ?? 'Add Item'),
     );
   }
   

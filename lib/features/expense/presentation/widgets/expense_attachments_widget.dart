@@ -75,7 +75,7 @@ class ExpenseAttachmentsWidget extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(AppSizes.radiusSm),
                         border: Border.all(
-                          color: BrandColors.outline.withOpacity(0.2),
+                          color: BrandColors.outline.withValues(alpha: 0.2),
                         ),
                       ),
                       child: ClipRRect(
@@ -124,7 +124,7 @@ class ExpenseAttachmentsWidget extends StatelessWidget {
         color: BrandColors.surfaceVariant,
         borderRadius: BorderRadius.circular(AppSizes.radiusSm),
         border: Border.all(
-          color: BrandColors.outline.withOpacity(0.2),
+          color: BrandColors.outline.withValues(alpha: 0.2),
         ),
       ),
       child: Icon(

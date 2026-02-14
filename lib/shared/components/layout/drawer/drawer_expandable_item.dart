@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../app/theme/app_sizes.dart';
 import '../../../../app/theme/brand_colors.dart';
+import '../../../../app/theme/text_styles.dart';
 import 'drawer_nav_item.dart';
 import 'drawer_navigation_group.dart';
 
@@ -37,9 +38,6 @@ class _DrawerExpandableItemState extends State<DrawerExpandableItem> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-
     final isActive = _isExpanded || _isHovered;
 
     return MouseRegion(
@@ -60,9 +58,9 @@ class _DrawerExpandableItemState extends State<DrawerExpandableItem> {
               margin: const EdgeInsets.symmetric(horizontal: AppSizes.md, vertical: AppSizes.xxs),
               decoration: BoxDecoration(
                 color: _isExpanded
-                    ? colorScheme.surfaceContainerHighest.withOpacity(0.4)
+                    ? BrandColors.surfaceContainerHighest.withValues(alpha: 0.4)
                     : _isHovered
-                        ? colorScheme.surfaceContainerHighest.withOpacity(0.4)
+                        ? BrandColors.surfaceContainerHighest.withValues(alpha: 0.4)
                         : BrandColors.transparent,
                 borderRadius: BorderRadius.circular(AppSizes.radius),
               ),
@@ -80,12 +78,14 @@ class _DrawerExpandableItemState extends State<DrawerExpandableItem> {
                   Expanded(
                     child: Text(
                       widget.label,
-                      style: theme.textTheme.bodyMedium?.copyWith(
+                      style: context.body(
+                        color: isActive
+                            ? BrandColors.textPrimary
+                            : BrandColors.textSecondary,
+                        bold: isActive,
+                      ).copyWith(
                         fontWeight:
                             isActive ? FontWeight.w600 : FontWeight.w500,
-                        color: isActive
-                            ? colorScheme.onSurface
-                            : colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ),
@@ -94,7 +94,7 @@ class _DrawerExpandableItemState extends State<DrawerExpandableItem> {
                         ? Icons.keyboard_arrow_up_outlined
                         : Icons.keyboard_arrow_down_outlined,
                     size: 20,
-                    color: colorScheme.onSurfaceVariant,
+                    color: BrandColors.textSecondary,
                   ),
                 ],
               ),

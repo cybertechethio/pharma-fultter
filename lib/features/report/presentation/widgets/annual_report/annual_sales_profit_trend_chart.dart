@@ -35,7 +35,7 @@ class AnnualSalesProfitTrendChart extends StatelessWidget {
         color: BrandColors.cardBackground,
         borderRadius: BorderRadius.circular(AppSizes.radiusLg),
         border: Border.all(
-          color: BrandColors.border.withOpacity(0.1),
+          color: BrandColors.border.withValues(alpha: 0.1),
         ),
         boxShadow: [
           BoxShadow(
@@ -53,7 +53,7 @@ class AnnualSalesProfitTrendChart extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(AppSizes.xs2),
                 decoration: BoxDecoration(
-                  color: salesColor.withOpacity(0.1),
+                  color: salesColor.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(AppSizes.radiusSm),
                 ),
                 child: Icon(
@@ -160,11 +160,11 @@ class AnnualSalesProfitTrendChart extends StatelessWidget {
                             show: true,
                             border: Border(
                               bottom: BorderSide(
-                                color: BrandColors.border.withOpacity(0.1),
+                                color: BrandColors.border.withValues(alpha: 0.1),
                                 width: 1,
                               ),
                               left: BorderSide(
-                                color: BrandColors.border.withOpacity(0.1),
+                                color: BrandColors.border.withValues(alpha: 0.1),
                                 width: 1,
                               ),
                             ),
@@ -174,7 +174,7 @@ class AnnualSalesProfitTrendChart extends StatelessWidget {
                             drawVerticalLine: false,
                             horizontalInterval: _getInterval(months),
                             getDrawingHorizontalLine: (value) => FlLine(
-                              color: BrandColors.border.withOpacity(0.1),
+                              color: BrandColors.border.withValues(alpha: 0.1),
                               strokeWidth: 1,
                             ),
                           ),

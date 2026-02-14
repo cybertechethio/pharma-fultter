@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CustomerItemData {
 
- int get id; String get reference; String? get code; int get customerId; String get customerName; String? get customerImageUrl; int get totalOrders; double get totalAmount; double get paidAmount; double get dueAmount; bool get hasDiscrepancy;
+ int get id; String get reference; String? get code; int get customerId; String get customerName; String? get customerImageUrl; int get totalOrders; double get totalAmount; double get paidAmount; double get dueAmount;
 /// Create a copy of CustomerItemData
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $CustomerItemDataCopyWith<CustomerItemData> get copyWith => _$CustomerItemDataCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CustomerItemData&&(identical(other.id, id) || other.id == id)&&(identical(other.reference, reference) || other.reference == reference)&&(identical(other.code, code) || other.code == code)&&(identical(other.customerId, customerId) || other.customerId == customerId)&&(identical(other.customerName, customerName) || other.customerName == customerName)&&(identical(other.customerImageUrl, customerImageUrl) || other.customerImageUrl == customerImageUrl)&&(identical(other.totalOrders, totalOrders) || other.totalOrders == totalOrders)&&(identical(other.totalAmount, totalAmount) || other.totalAmount == totalAmount)&&(identical(other.paidAmount, paidAmount) || other.paidAmount == paidAmount)&&(identical(other.dueAmount, dueAmount) || other.dueAmount == dueAmount)&&(identical(other.hasDiscrepancy, hasDiscrepancy) || other.hasDiscrepancy == hasDiscrepancy));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CustomerItemData&&(identical(other.id, id) || other.id == id)&&(identical(other.reference, reference) || other.reference == reference)&&(identical(other.code, code) || other.code == code)&&(identical(other.customerId, customerId) || other.customerId == customerId)&&(identical(other.customerName, customerName) || other.customerName == customerName)&&(identical(other.customerImageUrl, customerImageUrl) || other.customerImageUrl == customerImageUrl)&&(identical(other.totalOrders, totalOrders) || other.totalOrders == totalOrders)&&(identical(other.totalAmount, totalAmount) || other.totalAmount == totalAmount)&&(identical(other.paidAmount, paidAmount) || other.paidAmount == paidAmount)&&(identical(other.dueAmount, dueAmount) || other.dueAmount == dueAmount));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,reference,code,customerId,customerName,customerImageUrl,totalOrders,totalAmount,paidAmount,dueAmount,hasDiscrepancy);
+int get hashCode => Object.hash(runtimeType,id,reference,code,customerId,customerName,customerImageUrl,totalOrders,totalAmount,paidAmount,dueAmount);
 
 @override
 String toString() {
-  return 'CustomerItemData(id: $id, reference: $reference, code: $code, customerId: $customerId, customerName: $customerName, customerImageUrl: $customerImageUrl, totalOrders: $totalOrders, totalAmount: $totalAmount, paidAmount: $paidAmount, dueAmount: $dueAmount, hasDiscrepancy: $hasDiscrepancy)';
+  return 'CustomerItemData(id: $id, reference: $reference, code: $code, customerId: $customerId, customerName: $customerName, customerImageUrl: $customerImageUrl, totalOrders: $totalOrders, totalAmount: $totalAmount, paidAmount: $paidAmount, dueAmount: $dueAmount)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $CustomerItemDataCopyWith<$Res>  {
   factory $CustomerItemDataCopyWith(CustomerItemData value, $Res Function(CustomerItemData) _then) = _$CustomerItemDataCopyWithImpl;
 @useResult
 $Res call({
- int id, String reference, String? code, int customerId, String customerName, String? customerImageUrl, int totalOrders, double totalAmount, double paidAmount, double dueAmount, bool hasDiscrepancy
+ int id, String reference, String? code, int customerId, String customerName, String? customerImageUrl, int totalOrders, double totalAmount, double paidAmount, double dueAmount
 });
 
 
@@ -62,7 +62,7 @@ class _$CustomerItemDataCopyWithImpl<$Res>
 
 /// Create a copy of CustomerItemData
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? reference = null,Object? code = freezed,Object? customerId = null,Object? customerName = null,Object? customerImageUrl = freezed,Object? totalOrders = null,Object? totalAmount = null,Object? paidAmount = null,Object? dueAmount = null,Object? hasDiscrepancy = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? reference = null,Object? code = freezed,Object? customerId = null,Object? customerName = null,Object? customerImageUrl = freezed,Object? totalOrders = null,Object? totalAmount = null,Object? paidAmount = null,Object? dueAmount = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,reference: null == reference ? _self.reference : reference // ignore: cast_nullable_to_non_nullable
@@ -74,8 +74,7 @@ as String?,totalOrders: null == totalOrders ? _self.totalOrders : totalOrders //
 as int,totalAmount: null == totalAmount ? _self.totalAmount : totalAmount // ignore: cast_nullable_to_non_nullable
 as double,paidAmount: null == paidAmount ? _self.paidAmount : paidAmount // ignore: cast_nullable_to_non_nullable
 as double,dueAmount: null == dueAmount ? _self.dueAmount : dueAmount // ignore: cast_nullable_to_non_nullable
-as double,hasDiscrepancy: null == hasDiscrepancy ? _self.hasDiscrepancy : hasDiscrepancy // ignore: cast_nullable_to_non_nullable
-as bool,
+as double,
   ));
 }
 
@@ -157,10 +156,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String reference,  String? code,  int customerId,  String customerName,  String? customerImageUrl,  int totalOrders,  double totalAmount,  double paidAmount,  double dueAmount,  bool hasDiscrepancy)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String reference,  String? code,  int customerId,  String customerName,  String? customerImageUrl,  int totalOrders,  double totalAmount,  double paidAmount,  double dueAmount)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CustomerItemData() when $default != null:
-return $default(_that.id,_that.reference,_that.code,_that.customerId,_that.customerName,_that.customerImageUrl,_that.totalOrders,_that.totalAmount,_that.paidAmount,_that.dueAmount,_that.hasDiscrepancy);case _:
+return $default(_that.id,_that.reference,_that.code,_that.customerId,_that.customerName,_that.customerImageUrl,_that.totalOrders,_that.totalAmount,_that.paidAmount,_that.dueAmount);case _:
   return orElse();
 
 }
@@ -178,10 +177,10 @@ return $default(_that.id,_that.reference,_that.code,_that.customerId,_that.custo
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String reference,  String? code,  int customerId,  String customerName,  String? customerImageUrl,  int totalOrders,  double totalAmount,  double paidAmount,  double dueAmount,  bool hasDiscrepancy)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String reference,  String? code,  int customerId,  String customerName,  String? customerImageUrl,  int totalOrders,  double totalAmount,  double paidAmount,  double dueAmount)  $default,) {final _that = this;
 switch (_that) {
 case _CustomerItemData():
-return $default(_that.id,_that.reference,_that.code,_that.customerId,_that.customerName,_that.customerImageUrl,_that.totalOrders,_that.totalAmount,_that.paidAmount,_that.dueAmount,_that.hasDiscrepancy);}
+return $default(_that.id,_that.reference,_that.code,_that.customerId,_that.customerName,_that.customerImageUrl,_that.totalOrders,_that.totalAmount,_that.paidAmount,_that.dueAmount);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -195,10 +194,10 @@ return $default(_that.id,_that.reference,_that.code,_that.customerId,_that.custo
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String reference,  String? code,  int customerId,  String customerName,  String? customerImageUrl,  int totalOrders,  double totalAmount,  double paidAmount,  double dueAmount,  bool hasDiscrepancy)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String reference,  String? code,  int customerId,  String customerName,  String? customerImageUrl,  int totalOrders,  double totalAmount,  double paidAmount,  double dueAmount)?  $default,) {final _that = this;
 switch (_that) {
 case _CustomerItemData() when $default != null:
-return $default(_that.id,_that.reference,_that.code,_that.customerId,_that.customerName,_that.customerImageUrl,_that.totalOrders,_that.totalAmount,_that.paidAmount,_that.dueAmount,_that.hasDiscrepancy);case _:
+return $default(_that.id,_that.reference,_that.code,_that.customerId,_that.customerName,_that.customerImageUrl,_that.totalOrders,_that.totalAmount,_that.paidAmount,_that.dueAmount);case _:
   return null;
 
 }
@@ -210,7 +209,7 @@ return $default(_that.id,_that.reference,_that.code,_that.customerId,_that.custo
 
 
 class _CustomerItemData implements CustomerItemData {
-  const _CustomerItemData({required this.id, required this.reference, this.code, required this.customerId, required this.customerName, this.customerImageUrl, required this.totalOrders, required this.totalAmount, required this.paidAmount, required this.dueAmount, required this.hasDiscrepancy});
+  const _CustomerItemData({required this.id, required this.reference, this.code, required this.customerId, required this.customerName, this.customerImageUrl, required this.totalOrders, required this.totalAmount, required this.paidAmount, required this.dueAmount});
   
 
 @override final  int id;
@@ -223,7 +222,6 @@ class _CustomerItemData implements CustomerItemData {
 @override final  double totalAmount;
 @override final  double paidAmount;
 @override final  double dueAmount;
-@override final  bool hasDiscrepancy;
 
 /// Create a copy of CustomerItemData
 /// with the given fields replaced by the non-null parameter values.
@@ -235,16 +233,16 @@ _$CustomerItemDataCopyWith<_CustomerItemData> get copyWith => __$CustomerItemDat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CustomerItemData&&(identical(other.id, id) || other.id == id)&&(identical(other.reference, reference) || other.reference == reference)&&(identical(other.code, code) || other.code == code)&&(identical(other.customerId, customerId) || other.customerId == customerId)&&(identical(other.customerName, customerName) || other.customerName == customerName)&&(identical(other.customerImageUrl, customerImageUrl) || other.customerImageUrl == customerImageUrl)&&(identical(other.totalOrders, totalOrders) || other.totalOrders == totalOrders)&&(identical(other.totalAmount, totalAmount) || other.totalAmount == totalAmount)&&(identical(other.paidAmount, paidAmount) || other.paidAmount == paidAmount)&&(identical(other.dueAmount, dueAmount) || other.dueAmount == dueAmount)&&(identical(other.hasDiscrepancy, hasDiscrepancy) || other.hasDiscrepancy == hasDiscrepancy));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CustomerItemData&&(identical(other.id, id) || other.id == id)&&(identical(other.reference, reference) || other.reference == reference)&&(identical(other.code, code) || other.code == code)&&(identical(other.customerId, customerId) || other.customerId == customerId)&&(identical(other.customerName, customerName) || other.customerName == customerName)&&(identical(other.customerImageUrl, customerImageUrl) || other.customerImageUrl == customerImageUrl)&&(identical(other.totalOrders, totalOrders) || other.totalOrders == totalOrders)&&(identical(other.totalAmount, totalAmount) || other.totalAmount == totalAmount)&&(identical(other.paidAmount, paidAmount) || other.paidAmount == paidAmount)&&(identical(other.dueAmount, dueAmount) || other.dueAmount == dueAmount));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,reference,code,customerId,customerName,customerImageUrl,totalOrders,totalAmount,paidAmount,dueAmount,hasDiscrepancy);
+int get hashCode => Object.hash(runtimeType,id,reference,code,customerId,customerName,customerImageUrl,totalOrders,totalAmount,paidAmount,dueAmount);
 
 @override
 String toString() {
-  return 'CustomerItemData(id: $id, reference: $reference, code: $code, customerId: $customerId, customerName: $customerName, customerImageUrl: $customerImageUrl, totalOrders: $totalOrders, totalAmount: $totalAmount, paidAmount: $paidAmount, dueAmount: $dueAmount, hasDiscrepancy: $hasDiscrepancy)';
+  return 'CustomerItemData(id: $id, reference: $reference, code: $code, customerId: $customerId, customerName: $customerName, customerImageUrl: $customerImageUrl, totalOrders: $totalOrders, totalAmount: $totalAmount, paidAmount: $paidAmount, dueAmount: $dueAmount)';
 }
 
 
@@ -255,7 +253,7 @@ abstract mixin class _$CustomerItemDataCopyWith<$Res> implements $CustomerItemDa
   factory _$CustomerItemDataCopyWith(_CustomerItemData value, $Res Function(_CustomerItemData) _then) = __$CustomerItemDataCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String reference, String? code, int customerId, String customerName, String? customerImageUrl, int totalOrders, double totalAmount, double paidAmount, double dueAmount, bool hasDiscrepancy
+ int id, String reference, String? code, int customerId, String customerName, String? customerImageUrl, int totalOrders, double totalAmount, double paidAmount, double dueAmount
 });
 
 
@@ -272,7 +270,7 @@ class __$CustomerItemDataCopyWithImpl<$Res>
 
 /// Create a copy of CustomerItemData
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? reference = null,Object? code = freezed,Object? customerId = null,Object? customerName = null,Object? customerImageUrl = freezed,Object? totalOrders = null,Object? totalAmount = null,Object? paidAmount = null,Object? dueAmount = null,Object? hasDiscrepancy = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? reference = null,Object? code = freezed,Object? customerId = null,Object? customerName = null,Object? customerImageUrl = freezed,Object? totalOrders = null,Object? totalAmount = null,Object? paidAmount = null,Object? dueAmount = null,}) {
   return _then(_CustomerItemData(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,reference: null == reference ? _self.reference : reference // ignore: cast_nullable_to_non_nullable
@@ -284,8 +282,7 @@ as String?,totalOrders: null == totalOrders ? _self.totalOrders : totalOrders //
 as int,totalAmount: null == totalAmount ? _self.totalAmount : totalAmount // ignore: cast_nullable_to_non_nullable
 as double,paidAmount: null == paidAmount ? _self.paidAmount : paidAmount // ignore: cast_nullable_to_non_nullable
 as double,dueAmount: null == dueAmount ? _self.dueAmount : dueAmount // ignore: cast_nullable_to_non_nullable
-as double,hasDiscrepancy: null == hasDiscrepancy ? _self.hasDiscrepancy : hasDiscrepancy // ignore: cast_nullable_to_non_nullable
-as bool,
+as double,
   ));
 }
 

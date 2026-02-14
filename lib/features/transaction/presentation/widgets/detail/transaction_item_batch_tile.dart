@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../../app/theme/app_sizes.dart';
 import '../../../../../app/theme/brand_colors.dart';
 import '../../../../../app/theme/text_styles.dart';
+import '../../../../../l10n/app_localizations.dart';
 import '../../../../../shared/utils/formatters.dart';
 import '../../../domain/entities/trans_item_batch.dart';
 
@@ -17,15 +18,16 @@ class TransactionItemBatchTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: AppSizes.sm,
         vertical: AppSizes.xs,
       ),
       decoration: BoxDecoration(
-        color: BrandColors.surfaceContainerHighest.withOpacity(0.2),
+        color: BrandColors.surfaceContainerHighest.withValues(alpha: 0.2),
         borderRadius: BorderRadius.circular(AppSizes.radiusXs),
-        border: Border.all(color: BrandColors.outline.withOpacity(0.08)),
+        border: Border.all(color: BrandColors.outline.withValues(alpha: 0.08)),
       ),
       child: Row(
         children: [
@@ -56,17 +58,17 @@ class TransactionItemBatchTile extends StatelessWidget {
                     children: [
                       if (batch.costPrice != null)
                         _Chip(
-                          label: 'Cost',
+                          label: l10n.costPrice,
                           value: _formatPrice(batch.costPrice!),
                         ),
                       if (batch.unitPrice != null)
                         _Chip(
-                          label: 'Price',
+                          label: l10n.unitPrice,
                           value: _formatPrice(batch.unitPrice!),
                         ),
                       if (batch.expirationDate != null)
                         _Chip(
-                          label: 'Exp',
+                          label: l10n.expirationDate,
                           value: Formatters.formatDateTime(batch.expirationDate!),
                         ),
                     ],
@@ -82,7 +84,7 @@ class TransactionItemBatchTile extends StatelessWidget {
               vertical: 2,
             ),
             decoration: BoxDecoration(
-              color: BrandColors.primary.withOpacity(0.1),
+              color: BrandColors.primary.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(AppSizes.radiusXs2),
             ),
             child: Text(

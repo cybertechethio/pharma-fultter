@@ -18,6 +18,7 @@ class TransactionOrderBottomSheet extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
     final formState = ref.watch(transactionFormProvider);
     final formNotifier = ref.read(transactionFormProvider.notifier);
     final createLoading = ref.watch(transactionCreateLoadingProvider);
@@ -92,7 +93,7 @@ class TransactionOrderBottomSheet extends ConsumerWidget {
               SizedBox(
                 width: double.infinity,
                 child: CustomButton(
-                  text: 'Place Order',
+                  text: l10n.placeOrder,
                   onPressed: createLoading
                       ? null
                       : () => _handlePlaceOrder(context, ref),
@@ -143,6 +144,7 @@ class TransactionOrderBottomSheet extends ConsumerWidget {
   }
 
   Future<void> _handlePlaceOrder(BuildContext context, WidgetRef ref) async {
+    final l10n = AppLocalizations.of(context);
     final formState = ref.read(transactionFormProvider);
     final formNotifier = ref.read(transactionFormProvider.notifier);
     final snackbar = ref.read(snackbarServiceProvider);
@@ -157,7 +159,7 @@ class TransactionOrderBottomSheet extends ConsumerWidget {
     }
     if (itemIdsWithNoBatch.isNotEmpty) {
       formNotifier.setItemIdsRequiringBatch(itemIdsWithNoBatch);
-      snackbar.showWarning('Please select at least one batch for each item');
+      snackbar.showWarning(l10n.pleaseSelectAtLeastOneBatch);
       return;
     }
 

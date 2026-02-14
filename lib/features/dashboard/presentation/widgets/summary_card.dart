@@ -25,7 +25,7 @@ class SummaryCard extends StatelessWidget {
     final isDark = _isDarkColor(backgroundColor);
     final textColor = isDark ? BrandColors.textLight : BrandColors.textPrimary;
     final secondaryTextColor = isDark
-        ? BrandColors.textLight.withOpacity(0.8)
+        ? BrandColors.textLight.withValues(alpha: 0.8)
         : BrandColors.textSecondary;
 
     return Container(
@@ -35,7 +35,7 @@ class SummaryCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppSizes.radiusSm),
         boxShadow: [
           BoxShadow(
-            color: backgroundColor.withOpacity(0.3),
+            color: backgroundColor.withValues(alpha: 0.3),
             blurRadius: AppSizes.sm,
             offset: const Offset(0, 4),
           ),

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../app/theme/app_sizes.dart';
 import '../../../../app/theme/brand_colors.dart';
 import '../../../../app/theme/text_styles.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/components/forms/custom_button.dart';
 import '../../../../core/services/snackbar_service.dart';
 import '../../data/models/create_transfer_request.dart';
@@ -15,6 +16,7 @@ class TransferBottomSheet extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
     // Watch the form state to trigger rebuilds when cart changes
     final formState = ref.watch(transferFormProvider);
     final createLoading = ref.watch(transferCreateLoadingProvider);
@@ -48,7 +50,7 @@ class TransferBottomSheet extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Items',
+                    l10n.items,
                     style: context.small(
                       color: BrandColors.textSecondary,
                     ),
@@ -67,7 +69,7 @@ class TransferBottomSheet extends ConsumerWidget {
               SizedBox(
                 width: double.infinity,
                 child: CustomButton(
-                  text: 'Create Transfer',
+                  text: l10n.createTransfer,
                   onPressed: createLoading
                       ? null
                       : () => _handleCreateTransfer(context, ref),

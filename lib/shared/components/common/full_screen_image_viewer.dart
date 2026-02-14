@@ -99,14 +99,14 @@ class FullScreenImageViewer extends StatelessWidget {
                         children: [
                           Icon(
                             Icons.error_outline,
-                            color: BrandColors.textLight.withOpacity(0.7),
+                            color: BrandColors.textLight.withValues(alpha: 0.7),
                             size: AppSizes.xxxxxl,
                           ),
                           const SizedBox(height: AppSizes.lg),
                           Text(
                             'Failed to load image',
                             style: TextStyle(
-                              color: BrandColors.textLight.withOpacity(0.7),
+                              color: BrandColors.textLight.withValues(alpha: 0.7),
                               fontSize: AppSizes.fontSizeBody,
                             ),
                           ),

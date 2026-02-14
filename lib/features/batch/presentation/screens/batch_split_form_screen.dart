@@ -136,7 +136,7 @@ class _BatchSplitFormScreenState extends ConsumerState<BatchSplitFormScreen> {
 
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Split – ${widget.item.name}',
+        title: '${l10n.split} – ${widget.item.name}',
       ),
       body: asyncBatches.when(
         loading: () => const Center(child: CircularProgressIndicator()),
@@ -178,24 +178,24 @@ class _BatchSplitFormScreenState extends ConsumerState<BatchSplitFormScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   CustomDropdown<String>(
-                    label: 'Source batch',
+                    label: l10n.sourceBatch,
                     value: _sourceBatchNumber,
                     items: sourceItems,
                     onChanged: (v) =>
                         setState(() => _sourceBatchNumber = v),
                     required: true,
-                    hintText: 'Select source batch',
+                    hintText: l10n.selectSourceBatch,
                   ),
                   const SizedBox(height: AppSizes.lg),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Destination batches',
-                          style: Theme.of(context).textTheme.titleSmall),
+                      Text(l10n.destinationBatches,
+                          style: context.title()),
                       TextButton.icon(
                         onPressed: _addDestination,
-                        icon: const Icon(Icons.add, size: 18),
-                        label: const Text('Add destination'),
+                        icon: Icon(Icons.add, size: AppSizes.iconSizeSm, color: BrandColors.primary),
+                        label: Text(l10n.addDestination),
                         style: TextButton.styleFrom(
                           foregroundColor: BrandColors.primary,
                         ),
@@ -230,14 +230,14 @@ class _BatchSplitFormScreenState extends ConsumerState<BatchSplitFormScreen> {
                               Expanded(
                                 flex: 2,
                                 child: CustomDropdown<String>(
-                                  label: 'Destination ${index + 1}',
+                                  label: l10n.destinationNumber(index + 1),
                                   value: entry.batchNumber,
                                   items: destinationItems,
                                   onChanged: (v) => setState(() {
                                     entry.batchNumber = v;
                                   }),
                                   required: true,
-                                  hintText: 'Select batch',
+                                  hintText: l10n.selectBatch,
                                 ),
                               ),
                               const SizedBox(width: AppSizes.sm),
@@ -249,10 +249,10 @@ class _BatchSplitFormScreenState extends ConsumerState<BatchSplitFormScreen> {
                                   validator: (v) {
                                     final n = _parseInt(v ?? '');
                                     if (n == null || n < 1) {
-                                      return 'Min 1';
+                                      return '${l10n.min} 1';
                                     }
                                     if (sourceQty > 0 && n > sourceQty) {
-                                      return 'Max $sourceQty';
+                                      return '${l10n.max} $sourceQty';
                                     }
                                     return null;
                                   },
@@ -263,7 +263,7 @@ class _BatchSplitFormScreenState extends ConsumerState<BatchSplitFormScreen> {
                                     ? () => _removeDestination(index)
                                     : null,
                                 icon: const Icon(Icons.remove_circle_outline),
-                                tooltip: 'Remove destination',
+                                tooltip: l10n.removeDestination,
                               ),
                             ],
                           ),
@@ -281,14 +281,14 @@ class _BatchSplitFormScreenState extends ConsumerState<BatchSplitFormScreen> {
                                     entry.showMore
                                         ? Icons.expand_less
                                         : Icons.expand_more,
-                                    size: 20,
+                                    size: AppSizes.iconSize,
                                     color: BrandColors.primary,
                                   ),
                                   const SizedBox(width: AppSizes.xs),
                                   Text(
                                     entry.showMore
-                                        ? 'Hide details'
-                                        : 'Show more',
+                                        ? l10n.hideDetails
+                                        : l10n.showMore,
                                     style: context.bodyPrimary(bold: true),
                                   ),
                                 ],
@@ -314,7 +314,7 @@ class _BatchSplitFormScreenState extends ConsumerState<BatchSplitFormScreen> {
                                           validator: (v) {
                                             final n = _parseDouble(v ?? '');
                                             if (n != null && n < 0) {
-                                              return 'Cannot be negative';
+                                              return l10n.cannotBeNegative;
                                             }
                                             return null;
                                           },
@@ -330,7 +330,7 @@ class _BatchSplitFormScreenState extends ConsumerState<BatchSplitFormScreen> {
                                           validator: (v) {
                                             final n = _parseDouble(v ?? '');
                                             if (n != null && n < 0) {
-                                              return 'Cannot be negative';
+                                              return l10n.cannotBeNegative;
                                             }
                                             return null;
                                           },
@@ -356,10 +356,8 @@ class _BatchSplitFormScreenState extends ConsumerState<BatchSplitFormScreen> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: AppSizes.sm),
                       child: Text(
-                        'Total quantity must not exceed source ($sourceQty)',
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: BrandColors.textMuted,
-                            ),
+                        l10n.totalQuantityMustNotExceedSource(sourceQty),
+                        style: context.small(color: BrandColors.textMuted),
                       ),
                     ),
                   ],
@@ -378,7 +376,7 @@ class _BatchSplitFormScreenState extends ConsumerState<BatchSplitFormScreen> {
                           ref.invalidate(batchProvider(widget.item.id));
                         });
                       },
-                      icon: Icon(Icons.add, size: 18, color: BrandColors.primary),
+                      icon: Icon(Icons.add, size: AppSizes.iconSizeSm, color: BrandColors.primary),
                       label: Text(l10n.createBatch),
                       style: TextButton.styleFrom(
                         foregroundColor: BrandColors.primary,
@@ -394,7 +392,7 @@ class _BatchSplitFormScreenState extends ConsumerState<BatchSplitFormScreen> {
                   ),
                   const SizedBox(height: AppSizes.xxl),
                   CustomButton(
-                    text: 'Split',
+                    text: l10n.split,
                     onPressed: isSplitLoading ? null : _submit,
                     isLoading: isSplitLoading,
                     icon: Icons.call_split_outlined,
@@ -410,10 +408,11 @@ class _BatchSplitFormScreenState extends ConsumerState<BatchSplitFormScreen> {
 
   Future<void> _submit() async {
     if (!_formKey.currentState!.validate()) return;
+    final l10n = AppLocalizations.of(context);
     final source = _sourceBatchNumber?.trim();
     if (source == null || source.isEmpty) {
       ref.read(snackbarServiceProvider).showWarning(
-          'Source batch is required');
+          l10n.sourceBatchRequired);
       return;
     }
     final asyncBat = ref.read(batchProvider(widget.item.id));
@@ -428,13 +427,13 @@ class _BatchSplitFormScreenState extends ConsumerState<BatchSplitFormScreen> {
       final bn = entry.batchNumber?.trim();
       if (bn == null || bn.isEmpty) {
         ref.read(snackbarServiceProvider).showWarning(
-            'Each destination must have a batch selected');
+            l10n.eachDestinationMustHaveBatch);
         return;
       }
       final qty = _parseInt(entry.quantityController.text);
       if (qty == null || qty < 1) {
         ref.read(snackbarServiceProvider).showWarning(
-            'Each destination quantity must be at least 1');
+            l10n.eachDestinationQuantityAtLeast1);
         return;
       }
       totalQty += qty;
@@ -448,12 +447,12 @@ class _BatchSplitFormScreenState extends ConsumerState<BatchSplitFormScreen> {
     }
     if (destinations.isEmpty) {
       ref.read(snackbarServiceProvider).showWarning(
-          'At least one destination is required');
+          l10n.atLeastOneDestinationRequired);
       return;
     }
     if (sourceQty > 0 && totalQty > sourceQty) {
       ref.read(snackbarServiceProvider).showWarning(
-          'Total quantity ($totalQty) cannot exceed source batch quantity ($sourceQty)');
+          l10n.totalQuantityCannotExceedSource(totalQty, sourceQty));
       return;
     }
     final request = BatchSplitRequestModel(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 import '../../../app/theme/app_sizes.dart';
 import '../../../app/theme/brand_colors.dart';
+import '../../../app/theme/text_styles.dart';
 
 /// A reusable OTP input component using Pinput
 /// 
@@ -39,10 +40,7 @@ class CustomOtpInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
-    
-    final primary = primaryColor ?? colorScheme.primary;
+    final primary = primaryColor ?? BrandColors.primary;
     final error = errorColor ?? BrandColors.error;
     final pinWidth = width ?? 56.0;
     final pinHeight = height ?? 56.0;
@@ -55,52 +53,49 @@ class CustomOtpInput extends StatelessWidget {
       defaultPinTheme: PinTheme(
         width: pinWidth,
         height: pinHeight,
-        textStyle: textTheme.titleLarge?.copyWith(
-          color: colorScheme.onSurface,
-          fontWeight: FontWeight.bold,
-          fontSize: AppSizes.fontSizeTitle,
-        ),
+        textStyle: context.title(
+          color: BrandColors.textPrimary,
+          bold: true,
+        ).copyWith(fontSize: AppSizes.fontSizeTitle),
         decoration: BoxDecoration(
           border: Border.all(
-            color: colorScheme.outline,
+            color: BrandColors.outline,
             width: 1,
           ),
           borderRadius: BorderRadius.circular(AppSizes.radius),
-          color: colorScheme.surface,
+          color: BrandColors.surface,
         ),
       ),
       focusedPinTheme: PinTheme(
         width: pinWidth,
         height: pinHeight,
-        textStyle: textTheme.titleLarge?.copyWith(
-          color: colorScheme.onSurface,
-          fontWeight: FontWeight.bold,
-          fontSize: AppSizes.fontSizeTitle,
-        ),
+        textStyle: context.title(
+          color: BrandColors.textPrimary,
+          bold: true,
+        ).copyWith(fontSize: AppSizes.fontSizeTitle),
         decoration: BoxDecoration(
           border: Border.all(
             color: primary,
             width: 2,
           ),
           borderRadius: BorderRadius.circular(AppSizes.radius),
-          color: colorScheme.surface,
+          color: BrandColors.surface,
         ),
       ),
       errorPinTheme: PinTheme(
         width: pinWidth,
         height: pinHeight,
-        textStyle: textTheme.titleLarge?.copyWith(
-          color: colorScheme.onSurface,
-          fontWeight: FontWeight.bold,
-          fontSize: AppSizes.fontSizeTitle,
-        ),
+        textStyle: context.title(
+          color: BrandColors.textPrimary,
+          bold: true,
+        ).copyWith(fontSize: AppSizes.fontSizeTitle),
         decoration: BoxDecoration(
           border: Border.all(
             color: error,
             width: 2,
           ),
           borderRadius: BorderRadius.circular(AppSizes.radius),
-          color: colorScheme.surface,
+          color: BrandColors.surface,
         ),
       ),
       pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,

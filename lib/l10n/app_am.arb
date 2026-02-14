@@ -73,6 +73,7 @@
   "continueAsGuest": "እንደ እንግዳ ቀጥል",
   "calendar": "የቀን መቁጠሪያ",
   "selectDate": "ቀን ይምረጡ",
+  "select": "ይምረጡ",
   "gregorianCalendar": "ግሪጎሪያን የቀን መቁጠሪያ",
   "ethiopianCalendar": "የኢትዮጵያ የቀን መቁጠሪያ",
   "calendarType": "የቀን መቁጠሪያ አይነት",
@@ -1089,6 +1090,43 @@
   "@batchNameRequired": {
     "description": "የቦታ ስም መስክ የማረጋገጫ መልዕክት"
   },
+  "split": "ክፍል",
+  "consolidation": "ማጠራረስ",
+  "consolidate": "ማጠራረስ",
+  "sourceBatch": "ምንጭ ቦታ",
+  "destinationBatch": "መድረሻ ቦታ",
+  "selectSourceBatch": "ምንጭ ቦታ ይምረጡ",
+  "selectDestinationBatch": "መድረሻ ቦታ ይምረጡ",
+  "sourceBatches": "ምንጭ ቦታዎች",
+  "destinationBatches": "መድረሻ ቦታዎች",
+  "addSource": "ምንጭ ጨምር",
+  "addDestination": "መድረሻ ጨምር",
+  "sourceNumber": "ምንጭ {number}",
+  "destinationNumber": "መድረሻ {number}",
+  "selectBatch": "ቦታ ይምረጡ",
+  "removeSource": "ምንጭ አስወግድ",
+  "removeDestination": "መድረሻ አስወግድ",
+  "hideDetails": "ዝርዝሮችን ደብቅ",
+  "moreOptions": "ተጨማሪ አማራሮች",
+  "hideOptionalFields": "አማራጭ መስኮችን ደብቅ",
+  "qtyOptional": "ብዛት (አማራጭ)",
+  "itemRequiredToCreateBatch": "ቦታ ለመፍጠር ምርት ያስፈልጋል",
+  "sourceAndDestinationBatchRequired": "ምንጭ እና መድረሻ ቦታ ያስፈልጋሉ",
+  "destinationBatchRequired": "መድረሻ ቦታ ያስፈልጋል",
+  "sourceBatchRequired": "ምንጭ ቦታ ያስፈልጋል",
+  "eachSourceMustHaveBatch": "እያንዳንዱ ምንጭ ቦታ መምረጥ አለበት",
+  "eachDestinationMustHaveBatch": "እያንዳንዱ መድረሻ ቦታ መምረጥ አለበት",
+  "eachDestinationQuantityAtLeast1": "እያንዳንዱ መድረሻ ብዛት ቢያንስ 1 መሆን አለበት",
+  "atLeastOneSourceRequired": "ቢያንስ አንድ ምንጭ ያስፈልጋል",
+  "atLeastOneDestinationRequired": "ቢያንስ አንድ መድረሻ ያስፈልጋል",
+  "totalQuantityMustNotExceedSource": "ጠቅላላ ብዛት ከምንጭ ({count}) መብለጥ አይገባም",
+  "totalQuantityCannotExceedSource": "ጠቅላላ ብዛት ({total}) ከምንጭ ቦታ ብዛት ({source}) መብለጥ አይችልም",
+  "quantityMustBeAtLeast1": "ብዛት ቢያንስ 1 መሆን አለበት",
+  "quantityCannotExceedSourceBatch": "ብዛት ከምንጭ ቦታ ብዛት ({count}) መብለጥ አይችልም",
+  "costPriceCannotBeNegative": "የዋጋ ዋጋ አሉታዊ ሊሆን አይችልም",
+  "unitPriceCannotBeNegative": "የክፍል ዋጋ አሉታዊ ሊሆን አይችልም",
+  "cannotBeNegative": "አሉታዊ ሊሆን አይችልም",
+  "operationComingSoon": "ተግባር በቅርብ ይመጣል",
 
   "stocks": "ክምችቶች",
   "@stocks": {
@@ -2564,6 +2602,7 @@
     }
   },
 
+  "deleteTypeTitle": "{type} ሰርዝ",
   "confirmDeleteItem": "እርግጠኛ ነዎት {itemName}ን መሰረዝ ይፈልጋሉ? ይህ ተግባር ሊመለስ አይችልም።",
   "@confirmDeleteItem": {
     "description": "ንጥል ማረጋገጫ መልዕክት ሰርዝ",
@@ -3460,5 +3499,22 @@
   "paymentMethodCreatedSuccessfully": "የክፍያ ዘዴ በተሳካ ሁኔታ ተፈጥሯል",
   "paymentMethodUpdatedSuccessfully": "የክፍያ ዘዴ በተሳካ ሁኔታ ተሻሽሏል",
   "paymentMethodDeletedSuccessfully": "የክፍያ ዘዴ በተሳካ ሁኔታ ተሰርቷል",
-  "profilePictureUploadedSuccessfully": "የመገለጫ ስዕል በተሳካ ሁኔታ ተጭኗል"
+  "profilePictureUploadedSuccessfully": "የመገለጫ ስዕል በተሳካ ሁኔታ ተጭኗል",
+  "selectCustomer": "የተለመደ ይምረጡ",
+  "noBanksAvailable": "ምንም ባንኮች አይገኙም",
+  "pleaseSelectBank": "እባክዎ ባንክ ይምረጡ",
+  "bankRequired": "ባንክ *",
+  "pleaseSelectBatchForItem": "እባክዎ ለዚህ ንጥል ባች ይምረጡ",
+  "pleaseSelectAtLeastOneBatch": "እባክዎ ለእያንዳንዱ ንጥል ቢያንስ አንድ ባች ይምረጡ",
+  "transferLabel": "ማስተላለፍ: {number}",
+  "@transferLabel": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "by": "በ",
+  "arrow": "→",
+  "nA": "አይተያየም"
 }

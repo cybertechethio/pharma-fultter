@@ -76,7 +76,7 @@ import '../../../app/theme/brand_colors.dart';
 // After: color ?? BrandColors.primary
 
 backgroundColor: color ?? BrandColors.primary, // Use brand primary as default
-disabledBackgroundColor: (color ?? BrandColors.primary).withOpacity(0.6),
+disabledBackgroundColor: (color ?? BrandColors.primary).withValues(alpha: 0.6),
 ```
 
 ### 4. **Custom Text Field Component (`custom_text_field.dart`)**

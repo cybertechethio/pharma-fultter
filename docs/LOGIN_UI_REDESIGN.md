@@ -32,8 +32,8 @@ Container(
   decoration: BoxDecoration(
     gradient: LinearGradient(
       colors: [
-        BrandColors.primary.withOpacity(0.1),
-        BrandColors.secondary.withOpacity(0.05),
+        BrandColors.primary.withValues(alpha: 0.1),
+        BrandColors.secondary.withValues(alpha: 0.05),
         colorScheme.surface,
       ],
     ),
@@ -87,7 +87,7 @@ Container(
     color: colorScheme.surfaceContainerHighest,
     borderRadius: BorderRadius.circular(12),
     border: Border.all(
-      color: colorScheme.outline.withOpacity(0.2),
+      color: colorScheme.outline.withValues(alpha: 0.2),
       width: 1,
     ),
   ),
@@ -107,7 +107,7 @@ Container(
     borderRadius: BorderRadius.circular(12),
     boxShadow: [
       BoxShadow(
-        color: BrandColors.primary.withOpacity(0.3),
+        color: BrandColors.primary.withValues(alpha: 0.3),
         blurRadius: 12,
         offset: const Offset(0, 6),
       ),

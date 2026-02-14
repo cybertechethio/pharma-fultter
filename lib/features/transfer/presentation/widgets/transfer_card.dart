@@ -62,7 +62,7 @@ class TransferCard extends ConsumerWidget {
                                 vertical: 2,
                               ),
                               decoration: BoxDecoration(
-                                color: typeColor.withOpacity(0.1),
+                                color: typeColor.withValues(alpha: 0.1),
                                 borderRadius: BorderRadius.circular(AppSizes.radiusXs),
                               ),
                               child: Row(
@@ -98,7 +98,7 @@ class TransferCard extends ConsumerWidget {
                         if (transfer.creatorName != null) ...[
                           const SizedBox(height: AppSizes.xs),
                           Text(
-                            'by ${transfer.creatorName!}',
+                            '${l10n.by} ${transfer.creatorName!}',
                             style: context.small(),
                           ),
                         ],

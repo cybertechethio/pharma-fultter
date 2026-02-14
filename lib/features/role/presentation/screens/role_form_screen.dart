@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../app/theme/app_sizes.dart';
+import '../../../../app/theme/text_styles.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../core/services/snackbar_service.dart';
 import '../../../../shared/components/common/app_bar.dart';
@@ -248,14 +249,12 @@ class _RoleFormScreenState extends ConsumerState<RoleFormScreen> {
               // Permissions Section
               Text(
                 l10n.permissions,
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                style: context.title(bold: true),
               ),
               const SizedBox(height: AppSizes.sm),
               Text(
                 l10n.selectedPermissions(_selectedPermissionIds.length),
-                style: Theme.of(context).textTheme.bodyMedium,
+                style: context.body(),
               ),
               const SizedBox(height: AppSizes.lg),
 

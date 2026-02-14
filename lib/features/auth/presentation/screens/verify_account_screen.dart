@@ -51,7 +51,7 @@ class _VerifyAccountScreenState extends ConsumerState<VerifyAccountScreen> {
 
     await ref.read(authProvider.notifier).verifyAccount(
       identifier: widget.identifier,
-      otp: _otpController.text,
+      otp: _otpController.text, 
     );
   }
 

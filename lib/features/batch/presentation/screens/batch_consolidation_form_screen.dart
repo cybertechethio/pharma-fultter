@@ -138,7 +138,7 @@ class _BatchConsolidationFormScreenState
 
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Consolidation – ${widget.item.name}',
+        title: '${l10n.consolidation} – ${widget.item.name}',
       ),
       body: asyncBatches.when(
         loading: () => const Center(child: CircularProgressIndicator()),
@@ -178,24 +178,24 @@ class _BatchConsolidationFormScreenState
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   CustomDropdown<String>(
-                    label: 'Destination batch',
+                    label: l10n.destinationBatch,
                     value: _destinationBatchNumber,
                     items: destinationItems,
                     onChanged: (v) =>
                         setState(() => _destinationBatchNumber = v),
                     required: true,
-                    hintText: 'Select destination batch',
+                    hintText: l10n.selectDestinationBatch,
                   ),
                   const SizedBox(height: AppSizes.lg),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Source batches',
-                          style: Theme.of(context).textTheme.titleSmall),
+                      Text(l10n.sourceBatches,
+                          style: context.title()),
                       TextButton.icon(
                         onPressed: _addSource,
-                        icon: const Icon(Icons.add, size: 18),
-                        label: const Text('Add source'),
+                        icon: Icon(Icons.add, size: AppSizes.iconSizeSm, color: BrandColors.primary),
+                        label: Text(l10n.addSource),
                         style: TextButton.styleFrom(
                           foregroundColor: BrandColors.primary,
                         ),
@@ -233,14 +233,14 @@ class _BatchConsolidationFormScreenState
                               Expanded(
                                 flex: 2,
                                 child: CustomDropdown<String>(
-                                  label: 'Source ${index + 1}',
+                                  label: l10n.sourceNumber(index + 1),
                                   value: entry.batchNumber,
                                   items: sourceItems,
                                   onChanged: (v) => setState(() {
                                     entry.batchNumber = v;
                                   }),
                                   required: true,
-                                  hintText: 'Select batch',
+                                  hintText: l10n.selectBatch,
                                 ),
                               ),
                               IconButton(
@@ -248,7 +248,7 @@ class _BatchConsolidationFormScreenState
                                     ? () => _removeSource(index)
                                     : null,
                                 icon: const Icon(Icons.remove_circle_outline),
-                                tooltip: 'Remove source',
+                                tooltip: l10n.removeSource,
                               ),
                             ],
                           ),
@@ -266,14 +266,14 @@ class _BatchConsolidationFormScreenState
                                     entry.showMore
                                         ? Icons.expand_less
                                         : Icons.expand_more,
-                                    size: 20,
+                                    size: AppSizes.iconSize,
                                     color: BrandColors.primary,
                                   ),
                                   const SizedBox(width: AppSizes.xs),
                                   Text(
                                     entry.showMore
-                                        ? 'Hide details'
-                                        : 'Show more',
+                                        ? l10n.hideDetails
+                                        : l10n.showMore,
                                     style: context.bodyPrimary(bold: true),
                                   ),
                                 ],
@@ -292,18 +292,18 @@ class _BatchConsolidationFormScreenState
                                     children: [
                                       Expanded(
                                         child: CustomTextField(
-                                          labelText: 'Qty (optional)',
+                                          labelText: l10n.qtyOptional,
                                           controller: entry.quantityController,
                                           inputType: TextInputType.number,
                                           validator: (v) {
                                             final n = _parseInt(v ?? '');
                                             if (n != null && n < 1) {
-                                              return 'Min 1';
+                                              return '${l10n.min} 1';
                                             }
                                             if (sourceQty > 0 &&
                                                 n != null &&
                                                 n > sourceQty) {
-                                              return 'Max $sourceQty';
+                                              return '${l10n.max} $sourceQty';
                                             }
                                             return null;
                                           },
@@ -319,7 +319,7 @@ class _BatchConsolidationFormScreenState
                                           validator: (v) {
                                             final n = _parseDouble(v ?? '');
                                             if (n != null && n < 0) {
-                                              return 'Cannot be negative';
+                                              return l10n.cannotBeNegative;
                                             }
                                             return null;
                                           },
@@ -340,7 +340,7 @@ class _BatchConsolidationFormScreenState
                                           validator: (v) {
                                             final n = _parseDouble(v ?? '');
                                             if (n != null && n < 0) {
-                                              return 'Cannot be negative';
+                                              return l10n.cannotBeNegative;
                                             }
                                             return null;
                                           },
@@ -379,7 +379,7 @@ class _BatchConsolidationFormScreenState
                           ref.invalidate(batchProvider(widget.item.id));
                         });
                       },
-                      icon: Icon(Icons.add, size: 18, color: BrandColors.primary),
+                      icon: Icon(Icons.add, size: AppSizes.iconSizeSm, color: BrandColors.primary),
                       label: Text(l10n.createBatch),
                       style: TextButton.styleFrom(
                         foregroundColor: BrandColors.primary,
@@ -395,7 +395,7 @@ class _BatchConsolidationFormScreenState
                   ),
                   const SizedBox(height: AppSizes.xxl),
                   CustomButton(
-                    text: 'Consolidate',
+                    text: l10n.consolidate,
                     onPressed:
                         isConsolidationLoading ? null : _submit,
                     isLoading: isConsolidationLoading,
@@ -412,10 +412,11 @@ class _BatchConsolidationFormScreenState
 
   Future<void> _submit() async {
     if (!_formKey.currentState!.validate()) return;
+    final l10n = AppLocalizations.of(context);
     final dest = _destinationBatchNumber?.trim();
     if (dest == null || dest.isEmpty) {
       ref.read(snackbarServiceProvider).showWarning(
-          'Destination batch is required');
+          l10n.destinationBatchRequired);
       return;
     }
     final sources = <BatchOperationItemModel>[];
@@ -423,7 +424,7 @@ class _BatchConsolidationFormScreenState
       final bn = entry.batchNumber?.trim();
       if (bn == null || bn.isEmpty) {
         ref.read(snackbarServiceProvider).showWarning(
-            'Each source must have a batch selected');
+            l10n.eachSourceMustHaveBatch);
         return;
       }
       final qty = _parseInt(entry.quantityController.text);
@@ -437,7 +438,7 @@ class _BatchConsolidationFormScreenState
     }
     if (sources.isEmpty) {
       ref.read(snackbarServiceProvider).showWarning(
-          'At least one source is required');
+          l10n.atLeastOneSourceRequired);
       return;
     }
     final request = BatchConsolidationRequestModel(

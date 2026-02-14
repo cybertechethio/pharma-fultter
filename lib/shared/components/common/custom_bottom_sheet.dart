@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cyber_pos/l10n/app_localizations.dart';
 import '../../../app/theme/app_sizes.dart';
 import '../../../app/theme/brand_colors.dart';
+import '../../../app/theme/text_styles.dart';
 /// Custom bottom sheet component following Material Design 3 and project theme
 /// 
 /// Features:
@@ -150,11 +151,8 @@ class CustomBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-    
     // Build bottom sheet content
-    Widget sheetContent = _buildSheetContent(context, theme, colorScheme);
+    Widget sheetContent = _buildSheetContent(context);
     
     // Apply constraints
     if (width != null || height != null || constraints != null) {
@@ -187,96 +185,76 @@ class CustomBottomSheet extends StatelessWidget {
     );
   }
   
-  Widget _buildSheetContent(
-    BuildContext context,
-    ThemeData theme,
-    ColorScheme colorScheme,
-  ) {
+  Widget _buildSheetContent(BuildContext context) {
     switch (variant) {
       case BottomSheetVariant.standard:
-        return _buildStandardSheet(context, theme, colorScheme);
+        return _buildStandardSheet(context);
       case BottomSheetVariant.modal:
-        return _buildModalSheet(context, theme, colorScheme);
+        return _buildModalSheet(context);
       case BottomSheetVariant.persistent:
-        return _buildPersistentSheet(context, theme, colorScheme);
+        return _buildPersistentSheet(context);
     }
   }
   
-  Widget _buildStandardSheet(
-    BuildContext context,
-    ThemeData theme,
-    ColorScheme colorScheme,
-  ) {
+  Widget _buildStandardSheet(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: backgroundColor ?? colorScheme.surface,
+        color: backgroundColor ?? BrandColors.surface,
         borderRadius: borderRadius ?? const BorderRadius.vertical(
           top: Radius.circular(16),
         ),
         boxShadow: [
           BoxShadow(
-            color: shadowColor ?? colorScheme.shadow,
+            color: shadowColor ?? BrandColors.shadow,
             blurRadius: elevation ?? 8,
             offset: const Offset(0, -2),
           ),
         ],
       ),
       clipBehavior: clipBehavior,
-      child: _buildSheetBody(context, theme, colorScheme),
+      child: _buildSheetBody(context),
     );
   }
   
-  Widget _buildModalSheet(
-    BuildContext context,
-    ThemeData theme,
-    ColorScheme colorScheme,
-  ) {
+  Widget _buildModalSheet(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: backgroundColor ?? colorScheme.surface,
+        color: backgroundColor ?? BrandColors.surface,
         borderRadius: borderRadius ?? BorderRadius.circular(AppSizes.radiusLg),
         boxShadow: [
           BoxShadow(
-            color: shadowColor ?? colorScheme.shadow,
+            color: shadowColor ?? BrandColors.shadow,
             blurRadius: elevation ?? 16,
             offset: const Offset(0, -4),
           ),
         ],
       ),
       clipBehavior: clipBehavior,
-      child: _buildSheetBody(context, theme, colorScheme),
+      child: _buildSheetBody(context),
     );
   }
   
-  Widget _buildPersistentSheet(
-    BuildContext context,
-    ThemeData theme,
-    ColorScheme colorScheme,
-  ) {
+  Widget _buildPersistentSheet(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: backgroundColor ?? colorScheme.surface,
+        color: backgroundColor ?? BrandColors.surface,
         borderRadius: borderRadius ?? const BorderRadius.vertical(
           top: Radius.circular(12),
         ),
         boxShadow: [
           BoxShadow(
-            color: shadowColor ?? colorScheme.shadow,
+            color: shadowColor ?? BrandColors.shadow,
             blurRadius: elevation ?? 4,
             offset: const Offset(0, -1),
           ),
         ],
       ),
       clipBehavior: clipBehavior,
-      child: _buildSheetBody(context, theme, colorScheme),
+      child: _buildSheetBody(context),
     );
   }
   
-  Widget _buildSheetBody(
-    BuildContext context,
-    ThemeData theme,
-    ColorScheme colorScheme,
-  ) {
+  Widget _buildSheetBody(BuildContext context) {
     final List<Widget> sheetChildren = [];
     
     // Add header
@@ -286,7 +264,7 @@ class CustomBottomSheet extends StatelessWidget {
     
     // Add title section
     if (showTitle || showSubtitle) {
-      sheetChildren.add(_buildTitleSection(context, theme, colorScheme));
+      sheetChildren.add(_buildTitleSection(context));
     }
     
     // Add main content
@@ -299,7 +277,7 @@ class CustomBottomSheet extends StatelessWidget {
     
     // Add actions
     if (actions != null && actions!.isNotEmpty) {
-      sheetChildren.add(_buildActionsSection(context, theme, colorScheme));
+      sheetChildren.add(_buildActionsSection(context));
     }
     
     // Add footer
@@ -313,19 +291,15 @@ class CustomBottomSheet extends StatelessWidget {
     );
   }
   
-  Widget _buildTitleSection(
-    BuildContext context,
-    ThemeData theme,
-    ColorScheme colorScheme,
-  ) {
+  Widget _buildTitleSection(BuildContext context) {
     final List<Widget> titleChildren = [];
     
     if (showTitle && title != null) {
       titleChildren.add(
         Text(
           title!,
-          style: titleStyle ?? theme.textTheme.headlineSmall?.copyWith(
-            color: foregroundColor ?? colorScheme.onSurface,
+          style: titleStyle ?? context.header(
+            color: foregroundColor ?? BrandColors.textPrimary,
           ),
         ),
       );
@@ -335,8 +309,8 @@ class CustomBottomSheet extends StatelessWidget {
       titleChildren.add(
         Text(
           subtitle!,
-          style: subtitleStyle ?? theme.textTheme.bodyMedium?.copyWith(
-            color: foregroundColor ?? colorScheme.onSurfaceVariant,
+          style: subtitleStyle ?? context.body(
+            color: foregroundColor ?? BrandColors.textSecondary,
           ),
         ),
       );
@@ -355,11 +329,7 @@ class CustomBottomSheet extends StatelessWidget {
     );
   }
   
-  Widget _buildActionsSection(
-    BuildContext context,
-    ThemeData theme,
-    ColorScheme colorScheme,
-  ) {
+  Widget _buildActionsSection(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
       child: Row(

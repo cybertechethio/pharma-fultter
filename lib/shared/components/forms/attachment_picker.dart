@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../app/theme/app_sizes.dart';
 import '../../../app/theme/brand_colors.dart';
+import '../../../app/theme/text_styles.dart';
 import '../common/image_picker_bottom_sheet.dart';
 
 /// Modern attachment picker for receipts and files
@@ -24,8 +25,6 @@ class AttachmentPicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
     final hasFile = filePath != null;
 
     return Column(
@@ -38,14 +37,14 @@ class AttachmentPicker extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
             decoration: BoxDecoration(
-              color: hasFile 
-                  ? colorScheme.primaryContainer.withOpacity(0.15)
-                  : colorScheme.surfaceContainerHighest.withOpacity(0.3),
+              color: hasFile
+                  ? BrandColors.primaryContainer.withValues(alpha: 0.15)
+                  : BrandColors.surfaceContainerHighest.withValues(alpha: 0.3),
               borderRadius: BorderRadius.circular(AppSizes.radiusSm),
               border: Border.all(
-                color: hasFile 
-                    ? colorScheme.primary.withOpacity(0.3)
-                    : colorScheme.outline.withOpacity(0.3),
+                color: hasFile
+                    ? BrandColors.primary.withValues(alpha: 0.3)
+                    : BrandColors.outline.withValues(alpha: 0.3),
               ),
             ),
             child: Row(
@@ -54,14 +53,14 @@ class AttachmentPicker extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(AppSizes.sm),
                   decoration: BoxDecoration(
-                    color: hasFile 
-                        ? colorScheme.primary.withOpacity(0.1)
-                        : colorScheme.surfaceContainerHighest,
+                    color: hasFile
+                        ? BrandColors.primary.withValues(alpha: 0.1)
+                        : BrandColors.surfaceContainerHighest,
                     borderRadius: BorderRadius.circular(AppSizes.radiusSm),
                   ),
                   child: Icon(
                     hasFile ? Icons.check_circle_rounded : Icons.add_photo_alternate_outlined,
-                    color: hasFile ? colorScheme.primary : colorScheme.onSurfaceVariant,
+                    color: hasFile ? BrandColors.primary : BrandColors.textSecondary,
                     size: 20,
                   ),
                 ),
@@ -73,16 +72,16 @@ class AttachmentPicker extends StatelessWidget {
                     children: [
                       Text(
                         hasFile ? '$label attached' : placeholder ?? 'Add $label',
-                        style: theme.textTheme.bodyMedium?.copyWith(
-                          color: hasFile ? colorScheme.onSurface : colorScheme.onSurfaceVariant,
-                          fontWeight: hasFile ? FontWeight.w500 : FontWeight.normal,
+                        style: context.body(
+                          color: hasFile ? BrandColors.textPrimary : BrandColors.textSecondary,
+                          bold: hasFile,
                         ),
                       ),
                       if (!hasFile)
                         Text(
                           'Tap to upload',
-                          style: theme.textTheme.bodySmall?.copyWith(
-                            color: colorScheme.onSurfaceVariant.withOpacity(0.7),
+                          style: context.small(
+                            color: BrandColors.textSecondary.withValues(alpha: 0.7),
                           ),
                         ),
                     ],
@@ -92,9 +91,9 @@ class AttachmentPicker extends StatelessWidget {
                 if (hasFile)
                   IconButton(
                     icon: Icon(
-                      Icons.close_rounded, 
-                      size: AppSizes.iconSizeSm, 
-                      color: colorScheme.onSurfaceVariant,
+                      Icons.close_rounded,
+                      size: AppSizes.iconSizeSm,
+                      color: BrandColors.textSecondary,
                     ),
                     padding: EdgeInsets.zero,
                     constraints: const BoxConstraints(),
@@ -105,7 +104,7 @@ class AttachmentPicker extends StatelessWidget {
                 else
                   Icon(
                     Icons.chevron_right_rounded,
-                    color: colorScheme.onSurfaceVariant.withOpacity(0.5),
+                    color: BrandColors.textSecondary.withValues(alpha: 0.5),
                     size: 20,
                   ),
               ],
@@ -123,11 +122,11 @@ class AttachmentPicker extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(AppSizes.radiusMd),
                 border: Border.all(
-                  color: colorScheme.outline.withOpacity(0.2),
+                  color: BrandColors.outline.withValues(alpha: 0.2),
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: colorScheme.shadow.withOpacity(0.05),
+                    color: BrandColors.shadow.withValues(alpha: 0.05),
                     blurRadius: AppSizes.sm,
                     offset: const Offset(0, AppSizes.xxs),
                   ),
@@ -155,7 +154,7 @@ class AttachmentPicker extends StatelessWidget {
                                 end: Alignment.bottomCenter,
                                 colors: [
                                   Colors.transparent,
-                                  Colors.black.withOpacity(0.3),
+                                  Colors.black.withValues(alpha: 0.3),
                                 ],
                               ),
                             ),
@@ -163,7 +162,7 @@ class AttachmentPicker extends StatelessWidget {
                             padding: const EdgeInsets.only(bottom: 4),
                             child: Icon(
                               Icons.zoom_in_rounded,
-                              color: Colors.white.withOpacity(0.9),
+                              color: Colors.white.withValues(alpha: 0.9),
                               size: AppSizes.iconSizeSm,
                             ),
                           ),
@@ -223,7 +222,7 @@ class AttachmentPicker extends StatelessWidget {
                 icon: Container(
                   padding: const EdgeInsets.all(AppSizes.xs2),
                   decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.5),
+                    color: Colors.black.withValues(alpha: 0.5),
                     shape: BoxShape.circle,
                   ),
                   child: Icon(

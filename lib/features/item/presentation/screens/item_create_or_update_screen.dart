@@ -406,7 +406,7 @@ class _ItemCreateScreenState extends ConsumerState<ItemCreateOrUpdateScreen> {
               ),
               decoration: BoxDecoration(
                 color: _showMoreFields 
-                    ? BrandColors.primary.withOpacity(0.05)
+                    ? BrandColors.primary.withValues(alpha: 0.05)
                     : BrandColors.transparent,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(AppSizes.radius),
@@ -418,7 +418,7 @@ class _ItemCreateScreenState extends ConsumerState<ItemCreateOrUpdateScreen> {
                   Container(
                     padding: const EdgeInsets.all(AppSizes.xs),
                     decoration: BoxDecoration(
-                      color: BrandColors.primary.withOpacity(0.1),
+                      color: BrandColors.primary.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(AppSizes.radiusXs),
                     ),
                     child: Icon(

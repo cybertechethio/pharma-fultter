@@ -55,7 +55,7 @@ class RoleDetailScreen extends ConsumerWidget {
             Container(
               padding: const EdgeInsets.all(AppSizes.xl),
               decoration: BoxDecoration(
-                color: BrandColors.error.withOpacity(0.1),
+                color: BrandColors.error.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
               ),
               child: Icon(
@@ -163,7 +163,7 @@ class RoleDetailScreen extends ConsumerWidget {
                     Container(
                       padding: const EdgeInsets.all(AppSizes.md),
                       decoration: BoxDecoration(
-                        color: BrandColors.primary.withOpacity(0.1),
+                        color: BrandColors.primary.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(AppSizes.radius),
                       ),
                       child: Icon(
@@ -293,7 +293,7 @@ class RoleDetailScreen extends ConsumerWidget {
           Container(
             padding: const EdgeInsets.all(AppSizes.sm),
             decoration: BoxDecoration(
-              color: BrandColors.primary.withOpacity(0.1),
+              color: BrandColors.primary.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(AppSizes.radiusSm),
             ),
             child: Icon(
@@ -314,7 +314,7 @@ class RoleDetailScreen extends ConsumerWidget {
               vertical: AppSizes.xs,
             ),
             decoration: BoxDecoration(
-              color: BrandColors.primaryLight.withOpacity(0.15),
+              color: BrandColors.primaryLight.withValues(alpha: 0.15),
               borderRadius: BorderRadius.circular(AppSizes.radiusSm),
             ),
             child: Text(
@@ -336,7 +336,7 @@ class RoleDetailScreen extends ConsumerWidget {
             Container(
               padding: const EdgeInsets.all(AppSizes.lg),
               decoration: BoxDecoration(
-                color: BrandColors.textMuted.withOpacity(0.1),
+                color: BrandColors.textMuted.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
               ),
               child: Icon(
@@ -469,7 +469,7 @@ class _StatCard extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(AppSizes.sm),
             decoration: BoxDecoration(
-              color: iconColor.withOpacity(0.1),
+              color: iconColor.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(AppSizes.radiusSm),
             ),
             child: Icon(icon, color: iconColor, size: 20),
@@ -588,7 +588,7 @@ class _PermissionCategoryCardState extends State<_PermissionCategoryCard>
                   Container(
                     padding: const EdgeInsets.all(AppSizes.sm),
                     decoration: BoxDecoration(
-                      color: BrandColors.primary.withOpacity(0.1),
+                      color: BrandColors.primary.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(AppSizes.radiusSm),
                     ),
                     child: Icon(
@@ -691,7 +691,7 @@ class _PermissionItem extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(AppSizes.xs),
             decoration: BoxDecoration(
-              color: BrandColors.success.withOpacity(0.1),
+              color: BrandColors.success.withValues(alpha: 0.1),
               shape: BoxShape.circle,
             ),
             child: Icon(

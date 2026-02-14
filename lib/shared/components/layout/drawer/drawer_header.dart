@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../../../../app/theme/app_sizes.dart';
+import '../../../../app/theme/brand_colors.dart';
+import '../../../../app/theme/text_styles.dart';
 import '../../../../shared/utils/url_utils.dart';
 
 /// A stunning drawer header with gradient background, company branding,
@@ -19,10 +21,6 @@ class DrawerHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-    final isDark = theme.brightness == Brightness.dark;
-
     final fullLogoUrl = UrlUtils.getFullImageUrl(logoUrl);
 
     return Container(
@@ -31,15 +29,10 @@ class DrawerHeader extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: isDark
-              ? [
-                  colorScheme.surface,
-                  colorScheme.surfaceContainerHighest,
-                ]
-              : [
-                  colorScheme.primaryContainer.withOpacity(0.3),
-                  colorScheme.surface,
-                ],
+          colors: [
+            BrandColors.primaryContainer.withValues(alpha: 0.3),
+            BrandColors.surface,
+          ],
         ),
         image: fullLogoUrl != null
             ? DecorationImage(
@@ -76,8 +69,6 @@ class _CompanyAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
 
     final fullLogoUrl = UrlUtils.getFullImageUrl(logoUrl);
 
@@ -90,15 +81,15 @@ class _CompanyAvatar extends StatelessWidget {
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 colors: [
-                  colorScheme.primary,
-                  colorScheme.primary.withOpacity(0.7),
+                  BrandColors.primary,
+                  BrandColors.primary.withValues(alpha: 0.7),
                 ],
               )
             : null,
         borderRadius: BorderRadius.circular(AppSizes.radiusLg),
         boxShadow: [
           BoxShadow(
-            color: colorScheme.primary.withOpacity(0.3),
+            color: BrandColors.primary.withValues(alpha: 0.3),
             blurRadius: 12,
             offset: const Offset(0, 4),
           ),
@@ -117,22 +108,22 @@ width: AppSizes.iconSizeLg,
                   height: AppSizes.iconSizeLg,
                 child: CircularProgressIndicator(
                   strokeWidth: AppSizes.loaderStrokeWidth,
-                  color: colorScheme.onPrimary,
+                  valueColor: AlwaysStoppedAnimation<Color>(BrandColors.textLight),
                 ),
               )
             : (fullLogoUrl == null)
                 ? (companyName != null && companyName!.isNotEmpty)
                     ? Text(
                         companyName![0].toUpperCase(),
-                        style: theme.textTheme.headlineSmall?.copyWith(
-                          color: colorScheme.onPrimary,
-                          fontWeight: FontWeight.bold,
+                        style: context.title(
+                          color: BrandColors.textLight,
+                          bold: true,
                         ),
                       )
                     : Icon(
                         Icons.business_rounded,
-                        color: colorScheme.onPrimary,
-                        size: 28,
+                        color: BrandColors.textLight,
+                        size: AppSizes.iconSizeLg,
                       )
                 : const SizedBox.shrink(),
       ),
@@ -175,7 +166,6 @@ class _ShimmerBoxState extends State<_ShimmerBox>
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
 
     return AnimatedBuilder(
       animation: _animation,
@@ -189,9 +179,9 @@ class _ShimmerBoxState extends State<_ShimmerBox>
               begin: Alignment(_animation.value - 1, 0),
               end: Alignment(_animation.value + 1, 0),
               colors: [
-                colorScheme.surfaceContainerHighest,
-                colorScheme.surfaceContainerHighest.withOpacity(0.5),
-                colorScheme.surfaceContainerHighest,
+                BrandColors.surfaceContainerHighest,
+                BrandColors.surfaceContainerHighest.withValues(alpha: 0.5),
+                BrandColors.surfaceContainerHighest,
               ],
             ),
           ),

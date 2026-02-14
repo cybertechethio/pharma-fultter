@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../app/theme/brand_colors.dart';
 import '../../../app/theme/app_sizes.dart';
+import '../../../app/theme/brand_colors.dart';
+import '../../../app/theme/text_styles.dart';
 
 /// Reusable edit and delete action buttons component
 /// 
@@ -103,8 +104,6 @@ class ActionButtons extends StatelessWidget {
   }
 
   Widget _buildTextButtons(BuildContext context) {
-    final theme = Theme.of(context);
-    
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -127,9 +126,9 @@ class ActionButtons extends StatelessWidget {
                 ),
           label: Text(
             editLabel ?? 'Edit',
-            style: theme.textTheme.titleSmall?.copyWith(
+            style: context.small(
               color: BrandColors.primary,
-              fontWeight: FontWeight.w500,
+              bold: true,
             ),
           ),
           style: TextButton.styleFrom(
@@ -162,9 +161,9 @@ class ActionButtons extends StatelessWidget {
                   ),
             label: Text(
               deleteLabel ?? 'Delete',
-              style: theme.textTheme.titleSmall?.copyWith(
+              style: context.small(
                 color: BrandColors.error,
-                fontWeight: FontWeight.w500,
+                bold: true,
               ),
             ),
             style: TextButton.styleFrom(

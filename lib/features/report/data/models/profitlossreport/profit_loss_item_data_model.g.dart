@@ -10,7 +10,6 @@ _ProfitLossItemDataModel _$ProfitLossItemDataModelFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('_ProfitLossItemDataModel', json, ($checkedConvert) {
   final val = _ProfitLossItemDataModel(
-    itemType: $checkedConvert('itemType', (v) => v as String),
     sales: $checkedConvert(
       'sales',
       (v) => JsonTypeConverters.doubleFromDynamic(v),
@@ -31,7 +30,6 @@ _ProfitLossItemDataModel _$ProfitLossItemDataModelFromJson(
 Map<String, dynamic> _$ProfitLossItemDataModelToJson(
   _ProfitLossItemDataModel instance,
 ) => <String, dynamic>{
-  'itemType': instance.itemType,
   'sales': instance.sales,
   'cost': instance.cost,
   'vat': instance.vat,

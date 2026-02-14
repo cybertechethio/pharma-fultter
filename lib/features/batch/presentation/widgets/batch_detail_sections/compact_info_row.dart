@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import '../../../../../app/theme/app_sizes.dart';
+import '../../../../../app/theme/brand_colors.dart';
+import '../../../../../app/theme/text_styles.dart';
 
 class CompactInfoRow extends StatelessWidget {
   final IconData icon;
@@ -16,30 +19,22 @@ class CompactInfoRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-
     if (isCompact) {
-      // Compact: Label and value on same line
       return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 6),
+        padding: const EdgeInsets.symmetric(vertical: AppSizes.xs2),
         child: Row(
           children: [
-            Icon(icon, size: 18, color: colorScheme.primary),
-            const SizedBox(width: 8),
+            Icon(icon, size: AppSizes.iconSizeSm, color: BrandColors.primary),
+            const SizedBox(width: AppSizes.sm),
             Text(
               label,
-              style: theme.textTheme.bodySmall?.copyWith(
-                color: colorScheme.onSurfaceVariant,
-              ),
+              style: context.small(),
             ),
             const Spacer(),
             Flexible(
               child: Text(
                 value,
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  fontWeight: FontWeight.w500,
-                ),
+                style: context.body().copyWith(fontWeight: FontWeight.w500),
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
               ),
@@ -48,30 +43,25 @@ class CompactInfoRow extends StatelessWidget {
         ),
       );
     } else {
-      // Expanded: Label above value (for long text)
       return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 6),
+        padding: const EdgeInsets.symmetric(vertical: AppSizes.xs2),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Icon(icon, size: 18, color: colorScheme.primary),
-            const SizedBox(width: 8),
+            Icon(icon, size: AppSizes.iconSizeSm, color: BrandColors.primary),
+            const SizedBox(width: AppSizes.sm),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     label,
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      color: colorScheme.onSurfaceVariant,
-                    ),
+                    style: context.small(),
                   ),
-                  const SizedBox(height: 2),
+                  const SizedBox(height: AppSizes.xxs),
                   Text(
                     value,
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      fontWeight: FontWeight.w500,
-                    ),
+                    style: context.body().copyWith(fontWeight: FontWeight.w500),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                   ),

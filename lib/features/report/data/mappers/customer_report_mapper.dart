@@ -19,7 +19,6 @@ extension CustomerItemDataMapper on CustomerItemDataModel {
       totalAmount: totalAmount,
       paidAmount: paidAmount,
       dueAmount: dueAmount,
-      hasDiscrepancy: hasDiscrepancy,
     );
   }
 }

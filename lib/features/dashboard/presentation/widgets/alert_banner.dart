@@ -34,7 +34,7 @@ class AlertBanner extends StatelessWidget {
         color: BrandColors.alertBackground,
         borderRadius: BorderRadius.circular(AppSizes.radiusMd),
         border: Border.all(
-          color: BrandColors.alertBorder.withOpacity(0.5),
+          color: BrandColors.alertBorder.withValues(alpha: 0.5),
           width: AppSizes.br,
         ),
       ),

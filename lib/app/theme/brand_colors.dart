@@ -168,22 +168,22 @@ class BrandColors {
   
   /// Get primary color with opacity
   static Color primaryWithOpacity(double opacity) {
-    return primary.withOpacity(opacity);
+    return primary.withValues(alpha: opacity);
   }
   
   /// Get secondary color with opacity
   static Color secondaryWithOpacity(double opacity) {
-    return secondary.withOpacity(opacity);
+    return secondary.withValues(alpha: opacity);
   }
   
   /// Get error color with opacity
   static Color errorWithOpacity(double opacity) {
-    return error.withOpacity(opacity);
+    return error.withValues(alpha: opacity);
   }
   
   /// Get success color with opacity
   static Color successWithOpacity(double opacity) {
-    return success.withOpacity(opacity);
+    return success.withValues(alpha: opacity);
   }
 }
 
