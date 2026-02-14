@@ -69,7 +69,7 @@ class ItemDetailScreen extends ConsumerWidget {
                       decoration: BoxDecoration(
                         color: item.isActive
                             ? BrandColors.successWithOpacity(0.1)
-                            : BrandColors.textMuted.withOpacity(0.1),
+                            : BrandColors.textMuted.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(AppSizes.radiusLg),
                         border: Border.all(
                           color: item.isActive ? BrandColors.success : BrandColors.textMuted,

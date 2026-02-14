@@ -38,7 +38,7 @@ class TransferHeaderSection extends ConsumerWidget {
         color: BrandColors.surface,
         borderRadius: BorderRadius.circular(AppSizes.radius),
         border: Border.all(
-          color: BrandColors.outline.withOpacity(0.1),
+          color: BrandColors.outline.withValues(alpha: 0.1),
         ),
       ),
       child: Column(
@@ -57,7 +57,7 @@ class TransferHeaderSection extends ConsumerWidget {
                   vertical: 4,
                 ),
                 decoration: BoxDecoration(
-                  color: typeColor.withOpacity(0.1),
+                  color: typeColor.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(AppSizes.radiusXs2),
                 ),
                 child: Row(
@@ -162,7 +162,7 @@ class TransferHeaderSection extends ConsumerWidget {
       iconColor: BrandColors.error,
       confirmLabel: l10n.reject,
       confirmColor: BrandColors.error,
-      warningText: 'This action cannot be undone.',
+      warningText: l10n.thisActionCannotBeUndone,
       onConfirm: () {
         ref.read(transferProvider.notifier).updateTransferStatus(
           id: transfer.id,
@@ -183,6 +183,7 @@ class TransferHeaderSection extends ConsumerWidget {
     String? warningText,
     required VoidCallback onConfirm,
   }) {
+    final l10n = AppLocalizations.of(context);
     showDialog(
       context: context,
       builder: (dialogContext) => AlertDialog(
@@ -200,7 +201,7 @@ class TransferHeaderSection extends ConsumerWidget {
             Text(message, style: context.body()),
             const SizedBox(height: AppSizes.sm),
             Text(
-              'Transfer: ${transfer.transferNumber}',
+              l10n.transferLabel(transfer.transferNumber),
               style: context.small(bold: true),
             ),
             if (warningText != null) ...[
@@ -208,7 +209,7 @@ class TransferHeaderSection extends ConsumerWidget {
               Container(
                 padding: const EdgeInsets.all(AppSizes.sm),
                 decoration: BoxDecoration(
-                  color: BrandColors.warning.withOpacity(0.1),
+                  color: BrandColors.warning.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(AppSizes.radiusSm),
                 ),
                 child: Row(

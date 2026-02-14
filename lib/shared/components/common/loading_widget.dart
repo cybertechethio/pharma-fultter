@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cyber_pos/l10n/app_localizations.dart';
 import '../../../app/theme/app_sizes.dart';
 import '../../../app/theme/brand_colors.dart';
+import '../../../app/theme/text_styles.dart';
 
 /// Loading widget component with multiple variants
 /// 
@@ -57,13 +58,10 @@ class LoadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-    
-    final loadingColor = color ?? colorScheme.primary;
+    final loadingColor = color ?? BrandColors.primary;
     final sizeValue = _getSizeValue(size);
     
-    Widget indicator = _buildIndicator(context, theme, colorScheme, loadingColor, sizeValue);
+    Widget indicator = _buildIndicator(context, loadingColor, sizeValue);
     
     if (showMessage && message != null) {
       return Column(
@@ -73,9 +71,7 @@ class LoadingWidget extends StatelessWidget {
           const SizedBox(height: AppSizes.lg),
           Text(
             message!,
-            style: theme.textTheme.bodyMedium?.copyWith(
-              color: colorScheme.onSurfaceVariant,
-            ),
+            style: context.body(color: BrandColors.textSecondary),
             textAlign: TextAlign.center,
           ),
         ],
@@ -87,8 +83,6 @@ class LoadingWidget extends StatelessWidget {
   
   Widget _buildIndicator(
     BuildContext context,
-    ThemeData theme,
-    ColorScheme colorScheme,
     Color loadingColor,
     double sizeValue,
   ) {
@@ -98,7 +92,7 @@ class LoadingWidget extends StatelessWidget {
       case LoadingVariant.linear:
         return _buildLinearIndicator(loadingColor);
       case LoadingVariant.shimmer:
-        return _buildShimmerIndicator(context, theme, colorScheme, sizeValue);
+        return _buildShimmerIndicator(context, sizeValue);
       case LoadingVariant.custom:
         return customIndicator ?? _buildCircularIndicator(loadingColor, sizeValue);
     }
@@ -122,12 +116,7 @@ class LoadingWidget extends StatelessWidget {
     );
   }
   
-  Widget _buildShimmerIndicator(
-    BuildContext context,
-    ThemeData theme,
-    ColorScheme colorScheme,
-    double size,
-  ) {
+  Widget _buildShimmerIndicator(BuildContext context, double size) {
     return _ShimmerLoading(
       duration: animationDuration ?? const Duration(milliseconds: 1500),
       child: Column(

@@ -23,7 +23,7 @@ class SupplierCustomerTransactionCard extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: AppSizes.sm),
       padding: const EdgeInsets.all(AppSizes.md),
       decoration: BoxDecoration(
-        color: BrandColors.surfaceContainerHighest.withOpacity(0.3),
+        color: BrandColors.surfaceContainerHighest.withValues(alpha: 0.3),
         borderRadius: BorderRadius.circular(AppSizes.sm),
       ),
       child: Row(
@@ -32,7 +32,7 @@ class SupplierCustomerTransactionCard extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: AppSizes.sm, vertical: AppSizes.xs),
             decoration: BoxDecoration(
-              color: typeColor.withOpacity(0.1),
+              color: typeColor.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(AppSizes.xs),
             ),
             child: Text(

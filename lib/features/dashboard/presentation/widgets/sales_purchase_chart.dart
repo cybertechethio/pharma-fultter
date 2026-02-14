@@ -28,7 +28,7 @@ class SalesPurchaseChart extends StatelessWidget {
         color: BrandColors.cardBackground,
         borderRadius: BorderRadius.circular(AppSizes.radiusLg),
         border: Border.all(
-          color: BrandColors.border.withOpacity(0.1),
+          color: BrandColors.border.withValues(alpha: 0.1),
         ),
         boxShadow: [
           BoxShadow(
@@ -146,7 +146,7 @@ class SalesPurchaseChart extends StatelessWidget {
                         drawVerticalLine: false,
                         horizontalInterval: _getMaxY() / 4,
                         getDrawingHorizontalLine: (value) => FlLine(
-                          color: BrandColors.border.withOpacity(0.1),
+                          color: BrandColors.border.withValues(alpha: 0.1),
                           strokeWidth: 1,
                         ),
                       ),

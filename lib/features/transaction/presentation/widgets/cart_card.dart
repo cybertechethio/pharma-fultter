@@ -547,7 +547,7 @@ class _CartCardState extends ConsumerState<CartCard> {
                     SizedBox(width: AppSizes.xs),
                     Expanded(
                       child: Text(
-                        'Please select a batch for this item',
+                        l10n.pleaseSelectBatchForItem,
                         style: context.small(color: BrandColors.error),
                       ),
                     ),

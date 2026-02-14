@@ -120,7 +120,7 @@ class _ItemFilterBottomSheetState extends State<ItemFilterBottomSheet> {
                 width: AppSizes.xxxxl,
                 height: AppSizes.xxs,
                 decoration: BoxDecoration(
-                  color: BrandColors.textPrimary.withOpacity(0.3),
+                  color: BrandColors.textPrimary.withValues(alpha: 0.3),
                   borderRadius: BorderRadius.circular(AppSizes.xxs),
                 ),
               ),
@@ -193,7 +193,7 @@ class _ItemFilterBottomSheetState extends State<ItemFilterBottomSheet> {
                   color: BrandColors.background,
                   border: Border(
                     top: BorderSide(
-                      color: BrandColors.outline.withOpacity(0.2),
+                      color: BrandColors.outline.withValues(alpha: 0.2),
                       width: 1,
                     ),
                   ),

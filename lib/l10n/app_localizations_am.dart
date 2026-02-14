@@ -239,6 +239,9 @@ class AppLocalizationsAm extends AppLocalizations {
   String get selectDate => 'ቀን ይምረጡ';
 
   @override
+  String get select => 'ይምረጡ';
+
+  @override
   String get gregorianCalendar => 'ግሪጎሪያን የቀን መቁጠሪያ';
 
   @override
@@ -1225,6 +1228,128 @@ class AppLocalizationsAm extends AppLocalizations {
   String get batchNameRequired => 'የቦታ ስም ያስፈልጋል';
 
   @override
+  String get split => 'ክፍል';
+
+  @override
+  String get consolidation => 'ማጠራረስ';
+
+  @override
+  String get consolidate => 'ማጠራረስ';
+
+  @override
+  String get sourceBatch => 'ምንጭ ቦታ';
+
+  @override
+  String get destinationBatch => 'መድረሻ ቦታ';
+
+  @override
+  String get selectSourceBatch => 'ምንጭ ቦታ ይምረጡ';
+
+  @override
+  String get selectDestinationBatch => 'መድረሻ ቦታ ይምረጡ';
+
+  @override
+  String get sourceBatches => 'ምንጭ ቦታዎች';
+
+  @override
+  String get destinationBatches => 'መድረሻ ቦታዎች';
+
+  @override
+  String get addSource => 'ምንጭ ጨምር';
+
+  @override
+  String get addDestination => 'መድረሻ ጨምር';
+
+  @override
+  String sourceNumber(int number) {
+    return 'ምንጭ $number';
+  }
+
+  @override
+  String destinationNumber(int number) {
+    return 'መድረሻ $number';
+  }
+
+  @override
+  String get selectBatch => 'ቦታ ይምረጡ';
+
+  @override
+  String get removeSource => 'ምንጭ አስወግድ';
+
+  @override
+  String get removeDestination => 'መድረሻ አስወግድ';
+
+  @override
+  String get hideDetails => 'ዝርዝሮችን ደብቅ';
+
+  @override
+  String get moreOptions => 'ተጨማሪ አማራሮች';
+
+  @override
+  String get hideOptionalFields => 'አማራጭ መስኮችን ደብቅ';
+
+  @override
+  String get qtyOptional => 'ብዛት (አማራጭ)';
+
+  @override
+  String get itemRequiredToCreateBatch => 'ቦታ ለመፍጠር ምርት ያስፈልጋል';
+
+  @override
+  String get sourceAndDestinationBatchRequired => 'ምንጭ እና መድረሻ ቦታ ያስፈልጋሉ';
+
+  @override
+  String get destinationBatchRequired => 'መድረሻ ቦታ ያስፈልጋል';
+
+  @override
+  String get sourceBatchRequired => 'ምንጭ ቦታ ያስፈልጋል';
+
+  @override
+  String get eachSourceMustHaveBatch => 'እያንዳንዱ ምንጭ ቦታ መምረጥ አለበት';
+
+  @override
+  String get eachDestinationMustHaveBatch => 'እያንዳንዱ መድረሻ ቦታ መምረጥ አለበት';
+
+  @override
+  String get eachDestinationQuantityAtLeast1 =>
+      'እያንዳንዱ መድረሻ ብዛት ቢያንስ 1 መሆን አለበት';
+
+  @override
+  String get atLeastOneSourceRequired => 'ቢያንስ አንድ ምንጭ ያስፈልጋል';
+
+  @override
+  String get atLeastOneDestinationRequired => 'ቢያንስ አንድ መድረሻ ያስፈልጋል';
+
+  @override
+  String totalQuantityMustNotExceedSource(int count) {
+    return 'ጠቅላላ ብዛት ከምንጭ ($count) መብለጥ አይገባም';
+  }
+
+  @override
+  String totalQuantityCannotExceedSource(int total, int source) {
+    return 'ጠቅላላ ብዛት ($total) ከምንጭ ቦታ ብዛት ($source) መብለጥ አይችልም';
+  }
+
+  @override
+  String get quantityMustBeAtLeast1 => 'ብዛት ቢያንስ 1 መሆን አለበት';
+
+  @override
+  String quantityCannotExceedSourceBatch(int count) {
+    return 'ብዛት ከምንጭ ቦታ ብዛት ($count) መብለጥ አይችልም';
+  }
+
+  @override
+  String get costPriceCannotBeNegative => 'የዋጋ ዋጋ አሉታዊ ሊሆን አይችልም';
+
+  @override
+  String get unitPriceCannotBeNegative => 'የክፍል ዋጋ አሉታዊ ሊሆን አይችልም';
+
+  @override
+  String get cannotBeNegative => 'አሉታዊ ሊሆን አይችልም';
+
+  @override
+  String get operationComingSoon => 'ተግባር በቅርብ ይመጣል';
+
+  @override
   String get stocks => 'ክምችቶች';
 
   @override
@@ -2017,6 +2142,11 @@ class AppLocalizationsAm extends AppLocalizations {
   }
 
   @override
+  String deleteTypeTitle(String type) {
+    return '$type ሰርዝ';
+  }
+
+  @override
   String confirmDeleteItem(String itemName) {
     return 'እርግጠኛ ነዎት $itemNameን መሰረዝ ይፈልጋሉ? ይህ ተግባር ሊመለስ አይችልም።';
   }
@@ -2453,6 +2583,21 @@ class AppLocalizationsAm extends AppLocalizations {
   String get receiptAttached => 'ደረሰኝ ተያይዟል';
 
   @override
+  String get walkingCustomer => 'Walking';
+
+  @override
+  String get allTransactions => 'All';
+
+  @override
+  String get selectCustomer => 'የተለመደ ይምረጡ';
+
+  @override
+  String get pleaseSelectBatchForItem => 'እባክዎ ለዚህ ንጥል ባች ይምረጡ';
+
+  @override
+  String get pleaseSelectAtLeastOneBatch => 'እባክዎ ለእያንዳንዱ ንጥል ቢያንስ አንድ ባች ይምረጡ';
+
+  @override
   String get addReceipt => 'ደረሰኝ ጨምር';
 
   @override
@@ -2700,7 +2845,7 @@ class AppLocalizationsAm extends AppLocalizations {
   String get thisActionCannotBeUndone => 'ይህ ተግባር ሊመለስ አይችልም።';
 
   @override
-  String get nA => 'N/A';
+  String get nA => 'አይተያየም';
 
   @override
   String get expenseCategory => 'expense category';
@@ -2763,6 +2908,54 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get noAuthenticatedUserFound => 'ምንም የተጠቃሚ ማረጋገጫ አልተገኘም።';
+
+  @override
+  String get sendingResetLink => 'Sending reset link...';
+
+  @override
+  String get validatingOtp => 'Validating OTP...';
+
+  @override
+  String get changingPassword => 'Changing password...';
+
+  @override
+  String get updatingProfile => 'Updating profile...';
+
+  @override
+  String get deletingAccount => 'Deleting account...';
+
+  @override
+  String get loggingOut => 'Logging out...';
+
+  @override
+  String get refreshing => 'Refreshing...';
+
+  @override
+  String get companySelected => 'Company Selected';
+
+  @override
+  String get branchSelected => 'Branch Selected';
+
+  @override
+  String get noContextSelected => 'No Context Selected';
+
+  @override
+  String get companyAndBranchSelected => 'Company & Branch Selected';
+
+  @override
+  String get guest => 'Guest';
+
+  @override
+  String get viewDetails => 'View details';
+
+  @override
+  String get noRolesAssigned => 'No roles assigned';
+
+  @override
+  String get balanceAddedSuccess => 'Balance added successfully';
+
+  @override
+  String get refundProcessedSuccess => 'Refund processed successfully';
 
   @override
   String get bankCreatedSuccessfully => 'ባንክ በተሳካ ሁኔታ ተፈጥሯል';
@@ -2894,4 +3087,15 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get profilePictureUploadedSuccessfully => 'የመገለጫ ስዕል በተሳካ ሁኔታ ተጭኗል';
+
+  @override
+  String transferLabel(String number) {
+    return 'ማስተላለፍ: $number';
+  }
+
+  @override
+  String get by => 'በ';
+
+  @override
+  String get arrow => '→';
 }

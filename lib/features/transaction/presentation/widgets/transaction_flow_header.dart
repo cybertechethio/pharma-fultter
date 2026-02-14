@@ -147,7 +147,7 @@ class TransactionFlowHeader extends StatelessWidget {
           ),
           decoration: BoxDecoration(
             color: isActive
-                ? stepColor.withOpacity(0.1)
+                ? stepColor.withValues(alpha: 0.1)
                 : BrandColors.transparent,
             borderRadius: BorderRadius.circular(AppSizes.radiusSm),
           ),
@@ -161,8 +161,8 @@ class TransactionFlowHeader extends StatelessWidget {
                     padding: EdgeInsets.all(AppSizes.sm),
                     decoration: BoxDecoration(
                       color: isEnabled
-                          ? stepColor.withOpacity(0.15)
-                          : BrandColors.textDisabled.withOpacity(0.1),
+                          ? stepColor.withValues(alpha: 0.15)
+                          : BrandColors.textDisabled.withValues(alpha: 0.1),
                       shape: BoxShape.circle,
                     ),
                     child: Icon(

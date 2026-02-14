@@ -16,7 +16,6 @@ class AccountInfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context);
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: AppSizes.lg),
@@ -43,7 +42,7 @@ class AccountInfoCard extends StatelessWidget {
           ),
           const Divider(height: 1),
           ListTile(
-            leading: Icon(Icons.business_outlined, color: theme.colorScheme.primary),
+            leading: Icon(Icons.business_outlined, color: BrandColors.primary),
             title: Text(l10n.companyName),
             subtitle: Text(
               (user.companyName?.isNotEmpty ?? false)

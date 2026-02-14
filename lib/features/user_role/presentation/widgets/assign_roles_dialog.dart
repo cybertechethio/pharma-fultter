@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../app/theme/app_sizes.dart';
+import '../../../../app/theme/brand_colors.dart';
+import '../../../../app/theme/text_styles.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../core/services/snackbar_service.dart';
 import '../../../../shared/components/forms/custom_button.dart';
@@ -121,8 +123,6 @@ class _AssignRolesDialogState extends ConsumerState<AssignRolesDialog> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
     final branchesAsync = ref.watch(branchProvider);
     final rolesAsync = ref.watch(roleProvider);
 
@@ -143,15 +143,15 @@ class _AssignRolesDialogState extends ConsumerState<AssignRolesDialog> {
                       children: [
                         Text(
                           l10n.assignRolesToUser,
-                          style: theme.textTheme.titleLarge?.copyWith(
-                            fontWeight: FontWeight.bold,
+                          style: context.title(
+                            bold: true,
                           ),
                         ),
                         const SizedBox(height: AppSizes.xs),
                         Text(
                           l10n.userLabel(widget.userName),
-                          style: theme.textTheme.bodyMedium?.copyWith(
-                            color: colorScheme.onSurfaceVariant,
+                          style: context.body(
+                            color: BrandColors.textSecondary,
                           ),
                         ),
                       ],
@@ -207,8 +207,8 @@ class _AssignRolesDialogState extends ConsumerState<AssignRolesDialog> {
                           children: [
                             Text(
                               l10n.selectBranchesAndAssignRoles,
-                              style: theme.textTheme.titleMedium?.copyWith(
-                                fontWeight: FontWeight.bold,
+                              style: context.title(
+                                bold: true,
                               ),
                             ),
                             TextButton(
@@ -238,9 +238,7 @@ class _AssignRolesDialogState extends ConsumerState<AssignRolesDialog> {
                                   onChanged: (value) => _toggleBranch(branchId, value ?? false),
                                   title: Text(
                                     branch.name,
-                                    style: theme.textTheme.titleMedium?.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                    ),
+                                    style: context.title(bold: true),
                                   ),
                                   dense: true,
                                   contentPadding: const EdgeInsets.symmetric(
@@ -273,8 +271,8 @@ class _AssignRolesDialogState extends ConsumerState<AssignRolesDialog> {
                                                 padding: const EdgeInsets.all(AppSizes.lg),
                                                 child: Text(
                                                   l10n.noRolesAvailable,
-                                                  style: theme.textTheme.bodyMedium?.copyWith(
-                                                    color: colorScheme.onSurfaceVariant,
+                                                  style: context.body(
+                                                    color: BrandColors.textSecondary,
                                                   ),
                                                 ),
                                               );
@@ -302,8 +300,8 @@ class _AssignRolesDialogState extends ConsumerState<AssignRolesDialog> {
                                         const SizedBox(height: AppSizes.sm),
                                         Text(
                                           'Selected: ${currentRoleIds.length} ${currentRoleIds.length == 1 ? 'role' : 'roles'}',
-                                          style: theme.textTheme.bodySmall?.copyWith(
-                                            color: colorScheme.onSurfaceVariant,
+                                          style: context.small(
+                                            color: BrandColors.textSecondary,
                                           ),
                                         ),
                                       ],
@@ -320,7 +318,7 @@ class _AssignRolesDialogState extends ConsumerState<AssignRolesDialog> {
                         // Summary
                         if (_selectedBranches.isNotEmpty)
                           Card(
-                            color: colorScheme.surfaceContainerHighest,
+                            color: BrandColors.surfaceContainerHighest,
                             child: Padding(
                               padding: const EdgeInsets.all(12),
                               child: Column(
@@ -328,8 +326,8 @@ class _AssignRolesDialogState extends ConsumerState<AssignRolesDialog> {
                                 children: [
                                   Text(
                                     'Summary:',
-                                    style: theme.textTheme.titleSmall?.copyWith(
-                                      fontWeight: FontWeight.bold,
+                                    style: context.small(
+                                      bold: true,
                                     ),
                                   ),
                                   const SizedBox(height: AppSizes.xs),
@@ -342,7 +340,7 @@ class _AssignRolesDialogState extends ConsumerState<AssignRolesDialog> {
 
                                     return Text(
                                       '• $branchName: $roleCount ${roleCount == 1 ? 'role' : 'roles'}',
-                                      style: theme.textTheme.bodySmall,
+                                      style: context.small(),
                                     );
                                   }).toList(),
                                   const SizedBox(height: AppSizes.xs),
@@ -352,9 +350,7 @@ class _AssignRolesDialogState extends ConsumerState<AssignRolesDialog> {
                                           .fold<int>(0, (sum, roleIds) => sum + roleIds.length);
                                       return Text(
                                         'Total: ${_selectedBranches.length} branches, $totalRoles role assignments',
-                                        style: theme.textTheme.bodySmall?.copyWith(
-                                          fontWeight: FontWeight.w600,
-                                        ),
+                                        style: context.small(bold: true),
                                       );
                                     },
                                   ),

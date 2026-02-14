@@ -256,7 +256,7 @@ class _PaymentMethodDialogState extends ConsumerState<PaymentMethodDialog> {
                         // Bank Selector (only for bank transfer)
                         if (_selectedMethod == PaymentMethodType.bankTransfer) ...[
                           Text(
-                            'Bank *',
+                            l10n.bankRequired,
                             style: context.label(),
                           ),
                           const SizedBox(height: AppSizes.sm),
@@ -324,7 +324,7 @@ class _PaymentMethodDialogState extends ConsumerState<PaymentMethodDialog> {
           color: BrandColors.errorBackgroundLight,
           borderRadius: BorderRadius.circular(AppSizes.xs),
           border: Border.all(
-            color: BrandColors.error.withOpacity(0.5),
+            color: BrandColors.error.withValues(alpha: 0.5),
           ),
         ),
         child: Center(
@@ -343,12 +343,12 @@ class _PaymentMethodDialogState extends ConsumerState<PaymentMethodDialog> {
               color: BrandColors.errorBackgroundLight,
               borderRadius: BorderRadius.circular(AppSizes.xs),
               border: Border.all(
-                color: BrandColors.error.withOpacity(0.5),
+                color: BrandColors.error.withValues(alpha: 0.5),
               ),
             ),
             child: Center(
               child: Text(
-                'No banks available',
+                l10n.noBanksAvailable,
                 style: context.body(color: BrandColors.error),
               ),
             ),
@@ -452,10 +452,11 @@ class _PaymentMethodDialogState extends ConsumerState<PaymentMethodDialog> {
   }
 
   void _handleSubmit() {
+    final l10n = AppLocalizations.of(context);
     // Validate bank selection for bank transfer
     if (_selectedMethod == PaymentMethodType.bankTransfer && _selectedBankId == null) {
       final snackbar = ref.read(snackbarServiceProvider);
-      snackbar.showInfo('Please select a bank');
+      snackbar.showInfo(l10n.pleaseSelectBank);
       return;
     }
 

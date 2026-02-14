@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cyber_pos/l10n/app_localizations.dart';
 import '../../../app/theme/app_sizes.dart';
+import '../../../app/theme/brand_colors.dart';
+import '../../../app/theme/text_styles.dart';
 
 /// Gregorian calendar date picker
 class GregorianDatePicker extends StatefulWidget {
@@ -110,7 +112,6 @@ class _GregorianDatePickerState extends State<GregorianDatePicker> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context);
     final daysInMonth = _getDaysInMonth(_currentYear, _currentMonth);
     final firstDayOfWeek = _getFirstDayOfWeek(_currentYear, _currentMonth);
@@ -124,7 +125,7 @@ class _GregorianDatePickerState extends State<GregorianDatePicker> {
         Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: theme.colorScheme.primaryContainer,
+            color: BrandColors.primaryContainer,
             borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
           ),
           child: Row(
@@ -133,29 +134,27 @@ class _GregorianDatePickerState extends State<GregorianDatePicker> {
               IconButton(
                 icon: const Icon(Icons.chevron_left),
                 onPressed: _previousMonth,
-                color: theme.colorScheme.onPrimaryContainer,
+                color: BrandColors.onPrimaryContainer,
               ),
               Column(
                 children: [
                   Text(
                     monthNames[_currentMonth - 1],
-                    style: theme.textTheme.titleLarge?.copyWith(
-                      color: theme.colorScheme.onPrimaryContainer,
-                      fontWeight: FontWeight.bold,
+                    style: context.title(
+                      color: BrandColors.onPrimaryContainer,
+                      bold: true,
                     ),
                   ),
                   Text(
                     _currentYear.toString(),
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      color: theme.colorScheme.onPrimaryContainer,
-                    ),
+                    style: context.body(color: BrandColors.onPrimaryContainer),
                   ),
                 ],
               ),
               IconButton(
                 icon: const Icon(Icons.chevron_right),
                 onPressed: _nextMonth,
-                color: theme.colorScheme.onPrimaryContainer,
+                color: BrandColors.onPrimaryContainer,
               ),
             ],
           ),
@@ -171,9 +170,9 @@ class _GregorianDatePickerState extends State<GregorianDatePicker> {
                 child: Text(
                   day,
                   textAlign: TextAlign.center,
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: theme.colorScheme.onSurfaceVariant,
+                  style: context.small(
+                    color: BrandColors.textSecondary,
+                    bold: true,
                   ),
                 ),
               );
@@ -195,16 +194,16 @@ class _GregorianDatePickerState extends State<GregorianDatePicker> {
             itemCount: 42, // 6 weeks
             itemBuilder: (context, index) {
               final dayOffset = index - (firstDayOfWeek % 7);
-              
+
               if (dayOffset < 0 || dayOffset >= daysInMonth) {
                 return const SizedBox.shrink();
               }
-              
+
               final day = dayOffset + 1;
               final isSelected = _selectedDate.day == day &&
                   _selectedDate.month == _currentMonth &&
                   _selectedDate.year == _currentYear;
-              
+
               final today = DateTime.now();
               final isToday = today.day == day &&
                   today.month == _currentMonth &&
@@ -216,14 +215,14 @@ class _GregorianDatePickerState extends State<GregorianDatePicker> {
                 child: Container(
                   decoration: BoxDecoration(
                     color: isSelected
-                        ? theme.colorScheme.primary
+                        ? BrandColors.primary
                         : isToday
-                            ? theme.colorScheme.primaryContainer
+                            ? BrandColors.primaryContainer
                             : null,
                     borderRadius: BorderRadius.circular(AppSizes.radiusSm),
                     border: isToday && !isSelected
                         ? Border.all(
-                            color: theme.colorScheme.primary,
+                            color: BrandColors.primary,
                             width: 2,
                           )
                         : null,
@@ -231,15 +230,13 @@ class _GregorianDatePickerState extends State<GregorianDatePicker> {
                   alignment: Alignment.center,
                   child: Text(
                     day.toString(),
-                    style: theme.textTheme.bodyMedium?.copyWith(
+                    style: context.body(
                       color: isSelected
-                          ? theme.colorScheme.onPrimary
+                          ? BrandColors.buttonText
                           : isToday
-                              ? theme.colorScheme.primary
-                              : theme.colorScheme.onSurface,
-                      fontWeight: isSelected || isToday
-                          ? FontWeight.bold
-                          : FontWeight.normal,
+                              ? BrandColors.primary
+                              : BrandColors.textPrimary,
+                      bold: isSelected || isToday,
                     ),
                   ),
                 ),

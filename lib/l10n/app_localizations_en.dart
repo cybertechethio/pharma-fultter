@@ -241,6 +241,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get selectDate => 'Select Date';
 
   @override
+  String get select => 'Select';
+
+  @override
   String get gregorianCalendar => 'Gregorian Calendar';
 
   @override
@@ -1236,6 +1239,132 @@ class AppLocalizationsEn extends AppLocalizations {
   String get batchNameRequired => 'Batch name is required';
 
   @override
+  String get split => 'Split';
+
+  @override
+  String get consolidation => 'Consolidation';
+
+  @override
+  String get consolidate => 'Consolidate';
+
+  @override
+  String get sourceBatch => 'Source batch';
+
+  @override
+  String get destinationBatch => 'Destination batch';
+
+  @override
+  String get selectSourceBatch => 'Select source batch';
+
+  @override
+  String get selectDestinationBatch => 'Select destination batch';
+
+  @override
+  String get sourceBatches => 'Source batches';
+
+  @override
+  String get destinationBatches => 'Destination batches';
+
+  @override
+  String get addSource => 'Add source';
+
+  @override
+  String get addDestination => 'Add destination';
+
+  @override
+  String sourceNumber(int number) {
+    return 'Source $number';
+  }
+
+  @override
+  String destinationNumber(int number) {
+    return 'Destination $number';
+  }
+
+  @override
+  String get selectBatch => 'Select batch';
+
+  @override
+  String get removeSource => 'Remove source';
+
+  @override
+  String get removeDestination => 'Remove destination';
+
+  @override
+  String get hideDetails => 'Hide details';
+
+  @override
+  String get moreOptions => 'More options';
+
+  @override
+  String get hideOptionalFields => 'Hide optional fields';
+
+  @override
+  String get qtyOptional => 'Qty (optional)';
+
+  @override
+  String get itemRequiredToCreateBatch => 'Item is required to create a batch';
+
+  @override
+  String get sourceAndDestinationBatchRequired =>
+      'Source and destination batch are required';
+
+  @override
+  String get destinationBatchRequired => 'Destination batch is required';
+
+  @override
+  String get sourceBatchRequired => 'Source batch is required';
+
+  @override
+  String get eachSourceMustHaveBatch =>
+      'Each source must have a batch selected';
+
+  @override
+  String get eachDestinationMustHaveBatch =>
+      'Each destination must have a batch selected';
+
+  @override
+  String get eachDestinationQuantityAtLeast1 =>
+      'Each destination quantity must be at least 1';
+
+  @override
+  String get atLeastOneSourceRequired => 'At least one source is required';
+
+  @override
+  String get atLeastOneDestinationRequired =>
+      'At least one destination is required';
+
+  @override
+  String totalQuantityMustNotExceedSource(int count) {
+    return 'Total quantity must not exceed source ($count)';
+  }
+
+  @override
+  String totalQuantityCannotExceedSource(int total, int source) {
+    return 'Total quantity ($total) cannot exceed source batch quantity ($source)';
+  }
+
+  @override
+  String get quantityMustBeAtLeast1 => 'Quantity must be at least 1';
+
+  @override
+  String quantityCannotExceedSourceBatch(int count) {
+    return 'Quantity cannot exceed source batch quantity ($count)';
+  }
+
+  @override
+  String get costPriceCannotBeNegative => 'Cost price cannot be negative';
+
+  @override
+  String get unitPriceCannotBeNegative => 'Unit price cannot be negative';
+
+  @override
+  String get cannotBeNegative => 'Cannot be negative';
+
+  @override
+  String get operationComingSoon => 'Operation – coming soon';
+
+  @override
   String get stocks => 'Stocks';
 
   @override
@@ -2041,6 +2170,11 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String deleteTypeTitle(String type) {
+    return 'Delete $type';
+  }
+
+  @override
   String confirmDeleteItem(String itemName) {
     return 'Are you sure you want to delete $itemName? This action cannot be undone.';
   }
@@ -2484,6 +2618,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get receiptAttached => 'Receipt attached';
 
   @override
+  String get walkingCustomer => 'Walking';
+
+  @override
+  String get allTransactions => 'All';
+
+  @override
+  String get selectCustomer => 'Select Customer';
+
+  @override
+  String get pleaseSelectBatchForItem => 'Please select a batch for this item';
+
+  @override
+  String get pleaseSelectAtLeastOneBatch =>
+      'Please select at least one batch for each item';
+
+  @override
   String get addReceipt => 'Add Receipt';
 
   @override
@@ -2801,6 +2951,54 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noAuthenticatedUserFound => 'No authenticated user found.';
 
   @override
+  String get sendingResetLink => 'Sending reset link...';
+
+  @override
+  String get validatingOtp => 'Validating OTP...';
+
+  @override
+  String get changingPassword => 'Changing password...';
+
+  @override
+  String get updatingProfile => 'Updating profile...';
+
+  @override
+  String get deletingAccount => 'Deleting account...';
+
+  @override
+  String get loggingOut => 'Logging out...';
+
+  @override
+  String get refreshing => 'Refreshing...';
+
+  @override
+  String get companySelected => 'Company Selected';
+
+  @override
+  String get branchSelected => 'Branch Selected';
+
+  @override
+  String get noContextSelected => 'No Context Selected';
+
+  @override
+  String get companyAndBranchSelected => 'Company & Branch Selected';
+
+  @override
+  String get guest => 'Guest';
+
+  @override
+  String get viewDetails => 'View details';
+
+  @override
+  String get noRolesAssigned => 'No roles assigned';
+
+  @override
+  String get balanceAddedSuccess => 'Balance added successfully';
+
+  @override
+  String get refundProcessedSuccess => 'Refund processed successfully';
+
+  @override
   String get bankCreatedSuccessfully => 'Bank created successfully';
 
   @override
@@ -2940,4 +3138,15 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get profilePictureUploadedSuccessfully =>
       'Profile picture uploaded successfully';
+
+  @override
+  String transferLabel(String number) {
+    return 'Transfer: $number';
+  }
+
+  @override
+  String get by => 'by';
+
+  @override
+  String get arrow => '→';
 }

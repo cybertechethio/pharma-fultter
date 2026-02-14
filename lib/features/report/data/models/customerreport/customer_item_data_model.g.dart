@@ -35,10 +35,6 @@ _CustomerItemDataModel _$CustomerItemDataModelFromJson(
       'dueAmount',
       (v) => JsonTypeConverters.doubleFromDynamic(v),
     ),
-    hasDiscrepancy: $checkedConvert(
-      'hasDiscrepancy',
-      (v) => JsonTypeConverters.boolFromDynamic(v),
-    ),
   );
   return val;
 });
@@ -56,5 +52,4 @@ Map<String, dynamic> _$CustomerItemDataModelToJson(
   'totalAmount': instance.totalAmount,
   'paidAmount': instance.paidAmount,
   'dueAmount': instance.dueAmount,
-  'hasDiscrepancy': instance.hasDiscrepancy,
 };

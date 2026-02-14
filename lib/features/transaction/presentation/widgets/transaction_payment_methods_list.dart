@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../app/theme/app_sizes.dart';
 import '../../../../app/theme/brand_colors.dart';
 import '../../../../app/theme/text_styles.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../../../../core/enums/payment_method_type_enum.dart';
 import '../../../../shared/utils/formatters.dart';
 import '../../../../shared/components/common/local_file_image_preview.dart';
@@ -15,6 +16,7 @@ class TransactionPaymentMethodsList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
     final formState = ref.watch(transactionFormProvider);
     final formNotifier = ref.read(transactionFormProvider.notifier);
     final paymentMethods = formState.request.paymentMethods ?? [];
@@ -27,7 +29,7 @@ class TransactionPaymentMethodsList extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Payment Methods (${paymentMethods.length})',
+          '${l10n.paymentMethods} (${paymentMethods.length})',
           style: context.subtitle(),
         ),
         SizedBox(height: AppSizes.md),
@@ -40,10 +42,10 @@ class TransactionPaymentMethodsList extends ConsumerWidget {
             margin: EdgeInsets.only(bottom: AppSizes.sm),
             padding: const EdgeInsets.all(AppSizes.sm),
             decoration: BoxDecoration(
-              color: BrandColors.surfaceVariant.withOpacity(0.3),
+              color: BrandColors.surfaceVariant.withValues(alpha: 0.3),
               borderRadius: BorderRadius.circular(AppSizes.radius),
               border: Border.all(
-                color: BrandColors.outline.withOpacity(0.2),
+                color: BrandColors.outline.withValues(alpha: 0.2),
               ),
             ),
             child: Row(
@@ -75,7 +77,7 @@ class TransactionPaymentMethodsList extends ConsumerWidget {
                       if (method.referenceNumber != null) ...[
                         SizedBox(height: AppSizes.xs),
                         Text(
-                          'Ref: ${method.referenceNumber}',
+                          '${l10n.ref}: ${method.referenceNumber}',
                           style: context.small(),
                         ),
                       ],
@@ -90,7 +92,7 @@ class TransactionPaymentMethodsList extends ConsumerWidget {
                             ),
                             SizedBox(width: AppSizes.xs),
                             Text(
-                              'Receipt attached',
+                              l10n.receiptAttached,
                               style: context.smallPrimary(bold: true),
                             ),
                           ],
@@ -175,7 +177,7 @@ class TransactionPaymentMethodsList extends ConsumerWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(AppSizes.radiusSm),
             border: Border.all(
-              color: BrandColors.outline.withOpacity(0.2),
+              color: BrandColors.outline.withValues(alpha: 0.2),
             ),
           ),
           child: ClipRRect(

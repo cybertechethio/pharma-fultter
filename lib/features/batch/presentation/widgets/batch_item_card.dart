@@ -7,6 +7,7 @@ import '../../../../shared/utils/url_utils.dart';
 import '../../../../app/theme/text_styles.dart';
 import '../../../../app/theme/brand_colors.dart';
 import '../../../../app/theme/app_sizes.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../../../item/domain/entities/item.dart';
 
 class BatchItemCard extends StatelessWidget {
@@ -47,37 +48,37 @@ class BatchItemCard extends StatelessWidget {
                         icon: Icon(
                           Icons.more_vert,
                           color: BrandColors.textSecondary,
-                          size: 20,
+                          size: AppSizes.iconSize,
                         ),
                         padding: EdgeInsets.zero,
                         constraints: const BoxConstraints(
-                          minWidth: 32,
-                          minHeight: 32,
+                          minWidth: AppSizes.xxxl,
+                          minHeight: AppSizes.xxxl,
                         ),
                         onSelected: (value) => _onOperationSelected(context, value),
                         itemBuilder: (context) => [
-                          const PopupMenuItem<String>(
+                          PopupMenuItem<String>(
                             value: 'transfer',
                             child: ListTile(
                               contentPadding: EdgeInsets.zero,
-                              leading: Icon(Icons.swap_horiz_outlined, size: 22),
-                              title: Text('Transfer'),
+                              leading: Icon(Icons.swap_horiz_outlined, size: AppSizes.iconSizeLg),
+                              title: Text(AppLocalizations.of(context).transfer),
                             ),
                           ),
-                          const PopupMenuItem<String>(
+                          PopupMenuItem<String>(
                             value: 'consolidation',
                             child: ListTile(
                               contentPadding: EdgeInsets.zero,
-                              leading: Icon(Icons.merge_type_outlined, size: 22),
-                              title: Text('Consolidation'),
+                              leading: Icon(Icons.merge_type_outlined, size: AppSizes.iconSizeLg),
+                              title: Text(AppLocalizations.of(context).consolidation),
                             ),
                           ),
-                          const PopupMenuItem<String>(
+                          PopupMenuItem<String>(
                             value: 'split',
                             child: ListTile(
                               contentPadding: EdgeInsets.zero,
-                              leading: Icon(Icons.call_split_outlined, size: 22),
-                              title: Text('Split'),
+                              leading: Icon(Icons.call_split_outlined, size: AppSizes.iconSizeLg),
+                              title: Text(AppLocalizations.of(context).split),
                             ),
                           ),
                         ],
@@ -127,20 +128,20 @@ class BatchItemCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(AppSizes.radius),
           child: CachedNetworkImage(
             imageUrl: imageUrl,
-            width: 56,
-            height: 56,
+            width: AppSizes.imageSizeMd,
+            height: AppSizes.imageSizeMd,
             fit: BoxFit.cover,
             placeholder: (context, url) => Container(
-              width: 56,
-              height: 56,
+              width: AppSizes.imageSizeMd,
+              height: AppSizes.imageSizeMd,
               color: BrandColors.divider,
               child: const Center(
                 child: CircularProgressIndicator(strokeWidth: 2),
               ),
             ),
             errorWidget: (context, url, error) => Container(
-              width: 56,
-              height: 56,
+              width: AppSizes.imageSizeMd,
+              height: AppSizes.imageSizeMd,
               color: BrandColors.divider,
               child: Icon(
                 Icons.inventory_2_outlined,
@@ -154,8 +155,8 @@ class BatchItemCard extends StatelessWidget {
     
     // Placeholder icon
     return Container(
-      width: 56,
-      height: 56,
+      width: AppSizes.imageSizeMd,
+      height: AppSizes.imageSizeMd,
       decoration: BoxDecoration(
         color: BrandColors.divider,
         borderRadius: BorderRadius.circular(AppSizes.radius),
@@ -163,7 +164,7 @@ class BatchItemCard extends StatelessWidget {
       child: Icon(
         Icons.inventory_2_outlined,
         color: BrandColors.textSecondary,
-        size: 28,
+        size: AppSizes.iconSizeLg,
       ),
     );
   }
@@ -185,7 +186,7 @@ class BatchItemCard extends StatelessWidget {
         break;
       default:
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Operation – coming soon')),
+          SnackBar(content: Text(AppLocalizations.of(context).operationComingSoon)),
         );
     }
   }

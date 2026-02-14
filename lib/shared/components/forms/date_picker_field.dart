@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:cyber_pos/l10n/app_localizations.dart';
 
 import '../../../app/theme/app_sizes.dart';
 import '../../../app/theme/brand_colors.dart';
+import '../../../app/theme/text_styles.dart';
 
 /// Reusable date picker field widget (date only, no time)
 /// 
@@ -50,14 +52,15 @@ class DatePickerField extends StatelessWidget {
       }
     }
 
+    final l10n = AppLocalizations.of(context);
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: existingDate ?? initialDate ?? DateTime.now(),
       firstDate: firstDate ?? DateTime(1900),
       lastDate: lastDate ?? DateTime(2100),
-      helpText: 'Select Date',
-      cancelText: 'Cancel',
-      confirmText: 'Select',
+      helpText: l10n.selectDate,
+      cancelText: l10n.cancel,
+      confirmText: l10n.select,
     );
 
     if (picked != null) {
@@ -73,16 +76,8 @@ class DatePickerField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final textTheme = theme.textTheme;
-
-    final labelStyle = textTheme.bodySmall?.copyWith(
-      color: BrandColors.inputPlaceholder,
-      fontWeight: FontWeight.normal,
-    );
-    final inputStyle = textTheme.bodyMedium?.copyWith(
-      color: BrandColors.inputText,
-    );
+    final labelStyle = context.small(color: BrandColors.inputPlaceholder);
+    final inputStyle = context.body(color: BrandColors.inputText);
 
     return ValueListenableBuilder<TextEditingValue>(
       valueListenable: controller,

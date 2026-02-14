@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../app/theme/app_sizes.dart';
 import '../../../../app/theme/brand_colors.dart';
 import '../../../../app/theme/text_styles.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/components/common/card_title.dart';
 import '../../../../shared/utils/formatters.dart';
 import '../../../../core/enums/transaction_type_enum.dart';
@@ -19,18 +20,19 @@ class TransactionCard extends StatelessWidget {
   });
 
   /// Get customer/supplier name or "Walking" for sale/purchase
-  String _getDisplayName() {
+  String _getDisplayName(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     if (transaction.transactionType == TransactionType.sale) {
-      return transaction.customerName ?? 'Walking';
+      return transaction.customerName ?? l10n.walkingCustomer;
     } else if (transaction.transactionType == TransactionType.purchase) {
-      return transaction.supplierName ?? 'Walking';
+      return transaction.supplierName ?? l10n.walkingCustomer;
     }
     return transaction.customerName ?? transaction.supplierName ?? '';
   }
 
   @override
   Widget build(BuildContext context) {
-    final displayName = _getDisplayName();
+    final displayName = _getDisplayName(context);
     final status = transaction.status.toLowerCase() == 'reversed'
         ? TransactionStatus.reversed
         : TransactionStatus.completed;
@@ -74,7 +76,7 @@ class TransactionCard extends StatelessWidget {
                                 vertical: 2,
                               ),
                               decoration: BoxDecoration(
-                                color: transaction.transactionType.getColor().withOpacity(0.1),
+                                color: transaction.transactionType.getColor().withValues(alpha: 0.1),
                                 borderRadius: BorderRadius.circular(AppSizes.radiusXs),
                               ),
                               child: Text(

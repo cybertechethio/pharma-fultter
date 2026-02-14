@@ -125,14 +125,14 @@ class _CategorySelectionDialogState extends ConsumerState<CategorySelectionDialo
                             Icon(
                               Icons.category_outlined,
                               size: AppSizes.xxxxl + AppSizes.lg,
-                              color: BrandColors.textPrimary.withOpacity(0.3),
+                              color: BrandColors.textPrimary.withValues(alpha: 0.3),
                             ),
                             const SizedBox(height: AppSizes.lg),
                             Text(
                               categories.isEmpty
                                   ? l10n.noCategoriesFound
                                   : l10n.noCategoriesMatchSearch,
-                              style: context.body(color: BrandColors.textPrimary.withOpacity(0.6)),
+                              style: context.body(color: BrandColors.textPrimary.withValues(alpha: 0.6)),
                             ),
                           ],
                         ),
@@ -149,7 +149,7 @@ class _CategorySelectionDialogState extends ConsumerState<CategorySelectionDialo
                         return ListTile(
                           title: Text(category.name),
                           selected: isSelected,
-                          selectedTileColor: BrandColors.primaryContainer.withOpacity(0.3),
+                          selectedTileColor: BrandColors.primaryContainer.withValues(alpha: 0.3),
                           onTap: () {
                             Navigator.of(context).pop(categoryId);
                           },

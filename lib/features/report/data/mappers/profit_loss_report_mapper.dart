@@ -19,7 +19,6 @@ import '../models/profitlossreport/profit_loss_report_model.dart';
 extension ProfitLossItemDataMapper on ProfitLossItemDataModel {
   ProfitLossItemData toDomain() {
     return ProfitLossItemData(
-      itemType: itemType,
       sales: sales,
       cost: cost,
       vat: vat,

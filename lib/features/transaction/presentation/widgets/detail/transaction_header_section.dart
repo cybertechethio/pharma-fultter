@@ -37,7 +37,7 @@ class TransactionHeaderSection extends ConsumerWidget {
         color: BrandColors.surface,
         borderRadius: BorderRadius.circular(AppSizes.radius),
         border: Border.all(
-          color: BrandColors.outline.withOpacity(0.1),
+          color: BrandColors.outline.withValues(alpha: 0.1),
         ),
       ),
       child: Column(
@@ -98,7 +98,7 @@ class TransactionHeaderSection extends ConsumerWidget {
                   vertical: 4,
                 ),
                 decoration: BoxDecoration(
-                  color: typeColor.withOpacity(0.1),
+                  color: typeColor.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(AppSizes.radiusSm),
                 ),
                 child: Row(
@@ -219,7 +219,7 @@ class _ReverseConfirmDialogState extends State<_ReverseConfirmDialog> {
             Container(
               padding: const EdgeInsets.all(AppSizes.sm),
               decoration: BoxDecoration(
-                color: BrandColors.warning.withOpacity(0.1),
+                color: BrandColors.warning.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(AppSizes.radiusSm),
               ),
               child: Row(

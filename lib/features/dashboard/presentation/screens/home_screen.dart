@@ -41,8 +41,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    _endDate = DateTime.now();
-    
+    final now = DateTime.now();
+    _endDate = now;
+    _startDate = now.subtract(const Duration(days: 7));
+
     // Preload all dropdown providers in the background
     // This ensures data is ready when user navigates to forms that need them
     WidgetsBinding.instance.addPostFrameCallback((_) {

@@ -31,16 +31,15 @@ class _StockMovementsSectionState extends ConsumerState<StockMovementsSection> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final colorScheme = Theme.of(context).colorScheme;
     final asyncMovements =
         ref.watch(stockMovementsProvider(widget.stock.itemId));
 
     return Container(
       padding: const EdgeInsets.all(AppSizes.lg),
       decoration: BoxDecoration(
-        color: colorScheme.surface,
+        color: BrandColors.surface,
         borderRadius: BorderRadius.circular(AppSizes.radius),
-        border: Border.all(color: colorScheme.outline.withOpacity(0.1)),
+        border: Border.all(color: BrandColors.outline.withOpacity(0.1)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,8 +49,8 @@ class _StockMovementsSectionState extends ConsumerState<StockMovementsSection> {
             children: [
               Icon(
                 Icons.swap_vert_rounded,
-                size: 20,
-                color: colorScheme.primary,
+                size: AppSizes.iconSize,
+                color: BrandColors.primary,
               ),
               const SizedBox(width: AppSizes.sm),
               Expanded(
@@ -68,8 +67,8 @@ class _StockMovementsSectionState extends ConsumerState<StockMovementsSection> {
                       .refresh(),
                   icon: Icon(
                     Icons.refresh_rounded,
-                    size: 20,
-                    color: colorScheme.primary,
+                    size: AppSizes.iconSize,
+                    color: BrandColors.primary,
                   ),
                   padding: EdgeInsets.zero,
                   constraints: const BoxConstraints(),
@@ -89,7 +88,10 @@ class _StockMovementsSectionState extends ConsumerState<StockMovementsSection> {
                 child: SizedBox(
                   width: AppSizes.iconSizeLg,
                   height: AppSizes.iconSizeLg,
-                  child: CircularProgressIndicator(strokeWidth: 2),
+                  child: CircularProgressIndicator(
+                    strokeWidth: AppSizes.loaderStrokeWidth,
+                    valueColor: AlwaysStoppedAnimation<Color>(BrandColors.primary),
+                  ),
                 ),
               ),
             ),
@@ -187,15 +189,15 @@ class _StockMovementsSectionState extends ConsumerState<StockMovementsSection> {
                               _isExpanded
                                   ? Icons.keyboard_arrow_up_rounded
                                   : Icons.keyboard_arrow_down_rounded,
-                              size: 18,
-                              color: colorScheme.primary,
+                              size: AppSizes.iconSize,
+                              color: BrandColors.primary,
                             ),
                             const SizedBox(width: AppSizes.xs),
                             Text(
                               _isExpanded
                                   ? l10n.showLess
                                   : l10n.moreMovements(movements.length - _initialLimit),
-                              style: context.small(color: colorScheme.primary),
+                              style: context.small(color: BrandColors.primary),
                             ),
                           ],
                         ),

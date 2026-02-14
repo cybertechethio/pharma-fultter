@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../app/theme/app_sizes.dart';
 import '../../../../app/theme/brand_colors.dart';
+import '../../../../app/theme/text_styles.dart';
 import '../../../../l10n/app_localizations.dart';
 import 'drawer_nav_item.dart';
 
@@ -21,8 +22,6 @@ class DrawerFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
     final l10n = AppLocalizations.of(context);
 
     return Container(
@@ -46,13 +45,13 @@ class DrawerFooter extends StatelessWidget {
                 icon: Icons.person_outline_outlined,
                 label: l10n.profile,
                 onTap: onProfileTap!,
-                iconColor: colorScheme.secondary,
+                iconColor: BrandColors.secondary,
               ),
             DrawerNavItem(
               icon: Icons.settings_outlined,
               label: l10n.settings,
               onTap: onSettingsTap,
-              iconColor: colorScheme.secondary,
+              iconColor: BrandColors.secondary,
             ),
             // Version Info
             if (appVersion != null)
@@ -60,10 +59,9 @@ class DrawerFooter extends StatelessWidget {
                 padding: const EdgeInsets.only(top: AppSizes.sm, bottom: AppSizes.md),
                 child: Text(
                   'v$appVersion',
-                  style: theme.textTheme.labelSmall?.copyWith(
-                    color: colorScheme.onSurfaceVariant.withOpacity(0.5),
-                    letterSpacing: 0.5,
-                  ),
+                  style: context.caption(
+                    color: BrandColors.textSecondary,
+                  ).copyWith(letterSpacing: 0.5),
                 ),
               )
             else

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../../app/theme/app_sizes.dart';
+import '../../../../../app/theme/brand_colors.dart';
+import '../../../../../app/theme/text_styles.dart';
 
 class CompactInfoRow extends StatelessWidget {
   final IconData icon;
@@ -17,8 +19,6 @@ class CompactInfoRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
 
     if (isCompact) {
       // Compact: Label and value on same line
@@ -26,20 +26,16 @@ class CompactInfoRow extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 6),
         child: Row(
           children: [
-            Icon(icon, size: 18, color: colorScheme.primary),
+            Icon(icon, size: AppSizes.iconSize, color: BrandColors.primary),
             const SizedBox(width: AppSizes.sm),
             Text(
               label,
-              style: theme.textTheme.bodySmall?.copyWith(
-                color: colorScheme.onSurfaceVariant,
-              ),
+              style: context.small(color: BrandColors.textSecondary),
             ),
             const Spacer(),
             Text(
               value,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                fontWeight: FontWeight.w500,
-              ),
+              style: context.body(bold: true),
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
             ),
@@ -53,7 +49,7 @@ class CompactInfoRow extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Icon(icon, size: 18, color: colorScheme.primary),
+            Icon(icon, size: AppSizes.iconSize, color: BrandColors.primary),
             const SizedBox(width: AppSizes.sm),
             Expanded(
               child: Column(
@@ -61,16 +57,12 @@ class CompactInfoRow extends StatelessWidget {
                 children: [
                   Text(
                     label,
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      color: colorScheme.onSurfaceVariant,
-                    ),
+                    style: context.small(color: BrandColors.textSecondary),
                   ),
                   const SizedBox(height: AppSizes.xxs),
                   Text(
                     value,
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      fontWeight: FontWeight.w500,
-                    ),
+                    style: context.body(bold: true),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                   ),

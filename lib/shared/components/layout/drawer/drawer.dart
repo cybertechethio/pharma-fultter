@@ -36,9 +36,6 @@ class _AppDrawerState extends ConsumerState<AppDrawer> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-
     final contextAsync = ref.watch(currentContextProvider);
     final branchesAsync = ref.watch(localBranchesProviderProvider);
     final userAsync = ref.watch(profileProvider);
@@ -82,7 +79,7 @@ class _AppDrawerState extends ConsumerState<AppDrawer> {
     }
 
     return Drawer(
-      backgroundColor: colorScheme.surface,
+      backgroundColor: BrandColors.surface,
       width: AppSizes.drawerWidth,
       child: Column(
         children: [
@@ -162,8 +159,6 @@ class _DrawerScrollableContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
 
     return ShaderMask(
       shaderCallback: (Rect bounds) {
@@ -172,8 +167,8 @@ class _DrawerScrollableContent extends StatelessWidget {
           end: Alignment.bottomCenter,
           colors: [
             BrandColors.transparent,
-            colorScheme.surface,
-            colorScheme.surface,
+            BrandColors.surface,
+            BrandColors.surface,
             BrandColors.transparent,
           ],
           stops: const [0.0, 0.02, 0.98, 1.0],

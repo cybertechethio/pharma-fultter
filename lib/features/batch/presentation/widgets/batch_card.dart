@@ -21,14 +21,13 @@ class BatchCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final updating = ref.watch(batchUpdateLoadingProvider).contains(batch.id);
     final l10n = AppLocalizations.of(context);
-
     final costStr = batch.costPrice != null
         ? Formatters.formatCurrency(batch.costPrice!)
         : '—';
     final unitStr = batch.unitPrice != null
         ? Formatters.formatCurrency(batch.unitPrice!)
         : '—';
-    final details = 'Cost: $costStr · Price: $unitStr';
+    final details = '${l10n.costPrice}: $costStr · ${l10n.unitPrice}: $unitStr';
 
     return InkWell(
       onTap: () => _navigateToDetail(context),
@@ -46,12 +45,12 @@ class BatchCard extends ConsumerWidget {
               children: [
                 Expanded(child: cardTitle(title: batch.batchName)),
                 Text(
-                  'Qty: ${batch.quantity}',
+                  '${l10n.qty}: ${batch.quantity}',
                   style: context.small().copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
             ),
-            const SizedBox(height: 2),
+            const SizedBox(height: AppSizes.xxs),
             // Batch number (left) and status (right)
             Row(
               children: [
@@ -63,7 +62,7 @@ class BatchCard extends ConsumerWidget {
                 ActiveStatus(isActive: batch.isActive),
               ],
             ),
-            const SizedBox(height: 4),
+            const SizedBox(height: AppSizes.xs),
             // Price row with edit on right
             Row(
               children: [

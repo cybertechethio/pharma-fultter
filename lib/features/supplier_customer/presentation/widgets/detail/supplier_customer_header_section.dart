@@ -25,7 +25,7 @@ class SupplierCustomerHeaderSection extends StatelessWidget {
       decoration: BoxDecoration(
         color: BrandColors.surface,
         borderRadius: BorderRadius.circular(AppSizes.radius),
-        border: Border.all(color: BrandColors.outline.withOpacity(0.1)),
+        border: Border.all(color: BrandColors.outline.withValues(alpha: 0.1)),
       ),
       child: Column(
         children: [
@@ -80,7 +80,7 @@ class _Badge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: AppSizes.sm, vertical: AppSizes.xs),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(AppSizes.radiusSm),
       ),
       child: Text(

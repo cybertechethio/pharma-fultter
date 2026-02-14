@@ -25,7 +25,7 @@ class StockMovementInfoSection extends StatelessWidget {
       decoration: BoxDecoration(
         color: BrandColors.surface,
         borderRadius: BorderRadius.circular(AppSizes.radius),
-        border: Border.all(color: BrandColors.outline.withOpacity(0.1)),
+        border: Border.all(color: BrandColors.outline.withValues(alpha: 0.1)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

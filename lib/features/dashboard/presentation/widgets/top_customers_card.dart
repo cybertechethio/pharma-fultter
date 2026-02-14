@@ -31,7 +31,7 @@ class TopCustomersCard extends StatelessWidget {
         color: BrandColors.cardBackground,
         borderRadius: BorderRadius.circular(AppSizes.radiusLg),
         border: Border.all(
-          color: BrandColors.border.withOpacity(0.1),
+          color: BrandColors.border.withValues(alpha: 0.1),
         ),
         boxShadow: [
           BoxShadow(
@@ -191,7 +191,7 @@ class _CustomerItem extends StatelessWidget {
         if (!isLast)
           Divider(
             height: AppSizes.br,
-            color: BrandColors.border.withOpacity(0.1),
+            color: BrandColors.border.withValues(alpha: 0.1),
           ),
         if (!isLast) const SizedBox(height: AppSizes.lg),
       ],

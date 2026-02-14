@@ -530,6 +530,12 @@ abstract class AppLocalizations {
   /// **'Select Date'**
   String get selectDate;
 
+  /// Select button label (e.g. date picker confirm)
+  ///
+  /// In en, this message translates to:
+  /// **'Select'**
+  String get select;
+
   /// Gregorian calendar type label
   ///
   /// In en, this message translates to:
@@ -2414,6 +2420,228 @@ abstract class AppLocalizations {
   /// **'Batch name is required'**
   String get batchNameRequired;
 
+  /// No description provided for @split.
+  ///
+  /// In en, this message translates to:
+  /// **'Split'**
+  String get split;
+
+  /// No description provided for @consolidation.
+  ///
+  /// In en, this message translates to:
+  /// **'Consolidation'**
+  String get consolidation;
+
+  /// No description provided for @consolidate.
+  ///
+  /// In en, this message translates to:
+  /// **'Consolidate'**
+  String get consolidate;
+
+  /// No description provided for @sourceBatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Source batch'**
+  String get sourceBatch;
+
+  /// No description provided for @destinationBatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Destination batch'**
+  String get destinationBatch;
+
+  /// No description provided for @selectSourceBatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Select source batch'**
+  String get selectSourceBatch;
+
+  /// No description provided for @selectDestinationBatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Select destination batch'**
+  String get selectDestinationBatch;
+
+  /// No description provided for @sourceBatches.
+  ///
+  /// In en, this message translates to:
+  /// **'Source batches'**
+  String get sourceBatches;
+
+  /// No description provided for @destinationBatches.
+  ///
+  /// In en, this message translates to:
+  /// **'Destination batches'**
+  String get destinationBatches;
+
+  /// No description provided for @addSource.
+  ///
+  /// In en, this message translates to:
+  /// **'Add source'**
+  String get addSource;
+
+  /// No description provided for @addDestination.
+  ///
+  /// In en, this message translates to:
+  /// **'Add destination'**
+  String get addDestination;
+
+  /// No description provided for @sourceNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Source {number}'**
+  String sourceNumber(int number);
+
+  /// No description provided for @destinationNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Destination {number}'**
+  String destinationNumber(int number);
+
+  /// No description provided for @selectBatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Select batch'**
+  String get selectBatch;
+
+  /// No description provided for @removeSource.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove source'**
+  String get removeSource;
+
+  /// No description provided for @removeDestination.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove destination'**
+  String get removeDestination;
+
+  /// No description provided for @hideDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide details'**
+  String get hideDetails;
+
+  /// No description provided for @moreOptions.
+  ///
+  /// In en, this message translates to:
+  /// **'More options'**
+  String get moreOptions;
+
+  /// No description provided for @hideOptionalFields.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide optional fields'**
+  String get hideOptionalFields;
+
+  /// No description provided for @qtyOptional.
+  ///
+  /// In en, this message translates to:
+  /// **'Qty (optional)'**
+  String get qtyOptional;
+
+  /// No description provided for @itemRequiredToCreateBatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Item is required to create a batch'**
+  String get itemRequiredToCreateBatch;
+
+  /// No description provided for @sourceAndDestinationBatchRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Source and destination batch are required'**
+  String get sourceAndDestinationBatchRequired;
+
+  /// No description provided for @destinationBatchRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Destination batch is required'**
+  String get destinationBatchRequired;
+
+  /// No description provided for @sourceBatchRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Source batch is required'**
+  String get sourceBatchRequired;
+
+  /// No description provided for @eachSourceMustHaveBatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Each source must have a batch selected'**
+  String get eachSourceMustHaveBatch;
+
+  /// No description provided for @eachDestinationMustHaveBatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Each destination must have a batch selected'**
+  String get eachDestinationMustHaveBatch;
+
+  /// No description provided for @eachDestinationQuantityAtLeast1.
+  ///
+  /// In en, this message translates to:
+  /// **'Each destination quantity must be at least 1'**
+  String get eachDestinationQuantityAtLeast1;
+
+  /// No description provided for @atLeastOneSourceRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'At least one source is required'**
+  String get atLeastOneSourceRequired;
+
+  /// No description provided for @atLeastOneDestinationRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'At least one destination is required'**
+  String get atLeastOneDestinationRequired;
+
+  /// No description provided for @totalQuantityMustNotExceedSource.
+  ///
+  /// In en, this message translates to:
+  /// **'Total quantity must not exceed source ({count})'**
+  String totalQuantityMustNotExceedSource(int count);
+
+  /// No description provided for @totalQuantityCannotExceedSource.
+  ///
+  /// In en, this message translates to:
+  /// **'Total quantity ({total}) cannot exceed source batch quantity ({source})'**
+  String totalQuantityCannotExceedSource(int total, int source);
+
+  /// No description provided for @quantityMustBeAtLeast1.
+  ///
+  /// In en, this message translates to:
+  /// **'Quantity must be at least 1'**
+  String get quantityMustBeAtLeast1;
+
+  /// No description provided for @quantityCannotExceedSourceBatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Quantity cannot exceed source batch quantity ({count})'**
+  String quantityCannotExceedSourceBatch(int count);
+
+  /// No description provided for @costPriceCannotBeNegative.
+  ///
+  /// In en, this message translates to:
+  /// **'Cost price cannot be negative'**
+  String get costPriceCannotBeNegative;
+
+  /// No description provided for @unitPriceCannotBeNegative.
+  ///
+  /// In en, this message translates to:
+  /// **'Unit price cannot be negative'**
+  String get unitPriceCannotBeNegative;
+
+  /// No description provided for @cannotBeNegative.
+  ///
+  /// In en, this message translates to:
+  /// **'Cannot be negative'**
+  String get cannotBeNegative;
+
+  /// No description provided for @operationComingSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Operation – coming soon'**
+  String get operationComingSoon;
+
   /// Stocks menu label
   ///
   /// In en, this message translates to:
@@ -3980,6 +4208,12 @@ abstract class AppLocalizations {
   /// **'Error picking images: {error}'**
   String errorPickingImages(String error);
 
+  /// Delete confirmation dialog title with item type
+  ///
+  /// In en, this message translates to:
+  /// **'Delete {type}'**
+  String deleteTypeTitle(String type);
+
   /// Delete item confirmation message
   ///
   /// In en, this message translates to:
@@ -4742,6 +4976,36 @@ abstract class AppLocalizations {
   /// **'Receipt attached'**
   String get receiptAttached;
 
+  /// No description provided for @walkingCustomer.
+  ///
+  /// In en, this message translates to:
+  /// **'Walking'**
+  String get walkingCustomer;
+
+  /// No description provided for @allTransactions.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get allTransactions;
+
+  /// No description provided for @selectCustomer.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Customer'**
+  String get selectCustomer;
+
+  /// No description provided for @pleaseSelectBatchForItem.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select a batch for this item'**
+  String get pleaseSelectBatchForItem;
+
+  /// No description provided for @pleaseSelectAtLeastOneBatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select at least one batch for each item'**
+  String get pleaseSelectAtLeastOneBatch;
+
   /// Add receipt button label
   ///
   /// In en, this message translates to:
@@ -5336,6 +5600,102 @@ abstract class AppLocalizations {
   /// **'No authenticated user found.'**
   String get noAuthenticatedUserFound;
 
+  /// No description provided for @sendingResetLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Sending reset link...'**
+  String get sendingResetLink;
+
+  /// No description provided for @validatingOtp.
+  ///
+  /// In en, this message translates to:
+  /// **'Validating OTP...'**
+  String get validatingOtp;
+
+  /// No description provided for @changingPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Changing password...'**
+  String get changingPassword;
+
+  /// No description provided for @updatingProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Updating profile...'**
+  String get updatingProfile;
+
+  /// No description provided for @deletingAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Deleting account...'**
+  String get deletingAccount;
+
+  /// No description provided for @loggingOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Logging out...'**
+  String get loggingOut;
+
+  /// No description provided for @refreshing.
+  ///
+  /// In en, this message translates to:
+  /// **'Refreshing...'**
+  String get refreshing;
+
+  /// No description provided for @companySelected.
+  ///
+  /// In en, this message translates to:
+  /// **'Company Selected'**
+  String get companySelected;
+
+  /// No description provided for @branchSelected.
+  ///
+  /// In en, this message translates to:
+  /// **'Branch Selected'**
+  String get branchSelected;
+
+  /// No description provided for @noContextSelected.
+  ///
+  /// In en, this message translates to:
+  /// **'No Context Selected'**
+  String get noContextSelected;
+
+  /// No description provided for @companyAndBranchSelected.
+  ///
+  /// In en, this message translates to:
+  /// **'Company & Branch Selected'**
+  String get companyAndBranchSelected;
+
+  /// No description provided for @guest.
+  ///
+  /// In en, this message translates to:
+  /// **'Guest'**
+  String get guest;
+
+  /// No description provided for @viewDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'View details'**
+  String get viewDetails;
+
+  /// No description provided for @noRolesAssigned.
+  ///
+  /// In en, this message translates to:
+  /// **'No roles assigned'**
+  String get noRolesAssigned;
+
+  /// No description provided for @balanceAddedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Balance added successfully'**
+  String get balanceAddedSuccess;
+
+  /// No description provided for @refundProcessedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Refund processed successfully'**
+  String get refundProcessedSuccess;
+
   /// Bank creation success message
   ///
   /// In en, this message translates to:
@@ -5587,6 +5947,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Profile picture uploaded successfully'**
   String get profilePictureUploadedSuccessfully;
+
+  /// No description provided for @transferLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Transfer: {number}'**
+  String transferLabel(String number);
+
+  /// No description provided for @by.
+  ///
+  /// In en, this message translates to:
+  /// **'by'**
+  String get by;
+
+  /// No description provided for @arrow.
+  ///
+  /// In en, this message translates to:
+  /// **'→'**
+  String get arrow;
 }
 
 class _AppLocalizationsDelegate

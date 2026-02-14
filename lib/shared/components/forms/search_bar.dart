@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../app/theme/app_sizes.dart';
 import '../../../app/theme/brand_colors.dart';
+import '../../../app/theme/text_styles.dart';
 
 /// Reusable search bar widget with debounce functionality
 /// 
@@ -88,37 +89,30 @@ class _AppSearchBarState extends State<AppSearchBar> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-    
     return ValueListenableBuilder<TextEditingValue>(
       valueListenable: _controller,
       builder: (context, value, child) {
         return Container(
-           padding: const EdgeInsets.all(AppSizes.md2),
-          // decoration: BoxDecoration(
-          //   color: BrandColors.primary.withValues(alpha: 0.5),
-          //  // borderRadius: BorderRadius.circular(widget.borderRadius),
-          // ),
+          padding: const EdgeInsets.all(AppSizes.md2),
           child: TextField(
             controller: _controller,
-            style: theme.textTheme.bodyMedium,
+            style: context.body(),
             decoration: InputDecoration(
               hintText: widget.hintText,
-              hintStyle: theme.textTheme.bodyMedium?.copyWith(
-                color: colorScheme.onSurface.withOpacity(0.5),
+              hintStyle: context.body(
+                color: BrandColors.textSecondary.withValues(alpha: 0.5),
               ),
               prefixIcon: Icon(
                 Icons.search,
                 size: 20,
-                color: colorScheme.onSurface.withOpacity(0.6),
+                color: BrandColors.textPrimary.withValues(alpha: 0.6),
               ),
               suffixIcon: value.text.isNotEmpty
                   ? IconButton(
                       icon: Icon(
                         Icons.clear,
                         size: 18,
-                        color: colorScheme.onSurface.withOpacity(0.6),
+                        color: BrandColors.textPrimary.withValues(alpha: 0.6),
                       ),
                       onPressed: _onClear,
                       tooltip: 'Clear search',
@@ -129,21 +123,21 @@ class _AppSearchBarState extends State<AppSearchBar> {
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(widget.borderRadius),
                 borderSide: BorderSide(
-                  color: colorScheme.outline.withOpacity(0.2),
+                  color: BrandColors.outline.withValues(alpha: 0.2),
                   width: 1,
                 ),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(widget.borderRadius),
                 borderSide: BorderSide(
-                  color: colorScheme.outline.withOpacity(0.2),
+                  color: BrandColors.outline.withValues(alpha: 0.2),
                   width: 1,
                 ),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(widget.borderRadius),
                 borderSide: BorderSide(
-                  color: colorScheme.primary.withOpacity(0.5),
+                  color: BrandColors.primary.withValues(alpha: 0.5),
                   width: 1.5,
                 ),
               ),

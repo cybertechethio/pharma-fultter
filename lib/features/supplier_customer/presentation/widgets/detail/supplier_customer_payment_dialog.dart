@@ -165,7 +165,7 @@ class _SupplierCustomerPaymentDialogState
     return Container(
       padding: const EdgeInsets.all(AppSizes.lg),
       decoration: BoxDecoration(
-        border: Border(bottom: BorderSide(color: BrandColors.outline.withOpacity(0.2))),
+        border: Border(bottom: BorderSide(color: BrandColors.outline.withValues(alpha: 0.2))),
       ),
       child: Row(
         children: [
@@ -193,7 +193,7 @@ class _SupplierCustomerPaymentDialogState
     return Container(
       padding: const EdgeInsets.all(AppSizes.md),
       decoration: BoxDecoration(
-        color: BrandColors.primaryContainer.withOpacity(0.3),
+        color: BrandColors.primaryContainer.withValues(alpha: 0.3),
         borderRadius: BorderRadius.circular(AppSizes.radiusSm),
       ),
       child: Row(
@@ -224,7 +224,7 @@ class _SupplierCustomerPaymentDialogState
     return Container(
       padding: const EdgeInsets.all(AppSizes.md),
       decoration: BoxDecoration(
-        color: BrandColors.surfaceContainerHighest.withOpacity(0.3),
+        color: BrandColors.surfaceContainerHighest.withValues(alpha: 0.3),
         borderRadius: BorderRadius.circular(AppSizes.radiusSm),
       ),
       child: Row(
@@ -259,9 +259,9 @@ class _SupplierCustomerPaymentDialogState
             margin: const EdgeInsets.only(bottom: AppSizes.sm),
             padding: const EdgeInsets.all(AppSizes.md),
             decoration: BoxDecoration(
-              color: BrandColors.surfaceContainerHighest.withOpacity(0.3),
+              color: BrandColors.surfaceContainerHighest.withValues(alpha: 0.3),
               borderRadius: BorderRadius.circular(AppSizes.radiusSm),
-              border: Border.all(color: BrandColors.outline.withOpacity(0.2)),
+              border: Border.all(color: BrandColors.outline.withValues(alpha: 0.2)),
             ),
             child: Row(
               children: [
@@ -331,7 +331,7 @@ class _SupplierCustomerPaymentDialogState
         height: AppSizes.xxxxl - AppSizes.xs,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppSizes.xs2),
-          border: Border.all(color: BrandColors.outline.withOpacity(0.2)),
+          border: Border.all(color: BrandColors.outline.withValues(alpha: 0.2)),
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(AppSizes.xs2),
@@ -359,7 +359,7 @@ class _SupplierCustomerPaymentDialogState
     return Container(
       padding: const EdgeInsets.all(AppSizes.lg),
       decoration: BoxDecoration(
-        color: BrandColors.surfaceContainerHighest.withOpacity(0.3),
+        color: BrandColors.surfaceContainerHighest.withValues(alpha: 0.3),
         borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(AppSizes.radiusLg),
           bottomRight: Radius.circular(AppSizes.radiusLg),

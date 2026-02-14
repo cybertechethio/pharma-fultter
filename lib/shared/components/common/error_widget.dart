@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cyber_pos/l10n/app_localizations.dart';
 import '../../../app/theme/app_sizes.dart';
 import '../../../app/theme/text_styles.dart';
 import '../../../core/errors/failure.dart';
@@ -31,6 +32,7 @@ class ErrorsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -44,7 +46,7 @@ class ErrorsWidget extends StatelessWidget {
           if (onRetry != null)
             ElevatedButton(
               onPressed: onRetry,
-              child: const Text('Retry'),
+              child: Text(l10n.retry),
             ),
         ],
       ),

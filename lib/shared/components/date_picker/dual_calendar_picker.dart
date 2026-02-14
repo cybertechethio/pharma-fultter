@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:abushakir/abushakir.dart';
 import 'package:cyber_pos/l10n/app_localizations.dart';
 import '../../../app/theme/app_sizes.dart';
+import '../../../app/theme/brand_colors.dart';
+import '../../../app/theme/text_styles.dart';
 import '../../utils/calendar_converter.dart';
 import '../../models/calendar_type.dart';
 import 'ethiopian_date_picker.dart';
@@ -91,12 +93,11 @@ class _DualCalendarPickerState extends State<DualCalendarPicker> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context);
 
     return Container(
       decoration: BoxDecoration(
-        color: theme.colorScheme.surface,
+        color: BrandColors.surface,
         borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
       ),
       child: Column(
@@ -196,7 +197,6 @@ class _DualCalendarPickerSheetState extends State<DualCalendarPickerSheet> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context);
 
     return Container(
@@ -204,7 +204,7 @@ class _DualCalendarPickerSheetState extends State<DualCalendarPickerSheet> {
         maxHeight: MediaQuery.of(context).size.height * 0.85,
       ),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surface,
+        color: BrandColors.surface,
         borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
       ),
       child: Column(
@@ -216,7 +216,7 @@ class _DualCalendarPickerSheetState extends State<DualCalendarPickerSheet> {
             width: AppSizes.xxxxl,
             height: AppSizes.xs,
             decoration: BoxDecoration(
-              color: theme.colorScheme.onSurfaceVariant.withOpacity(0.4),
+              color: BrandColors.textSecondary.withValues(alpha: 0.4),
               borderRadius: BorderRadius.circular(AppSizes.radiusXxs),
             ),
           ),
@@ -229,9 +229,7 @@ class _DualCalendarPickerSheetState extends State<DualCalendarPickerSheet> {
               children: [
                 Text(
                   l10n.selectDate,
-                  style: theme.textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: context.title(bold: true),
                 ),
                 IconButton(
                   icon: const Icon(Icons.close),

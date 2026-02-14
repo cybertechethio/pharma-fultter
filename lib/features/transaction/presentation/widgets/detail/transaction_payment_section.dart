@@ -34,7 +34,7 @@ class TransactionPaymentSection extends ConsumerWidget {
       decoration: BoxDecoration(
         color: BrandColors.surface,
         borderRadius: BorderRadius.circular(AppSizes.radius),
-        border: Border.all(color: BrandColors.outline.withOpacity(0.1)),
+        border: Border.all(color: BrandColors.outline.withValues(alpha: 0.1)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -104,7 +104,7 @@ class _PaymentBlock extends ConsumerWidget {
                         vertical: AppSizes.xxs,
                       ),
                       decoration: BoxDecoration(
-                        color: BrandColors.primary.withOpacity(0.1),
+                        color: BrandColors.primary.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(AppSizes.radiusSm),
                       ),
                       child: Text(
@@ -279,9 +279,9 @@ class _PaymentMethodCard extends ConsumerWidget {
     return Container(
       padding: const EdgeInsets.all(AppSizes.md),
       decoration: BoxDecoration(
-        color: BrandColors.surfaceContainerHighest.withOpacity(0.3),
+        color: BrandColors.surfaceContainerHighest.withValues(alpha: 0.3),
         borderRadius: BorderRadius.circular(AppSizes.radiusSm),
-        border: Border.all(color: BrandColors.outline.withOpacity(0.1)),
+        border: Border.all(color: BrandColors.outline.withValues(alpha: 0.1)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -464,7 +464,7 @@ class _ReceiptPreview extends StatelessWidget {
               height: thumbSize,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(AppSizes.radiusSm),
-                border: Border.all(color: BrandColors.outline.withOpacity(0.3)),
+                border: Border.all(color: BrandColors.outline.withValues(alpha: 0.3)),
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(AppSizes.radiusSm),

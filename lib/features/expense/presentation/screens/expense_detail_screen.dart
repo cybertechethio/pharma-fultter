@@ -82,6 +82,7 @@ class ExpenseDetailScreen extends ConsumerWidget {
       },
       child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
+        padding: const EdgeInsets.all(AppSizes.md),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -89,13 +90,10 @@ class ExpenseDetailScreen extends ConsumerWidget {
             ExpenseBasicInfoWidget(expense: detail),
             // Attachments
             ExpenseAttachmentsWidget(attachments: detail.attachments),
-            
-            // Payments
-            ExpensePaymentsWidget(
-              expensePayments: detail.expensePayments,
-              expenseId: detail.id,
-            ),
-            const SizedBox(height: AppSizes.lg),
+            const SizedBox(height: AppSizes.md),
+            // Payments (same layout as transaction detail payment section)
+            ExpensePaymentsWidget(detail: detail),
+            const SizedBox(height: AppSizes.xl),
           ],
         ),
       ),

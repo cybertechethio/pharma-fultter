@@ -27,7 +27,6 @@ class _BottomNavScreenState extends ConsumerState<BottomNavScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
       appBar: CustomAppBar(
@@ -62,7 +61,7 @@ class _BottomNavScreenState extends ConsumerState<BottomNavScreen> {
       drawer: const AppDrawer(),
       body: widget.navigationShell,
       bottomNavigationBar: Theme(
-        data: Theme.of(context).copyWith(
+        data: ThemeData.light().copyWith(
           splashFactory: NoSplash.splashFactory,
           splashColor: BrandColors.transparent,
           highlightColor: BrandColors.transparent,
@@ -70,9 +69,9 @@ class _BottomNavScreenState extends ConsumerState<BottomNavScreen> {
         child: BottomNavigationBar(
           currentIndex: widget.navigationShell.currentIndex,
           onTap: _onItemTapped,
-          selectedItemColor: colorScheme.primary,
-          unselectedItemColor: colorScheme.onSurfaceVariant,
-          backgroundColor: colorScheme.surface,
+          selectedItemColor: BrandColors.primary,
+          unselectedItemColor: BrandColors.textSecondary,
+          backgroundColor: BrandColors.surface,
           type: BottomNavigationBarType.fixed,
           items: const [
             BottomNavigationBarItem(

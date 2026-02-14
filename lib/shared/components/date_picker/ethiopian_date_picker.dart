@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:abushakir/abushakir.dart';
 import 'package:cyber_pos/l10n/app_localizations.dart';
 import '../../../app/theme/app_sizes.dart';
+import '../../../app/theme/brand_colors.dart';
+import '../../../app/theme/text_styles.dart';
 import '../../utils/calendar_converter.dart';
 
 /// Ethiopian calendar date picker
@@ -82,7 +84,6 @@ class _EthiopianDatePickerState extends State<EthiopianDatePicker> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context);
     final daysInMonth = CalendarConverter.getDaysInEthiopianMonth(
       _currentYear,
@@ -96,7 +97,7 @@ class _EthiopianDatePickerState extends State<EthiopianDatePicker> {
         Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: theme.colorScheme.primaryContainer,
+            color: BrandColors.primaryContainer,
             borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
           ),
           child: Row(
@@ -105,29 +106,27 @@ class _EthiopianDatePickerState extends State<EthiopianDatePicker> {
               IconButton(
                 icon: const Icon(Icons.chevron_left),
                 onPressed: _previousMonth,
-                color: theme.colorScheme.onPrimaryContainer,
+                color: BrandColors.onPrimaryContainer,
               ),
               Column(
                 children: [
                   Text(
                     CalendarConverter.getEthiopianMonthName(_currentMonth, l10n),
-                    style: theme.textTheme.titleLarge?.copyWith(
-                      color: theme.colorScheme.onPrimaryContainer,
-                      fontWeight: FontWeight.bold,
+                    style: context.title(
+                      color: BrandColors.onPrimaryContainer,
+                      bold: true,
                     ),
                   ),
                   Text(
                     _currentYear.toString(),
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      color: theme.colorScheme.onPrimaryContainer,
-                    ),
+                    style: context.body(color: BrandColors.onPrimaryContainer),
                   ),
                 ],
               ),
               IconButton(
                 icon: const Icon(Icons.chevron_right),
                 onPressed: _nextMonth,
-                color: theme.colorScheme.onPrimaryContainer,
+                color: BrandColors.onPrimaryContainer,
               ),
             ],
           ),
@@ -150,7 +149,7 @@ class _EthiopianDatePickerState extends State<EthiopianDatePicker> {
               final isSelected = _selectedDate.day == day &&
                   _selectedDate.month == _currentMonth &&
                   _selectedDate.year == _currentYear;
-              
+
               final today = CalendarConverter.getEthiopianToday();
               final isToday = today.day == day &&
                   today.month == _currentMonth &&
@@ -162,14 +161,14 @@ class _EthiopianDatePickerState extends State<EthiopianDatePicker> {
                 child: Container(
                   decoration: BoxDecoration(
                     color: isSelected
-                        ? theme.colorScheme.primary
+                        ? BrandColors.primary
                         : isToday
-                            ? theme.colorScheme.primaryContainer
+                            ? BrandColors.primaryContainer
                             : null,
                     borderRadius: BorderRadius.circular(AppSizes.radiusSm),
                     border: isToday && !isSelected
                         ? Border.all(
-                            color: theme.colorScheme.primary,
+                            color: BrandColors.primary,
                             width: 2,
                           )
                         : null,
@@ -177,15 +176,13 @@ class _EthiopianDatePickerState extends State<EthiopianDatePicker> {
                   alignment: Alignment.center,
                   child: Text(
                     day.toString(),
-                    style: theme.textTheme.bodyMedium?.copyWith(
+                    style: context.body(
                       color: isSelected
-                          ? theme.colorScheme.onPrimary
+                          ? BrandColors.buttonText
                           : isToday
-                              ? theme.colorScheme.primary
-                              : theme.colorScheme.onSurface,
-                      fontWeight: isSelected || isToday
-                          ? FontWeight.bold
-                          : FontWeight.normal,
+                              ? BrandColors.primary
+                              : BrandColors.textPrimary,
+                      bold: isSelected || isToday,
                     ),
                   ),
                 ),

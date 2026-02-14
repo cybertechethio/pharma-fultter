@@ -8,6 +8,7 @@ import '../../../../shared/components/common/delete_confirmation_dialog.dart';
 import '../../../../routes/route_name.dart';
 import '../../../../app/theme/app_sizes.dart';
 import '../../../../app/theme/brand_colors.dart';
+import '../../../../app/theme/text_styles.dart';
 import '../../../../core/enums/user_type_enum.dart';
 import '../../domain/entities/user.dart';
 import '../providers/user_notifier.dart';
@@ -29,8 +30,6 @@ class UserDetailScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
     final usersAsync = ref.watch(userProvider);
     final deleting = ref.watch(userDeleteLoadingProvider).contains(userId);
     final updating = ref.watch(userUpdateLoadingProvider).contains(userId);
@@ -66,12 +65,12 @@ class UserDetailScreen extends ConsumerWidget {
               Icon(
                 Icons.error_outline,
                 size: 64,
-                color: colorScheme.error,
+                color: BrandColors.error,
               ),
               const SizedBox(height: AppSizes.lg),
               Text(
                 l10n.errorLoadingUser(error.toString()),
-                style: theme.textTheme.bodyLarge,
+                style: context.title(),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: AppSizes.lg),
@@ -103,12 +102,12 @@ class UserDetailScreen extends ConsumerWidget {
                         // Small Avatar
                         CircleAvatar(
                           radius: 28,
-                          backgroundColor: colorScheme.primaryContainer,
+                          backgroundColor: BrandColors.primaryContainer,
                           child: Text(
                             '${user.firstName[0]}${user.lastName[0]}'.toUpperCase(),
-                            style: theme.textTheme.titleLarge?.copyWith(
-                              color: colorScheme.onPrimaryContainer,
-                              fontWeight: FontWeight.bold,
+                            style: context.title(
+                              color: BrandColors.onPrimaryContainer,
+                              bold: true,
                             ),
                           ),
                         ),
@@ -120,15 +119,15 @@ class UserDetailScreen extends ConsumerWidget {
                             children: [
                               Text(
                                 '${user.firstName} ${user.lastName}',
-                                style: theme.textTheme.titleLarge?.copyWith(
-                                  fontWeight: FontWeight.bold,
+                                style: context.title(
+                                  bold: true,
                                 ),
                               ),
                               const SizedBox(height: AppSizes.xs),
                               Text(
                                 'ID: ${user.id}',
-                                style: theme.textTheme.bodySmall?.copyWith(
-                                  color: colorScheme.onSurfaceVariant,
+                                style: context.small(
+                                  color: BrandColors.textSecondary,
                                 ),
                               ),
                             ],
@@ -140,7 +139,7 @@ class UserDetailScreen extends ConsumerWidget {
                           decoration: BoxDecoration(
                             color: user.isActive
                                 ? BrandColors.successWithOpacity(0.1)
-                                : BrandColors.textMuted.withOpacity(0.1),
+                                : BrandColors.textMuted.withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(AppSizes.radiusLg),
                             border: Border.all(
                               color: user.isActive ? BrandColors.success : BrandColors.textMuted,
@@ -160,8 +159,7 @@ class UserDetailScreen extends ConsumerWidget {
                                 user.isActive ? l10n.active : l10n.inactive,
                                 style: TextStyle(
                                   color: user.isActive ? BrandColors.success : BrandColors.textMuted,
-                                  fontSize: AppSizes.fontSizeLabel,
-                                  fontWeight: FontWeight.w600,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ],
@@ -289,8 +287,8 @@ class UserDetailScreen extends ConsumerWidget {
                         label: Text(l10n.delete),
                         style: OutlinedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 12),
-                          foregroundColor: colorScheme.error,
-                          side: BorderSide(color: colorScheme.error),
+                          foregroundColor: BrandColors.error,
+                          side: BorderSide(color: BrandColors.error),
                         ),
                       ),
                     ),
@@ -344,8 +342,6 @@ class _InfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
 
     return Card(
       elevation: 1,
@@ -359,12 +355,12 @@ class _InfoCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                Icon(icon, size: 20, color: colorScheme.primary),
+                Icon(icon, size: AppSizes.iconSize, color: BrandColors.primary),
                 const SizedBox(width: AppSizes.sm),
                 Text(
                   title,
-                  style: theme.textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w600,
+                  style: context.title(
+                    bold: true,
                   ),
                 ),
               ],
@@ -391,8 +387,6 @@ class _InfoRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
@@ -401,8 +395,8 @@ class _InfoRow extends StatelessWidget {
         children: [
           Icon(
             icon,
-            size: 20,
-            color: colorScheme.onSurfaceVariant,
+            size: AppSizes.iconSize,
+            color: BrandColors.textSecondary,
           ),
           const SizedBox(width: AppSizes.md),
           Expanded(
@@ -411,16 +405,15 @@ class _InfoRow extends StatelessWidget {
               children: [
                 Text(
                   label,
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    color: colorScheme.onSurfaceVariant,
-                    fontSize: AppSizes.fontSizeLabel,
+                  style: context.small(
+                    color: BrandColors.textSecondary,
                   ),
                 ),
                 const SizedBox(height: AppSizes.xs),
                 Text(
                   value,
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    fontWeight: FontWeight.w500,
+                  style: context.body(
+                    bold: true,
                   ),
                 ),
               ],
@@ -440,8 +433,6 @@ class _UserTypeRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
 
     String getLocalizedLabel() {
       switch (userType) {
@@ -477,16 +468,15 @@ class _UserTypeRow extends StatelessWidget {
               children: [
                 Text(
                   l10n.userType,
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    color: colorScheme.onSurfaceVariant,
-                    fontSize: AppSizes.fontSizeLabel,
+                  style: context.small(
+                    color: BrandColors.textSecondary,
                   ),
                 ),
                 const SizedBox(height: AppSizes.xs),
                 Text(
                   getLocalizedLabel(),
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    fontWeight: FontWeight.w500,
+                  style: context.body(
+                    bold: true,
                     color: userType.getColor(),
                   ),
                 ),
@@ -538,8 +528,6 @@ class _RoleAssignmentsSectionState extends ConsumerState<_RoleAssignmentsSection
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
     final assignmentsAsync = ref.watch(userRoleProvider(widget.userId));
 
     return Card(
@@ -551,12 +539,12 @@ class _RoleAssignmentsSectionState extends ConsumerState<_RoleAssignmentsSection
           children: [
             Row(
               children: [
-                Icon(Icons.badge_outlined, color: colorScheme.primary),
+                Icon(Icons.badge_outlined, color: BrandColors.primary),
                 const SizedBox(width: AppSizes.sm),
                 Text(
                   l10n.roleAssignmentsByBranch,
-                  style: theme.textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w600,
+                  style: context.title(
+                    bold: true,
                   ),
                 ),
               ],
@@ -575,8 +563,8 @@ class _RoleAssignmentsSectionState extends ConsumerState<_RoleAssignmentsSection
                   children: [
                     Text(
                       l10n.errorLoadingRoleAssignments(error.toString()),
-                      style: theme.textTheme.bodyMedium?.copyWith(
-                        color: colorScheme.error,
+                      style: context.body(
+                        color: BrandColors.error,
                       ),
                     ),
                     const SizedBox(height: AppSizes.sm),
@@ -598,20 +586,18 @@ class _RoleAssignmentsSectionState extends ConsumerState<_RoleAssignmentsSection
                             Icon(
                               Icons.badge_outlined,
                               size: 48,
-                              color: colorScheme.onSurfaceVariant,
+                              color: BrandColors.textSecondary,
                             ),
                             const SizedBox(height: AppSizes.lg),
                             Text(
                               l10n.noRoleAssignmentsFound,
-                              style: theme.textTheme.bodyLarge?.copyWith(
-                                color: colorScheme.onSurfaceVariant,
-                              ),
+                              style: context.title(color: BrandColors.textSecondary),
                             ),
                             const SizedBox(height: AppSizes.sm),
                             Text(
                               l10n.noRoleAssignmentsMessage,
-                              style: theme.textTheme.bodyMedium?.copyWith(
-                                color: colorScheme.onSurfaceVariant,
+                              style: context.body(
+                                color: BrandColors.textSecondary,
                               ),
                               textAlign: TextAlign.center,
                             ),

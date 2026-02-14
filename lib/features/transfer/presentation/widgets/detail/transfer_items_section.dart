@@ -25,7 +25,7 @@ class TransferItemsSection extends StatelessWidget {
       decoration: BoxDecoration(
         color: BrandColors.surface,
         borderRadius: BorderRadius.circular(AppSizes.radius),
-        border: Border.all(color: BrandColors.outline.withOpacity(0.1)),
+        border: Border.all(color: BrandColors.outline.withValues(alpha: 0.1)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,7 +40,7 @@ class TransferItemsSection extends StatelessWidget {
                   vertical: AppSizes.xxs,
                 ),
                 decoration: BoxDecoration(
-                  color: BrandColors.primary.withOpacity(0.1),
+                  color: BrandColors.primary.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(AppSizes.radius),
                 ),
                 child: Text(
@@ -92,9 +92,9 @@ class _ItemCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppSizes.md),
       decoration: BoxDecoration(
-        color: BrandColors.surfaceContainerHighest.withOpacity(0.3),
+        color: BrandColors.surfaceContainerHighest.withValues(alpha: 0.3),
         borderRadius: BorderRadius.circular(AppSizes.radiusSm),
-        border: Border.all(color: BrandColors.outline.withOpacity(0.1)),
+        border: Border.all(color: BrandColors.outline.withValues(alpha: 0.1)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,7 +106,7 @@ class _ItemCard extends StatelessWidget {
                 width: AppSizes.xxl,
                 height: AppSizes.xxl,
                 decoration: BoxDecoration(
-                  color: BrandColors.primary.withOpacity(0.1),
+                  color: BrandColors.primary.withValues(alpha: 0.1),
                   shape: BoxShape.circle,
                 ),
                 alignment: Alignment.center,
@@ -129,7 +129,7 @@ class _ItemCard extends StatelessWidget {
                     if (item.itemCode != null) ...[
                       const SizedBox(height: AppSizes.xxs),
                       Text(
-                        'Code: ${item.itemCode}',
+                        '${l10n.itemCode}: ${item.itemCode}',
                         style: context.small(),
                       ),
                     ],
@@ -137,7 +137,7 @@ class _ItemCard extends StatelessWidget {
                 ),
               ),
               Text(
-                'Qty: ${item.quantity}',
+                '${l10n.qty}: ${item.quantity}',
                 style: context.bodyPrimary(bold: true),
               ),
             ],

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../app/theme/brand_colors.dart';
+import '../../../../app/theme/text_styles.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../../../../core/errors/failure.dart';
 import '../../../auth/domain/entities/user.dart';
@@ -25,8 +26,6 @@ class ProfileHeaderWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
     final isUploading = ref.watch(profilePictureUploadLoadingProvider);
     
     return Container(
@@ -36,9 +35,9 @@ class ProfileHeaderWidget extends ConsumerWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            colorScheme.primary.withOpacity(0.1),
-            colorScheme.secondary.withOpacity(0.05),
-            colorScheme.surface,
+            BrandColors.primary.withOpacity(0.1),
+            BrandColors.secondary.withOpacity(0.05),
+            BrandColors.surface,
           ],
         ),
       ),
@@ -68,7 +67,7 @@ class ProfileHeaderWidget extends ConsumerWidget {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(
-                      color: colorScheme.outline,
+                      color: BrandColors.outline,
                       width: 2,
                     ),
                   ),
@@ -82,7 +81,7 @@ class ProfileHeaderWidget extends ConsumerWidget {
                                 final imageUrl = UrlUtils.getFullImageUrl(user.profilePicture!);
                                 
                                 if (imageUrl == null) {
-                                  return _buildDefaultAvatar(context, colorScheme);
+                                  return _buildDefaultAvatar(context);
                                 }
                                 
                                 // Use profilePicture URL as cache key to ensure cache updates when URL changes
@@ -95,20 +94,20 @@ class ProfileHeaderWidget extends ConsumerWidget {
                                   height: 120,
                                   fit: BoxFit.cover,
                                   cacheKey: cacheKey,
-                                  placeholder: (context, url) => _buildDefaultAvatar(context, colorScheme),
+                                  placeholder: (context, url) => _buildDefaultAvatar(context),
                                   errorWidget: (context, url, error) {
                                     // Log error for debugging
                                     debugPrint('Error loading profile image: $error');
                                     debugPrint('Image URL: $imageUrl');
                                     debugPrint('Profile Picture: ${user.profilePicture}');
-                                    return _buildDefaultAvatar(context, colorScheme);
+                                    return _buildDefaultAvatar(context);
                                   },
                                 );
                               },
                             ),
                           ),
                         )
-                      : _buildDefaultAvatar(context, colorScheme),
+                      : _buildDefaultAvatar(context),
                 ),
               ),
               // Edit Icon
@@ -121,10 +120,10 @@ class ProfileHeaderWidget extends ConsumerWidget {
                     width: 32,
                     height: 32,
                     decoration: BoxDecoration(
-                      color: colorScheme.primary,
+                      color: BrandColors.primary,
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: colorScheme.surface,
+                        color: BrandColors.surface,
                         width: 2,
                       ),
                     ),
@@ -156,9 +155,9 @@ class ProfileHeaderWidget extends ConsumerWidget {
               Flexible(
                 child: Text(
                   user.fullName,
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    color: colorScheme.onSurface,
-                    fontWeight: FontWeight.bold,
+                  style: context.title(
+                    color: BrandColors.textPrimary,
+                    bold: true,
                   ),
                   textAlign: TextAlign.center,
                   overflow: TextOverflow.ellipsis,
@@ -169,8 +168,8 @@ class ProfileHeaderWidget extends ConsumerWidget {
                 const SizedBox(width: AppSizes.sm),
                 Icon(
                   Icons.verified,
-                  color: colorScheme.primary,
-                  size: 20,
+                  color: BrandColors.primary,
+                  size: AppSizes.iconSize,
                 ),
               ],
             ],
@@ -183,15 +182,13 @@ class ProfileHeaderWidget extends ConsumerWidget {
               children: [
                 Icon(
                   Icons.email_outlined,
-                  size: 16,
-                  color: colorScheme.onSurfaceVariant,
+                  size: AppSizes.iconSize,
+                  color: BrandColors.textSecondary,
                 ),
                 const SizedBox(width: AppSizes.xs),
                 Text(
                   user.email!,
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: colorScheme.onSurfaceVariant,
-                  ),
+                  style: context.body(color: BrandColors.textSecondary),
                 ),
               ],
             ),
@@ -202,15 +199,13 @@ class ProfileHeaderWidget extends ConsumerWidget {
             children: [
               Icon(
                 Icons.phone_outlined,
-                size: 16,
-                color: colorScheme.onSurfaceVariant,
+                size: AppSizes.iconSize,
+                color: BrandColors.textSecondary,
               ),
               const SizedBox(width: AppSizes.xs),
               Text(
                 user.phone,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: colorScheme.onSurfaceVariant,
-                ),
+                style: context.body(color: BrandColors.textSecondary),
               ),
             ],
           ),
@@ -219,7 +214,7 @@ class ProfileHeaderWidget extends ConsumerWidget {
     );
   }
 
-  Widget _buildDefaultAvatar(BuildContext context, ColorScheme colorScheme) {
+  Widget _buildDefaultAvatar(BuildContext context) {
     final initials = user.fullName
         .split(' ')
         .map((n) => n.isNotEmpty ? n[0].toUpperCase() : '')
@@ -228,15 +223,15 @@ class ProfileHeaderWidget extends ConsumerWidget {
     
     return Container(
       decoration: BoxDecoration(
-        color: colorScheme.primary.withOpacity(0.1),
+        color: BrandColors.primary.withOpacity(0.1),
         shape: BoxShape.circle,
       ),
       child: Center(
         child: Text(
           initials.isNotEmpty ? initials : 'U',
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            color: colorScheme.primary,
-            fontWeight: FontWeight.bold,
+          style: context.title(
+            color: BrandColors.primary,
+            bold: true,
           ),
         ),
       ),

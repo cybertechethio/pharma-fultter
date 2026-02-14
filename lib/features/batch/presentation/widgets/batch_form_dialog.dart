@@ -4,6 +4,7 @@ import '../../../../l10n/app_localizations.dart';
 import '../../../../core/services/snackbar_service.dart';
 import '../../../../shared/components/dialogs/standard_form_dialog.dart';
 import '../../../../shared/components/forms/custom_text_field.dart';
+import '../../../../app/theme/app_sizes.dart';
 import '../../../../shared/components/forms/date_picker_field.dart';
 import '../../domain/entities/batch.dart';
 import '../../domain/entities/batch_input.dart';
@@ -107,7 +108,7 @@ class _BatchFormDialogState extends ConsumerState<BatchFormDialog> {
       onSubmit: () async {
         if (!_formKey.currentState!.validate()) return;
         if (!isEditing && widget.itemId == null) {
-          snackbar.showWarning('Item is required to create a batch');
+          snackbar.showWarning(l10n.itemRequiredToCreateBatch);
           return;
         }
         final cost = _parseDouble(_costPrice.text);
@@ -159,7 +160,7 @@ class _BatchFormDialogState extends ConsumerState<BatchFormDialog> {
                   return null;
                 },
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: AppSizes.md),
               CustomTextField(
                 labelText: l10n.costPrice,
                 controller: _costPrice,
@@ -171,7 +172,7 @@ class _BatchFormDialogState extends ConsumerState<BatchFormDialog> {
                   return null;
                 },
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: AppSizes.md),
               CustomTextField(
                 labelText: l10n.unitPrice,
                 controller: _unitPrice,
@@ -187,26 +188,26 @@ class _BatchFormDialogState extends ConsumerState<BatchFormDialog> {
                   return null;
                 },
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: AppSizes.md),
               CustomTextField(
                 labelText: l10n.supplierBatchNumber,
                 controller: _supplierBatchNumber,
                 validator: (value) => null,
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: AppSizes.md),
               CustomTextField(
                 labelText: l10n.notes,
                 controller: _notes,
                 prefixIcon: Icons.notes_outlined,
                 maxLines: 3,
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: AppSizes.md),
               DatePickerField(
                 labelText: l10n.expirationDate,
                 controller: _expirationDate,
                 prefixIcon: Icons.calendar_today_outlined,
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: AppSizes.md),
               DatePickerField(
                 labelText: l10n.manufacturingDate,
                 controller: _manufacturingDate,

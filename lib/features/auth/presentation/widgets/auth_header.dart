@@ -28,7 +28,7 @@ class AuthHeader extends StatelessWidget {
               borderRadius: BorderRadius.circular(AppSizes.radiusLg),
               boxShadow: [
                 BoxShadow(
-                  color: BrandColors.primary.withOpacity(0.3),
+                  color: BrandColors.primary.withValues(alpha: 0.3),
                   blurRadius: AppSizes.md,
                   offset: const Offset(0, 6),
                 ),

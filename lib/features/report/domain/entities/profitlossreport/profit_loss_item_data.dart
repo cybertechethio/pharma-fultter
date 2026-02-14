@@ -5,7 +5,6 @@ part 'profit_loss_item_data.freezed.dart';
 @freezed
 sealed class ProfitLossItemData with _$ProfitLossItemData {
   const factory ProfitLossItemData({
-    required String itemType,
     required double sales,
     required double cost,
     required double vat,

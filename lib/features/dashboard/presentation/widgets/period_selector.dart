@@ -54,7 +54,7 @@ class PeriodSelector extends ConsumerWidget {
           color: BrandColors.cardBackground,
           borderRadius: BorderRadius.circular(AppSizes.radiusSm),
           border: Border.all(
-            color: BrandColors.border.withOpacity(0.3),
+            color: BrandColors.border.withValues(alpha: 0.3),
           ),
         ),
         child: Row(
@@ -214,7 +214,7 @@ class _PeriodSelectorSheetState extends State<_PeriodSelectorSheet> {
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: BrandColors.border.withOpacity(0.3),
+                  color: BrandColors.border.withValues(alpha: 0.3),
                   borderRadius: BorderRadius.circular(AppSizes.xxs),
                 ),
               ),
@@ -340,7 +340,7 @@ class _QuickSelectChip extends StatelessWidget {
           border: Border.all(
             color: isSelected
                 ? BrandColors.primary
-                : BrandColors.border.withOpacity(0.5),
+                : BrandColors.border.withValues(alpha: 0.5),
           ),
         ),
         child: Text(

@@ -4,6 +4,7 @@ import '../../core/state/locale_provider.dart';
 import 'package:cyber_pos/l10n/app_localizations.dart';
 import '../../app/theme/app_sizes.dart';
 import '../../app/theme/brand_colors.dart';
+import '../../app/theme/text_styles.dart';
 
 /// A reusable language selector widget
 /// 
@@ -84,7 +85,7 @@ class LanguageSelectorSheet {
                 children: [
                   Text(
                     l10n.changeLanguage,
-                    style: Theme.of(context).textTheme.headlineSmall,
+                    style: context.header(),
                   ),
                   const SizedBox(height: AppSizes.xl),
                   ...LocaleNotifier.availableLanguages.entries.map((entry) {

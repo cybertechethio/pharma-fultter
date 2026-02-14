@@ -28,7 +28,7 @@ class SalesStatisticsChart extends StatelessWidget {
         color: BrandColors.cardBackground,
         borderRadius: BorderRadius.circular(AppSizes.radiusLg),
         border: Border.all(
-          color: BrandColors.border.withOpacity(0.1),
+          color: BrandColors.border.withValues(alpha: 0.1),
         ),
         boxShadow: [
           BoxShadow(
@@ -162,7 +162,7 @@ class SalesStatisticsChart extends StatelessWidget {
                         drawVerticalLine: false,
                         horizontalInterval: _getInterval(),
                         getDrawingHorizontalLine: (value) => FlLine(
-                          color: BrandColors.border.withOpacity(0.1),
+                          color: BrandColors.border.withValues(alpha: 0.1),
                           strokeWidth: 1,
                         ),
                       ),
@@ -314,7 +314,7 @@ class _SummaryCard extends StatelessWidget {
         color: BrandColors.inputBackground,
         borderRadius: BorderRadius.circular(AppSizes.radius),
         border: Border.all(
-          color: BrandColors.border.withOpacity(0.1),
+          color: BrandColors.border.withValues(alpha: 0.1),
         ),
       ),
       child: Column(

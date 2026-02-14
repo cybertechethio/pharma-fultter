@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../app/theme/app_sizes.dart';
+import '../../../app/theme/brand_colors.dart';
+import '../../../app/theme/text_styles.dart';
 
 /// Gregorian calendar range picker with visual range highlighting
 class GregorianRangePicker extends StatefulWidget {
@@ -177,7 +179,6 @@ class _GregorianRangePickerState extends State<GregorianRangePicker> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final daysInMonth = _getDaysInMonth(_currentYear, _currentMonth);
     final firstDayOfWeek = _getFirstDayOfWeek(_currentYear, _currentMonth);
     final monthNames = _getMonthNames();
@@ -191,7 +192,7 @@ class _GregorianRangePickerState extends State<GregorianRangePicker> {
         Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: theme.colorScheme.primaryContainer,
+            color: BrandColors.primaryContainer,
             borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
           ),
           child: Row(
@@ -200,29 +201,27 @@ class _GregorianRangePickerState extends State<GregorianRangePicker> {
               IconButton(
                 icon: const Icon(Icons.chevron_left),
                 onPressed: _previousMonth,
-                color: theme.colorScheme.onPrimaryContainer,
+                color: BrandColors.onPrimaryContainer,
               ),
               Column(
                 children: [
                   Text(
                     monthNames[_currentMonth - 1],
-                    style: theme.textTheme.titleLarge?.copyWith(
-                      color: theme.colorScheme.onPrimaryContainer,
-                      fontWeight: FontWeight.bold,
+                    style: context.title(
+                      color: BrandColors.onPrimaryContainer,
+                      bold: true,
                     ),
                   ),
                   Text(
                     _currentYear.toString(),
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      color: theme.colorScheme.onPrimaryContainer,
-                    ),
+                    style: context.body(color: BrandColors.onPrimaryContainer),
                   ),
                 ],
               ),
               IconButton(
                 icon: const Icon(Icons.chevron_right),
                 onPressed: _nextMonth,
-                color: theme.colorScheme.onPrimaryContainer,
+                color: BrandColors.onPrimaryContainer,
               ),
             ],
           ),
@@ -238,9 +237,9 @@ class _GregorianRangePickerState extends State<GregorianRangePicker> {
                 child: Text(
                   day,
                   textAlign: TextAlign.center,
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: theme.colorScheme.onSurfaceVariant,
+                  style: context.small(
+                    color: BrandColors.textSecondary,
+                    bold: true,
                   ),
                 ),
               );
@@ -310,7 +309,6 @@ class _GregorianRangePickerState extends State<GregorianRangePicker> {
     required bool isFuture,
     required VoidCallback? onTap,
   }) {
-    final theme = Theme.of(context);
     final isSelected = isStart || isEnd;
 
     // Determine background decoration
@@ -318,29 +316,28 @@ class _GregorianRangePickerState extends State<GregorianRangePicker> {
     Color? textColor;
 
     if (isFuture) {
-      // Future dates are disabled
-      textColor = theme.colorScheme.onSurface.withOpacity(0.3);
+      textColor = BrandColors.textPrimary.withValues(alpha: 0.3);
     } else if (isSelected) {
       decoration = BoxDecoration(
-        color: theme.colorScheme.primary,
+        color: BrandColors.primary,
         borderRadius: BorderRadius.circular(AppSizes.radiusSm),
       );
-      textColor = theme.colorScheme.onPrimary;
+      textColor = BrandColors.buttonText;
     } else if (isInRange) {
       decoration = BoxDecoration(
-        color: theme.colorScheme.primary.withOpacity(0.15),
+        color: BrandColors.primary.withValues(alpha: 0.15),
         borderRadius: BorderRadius.circular(AppSizes.radiusXs),
       );
-      textColor = theme.colorScheme.primary;
+      textColor = BrandColors.primary;
     } else if (isToday) {
       decoration = BoxDecoration(
         border: Border.all(
-          color: theme.colorScheme.primary,
+          color: BrandColors.primary,
           width: 2,
         ),
         borderRadius: BorderRadius.circular(AppSizes.radiusSm),
       );
-      textColor = theme.colorScheme.primary;
+      textColor = BrandColors.primary;
     }
 
     return InkWell(
@@ -351,9 +348,9 @@ class _GregorianRangePickerState extends State<GregorianRangePicker> {
         alignment: Alignment.center,
         child: Text(
           day.toString(),
-          style: theme.textTheme.bodyMedium?.copyWith(
-            color: textColor ?? theme.colorScheme.onSurface,
-            fontWeight: (isSelected || isToday) ? FontWeight.bold : FontWeight.normal,
+          style: context.body(
+            color: textColor ?? BrandColors.textPrimary,
+            bold: isSelected || isToday,
           ),
         ),
       ),

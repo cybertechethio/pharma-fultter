@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../app/theme/app_sizes.dart';
+import '../../../app/theme/brand_colors.dart';
+import '../../../app/theme/text_styles.dart';
 
 /// Custom checkbox component following Material Design 3 and project theme
 /// 
@@ -72,16 +74,13 @@ class CustomCheckbox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-    
     final isDisabled = !enabled || onChanged == null;
-    
-    Widget checkboxWidget = _buildCheckbox(context, theme, colorScheme, isDisabled);
-    
+
+    Widget checkboxWidget = _buildCheckbox(context, isDisabled);
+
     if (label != null) {
-      final labelWidget = _buildLabel(context, theme, colorScheme, isDisabled);
-      final descriptionWidget = _buildDescription(context, theme, colorScheme, isDisabled);
+      final labelWidget = _buildLabel(context, isDisabled);
+      final descriptionWidget = _buildDescription(context, isDisabled);
       
       final content = Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -125,42 +124,34 @@ class CustomCheckbox extends StatelessWidget {
     return checkboxWidget;
   }
   
-  Widget _buildCheckbox(
-    BuildContext context,
-    ThemeData theme,
-    ColorScheme colorScheme,
-    bool isDisabled,
-  ) {
+  Widget _buildCheckbox(BuildContext context, bool isDisabled) {
     if (customCheckbox != null) {
       return customCheckbox!;
     }
-    
+
     switch (variant) {
       case CheckboxVariant.checkbox:
-        return _buildMaterialCheckbox(context, theme, colorScheme, isDisabled);
+        return _buildMaterialCheckbox(context, isDisabled);
       case CheckboxVariant.radio:
-        return _buildRadioButton(context, theme, colorScheme, isDisabled);
+        return _buildRadioButton(context, isDisabled);
       case CheckboxVariant.switchButton:
-        return _buildSwitch(context, theme, colorScheme, isDisabled);
+        return _buildSwitch(context, isDisabled);
     }
   }
-  
-  Widget _buildMaterialCheckbox(
-    BuildContext context,
-    ThemeData theme,
-    ColorScheme colorScheme,
-    bool isDisabled,
-  ) {
+
+  Widget _buildMaterialCheckbox(BuildContext context, bool isDisabled) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(AppSizes.radiusXs),
-        boxShadow: value && !isDisabled ? [
-          BoxShadow(
-            color: (activeColor ?? colorScheme.primary).withOpacity(0.3),
-            blurRadius: AppSizes.xs,
-            offset: const Offset(0, AppSizes.xxs),
-          ),
-        ] : null,
+        boxShadow: value && !isDisabled
+            ? [
+                BoxShadow(
+                  color: (activeColor ?? BrandColors.primary).withValues(alpha: 0.3),
+                  blurRadius: AppSizes.xs,
+                  offset: const Offset(0, AppSizes.xxs),
+                ),
+              ]
+            : null,
       ),
       child: Checkbox(
         value: value,
@@ -169,33 +160,28 @@ class CustomCheckbox extends StatelessWidget {
             onChanged?.call(newValue);
           }
         },
-        activeColor: activeColor ?? colorScheme.primary,
-        checkColor: colorScheme.onPrimary,
+        activeColor: activeColor ?? BrandColors.primary,
+        checkColor: BrandColors.buttonText,
         fillColor: WidgetStateProperty.resolveWith<Color?>((states) {
           if (states.contains(WidgetState.disabled)) {
-            return colorScheme.surfaceVariant;
+            return BrandColors.surfaceVariant;
           }
           if (states.contains(WidgetState.selected)) {
-            return activeColor ?? colorScheme.primary;
+            return activeColor ?? BrandColors.primary;
           }
-          return inactiveColor ?? colorScheme.outline;
+          return inactiveColor ?? BrandColors.outline;
         }),
         side: WidgetStateBorderSide.resolveWith((states) {
           if (states.contains(WidgetState.disabled)) {
-            return BorderSide(color: colorScheme.outlineVariant);
+            return BorderSide(color: BrandColors.outline);
           }
-          return BorderSide(color: colorScheme.outline);
+          return BorderSide(color: BrandColors.outline);
         }),
       ),
     );
   }
-  
-  Widget _buildRadioButton(
-    BuildContext context,
-    ThemeData theme,
-    ColorScheme colorScheme,
-    bool isDisabled,
-  ) {
+
+  Widget _buildRadioButton(BuildContext context, bool isDisabled) {
     return Radio<bool>(
       value: true,
       groupValue: value,
@@ -204,64 +190,51 @@ class CustomCheckbox extends StatelessWidget {
           onChanged?.call(newValue);
         }
       },
-      activeColor: activeColor ?? colorScheme.primary,
+      activeColor: activeColor ?? BrandColors.primary,
       fillColor: WidgetStateProperty.resolveWith<Color?>((states) {
         if (states.contains(WidgetState.disabled)) {
-          return colorScheme.surfaceVariant;
+          return BrandColors.surfaceVariant;
         }
         if (states.contains(WidgetState.selected)) {
-          return activeColor ?? colorScheme.primary;
+          return activeColor ?? BrandColors.primary;
         }
-        return inactiveColor ?? colorScheme.outline;
+        return inactiveColor ?? BrandColors.outline;
       }),
     );
   }
-  
-  Widget _buildSwitch(
-    BuildContext context,
-    ThemeData theme,
-    ColorScheme colorScheme,
-    bool isDisabled,
-  ) {
+
+  Widget _buildSwitch(BuildContext context, bool isDisabled) {
     return Switch(
       value: value,
       onChanged: isDisabled ? null : onChanged,
-      activeColor: activeColor ?? colorScheme.primary,
-      inactiveThumbColor: inactiveColor ?? colorScheme.outline,
-      inactiveTrackColor: colorScheme.surfaceVariant,
-      activeTrackColor: (activeColor ?? colorScheme.primary).withOpacity(0.3),
+      activeColor: activeColor ?? BrandColors.primary,
+      inactiveThumbColor: inactiveColor ?? BrandColors.outline,
+      inactiveTrackColor: BrandColors.surfaceVariant,
+      activeTrackColor: (activeColor ?? BrandColors.primary).withValues(alpha: 0.3),
     );
   }
-  
-  Widget _buildLabel(
-    BuildContext context,
-    ThemeData theme,
-    ColorScheme colorScheme,
-    bool isDisabled,
-  ) {
+
+  Widget _buildLabel(BuildContext context, bool isDisabled) {
     return Text(
       required ? '$label *' : label ?? '',
-      style: labelStyle ?? theme.textTheme.bodyLarge?.copyWith(
-        color: isDisabled 
-            ? colorScheme.onSurfaceVariant.withOpacity(0.5)
-            : colorScheme.onSurface,
-      ),
+      style: labelStyle ??
+          context.body(
+            color: isDisabled
+                ? BrandColors.textSecondary.withValues(alpha: 0.5)
+                : BrandColors.textPrimary,
+          ),
     );
   }
-  
-  Widget _buildDescription(
-    BuildContext context,
-    ThemeData theme,
-    ColorScheme colorScheme,
-    bool isDisabled,
-  ) {
+
+  Widget _buildDescription(BuildContext context, bool isDisabled) {
     return Text(
       description ?? '',
-      style: descriptionStyle ?? theme.textTheme.bodySmall?.copyWith(
-        color: isDisabled 
-            ? colorScheme.onSurfaceVariant.withOpacity(0.5)
-            : colorScheme.onSurfaceVariant,
-      ),
+      style: descriptionStyle ??
+          context.small(
+            color: isDisabled
+                ? BrandColors.textSecondary.withValues(alpha: 0.5)
+                : BrandColors.textSecondary,
+          ),
     );
   }
 }

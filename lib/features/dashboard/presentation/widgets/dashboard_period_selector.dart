@@ -261,7 +261,7 @@ class _PeriodSelectorSheetState extends State<_PeriodSelectorSheet> {
               width: AppSizes.xxxxl,
               height: AppSizes.xs,
               decoration: BoxDecoration(
-                color: BrandColors.border.withOpacity(0.3),
+                color: BrandColors.border.withValues(alpha: 0.3),
                 borderRadius: BorderRadius.circular(AppSizes.xxs),
               ),
             ),

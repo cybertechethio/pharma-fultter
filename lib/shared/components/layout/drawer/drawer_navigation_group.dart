@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../app/theme/app_sizes.dart';
+import '../../../../app/theme/brand_colors.dart';
+import '../../../../app/theme/text_styles.dart';
 import 'drawer_nav_item.dart';
 
 /// A group of navigation items with an optional section header.
@@ -20,9 +22,6 @@ class DrawerNavigationGroup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -31,9 +30,10 @@ class DrawerNavigationGroup extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(26, 8, 16, 4),
             child: Text(
               title!.toUpperCase(),
-              style: theme.textTheme.labelSmall?.copyWith(
-                color: colorScheme.onSurfaceVariant.withOpacity(0.7),
-                fontWeight: FontWeight.w700,
+              style: context.caption(
+                color: BrandColors.textSecondary,
+                bold: true,
+              ).copyWith(
                 letterSpacing: 1.2,
                 fontSize: AppSizes.fontSizeCaption,
               ),

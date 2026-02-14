@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:cyber_pos/l10n/app_localizations.dart';
 import '../../domain/entities/user_role.dart';
 import '../../../../app/theme/app_sizes.dart';
 import '../../../../app/theme/brand_colors.dart';
+import '../../../../app/theme/text_styles.dart';
 
 class BranchRoleAssignmentCard extends StatelessWidget {
   final UserBranchRoleAssignment assignment;
@@ -17,8 +19,6 @@ class BranchRoleAssignmentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
 
     return Card(
       elevation: 1,
@@ -28,18 +28,16 @@ class BranchRoleAssignmentCard extends StatelessWidget {
           ListTile(
             leading: Icon(
               Icons.account_tree_outlined,
-              color: colorScheme.primary,
+              color: BrandColors.primary,
             ),
             title: Text(
               assignment.branchName,
-              style: theme.textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.w600,
-              ),
+              style: context.title(bold: true),
             ),
             subtitle: Text(
               'ID: ${assignment.branchId}',
-              style: theme.textTheme.bodySmall?.copyWith(
-                color: colorScheme.onSurfaceVariant,
+              style: context.small(
+                color: BrandColors.textSecondary,
               ),
             ),
             trailing: Row(
@@ -49,13 +47,13 @@ class BranchRoleAssignmentCard extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
-                    color: colorScheme.secondaryContainer,
+                    color: BrandColors.secondaryContainer,
                     borderRadius: BorderRadius.circular(AppSizes.radius),
                   ),
                   child: Text(
                     '${assignment.roles.length} ${assignment.roles.length == 1 ? 'role' : 'roles'}',
                     style: TextStyle(
-                      color: colorScheme.onSecondaryContainer,
+                      color: BrandColors.onSecondaryContainer,
                       fontSize: AppSizes.fontSizeLabel,
                       fontWeight: FontWeight.bold,
                     ),
@@ -64,7 +62,7 @@ class BranchRoleAssignmentCard extends StatelessWidget {
                 const SizedBox(width: AppSizes.sm),
                 Icon(
                   isExpanded ? Icons.expand_less : Icons.expand_more,
-                  color: colorScheme.onSurfaceVariant,
+                  color: BrandColors.textSecondary,
                 ),
               ],
             ),
@@ -81,9 +79,9 @@ class BranchRoleAssignmentCard extends StatelessWidget {
                 children: [
                   Text(
                     'Assigned Roles:',
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      color: colorScheme.onSurfaceVariant,
-                      fontWeight: FontWeight.w600,
+                    style: context.small(
+                      color: BrandColors.textSecondary,
+                      bold: true,
                     ),
                   ),
                   const SizedBox(height: AppSizes.sm),
@@ -91,10 +89,9 @@ class BranchRoleAssignmentCard extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8),
                       child: Text(
-                        'No roles assigned',
-                        style: theme.textTheme.bodyMedium?.copyWith(
-                          color: colorScheme.onSurfaceVariant,
-                          fontStyle: FontStyle.italic,
+                        AppLocalizations.of(context).noRolesAssigned,
+                        style: context.body(
+                          color: BrandColors.textSecondary,
                         ),
                       ),
                     )
@@ -105,7 +102,7 @@ class BranchRoleAssignmentCard extends StatelessWidget {
                       children: assignment.roles.map((role) {
                         return Chip(
                           label: Text(role.name),
-                          backgroundColor: colorScheme.surfaceContainerHighest,
+                          backgroundColor: BrandColors.surfaceContainerHighest,
                         );
                       }).toList(),
                     ),

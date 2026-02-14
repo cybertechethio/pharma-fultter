@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../app/theme/app_sizes.dart';
 import '../../../app/theme/brand_colors.dart';
+import '../../../app/theme/text_styles.dart';
 import '../../../l10n/app_localizations.dart';
 import '../forms/custom_button.dart';
 
@@ -130,10 +131,10 @@ class StandardFormDialog extends ConsumerWidget {
                   Expanded(
                     child: Text(
                       title,
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                            fontWeight: FontWeight.w600,
-                            color: BrandColors.textPrimary,
-                          ),
+                      style: context.title(
+                        color: BrandColors.textPrimary,
+                        bold: true,
+                      ),
                     ),
                   ),
                   IconButton(

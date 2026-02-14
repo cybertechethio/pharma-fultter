@@ -77,12 +77,12 @@ class _CartScreenState extends ConsumerState<CartScreen> {
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(60),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            padding: const EdgeInsets.symmetric(horizontal: AppSizes.sm),
             child: search.AppSearchBar(
               hintText: l10n.searchByNameCodeSku,
               onSearch: (query) => ref.read(itemWithBatchesProvider.notifier).search(query),
               onClear: () => ref.read(itemWithBatchesProvider.notifier).refresh(),
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(AppSizes.sm),
             ),
           ),
         ),

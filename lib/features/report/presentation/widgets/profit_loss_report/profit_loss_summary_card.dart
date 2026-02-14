@@ -37,7 +37,7 @@ class ProfitLossSummaryCard extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-            color: BrandColors.shadow.withOpacity(0.05),
+            color: BrandColors.shadow.withValues(alpha: 0.05),
             blurRadius: AppSizes.xs,
             offset: const Offset(0, 1),
           ),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../app/theme/app_sizes.dart';
+import '../app/theme/text_styles.dart';
 import '../core/services/snackbar_service.dart';
 import '../app/theme/brand_colors.dart';
 import '../features/auth/presentation/providers/current_context_provider.dart';
@@ -543,12 +544,12 @@ class AppRouter {
             const SizedBox(height: AppSizes.lg),
             Text(
               'Page Not Found',
-              style: Theme.of(context).textTheme.headlineSmall,
+              style: context.header(),
             ),
             const SizedBox(height: AppSizes.sm),
             Text(
               'The page could not be found.',
-              style: Theme.of(context).textTheme.bodyMedium,
+              style: context.body(),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: AppSizes.xxl),
@@ -570,10 +571,11 @@ class _PlaceholderScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textStyle = Theme.of(context).textTheme.headlineSmall;
     return Scaffold(
-      appBar:CustomAppBar(title: title),
-      body: Center(child: Text('$title screen', style: textStyle)),
+      appBar: CustomAppBar(title: title),
+      body: Center(
+        child: Text('$title screen', style: context.header()),
+      ),
     );
   }
 }
@@ -584,23 +586,20 @@ class _ShellRouteScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final textStyle = Theme.of(context).textTheme.headlineSmall;
     final contextAsync = ref.watch(currentContextProvider);
-    
+
     return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('$title screens', style: textStyle),
+            Text('$title screens', style: context.header()),
             const SizedBox(height: AppSizes.xxl),
             contextAsync.when(
               loading: () => const CircularProgressIndicator(),
               error: (error, stack) => Text(
                 'Error loading context',
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.error,
-                ),
+                style: context.body(color: BrandColors.error),
                 textAlign: TextAlign.center,
               ),
               data: (ctx) {
@@ -610,9 +609,9 @@ class _ShellRouteScreen extends ConsumerWidget {
                       'Branch ID: ${ctx.currentBranchId ?? "None"}';
                 }
                 return Text(
-              contextInfo,
-              style: Theme.of(context).textTheme.bodyMedium,
-              textAlign: TextAlign.center,
+                  contextInfo,
+                  style: context.body(),
+                  textAlign: TextAlign.center,
                 );
               },
             ),

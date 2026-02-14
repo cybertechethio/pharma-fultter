@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../app/theme/app_sizes.dart';
+import '../../../../app/theme/brand_colors.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/components/forms/custom_text_field.dart';
 import '../../../../shared/components/forms/custom_button.dart';
@@ -70,7 +71,7 @@ class _ChangePasswordDialogState extends ConsumerState<ChangePasswordDialog> {
                     _obscureCurrentPassword
                         ? Icons.visibility
                         : Icons.visibility_off,
-                    color: Theme.of(context).colorScheme.primary,
+                    color: BrandColors.primary,
                   ),
                   onPressed: () {
                     setState(() {
@@ -96,7 +97,7 @@ class _ChangePasswordDialogState extends ConsumerState<ChangePasswordDialog> {
                     _obscureNewPassword
                         ? Icons.visibility
                         : Icons.visibility_off,
-                    color: Theme.of(context).colorScheme.primary,
+                    color: BrandColors.primary,
                   ),
                   onPressed: () {
                     setState(() {
@@ -120,7 +121,7 @@ class _ChangePasswordDialogState extends ConsumerState<ChangePasswordDialog> {
                     _obscureConfirmPassword
                         ? Icons.visibility
                         : Icons.visibility_off,
-                    color: Theme.of(context).colorScheme.primary,
+                    color: BrandColors.primary,
                   ),
                   onPressed: () {
                     setState(() {
