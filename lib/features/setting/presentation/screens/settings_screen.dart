@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../app/theme/app_sizes.dart';
@@ -8,6 +9,7 @@ import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/components/common/app_bar.dart';
 import '../../../../shared/components/common/error_widget.dart' as app_err;
 import '../../../../features/profile/presentation/widgets/section_header_widget.dart';
+import '../../../../shared/utils/url_utils.dart';
 import '../providers/company_notifier.dart';
 import '../widgets/company_basic_info_card.dart';
 import '../widgets/company_configuration_card.dart';
@@ -72,17 +74,55 @@ class SettingsScreen extends ConsumerWidget {
                   padding: const EdgeInsets.fromLTRB(AppSizes.lg, AppSizes.xxl, AppSizes.lg, AppSizes.md),
                   child: Row(
                     children: [
-                      Icon(
-                        Icons.business,
-                        color: BrandColors.primary,
-                        size: AppSizes.iconSize,
+                      Expanded(
+                        child: Row(
+                          children: [
+                            if (company.logoUrl != null && company.logoUrl!.isNotEmpty)
+                              _buildCompanyLogo(context, company.logoUrl!)
+                            else
+                              Container(
+                                width: 56,
+                                height: 56,
+                                decoration: BoxDecoration(
+                                  color: BrandColors.surfaceVariant,
+                                  borderRadius: BorderRadius.circular(AppSizes.radiusSm),
+                                  border: Border.all(
+                                    color: BrandColors.outline.withValues(alpha: 0.2),
+                                  ),
+                                ),
+                                child: Icon(
+                                  Icons.business,
+                                  color: BrandColors.textSecondary,
+                                  size: 28,
+                                ),
+                              ),
+                            const SizedBox(width: AppSizes.md),
+                            Expanded(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    company.name,
+                                    style: context.title(bold: true),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                  ),
+                                  if (company.tradeName != null) ...[
+                                    const SizedBox(height: AppSizes.xxs),
+                                    Text(
+                                      company.tradeName!,
+                                      style: context.small(color: BrandColors.textSecondary),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 1,
+                                    ),
+                                  ],
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                      const SizedBox(width: AppSizes.sm),
-                      Text(
-                        l10n.companyInformation,
-                        style: context.title(color: BrandColors.primary, bold: true),
-                      ),
-                      const Spacer(),
                       TextButton.icon(
                         onPressed: () {
                           Navigator.push(
@@ -111,7 +151,6 @@ class SettingsScreen extends ConsumerWidget {
                 ),
                 CompanyBasicInfoCard(company: company),
 
-                const SizedBox(height: AppSizes.lg),
 
                 // Configuration Section
                 SectionHeaderWidget(
@@ -120,7 +159,6 @@ class SettingsScreen extends ConsumerWidget {
                 ),
                 CompanyConfigurationCard(company: company),
 
-                const SizedBox(height: AppSizes.lg),
 
                 // App Settings Section
                 SectionHeaderWidget(
@@ -128,6 +166,7 @@ class SettingsScreen extends ConsumerWidget {
                   icon: Icons.settings_outlined,
                 ),
                 const LanguageTile(),
+                const SizedBox(height: AppSizes.lg),
               ],
             ),
           );
@@ -137,3 +176,61 @@ class SettingsScreen extends ConsumerWidget {
   }
 }
 
+
+
+
+ Widget _buildCompanyLogo(BuildContext context, String logoUrl) {
+    final imageUrl = UrlUtils.getFullImageUrl(logoUrl);
+
+    if (imageUrl == null) {
+      return Container(
+        width: 56,
+        height: 56,
+        decoration: BoxDecoration(
+          color: BrandColors.surfaceVariant,
+          borderRadius: BorderRadius.circular(AppSizes.radiusSm),
+          border: Border.all(
+            color: BrandColors.outline.withValues(alpha: 0.2),
+          ),
+        ),
+        child: Icon(
+          Icons.broken_image,
+          color: BrandColors.error,
+        ),
+      );
+    }
+
+    return Container(
+      width: 56,
+      height: 56,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(AppSizes.radiusSm),
+        border: Border.all(
+          color: BrandColors.outline.withValues(alpha: 0.2),
+        ),
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(AppSizes.radiusSm),
+        child: CachedNetworkImage(
+          imageUrl: imageUrl,
+          fit: BoxFit.cover,
+          placeholder: (context, url) => Container(
+            color: BrandColors.surfaceVariant,
+            child: Center(
+              child: CircularProgressIndicator(
+                strokeWidth: AppSizes.loaderStrokeWidth,
+                color: BrandColors.primary,
+              ),
+            ),
+          ),
+          errorWidget: (context, url, error) => Container(
+            color: BrandColors.surfaceVariant,
+            child: Icon(
+              Icons.broken_image,
+              color: BrandColors.error,
+            ),
+          ),
+        ),
+      ),
+    );
+  }

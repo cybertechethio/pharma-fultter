@@ -141,17 +141,12 @@ class _AssignRolesDialogState extends ConsumerState<AssignRolesDialog> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          l10n.assignRolesToUser,
-                          style: context.title(
-                            bold: true,
-                          ),
-                        ),
+                      
                         const SizedBox(height: AppSizes.xs),
                         Text(
-                          l10n.userLabel(widget.userName),
-                          style: context.body(
-                            color: BrandColors.textSecondary,
+                          widget.userName,
+                          style: context.title(
+                            bold: true,
                           ),
                         ),
                       ],
@@ -206,7 +201,7 @@ class _AssignRolesDialogState extends ConsumerState<AssignRolesDialog> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              l10n.selectBranchesAndAssignRoles,
+                             l10n.assignRole,
                               style: context.title(
                                 bold: true,
                               ),
@@ -379,7 +374,7 @@ class _AssignRolesDialogState extends ConsumerState<AssignRolesDialog> {
                   const SizedBox(width: AppSizes.sm),
                   Flexible(
                     child: CustomButton(
-                      text: 'Save All Assignments',
+                      text: l10n.save,
                       onPressed: _handleSave,
                       width: null, // Let Flexible handle the width
                     ),

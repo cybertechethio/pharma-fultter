@@ -9,7 +9,6 @@ part of 'annual_item_data_model.dart';
 _AnnualItemDataModel _$AnnualItemDataModelFromJson(Map<String, dynamic> json) =>
     $checkedCreate('_AnnualItemDataModel', json, ($checkedConvert) {
       final val = _AnnualItemDataModel(
-        itemType: $checkedConvert('itemType', (v) => v as String),
         sales: $checkedConvert(
           'sales',
           (v) => JsonTypeConverters.doubleFromDynamic(v),
@@ -33,7 +32,6 @@ _AnnualItemDataModel _$AnnualItemDataModelFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$AnnualItemDataModelToJson(
   _AnnualItemDataModel instance,
 ) => <String, dynamic>{
-  'itemType': instance.itemType,
   'sales': instance.sales,
   'cost': instance.cost,
   'vat': instance.vat,

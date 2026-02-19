@@ -4,7 +4,6 @@ import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/components/common/app_bar.dart';
 import '../../../../app/theme/app_sizes.dart';
 import '../../domain/entities/stock.dart';
-import '../widgets/detail/stock_header_section.dart';
 import '../widgets/detail/stock_item_section.dart';
 import '../widgets/detail/stock_overview_section.dart';
 import '../widgets/detail/stock_metadata_section.dart';
@@ -23,7 +22,7 @@ class StockDetailScreen extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     return Scaffold(
       appBar: CustomAppBar(
-        title: l10n.stockDetails,
+        title: stock.item?.name ?? l10n.stockDetails,
       ),
       body: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
@@ -31,27 +30,23 @@ class StockDetailScreen extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // 1. Header: Item Name, Status Badge, Quantity
-            StockHeaderSection(stock: stock),
-            const SizedBox(height: AppSizes.md),
-
-            // 2. Stock Information: Quantity, Threshold, Location
+            // 1. Stock Information: Quantity, Code, Status, Threshold, Location
             StockOverviewSection(stock: stock),
-            const SizedBox(height: AppSizes.md),
+            const SizedBox(height: AppSizes.xs2),
 
             // 3. Item Details: Category, Brand, Unit, etc.
             if (stock.item != null) ...[
               StockItemSection(stock: stock),
-              const SizedBox(height: AppSizes.md),
+              const SizedBox(height: AppSizes.xs2),
             ],
 
             // 4. Stock Movements
             StockMovementsSection(stock: stock),
-            const SizedBox(height: AppSizes.md),
+            const SizedBox(height: AppSizes.xs2),
 
             // 5. Metadata: Dates, Creator/Updater
             StockMetadataSection(stock: stock),
-            const SizedBox(height: AppSizes.xl),
+            const SizedBox(height: AppSizes.xxl),
           ],
         ),
       ),

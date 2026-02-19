@@ -96,22 +96,14 @@ class StockItemSection extends StatelessWidget {
 
     if (rows.isEmpty) return const SizedBox.shrink();
 
-    return Container(
-      padding: const EdgeInsets.all(AppSizes.lg),
-      decoration: BoxDecoration(
-        color: BrandColors.surface,
-        borderRadius: BorderRadius.circular(AppSizes.radius),
-        border: Border.all(color: BrandColors.outline.withOpacity(0.1)),
-      ),
+    return Padding(
+      padding: const EdgeInsets.all(AppSizes.md),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(l10n.itemDetails, style: context.subtitle(bold: true)),
           const SizedBox(height: AppSizes.md),
-          for (int i = 0; i < rows.length; i++) ...[
-            rows[i],
-            if (i < rows.length - 1) const Divider(height: AppSizes.lg),
-          ],
+          ...rows,
         ],
       ),
     );

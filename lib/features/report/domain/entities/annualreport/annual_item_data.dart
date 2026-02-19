@@ -5,7 +5,6 @@ part 'annual_item_data.freezed.dart';
 @freezed
 sealed class AnnualItemData with _$AnnualItemData {
   const factory AnnualItemData({
-    required String itemType,
     required double sales,
     required double cost,
     required double vat,

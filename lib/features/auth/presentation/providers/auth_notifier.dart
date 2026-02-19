@@ -311,7 +311,7 @@ class AuthNotifier extends _$AuthNotifier {
       state = AsyncValue.error(e, StackTrace.current);
     }
   }
-
+  ///
   /// Logout user
   Future<void> logout() async {
     // Set loading state

@@ -24,9 +24,8 @@ class ExpenseAttachmentsWidget extends StatelessWidget {
     }
 
     return Card(
-      margin: const EdgeInsets.symmetric(horizontal: AppSizes.lg, vertical: AppSizes.sm),
       child: Padding(
-        padding: const EdgeInsets.all(AppSizes.lg),
+        padding: const EdgeInsets.all(AppSizes.sm),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -9,7 +9,6 @@ part 'annual_item_data_model.g.dart';
 @freezed
 sealed class AnnualItemDataModel with _$AnnualItemDataModel {
   const factory AnnualItemDataModel({
-    required String itemType,
     @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)
     required double sales,
     @JsonKey(fromJson: JsonTypeConverters.doubleFromDynamic)

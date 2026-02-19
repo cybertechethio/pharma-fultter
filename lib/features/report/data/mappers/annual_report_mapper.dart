@@ -21,7 +21,6 @@ import '../models/annualreport/annual_report_model.dart';
 extension AnnualItemDataMapper on AnnualItemDataModel {
   AnnualItemData toDomain() {
     return AnnualItemData(
-      itemType: itemType,
       sales: sales,
       cost: cost,
       vat: vat,

@@ -6,24 +6,26 @@ import '../../../../core/services/snackbar_service.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/components/common/app_bar.dart';
 import '../../../../shared/components/common/error_widget.dart' as app_err;
+import '../../domain/entities/expense.dart';
 import '../../domain/entities/expense_detail.dart';
 import '../providers/expense_detail_provider.dart';
 import '../providers/expense_events.dart';
-import '../widgets/expense_basic_info_widget.dart';
 import '../widgets/expense_attachments_widget.dart';
+import '../widgets/expense_basic_info_widget.dart';
 import '../widgets/expense_payments_widget.dart';
 
 class ExpenseDetailScreen extends ConsumerWidget {
-  final String expenseId;
+  final Expense expense;
 
   const ExpenseDetailScreen({
     super.key,
-    required this.expenseId,
+    required this.expense,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
+    final expenseId = expense.id;
     final asyncDetail = ref.watch(expenseDetailProvider(expenseId));
 
     // Listen to UI events for user feedback
@@ -36,11 +38,9 @@ class ExpenseDetailScreen extends ConsumerWidget {
           snackbar.showError(next.failure);
         } else if (next is ExpensePaymentMethodUpdated) {
           snackbar.showSuccess(next.message);
-          // Refresh the expense detail to get updated payment methods
           ref.invalidate(expenseDetailProvider(expenseId));
         } else if (next is ExpensePaymentMethodDeleted) {
           snackbar.showSuccess(next.message);
-          // Refresh the expense detail to get updated payment methods
           ref.invalidate(expenseDetailProvider(expenseId));
         }
         ref.read(expenseUiEventsProvider.notifier).clear();
@@ -49,7 +49,7 @@ class ExpenseDetailScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: CustomAppBar(
-        title: l10n.expenseDetails,
+        title: asyncDetail.whenOrNull(data: (d) => d.name) ?? expense.name,
       ),
       body: asyncDetail.when(
         loading: () => const Center(child: CircularProgressIndicator()),
@@ -75,6 +75,7 @@ class ExpenseDetailScreen extends ConsumerWidget {
 
 
   Widget _buildContent(BuildContext context, ExpenseDetail detail, WidgetRef ref) {
+    final expenseId = expense.id;
     return RefreshIndicator(
       onRefresh: () async {
         ref.invalidate(expenseDetailProvider(expenseId));
@@ -82,18 +83,15 @@ class ExpenseDetailScreen extends ConsumerWidget {
       },
       child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
-        padding: const EdgeInsets.all(AppSizes.md),
+        padding: const EdgeInsets.all(AppSizes.sm),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Basic Info
             ExpenseBasicInfoWidget(expense: detail),
-            // Attachments
+            const SizedBox(height: AppSizes.sm),
             ExpenseAttachmentsWidget(attachments: detail.attachments),
-            const SizedBox(height: AppSizes.md),
-            // Payments (same layout as transaction detail payment section)
+            const SizedBox(height: AppSizes.sm),
             ExpensePaymentsWidget(detail: detail),
-            const SizedBox(height: AppSizes.xl),
           ],
         ),
       ),

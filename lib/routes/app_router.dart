@@ -182,8 +182,8 @@ class AppRouter {
           path: RouteName.expenseDetail,
           name: 'expense-detail',
           builder: (context, state) {
-            final expenseId = state.uri.queryParameters['id'] ?? '';
-            return ExpenseDetailScreen(expenseId: expenseId);
+            final expense = state.extra as Expense;
+            return ExpenseDetailScreen(expense: expense);
           },
         ),
         GoRoute(

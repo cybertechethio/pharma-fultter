@@ -7,7 +7,6 @@ import '../../../../shared/components/common/app_bar.dart';
 import '../../../../shared/components/common/delete_confirmation_dialog.dart';
 import '../../../../app/theme/app_sizes.dart';
 import '../../../../app/theme/brand_colors.dart';
-import '../../../../app/theme/text_styles.dart';
 import '../../domain/entities/item.dart';
 import '../providers/item_notifier.dart';
 import '../providers/item_loading_providers.dart';
@@ -34,98 +33,39 @@ class ItemDetailScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: CustomAppBar(
-        title: l10n.itemDetails,
+        title: item.name,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(AppSizes.md),
+        padding: const EdgeInsets.all(AppSizes.sm),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             // Header Card
-            Card(
-              elevation: 1,
-              child: Padding(
-                padding: const EdgeInsets.all(AppSizes.md),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            item.name,
-                            style: context.subtitle(bold: true),
-                          ),
-                          const SizedBox(height: AppSizes.xs),
-                          Text(
-                            'SKU: ${item.sku ?? 'N/A'}',
-                            style: context.smallSecondary(),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: AppSizes.md, vertical: AppSizes.xs2),
-                      decoration: BoxDecoration(
-                        color: item.isActive
-                            ? BrandColors.successWithOpacity(0.1)
-                            : BrandColors.textMuted.withValues(alpha: 0.1),
-                        borderRadius: BorderRadius.circular(AppSizes.radiusLg),
-                        border: Border.all(
-                          color: item.isActive ? BrandColors.success : BrandColors.textMuted,
-                          width: 1,
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(
-                            item.isActive ? Icons.check_circle : Icons.cancel,
-                            size: AppSizes.md2,
-                            color: item.isActive ? BrandColors.success : BrandColors.textMuted,
-                          ),
-                          const SizedBox(width: AppSizes.xs),
-                          Text(
-                            item.isActive ? l10n.active : l10n.inactive,
-                            style: context.label(
-                              color: item.isActive ? BrandColors.success : BrandColors.textMuted,
-                              bold: true,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-
-            const SizedBox(height: AppSizes.md),
-
+            
             // Basic Information Section
             BasicInfoSection(item: item),
 
-            const SizedBox(height: AppSizes.md),
+            const SizedBox(height: AppSizes.xs2),
 
             // Product Details Section
             ProductDetailsSection(item: item),
 
-            const SizedBox(height: AppSizes.md),
+            const SizedBox(height: AppSizes.xs2),
 
             // Relationships Section
             RelationshipsSection(item: item),
 
-            const SizedBox(height: AppSizes.md),
+            const SizedBox(height: AppSizes.xs2),
 
             // Pricing Section
             PricingSection(item: item),
 
-            const SizedBox(height: AppSizes.md),
+            const SizedBox(height: AppSizes.xs2),
 
             // Tax & Status Section
             TaxStatusSection(item: item),
 
-            const SizedBox(height: AppSizes.md),
+            const SizedBox(height: AppSizes.xs2),
 
             // Metadata Section
             MetadataSection(item: item),

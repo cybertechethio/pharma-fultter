@@ -45,7 +45,7 @@ class TransactionOverviewSection extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
 
     return Container(
-      padding: const EdgeInsets.all(AppSizes.lg),
+      padding: const EdgeInsets.symmetric(horizontal: AppSizes.sm),
       decoration: BoxDecoration(
         color: BrandColors.surface,
         borderRadius: BorderRadius.circular(AppSizes.radius),

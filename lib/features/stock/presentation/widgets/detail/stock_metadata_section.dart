@@ -18,13 +18,8 @@ class StockMetadataSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
 
-    return Container(
-      padding: const EdgeInsets.all(AppSizes.lg),
-      decoration: BoxDecoration(
-        color: BrandColors.surface,
-        borderRadius: BorderRadius.circular(AppSizes.radius),
-        border: Border.all(color: BrandColors.outline.withOpacity(0.1)),
-      ),
+    return Padding(
+      padding: const EdgeInsets.all(AppSizes.md),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -35,7 +30,6 @@ class StockMetadataSection extends StatelessWidget {
             label: l10n.createdAt,
             value: Formatters.formatDateTime(stock.createdAt),
           ),
-          const Divider(height: AppSizes.lg),
           _InfoRow(
             icon: Icons.update_outlined,
             label: l10n.updatedAt,

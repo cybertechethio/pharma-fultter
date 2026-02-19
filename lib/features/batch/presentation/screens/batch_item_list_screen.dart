@@ -65,7 +65,7 @@ class _BatchItemListScreenState extends ConsumerState<BatchItemListScreen> {
 
     return Scaffold(
       appBar: CustomAppBar(
-        title: l10n.items,
+        title: l10n.itemWithBatch,
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(AppSizes.searchBarHeight),
           child: Padding(

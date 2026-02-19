@@ -20,7 +20,6 @@ sealed class CompanyModel with _$CompanyModel {
     String? wereda,
     @Default(false) bool autoPrint,
     DateTime? defaultStartDate,
-    String? businessType,
     required DateTime createdAt,
      DateTime? updatedAt,
   }) = _CompanyModel;

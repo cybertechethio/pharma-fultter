@@ -17,16 +17,11 @@ class ProductDetailsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
 
-    return Card(
-      elevation: 1,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppSizes.radiusSm),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(AppSizes.md),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+    return Padding(
+      padding: const EdgeInsets.all(AppSizes.md),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
             Text(
               l10n.productDetails,
               style: context.subtitle(bold: true),
@@ -38,47 +33,39 @@ class ProductDetailsSection extends StatelessWidget {
               value: item.color,
               isCompact: true,
             ),
-            const Divider(height: AppSizes.md),
             CompactInfoRow(
               icon: Icons.straighten_outlined,
               label: l10n.size,
               value: item.size,
               isCompact: true,
             ),
-            const Divider(height: AppSizes.md),
             CompactInfoRow(
               icon: Icons.texture_outlined,
               label: l10n.material,
               value: item.material,
               isCompact: true,
             ),
-            const Divider(height: AppSizes.md),
             CompactInfoRow(
               icon: Icons.scale_outlined,
               label: l10n.weight,
               value: item.weight != null ? '${item.weight} kg' : null,
               isCompact: true,
             ),
-            if (item.expirationDate != null) ...[
-              const Divider(height: AppSizes.md),
+            if (item.expirationDate != null)
               CompactInfoRow(
                 icon: Icons.calendar_today_outlined,
                 label: l10n.expirationDate,
                 value: '${item.expirationDate!.year}-${item.expirationDate!.month.toString().padLeft(2, '0')}-${item.expirationDate!.day.toString().padLeft(2, '0')}',
                 isCompact: true,
               ),
-            ],
-            if (item.manufacturingDate != null) ...[
-              const Divider(height: AppSizes.md),
+            if (item.manufacturingDate != null)
               CompactInfoRow(
                 icon: Icons.date_range_outlined,
                 label: l10n.manufacturingDate,
                 value: '${item.manufacturingDate!.year}-${item.manufacturingDate!.month.toString().padLeft(2, '0')}-${item.manufacturingDate!.day.toString().padLeft(2, '0')}',
                 isCompact: true,
               ),
-            ],
-          ],
-        ),
+        ],
       ),
     );
   }

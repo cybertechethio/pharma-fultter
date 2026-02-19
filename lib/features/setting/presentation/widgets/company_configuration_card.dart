@@ -16,15 +16,10 @@ class CompanyConfigurationCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
 
-    return Card(
-      margin: const EdgeInsets.symmetric(horizontal: AppSizes.lg),
-      elevation: 1,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppSizes.radiusSm),
-      ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: AppSizes.lg),
       child: Column(
         children: [
-          // Auto Print
           ListTile(
             leading: Icon(
               Icons.print,
@@ -41,8 +36,7 @@ class CompanyConfigurationCard extends StatelessWidget {
                   : BrandColors.error,
             ),
           ),
-          if (company.defaultStartDate != null) ...[
-            const Divider(height: 1),
+          if (company.defaultStartDate != null)
             ListTile(
               leading: Icon(
                 Icons.calendar_today,
@@ -53,18 +47,6 @@ class CompanyConfigurationCard extends StatelessWidget {
                 company.defaultStartDate!.toIso8601String().split('T')[0],
               ),
             ),
-          ],
-          if (company.businessType != null) ...[
-            const Divider(height: 1),
-            ListTile(
-              leading: Icon(
-                Icons.business_outlined,
-                color: BrandColors.primary,
-              ),
-              title: Text(l10n.businessType),
-              subtitle: Text(company.businessType!),
-            ),
-          ],
         ],
       ),
     );

@@ -2390,6 +2390,12 @@ abstract class AppLocalizations {
   /// **'Batch'**
   String get batch;
 
+  /// Title for items associated with a batch
+  ///
+  /// In en, this message translates to:
+  /// **'Items with Batch'**
+  String get itemWithBatch;
+
   /// Create batch dialog title
   ///
   /// In en, this message translates to:
@@ -4717,6 +4723,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Enter a valid email'**
   String get enterValidEmail;
+
+  /// Assign role label
+  ///
+  /// In en, this message translates to:
+  /// **'Assign Role'**
+  String get assignRole;
 
   /// Assign roles to user dialog title
   ///

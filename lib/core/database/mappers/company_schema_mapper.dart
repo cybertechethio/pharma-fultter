@@ -14,7 +14,6 @@ extension CompanySchemaMapper on CompanySchema {
     wereda: wereda,
     autoPrint: autoPrint ?? false,
     defaultStartDate: defaultStartDate,
-    businessType: businessType,
     createdAt: createdAt,
     updatedAt: updatedAt ?? createdAt, // Fallback to createdAt if updatedAt is null
   );
@@ -33,7 +32,6 @@ extension CompanyToSchemaMapper on Company {
     ..wereda = wereda
     ..autoPrint = autoPrint
     ..defaultStartDate = defaultStartDate
-    ..businessType = businessType
     ..createdAt = createdAt
     ..updatedAt = updatedAt;
 }

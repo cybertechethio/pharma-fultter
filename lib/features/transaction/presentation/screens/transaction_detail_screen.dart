@@ -111,7 +111,7 @@ class TransactionDetailScreen extends ConsumerWidget {
           children: [
             // 1. Header: Transaction Number, Type, Status
             TransactionHeaderSection(transaction: transaction),
-            const SizedBox(height: AppSizes.md),
+            const SizedBox(height: AppSizes.sm),
 
             // 2. Overview: Party, Sales Order, Dates, Creator/Updator
             TransactionOverviewSection(transaction: transaction),
