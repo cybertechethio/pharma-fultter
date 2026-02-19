@@ -14,12 +14,8 @@ class LanguageTile extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final localeState = ref.watch(localeProvider);
 
-    return Card(
-      margin: const EdgeInsets.symmetric(horizontal: AppSizes.lg),
-      elevation: 1,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppSizes.radiusSm),
-      ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: AppSizes.lg),
       child: ListTile(
         leading: Icon(
           Icons.language,

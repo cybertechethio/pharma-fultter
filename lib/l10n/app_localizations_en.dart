@@ -1224,6 +1224,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get batch => 'Batch';
 
   @override
+  String get itemWithBatch => 'Items with Batch';
+
+  @override
   String get createBatch => 'Create Batch';
 
   @override
@@ -2469,6 +2472,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get enterValidEmail => 'Enter a valid email';
+
+  @override
+  String get assignRole => 'Assign Role';
 
   @override
   String get assignRolesToUser => 'Assign Roles to User';

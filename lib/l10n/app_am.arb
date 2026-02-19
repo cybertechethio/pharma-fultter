@@ -1068,6 +1068,10 @@
   "@batch": {
     "description": "ቦታ ዓይነት መለያ"
   },
+  "itemWithBatch": "እቃዎች ከቦታ ጋር",
+  "@itemWithBatch": {
+    "description": "Title for items associated with a batch"
+  },
   "createBatch": "ቦታ ፍጠር",
   "@createBatch": {
     "description": "ቦታ ማፍጠር ዲያሎግ ርዕስ"
@@ -2752,6 +2756,10 @@
   "lastNameRequired": "የአባት ስም ያስፈልጋል",
   "enterValidEmail": "ትክክለኛ ኢሜይል ያስገቡ",
   "selectAll": "ሁሉንም ይምረጡ",
+  "assignRole": "ሚና መድረስ",
+  "@assignRole": {
+    "description": "Assign role label"
+  },
   "assignRolesToUser": "ለተጠቃሚ ሚናዎች ይመድቡ",
   "pleaseSelectAtLeastOneBranch": "እባክዎ ቢያንስ አንድ ቅርንጫፍ ይምረጡ",
   "pleaseSelectBank": "እባክዎ ባንክ ይምረጡ",

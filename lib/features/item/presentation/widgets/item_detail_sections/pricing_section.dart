@@ -18,36 +18,29 @@ class PricingSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
 
-    return Card(
-      elevation: 1,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppSizes.radiusSm),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(AppSizes.md),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              l10n.pricing,
-              style: context.subtitle(bold: true),
-            ),
-            const SizedBox(height: AppSizes.md),
-            CompactInfoRow(
-              icon: Icons.attach_money_outlined,
-              label: l10n.costPrice,
-              value: Formatters.formatCurrency(item.costPrice),
-              isCompact: true,
-            ),
-            const Divider(height: AppSizes.md),
-            CompactInfoRow(
-              icon: Icons.sell_outlined,
-              label: l10n.unitPrice,
-              value: Formatters.formatCurrency(item.unitPrice),
-              isCompact: true,
-            ),
-          ],
-        ),
+    return Padding(
+      padding: const EdgeInsets.all(AppSizes.md),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            l10n.pricing,
+            style: context.subtitle(bold: true),
+          ),
+          const SizedBox(height: AppSizes.md),
+          CompactInfoRow(
+            icon: Icons.attach_money_outlined,
+            label: l10n.costPrice,
+            value: Formatters.formatCurrency(item.costPrice),
+            isCompact: true,
+          ),
+          CompactInfoRow(
+            icon: Icons.sell_outlined,
+            label: l10n.unitPrice,
+            value: Formatters.formatCurrency(item.unitPrice),
+            isCompact: true,
+          ),
+        ],
       ),
     );
   }

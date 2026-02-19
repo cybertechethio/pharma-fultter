@@ -2046,6 +2046,10 @@
   "@batch": {
     "description": "Batch type label"
   },
+  "itemWithBatch": "Items with Batch",
+  "@itemWithBatch": {
+    "description": "Title for items associated with a batch"
+  },
   "createBatch": "Create Batch",
   "@createBatch": {
     "description": "Create batch dialog title"
@@ -4179,6 +4183,10 @@
     "description": "Select all button label"
   },
 
+  "assignRole": "Assign Role",
+  "@assignRole": {
+    "description": "Assign role label"
+  },
   "assignRolesToUser": "Assign Roles to User",
   "@assignRolesToUser": {
     "description": "Assign roles to user dialog title"

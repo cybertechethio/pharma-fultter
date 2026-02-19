@@ -20,7 +20,6 @@ class CompanySchema {
   bool? autoPrint;
   DateTime? defaultStartDate;
   String? defaultCalendarType;
-  String? businessType;
   late DateTime createdAt;
   DateTime? updatedAt;
 }

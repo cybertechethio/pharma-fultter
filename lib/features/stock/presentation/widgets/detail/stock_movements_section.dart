@@ -34,13 +34,8 @@ class _StockMovementsSectionState extends ConsumerState<StockMovementsSection> {
     final asyncMovements =
         ref.watch(stockMovementsProvider(widget.stock.itemId));
 
-    return Container(
-      padding: const EdgeInsets.all(AppSizes.lg),
-      decoration: BoxDecoration(
-        color: BrandColors.surface,
-        borderRadius: BorderRadius.circular(AppSizes.radius),
-        border: Border.all(color: BrandColors.outline.withOpacity(0.1)),
-      ),
+    return Padding(
+      padding: const EdgeInsets.all(AppSizes.md),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -148,7 +143,6 @@ class _StockMovementsSectionState extends ConsumerState<StockMovementsSection> {
                       ),
                     ],
                   ),
-                  const Divider(height: AppSizes.lg),
 
                   // Movement list
                   ListView.separated(

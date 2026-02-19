@@ -1213,6 +1213,9 @@ class AppLocalizationsAm extends AppLocalizations {
   String get batch => 'ቦታ';
 
   @override
+  String get itemWithBatch => 'እቃዎች ከቦታ ጋር';
+
+  @override
   String get createBatch => 'ቦታ ፍጠር';
 
   @override
@@ -2439,6 +2442,9 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get enterValidEmail => 'ትክክለኛ ኢሜይል ያስገቡ';
+
+  @override
+  String get assignRole => 'ሚና መድረስ';
 
   @override
   String get assignRolesToUser => 'ለተጠቃሚ ሚናዎች ይመድቡ';

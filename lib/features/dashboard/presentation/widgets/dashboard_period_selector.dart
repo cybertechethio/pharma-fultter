@@ -241,17 +241,17 @@ class _PeriodSelectorSheetState extends State<_PeriodSelectorSheet> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final bottomPadding = MediaQuery.paddingOf(context).bottom;
+    final maxSheetHeight = MediaQuery.sizeOf(context).height * 0.88;
 
     return Container(
-      // constraints: BoxConstraints(
-      //   maxHeight: MediaQuery.of(context).size.height * 0.85,
-      // ),
+      constraints: BoxConstraints(maxHeight: maxSheetHeight),
       decoration: BoxDecoration(
         color: BrandColors.cardBackground,
         borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
       ),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Handle bar
@@ -321,26 +321,38 @@ class _PeriodSelectorSheetState extends State<_PeriodSelectorSheet> {
             ),
           ),
       
-          const SizedBox(height: AppSizes.lg),
+          const SizedBox(height: AppSizes.sm),
       
-          // Date picker based on calendar type
-          widget.calendarType == CalendarType.ethiopian
-              ? EthiopianRangePicker(
-                  startDate: CalendarConverter.toEthiopian(_startDate),
-                  endDate: CalendarConverter.toEthiopian(_endDate),
-                  onRangeSelected: _onEthiopianRangeSelected,
-                )
-              : GregorianRangePicker(
-                  startDate: _startDate,
-                  endDate: _endDate,
-                  onRangeSelected: _onRangeSelected,
-                ),
+          // Date picker (scrollable) + fixed OK button
+          Flexible(
+            child: SingleChildScrollView(
+              child: widget.calendarType == CalendarType.ethiopian
+                  ? EthiopianRangePicker(
+                      startDate: CalendarConverter.toEthiopian(_startDate),
+                      endDate: CalendarConverter.toEthiopian(_endDate),
+                      onRangeSelected: _onEthiopianRangeSelected,
+                    )
+                  : GregorianRangePicker(
+                      startDate: _startDate,
+                      endDate: _endDate,
+                      onRangeSelected: _onRangeSelected,
+                    ),
+            ),
+          ),
       
-          // Apply button
-          Center(
-            child: OutlinedButton(
-              onPressed: _applySelection,
-              child: Text(l10n.ok),
+          // Apply button with safe bottom padding
+          Padding(
+            padding: EdgeInsets.fromLTRB(
+              AppSizes.lg,
+              AppSizes.md,
+              AppSizes.lg,
+              AppSizes.lg + bottomPadding,
+            ),
+            child: Center(
+              child: FilledButton(
+                onPressed: _applySelection,
+                child: Text(l10n.ok),
+              ),
             ),
           ),
         ],

@@ -80,7 +80,7 @@ class ExpenseCard extends ConsumerWidget {
 
   void _navigateToDetail(BuildContext context) {
     // Navigate to detail screen
-    context.push('${RouteName.expenseDetail}?id=${expense.id}');
+    context.push(RouteName.expenseDetail, extra: expense);
   }
 
   Future<void> _confirmDelete(

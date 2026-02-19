@@ -6,7 +6,7 @@ import '../../../../../app/theme/text_styles.dart';
 import '../../../domain/entities/annualreport/annual_item_data.dart';
 
 /// Card for annual report item
-/// Displays: Item Type, Sales, Cost, VAT, Gross Profit
+/// Displays: Sales, Cost, VAT, Gross Profit
 class AnnualItemCard extends StatelessWidget {
   final AnnualItemData item;
 
@@ -37,13 +37,7 @@ class AnnualItemCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          // Line 1: Item Type
-          Text(
-            item.itemType,
-            style: context.body(bold: true),
-          ),
-          const SizedBox(height: AppSizes.xxs),
-          // Line 2: Sales + Cost
+          // Line 1: Sales + Cost
           Row(
             children: [
               Expanded(
@@ -61,7 +55,7 @@ class AnnualItemCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: AppSizes.xxs),
-          // Line 3: VAT + Gross Profit
+          // Line 2: VAT + Gross Profit
           Row(
             children: [
               Expanded(

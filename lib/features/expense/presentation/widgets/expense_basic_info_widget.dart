@@ -19,43 +19,25 @@ class ExpenseBasicInfoWidget extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
 
     return Card(
-      margin: const EdgeInsets.all(AppSizes.lg),
+      margin: const EdgeInsets.all(AppSizes.sm),
       child: Padding(
-        padding: const EdgeInsets.all(AppSizes.lg),
+        padding: const EdgeInsets.all(AppSizes.sm),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        expense.name,
-                        style: context.subtitle(bold: true),
-                      ),
-                    ],
-                  ),
-                ),
-                _buildStatusBadge(context, expense.status ?? ''),
-              ],
+           _InfoRow(
+              label: l10n.amount,
+              value: Formatters.formatAmount(double.tryParse(expense.amount) ?? 0.0),
+              isTotal: true,
             ),
-            const SizedBox(height: AppSizes.lg),
-            const Divider(),
-            const SizedBox(height: AppSizes.lg),
+             const SizedBox(height: AppSizes.sm),
             _InfoRow(
               label: l10n.date,
               value: Formatters.formatDateTime(expense.expenseDate),
               isTotal: false,
             ),
-            const SizedBox(height: AppSizes.sm),
-            _InfoRow(
-              label: l10n.amount,
-              value: Formatters.formatAmount(double.tryParse(expense.amount) ?? 0.0),
-              isTotal: true,
-            ),
+           
+            
             if (expense.notes != null && expense.notes!.isNotEmpty) ...[
               const SizedBox(height: AppSizes.sm),
               _InfoRow(
@@ -76,23 +58,7 @@ class ExpenseBasicInfoWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildStatusBadge(BuildContext context, String status) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: AppSizes.md, vertical: AppSizes.xs2),
-      decoration: BoxDecoration(
-        color: BrandColors.primaryWithOpacity(0.1),
-        borderRadius: BorderRadius.circular(AppSizes.radiusLg),
-        border: Border.all(
-          color: BrandColors.primary,
-          width: 1,
-        ),
-      ),
-      child: Text(
-        status.toUpperCase(),
-        style: context.labelPrimary(bold: true),
-      ),
-    );
-  }
+ 
 }
 
 class _InfoRow extends StatelessWidget {

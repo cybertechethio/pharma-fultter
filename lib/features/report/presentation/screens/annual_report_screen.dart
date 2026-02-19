@@ -25,12 +25,6 @@ class AnnualReportScreen extends ConsumerStatefulWidget {
 class _AnnualReportScreenState extends ConsumerState<AnnualReportScreen> {
   DateTime? _startDate;
 
-  @override
-  void initState() {
-    super.initState();
-    _startDate = DateTime.now();
-  }
-
   void _handleDateChanged(DateTime date) {
     setState(() {
       _startDate = date;
@@ -43,11 +37,11 @@ class _AnnualReportScreenState extends ConsumerState<AnnualReportScreen> {
     final l10n = AppLocalizations.of(context);
     final companyAsync = ref.watch(companyProvider);
 
-    // Get default start date from company settings or fallback to today
+    // Get default start date from company settings or 7 days before today
     final defaultStartDate = companyAsync.whenOrNull(
           data: (company) => company?.defaultStartDate,
         ) ??
-        DateTime.now();
+        DateTime.now().subtract(const Duration(days: 7));
 
     final startDate = _startDate ?? defaultStartDate;
 

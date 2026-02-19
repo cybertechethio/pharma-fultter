@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CompanyRequestModel {
 
- String? get name; String? get phone1; String? get phone2; String? get logoUrl; String? get tinNumber; String? get tradeName; String? get city; String? get wereda; bool? get autoPrint; DateTime? get defaultStartDate; String? get businessType;
+ String? get name; String? get phone1; String? get phone2; String? get logoUrl; String? get tinNumber; String? get tradeName; String? get city; String? get wereda; bool? get autoPrint; DateTime? get defaultStartDate;
 /// Create a copy of CompanyRequestModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $CompanyRequestModelCopyWith<CompanyRequestModel> get copyWith => _$CompanyReque
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CompanyRequestModel&&(identical(other.name, name) || other.name == name)&&(identical(other.phone1, phone1) || other.phone1 == phone1)&&(identical(other.phone2, phone2) || other.phone2 == phone2)&&(identical(other.logoUrl, logoUrl) || other.logoUrl == logoUrl)&&(identical(other.tinNumber, tinNumber) || other.tinNumber == tinNumber)&&(identical(other.tradeName, tradeName) || other.tradeName == tradeName)&&(identical(other.city, city) || other.city == city)&&(identical(other.wereda, wereda) || other.wereda == wereda)&&(identical(other.autoPrint, autoPrint) || other.autoPrint == autoPrint)&&(identical(other.defaultStartDate, defaultStartDate) || other.defaultStartDate == defaultStartDate)&&(identical(other.businessType, businessType) || other.businessType == businessType));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CompanyRequestModel&&(identical(other.name, name) || other.name == name)&&(identical(other.phone1, phone1) || other.phone1 == phone1)&&(identical(other.phone2, phone2) || other.phone2 == phone2)&&(identical(other.logoUrl, logoUrl) || other.logoUrl == logoUrl)&&(identical(other.tinNumber, tinNumber) || other.tinNumber == tinNumber)&&(identical(other.tradeName, tradeName) || other.tradeName == tradeName)&&(identical(other.city, city) || other.city == city)&&(identical(other.wereda, wereda) || other.wereda == wereda)&&(identical(other.autoPrint, autoPrint) || other.autoPrint == autoPrint)&&(identical(other.defaultStartDate, defaultStartDate) || other.defaultStartDate == defaultStartDate));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,name,phone1,phone2,logoUrl,tinNumber,tradeName,city,wereda,autoPrint,defaultStartDate,businessType);
+int get hashCode => Object.hash(runtimeType,name,phone1,phone2,logoUrl,tinNumber,tradeName,city,wereda,autoPrint,defaultStartDate);
 
 @override
 String toString() {
-  return 'CompanyRequestModel(name: $name, phone1: $phone1, phone2: $phone2, logoUrl: $logoUrl, tinNumber: $tinNumber, tradeName: $tradeName, city: $city, wereda: $wereda, autoPrint: $autoPrint, defaultStartDate: $defaultStartDate, businessType: $businessType)';
+  return 'CompanyRequestModel(name: $name, phone1: $phone1, phone2: $phone2, logoUrl: $logoUrl, tinNumber: $tinNumber, tradeName: $tradeName, city: $city, wereda: $wereda, autoPrint: $autoPrint, defaultStartDate: $defaultStartDate)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $CompanyRequestModelCopyWith<$Res>  {
   factory $CompanyRequestModelCopyWith(CompanyRequestModel value, $Res Function(CompanyRequestModel) _then) = _$CompanyRequestModelCopyWithImpl;
 @useResult
 $Res call({
- String? name, String? phone1, String? phone2, String? logoUrl, String? tinNumber, String? tradeName, String? city, String? wereda, bool? autoPrint, DateTime? defaultStartDate, String? businessType
+ String? name, String? phone1, String? phone2, String? logoUrl, String? tinNumber, String? tradeName, String? city, String? wereda, bool? autoPrint, DateTime? defaultStartDate
 });
 
 
@@ -65,7 +65,7 @@ class _$CompanyRequestModelCopyWithImpl<$Res>
 
 /// Create a copy of CompanyRequestModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? name = freezed,Object? phone1 = freezed,Object? phone2 = freezed,Object? logoUrl = freezed,Object? tinNumber = freezed,Object? tradeName = freezed,Object? city = freezed,Object? wereda = freezed,Object? autoPrint = freezed,Object? defaultStartDate = freezed,Object? businessType = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? name = freezed,Object? phone1 = freezed,Object? phone2 = freezed,Object? logoUrl = freezed,Object? tinNumber = freezed,Object? tradeName = freezed,Object? city = freezed,Object? wereda = freezed,Object? autoPrint = freezed,Object? defaultStartDate = freezed,}) {
   return _then(_self.copyWith(
 name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,phone1: freezed == phone1 ? _self.phone1 : phone1 // ignore: cast_nullable_to_non_nullable
@@ -77,8 +77,7 @@ as String?,city: freezed == city ? _self.city : city // ignore: cast_nullable_to
 as String?,wereda: freezed == wereda ? _self.wereda : wereda // ignore: cast_nullable_to_non_nullable
 as String?,autoPrint: freezed == autoPrint ? _self.autoPrint : autoPrint // ignore: cast_nullable_to_non_nullable
 as bool?,defaultStartDate: freezed == defaultStartDate ? _self.defaultStartDate : defaultStartDate // ignore: cast_nullable_to_non_nullable
-as DateTime?,businessType: freezed == businessType ? _self.businessType : businessType // ignore: cast_nullable_to_non_nullable
-as String?,
+as DateTime?,
   ));
 }
 
@@ -160,10 +159,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? name,  String? phone1,  String? phone2,  String? logoUrl,  String? tinNumber,  String? tradeName,  String? city,  String? wereda,  bool? autoPrint,  DateTime? defaultStartDate,  String? businessType)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? name,  String? phone1,  String? phone2,  String? logoUrl,  String? tinNumber,  String? tradeName,  String? city,  String? wereda,  bool? autoPrint,  DateTime? defaultStartDate)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CompanyRequestModel() when $default != null:
-return $default(_that.name,_that.phone1,_that.phone2,_that.logoUrl,_that.tinNumber,_that.tradeName,_that.city,_that.wereda,_that.autoPrint,_that.defaultStartDate,_that.businessType);case _:
+return $default(_that.name,_that.phone1,_that.phone2,_that.logoUrl,_that.tinNumber,_that.tradeName,_that.city,_that.wereda,_that.autoPrint,_that.defaultStartDate);case _:
   return orElse();
 
 }
@@ -181,10 +180,10 @@ return $default(_that.name,_that.phone1,_that.phone2,_that.logoUrl,_that.tinNumb
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? name,  String? phone1,  String? phone2,  String? logoUrl,  String? tinNumber,  String? tradeName,  String? city,  String? wereda,  bool? autoPrint,  DateTime? defaultStartDate,  String? businessType)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? name,  String? phone1,  String? phone2,  String? logoUrl,  String? tinNumber,  String? tradeName,  String? city,  String? wereda,  bool? autoPrint,  DateTime? defaultStartDate)  $default,) {final _that = this;
 switch (_that) {
 case _CompanyRequestModel():
-return $default(_that.name,_that.phone1,_that.phone2,_that.logoUrl,_that.tinNumber,_that.tradeName,_that.city,_that.wereda,_that.autoPrint,_that.defaultStartDate,_that.businessType);}
+return $default(_that.name,_that.phone1,_that.phone2,_that.logoUrl,_that.tinNumber,_that.tradeName,_that.city,_that.wereda,_that.autoPrint,_that.defaultStartDate);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -198,10 +197,10 @@ return $default(_that.name,_that.phone1,_that.phone2,_that.logoUrl,_that.tinNumb
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? name,  String? phone1,  String? phone2,  String? logoUrl,  String? tinNumber,  String? tradeName,  String? city,  String? wereda,  bool? autoPrint,  DateTime? defaultStartDate,  String? businessType)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? name,  String? phone1,  String? phone2,  String? logoUrl,  String? tinNumber,  String? tradeName,  String? city,  String? wereda,  bool? autoPrint,  DateTime? defaultStartDate)?  $default,) {final _that = this;
 switch (_that) {
 case _CompanyRequestModel() when $default != null:
-return $default(_that.name,_that.phone1,_that.phone2,_that.logoUrl,_that.tinNumber,_that.tradeName,_that.city,_that.wereda,_that.autoPrint,_that.defaultStartDate,_that.businessType);case _:
+return $default(_that.name,_that.phone1,_that.phone2,_that.logoUrl,_that.tinNumber,_that.tradeName,_that.city,_that.wereda,_that.autoPrint,_that.defaultStartDate);case _:
   return null;
 
 }
@@ -213,7 +212,7 @@ return $default(_that.name,_that.phone1,_that.phone2,_that.logoUrl,_that.tinNumb
 @JsonSerializable()
 
 class _CompanyRequestModel implements CompanyRequestModel {
-  const _CompanyRequestModel({this.name, this.phone1, this.phone2, this.logoUrl, this.tinNumber, this.tradeName, this.city, this.wereda, this.autoPrint, this.defaultStartDate, this.businessType});
+  const _CompanyRequestModel({this.name, this.phone1, this.phone2, this.logoUrl, this.tinNumber, this.tradeName, this.city, this.wereda, this.autoPrint, this.defaultStartDate});
   factory _CompanyRequestModel.fromJson(Map<String, dynamic> json) => _$CompanyRequestModelFromJson(json);
 
 @override final  String? name;
@@ -226,7 +225,6 @@ class _CompanyRequestModel implements CompanyRequestModel {
 @override final  String? wereda;
 @override final  bool? autoPrint;
 @override final  DateTime? defaultStartDate;
-@override final  String? businessType;
 
 /// Create a copy of CompanyRequestModel
 /// with the given fields replaced by the non-null parameter values.
@@ -241,16 +239,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CompanyRequestModel&&(identical(other.name, name) || other.name == name)&&(identical(other.phone1, phone1) || other.phone1 == phone1)&&(identical(other.phone2, phone2) || other.phone2 == phone2)&&(identical(other.logoUrl, logoUrl) || other.logoUrl == logoUrl)&&(identical(other.tinNumber, tinNumber) || other.tinNumber == tinNumber)&&(identical(other.tradeName, tradeName) || other.tradeName == tradeName)&&(identical(other.city, city) || other.city == city)&&(identical(other.wereda, wereda) || other.wereda == wereda)&&(identical(other.autoPrint, autoPrint) || other.autoPrint == autoPrint)&&(identical(other.defaultStartDate, defaultStartDate) || other.defaultStartDate == defaultStartDate)&&(identical(other.businessType, businessType) || other.businessType == businessType));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CompanyRequestModel&&(identical(other.name, name) || other.name == name)&&(identical(other.phone1, phone1) || other.phone1 == phone1)&&(identical(other.phone2, phone2) || other.phone2 == phone2)&&(identical(other.logoUrl, logoUrl) || other.logoUrl == logoUrl)&&(identical(other.tinNumber, tinNumber) || other.tinNumber == tinNumber)&&(identical(other.tradeName, tradeName) || other.tradeName == tradeName)&&(identical(other.city, city) || other.city == city)&&(identical(other.wereda, wereda) || other.wereda == wereda)&&(identical(other.autoPrint, autoPrint) || other.autoPrint == autoPrint)&&(identical(other.defaultStartDate, defaultStartDate) || other.defaultStartDate == defaultStartDate));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,name,phone1,phone2,logoUrl,tinNumber,tradeName,city,wereda,autoPrint,defaultStartDate,businessType);
+int get hashCode => Object.hash(runtimeType,name,phone1,phone2,logoUrl,tinNumber,tradeName,city,wereda,autoPrint,defaultStartDate);
 
 @override
 String toString() {
-  return 'CompanyRequestModel(name: $name, phone1: $phone1, phone2: $phone2, logoUrl: $logoUrl, tinNumber: $tinNumber, tradeName: $tradeName, city: $city, wereda: $wereda, autoPrint: $autoPrint, defaultStartDate: $defaultStartDate, businessType: $businessType)';
+  return 'CompanyRequestModel(name: $name, phone1: $phone1, phone2: $phone2, logoUrl: $logoUrl, tinNumber: $tinNumber, tradeName: $tradeName, city: $city, wereda: $wereda, autoPrint: $autoPrint, defaultStartDate: $defaultStartDate)';
 }
 
 
@@ -261,7 +259,7 @@ abstract mixin class _$CompanyRequestModelCopyWith<$Res> implements $CompanyRequ
   factory _$CompanyRequestModelCopyWith(_CompanyRequestModel value, $Res Function(_CompanyRequestModel) _then) = __$CompanyRequestModelCopyWithImpl;
 @override @useResult
 $Res call({
- String? name, String? phone1, String? phone2, String? logoUrl, String? tinNumber, String? tradeName, String? city, String? wereda, bool? autoPrint, DateTime? defaultStartDate, String? businessType
+ String? name, String? phone1, String? phone2, String? logoUrl, String? tinNumber, String? tradeName, String? city, String? wereda, bool? autoPrint, DateTime? defaultStartDate
 });
 
 
@@ -278,7 +276,7 @@ class __$CompanyRequestModelCopyWithImpl<$Res>
 
 /// Create a copy of CompanyRequestModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? name = freezed,Object? phone1 = freezed,Object? phone2 = freezed,Object? logoUrl = freezed,Object? tinNumber = freezed,Object? tradeName = freezed,Object? city = freezed,Object? wereda = freezed,Object? autoPrint = freezed,Object? defaultStartDate = freezed,Object? businessType = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? name = freezed,Object? phone1 = freezed,Object? phone2 = freezed,Object? logoUrl = freezed,Object? tinNumber = freezed,Object? tradeName = freezed,Object? city = freezed,Object? wereda = freezed,Object? autoPrint = freezed,Object? defaultStartDate = freezed,}) {
   return _then(_CompanyRequestModel(
 name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,phone1: freezed == phone1 ? _self.phone1 : phone1 // ignore: cast_nullable_to_non_nullable
@@ -290,8 +288,7 @@ as String?,city: freezed == city ? _self.city : city // ignore: cast_nullable_to
 as String?,wereda: freezed == wereda ? _self.wereda : wereda // ignore: cast_nullable_to_non_nullable
 as String?,autoPrint: freezed == autoPrint ? _self.autoPrint : autoPrint // ignore: cast_nullable_to_non_nullable
 as bool?,defaultStartDate: freezed == defaultStartDate ? _self.defaultStartDate : defaultStartDate // ignore: cast_nullable_to_non_nullable
-as DateTime?,businessType: freezed == businessType ? _self.businessType : businessType // ignore: cast_nullable_to_non_nullable
-as String?,
+as DateTime?,
   ));
 }
 
